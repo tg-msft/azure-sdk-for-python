@@ -364,7 +364,10 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">authentication_policy</span> <span class="o">=</span> <span class="kc">None</span>
 
         <span class="c1"># HTTP Transport</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">transport</span> <span class="o">=</span> <span class="n">transport</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">transport</span> <span class="o">=</span> <span class="n">transport</span>
+
+        <span class="c1"># Polling interval if no retry-after in polling calls results</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">polling_interval</span> <span class="o">=</span> <span class="mi">30</span></div>
 
 
 <div class="viewcode-block" id="ConnectionConfiguration"><a class="viewcode-back" href="../../../ref/azure.core.html#azure.core.configuration.ConnectionConfiguration">[docs]</a><span class="k">class</span> <span class="nc">ConnectionConfiguration</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
