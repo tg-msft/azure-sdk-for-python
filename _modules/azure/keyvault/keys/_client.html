@@ -280,16 +280,23 @@
 <span class="c1"># Copyright (c) Microsoft Corporation.</span>
 <span class="c1"># Licensed under the MIT License.</span>
 <span class="c1"># ------------------------------------</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="k">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Generator</span><span class="p">,</span> <span class="n">Mapping</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">List</span>
 <span class="kn">from</span> <span class="nn">datetime</span> <span class="k">import</span> <span class="n">datetime</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">from</span> <span class="nn">typing</span> <span class="k">import</span> <span class="n">TYPE_CHECKING</span>
+<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+    <span class="n">TYPE_CHECKING</span> <span class="o">=</span> <span class="kc">False</span>
+
+<span class="k">if</span> <span class="n">TYPE_CHECKING</span><span class="p">:</span>
+    <span class="kn">from</span> <span class="nn">typing</span> <span class="k">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Generator</span><span class="p">,</span> <span class="n">Mapping</span><span class="p">,</span> <span class="n">Optional</span>
 
 <span class="kn">from</span> <span class="nn">azure.core.exceptions</span> <span class="k">import</span> <span class="n">ResourceExistsError</span><span class="p">,</span> <span class="n">ResourceNotFoundError</span>
 
-<span class="kn">from</span> <span class="nn">._internal</span> <span class="k">import</span> <span class="n">_KeyVaultClientBase</span>
+<span class="kn">from</span> <span class="nn">._shared</span> <span class="k">import</span> <span class="n">KeyVaultClientBase</span>
 <span class="kn">from</span> <span class="nn">._models</span> <span class="k">import</span> <span class="n">Key</span><span class="p">,</span> <span class="n">KeyBase</span><span class="p">,</span> <span class="n">DeletedKey</span><span class="p">,</span> <span class="n">KeyOperationResult</span>
 
 
-<div class="viewcode-block" id="KeyClient"><a class="viewcode-back" href="../../../../ref/azure.keyvault.keys.html#azure.keyvault.keys.KeyClient">[docs]</a><span class="k">class</span> <span class="nc">KeyClient</span><span class="p">(</span><span class="n">_KeyVaultClientBase</span><span class="p">):</span>
+<div class="viewcode-block" id="KeyClient"><a class="viewcode-back" href="../../../../ref/azure.keyvault.keys.html#azure.keyvault.keys.KeyClient">[docs]</a><span class="k">class</span> <span class="nc">KeyClient</span><span class="p">(</span><span class="n">KeyVaultClientBase</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;KeyClient is a high-level interface for managing a vault&#39;s keys.</span>
 
 <span class="sd">    Example:</span>

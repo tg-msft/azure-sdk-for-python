@@ -286,10 +286,10 @@
 <span class="kn">from</span> <span class="nn">azure.core.exceptions</span> <span class="k">import</span> <span class="n">ResourceExistsError</span><span class="p">,</span> <span class="n">ResourceNotFoundError</span>
 
 <span class="kn">from</span> <span class="nn">azure.keyvault.keys._models</span> <span class="k">import</span> <span class="n">Key</span><span class="p">,</span> <span class="n">DeletedKey</span><span class="p">,</span> <span class="n">KeyBase</span><span class="p">,</span> <span class="n">KeyOperationResult</span>
-<span class="kn">from</span> <span class="nn">._internal</span> <span class="k">import</span> <span class="n">_AsyncKeyVaultClientBase</span><span class="p">,</span> <span class="n">AsyncPagingAdapter</span>
+<span class="kn">from</span> <span class="nn">azure.keyvault.keys._shared</span> <span class="k">import</span> <span class="n">AsyncKeyVaultClientBase</span><span class="p">,</span> <span class="n">AsyncPagingAdapter</span>
 
 
-<div class="viewcode-block" id="KeyClient"><a class="viewcode-back" href="../../../../../ref/azure.keyvault.keys.aio.html#azure.keyvault.keys.aio.KeyClient">[docs]</a><span class="k">class</span> <span class="nc">KeyClient</span><span class="p">(</span><span class="n">_AsyncKeyVaultClientBase</span><span class="p">):</span>
+<div class="viewcode-block" id="KeyClient"><a class="viewcode-back" href="../../../../../ref/azure.keyvault.keys.aio.html#azure.keyvault.keys.aio.KeyClient">[docs]</a><span class="k">class</span> <span class="nc">KeyClient</span><span class="p">(</span><span class="n">AsyncKeyVaultClientBase</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;The KeyClient class defines a high level interface for managing keys in the specified vault.</span>
 
 <span class="sd">    Example:</span>
