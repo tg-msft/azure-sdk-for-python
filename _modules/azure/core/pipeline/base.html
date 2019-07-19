@@ -356,7 +356,7 @@
 
 <span class="sd">    Uses specified HTTP transport type to send request and returns response.</span>
 
-<span class="sd">    :param sender: The Http Transport type.</span>
+<span class="sd">    :param sender: The Http Transport instance.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sender</span><span class="p">):</span>
         <span class="c1"># type: (HttpTransportType) -&gt; None</span>
@@ -384,7 +384,7 @@
 <span class="sd">    This is implemented as a context manager, that will activate the context</span>
 <span class="sd">    of the HTTP sender. The transport is the last node in the pipeline.</span>
 
-<span class="sd">    :param transport: The Http Transport type</span>
+<span class="sd">    :param transport: The Http Transport instance</span>
 <span class="sd">    :param list policies: List of configured policies.</span>
 
 <span class="sd">    Example:</span>

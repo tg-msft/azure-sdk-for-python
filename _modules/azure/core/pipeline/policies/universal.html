@@ -366,8 +366,8 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_headers</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span></div>
 
-<div class="viewcode-block" id="HeadersPolicy.on_request"><a class="viewcode-back" href="../../../../../ref/azure.core.pipeline.policies.html#azure.core.pipeline.policies.universal.HeadersPolicy.on_request">[docs]</a>    <span class="k">def</span> <span class="nf">on_request</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="c1"># type: (PipelineRequest, Any) -&gt; None</span>
+<div class="viewcode-block" id="HeadersPolicy.on_request"><a class="viewcode-back" href="../../../../../ref/azure.core.pipeline.policies.html#azure.core.pipeline.policies.universal.HeadersPolicy.on_request">[docs]</a>    <span class="k">def</span> <span class="nf">on_request</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">):</span>
+        <span class="c1"># type: (PipelineRequest) -&gt; None</span>
         <span class="sd">&quot;&quot;&quot;Updates with the given headers before sending the request to the next policy.</span>
 
 <span class="sd">        :param request: The PipelineRequest object</span>
@@ -432,8 +432,8 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_user_agent</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2"> </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_user_agent</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="UserAgentPolicy.on_request"><a class="viewcode-back" href="../../../../../ref/azure.core.pipeline.policies.html#azure.core.pipeline.policies.universal.UserAgentPolicy.on_request">[docs]</a>    <span class="k">def</span> <span class="nf">on_request</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="c1"># type: (PipelineRequest, Any) -&gt; None</span>
+<div class="viewcode-block" id="UserAgentPolicy.on_request"><a class="viewcode-back" href="../../../../../ref/azure.core.pipeline.policies.html#azure.core.pipeline.policies.universal.UserAgentPolicy.on_request">[docs]</a>    <span class="k">def</span> <span class="nf">on_request</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">):</span>
+        <span class="c1"># type: (PipelineRequest) -&gt; None</span>
         <span class="sd">&quot;&quot;&quot;Modifies the User-Agent header before the request is sent.</span>
 
 <span class="sd">        :param request: The PipelineRequest object</span>
@@ -471,8 +471,8 @@
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">logging_enable</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span> <span class="c1"># pylint: disable=unused-argument</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">enable_http_logger</span> <span class="o">=</span> <span class="n">logging_enable</span>
 
-<div class="viewcode-block" id="NetworkTraceLoggingPolicy.on_request"><a class="viewcode-back" href="../../../../../ref/azure.core.pipeline.policies.html#azure.core.pipeline.policies.universal.NetworkTraceLoggingPolicy.on_request">[docs]</a>    <span class="k">def</span> <span class="nf">on_request</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="c1"># type: (PipelineRequest, Any) -&gt; None</span>
+<div class="viewcode-block" id="NetworkTraceLoggingPolicy.on_request"><a class="viewcode-back" href="../../../../../ref/azure.core.pipeline.policies.html#azure.core.pipeline.policies.universal.NetworkTraceLoggingPolicy.on_request">[docs]</a>    <span class="k">def</span> <span class="nf">on_request</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">):</span>
+        <span class="c1"># type: (PipelineRequest) -&gt; None</span>
         <span class="sd">&quot;&quot;&quot;Logs HTTP request to the DEBUG logger.</span>
 
 <span class="sd">        :param request: The PipelineRequest object.</span>
@@ -503,8 +503,8 @@
             <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>  <span class="c1"># pylint: disable=broad-except</span>
                 <span class="n">_LOGGER</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Failed to log request: </span><span class="si">%r</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">err</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="NetworkTraceLoggingPolicy.on_response"><a class="viewcode-back" href="../../../../../ref/azure.core.pipeline.policies.html#azure.core.pipeline.policies.universal.NetworkTraceLoggingPolicy.on_response">[docs]</a>    <span class="k">def</span> <span class="nf">on_response</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">response</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="c1"># type: (PipelineRequest, PipelineResponse, Any) -&gt; None</span>
+<div class="viewcode-block" id="NetworkTraceLoggingPolicy.on_response"><a class="viewcode-back" href="../../../../../ref/azure.core.pipeline.policies.html#azure.core.pipeline.policies.universal.NetworkTraceLoggingPolicy.on_response">[docs]</a>    <span class="k">def</span> <span class="nf">on_response</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">response</span><span class="p">):</span>
+        <span class="c1"># type: (PipelineRequest, PipelineResponse) -&gt; None</span>
         <span class="sd">&quot;&quot;&quot;Logs HTTP response to the DEBUG logger.</span>
 
 <span class="sd">        :param request: The PipelineRequest object.</span>
@@ -641,8 +641,8 @@
 
         <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">deserialize_from_text</span><span class="p">(</span><span class="n">response</span><span class="p">,</span> <span class="n">content_type</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="ContentDecodePolicy.on_response"><a class="viewcode-back" href="../../../../../ref/azure.core.pipeline.policies.html#azure.core.pipeline.policies.universal.ContentDecodePolicy.on_response">[docs]</a>    <span class="k">def</span> <span class="nf">on_response</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">response</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="c1"># type: (PipelineRequest, PipelineResponse, Any) -&gt; None</span>
+<div class="viewcode-block" id="ContentDecodePolicy.on_response"><a class="viewcode-back" href="../../../../../ref/azure.core.pipeline.policies.html#azure.core.pipeline.policies.universal.ContentDecodePolicy.on_response">[docs]</a>    <span class="k">def</span> <span class="nf">on_response</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">response</span><span class="p">):</span>
+        <span class="c1"># type: (PipelineRequest, PipelineResponse) -&gt; None</span>
         <span class="sd">&quot;&quot;&quot;Extract data from the body of a REST response object.</span>
 <span class="sd">        This will load the entire payload in memory.</span>
 <span class="sd">        Will follow Content-Type to parse.</span>
@@ -674,10 +674,6 @@
 <span class="sd">    :param dict proxies: Maps protocol or protocol and hostname to the URL</span>
 <span class="sd">     of the proxy.</span>
 
-<span class="sd">    **Keyword argument:**</span>
-
-<span class="sd">    *proxies_use_env_settings (bool)* - Uses proxy settings from environment. Defaults to True.</span>
-
 <span class="sd">    Example:</span>
 <span class="sd">        .. literalinclude:: ../examples/test_example_sansio.py</span>
 <span class="sd">            :start-after: [START proxy_policy]</span>
@@ -686,9 +682,14 @@
 <span class="sd">            :dedent: 4</span>
 <span class="sd">            :caption: Configuring a proxy policy.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">proxies</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">proxies</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>  <span class="c1">#pylint: disable=unused-argument</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">proxies</span> <span class="o">=</span> <span class="n">proxies</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">use_env_settings</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;proxies_use_env_settings&#39;</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="ProxyPolicy.on_request"><a class="viewcode-back" href="../../../../../ref/azure.core.pipeline.policies.html#azure.core.pipeline.policies.universal.ProxyPolicy.on_request">[docs]</a>    <span class="k">def</span> <span class="nf">on_request</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">):</span>
+        <span class="c1"># type: (PipelineRequest) -&gt; None</span>
+        <span class="n">ctxt</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">options</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">proxies</span> <span class="ow">and</span> <span class="s2">&quot;proxies&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">ctxt</span><span class="p">:</span>
+            <span class="n">ctxt</span><span class="p">[</span><span class="s2">&quot;proxies&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">proxies</span></div></div>
 </pre></div>
 
            </div>

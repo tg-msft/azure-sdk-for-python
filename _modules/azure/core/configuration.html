@@ -312,8 +312,6 @@
 <span class="sd">    Configuration to construct the pipeline correctly, as well as inserting any</span>
 <span class="sd">    unexposed/non-configurable policies.</span>
 
-<span class="sd">    :param connection: Provides the configuration parameters for the transport.</span>
-<span class="sd">    :type connection: ~azure.core.ConnectionConfiguration</span>
 <span class="sd">    :param headers_policy: Provides parameters for custom or additional headers to be sent with the request.</span>
 <span class="sd">    :param proxy_policy: Provides configuration parameters for proxy.</span>
 <span class="sd">    :param redirect_policy: Provides configuration parameters for redirects.</span>
@@ -324,8 +322,7 @@
 <span class="sd">     User-Agent header.</span>
 <span class="sd">    :param authentication_policy: Provides configuration parameters for adding a bearer token Authorization</span>
 <span class="sd">     header to requests.</span>
-<span class="sd">    :param transport: The Http Transport type. E.g. RequestsTransport, AsyncioRequestsTransport,</span>
-<span class="sd">     TrioRequestsTransport, AioHttpTransport.</span>
+<span class="sd">    :param polling_interval: Polling interval while doing LRO operations, if Retry-After is not set.</span>
 
 <span class="sd">    Example:</span>
 <span class="sd">        .. literalinclude:: ../examples/test_example_config.py</span>
@@ -335,10 +332,7 @@
 <span class="sd">            :caption: Creates the service configuration and adds policies.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">transport</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="c1"># Communication configuration - applied per transport.</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">connection</span> <span class="o">=</span> <span class="n">ConnectionConfiguration</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="c1"># Headers (sent with every request)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">headers_policy</span> <span class="o">=</span> <span class="kc">None</span>
 
@@ -363,11 +357,8 @@
         <span class="c1"># Authentication configuration</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">authentication_policy</span> <span class="o">=</span> <span class="kc">None</span>
 
-        <span class="c1"># HTTP Transport</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">transport</span> <span class="o">=</span> <span class="n">transport</span>
-
         <span class="c1"># Polling interval if no retry-after in polling calls results</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">polling_interval</span> <span class="o">=</span> <span class="mi">30</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">polling_interval</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;polling_interval&quot;</span><span class="p">,</span> <span class="mi">30</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="ConnectionConfiguration"><a class="viewcode-back" href="../../../ref/azure.core.html#azure.core.configuration.ConnectionConfiguration">[docs]</a><span class="k">class</span> <span class="nc">ConnectionConfiguration</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>

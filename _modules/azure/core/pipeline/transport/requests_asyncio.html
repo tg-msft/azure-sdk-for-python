@@ -366,13 +366,17 @@
 <span class="sd">        :param kwargs: Any keyword arguments</span>
 <span class="sd">        :return: The AsyncHttpResponse</span>
 <span class="sd">        :rtype: ~azure.core.pipeline.transport.AsyncHttpResponse</span>
+
+<span class="sd">        **Keyword arguments:**</span>
+
+<span class="sd">        *session* - will override the driver session and use yours. Should NOT be done unless really required.</span>
+<span class="sd">        Anything else is sent straight to requests.</span>
+<span class="sd">        *proxies* - will define the proxy to use. Proxy is a dict (protocol, url)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">open</span><span class="p">()</span>
         <span class="n">loop</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;loop&quot;</span><span class="p">,</span> <span class="n">_get_running_loop</span><span class="p">())</span>
         <span class="n">response</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="n">error</span> <span class="o">=</span> <span class="kc">None</span> <span class="c1"># type: Optional[Union[ServiceRequestError, ServiceResponseError]]</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">proxy_policy</span> <span class="ow">and</span> <span class="s1">&#39;proxies&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
-            <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;proxies&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">proxy_policy</span><span class="o">.</span><span class="n">proxies</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">response</span> <span class="o">=</span> <span class="k">await</span> <span class="n">loop</span><span class="o">.</span><span class="n">run_in_executor</span><span class="p">(</span>
                 <span class="kc">None</span><span class="p">,</span>
@@ -383,9 +387,9 @@
                     <span class="n">headers</span><span class="o">=</span><span class="n">request</span><span class="o">.</span><span class="n">headers</span><span class="p">,</span>
                     <span class="n">data</span><span class="o">=</span><span class="n">request</span><span class="o">.</span><span class="n">data</span><span class="p">,</span>
                     <span class="n">files</span><span class="o">=</span><span class="n">request</span><span class="o">.</span><span class="n">files</span><span class="p">,</span>
-                    <span class="n">verify</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;connection_verify&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">connection</span><span class="o">.</span><span class="n">verify</span><span class="p">),</span>
-                    <span class="n">timeout</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;connection_timeout&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">connection</span><span class="o">.</span><span class="n">timeout</span><span class="p">),</span>
-                    <span class="n">cert</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;connection_cert&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">connection</span><span class="o">.</span><span class="n">cert</span><span class="p">),</span>
+                    <span class="n">verify</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;connection_verify&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">connection_config</span><span class="o">.</span><span class="n">verify</span><span class="p">),</span>
+                    <span class="n">timeout</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;connection_timeout&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">connection_config</span><span class="o">.</span><span class="n">timeout</span><span class="p">),</span>
+                    <span class="n">cert</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;connection_cert&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">connection_config</span><span class="o">.</span><span class="n">cert</span><span class="p">),</span>
                     <span class="n">allow_redirects</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                     <span class="o">**</span><span class="n">kwargs</span><span class="p">))</span>
 
@@ -404,7 +408,7 @@
         <span class="k">if</span> <span class="n">error</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">error</span>
 
-        <span class="k">return</span> <span class="n">AsyncioRequestsTransportResponse</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">response</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">connection</span><span class="o">.</span><span class="n">data_block_size</span><span class="p">)</span></div></div>
+        <span class="k">return</span> <span class="n">AsyncioRequestsTransportResponse</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">response</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">connection_config</span><span class="o">.</span><span class="n">data_block_size</span><span class="p">)</span></div></div>
 
 
 <div class="viewcode-block" id="AsyncioStreamDownloadGenerator"><a class="viewcode-back" href="../../../../../ref/azure.core.pipeline.transport.html#azure.core.pipeline.transport.requests_asyncio.AsyncioStreamDownloadGenerator">[docs]</a><span class="k">class</span> <span class="nc">AsyncioStreamDownloadGenerator</span><span class="p">(</span><span class="n">AsyncIterator</span><span class="p">):</span>

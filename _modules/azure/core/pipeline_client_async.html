@@ -329,8 +329,8 @@
 <span class="sd">    **Keyword arguments:**</span>
 
 <span class="sd">    *pipeline* - A Pipeline object. If omitted, an AsyncPipeline is created and returned.</span>
-
-<span class="sd">    *transport* - The HTTP Transport type. If omitted, AioHttpTransport is use for asynchronous transport.</span>
+<span class="sd">    *policies* - A list of policies object. If omitted, the standard policies of the configuration object is used.</span>
+<span class="sd">    *transport* - The HTTP Transport instance. If omitted, AioHttpTransport is use for asynchronous transport.</span>
 
 <span class="sd">    Example:</span>
 <span class="sd">        .. literalinclude:: ../examples/test_example_async.py</span>
@@ -349,10 +349,7 @@
         <span class="k">if</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;pipeline&#39;</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_pipeline</span> <span class="o">=</span> <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;pipeline&#39;</span><span class="p">]</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">transport</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;transport&#39;</span><span class="p">)</span>
-            <span class="k">if</span> <span class="ow">not</span> <span class="n">transport</span><span class="p">:</span>
-                <span class="n">transport</span> <span class="o">=</span> <span class="n">AioHttpTransport</span><span class="p">(</span><span class="n">config</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_pipeline</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_build_pipeline</span><span class="p">(</span><span class="n">config</span><span class="p">,</span> <span class="n">transport</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_pipeline</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_build_pipeline</span><span class="p">(</span><span class="n">config</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
     <span class="k">async</span> <span class="k">def</span> <span class="nf">__aenter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pipeline</span><span class="o">.</span><span class="fm">__aenter__</span><span class="p">()</span>
@@ -364,17 +361,25 @@
 <div class="viewcode-block" id="AsyncPipelineClient.close"><a class="viewcode-back" href="../../../ref/azure.core.html#azure.core.pipeline_client_async.AsyncPipelineClient.close">[docs]</a>    <span class="k">async</span> <span class="k">def</span> <span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pipeline</span><span class="o">.</span><span class="fm">__aexit__</span><span class="p">()</span></div>
 
-    <span class="k">def</span> <span class="nf">_build_pipeline</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">config</span><span class="p">,</span> <span class="n">transport</span><span class="p">):</span> <span class="c1"># pylint: disable=no-self-use</span>
-        <span class="n">policies</span> <span class="o">=</span> <span class="p">[</span>
-            <span class="n">config</span><span class="o">.</span><span class="n">headers_policy</span><span class="p">,</span>
-            <span class="n">config</span><span class="o">.</span><span class="n">user_agent_policy</span><span class="p">,</span>
-            <span class="n">config</span><span class="o">.</span><span class="n">authentication_policy</span><span class="p">,</span>
-            <span class="n">ContentDecodePolicy</span><span class="p">(),</span>
-            <span class="n">config</span><span class="o">.</span><span class="n">redirect_policy</span><span class="p">,</span>
-            <span class="n">config</span><span class="o">.</span><span class="n">retry_policy</span><span class="p">,</span>
-            <span class="n">config</span><span class="o">.</span><span class="n">custom_hook_policy</span><span class="p">,</span>
-            <span class="n">config</span><span class="o">.</span><span class="n">logging_policy</span><span class="p">,</span>
-        <span class="p">]</span>
+    <span class="k">def</span> <span class="nf">_build_pipeline</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">config</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span> <span class="c1"># pylint: disable=no-self-use</span>
+        <span class="n">transport</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;transport&#39;</span><span class="p">)</span>
+        <span class="n">policies</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;policies&#39;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">policies</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># [] is a valid policy list</span>
+            <span class="n">policies</span> <span class="o">=</span> <span class="p">[</span>
+                <span class="n">config</span><span class="o">.</span><span class="n">headers_policy</span><span class="p">,</span>
+                <span class="n">config</span><span class="o">.</span><span class="n">user_agent_policy</span><span class="p">,</span>
+                <span class="n">config</span><span class="o">.</span><span class="n">authentication_policy</span><span class="p">,</span>
+                <span class="n">ContentDecodePolicy</span><span class="p">(),</span>
+                <span class="n">config</span><span class="o">.</span><span class="n">redirect_policy</span><span class="p">,</span>
+                <span class="n">config</span><span class="o">.</span><span class="n">retry_policy</span><span class="p">,</span>
+                <span class="n">config</span><span class="o">.</span><span class="n">custom_hook_policy</span><span class="p">,</span>
+                <span class="n">config</span><span class="o">.</span><span class="n">logging_policy</span><span class="p">,</span>
+            <span class="p">]</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">transport</span><span class="p">:</span>
+            <span class="n">transport</span> <span class="o">=</span> <span class="n">AioHttpTransport</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
         <span class="k">return</span> <span class="n">AsyncPipeline</span><span class="p">(</span><span class="n">transport</span><span class="p">,</span> <span class="n">policies</span><span class="p">)</span></div>
 </pre></div>
 

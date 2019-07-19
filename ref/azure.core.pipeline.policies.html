@@ -448,7 +448,7 @@ subclasses will function in either a Pipeline or an AsyncPipeline,
 and can act either before the request is done, or after.</p>
 <dl class="method">
 <dt id="azure.core.pipeline.policies.base.SansIOHTTPPolicy.on_exception">
-<code class="sig-name descname">on_exception</code><span class="sig-paren">(</span><em class="sig-param">_request</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/core/pipeline/policies/base.html#SansIOHTTPPolicy.on_exception"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.core.pipeline.policies.base.SansIOHTTPPolicy.on_exception" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">on_exception</code><span class="sig-paren">(</span><em class="sig-param">_request</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/core/pipeline/policies/base.html#SansIOHTTPPolicy.on_exception"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.core.pipeline.policies.base.SansIOHTTPPolicy.on_exception" title="Permalink to this definition">¶</a></dt>
 <dd><p>Is executed if an exception is raised while executing the next policy.</p>
 <p>Developer can optionally implement this method to return True
 if the exception has been handled and should not be forwarded to the caller.</p>
@@ -481,7 +481,7 @@ if the exception has been handled and should not be forwarded to the caller.</p>
 
 <dl class="method">
 <dt id="azure.core.pipeline.policies.base.SansIOHTTPPolicy.on_request">
-<code class="sig-name descname">on_request</code><span class="sig-paren">(</span><em class="sig-param">request</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/core/pipeline/policies/base.html#SansIOHTTPPolicy.on_request"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.core.pipeline.policies.base.SansIOHTTPPolicy.on_request" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">on_request</code><span class="sig-paren">(</span><em class="sig-param">request</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/core/pipeline/policies/base.html#SansIOHTTPPolicy.on_request"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.core.pipeline.policies.base.SansIOHTTPPolicy.on_request" title="Permalink to this definition">¶</a></dt>
 <dd><p>Is executed before sending the request from next policy.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -492,7 +492,7 @@ if the exception has been handled and should not be forwarded to the caller.</p>
 
 <dl class="method">
 <dt id="azure.core.pipeline.policies.base.SansIOHTTPPolicy.on_response">
-<code class="sig-name descname">on_response</code><span class="sig-paren">(</span><em class="sig-param">request</em>, <em class="sig-param">response</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/core/pipeline/policies/base.html#SansIOHTTPPolicy.on_response"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.core.pipeline.policies.base.SansIOHTTPPolicy.on_response" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">on_response</code><span class="sig-paren">(</span><em class="sig-param">request</em>, <em class="sig-param">response</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/core/pipeline/policies/base.html#SansIOHTTPPolicy.on_response"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.core.pipeline.policies.base.SansIOHTTPPolicy.on_response" title="Permalink to this definition">¶</a></dt>
 <dd><p>Is executed after the request comes back from the policy.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1240,7 +1240,7 @@ If no content-type, will return the string version (not bytes, not stream)</p>
 
 <dl class="method">
 <dt id="azure.core.pipeline.policies.universal.ContentDecodePolicy.on_response">
-<code class="sig-name descname">on_response</code><span class="sig-paren">(</span><em class="sig-param">request</em>, <em class="sig-param">response</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/core/pipeline/policies/universal.html#ContentDecodePolicy.on_response"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.core.pipeline.policies.universal.ContentDecodePolicy.on_response" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">on_response</code><span class="sig-paren">(</span><em class="sig-param">request</em>, <em class="sig-param">response</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/core/pipeline/policies/universal.html#ContentDecodePolicy.on_response"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.core.pipeline.policies.universal.ContentDecodePolicy.on_response" title="Permalink to this definition">¶</a></dt>
 <dd><p>Extract data from the body of a REST response object.
 This will load the entire payload in memory.
 Will follow Content-Type to parse.
@@ -1320,7 +1320,7 @@ operations, and additional headers can also be added dynamically per operation.<
 
 <dl class="method">
 <dt id="azure.core.pipeline.policies.universal.HeadersPolicy.on_request">
-<code class="sig-name descname">on_request</code><span class="sig-paren">(</span><em class="sig-param">request</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/core/pipeline/policies/universal.html#HeadersPolicy.on_request"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.core.pipeline.policies.universal.HeadersPolicy.on_request" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">on_request</code><span class="sig-paren">(</span><em class="sig-param">request</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/core/pipeline/policies/universal.html#HeadersPolicy.on_request"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.core.pipeline.policies.universal.HeadersPolicy.on_request" title="Permalink to this definition">¶</a></dt>
 <dd><p>Updates with the given headers before sending the request to the next policy.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1378,7 +1378,7 @@ operations, and additional headers can also be added dynamically per operation.<
 </dl>
 <dl class="method">
 <dt id="azure.core.pipeline.policies.universal.NetworkTraceLoggingPolicy.on_request">
-<code class="sig-name descname">on_request</code><span class="sig-paren">(</span><em class="sig-param">request</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/core/pipeline/policies/universal.html#NetworkTraceLoggingPolicy.on_request"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.core.pipeline.policies.universal.NetworkTraceLoggingPolicy.on_request" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">on_request</code><span class="sig-paren">(</span><em class="sig-param">request</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/core/pipeline/policies/universal.html#NetworkTraceLoggingPolicy.on_request"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.core.pipeline.policies.universal.NetworkTraceLoggingPolicy.on_request" title="Permalink to this definition">¶</a></dt>
 <dd><p>Logs HTTP request to the DEBUG logger.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1389,7 +1389,7 @@ operations, and additional headers can also be added dynamically per operation.<
 
 <dl class="method">
 <dt id="azure.core.pipeline.policies.universal.NetworkTraceLoggingPolicy.on_response">
-<code class="sig-name descname">on_response</code><span class="sig-paren">(</span><em class="sig-param">request</em>, <em class="sig-param">response</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/core/pipeline/policies/universal.html#NetworkTraceLoggingPolicy.on_response"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.core.pipeline.policies.universal.NetworkTraceLoggingPolicy.on_response" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">on_response</code><span class="sig-paren">(</span><em class="sig-param">request</em>, <em class="sig-param">response</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/core/pipeline/policies/universal.html#NetworkTraceLoggingPolicy.on_response"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.core.pipeline.policies.universal.NetworkTraceLoggingPolicy.on_response" title="Permalink to this definition">¶</a></dt>
 <dd><p>Logs HTTP response to the DEBUG logger.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1416,8 +1416,6 @@ to be used on each Request.</p>
 of the proxy.</p>
 </dd>
 </dl>
-<p><strong>Keyword argument:</strong></p>
-<p><em>proxies_use_env_settings (bool)</em> - Uses proxy settings from environment. Defaults to True.</p>
 <dl>
 <dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id7">
 <div class="code-block-caption"><span class="caption-text">Configuring a proxy policy.</span><a class="headerlink" href="#id7" title="Permalink to this code">¶</a></div>
@@ -1439,6 +1437,17 @@ of the proxy.</p>
 </div>
 </dd>
 </dl>
+<dl class="method">
+<dt id="azure.core.pipeline.policies.universal.ProxyPolicy.on_request">
+<code class="sig-name descname">on_request</code><span class="sig-paren">(</span><em class="sig-param">request</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/core/pipeline/policies/universal.html#ProxyPolicy.on_request"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.core.pipeline.policies.universal.ProxyPolicy.on_request" title="Permalink to this definition">¶</a></dt>
+<dd><p>Is executed before sending the request from next policy.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>request</strong> (<a class="reference internal" href="azure.core.pipeline.html#azure.core.pipeline.PipelineRequest" title="azure.core.pipeline.PipelineRequest"><em>PipelineRequest</em></a>) – Request to be modified before sent from next policy.</p>
+</dd>
+</dl>
+</dd></dl>
+
 </dd></dl>
 
 <dl class="class">
@@ -1483,7 +1492,7 @@ of the proxy.</p>
 
 <dl class="method">
 <dt id="azure.core.pipeline.policies.universal.UserAgentPolicy.on_request">
-<code class="sig-name descname">on_request</code><span class="sig-paren">(</span><em class="sig-param">request</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/core/pipeline/policies/universal.html#UserAgentPolicy.on_request"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.core.pipeline.policies.universal.UserAgentPolicy.on_request" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">on_request</code><span class="sig-paren">(</span><em class="sig-param">request</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/core/pipeline/policies/universal.html#UserAgentPolicy.on_request"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.core.pipeline.policies.universal.UserAgentPolicy.on_request" title="Permalink to this definition">¶</a></dt>
 <dd><p>Modifies the User-Agent header before the request is sent.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1547,7 +1556,7 @@ subclasses will function in either a Pipeline or an AsyncPipeline,
 and can act either before the request is done, or after.</p>
 <dl class="method">
 <dt id="azure.core.pipeline.policies.SansIOHTTPPolicy.on_exception">
-<code class="sig-name descname">on_exception</code><span class="sig-paren">(</span><em class="sig-param">_request</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/core/pipeline/policies/base.html#SansIOHTTPPolicy.on_exception"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.core.pipeline.policies.SansIOHTTPPolicy.on_exception" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">on_exception</code><span class="sig-paren">(</span><em class="sig-param">_request</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/core/pipeline/policies/base.html#SansIOHTTPPolicy.on_exception"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.core.pipeline.policies.SansIOHTTPPolicy.on_exception" title="Permalink to this definition">¶</a></dt>
 <dd><p>Is executed if an exception is raised while executing the next policy.</p>
 <p>Developer can optionally implement this method to return True
 if the exception has been handled and should not be forwarded to the caller.</p>
@@ -1580,7 +1589,7 @@ if the exception has been handled and should not be forwarded to the caller.</p>
 
 <dl class="method">
 <dt id="azure.core.pipeline.policies.SansIOHTTPPolicy.on_request">
-<code class="sig-name descname">on_request</code><span class="sig-paren">(</span><em class="sig-param">request</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/core/pipeline/policies/base.html#SansIOHTTPPolicy.on_request"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.core.pipeline.policies.SansIOHTTPPolicy.on_request" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">on_request</code><span class="sig-paren">(</span><em class="sig-param">request</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/core/pipeline/policies/base.html#SansIOHTTPPolicy.on_request"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.core.pipeline.policies.SansIOHTTPPolicy.on_request" title="Permalink to this definition">¶</a></dt>
 <dd><p>Is executed before sending the request from next policy.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1591,7 +1600,7 @@ if the exception has been handled and should not be forwarded to the caller.</p>
 
 <dl class="method">
 <dt id="azure.core.pipeline.policies.SansIOHTTPPolicy.on_response">
-<code class="sig-name descname">on_response</code><span class="sig-paren">(</span><em class="sig-param">request</em>, <em class="sig-param">response</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/core/pipeline/policies/base.html#SansIOHTTPPolicy.on_response"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.core.pipeline.policies.SansIOHTTPPolicy.on_response" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">on_response</code><span class="sig-paren">(</span><em class="sig-param">request</em>, <em class="sig-param">response</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/core/pipeline/policies/base.html#SansIOHTTPPolicy.on_response"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.core.pipeline.policies.SansIOHTTPPolicy.on_response" title="Permalink to this definition">¶</a></dt>
 <dd><p>Is executed after the request comes back from the policy.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1691,7 +1700,7 @@ operations, and additional headers can also be added dynamically per operation.<
 
 <dl class="method">
 <dt id="azure.core.pipeline.policies.HeadersPolicy.on_request">
-<code class="sig-name descname">on_request</code><span class="sig-paren">(</span><em class="sig-param">request</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/core/pipeline/policies/universal.html#HeadersPolicy.on_request"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.core.pipeline.policies.HeadersPolicy.on_request" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">on_request</code><span class="sig-paren">(</span><em class="sig-param">request</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/core/pipeline/policies/universal.html#HeadersPolicy.on_request"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.core.pipeline.policies.HeadersPolicy.on_request" title="Permalink to this definition">¶</a></dt>
 <dd><p>Updates with the given headers before sending the request to the next policy.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1744,7 +1753,7 @@ operations, and additional headers can also be added dynamically per operation.<
 
 <dl class="method">
 <dt id="azure.core.pipeline.policies.UserAgentPolicy.on_request">
-<code class="sig-name descname">on_request</code><span class="sig-paren">(</span><em class="sig-param">request</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/core/pipeline/policies/universal.html#UserAgentPolicy.on_request"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.core.pipeline.policies.UserAgentPolicy.on_request" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">on_request</code><span class="sig-paren">(</span><em class="sig-param">request</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/core/pipeline/policies/universal.html#UserAgentPolicy.on_request"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.core.pipeline.policies.UserAgentPolicy.on_request" title="Permalink to this definition">¶</a></dt>
 <dd><p>Modifies the User-Agent header before the request is sent.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1808,7 +1817,7 @@ operations, and additional headers can also be added dynamically per operation.<
 </dl>
 <dl class="method">
 <dt id="azure.core.pipeline.policies.NetworkTraceLoggingPolicy.on_request">
-<code class="sig-name descname">on_request</code><span class="sig-paren">(</span><em class="sig-param">request</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/core/pipeline/policies/universal.html#NetworkTraceLoggingPolicy.on_request"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.core.pipeline.policies.NetworkTraceLoggingPolicy.on_request" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">on_request</code><span class="sig-paren">(</span><em class="sig-param">request</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/core/pipeline/policies/universal.html#NetworkTraceLoggingPolicy.on_request"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.core.pipeline.policies.NetworkTraceLoggingPolicy.on_request" title="Permalink to this definition">¶</a></dt>
 <dd><p>Logs HTTP request to the DEBUG logger.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1819,7 +1828,7 @@ operations, and additional headers can also be added dynamically per operation.<
 
 <dl class="method">
 <dt id="azure.core.pipeline.policies.NetworkTraceLoggingPolicy.on_response">
-<code class="sig-name descname">on_response</code><span class="sig-paren">(</span><em class="sig-param">request</em>, <em class="sig-param">response</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/core/pipeline/policies/universal.html#NetworkTraceLoggingPolicy.on_response"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.core.pipeline.policies.NetworkTraceLoggingPolicy.on_response" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">on_response</code><span class="sig-paren">(</span><em class="sig-param">request</em>, <em class="sig-param">response</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/core/pipeline/policies/universal.html#NetworkTraceLoggingPolicy.on_response"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.core.pipeline.policies.NetworkTraceLoggingPolicy.on_response" title="Permalink to this definition">¶</a></dt>
 <dd><p>Logs HTTP response to the DEBUG logger.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1880,7 +1889,7 @@ If no content-type, will return the string version (not bytes, not stream)</p>
 
 <dl class="method">
 <dt id="azure.core.pipeline.policies.ContentDecodePolicy.on_response">
-<code class="sig-name descname">on_response</code><span class="sig-paren">(</span><em class="sig-param">request</em>, <em class="sig-param">response</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/core/pipeline/policies/universal.html#ContentDecodePolicy.on_response"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.core.pipeline.policies.ContentDecodePolicy.on_response" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">on_response</code><span class="sig-paren">(</span><em class="sig-param">request</em>, <em class="sig-param">response</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/core/pipeline/policies/universal.html#ContentDecodePolicy.on_response"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.core.pipeline.policies.ContentDecodePolicy.on_response" title="Permalink to this definition">¶</a></dt>
 <dd><p>Extract data from the body of a REST response object.
 This will load the entire payload in memory.
 Will follow Content-Type to parse.
@@ -2327,8 +2336,6 @@ to be used on each Request.</p>
 of the proxy.</p>
 </dd>
 </dl>
-<p><strong>Keyword argument:</strong></p>
-<p><em>proxies_use_env_settings (bool)</em> - Uses proxy settings from environment. Defaults to True.</p>
 <dl>
 <dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id14">
 <div class="code-block-caption"><span class="caption-text">Configuring a proxy policy.</span><a class="headerlink" href="#id14" title="Permalink to this code">¶</a></div>
@@ -2350,6 +2357,17 @@ of the proxy.</p>
 </div>
 </dd>
 </dl>
+<dl class="method">
+<dt id="azure.core.pipeline.policies.ProxyPolicy.on_request">
+<code class="sig-name descname">on_request</code><span class="sig-paren">(</span><em class="sig-param">request</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/core/pipeline/policies/universal.html#ProxyPolicy.on_request"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.core.pipeline.policies.ProxyPolicy.on_request" title="Permalink to this definition">¶</a></dt>
+<dd><p>Is executed before sending the request from next policy.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>request</strong> (<a class="reference internal" href="azure.core.pipeline.html#azure.core.pipeline.PipelineRequest" title="azure.core.pipeline.PipelineRequest"><em>PipelineRequest</em></a>) – Request to be modified before sent from next policy.</p>
+</dd>
+</dl>
+</dd></dl>
+
 </dd></dl>
 
 <dl class="class">

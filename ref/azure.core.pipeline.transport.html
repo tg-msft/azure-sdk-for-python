@@ -335,26 +335,27 @@
 
 <dl class="class">
 <dt id="azure.core.pipeline.transport.aiohttp.AioHttpTransport">
-<em class="property">class </em><code class="sig-prename descclassname">azure.core.pipeline.transport.aiohttp.</code><code class="sig-name descname">AioHttpTransport</code><span class="sig-paren">(</span><em class="sig-param">configuration=None</em>, <em class="sig-param">*</em>, <em class="sig-param">session=None</em>, <em class="sig-param">loop=None</em>, <em class="sig-param">session_owner=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/core/pipeline/transport/aiohttp.html#AioHttpTransport"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.core.pipeline.transport.aiohttp.AioHttpTransport" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">azure.core.pipeline.transport.aiohttp.</code><code class="sig-name descname">AioHttpTransport</code><span class="sig-paren">(</span><em class="sig-param">*</em>, <em class="sig-param">session=None</em>, <em class="sig-param">loop=None</em>, <em class="sig-param">session_owner=True</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/core/pipeline/transport/aiohttp.html#AioHttpTransport"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.core.pipeline.transport.aiohttp.AioHttpTransport" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#azure.core.pipeline.transport.base_async.AsyncHttpTransport" title="azure.core.pipeline.transport.base_async.AsyncHttpTransport"><code class="xref py py-class docutils literal notranslate"><span class="pre">azure.core.pipeline.transport.base_async.AsyncHttpTransport</span></code></a></p>
 <p>AioHttp HTTP sender implementation.</p>
 <p>Fully asynchronous implementation using the aiohttp library.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>configuration</strong> (<a class="reference internal" href="azure.core.html#azure.core.Configuration" title="azure.core.Configuration"><em>Configuration</em></a>) – The service configuration.</p></li>
 <li><p><strong>session</strong> – The client session.</p></li>
 <li><p><strong>loop</strong> – The event loop.</p></li>
 <li><p><strong>session_owner</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#bool" title="(in Python v3.5)"><em>bool</em></a>) – Session owner. Defaults True.</p></li>
 </ul>
 </dd>
 </dl>
+<p><strong>Keyword argument:</strong></p>
+<p><em>use_env_settings (bool)</em> - Uses proxy settings from environment. Defaults to True.</p>
 <dl>
 <dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id1">
 <div class="code-block-caption"><span class="caption-text">Asynchronous transport with aiohttp.</span><a class="headerlink" href="#id1" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">azure.core.pipeline.transport</span> <span class="kn">import</span> <span class="n">AioHttpTransport</span>
 
-<span class="n">async</span> <span class="k">with</span> <span class="n">AsyncPipeline</span><span class="p">(</span><span class="n">AioHttpTransport</span><span class="p">(</span><span class="n">config</span><span class="p">),</span> <span class="n">policies</span><span class="o">=</span><span class="n">policies</span><span class="p">)</span> <span class="k">as</span> <span class="n">pipeline</span><span class="p">:</span>
+<span class="n">async</span> <span class="k">with</span> <span class="n">AsyncPipeline</span><span class="p">(</span><span class="n">AioHttpTransport</span><span class="p">(),</span> <span class="n">policies</span><span class="o">=</span><span class="n">policies</span><span class="p">)</span> <span class="k">as</span> <span class="n">pipeline</span><span class="p">:</span>
     <span class="n">response</span> <span class="o">=</span> <span class="n">await</span> <span class="n">pipeline</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -394,7 +395,9 @@ Pass stream=True to avoid this behavior.</p>
 </dd>
 </dl>
 <p><strong>Keyword argument:</strong></p>
-<p><em>stream (bool)</em> - Defaults to False.</p>
+<p><em>stream (bool)</em> - Defaults to False.
+<em>proxies</em> - dict of proxy to used based on protocol. Proxy is a dict (protocol, url)
+<em>proxy</em> - will define the proxy to use all the time</p>
 </dd></dl>
 
 </dd></dl>
@@ -827,7 +830,7 @@ is supported. Will return an asynchronous generator.</p>
 <span id="azure-core-pipeline-transport-requests-asyncio-module"></span><h2>azure.core.pipeline.transport.requests_asyncio module<a class="headerlink" href="#module-azure.core.pipeline.transport.requests_asyncio" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="azure.core.pipeline.transport.requests_asyncio.AsyncioRequestsTransport">
-<em class="property">class </em><code class="sig-prename descclassname">azure.core.pipeline.transport.requests_asyncio.</code><code class="sig-name descname">AsyncioRequestsTransport</code><span class="sig-paren">(</span><em class="sig-param">configuration=None</em>, <em class="sig-param">session=None</em>, <em class="sig-param">session_owner=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/core/pipeline/transport/requests_asyncio.html#AsyncioRequestsTransport"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.core.pipeline.transport.requests_asyncio.AsyncioRequestsTransport" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">azure.core.pipeline.transport.requests_asyncio.</code><code class="sig-name descname">AsyncioRequestsTransport</code><span class="sig-paren">(</span><em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/core/pipeline/transport/requests_asyncio.html#AsyncioRequestsTransport"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.core.pipeline.transport.requests_asyncio.AsyncioRequestsTransport" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#azure.core.pipeline.transport.requests_basic.RequestsTransport" title="azure.core.pipeline.transport.requests_basic.RequestsTransport"><code class="xref py py-class docutils literal notranslate"><span class="pre">azure.core.pipeline.transport.requests_basic.RequestsTransport</span></code></a>, <a class="reference internal" href="#azure.core.pipeline.transport.base_async.AsyncHttpTransport" title="azure.core.pipeline.transport.base_async.AsyncHttpTransport"><code class="xref py py-class docutils literal notranslate"><span class="pre">azure.core.pipeline.transport.base_async.AsyncHttpTransport</span></code></a></p>
 <p>Identical implementation as the synchronous RequestsTransport wrapped in a class with
 asynchronous methods. Uses the built-in asyncio event loop.</p>
@@ -836,7 +839,7 @@ asynchronous methods. Uses the built-in asyncio event loop.</p>
 <div class="code-block-caption"><span class="caption-text">Asynchronous transport with asyncio.</span><a class="headerlink" href="#id2" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">azure.core.pipeline.transport</span> <span class="kn">import</span> <span class="n">AsyncioRequestsTransport</span>
 
-<span class="n">async</span> <span class="k">with</span> <span class="n">AsyncPipeline</span><span class="p">(</span><span class="n">AsyncioRequestsTransport</span><span class="p">(</span><span class="n">config</span><span class="p">),</span> <span class="n">policies</span><span class="o">=</span><span class="n">policies</span><span class="p">)</span> <span class="k">as</span> <span class="n">pipeline</span><span class="p">:</span>
+<span class="n">async</span> <span class="k">with</span> <span class="n">AsyncPipeline</span><span class="p">(</span><span class="n">AsyncioRequestsTransport</span><span class="p">(),</span> <span class="n">policies</span><span class="o">=</span><span class="n">policies</span><span class="p">)</span> <span class="k">as</span> <span class="n">pipeline</span><span class="p">:</span>
     <span class="n">response</span> <span class="o">=</span> <span class="n">await</span> <span class="n">pipeline</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -861,6 +864,10 @@ asynchronous methods. Uses the built-in asyncio event loop.</p>
 <dd class="field-odd"><p><a class="reference internal" href="#azure.core.pipeline.transport.AsyncHttpResponse" title="azure.core.pipeline.transport.AsyncHttpResponse">AsyncHttpResponse</a></p>
 </dd>
 </dl>
+<p><strong>Keyword arguments:</strong></p>
+<p><em>session</em> - will override the driver session and use yours. Should NOT be done unless really required.
+Anything else is sent straight to requests.
+<em>proxies</em> - will define the proxy to use. Proxy is a dict (protocol, url)</p>
 </dd></dl>
 
 </dd></dl>
@@ -902,7 +909,7 @@ asynchronous methods. Uses the built-in asyncio event loop.</p>
 <span id="azure-core-pipeline-transport-requests-basic-module"></span><h2>azure.core.pipeline.transport.requests_basic module<a class="headerlink" href="#module-azure.core.pipeline.transport.requests_basic" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="azure.core.pipeline.transport.requests_basic.RequestsTransport">
-<em class="property">class </em><code class="sig-prename descclassname">azure.core.pipeline.transport.requests_basic.</code><code class="sig-name descname">RequestsTransport</code><span class="sig-paren">(</span><em class="sig-param">configuration=None</em>, <em class="sig-param">session=None</em>, <em class="sig-param">session_owner=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/core/pipeline/transport/requests_basic.html#RequestsTransport"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.core.pipeline.transport.requests_basic.RequestsTransport" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">azure.core.pipeline.transport.requests_basic.</code><code class="sig-name descname">RequestsTransport</code><span class="sig-paren">(</span><em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/core/pipeline/transport/requests_basic.html#RequestsTransport"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.core.pipeline.transport.requests_basic.RequestsTransport" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#azure.core.pipeline.transport.base.HttpTransport" title="azure.core.pipeline.transport.base.HttpTransport"><code class="xref py py-class docutils literal notranslate"><span class="pre">azure.core.pipeline.transport.base.HttpTransport</span></code></a></p>
 <p>Implements a basic requests HTTP sender.</p>
 <p>Since requests team recommends to use one session per requests, you should
@@ -911,21 +918,16 @@ per instance.</p>
 <p>In this simple implementation:
 - You provide the configured session if you want to, or a basic session is created.
 - All kwargs received by “send” are sent to session.request directly</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>configuration</strong> (<a class="reference internal" href="azure.core.html#azure.core.Configuration" title="azure.core.Configuration"><em>Configuration</em></a>) – The service configuration.</p></li>
-<li><p><strong>session</strong> (<em>requests.Session</em>) – The session.</p></li>
-<li><p><strong>session_owner</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#bool" title="(in Python v3.5)"><em>bool</em></a>) – Defaults to True.</p></li>
-</ul>
-</dd>
-</dl>
+<p><strong>Keyword argument:</strong></p>
+<p><em>session (requests.Session)</em> - Request session to use instead of the default one.
+<em>session_owner (bool)</em> - Decide if the session provided by user is owned by this transport. Default to True.
+<em>use_env_settings (bool)</em> - Uses proxy settings from environment. Defaults to True.</p>
 <dl>
 <dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id3">
 <div class="code-block-caption"><span class="caption-text">Synchronous transport with Requests.</span><a class="headerlink" href="#id3" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">azure.core.pipeline.transport</span> <span class="kn">import</span> <span class="n">RequestsTransport</span>
 
-<span class="k">with</span> <span class="n">Pipeline</span><span class="p">(</span><span class="n">transport</span><span class="o">=</span><span class="n">RequestsTransport</span><span class="p">(</span><span class="n">config</span><span class="p">),</span> <span class="n">policies</span><span class="o">=</span><span class="n">policies</span><span class="p">)</span> <span class="k">as</span> <span class="n">pipeline</span><span class="p">:</span>
+<span class="k">with</span> <span class="n">Pipeline</span><span class="p">(</span><span class="n">transport</span><span class="o">=</span><span class="n">RequestsTransport</span><span class="p">(),</span> <span class="n">policies</span><span class="o">=</span><span class="n">policies</span><span class="p">)</span> <span class="k">as</span> <span class="n">pipeline</span><span class="p">:</span>
     <span class="n">response</span> <span class="o">=</span> <span class="n">pipeline</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -961,7 +963,8 @@ per instance.</p>
 </dl>
 <p><strong>Keyword arguments:</strong></p>
 <p><em>session</em> - will override the driver session and use yours. Should NOT be done unless really required.
-Anything else is sent straight to requests.</p>
+Anything else is sent straight to requests.
+<em>proxies</em> - will define the proxy to use. Proxy is a dict (protocol, url)</p>
 </dd></dl>
 
 </dd></dl>
@@ -1008,7 +1011,7 @@ Anything else is sent straight to requests.</p>
 <span id="azure-core-pipeline-transport-requests-trio-module"></span><h2>azure.core.pipeline.transport.requests_trio module<a class="headerlink" href="#module-azure.core.pipeline.transport.requests_trio" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="azure.core.pipeline.transport.requests_trio.TrioRequestsTransport">
-<em class="property">class </em><code class="sig-prename descclassname">azure.core.pipeline.transport.requests_trio.</code><code class="sig-name descname">TrioRequestsTransport</code><span class="sig-paren">(</span><em class="sig-param">configuration=None</em>, <em class="sig-param">session=None</em>, <em class="sig-param">session_owner=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/core/pipeline/transport/requests_trio.html#TrioRequestsTransport"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.core.pipeline.transport.requests_trio.TrioRequestsTransport" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">azure.core.pipeline.transport.requests_trio.</code><code class="sig-name descname">TrioRequestsTransport</code><span class="sig-paren">(</span><em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/core/pipeline/transport/requests_trio.html#TrioRequestsTransport"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.core.pipeline.transport.requests_trio.TrioRequestsTransport" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#azure.core.pipeline.transport.requests_basic.RequestsTransport" title="azure.core.pipeline.transport.requests_basic.RequestsTransport"><code class="xref py py-class docutils literal notranslate"><span class="pre">azure.core.pipeline.transport.requests_basic.RequestsTransport</span></code></a>, <a class="reference internal" href="#azure.core.pipeline.transport.base_async.AsyncHttpTransport" title="azure.core.pipeline.transport.base_async.AsyncHttpTransport"><code class="xref py py-class docutils literal notranslate"><span class="pre">azure.core.pipeline.transport.base_async.AsyncHttpTransport</span></code></a></p>
 <p>Identical implementation as the synchronous RequestsTransport wrapped in a class with
 asynchronous methods. Uses the third party trio event loop.</p>
@@ -1017,7 +1020,7 @@ asynchronous methods. Uses the third party trio event loop.</p>
 <div class="code-block-caption"><span class="caption-text">Asynchronous transport with trio.</span><a class="headerlink" href="#id4" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span>    <span class="kn">from</span> <span class="nn">azure.core.pipeline.transport</span> <span class="kn">import</span> <span class="n">TrioRequestsTransport</span>
 
-    <span class="n">async</span> <span class="k">with</span> <span class="n">AsyncPipeline</span><span class="p">(</span><span class="n">TrioRequestsTransport</span><span class="p">(</span><span class="n">config</span><span class="p">),</span> <span class="n">policies</span><span class="o">=</span><span class="n">policies</span><span class="p">)</span> <span class="k">as</span> <span class="n">pipeline</span><span class="p">:</span>
+    <span class="n">async</span> <span class="k">with</span> <span class="n">AsyncPipeline</span><span class="p">(</span><span class="n">TrioRequestsTransport</span><span class="p">(),</span> <span class="n">policies</span><span class="o">=</span><span class="n">policies</span><span class="p">)</span> <span class="k">as</span> <span class="n">pipeline</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">await</span> <span class="n">pipeline</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -1042,6 +1045,10 @@ asynchronous methods. Uses the third party trio event loop.</p>
 <dd class="field-odd"><p><a class="reference internal" href="#azure.core.pipeline.transport.AsyncHttpResponse" title="azure.core.pipeline.transport.AsyncHttpResponse">AsyncHttpResponse</a></p>
 </dd>
 </dl>
+<p><strong>Keyword arguments:</strong></p>
+<p><em>session</em> - will override the driver session and use yours. Should NOT be done unless really required.
+Anything else is sent straight to requests.
+<em>proxies</em> - will define the proxy to use. Proxy is a dict (protocol, url)</p>
 </dd></dl>
 
 <dl class="method">
@@ -1231,7 +1238,7 @@ is supported.</p>
 
 <dl class="class">
 <dt id="azure.core.pipeline.transport.RequestsTransport">
-<em class="property">class </em><code class="sig-prename descclassname">azure.core.pipeline.transport.</code><code class="sig-name descname">RequestsTransport</code><span class="sig-paren">(</span><em class="sig-param">configuration=None</em>, <em class="sig-param">session=None</em>, <em class="sig-param">session_owner=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/core/pipeline/transport/requests_basic.html#RequestsTransport"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.core.pipeline.transport.RequestsTransport" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">azure.core.pipeline.transport.</code><code class="sig-name descname">RequestsTransport</code><span class="sig-paren">(</span><em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/core/pipeline/transport/requests_basic.html#RequestsTransport"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.core.pipeline.transport.RequestsTransport" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#azure.core.pipeline.transport.base.HttpTransport" title="azure.core.pipeline.transport.base.HttpTransport"><code class="xref py py-class docutils literal notranslate"><span class="pre">azure.core.pipeline.transport.base.HttpTransport</span></code></a></p>
 <p>Implements a basic requests HTTP sender.</p>
 <p>Since requests team recommends to use one session per requests, you should
@@ -1240,21 +1247,16 @@ per instance.</p>
 <p>In this simple implementation:
 - You provide the configured session if you want to, or a basic session is created.
 - All kwargs received by “send” are sent to session.request directly</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>configuration</strong> (<a class="reference internal" href="azure.core.html#azure.core.Configuration" title="azure.core.Configuration"><em>Configuration</em></a>) – The service configuration.</p></li>
-<li><p><strong>session</strong> (<em>requests.Session</em>) – The session.</p></li>
-<li><p><strong>session_owner</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#bool" title="(in Python v3.5)"><em>bool</em></a>) – Defaults to True.</p></li>
-</ul>
-</dd>
-</dl>
+<p><strong>Keyword argument:</strong></p>
+<p><em>session (requests.Session)</em> - Request session to use instead of the default one.
+<em>session_owner (bool)</em> - Decide if the session provided by user is owned by this transport. Default to True.
+<em>use_env_settings (bool)</em> - Uses proxy settings from environment. Defaults to True.</p>
 <dl>
 <dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id5">
 <div class="code-block-caption"><span class="caption-text">Synchronous transport with Requests.</span><a class="headerlink" href="#id5" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">azure.core.pipeline.transport</span> <span class="kn">import</span> <span class="n">RequestsTransport</span>
 
-<span class="k">with</span> <span class="n">Pipeline</span><span class="p">(</span><span class="n">transport</span><span class="o">=</span><span class="n">RequestsTransport</span><span class="p">(</span><span class="n">config</span><span class="p">),</span> <span class="n">policies</span><span class="o">=</span><span class="n">policies</span><span class="p">)</span> <span class="k">as</span> <span class="n">pipeline</span><span class="p">:</span>
+<span class="k">with</span> <span class="n">Pipeline</span><span class="p">(</span><span class="n">transport</span><span class="o">=</span><span class="n">RequestsTransport</span><span class="p">(),</span> <span class="n">policies</span><span class="o">=</span><span class="n">policies</span><span class="p">)</span> <span class="k">as</span> <span class="n">pipeline</span><span class="p">:</span>
     <span class="n">response</span> <span class="o">=</span> <span class="n">pipeline</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -1290,7 +1292,8 @@ per instance.</p>
 </dl>
 <p><strong>Keyword arguments:</strong></p>
 <p><em>session</em> - will override the driver session and use yours. Should NOT be done unless really required.
-Anything else is sent straight to requests.</p>
+Anything else is sent straight to requests.
+<em>proxies</em> - will define the proxy to use. Proxy is a dict (protocol, url)</p>
 </dd></dl>
 
 </dd></dl>
@@ -1361,7 +1364,7 @@ is supported. Will return an asynchronous generator.</p>
 
 <dl class="class">
 <dt id="azure.core.pipeline.transport.AsyncioRequestsTransport">
-<em class="property">class </em><code class="sig-prename descclassname">azure.core.pipeline.transport.</code><code class="sig-name descname">AsyncioRequestsTransport</code><span class="sig-paren">(</span><em class="sig-param">configuration=None</em>, <em class="sig-param">session=None</em>, <em class="sig-param">session_owner=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/core/pipeline/transport/requests_asyncio.html#AsyncioRequestsTransport"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.core.pipeline.transport.AsyncioRequestsTransport" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">azure.core.pipeline.transport.</code><code class="sig-name descname">AsyncioRequestsTransport</code><span class="sig-paren">(</span><em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/core/pipeline/transport/requests_asyncio.html#AsyncioRequestsTransport"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.core.pipeline.transport.AsyncioRequestsTransport" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#azure.core.pipeline.transport.requests_basic.RequestsTransport" title="azure.core.pipeline.transport.requests_basic.RequestsTransport"><code class="xref py py-class docutils literal notranslate"><span class="pre">azure.core.pipeline.transport.requests_basic.RequestsTransport</span></code></a>, <a class="reference internal" href="#azure.core.pipeline.transport.base_async.AsyncHttpTransport" title="azure.core.pipeline.transport.base_async.AsyncHttpTransport"><code class="xref py py-class docutils literal notranslate"><span class="pre">azure.core.pipeline.transport.base_async.AsyncHttpTransport</span></code></a></p>
 <p>Identical implementation as the synchronous RequestsTransport wrapped in a class with
 asynchronous methods. Uses the built-in asyncio event loop.</p>
@@ -1370,7 +1373,7 @@ asynchronous methods. Uses the built-in asyncio event loop.</p>
 <div class="code-block-caption"><span class="caption-text">Asynchronous transport with asyncio.</span><a class="headerlink" href="#id6" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">azure.core.pipeline.transport</span> <span class="kn">import</span> <span class="n">AsyncioRequestsTransport</span>
 
-<span class="n">async</span> <span class="k">with</span> <span class="n">AsyncPipeline</span><span class="p">(</span><span class="n">AsyncioRequestsTransport</span><span class="p">(</span><span class="n">config</span><span class="p">),</span> <span class="n">policies</span><span class="o">=</span><span class="n">policies</span><span class="p">)</span> <span class="k">as</span> <span class="n">pipeline</span><span class="p">:</span>
+<span class="n">async</span> <span class="k">with</span> <span class="n">AsyncPipeline</span><span class="p">(</span><span class="n">AsyncioRequestsTransport</span><span class="p">(),</span> <span class="n">policies</span><span class="o">=</span><span class="n">policies</span><span class="p">)</span> <span class="k">as</span> <span class="n">pipeline</span><span class="p">:</span>
     <span class="n">response</span> <span class="o">=</span> <span class="n">await</span> <span class="n">pipeline</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -1395,6 +1398,10 @@ asynchronous methods. Uses the built-in asyncio event loop.</p>
 <dd class="field-odd"><p><a class="reference internal" href="#azure.core.pipeline.transport.AsyncHttpResponse" title="azure.core.pipeline.transport.AsyncHttpResponse">AsyncHttpResponse</a></p>
 </dd>
 </dl>
+<p><strong>Keyword arguments:</strong></p>
+<p><em>session</em> - will override the driver session and use yours. Should NOT be done unless really required.
+Anything else is sent straight to requests.
+<em>proxies</em> - will define the proxy to use. Proxy is a dict (protocol, url)</p>
 </dd></dl>
 
 </dd></dl>
@@ -1414,7 +1421,7 @@ asynchronous methods. Uses the built-in asyncio event loop.</p>
 
 <dl class="class">
 <dt id="azure.core.pipeline.transport.TrioRequestsTransport">
-<em class="property">class </em><code class="sig-prename descclassname">azure.core.pipeline.transport.</code><code class="sig-name descname">TrioRequestsTransport</code><span class="sig-paren">(</span><em class="sig-param">configuration=None</em>, <em class="sig-param">session=None</em>, <em class="sig-param">session_owner=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/core/pipeline/transport/requests_trio.html#TrioRequestsTransport"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.core.pipeline.transport.TrioRequestsTransport" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">azure.core.pipeline.transport.</code><code class="sig-name descname">TrioRequestsTransport</code><span class="sig-paren">(</span><em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/core/pipeline/transport/requests_trio.html#TrioRequestsTransport"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.core.pipeline.transport.TrioRequestsTransport" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#azure.core.pipeline.transport.requests_basic.RequestsTransport" title="azure.core.pipeline.transport.requests_basic.RequestsTransport"><code class="xref py py-class docutils literal notranslate"><span class="pre">azure.core.pipeline.transport.requests_basic.RequestsTransport</span></code></a>, <a class="reference internal" href="#azure.core.pipeline.transport.base_async.AsyncHttpTransport" title="azure.core.pipeline.transport.base_async.AsyncHttpTransport"><code class="xref py py-class docutils literal notranslate"><span class="pre">azure.core.pipeline.transport.base_async.AsyncHttpTransport</span></code></a></p>
 <p>Identical implementation as the synchronous RequestsTransport wrapped in a class with
 asynchronous methods. Uses the third party trio event loop.</p>
@@ -1423,7 +1430,7 @@ asynchronous methods. Uses the third party trio event loop.</p>
 <div class="code-block-caption"><span class="caption-text">Asynchronous transport with trio.</span><a class="headerlink" href="#id7" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span>    <span class="kn">from</span> <span class="nn">azure.core.pipeline.transport</span> <span class="kn">import</span> <span class="n">TrioRequestsTransport</span>
 
-    <span class="n">async</span> <span class="k">with</span> <span class="n">AsyncPipeline</span><span class="p">(</span><span class="n">TrioRequestsTransport</span><span class="p">(</span><span class="n">config</span><span class="p">),</span> <span class="n">policies</span><span class="o">=</span><span class="n">policies</span><span class="p">)</span> <span class="k">as</span> <span class="n">pipeline</span><span class="p">:</span>
+    <span class="n">async</span> <span class="k">with</span> <span class="n">AsyncPipeline</span><span class="p">(</span><span class="n">TrioRequestsTransport</span><span class="p">(),</span> <span class="n">policies</span><span class="o">=</span><span class="n">policies</span><span class="p">)</span> <span class="k">as</span> <span class="n">pipeline</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">await</span> <span class="n">pipeline</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -1448,6 +1455,10 @@ asynchronous methods. Uses the third party trio event loop.</p>
 <dd class="field-odd"><p><a class="reference internal" href="#azure.core.pipeline.transport.AsyncHttpResponse" title="azure.core.pipeline.transport.AsyncHttpResponse">AsyncHttpResponse</a></p>
 </dd>
 </dl>
+<p><strong>Keyword arguments:</strong></p>
+<p><em>session</em> - will override the driver session and use yours. Should NOT be done unless really required.
+Anything else is sent straight to requests.
+<em>proxies</em> - will define the proxy to use. Proxy is a dict (protocol, url)</p>
 </dd></dl>
 
 <dl class="method">
@@ -1472,26 +1483,27 @@ asynchronous methods. Uses the third party trio event loop.</p>
 
 <dl class="class">
 <dt id="azure.core.pipeline.transport.AioHttpTransport">
-<em class="property">class </em><code class="sig-prename descclassname">azure.core.pipeline.transport.</code><code class="sig-name descname">AioHttpTransport</code><span class="sig-paren">(</span><em class="sig-param">configuration=None</em>, <em class="sig-param">*</em>, <em class="sig-param">session=None</em>, <em class="sig-param">loop=None</em>, <em class="sig-param">session_owner=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/core/pipeline/transport/aiohttp.html#AioHttpTransport"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.core.pipeline.transport.AioHttpTransport" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">azure.core.pipeline.transport.</code><code class="sig-name descname">AioHttpTransport</code><span class="sig-paren">(</span><em class="sig-param">*</em>, <em class="sig-param">session=None</em>, <em class="sig-param">loop=None</em>, <em class="sig-param">session_owner=True</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/core/pipeline/transport/aiohttp.html#AioHttpTransport"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.core.pipeline.transport.AioHttpTransport" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#azure.core.pipeline.transport.base_async.AsyncHttpTransport" title="azure.core.pipeline.transport.base_async.AsyncHttpTransport"><code class="xref py py-class docutils literal notranslate"><span class="pre">azure.core.pipeline.transport.base_async.AsyncHttpTransport</span></code></a></p>
 <p>AioHttp HTTP sender implementation.</p>
 <p>Fully asynchronous implementation using the aiohttp library.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>configuration</strong> (<a class="reference internal" href="azure.core.html#azure.core.Configuration" title="azure.core.Configuration"><em>Configuration</em></a>) – The service configuration.</p></li>
 <li><p><strong>session</strong> – The client session.</p></li>
 <li><p><strong>loop</strong> – The event loop.</p></li>
 <li><p><strong>session_owner</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#bool" title="(in Python v3.5)"><em>bool</em></a>) – Session owner. Defaults True.</p></li>
 </ul>
 </dd>
 </dl>
+<p><strong>Keyword argument:</strong></p>
+<p><em>use_env_settings (bool)</em> - Uses proxy settings from environment. Defaults to True.</p>
 <dl>
 <dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id8">
 <div class="code-block-caption"><span class="caption-text">Asynchronous transport with aiohttp.</span><a class="headerlink" href="#id8" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">azure.core.pipeline.transport</span> <span class="kn">import</span> <span class="n">AioHttpTransport</span>
 
-<span class="n">async</span> <span class="k">with</span> <span class="n">AsyncPipeline</span><span class="p">(</span><span class="n">AioHttpTransport</span><span class="p">(</span><span class="n">config</span><span class="p">),</span> <span class="n">policies</span><span class="o">=</span><span class="n">policies</span><span class="p">)</span> <span class="k">as</span> <span class="n">pipeline</span><span class="p">:</span>
+<span class="n">async</span> <span class="k">with</span> <span class="n">AsyncPipeline</span><span class="p">(</span><span class="n">AioHttpTransport</span><span class="p">(),</span> <span class="n">policies</span><span class="o">=</span><span class="n">policies</span><span class="p">)</span> <span class="k">as</span> <span class="n">pipeline</span><span class="p">:</span>
     <span class="n">response</span> <span class="o">=</span> <span class="n">await</span> <span class="n">pipeline</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -1531,7 +1543,9 @@ Pass stream=True to avoid this behavior.</p>
 </dd>
 </dl>
 <p><strong>Keyword argument:</strong></p>
-<p><em>stream (bool)</em> - Defaults to False.</p>
+<p><em>stream (bool)</em> - Defaults to False.
+<em>proxies</em> - dict of proxy to used based on protocol. Proxy is a dict (protocol, url)
+<em>proxy</em> - will define the proxy to use all the time</p>
 </dd></dl>
 
 </dd></dl>
