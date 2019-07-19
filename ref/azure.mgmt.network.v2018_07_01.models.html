@@ -5815,8 +5815,8 @@ certificate resource. Possible values are: ‘Updating’, ‘Deleting’, and
 
 <dl class="class">
 <dt id="azure.mgmt.network.v2018_07_01.models.VpnConnection">
-<em class="property">class </em><code class="sig-prename descclassname">azure.mgmt.network.v2018_07_01.models.</code><code class="sig-name descname">VpnConnection</code><span class="sig-paren">(</span><em class="sig-param">*</em>, <em class="sig-param">id: str = None</em>, <em class="sig-param">location: str = None</em>, <em class="sig-param">tags=None</em>, <em class="sig-param">remote_vpn_site=None</em>, <em class="sig-param">routing_weight: int = None</em>, <em class="sig-param">connection_status=None</em>, <em class="sig-param">shared_key: str = None</em>, <em class="sig-param">enable_bgp: bool = None</em>, <em class="sig-param">ipsec_policies=None</em>, <em class="sig-param">provisioning_state=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/mgmt/network/v2018_07_01/models/_models_py3.html#VpnConnection"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.network.v2018_07_01.models.VpnConnection" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">azure.mgmt.network.v2018_07_01.models._models_py3.Resource</span></code></p>
+<em class="property">class </em><code class="sig-prename descclassname">azure.mgmt.network.v2018_07_01.models.</code><code class="sig-name descname">VpnConnection</code><span class="sig-paren">(</span><em class="sig-param">*</em>, <em class="sig-param">id: str = None</em>, <em class="sig-param">remote_vpn_site=None</em>, <em class="sig-param">routing_weight: int = None</em>, <em class="sig-param">connection_status=None</em>, <em class="sig-param">shared_key: str = None</em>, <em class="sig-param">enable_bgp: bool = None</em>, <em class="sig-param">ipsec_policies=None</em>, <em class="sig-param">provisioning_state=None</em>, <em class="sig-param">name: str = None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/mgmt/network/v2018_07_01/models/_models_py3.html#VpnConnection"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.network.v2018_07_01.models.VpnConnection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">azure.mgmt.network.v2018_07_01.models._models_py3.SubResource</span></code></p>
 <p>VpnConnection Resource.</p>
 <p>Variables are only populated by the server, and will be ignored when
 sending a request.</p>
@@ -5824,8 +5824,6 @@ sending a request.</p>
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>id</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Resource ID.</p></li>
-<li><p><strong>location</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Resource location.</p></li>
-<li><p><strong>tags</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#dict" title="(in Python v3.5)"><em>dict</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a><em>]</em>) – Resource tags.</p></li>
 <li><p><strong>remote_vpn_site</strong> (<a class="reference internal" href="#azure.mgmt.network.v2018_07_01.models.SubResource" title="azure.mgmt.network.v2018_07_01.models.SubResource"><em>SubResource</em></a>) – Id of the connected vpn site.</p></li>
 <li><p><strong>routing_weight</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a>) – routing weight for vpn connection.</p></li>
 <li><p><strong>connection_status</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a><em> or
@@ -5838,12 +5836,12 @@ connection.</p></li>
 <li><p><strong>provisioning_state</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a><em> or
 </em><a class="reference internal" href="#azure.mgmt.network.v2018_07_01.models.ProvisioningState" title="azure.mgmt.network.v2018_07_01.models.ProvisioningState"><em>ProvisioningState</em></a>) – The provisioning state of the resource.
 Possible values include: ‘Succeeded’, ‘Updating’, ‘Deleting’, ‘Failed’</p></li>
+<li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The name of the resource that is unique within a resource
+group. This name can be used to access the resource.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Variables</dt>
 <dd class="field-even"><ul class="simple">
-<li><p><a class="reference internal" href="azure.mgmt.alertsmanagement.models.html#azure.mgmt.alertsmanagement.models.AlertsSortByFields.name" title="azure.mgmt.alertsmanagement.models.AlertsSortByFields.name"><strong>name</strong></a> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Resource name.</p></li>
-<li><p><a class="reference internal" href="azure.batch.models.html#azure.batch.models.ContainerConfiguration.type" title="azure.batch.models.ContainerConfiguration.type"><strong>type</strong></a> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Resource type.</p></li>
 <li><p><strong>ingress_bytes_transferred</strong> (<em>long</em>) – Ingress bytes transferred.</p></li>
 <li><p><strong>egress_bytes_transferred</strong> (<em>long</em>) – Egress bytes transferred.</p></li>
 <li><p><strong>connection_bandwidth_in_mbps</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a>) – Expected bandwidth in MBPS.</p></li>
@@ -6755,6 +6753,11 @@ fetched.</p>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3.5/library/enum.html#enum.Enum" title="(in Python v3.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></a></p>
 <p>An enumeration.</p>
 <dl class="attribute">
+<dt id="azure.mgmt.network.v2018_07_01.models.ApplicationGatewaySslCipherSuite.tls_dhe_dss_with_3_des_ede_cbc_sha">
+<code class="sig-name descname">tls_dhe_dss_with_3_des_ede_cbc_sha</code><em class="property"> = 'TLS_DHE_DSS_WITH_3DES_EDE_CBC_SHA'</em><a class="headerlink" href="#azure.mgmt.network.v2018_07_01.models.ApplicationGatewaySslCipherSuite.tls_dhe_dss_with_3_des_ede_cbc_sha" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
 <dt id="azure.mgmt.network.v2018_07_01.models.ApplicationGatewaySslCipherSuite.tls_dhe_dss_with_aes_128_cbc_sha">
 <code class="sig-name descname">tls_dhe_dss_with_aes_128_cbc_sha</code><em class="property"> = 'TLS_DHE_DSS_WITH_AES_128_CBC_SHA'</em><a class="headerlink" href="#azure.mgmt.network.v2018_07_01.models.ApplicationGatewaySslCipherSuite.tls_dhe_dss_with_aes_128_cbc_sha" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
@@ -6835,6 +6838,11 @@ fetched.</p>
 <dd></dd></dl>
 
 <dl class="attribute">
+<dt id="azure.mgmt.network.v2018_07_01.models.ApplicationGatewaySslCipherSuite.tls_ecdhe_rsa_with_aes_128_gcm_sha256">
+<code class="sig-name descname">tls_ecdhe_rsa_with_aes_128_gcm_sha256</code><em class="property"> = 'TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256'</em><a class="headerlink" href="#azure.mgmt.network.v2018_07_01.models.ApplicationGatewaySslCipherSuite.tls_ecdhe_rsa_with_aes_128_gcm_sha256" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
 <dt id="azure.mgmt.network.v2018_07_01.models.ApplicationGatewaySslCipherSuite.tls_ecdhe_rsa_with_aes_256_cbc_sha">
 <code class="sig-name descname">tls_ecdhe_rsa_with_aes_256_cbc_sha</code><em class="property"> = 'TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA'</em><a class="headerlink" href="#azure.mgmt.network.v2018_07_01.models.ApplicationGatewaySslCipherSuite.tls_ecdhe_rsa_with_aes_256_cbc_sha" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
@@ -6842,6 +6850,11 @@ fetched.</p>
 <dl class="attribute">
 <dt id="azure.mgmt.network.v2018_07_01.models.ApplicationGatewaySslCipherSuite.tls_ecdhe_rsa_with_aes_256_cbc_sha384">
 <code class="sig-name descname">tls_ecdhe_rsa_with_aes_256_cbc_sha384</code><em class="property"> = 'TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384'</em><a class="headerlink" href="#azure.mgmt.network.v2018_07_01.models.ApplicationGatewaySslCipherSuite.tls_ecdhe_rsa_with_aes_256_cbc_sha384" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="azure.mgmt.network.v2018_07_01.models.ApplicationGatewaySslCipherSuite.tls_ecdhe_rsa_with_aes_256_gcm_sha384">
+<code class="sig-name descname">tls_ecdhe_rsa_with_aes_256_gcm_sha384</code><em class="property"> = 'TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384'</em><a class="headerlink" href="#azure.mgmt.network.v2018_07_01.models.ApplicationGatewaySslCipherSuite.tls_ecdhe_rsa_with_aes_256_gcm_sha384" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">

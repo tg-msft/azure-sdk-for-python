@@ -9826,7 +9826,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">etag</span> <span class="o">=</span> <span class="n">etag</span></div>
 
 
-<div class="viewcode-block" id="VpnConnection"><a class="viewcode-back" href="../../../../../../ref/azure.mgmt.network.v2018_06_01.models.html#azure.mgmt.network.v2018_06_01.models.VpnConnection">[docs]</a><span class="k">class</span> <span class="nc">VpnConnection</span><span class="p">(</span><span class="n">Resource</span><span class="p">):</span>
+<div class="viewcode-block" id="VpnConnection"><a class="viewcode-back" href="../../../../../../ref/azure.mgmt.network.v2018_06_01.models.html#azure.mgmt.network.v2018_06_01.models.VpnConnection">[docs]</a><span class="k">class</span> <span class="nc">VpnConnection</span><span class="p">(</span><span class="n">SubResource</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;VpnConnection Resource.</span>
 
 <span class="sd">    Variables are only populated by the server, and will be ignored when</span>
@@ -9834,14 +9834,6 @@
 
 <span class="sd">    :param id: Resource ID.</span>
 <span class="sd">    :type id: str</span>
-<span class="sd">    :ivar name: Resource name.</span>
-<span class="sd">    :vartype name: str</span>
-<span class="sd">    :ivar type: Resource type.</span>
-<span class="sd">    :vartype type: str</span>
-<span class="sd">    :param location: Resource location.</span>
-<span class="sd">    :type location: str</span>
-<span class="sd">    :param tags: Resource tags.</span>
-<span class="sd">    :type tags: dict[str, str]</span>
 <span class="sd">    :param remote_vpn_site: Id of the connected vpn site.</span>
 <span class="sd">    :type remote_vpn_site: ~azure.mgmt.network.v2018_06_01.models.SubResource</span>
 <span class="sd">    :param routing_weight: routing weight for vpn connection.</span>
@@ -9868,14 +9860,15 @@
 <span class="sd">     Possible values include: &#39;Succeeded&#39;, &#39;Updating&#39;, &#39;Deleting&#39;, &#39;Failed&#39;</span>
 <span class="sd">    :type provisioning_state: str or</span>
 <span class="sd">     ~azure.mgmt.network.v2018_06_01.models.ProvisioningState</span>
+<span class="sd">    :param name: The name of the resource that is unique within a resource</span>
+<span class="sd">     group. This name can be used to access the resource.</span>
+<span class="sd">    :type name: str</span>
 <span class="sd">    :ivar etag: Gets a unique read-only string that changes whenever the</span>
 <span class="sd">     resource is updated.</span>
 <span class="sd">    :vartype etag: str</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">_validation</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;readonly&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">},</span>
-        <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;readonly&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">},</span>
         <span class="s1">&#39;ingress_bytes_transferred&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;readonly&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">},</span>
         <span class="s1">&#39;egress_bytes_transferred&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;readonly&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">},</span>
         <span class="s1">&#39;connection_bandwidth_in_mbps&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;readonly&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">},</span>
@@ -9884,10 +9877,6 @@
 
     <span class="n">_attribute_map</span> <span class="o">=</span> <span class="p">{</span>
         <span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;key&#39;</span><span class="p">:</span> <span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;str&#39;</span><span class="p">},</span>
-        <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;key&#39;</span><span class="p">:</span> <span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;str&#39;</span><span class="p">},</span>
-        <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;key&#39;</span><span class="p">:</span> <span class="s1">&#39;type&#39;</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;str&#39;</span><span class="p">},</span>
-        <span class="s1">&#39;location&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;key&#39;</span><span class="p">:</span> <span class="s1">&#39;location&#39;</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;str&#39;</span><span class="p">},</span>
-        <span class="s1">&#39;tags&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;key&#39;</span><span class="p">:</span> <span class="s1">&#39;tags&#39;</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;</span><span class="si">{str}</span><span class="s1">&#39;</span><span class="p">},</span>
         <span class="s1">&#39;remote_vpn_site&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;key&#39;</span><span class="p">:</span> <span class="s1">&#39;properties.remoteVpnSite&#39;</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;SubResource&#39;</span><span class="p">},</span>
         <span class="s1">&#39;routing_weight&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;key&#39;</span><span class="p">:</span> <span class="s1">&#39;properties.routingWeight&#39;</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;int&#39;</span><span class="p">},</span>
         <span class="s1">&#39;connection_status&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;key&#39;</span><span class="p">:</span> <span class="s1">&#39;properties.connectionStatus&#39;</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;str&#39;</span><span class="p">},</span>
@@ -9898,11 +9887,12 @@
         <span class="s1">&#39;enable_bgp&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;key&#39;</span><span class="p">:</span> <span class="s1">&#39;properties.enableBgp&#39;</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;bool&#39;</span><span class="p">},</span>
         <span class="s1">&#39;ipsec_policies&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;key&#39;</span><span class="p">:</span> <span class="s1">&#39;properties.ipsecPolicies&#39;</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;[IpsecPolicy]&#39;</span><span class="p">},</span>
         <span class="s1">&#39;provisioning_state&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;key&#39;</span><span class="p">:</span> <span class="s1">&#39;properties.provisioningState&#39;</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;str&#39;</span><span class="p">},</span>
+        <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;key&#39;</span><span class="p">:</span> <span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;str&#39;</span><span class="p">},</span>
         <span class="s1">&#39;etag&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;key&#39;</span><span class="p">:</span> <span class="s1">&#39;etag&#39;</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;str&#39;</span><span class="p">},</span>
     <span class="p">}</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="nb">id</span><span class="p">:</span> <span class="nb">str</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">location</span><span class="p">:</span> <span class="nb">str</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">tags</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">remote_vpn_site</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">routing_weight</span><span class="p">:</span> <span class="nb">int</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">connection_status</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">shared_key</span><span class="p">:</span> <span class="nb">str</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">enable_bgp</span><span class="p">:</span> <span class="nb">bool</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">ipsec_policies</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">provisioning_state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="nb">super</span><span class="p">(</span><span class="n">VpnConnection</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="nb">id</span><span class="p">,</span> <span class="n">location</span><span class="o">=</span><span class="n">location</span><span class="p">,</span> <span class="n">tags</span><span class="o">=</span><span class="n">tags</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="nb">id</span><span class="p">:</span> <span class="nb">str</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">remote_vpn_site</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">routing_weight</span><span class="p">:</span> <span class="nb">int</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">connection_status</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">shared_key</span><span class="p">:</span> <span class="nb">str</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">enable_bgp</span><span class="p">:</span> <span class="nb">bool</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">ipsec_policies</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">provisioning_state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">VpnConnection</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="nb">id</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">remote_vpn_site</span> <span class="o">=</span> <span class="n">remote_vpn_site</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">routing_weight</span> <span class="o">=</span> <span class="n">routing_weight</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">connection_status</span> <span class="o">=</span> <span class="n">connection_status</span>
@@ -9913,6 +9903,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">enable_bgp</span> <span class="o">=</span> <span class="n">enable_bgp</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">ipsec_policies</span> <span class="o">=</span> <span class="n">ipsec_policies</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">provisioning_state</span> <span class="o">=</span> <span class="n">provisioning_state</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">etag</span> <span class="o">=</span> <span class="kc">None</span></div>
 
 

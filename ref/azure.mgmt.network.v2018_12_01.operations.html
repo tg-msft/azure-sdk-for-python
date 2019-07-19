@@ -9790,7 +9790,7 @@ AzureOperationPoller[ClientRawResponse[<a class="reference external" href="https
 
 <dl class="method">
 <dt id="azure.mgmt.network.v2018_12_01.operations.VirtualNetworkGatewaysOperations.generate_vpn_profile">
-<code class="sig-name descname">generate_vpn_profile</code><span class="sig-paren">(</span><em class="sig-param">resource_group_name</em>, <em class="sig-param">virtual_network_gateway_name</em>, <em class="sig-param">parameters</em>, <em class="sig-param">custom_headers=None</em>, <em class="sig-param">raw=False</em>, <em class="sig-param">**operation_config</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/mgmt/network/v2018_12_01/operations/_virtual_network_gateways_operations.html#VirtualNetworkGatewaysOperations.generate_vpn_profile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.network.v2018_12_01.operations.VirtualNetworkGatewaysOperations.generate_vpn_profile" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">generate_vpn_profile</code><span class="sig-paren">(</span><em class="sig-param">resource_group_name</em>, <em class="sig-param">virtual_network_gateway_name</em>, <em class="sig-param">parameters</em>, <em class="sig-param">custom_headers=None</em>, <em class="sig-param">raw=False</em>, <em class="sig-param">polling=True</em>, <em class="sig-param">**operation_config</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/mgmt/network/v2018_12_01/operations/_virtual_network_gateways_operations.html#VirtualNetworkGatewaysOperations.generate_vpn_profile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.network.v2018_12_01.operations.VirtualNetworkGatewaysOperations.generate_vpn_profile" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generates VPN profile for P2S client of the virtual network gateway in
 the specified resource group. Used for IKEV2 and radius based
 authentication.</p>
@@ -9803,17 +9803,19 @@ gateway.</p></li>
 <li><p><strong>parameters</strong> (<a class="reference internal" href="azure.mgmt.network.v2018_12_01.models.html#azure.mgmt.network.v2018_12_01.models.VpnClientParameters" title="azure.mgmt.network.v2018_12_01.models.VpnClientParameters"><em>VpnClientParameters</em></a>) – Parameters supplied to the generate virtual network
 gateway VPN client package operation.</p></li>
 <li><p><strong>custom_headers</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#dict" title="(in Python v3.5)"><em>dict</em></a>) – headers that will be added to the request</p></li>
-<li><p><strong>raw</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#bool" title="(in Python v3.5)"><em>bool</em></a>) – returns the direct response alongside the
-deserialized response</p></li>
-<li><p><strong>operation_config</strong> – <span class="xref std std-ref">Operation configuration
-overrides</span>.</p></li>
+<li><p><strong>raw</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#bool" title="(in Python v3.5)"><em>bool</em></a>) – The poller return type is ClientRawResponse, the
+direct response alongside the deserialized response</p></li>
+<li><p><strong>polling</strong> – True for ARMPolling, False for no polling, or a
+polling object for personal polling strategy</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>str or ClientRawResponse if raw=true</p>
+<dd class="field-even"><p>An instance of LROPoller that returns str or
+ClientRawResponse&lt;str&gt; if raw==True</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)">str</a> or ClientRawResponse</p>
+<dd class="field-odd"><p>AzureOperationPoller[<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)">str</a>] or
+AzureOperationPoller[ClientRawResponse[<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)">str</a>]]</p>
 </dd>
 <dt class="field-even">Raises</dt>
 <dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">CloudError</span></code></p>

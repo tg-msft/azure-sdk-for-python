@@ -734,36 +734,15 @@
         <span class="n">lro_delay</span> <span class="o">=</span> <span class="n">operation_config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
             <span class="s1">&#39;long_running_operation_timeout&#39;</span><span class="p">,</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">long_running_operation_timeout</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">polling</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span> <span class="n">polling_method</span> <span class="o">=</span> <span class="n">ARMPolling</span><span class="p">(</span><span class="n">lro_delay</span><span class="p">,</span> <span class="o">**</span><span class="n">operation_config</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">polling</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span> <span class="n">polling_method</span> <span class="o">=</span> <span class="n">ARMPolling</span><span class="p">(</span><span class="n">lro_delay</span><span class="p">,</span> <span class="n">lro_options</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;final-state-via&#39;</span><span class="p">:</span> <span class="s1">&#39;location&#39;</span><span class="p">},</span> <span class="o">**</span><span class="n">operation_config</span><span class="p">)</span>
         <span class="k">elif</span> <span class="n">polling</span> <span class="ow">is</span> <span class="kc">False</span><span class="p">:</span> <span class="n">polling_method</span> <span class="o">=</span> <span class="n">NoPolling</span><span class="p">()</span>
         <span class="k">else</span><span class="p">:</span> <span class="n">polling_method</span> <span class="o">=</span> <span class="n">polling</span>
         <span class="k">return</span> <span class="n">LROPoller</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_client</span><span class="p">,</span> <span class="n">raw_result</span><span class="p">,</span> <span class="n">get_long_running_output</span><span class="p">,</span> <span class="n">polling_method</span><span class="p">)</span></div>
     <span class="n">reset</span><span class="o">.</span><span class="n">metadata</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;url&#39;</span><span class="p">:</span> <span class="s1">&#39;/subscriptions/</span><span class="si">{subscriptionId}</span><span class="s1">/resourceGroups/</span><span class="si">{resourceGroupName}</span><span class="s1">/providers/Microsoft.Network/virtualNetworkGateways/</span><span class="si">{virtualNetworkGatewayName}</span><span class="s1">/reset&#39;</span><span class="p">}</span>
 
-<div class="viewcode-block" id="VirtualNetworkGatewaysOperations.generatevpnclientpackage"><a class="viewcode-back" href="../../../../../../ref/azure.mgmt.network.v2015_06_15.operations.html#azure.mgmt.network.v2015_06_15.operations.VirtualNetworkGatewaysOperations.generatevpnclientpackage">[docs]</a>    <span class="k">def</span> <span class="nf">generatevpnclientpackage</span><span class="p">(</span>
-            <span class="bp">self</span><span class="p">,</span> <span class="n">resource_group_name</span><span class="p">,</span> <span class="n">virtual_network_gateway_name</span><span class="p">,</span> <span class="n">processor_architecture</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">custom_headers</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">raw</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="o">**</span><span class="n">operation_config</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Generates VPN client package for P2S client of the virtual network</span>
-<span class="sd">        gateway in the specified resource group.</span>
 
-<span class="sd">        :param resource_group_name: The name of the resource group.</span>
-<span class="sd">        :type resource_group_name: str</span>
-<span class="sd">        :param virtual_network_gateway_name: The name of the virtual network</span>
-<span class="sd">         gateway.</span>
-<span class="sd">        :type virtual_network_gateway_name: str</span>
-<span class="sd">        :param processor_architecture: VPN client Processor Architecture.</span>
-<span class="sd">         Possible values are: &#39;AMD64&#39; and &#39;X86&#39;. Possible values include:</span>
-<span class="sd">         &#39;Amd64&#39;, &#39;X86&#39;</span>
-<span class="sd">        :type processor_architecture: str or</span>
-<span class="sd">         ~azure.mgmt.network.v2015_06_15.models.ProcessorArchitecture</span>
-<span class="sd">        :param dict custom_headers: headers that will be added to the request</span>
-<span class="sd">        :param bool raw: returns the direct response alongside the</span>
-<span class="sd">         deserialized response</span>
-<span class="sd">        :param operation_config: :ref:`Operation configuration</span>
-<span class="sd">         overrides&lt;msrest:optionsforoperations&gt;`.</span>
-<span class="sd">        :return: str or ClientRawResponse if raw=true</span>
-<span class="sd">        :rtype: str or ~msrest.pipeline.ClientRawResponse</span>
-<span class="sd">        :raises: :class:`CloudError&lt;msrestazure.azure_exceptions.CloudError&gt;`</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">_generatevpnclientpackage_initial</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span> <span class="n">resource_group_name</span><span class="p">,</span> <span class="n">virtual_network_gateway_name</span><span class="p">,</span> <span class="n">processor_architecture</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">custom_headers</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">raw</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="o">**</span><span class="n">operation_config</span><span class="p">):</span>
         <span class="n">parameters</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">VpnClientParameters</span><span class="p">(</span><span class="n">processor_architecture</span><span class="o">=</span><span class="n">processor_architecture</span><span class="p">)</span>
 
         <span class="c1"># Construct URL</span>
@@ -803,6 +782,7 @@
             <span class="k">raise</span> <span class="n">exp</span>
 
         <span class="n">deserialized</span> <span class="o">=</span> <span class="kc">None</span>
+
         <span class="k">if</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">202</span><span class="p">:</span>
             <span class="n">deserialized</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_deserialize</span><span class="p">(</span><span class="s1">&#39;str&#39;</span><span class="p">,</span> <span class="n">response</span><span class="p">)</span>
 
@@ -810,7 +790,59 @@
             <span class="n">client_raw_response</span> <span class="o">=</span> <span class="n">ClientRawResponse</span><span class="p">(</span><span class="n">deserialized</span><span class="p">,</span> <span class="n">response</span><span class="p">)</span>
             <span class="k">return</span> <span class="n">client_raw_response</span>
 
-        <span class="k">return</span> <span class="n">deserialized</span></div>
+        <span class="k">return</span> <span class="n">deserialized</span>
+
+<div class="viewcode-block" id="VirtualNetworkGatewaysOperations.generatevpnclientpackage"><a class="viewcode-back" href="../../../../../../ref/azure.mgmt.network.v2015_06_15.operations.html#azure.mgmt.network.v2015_06_15.operations.VirtualNetworkGatewaysOperations.generatevpnclientpackage">[docs]</a>    <span class="k">def</span> <span class="nf">generatevpnclientpackage</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span> <span class="n">resource_group_name</span><span class="p">,</span> <span class="n">virtual_network_gateway_name</span><span class="p">,</span> <span class="n">processor_architecture</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">custom_headers</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">raw</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">polling</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="o">**</span><span class="n">operation_config</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Generates VPN client package for P2S client of the virtual network</span>
+<span class="sd">        gateway in the specified resource group.</span>
+
+<span class="sd">        :param resource_group_name: The name of the resource group.</span>
+<span class="sd">        :type resource_group_name: str</span>
+<span class="sd">        :param virtual_network_gateway_name: The name of the virtual network</span>
+<span class="sd">         gateway.</span>
+<span class="sd">        :type virtual_network_gateway_name: str</span>
+<span class="sd">        :param processor_architecture: VPN client Processor Architecture.</span>
+<span class="sd">         Possible values are: &#39;AMD64&#39; and &#39;X86&#39;. Possible values include:</span>
+<span class="sd">         &#39;Amd64&#39;, &#39;X86&#39;</span>
+<span class="sd">        :type processor_architecture: str or</span>
+<span class="sd">         ~azure.mgmt.network.v2015_06_15.models.ProcessorArchitecture</span>
+<span class="sd">        :param dict custom_headers: headers that will be added to the request</span>
+<span class="sd">        :param bool raw: The poller return type is ClientRawResponse, the</span>
+<span class="sd">         direct response alongside the deserialized response</span>
+<span class="sd">        :param polling: True for ARMPolling, False for no polling, or a</span>
+<span class="sd">         polling object for personal polling strategy</span>
+<span class="sd">        :return: An instance of LROPoller that returns str or</span>
+<span class="sd">         ClientRawResponse&lt;str&gt; if raw==True</span>
+<span class="sd">        :rtype: ~msrestazure.azure_operation.AzureOperationPoller[str] or</span>
+<span class="sd">         ~msrestazure.azure_operation.AzureOperationPoller[~msrest.pipeline.ClientRawResponse[str]]</span>
+<span class="sd">        :raises: :class:`CloudError&lt;msrestazure.azure_exceptions.CloudError&gt;`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">raw_result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_generatevpnclientpackage_initial</span><span class="p">(</span>
+            <span class="n">resource_group_name</span><span class="o">=</span><span class="n">resource_group_name</span><span class="p">,</span>
+            <span class="n">virtual_network_gateway_name</span><span class="o">=</span><span class="n">virtual_network_gateway_name</span><span class="p">,</span>
+            <span class="n">processor_architecture</span><span class="o">=</span><span class="n">processor_architecture</span><span class="p">,</span>
+            <span class="n">custom_headers</span><span class="o">=</span><span class="n">custom_headers</span><span class="p">,</span>
+            <span class="n">raw</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="o">**</span><span class="n">operation_config</span>
+        <span class="p">)</span>
+
+        <span class="k">def</span> <span class="nf">get_long_running_output</span><span class="p">(</span><span class="n">response</span><span class="p">):</span>
+            <span class="n">deserialized</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_deserialize</span><span class="p">(</span><span class="s1">&#39;str&#39;</span><span class="p">,</span> <span class="n">response</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">raw</span><span class="p">:</span>
+                <span class="n">client_raw_response</span> <span class="o">=</span> <span class="n">ClientRawResponse</span><span class="p">(</span><span class="n">deserialized</span><span class="p">,</span> <span class="n">response</span><span class="p">)</span>
+                <span class="k">return</span> <span class="n">client_raw_response</span>
+
+            <span class="k">return</span> <span class="n">deserialized</span>
+
+        <span class="n">lro_delay</span> <span class="o">=</span> <span class="n">operation_config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+            <span class="s1">&#39;long_running_operation_timeout&#39;</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">long_running_operation_timeout</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">polling</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span> <span class="n">polling_method</span> <span class="o">=</span> <span class="n">ARMPolling</span><span class="p">(</span><span class="n">lro_delay</span><span class="p">,</span> <span class="n">lro_options</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;final-state-via&#39;</span><span class="p">:</span> <span class="s1">&#39;location&#39;</span><span class="p">},</span> <span class="o">**</span><span class="n">operation_config</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">polling</span> <span class="ow">is</span> <span class="kc">False</span><span class="p">:</span> <span class="n">polling_method</span> <span class="o">=</span> <span class="n">NoPolling</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span> <span class="n">polling_method</span> <span class="o">=</span> <span class="n">polling</span>
+        <span class="k">return</span> <span class="n">LROPoller</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_client</span><span class="p">,</span> <span class="n">raw_result</span><span class="p">,</span> <span class="n">get_long_running_output</span><span class="p">,</span> <span class="n">polling_method</span><span class="p">)</span></div>
     <span class="n">generatevpnclientpackage</span><span class="o">.</span><span class="n">metadata</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;url&#39;</span><span class="p">:</span> <span class="s1">&#39;/subscriptions/</span><span class="si">{subscriptionId}</span><span class="s1">/resourceGroups/</span><span class="si">{resourceGroupName}</span><span class="s1">/providers/Microsoft.Network/virtualNetworkGateways/</span><span class="si">{virtualNetworkGatewayName}</span><span class="s1">/generatevpnclientpackage&#39;</span><span class="p">}</span></div>
 </pre></div>
 

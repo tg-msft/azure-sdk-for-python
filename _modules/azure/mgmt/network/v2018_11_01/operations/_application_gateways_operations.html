@@ -1068,11 +1068,8 @@
 <span class="sd">         deserialized response</span>
 <span class="sd">        :param operation_config: :ref:`Operation configuration</span>
 <span class="sd">         overrides&lt;msrest:optionsforoperations&gt;`.</span>
-<span class="sd">        :return: ApplicationGatewayAvailableServerVariablesResult or</span>
-<span class="sd">         ClientRawResponse if raw=true</span>
-<span class="sd">        :rtype:</span>
-<span class="sd">         ~azure.mgmt.network.v2018_11_01.models.ApplicationGatewayAvailableServerVariablesResult</span>
-<span class="sd">         or ~msrest.pipeline.ClientRawResponse</span>
+<span class="sd">        :return: list or ClientRawResponse if raw=true</span>
+<span class="sd">        :rtype: list[str] or ~msrest.pipeline.ClientRawResponse</span>
 <span class="sd">        :raises:</span>
 <span class="sd">         :class:`ErrorException&lt;azure.mgmt.network.v2018_11_01.models.ErrorException&gt;`</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -1106,7 +1103,7 @@
 
         <span class="n">deserialized</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="k">if</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span><span class="p">:</span>
-            <span class="n">deserialized</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_deserialize</span><span class="p">(</span><span class="s1">&#39;ApplicationGatewayAvailableServerVariablesResult&#39;</span><span class="p">,</span> <span class="n">response</span><span class="p">)</span>
+            <span class="n">deserialized</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_deserialize</span><span class="p">(</span><span class="s1">&#39;[str]&#39;</span><span class="p">,</span> <span class="n">response</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">raw</span><span class="p">:</span>
             <span class="n">client_raw_response</span> <span class="o">=</span> <span class="n">ClientRawResponse</span><span class="p">(</span><span class="n">deserialized</span><span class="p">,</span> <span class="n">response</span><span class="p">)</span>
@@ -1124,11 +1121,8 @@
 <span class="sd">         deserialized response</span>
 <span class="sd">        :param operation_config: :ref:`Operation configuration</span>
 <span class="sd">         overrides&lt;msrest:optionsforoperations&gt;`.</span>
-<span class="sd">        :return: ApplicationGatewayAvailableRequestHeadersResult or</span>
-<span class="sd">         ClientRawResponse if raw=true</span>
-<span class="sd">        :rtype:</span>
-<span class="sd">         ~azure.mgmt.network.v2018_11_01.models.ApplicationGatewayAvailableRequestHeadersResult</span>
-<span class="sd">         or ~msrest.pipeline.ClientRawResponse</span>
+<span class="sd">        :return: list or ClientRawResponse if raw=true</span>
+<span class="sd">        :rtype: list[str] or ~msrest.pipeline.ClientRawResponse</span>
 <span class="sd">        :raises:</span>
 <span class="sd">         :class:`ErrorException&lt;azure.mgmt.network.v2018_11_01.models.ErrorException&gt;`</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -1162,7 +1156,7 @@
 
         <span class="n">deserialized</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="k">if</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span><span class="p">:</span>
-            <span class="n">deserialized</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_deserialize</span><span class="p">(</span><span class="s1">&#39;ApplicationGatewayAvailableRequestHeadersResult&#39;</span><span class="p">,</span> <span class="n">response</span><span class="p">)</span>
+            <span class="n">deserialized</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_deserialize</span><span class="p">(</span><span class="s1">&#39;[str]&#39;</span><span class="p">,</span> <span class="n">response</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">raw</span><span class="p">:</span>
             <span class="n">client_raw_response</span> <span class="o">=</span> <span class="n">ClientRawResponse</span><span class="p">(</span><span class="n">deserialized</span><span class="p">,</span> <span class="n">response</span><span class="p">)</span>
@@ -1180,11 +1174,8 @@
 <span class="sd">         deserialized response</span>
 <span class="sd">        :param operation_config: :ref:`Operation configuration</span>
 <span class="sd">         overrides&lt;msrest:optionsforoperations&gt;`.</span>
-<span class="sd">        :return: ApplicationGatewayAvailableResponseHeadersResult or</span>
-<span class="sd">         ClientRawResponse if raw=true</span>
-<span class="sd">        :rtype:</span>
-<span class="sd">         ~azure.mgmt.network.v2018_11_01.models.ApplicationGatewayAvailableResponseHeadersResult</span>
-<span class="sd">         or ~msrest.pipeline.ClientRawResponse</span>
+<span class="sd">        :return: list or ClientRawResponse if raw=true</span>
+<span class="sd">        :rtype: list[str] or ~msrest.pipeline.ClientRawResponse</span>
 <span class="sd">        :raises:</span>
 <span class="sd">         :class:`ErrorException&lt;azure.mgmt.network.v2018_11_01.models.ErrorException&gt;`</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -1218,7 +1209,7 @@
 
         <span class="n">deserialized</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="k">if</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span><span class="p">:</span>
-            <span class="n">deserialized</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_deserialize</span><span class="p">(</span><span class="s1">&#39;ApplicationGatewayAvailableResponseHeadersResult&#39;</span><span class="p">,</span> <span class="n">response</span><span class="p">)</span>
+            <span class="n">deserialized</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_deserialize</span><span class="p">(</span><span class="s1">&#39;[str]&#39;</span><span class="p">,</span> <span class="n">response</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">raw</span><span class="p">:</span>
             <span class="n">client_raw_response</span> <span class="o">=</span> <span class="n">ClientRawResponse</span><span class="p">(</span><span class="n">deserialized</span><span class="p">,</span> <span class="n">response</span><span class="p">)</span>

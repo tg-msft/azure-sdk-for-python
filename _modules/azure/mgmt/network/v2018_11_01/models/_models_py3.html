@@ -616,57 +616,6 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">max_capacity</span> <span class="o">=</span> <span class="n">max_capacity</span></div>
 
 
-<div class="viewcode-block" id="ApplicationGatewayAvailableRequestHeadersResult"><a class="viewcode-back" href="../../../../../../ref/azure.mgmt.network.v2018_11_01.models.html#azure.mgmt.network.v2018_11_01.models.ApplicationGatewayAvailableRequestHeadersResult">[docs]</a><span class="k">class</span> <span class="nc">ApplicationGatewayAvailableRequestHeadersResult</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Response for ApplicationGatewayAvailableRequestHeaders API service call.</span>
-
-<span class="sd">    :param value: The list of supported request headers in application</span>
-<span class="sd">     gateway.</span>
-<span class="sd">    :type value: list[str]</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-
-    <span class="n">_attribute_map</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="s1">&#39;value&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;key&#39;</span><span class="p">:</span> <span class="s1">&#39;value&#39;</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;[str]&#39;</span><span class="p">},</span>
-    <span class="p">}</span>
-
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="nb">super</span><span class="p">(</span><span class="n">ApplicationGatewayAvailableRequestHeadersResult</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">value</span></div>
-
-
-<div class="viewcode-block" id="ApplicationGatewayAvailableResponseHeadersResult"><a class="viewcode-back" href="../../../../../../ref/azure.mgmt.network.v2018_11_01.models.html#azure.mgmt.network.v2018_11_01.models.ApplicationGatewayAvailableResponseHeadersResult">[docs]</a><span class="k">class</span> <span class="nc">ApplicationGatewayAvailableResponseHeadersResult</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Response for ApplicationGatewayAvailableResponeHeaders API service call.</span>
-
-<span class="sd">    :param value: The list of supported response header in application</span>
-<span class="sd">     gateway.</span>
-<span class="sd">    :type value: list[str]</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-
-    <span class="n">_attribute_map</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="s1">&#39;value&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;key&#39;</span><span class="p">:</span> <span class="s1">&#39;value&#39;</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;[str]&#39;</span><span class="p">},</span>
-    <span class="p">}</span>
-
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="nb">super</span><span class="p">(</span><span class="n">ApplicationGatewayAvailableResponseHeadersResult</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">value</span></div>
-
-
-<div class="viewcode-block" id="ApplicationGatewayAvailableServerVariablesResult"><a class="viewcode-back" href="../../../../../../ref/azure.mgmt.network.v2018_11_01.models.html#azure.mgmt.network.v2018_11_01.models.ApplicationGatewayAvailableServerVariablesResult">[docs]</a><span class="k">class</span> <span class="nc">ApplicationGatewayAvailableServerVariablesResult</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Response for ApplicationGatewayAvailableServerVariables API service call.</span>
-
-<span class="sd">    :param value: The list of supported server variables in application</span>
-<span class="sd">     gateway.</span>
-<span class="sd">    :type value: list[str]</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-
-    <span class="n">_attribute_map</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="s1">&#39;value&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;key&#39;</span><span class="p">:</span> <span class="s1">&#39;value&#39;</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;[str]&#39;</span><span class="p">},</span>
-    <span class="p">}</span>
-
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="nb">super</span><span class="p">(</span><span class="n">ApplicationGatewayAvailableServerVariablesResult</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">value</span></div>
-
-
 <div class="viewcode-block" id="ApplicationGatewayAvailableSslOptions"><a class="viewcode-back" href="../../../../../../ref/azure.mgmt.network.v2018_11_01.models.html#azure.mgmt.network.v2018_11_01.models.ApplicationGatewayAvailableSslOptions">[docs]</a><span class="k">class</span> <span class="nc">ApplicationGatewayAvailableSslOptions</span><span class="p">(</span><span class="n">Resource</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Response for ApplicationGatewayAvailableSslOptions API service call.</span>
 
