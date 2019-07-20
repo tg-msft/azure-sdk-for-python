@@ -308,123 +308,8 @@
   <div class="section" id="module-azure.mgmt.compute.v2017_09_01.models">
 <span id="azure-mgmt-compute-v2017-09-01-models-module"></span><h1>azure.mgmt.compute.v2017_09_01.models module<a class="headerlink" href="#module-azure.mgmt.compute.v2017_09_01.models" title="Permalink to this headline">¶</a></h1>
 <dl class="class">
-<dt id="azure.mgmt.compute.v2017_09_01.models.ResourceSkuCapacity">
-<em class="property">class </em><code class="sig-prename descclassname">azure.mgmt.compute.v2017_09_01.models.</code><code class="sig-name descname">ResourceSkuCapacity</code><span class="sig-paren">(</span><em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/mgmt/compute/v2017_09_01/models/resource_sku_capacity_py3.html#ResourceSkuCapacity"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.compute.v2017_09_01.models.ResourceSkuCapacity" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">msrest.serialization.Model</span></code></p>
-<p>Describes scaling information of a SKU.</p>
-<p>Variables are only populated by the server, and will be ignored when
-sending a request.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Variables</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><a class="reference internal" href="azure.mgmt.network.v2018_08_01.models.html#azure.mgmt.network.v2018_08_01.models.VerbosityLevel.minimum" title="azure.mgmt.network.v2018_08_01.models.VerbosityLevel.minimum"><strong>minimum</strong></a> (<em>long</em>) – The minimum capacity.</p></li>
-<li><p><a class="reference internal" href="azure.mgmt.cosmosdb.models.html#azure.mgmt.cosmosdb.models.PrimaryAggregationType.maximum" title="azure.mgmt.cosmosdb.models.PrimaryAggregationType.maximum"><strong>maximum</strong></a> (<em>long</em>) – The maximum capacity that can be set.</p></li>
-<li><p><a class="reference internal" href="azure.mgmt.containerregistry.v2018_09_01.models.html#azure.mgmt.containerregistry.v2018_09_01.models.SourceRegistryLoginMode.default" title="azure.mgmt.containerregistry.v2018_09_01.models.SourceRegistryLoginMode.default"><strong>default</strong></a> (<em>long</em>) – The default capacity.</p></li>
-<li><p><strong>scale_type</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a><em> or
-</em><a class="reference internal" href="#azure.mgmt.compute.v2017_09_01.models.ResourceSkuCapacityScaleType" title="azure.mgmt.compute.v2017_09_01.models.ResourceSkuCapacityScaleType"><em>ResourceSkuCapacityScaleType</em></a>) – The scale type applicable to the sku. Possible values
-include: ‘Automatic’, ‘Manual’, ‘None’</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="class">
-<dt id="azure.mgmt.compute.v2017_09_01.models.ResourceSkuCosts">
-<em class="property">class </em><code class="sig-prename descclassname">azure.mgmt.compute.v2017_09_01.models.</code><code class="sig-name descname">ResourceSkuCosts</code><span class="sig-paren">(</span><em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/mgmt/compute/v2017_09_01/models/resource_sku_costs_py3.html#ResourceSkuCosts"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.compute.v2017_09_01.models.ResourceSkuCosts" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">msrest.serialization.Model</span></code></p>
-<p>Describes metadata for retrieving price info.</p>
-<p>Variables are only populated by the server, and will be ignored when
-sending a request.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Variables</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>meter_id</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Used for querying price from commerce.</p></li>
-<li><p><strong>quantity</strong> (<em>long</em>) – The multiplier is needed to extend the base metered cost.</p></li>
-<li><p><strong>extended_unit</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – An invariant to show the extended unit.</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="class">
-<dt id="azure.mgmt.compute.v2017_09_01.models.ResourceSkuCapabilities">
-<em class="property">class </em><code class="sig-prename descclassname">azure.mgmt.compute.v2017_09_01.models.</code><code class="sig-name descname">ResourceSkuCapabilities</code><span class="sig-paren">(</span><em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/mgmt/compute/v2017_09_01/models/resource_sku_capabilities_py3.html#ResourceSkuCapabilities"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.compute.v2017_09_01.models.ResourceSkuCapabilities" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">msrest.serialization.Model</span></code></p>
-<p>Describes The SKU capabilities object.</p>
-<p>Variables are only populated by the server, and will be ignored when
-sending a request.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Variables</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><a class="reference internal" href="azure.mgmt.alertsmanagement.models.html#azure.mgmt.alertsmanagement.models.AlertsSortByFields.name" title="azure.mgmt.alertsmanagement.models.AlertsSortByFields.name"><strong>name</strong></a> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – An invariant to describe the feature.</p></li>
-<li><p><a class="reference internal" href="azure.mgmt.datafactory.models.html#azure.mgmt.datafactory.models.PolybaseSettingsRejectType.value" title="azure.mgmt.datafactory.models.PolybaseSettingsRejectType.value"><strong>value</strong></a> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – An invariant if the feature is measured by quantity.</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="class">
-<dt id="azure.mgmt.compute.v2017_09_01.models.ResourceSkuRestrictionInfo">
-<em class="property">class </em><code class="sig-prename descclassname">azure.mgmt.compute.v2017_09_01.models.</code><code class="sig-name descname">ResourceSkuRestrictionInfo</code><span class="sig-paren">(</span><em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/mgmt/compute/v2017_09_01/models/resource_sku_restriction_info_py3.html#ResourceSkuRestrictionInfo"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.compute.v2017_09_01.models.ResourceSkuRestrictionInfo" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">msrest.serialization.Model</span></code></p>
-<p>ResourceSkuRestrictionInfo.</p>
-<p>Variables are only populated by the server, and will be ignored when
-sending a request.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Variables</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>locations</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a><em>]</em>) – Locations where the SKU is restricted</p></li>
-<li><p><a class="reference internal" href="azure.mgmt.dns.html#azure.mgmt.dns.DnsManagementClient.zones" title="azure.mgmt.dns.DnsManagementClient.zones"><strong>zones</strong></a> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a><em>]</em>) – List of availability zones where the SKU is restricted.</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="class">
-<dt id="azure.mgmt.compute.v2017_09_01.models.ResourceSkuRestrictions">
-<em class="property">class </em><code class="sig-prename descclassname">azure.mgmt.compute.v2017_09_01.models.</code><code class="sig-name descname">ResourceSkuRestrictions</code><span class="sig-paren">(</span><em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/mgmt/compute/v2017_09_01/models/resource_sku_restrictions_py3.html#ResourceSkuRestrictions"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.compute.v2017_09_01.models.ResourceSkuRestrictions" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">msrest.serialization.Model</span></code></p>
-<p>Describes scaling information of a SKU.</p>
-<p>Variables are only populated by the server, and will be ignored when
-sending a request.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Variables</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><a class="reference internal" href="azure.batch.models.html#azure.batch.models.ContainerConfiguration.type" title="azure.batch.models.ContainerConfiguration.type"><strong>type</strong></a> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a><em> or
-</em><a class="reference internal" href="#azure.mgmt.compute.v2017_09_01.models.ResourceSkuRestrictionsType" title="azure.mgmt.compute.v2017_09_01.models.ResourceSkuRestrictionsType"><em>ResourceSkuRestrictionsType</em></a>) – The type of restrictions. Possible values include: ‘Location’,
-‘Zone’</p></li>
-<li><p><strong>values</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a><em>]</em>) – The value of restrictions. If the restriction type is set to
-location. This would be different locations where the SKU is restricted.</p></li>
-<li><p><strong>restriction_info</strong> (<a class="reference internal" href="#azure.mgmt.compute.v2017_09_01.models.ResourceSkuRestrictionInfo" title="azure.mgmt.compute.v2017_09_01.models.ResourceSkuRestrictionInfo"><em>ResourceSkuRestrictionInfo</em></a>) – The information about the restriction where the
-SKU cannot be used.</p></li>
-<li><p><strong>reason_code</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a><em> or
-</em><a class="reference internal" href="#azure.mgmt.compute.v2017_09_01.models.ResourceSkuRestrictionsReasonCode" title="azure.mgmt.compute.v2017_09_01.models.ResourceSkuRestrictionsReasonCode"><em>ResourceSkuRestrictionsReasonCode</em></a>) – The reason for restriction. Possible values include:
-‘QuotaId’, ‘NotAvailableForSubscription’</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="class">
-<dt id="azure.mgmt.compute.v2017_09_01.models.ResourceSkuLocationInfo">
-<em class="property">class </em><code class="sig-prename descclassname">azure.mgmt.compute.v2017_09_01.models.</code><code class="sig-name descname">ResourceSkuLocationInfo</code><span class="sig-paren">(</span><em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/mgmt/compute/v2017_09_01/models/resource_sku_location_info_py3.html#ResourceSkuLocationInfo"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.compute.v2017_09_01.models.ResourceSkuLocationInfo" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">msrest.serialization.Model</span></code></p>
-<p>ResourceSkuLocationInfo.</p>
-<p>Variables are only populated by the server, and will be ignored when
-sending a request.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Variables</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><a class="reference internal" href="azure.mgmt.cognitiveservices.models.html#azure.mgmt.cognitiveservices.models.ResourceSkuRestrictionsType.location" title="azure.mgmt.cognitiveservices.models.ResourceSkuRestrictionsType.location"><strong>location</strong></a> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Location of the SKU</p></li>
-<li><p><a class="reference internal" href="azure.mgmt.dns.html#azure.mgmt.dns.DnsManagementClient.zones" title="azure.mgmt.dns.DnsManagementClient.zones"><strong>zones</strong></a> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a><em>]</em>) – List of availability zones where the SKU is supported.</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="class">
 <dt id="azure.mgmt.compute.v2017_09_01.models.ResourceSku">
-<em class="property">class </em><code class="sig-prename descclassname">azure.mgmt.compute.v2017_09_01.models.</code><code class="sig-name descname">ResourceSku</code><span class="sig-paren">(</span><em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/mgmt/compute/v2017_09_01/models/resource_sku_py3.html#ResourceSku"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.compute.v2017_09_01.models.ResourceSku" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">azure.mgmt.compute.v2017_09_01.models.</code><code class="sig-name descname">ResourceSku</code><span class="sig-paren">(</span><em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/mgmt/compute/v2017_09_01/models/_models_py3.html#ResourceSku"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.compute.v2017_09_01.models.ResourceSku" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">msrest.serialization.Model</span></code></p>
 <p>Describes an available Compute SKU.</p>
 <p>Variables are only populated by the server, and will be ignored when
@@ -454,15 +339,130 @@ This is empty if there are no restrictions.</p></li>
 </dd></dl>
 
 <dl class="class">
+<dt id="azure.mgmt.compute.v2017_09_01.models.ResourceSkuCapabilities">
+<em class="property">class </em><code class="sig-prename descclassname">azure.mgmt.compute.v2017_09_01.models.</code><code class="sig-name descname">ResourceSkuCapabilities</code><span class="sig-paren">(</span><em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/mgmt/compute/v2017_09_01/models/_models_py3.html#ResourceSkuCapabilities"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.compute.v2017_09_01.models.ResourceSkuCapabilities" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">msrest.serialization.Model</span></code></p>
+<p>Describes The SKU capabilities object.</p>
+<p>Variables are only populated by the server, and will be ignored when
+sending a request.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Variables</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><a class="reference internal" href="azure.mgmt.alertsmanagement.models.html#azure.mgmt.alertsmanagement.models.AlertsSortByFields.name" title="azure.mgmt.alertsmanagement.models.AlertsSortByFields.name"><strong>name</strong></a> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – An invariant to describe the feature.</p></li>
+<li><p><a class="reference internal" href="azure.mgmt.datafactory.models.html#azure.mgmt.datafactory.models.PolybaseSettingsRejectType.value" title="azure.mgmt.datafactory.models.PolybaseSettingsRejectType.value"><strong>value</strong></a> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – An invariant if the feature is measured by quantity.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="class">
+<dt id="azure.mgmt.compute.v2017_09_01.models.ResourceSkuCapacity">
+<em class="property">class </em><code class="sig-prename descclassname">azure.mgmt.compute.v2017_09_01.models.</code><code class="sig-name descname">ResourceSkuCapacity</code><span class="sig-paren">(</span><em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/mgmt/compute/v2017_09_01/models/_models_py3.html#ResourceSkuCapacity"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.compute.v2017_09_01.models.ResourceSkuCapacity" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">msrest.serialization.Model</span></code></p>
+<p>Describes scaling information of a SKU.</p>
+<p>Variables are only populated by the server, and will be ignored when
+sending a request.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Variables</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><a class="reference internal" href="azure.mgmt.network.v2018_08_01.models.html#azure.mgmt.network.v2018_08_01.models.VerbosityLevel.minimum" title="azure.mgmt.network.v2018_08_01.models.VerbosityLevel.minimum"><strong>minimum</strong></a> (<em>long</em>) – The minimum capacity.</p></li>
+<li><p><a class="reference internal" href="azure.mgmt.cosmosdb.models.html#azure.mgmt.cosmosdb.models.PrimaryAggregationType.maximum" title="azure.mgmt.cosmosdb.models.PrimaryAggregationType.maximum"><strong>maximum</strong></a> (<em>long</em>) – The maximum capacity that can be set.</p></li>
+<li><p><a class="reference internal" href="azure.mgmt.containerregistry.v2018_09_01.models.html#azure.mgmt.containerregistry.v2018_09_01.models.SourceRegistryLoginMode.default" title="azure.mgmt.containerregistry.v2018_09_01.models.SourceRegistryLoginMode.default"><strong>default</strong></a> (<em>long</em>) – The default capacity.</p></li>
+<li><p><strong>scale_type</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a><em> or
+</em><a class="reference internal" href="#azure.mgmt.compute.v2017_09_01.models.ResourceSkuCapacityScaleType" title="azure.mgmt.compute.v2017_09_01.models.ResourceSkuCapacityScaleType"><em>ResourceSkuCapacityScaleType</em></a>) – The scale type applicable to the sku. Possible values
+include: ‘Automatic’, ‘Manual’, ‘None’</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="class">
+<dt id="azure.mgmt.compute.v2017_09_01.models.ResourceSkuCosts">
+<em class="property">class </em><code class="sig-prename descclassname">azure.mgmt.compute.v2017_09_01.models.</code><code class="sig-name descname">ResourceSkuCosts</code><span class="sig-paren">(</span><em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/mgmt/compute/v2017_09_01/models/_models_py3.html#ResourceSkuCosts"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.compute.v2017_09_01.models.ResourceSkuCosts" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">msrest.serialization.Model</span></code></p>
+<p>Describes metadata for retrieving price info.</p>
+<p>Variables are only populated by the server, and will be ignored when
+sending a request.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Variables</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>meter_id</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Used for querying price from commerce.</p></li>
+<li><p><strong>quantity</strong> (<em>long</em>) – The multiplier is needed to extend the base metered cost.</p></li>
+<li><p><strong>extended_unit</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – An invariant to show the extended unit.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="class">
+<dt id="azure.mgmt.compute.v2017_09_01.models.ResourceSkuLocationInfo">
+<em class="property">class </em><code class="sig-prename descclassname">azure.mgmt.compute.v2017_09_01.models.</code><code class="sig-name descname">ResourceSkuLocationInfo</code><span class="sig-paren">(</span><em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/mgmt/compute/v2017_09_01/models/_models_py3.html#ResourceSkuLocationInfo"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.compute.v2017_09_01.models.ResourceSkuLocationInfo" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">msrest.serialization.Model</span></code></p>
+<p>ResourceSkuLocationInfo.</p>
+<p>Variables are only populated by the server, and will be ignored when
+sending a request.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Variables</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><a class="reference internal" href="azure.mgmt.cognitiveservices.models.html#azure.mgmt.cognitiveservices.models.ResourceSkuRestrictionsType.location" title="azure.mgmt.cognitiveservices.models.ResourceSkuRestrictionsType.location"><strong>location</strong></a> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Location of the SKU</p></li>
+<li><p><a class="reference internal" href="azure.mgmt.dns.html#azure.mgmt.dns.DnsManagementClient.zones" title="azure.mgmt.dns.DnsManagementClient.zones"><strong>zones</strong></a> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a><em>]</em>) – List of availability zones where the SKU is supported.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="class">
+<dt id="azure.mgmt.compute.v2017_09_01.models.ResourceSkuRestrictionInfo">
+<em class="property">class </em><code class="sig-prename descclassname">azure.mgmt.compute.v2017_09_01.models.</code><code class="sig-name descname">ResourceSkuRestrictionInfo</code><span class="sig-paren">(</span><em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/mgmt/compute/v2017_09_01/models/_models_py3.html#ResourceSkuRestrictionInfo"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.compute.v2017_09_01.models.ResourceSkuRestrictionInfo" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">msrest.serialization.Model</span></code></p>
+<p>ResourceSkuRestrictionInfo.</p>
+<p>Variables are only populated by the server, and will be ignored when
+sending a request.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Variables</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>locations</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a><em>]</em>) – Locations where the SKU is restricted</p></li>
+<li><p><a class="reference internal" href="azure.mgmt.dns.html#azure.mgmt.dns.DnsManagementClient.zones" title="azure.mgmt.dns.DnsManagementClient.zones"><strong>zones</strong></a> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a><em>]</em>) – List of availability zones where the SKU is restricted.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="class">
+<dt id="azure.mgmt.compute.v2017_09_01.models.ResourceSkuRestrictions">
+<em class="property">class </em><code class="sig-prename descclassname">azure.mgmt.compute.v2017_09_01.models.</code><code class="sig-name descname">ResourceSkuRestrictions</code><span class="sig-paren">(</span><em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/mgmt/compute/v2017_09_01/models/_models_py3.html#ResourceSkuRestrictions"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.compute.v2017_09_01.models.ResourceSkuRestrictions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">msrest.serialization.Model</span></code></p>
+<p>Describes scaling information of a SKU.</p>
+<p>Variables are only populated by the server, and will be ignored when
+sending a request.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Variables</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><a class="reference internal" href="azure.batch.models.html#azure.batch.models.ContainerConfiguration.type" title="azure.batch.models.ContainerConfiguration.type"><strong>type</strong></a> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a><em> or
+</em><a class="reference internal" href="#azure.mgmt.compute.v2017_09_01.models.ResourceSkuRestrictionsType" title="azure.mgmt.compute.v2017_09_01.models.ResourceSkuRestrictionsType"><em>ResourceSkuRestrictionsType</em></a>) – The type of restrictions. Possible values include: ‘Location’,
+‘Zone’</p></li>
+<li><p><strong>values</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a><em>]</em>) – The value of restrictions. If the restriction type is set to
+location. This would be different locations where the SKU is restricted.</p></li>
+<li><p><strong>restriction_info</strong> (<a class="reference internal" href="#azure.mgmt.compute.v2017_09_01.models.ResourceSkuRestrictionInfo" title="azure.mgmt.compute.v2017_09_01.models.ResourceSkuRestrictionInfo"><em>ResourceSkuRestrictionInfo</em></a>) – The information about the restriction where the
+SKU cannot be used.</p></li>
+<li><p><strong>reason_code</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a><em> or
+</em><a class="reference internal" href="#azure.mgmt.compute.v2017_09_01.models.ResourceSkuRestrictionsReasonCode" title="azure.mgmt.compute.v2017_09_01.models.ResourceSkuRestrictionsReasonCode"><em>ResourceSkuRestrictionsReasonCode</em></a>) – The reason for restriction. Possible values include:
+‘QuotaId’, ‘NotAvailableForSubscription’</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="class">
 <dt id="azure.mgmt.compute.v2017_09_01.models.ResourceSkuPaged">
-<em class="property">class </em><code class="sig-prename descclassname">azure.mgmt.compute.v2017_09_01.models.</code><code class="sig-name descname">ResourceSkuPaged</code><span class="sig-paren">(</span><em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/mgmt/compute/v2017_09_01/models/resource_sku_paged.html#ResourceSkuPaged"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.compute.v2017_09_01.models.ResourceSkuPaged" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">azure.mgmt.compute.v2017_09_01.models.</code><code class="sig-name descname">ResourceSkuPaged</code><span class="sig-paren">(</span><em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/mgmt/compute/v2017_09_01/models/_paged_models.html#ResourceSkuPaged"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.compute.v2017_09_01.models.ResourceSkuPaged" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">msrest.paging.Paged</span></code></p>
 <p>A paging container for iterating over a list of <a class="reference internal" href="#azure.mgmt.compute.v2017_09_01.models.ResourceSku" title="azure.mgmt.compute.v2017_09_01.models.ResourceSku"><code class="xref py py-class docutils literal notranslate"><span class="pre">ResourceSku</span></code></a> object</p>
 </dd></dl>
 
 <dl class="class">
 <dt id="azure.mgmt.compute.v2017_09_01.models.ResourceSkuCapacityScaleType">
-<em class="property">class </em><code class="sig-prename descclassname">azure.mgmt.compute.v2017_09_01.models.</code><code class="sig-name descname">ResourceSkuCapacityScaleType</code><a class="reference internal" href="../_modules/azure/mgmt/compute/v2017_09_01/models/compute_management_client_enums.html#ResourceSkuCapacityScaleType"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.compute.v2017_09_01.models.ResourceSkuCapacityScaleType" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">azure.mgmt.compute.v2017_09_01.models.</code><code class="sig-name descname">ResourceSkuCapacityScaleType</code><a class="reference internal" href="../_modules/azure/mgmt/compute/v2017_09_01/models/_compute_management_client_enums.html#ResourceSkuCapacityScaleType"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.compute.v2017_09_01.models.ResourceSkuCapacityScaleType" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3.5/library/enum.html#enum.Enum" title="(in Python v3.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></a></p>
 <p>An enumeration.</p>
 <dl class="attribute">
@@ -484,7 +484,7 @@ This is empty if there are no restrictions.</p></li>
 
 <dl class="class">
 <dt id="azure.mgmt.compute.v2017_09_01.models.ResourceSkuRestrictionsType">
-<em class="property">class </em><code class="sig-prename descclassname">azure.mgmt.compute.v2017_09_01.models.</code><code class="sig-name descname">ResourceSkuRestrictionsType</code><a class="reference internal" href="../_modules/azure/mgmt/compute/v2017_09_01/models/compute_management_client_enums.html#ResourceSkuRestrictionsType"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.compute.v2017_09_01.models.ResourceSkuRestrictionsType" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">azure.mgmt.compute.v2017_09_01.models.</code><code class="sig-name descname">ResourceSkuRestrictionsType</code><a class="reference internal" href="../_modules/azure/mgmt/compute/v2017_09_01/models/_compute_management_client_enums.html#ResourceSkuRestrictionsType"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.compute.v2017_09_01.models.ResourceSkuRestrictionsType" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3.5/library/enum.html#enum.Enum" title="(in Python v3.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></a></p>
 <p>An enumeration.</p>
 <dl class="attribute">
@@ -501,7 +501,7 @@ This is empty if there are no restrictions.</p></li>
 
 <dl class="class">
 <dt id="azure.mgmt.compute.v2017_09_01.models.ResourceSkuRestrictionsReasonCode">
-<em class="property">class </em><code class="sig-prename descclassname">azure.mgmt.compute.v2017_09_01.models.</code><code class="sig-name descname">ResourceSkuRestrictionsReasonCode</code><a class="reference internal" href="../_modules/azure/mgmt/compute/v2017_09_01/models/compute_management_client_enums.html#ResourceSkuRestrictionsReasonCode"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.compute.v2017_09_01.models.ResourceSkuRestrictionsReasonCode" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">azure.mgmt.compute.v2017_09_01.models.</code><code class="sig-name descname">ResourceSkuRestrictionsReasonCode</code><a class="reference internal" href="../_modules/azure/mgmt/compute/v2017_09_01/models/_compute_management_client_enums.html#ResourceSkuRestrictionsReasonCode"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.compute.v2017_09_01.models.ResourceSkuRestrictionsReasonCode" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3.5/library/enum.html#enum.Enum" title="(in Python v3.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></a></p>
 <p>An enumeration.</p>
 <dl class="attribute">

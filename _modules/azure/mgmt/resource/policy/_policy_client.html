@@ -324,7 +324,7 @@
 <span class="sd">    :type profile: azure.profiles.KnownProfiles</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="n">DEFAULT_API_VERSION</span> <span class="o">=</span> <span class="s1">&#39;2018-05-01&#39;</span>
+    <span class="n">DEFAULT_API_VERSION</span> <span class="o">=</span> <span class="s1">&#39;2019-01-01&#39;</span>
     <span class="n">_PROFILE_TAG</span> <span class="o">=</span> <span class="s2">&quot;azure.mgmt.resource.policy.PolicyClient&quot;</span>
     <span class="n">LATEST_PROFILE</span> <span class="o">=</span> <span class="n">ProfileDefinition</span><span class="p">({</span>
         <span class="n">_PROFILE_TAG</span><span class="p">:</span> <span class="p">{</span>
@@ -356,6 +356,7 @@
 <span class="sd">           * 2017-06-01-preview: :mod:`v2017_06_01_preview.models&lt;azure.mgmt.resource.policy.v2017_06_01_preview.models&gt;`</span>
 <span class="sd">           * 2018-03-01: :mod:`v2018_03_01.models&lt;azure.mgmt.resource.policy.v2018_03_01.models&gt;`</span>
 <span class="sd">           * 2018-05-01: :mod:`v2018_05_01.models&lt;azure.mgmt.resource.policy.v2018_05_01.models&gt;`</span>
+<span class="sd">           * 2019-01-01: :mod:`v2019_01_01.models&lt;azure.mgmt.resource.policy.v2019_01_01.models&gt;`</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">api_version</span> <span class="o">==</span> <span class="s1">&#39;2015-10-01-preview&#39;</span><span class="p">:</span>
             <span class="kn">from</span> <span class="nn">.v2015_10_01_preview</span> <span class="k">import</span> <span class="n">models</span>
@@ -375,6 +376,9 @@
         <span class="k">elif</span> <span class="n">api_version</span> <span class="o">==</span> <span class="s1">&#39;2018-05-01&#39;</span><span class="p">:</span>
             <span class="kn">from</span> <span class="nn">.v2018_05_01</span> <span class="k">import</span> <span class="n">models</span>
             <span class="k">return</span> <span class="n">models</span>
+        <span class="k">elif</span> <span class="n">api_version</span> <span class="o">==</span> <span class="s1">&#39;2019-01-01&#39;</span><span class="p">:</span>
+            <span class="kn">from</span> <span class="nn">.v2019_01_01</span> <span class="k">import</span> <span class="n">models</span>
+            <span class="k">return</span> <span class="n">models</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;APIVersion </span><span class="si">{}</span><span class="s2"> is not available&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">api_version</span><span class="p">))</span></div>
 
     <span class="nd">@property</span>
@@ -387,6 +391,7 @@
 <span class="sd">           * 2017-06-01-preview: :class:`PolicyAssignmentsOperations&lt;azure.mgmt.resource.policy.v2017_06_01_preview.operations.PolicyAssignmentsOperations&gt;`</span>
 <span class="sd">           * 2018-03-01: :class:`PolicyAssignmentsOperations&lt;azure.mgmt.resource.policy.v2018_03_01.operations.PolicyAssignmentsOperations&gt;`</span>
 <span class="sd">           * 2018-05-01: :class:`PolicyAssignmentsOperations&lt;azure.mgmt.resource.policy.v2018_05_01.operations.PolicyAssignmentsOperations&gt;`</span>
+<span class="sd">           * 2019-01-01: :class:`PolicyAssignmentsOperations&lt;azure.mgmt.resource.policy.v2019_01_01.operations.PolicyAssignmentsOperations&gt;`</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">api_version</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_api_version</span><span class="p">(</span><span class="s1">&#39;policy_assignments&#39;</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">api_version</span> <span class="o">==</span> <span class="s1">&#39;2015-10-01-preview&#39;</span><span class="p">:</span>
@@ -401,6 +406,8 @@
             <span class="kn">from</span> <span class="nn">.v2018_03_01.operations</span> <span class="k">import</span> <span class="n">PolicyAssignmentsOperations</span> <span class="k">as</span> <span class="n">OperationClass</span>
         <span class="k">elif</span> <span class="n">api_version</span> <span class="o">==</span> <span class="s1">&#39;2018-05-01&#39;</span><span class="p">:</span>
             <span class="kn">from</span> <span class="nn">.v2018_05_01.operations</span> <span class="k">import</span> <span class="n">PolicyAssignmentsOperations</span> <span class="k">as</span> <span class="n">OperationClass</span>
+        <span class="k">elif</span> <span class="n">api_version</span> <span class="o">==</span> <span class="s1">&#39;2019-01-01&#39;</span><span class="p">:</span>
+            <span class="kn">from</span> <span class="nn">.v2019_01_01.operations</span> <span class="k">import</span> <span class="n">PolicyAssignmentsOperations</span> <span class="k">as</span> <span class="n">OperationClass</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;APIVersion </span><span class="si">{}</span><span class="s2"> is not available&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">api_version</span><span class="p">))</span>
         <span class="k">return</span> <span class="n">OperationClass</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_client</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="p">,</span> <span class="n">Serializer</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_models_dict</span><span class="p">(</span><span class="n">api_version</span><span class="p">)),</span> <span class="n">Deserializer</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_models_dict</span><span class="p">(</span><span class="n">api_version</span><span class="p">)))</span>
@@ -415,6 +422,7 @@
 <span class="sd">           * 2017-06-01-preview: :class:`PolicyDefinitionsOperations&lt;azure.mgmt.resource.policy.v2017_06_01_preview.operations.PolicyDefinitionsOperations&gt;`</span>
 <span class="sd">           * 2018-03-01: :class:`PolicyDefinitionsOperations&lt;azure.mgmt.resource.policy.v2018_03_01.operations.PolicyDefinitionsOperations&gt;`</span>
 <span class="sd">           * 2018-05-01: :class:`PolicyDefinitionsOperations&lt;azure.mgmt.resource.policy.v2018_05_01.operations.PolicyDefinitionsOperations&gt;`</span>
+<span class="sd">           * 2019-01-01: :class:`PolicyDefinitionsOperations&lt;azure.mgmt.resource.policy.v2019_01_01.operations.PolicyDefinitionsOperations&gt;`</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">api_version</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_api_version</span><span class="p">(</span><span class="s1">&#39;policy_definitions&#39;</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">api_version</span> <span class="o">==</span> <span class="s1">&#39;2015-10-01-preview&#39;</span><span class="p">:</span>
@@ -429,6 +437,8 @@
             <span class="kn">from</span> <span class="nn">.v2018_03_01.operations</span> <span class="k">import</span> <span class="n">PolicyDefinitionsOperations</span> <span class="k">as</span> <span class="n">OperationClass</span>
         <span class="k">elif</span> <span class="n">api_version</span> <span class="o">==</span> <span class="s1">&#39;2018-05-01&#39;</span><span class="p">:</span>
             <span class="kn">from</span> <span class="nn">.v2018_05_01.operations</span> <span class="k">import</span> <span class="n">PolicyDefinitionsOperations</span> <span class="k">as</span> <span class="n">OperationClass</span>
+        <span class="k">elif</span> <span class="n">api_version</span> <span class="o">==</span> <span class="s1">&#39;2019-01-01&#39;</span><span class="p">:</span>
+            <span class="kn">from</span> <span class="nn">.v2019_01_01.operations</span> <span class="k">import</span> <span class="n">PolicyDefinitionsOperations</span> <span class="k">as</span> <span class="n">OperationClass</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;APIVersion </span><span class="si">{}</span><span class="s2"> is not available&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">api_version</span><span class="p">))</span>
         <span class="k">return</span> <span class="n">OperationClass</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_client</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="p">,</span> <span class="n">Serializer</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_models_dict</span><span class="p">(</span><span class="n">api_version</span><span class="p">)),</span> <span class="n">Deserializer</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_models_dict</span><span class="p">(</span><span class="n">api_version</span><span class="p">)))</span>
@@ -440,6 +450,7 @@
 <span class="sd">           * 2017-06-01-preview: :class:`PolicySetDefinitionsOperations&lt;azure.mgmt.resource.policy.v2017_06_01_preview.operations.PolicySetDefinitionsOperations&gt;`</span>
 <span class="sd">           * 2018-03-01: :class:`PolicySetDefinitionsOperations&lt;azure.mgmt.resource.policy.v2018_03_01.operations.PolicySetDefinitionsOperations&gt;`</span>
 <span class="sd">           * 2018-05-01: :class:`PolicySetDefinitionsOperations&lt;azure.mgmt.resource.policy.v2018_05_01.operations.PolicySetDefinitionsOperations&gt;`</span>
+<span class="sd">           * 2019-01-01: :class:`PolicySetDefinitionsOperations&lt;azure.mgmt.resource.policy.v2019_01_01.operations.PolicySetDefinitionsOperations&gt;`</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">api_version</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_api_version</span><span class="p">(</span><span class="s1">&#39;policy_set_definitions&#39;</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">api_version</span> <span class="o">==</span> <span class="s1">&#39;2017-06-01-preview&#39;</span><span class="p">:</span>
@@ -448,6 +459,8 @@
             <span class="kn">from</span> <span class="nn">.v2018_03_01.operations</span> <span class="k">import</span> <span class="n">PolicySetDefinitionsOperations</span> <span class="k">as</span> <span class="n">OperationClass</span>
         <span class="k">elif</span> <span class="n">api_version</span> <span class="o">==</span> <span class="s1">&#39;2018-05-01&#39;</span><span class="p">:</span>
             <span class="kn">from</span> <span class="nn">.v2018_05_01.operations</span> <span class="k">import</span> <span class="n">PolicySetDefinitionsOperations</span> <span class="k">as</span> <span class="n">OperationClass</span>
+        <span class="k">elif</span> <span class="n">api_version</span> <span class="o">==</span> <span class="s1">&#39;2019-01-01&#39;</span><span class="p">:</span>
+            <span class="kn">from</span> <span class="nn">.v2019_01_01.operations</span> <span class="k">import</span> <span class="n">PolicySetDefinitionsOperations</span> <span class="k">as</span> <span class="n">OperationClass</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;APIVersion </span><span class="si">{}</span><span class="s2"> is not available&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">api_version</span><span class="p">))</span>
         <span class="k">return</span> <span class="n">OperationClass</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_client</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="p">,</span> <span class="n">Serializer</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_models_dict</span><span class="p">(</span><span class="n">api_version</span><span class="p">)),</span> <span class="n">Deserializer</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_models_dict</span><span class="p">(</span><span class="n">api_version</span><span class="p">)))</span></div>
