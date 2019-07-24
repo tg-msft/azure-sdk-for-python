@@ -310,6 +310,8 @@
 
 <span class="kn">from</span> <span class="nn">typing</span> <span class="k">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Union</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">TYPE_CHECKING</span>
 <span class="kn">from</span> <span class="nn">azure.core.pipeline.transport.base</span> <span class="k">import</span> <span class="n">HttpResponse</span>  <span class="c1"># type: ignore</span>
+<span class="kn">from</span> <span class="nn">azure.core.tracing.context</span> <span class="k">import</span> <span class="n">tracing_context</span>
+<span class="kn">from</span> <span class="nn">azure.core.tracing.decorator</span> <span class="k">import</span> <span class="n">distributed_trace</span>
 
 <span class="k">if</span> <span class="n">TYPE_CHECKING</span><span class="p">:</span>
     <span class="kn">import</span> <span class="nn">requests</span>
@@ -415,7 +417,7 @@
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_polling_method</span><span class="o">.</span><span class="n">finished</span><span class="p">():</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_done</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Event</span><span class="p">()</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_thread</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Thread</span><span class="p">(</span>
-                <span class="n">target</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_start</span><span class="p">,</span>
+                <span class="n">target</span><span class="o">=</span><span class="n">tracing_context</span><span class="o">.</span><span class="n">with_current_context</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_start</span><span class="p">),</span>
                 <span class="n">name</span><span class="o">=</span><span class="s2">&quot;LROPoller(</span><span class="si">{}</span><span class="s2">)&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">uuid</span><span class="o">.</span><span class="n">uuid4</span><span class="p">()))</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_thread</span><span class="o">.</span><span class="n">daemon</span> <span class="o">=</span> <span class="kc">True</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_thread</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
@@ -462,7 +464,8 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">wait</span><span class="p">(</span><span class="n">timeout</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_polling_method</span><span class="o">.</span><span class="n">resource</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="LROPoller.wait"><a class="viewcode-back" href="../../../../ref/azure.core.polling.html#azure.core.polling.poller.LROPoller.wait">[docs]</a>    <span class="k">def</span> <span class="nf">wait</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="LROPoller.wait"><a class="viewcode-back" href="../../../../ref/azure.core.polling.html#azure.core.polling.poller.LROPoller.wait">[docs]</a>    <span class="nd">@distributed_trace</span>
+    <span class="k">def</span> <span class="nf">wait</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="c1"># type: (Optional[int]) -&gt; None</span>
         <span class="sd">&quot;&quot;&quot;Wait on the long running operation for a specified length</span>
 <span class="sd">        of time. You can check if this call as ended with timeout with the</span>
