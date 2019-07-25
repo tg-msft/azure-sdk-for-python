@@ -294,6 +294,8 @@
 
 <span class="kn">import</span> <span class="nn">six</span>
 
+<span class="kn">from</span> <span class="nn">azure.core.paging</span> <span class="k">import</span> <span class="n">ItemPaged</span>
+
 <span class="kn">from</span> <span class="nn">._shared.shared_access_signature</span> <span class="k">import</span> <span class="n">QueueSharedAccessSignature</span>
 <span class="kn">from</span> <span class="nn">._shared.utils</span> <span class="k">import</span> <span class="p">(</span>
     <span class="n">StorageAccountHostsMixin</span><span class="p">,</span>
@@ -790,7 +792,7 @@
             <span class="n">process_storage_error</span><span class="p">(</span><span class="n">error</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="QueueClient.receive_messages"><a class="viewcode-back" href="../../../../ref/azure.storage.queue.html#azure.storage.queue.queue_client.QueueClient.receive_messages">[docs]</a>    <span class="k">def</span> <span class="nf">receive_messages</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">messages_per_page</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">visibility_timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span> <span class="c1"># type: ignore</span>
-        <span class="c1"># type: (Optional[int], Optional[int], Optional[int], Optional[Any]) -&gt; QueueMessage</span>
+        <span class="c1"># type: (Optional[int], Optional[int], Optional[int], Optional[Any]) -&gt; ItemPaged[Message]</span>
         <span class="sd">&quot;&quot;&quot;Removes one or more messages from the front of the queue.</span>
 
 <span class="sd">        When a message is retrieved from the queue, the response includes the message</span>
@@ -818,7 +820,7 @@
 <span class="sd">            The server timeout, expressed in seconds.</span>
 <span class="sd">        :return:</span>
 <span class="sd">            Returns a message iterator of dict-like Message objects.</span>
-<span class="sd">        :rtype: ~azure.storage.queue.models.MessagesPaged</span>
+<span class="sd">        :rtype: ~azure.core.paging.ItemPaged[~azure.storage.queue.models.Message]</span>
 
 <span class="sd">        Example:</span>
 <span class="sd">            .. literalinclude:: ../tests/test_queue_samples_message.py</span>
@@ -840,7 +842,7 @@
                 <span class="bp">cls</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_config</span><span class="o">.</span><span class="n">message_decode_policy</span><span class="p">,</span>
                 <span class="o">**</span><span class="n">kwargs</span>
             <span class="p">)</span>
-            <span class="k">return</span> <span class="n">MessagesPaged</span><span class="p">(</span><span class="n">command</span><span class="p">,</span> <span class="n">results_per_page</span><span class="o">=</span><span class="n">messages_per_page</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">ItemPaged</span><span class="p">(</span><span class="n">command</span><span class="p">,</span> <span class="n">results_per_page</span><span class="o">=</span><span class="n">messages_per_page</span><span class="p">,</span> <span class="n">page_iterator_class</span><span class="o">=</span><span class="n">MessagesPaged</span><span class="p">)</span>
         <span class="k">except</span> <span class="n">StorageErrorException</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
             <span class="n">process_storage_error</span><span class="p">(</span><span class="n">error</span><span class="p">)</span></div>
 

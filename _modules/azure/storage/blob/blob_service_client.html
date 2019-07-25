@@ -292,6 +292,8 @@
 <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
     <span class="kn">from</span> <span class="nn">urlparse</span> <span class="k">import</span> <span class="n">urlparse</span> <span class="c1"># type: ignore</span>
 
+<span class="kn">from</span> <span class="nn">azure.core.paging</span> <span class="k">import</span> <span class="n">ItemPaged</span>
+
 <span class="kn">from</span> <span class="nn">._shared.shared_access_signature</span> <span class="k">import</span> <span class="n">SharedAccessSignature</span>
 <span class="kn">from</span> <span class="nn">._shared.models</span> <span class="k">import</span> <span class="n">LocationMode</span><span class="p">,</span> <span class="n">Services</span>
 <span class="kn">from</span> <span class="nn">._shared.utils</span> <span class="k">import</span> <span class="p">(</span>
@@ -658,12 +660,11 @@
 <div class="viewcode-block" id="BlobServiceClient.list_containers"><a class="viewcode-back" href="../../../../ref/azure.storage.blob.html#azure.storage.blob.blob_service_client.BlobServiceClient.list_containers">[docs]</a>    <span class="k">def</span> <span class="nf">list_containers</span><span class="p">(</span>
             <span class="bp">self</span><span class="p">,</span> <span class="n">name_starts_with</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>  <span class="c1"># type: Optional[str]</span>
             <span class="n">include_metadata</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>  <span class="c1"># type: Optional[bool]</span>
-            <span class="n">marker</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>  <span class="c1"># type: Optional[str]</span>
             <span class="n">results_per_page</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>  <span class="c1"># type: Optional[int]</span>
             <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>  <span class="c1"># type: Optional[int]</span>
             <span class="o">**</span><span class="n">kwargs</span>
         <span class="p">):</span>
-        <span class="c1"># type: (...) -&gt; ContainerPropertiesPaged</span>
+        <span class="c1"># type: (...) -&gt; ItemPaged[ContainerProperties]</span>
         <span class="sd">&quot;&quot;&quot;Returns a generator to list the containers under the specified account.</span>
 
 <span class="sd">        The generator will lazily follow the continuation tokens returned by</span>
@@ -675,17 +676,13 @@
 <span class="sd">        :param bool include_metadata:</span>
 <span class="sd">            Specifies that container metadata be returned in the response.</span>
 <span class="sd">            The default value is `False`.</span>
-<span class="sd">        :param str marker:</span>
-<span class="sd">            An opaque continuation token. This value can be retrieved from the</span>
-<span class="sd">            next_marker field of a previous generator object. If specified,</span>
-<span class="sd">            this generator will begin returning results from this point.</span>
 <span class="sd">        :param int results_per_page:</span>
 <span class="sd">            The maximum number of container names to retrieve per API</span>
 <span class="sd">            call. If the request does not specify the server will return up to 5,000 items.</span>
 <span class="sd">        :param int timeout:</span>
 <span class="sd">            The timeout parameter is expressed in seconds.</span>
 <span class="sd">        :returns: An iterable (auto-paging) of ContainerProperties.</span>
-<span class="sd">        :rtype: ~azure.core.blob.models.ContainerPropertiesPaged</span>
+<span class="sd">        :rtype: ~azure.core.paging.ItemPaged[~azure.core.blob.models.ContainerProperties]</span>
 
 <span class="sd">        Example:</span>
 <span class="sd">            .. literalinclude:: ../tests/test_blob_samples_service.py</span>
@@ -702,8 +699,8 @@
             <span class="n">include</span><span class="o">=</span><span class="n">include</span><span class="p">,</span>
             <span class="n">timeout</span><span class="o">=</span><span class="n">timeout</span><span class="p">,</span>
             <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">ContainerPropertiesPaged</span><span class="p">(</span>
-            <span class="n">command</span><span class="p">,</span> <span class="n">prefix</span><span class="o">=</span><span class="n">name_starts_with</span><span class="p">,</span> <span class="n">results_per_page</span><span class="o">=</span><span class="n">results_per_page</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="n">marker</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="n">ItemPaged</span><span class="p">(</span>
+            <span class="n">command</span><span class="p">,</span> <span class="n">prefix</span><span class="o">=</span><span class="n">name_starts_with</span><span class="p">,</span> <span class="n">results_per_page</span><span class="o">=</span><span class="n">results_per_page</span><span class="p">,</span> <span class="n">page_iterator_class</span><span class="o">=</span><span class="n">ContainerPropertiesPaged</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="BlobServiceClient.create_container"><a class="viewcode-back" href="../../../../ref/azure.storage.blob.html#azure.storage.blob.blob_service_client.BlobServiceClient.create_container">[docs]</a>    <span class="k">def</span> <span class="nf">create_container</span><span class="p">(</span>
             <span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span>  <span class="c1"># type: str</span>

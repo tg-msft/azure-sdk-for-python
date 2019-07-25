@@ -284,7 +284,7 @@
 <span class="c1"># pylint: disable=too-few-public-methods, too-many-instance-attributes</span>
 <span class="c1"># pylint: disable=super-init-not-called, too-many-lines</span>
 
-<span class="kn">from</span> <span class="nn">azure.core.paging</span> <span class="k">import</span> <span class="n">Paged</span>
+<span class="kn">from</span> <span class="nn">azure.core.paging</span> <span class="k">import</span> <span class="n">PageIterator</span>
 <span class="kn">from</span> <span class="nn">._shared.utils</span> <span class="k">import</span> <span class="p">(</span>
     <span class="n">return_context_and_deserialized</span><span class="p">,</span>
     <span class="n">process_storage_error</span><span class="p">)</span>
@@ -521,12 +521,12 @@
         <span class="k">return</span> <span class="n">props</span></div>
 
 
-<div class="viewcode-block" id="SharePropertiesPaged"><a class="viewcode-back" href="../../../../ref/azure.storage.file.html#azure.storage.file.models.SharePropertiesPaged">[docs]</a><span class="k">class</span> <span class="nc">SharePropertiesPaged</span><span class="p">(</span><span class="n">Paged</span><span class="p">):</span>
+<div class="viewcode-block" id="SharePropertiesPaged"><a class="viewcode-back" href="../../../../ref/azure.storage.file.html#azure.storage.file.models.SharePropertiesPaged">[docs]</a><span class="k">class</span> <span class="nc">SharePropertiesPaged</span><span class="p">(</span><span class="n">PageIterator</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;An iterable of Share properties.</span>
 
 <span class="sd">    :ivar str service_endpoint: The service URL.</span>
 <span class="sd">    :ivar str prefix: A file name prefix being used to filter the list.</span>
-<span class="sd">    :ivar str current_marker: The continuation token of the current page of results.</span>
+<span class="sd">    :ivar str marker: The continuation token of the current page of results.</span>
 <span class="sd">    :ivar int results_per_page: The maximum number of results retrieved per API call.</span>
 <span class="sd">    :ivar str next_marker: The continuation token to retrieve the next page of results.</span>
 <span class="sd">    :ivar str location_mode: The location mode being used to list results. The available</span>
@@ -539,43 +539,40 @@
 <span class="sd">        begin with the specified prefix.</span>
 <span class="sd">    :param int results_per_page: The maximum number of share names to retrieve per</span>
 <span class="sd">        call.</span>
-<span class="sd">    :param str marker: An opaque continuation token.</span>
+<span class="sd">    :param str continuation_token: An opaque continuation token.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">command</span><span class="p">,</span> <span class="n">prefix</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">results_per_page</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">(</span><span class="n">SharePropertiesPaged</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">command</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">command</span><span class="p">,</span> <span class="n">prefix</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">results_per_page</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">continuation_token</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">SharePropertiesPaged</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
+            <span class="n">get_next</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_get_next_cb</span><span class="p">,</span>
+            <span class="n">extract_data</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_extract_data_cb</span><span class="p">,</span>
+            <span class="n">continuation_token</span><span class="o">=</span><span class="n">continuation_token</span> <span class="ow">or</span> <span class="s2">&quot;&quot;</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_command</span> <span class="o">=</span> <span class="n">command</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">service_endpoint</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">prefix</span> <span class="o">=</span> <span class="n">prefix</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">current_marker</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">marker</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">results_per_page</span> <span class="o">=</span> <span class="n">results_per_page</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">next_marker</span> <span class="o">=</span> <span class="n">marker</span> <span class="ow">or</span> <span class="s2">&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">location_mode</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">current_page</span> <span class="o">=</span> <span class="p">[]</span>
 
-    <span class="k">def</span> <span class="nf">_advance_page</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Force moving the cursor to the next azure call.</span>
-<span class="sd">        This method is for advanced usage, iterator protocol is prefered.</span>
-<span class="sd">        :raises: StopIteration if no further page</span>
-<span class="sd">        :return: The current page list</span>
-<span class="sd">        :rtype: list</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">next_marker</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">StopIteration</span><span class="p">(</span><span class="s2">&quot;End of paging&quot;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_current_page_iter_index</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">def</span> <span class="nf">_get_next_cb</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">continuation_token</span><span class="p">):</span>
         <span class="k">try</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">location_mode</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_next</span><span class="p">(</span>
-                <span class="n">marker</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">next_marker</span> <span class="ow">or</span> <span class="kc">None</span><span class="p">,</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_command</span><span class="p">(</span>
+                <span class="n">marker</span><span class="o">=</span><span class="n">continuation_token</span> <span class="ow">or</span> <span class="kc">None</span><span class="p">,</span>
                 <span class="n">maxresults</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">results_per_page</span><span class="p">,</span>
                 <span class="bp">cls</span><span class="o">=</span><span class="n">return_context_and_deserialized</span><span class="p">,</span>
                 <span class="n">use_location</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">location_mode</span><span class="p">)</span>
         <span class="k">except</span> <span class="n">StorageErrorException</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
             <span class="n">process_storage_error</span><span class="p">(</span><span class="n">error</span><span class="p">)</span>
 
+    <span class="k">def</span> <span class="nf">_extract_data_cb</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">get_next_return</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">location_mode</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_response</span> <span class="o">=</span> <span class="n">get_next_return</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">service_endpoint</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_response</span><span class="o">.</span><span class="n">service_endpoint</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">prefix</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_response</span><span class="o">.</span><span class="n">prefix</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">current_marker</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_response</span><span class="o">.</span><span class="n">marker</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">marker</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_response</span><span class="o">.</span><span class="n">marker</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">results_per_page</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_response</span><span class="o">.</span><span class="n">max_results</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">current_page</span> <span class="o">=</span> <span class="p">[</span><span class="n">ShareProperties</span><span class="o">.</span><span class="n">_from_generated</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_response</span><span class="o">.</span><span class="n">share_items</span><span class="p">]</span>  <span class="c1"># pylint: disable=protected-access</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">next_marker</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_response</span><span class="o">.</span><span class="n">next_marker</span> <span class="ow">or</span> <span class="kc">None</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_page</span></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_response</span><span class="o">.</span><span class="n">next_marker</span> <span class="ow">or</span> <span class="kc">None</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_page</span></div>
 
 
 <div class="viewcode-block" id="Handle"><a class="viewcode-back" href="../../../../ref/azure.storage.file.html#azure.storage.file.models.Handle">[docs]</a><span class="k">class</span> <span class="nc">Handle</span><span class="p">(</span><span class="n">DictMixin</span><span class="p">):</span>
@@ -630,10 +627,10 @@
         <span class="k">return</span> <span class="n">handle</span></div>
 
 
-<div class="viewcode-block" id="HandlesPaged"><a class="viewcode-back" href="../../../../ref/azure.storage.file.html#azure.storage.file.models.HandlesPaged">[docs]</a><span class="k">class</span> <span class="nc">HandlesPaged</span><span class="p">(</span><span class="n">Paged</span><span class="p">):</span>
+<div class="viewcode-block" id="HandlesPaged"><a class="viewcode-back" href="../../../../ref/azure.storage.file.html#azure.storage.file.models.HandlesPaged">[docs]</a><span class="k">class</span> <span class="nc">HandlesPaged</span><span class="p">(</span><span class="n">PageIterator</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;An iterable of Handles.</span>
 
-<span class="sd">    :ivar str current_marker: The continuation token of the current page of results.</span>
+<span class="sd">    :ivar str marker: The continuation token of the current page of results.</span>
 <span class="sd">    :ivar int results_per_page: The maximum number of results retrieved per API call.</span>
 <span class="sd">    :ivar str next_marker: The continuation token to retrieve the next page of results.</span>
 <span class="sd">    :ivar str location_mode: The location mode being used to list results. The available</span>
@@ -644,36 +641,34 @@
 <span class="sd">    :param callable command: Function to retrieve the next page of items.</span>
 <span class="sd">    :param int results_per_page: The maximum number of share names to retrieve per</span>
 <span class="sd">        call.</span>
-<span class="sd">    :param str marker: An opaque continuation token.</span>
+<span class="sd">    :param str continuation_token: An opaque continuation token.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">command</span><span class="p">,</span> <span class="n">results_per_page</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">(</span><span class="n">HandlesPaged</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">command</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">current_marker</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">command</span><span class="p">,</span> <span class="n">results_per_page</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">continuation_token</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">HandlesPaged</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
+            <span class="n">get_next</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_get_next_cb</span><span class="p">,</span>
+            <span class="n">extract_data</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_extract_data_cb</span><span class="p">,</span>
+            <span class="n">continuation_token</span><span class="o">=</span><span class="n">continuation_token</span> <span class="ow">or</span> <span class="s2">&quot;&quot;</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_command</span> <span class="o">=</span> <span class="n">command</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">marker</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">results_per_page</span> <span class="o">=</span> <span class="n">results_per_page</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">next_marker</span> <span class="o">=</span> <span class="n">marker</span> <span class="ow">or</span> <span class="s2">&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">location_mode</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">current_page</span> <span class="o">=</span> <span class="p">[]</span>
 
-    <span class="k">def</span> <span class="nf">_advance_page</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Force moving the cursor to the next azure call.</span>
-<span class="sd">        This method is for advanced usage, iterator protocol is prefered.</span>
-<span class="sd">        :raises: StopIteration if no further page</span>
-<span class="sd">        :return: The current page list</span>
-<span class="sd">        :rtype: list</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">next_marker</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">StopIteration</span><span class="p">(</span><span class="s2">&quot;End of paging&quot;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_current_page_iter_index</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">def</span> <span class="nf">_get_next_cb</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">continuation_token</span><span class="p">):</span>
         <span class="k">try</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">location_mode</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_next</span><span class="p">(</span>
-                <span class="n">marker</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">next_marker</span> <span class="ow">or</span> <span class="kc">None</span><span class="p">,</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_command</span><span class="p">(</span>
+                <span class="n">marker</span><span class="o">=</span><span class="n">continuation_token</span> <span class="ow">or</span> <span class="kc">None</span><span class="p">,</span>
                 <span class="n">maxresults</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">results_per_page</span><span class="p">,</span>
                 <span class="bp">cls</span><span class="o">=</span><span class="n">return_context_and_deserialized</span><span class="p">,</span>
                 <span class="n">use_location</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">location_mode</span><span class="p">)</span>
         <span class="k">except</span> <span class="n">StorageErrorException</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
             <span class="n">process_storage_error</span><span class="p">(</span><span class="n">error</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_extract_data_cb</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">get_next_return</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">location_mode</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_response</span> <span class="o">=</span> <span class="n">get_next_return</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">current_page</span> <span class="o">=</span> <span class="p">[</span><span class="n">Handle</span><span class="o">.</span><span class="n">_from_generated</span><span class="p">(</span><span class="n">h</span><span class="p">)</span> <span class="k">for</span> <span class="n">h</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_response</span><span class="o">.</span><span class="n">handle_list</span><span class="p">]</span>  <span class="c1"># pylint: disable=protected-access</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">next_marker</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_response</span><span class="o">.</span><span class="n">next_marker</span> <span class="ow">or</span> <span class="kc">None</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_page</span></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_response</span><span class="o">.</span><span class="n">next_marker</span> <span class="ow">or</span> <span class="kc">None</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_page</span></div>
 
 
 <div class="viewcode-block" id="DirectoryProperties"><a class="viewcode-back" href="../../../../ref/azure.storage.file.html#azure.storage.file.models.DirectoryProperties">[docs]</a><span class="k">class</span> <span class="nc">DirectoryProperties</span><span class="p">(</span><span class="n">DictMixin</span><span class="p">):</span>
@@ -710,7 +705,7 @@
         <span class="k">return</span> <span class="n">props</span></div>
 
 
-<div class="viewcode-block" id="DirectoryPropertiesPaged"><a class="viewcode-back" href="../../../../ref/azure.storage.file.html#azure.storage.file.models.DirectoryPropertiesPaged">[docs]</a><span class="k">class</span> <span class="nc">DirectoryPropertiesPaged</span><span class="p">(</span><span class="n">Paged</span><span class="p">):</span>
+<div class="viewcode-block" id="DirectoryPropertiesPaged"><a class="viewcode-back" href="../../../../ref/azure.storage.file.html#azure.storage.file.models.DirectoryPropertiesPaged">[docs]</a><span class="k">class</span> <span class="nc">DirectoryPropertiesPaged</span><span class="p">(</span><span class="n">PageIterator</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;An iterable for the contents of a directory.</span>
 
 <span class="sd">    This iterable will yield dicts for the contents of the directory. The dicts</span>
@@ -719,7 +714,7 @@
 
 <span class="sd">    :ivar str service_endpoint: The service URL.</span>
 <span class="sd">    :ivar str prefix: A file name prefix being used to filter the list.</span>
-<span class="sd">    :ivar str current_marker: The continuation token of the current page of results.</span>
+<span class="sd">    :ivar str marker: The continuation token of the current page of results.</span>
 <span class="sd">    :ivar int results_per_page: The maximum number of results retrieved per API call.</span>
 <span class="sd">    :ivar str next_marker: The continuation token to retrieve the next page of results.</span>
 <span class="sd">    :ivar str location_mode: The location mode being used to list results. The available</span>
@@ -732,30 +727,26 @@
 <span class="sd">        begin with the specified prefix.</span>
 <span class="sd">    :param int results_per_page: The maximum number of share names to retrieve per</span>
 <span class="sd">        call.</span>
-<span class="sd">    :param str marker: An opaque continuation token.</span>
+<span class="sd">    :param str continuation_token: An opaque continuation token.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">command</span><span class="p">,</span> <span class="n">prefix</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">results_per_page</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">(</span><span class="n">DirectoryPropertiesPaged</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">command</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">command</span><span class="p">,</span> <span class="n">prefix</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">results_per_page</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">continuation_token</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">DirectoryPropertiesPaged</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
+            <span class="n">get_next</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_get_next_cb</span><span class="p">,</span>
+            <span class="n">extract_data</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_extract_data_cb</span><span class="p">,</span>
+            <span class="n">continuation_token</span><span class="o">=</span><span class="n">continuation_token</span> <span class="ow">or</span> <span class="s2">&quot;&quot;</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_command</span> <span class="o">=</span> <span class="n">command</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">service_endpoint</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">prefix</span> <span class="o">=</span> <span class="n">prefix</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">current_marker</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">marker</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">results_per_page</span> <span class="o">=</span> <span class="n">results_per_page</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">next_marker</span> <span class="o">=</span> <span class="n">marker</span> <span class="ow">or</span> <span class="s2">&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">location_mode</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">current_page</span> <span class="o">=</span> <span class="p">[]</span>
 
-    <span class="k">def</span> <span class="nf">_advance_page</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Force moving the cursor to the next azure call.</span>
-<span class="sd">        This method is for advanced usage, iterator protocol is prefered.</span>
-<span class="sd">        :raises: StopIteration if no further page</span>
-<span class="sd">        :return: The current page list</span>
-<span class="sd">        :rtype: list</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">next_marker</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">StopIteration</span><span class="p">(</span><span class="s2">&quot;End of paging&quot;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_current_page_iter_index</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">def</span> <span class="nf">_get_next_cb</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">continuation_token</span><span class="p">):</span>
         <span class="k">try</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">location_mode</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_next</span><span class="p">(</span>
-                <span class="n">marker</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">next_marker</span> <span class="ow">or</span> <span class="kc">None</span><span class="p">,</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_command</span><span class="p">(</span>
+                <span class="n">marker</span><span class="o">=</span><span class="n">continuation_token</span> <span class="ow">or</span> <span class="kc">None</span><span class="p">,</span>
                 <span class="n">prefix</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">prefix</span><span class="p">,</span>
                 <span class="n">maxresults</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">results_per_page</span><span class="p">,</span>
                 <span class="bp">cls</span><span class="o">=</span><span class="n">return_context_and_deserialized</span><span class="p">,</span>
@@ -763,14 +754,15 @@
         <span class="k">except</span> <span class="n">StorageErrorException</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
             <span class="n">process_storage_error</span><span class="p">(</span><span class="n">error</span><span class="p">)</span>
 
+    <span class="k">def</span> <span class="nf">_extract_data_cb</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">get_next_return</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">location_mode</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_response</span> <span class="o">=</span> <span class="n">get_next_return</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">service_endpoint</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_response</span><span class="o">.</span><span class="n">service_endpoint</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">prefix</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_response</span><span class="o">.</span><span class="n">prefix</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">current_marker</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_response</span><span class="o">.</span><span class="n">marker</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">marker</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_response</span><span class="o">.</span><span class="n">marker</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">results_per_page</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_response</span><span class="o">.</span><span class="n">max_results</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">current_page</span> <span class="o">=</span> <span class="p">[</span><span class="n">_wrap_item</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_response</span><span class="o">.</span><span class="n">segment</span><span class="o">.</span><span class="n">directory_items</span><span class="p">]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">current_page</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="n">_wrap_item</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_response</span><span class="o">.</span><span class="n">segment</span><span class="o">.</span><span class="n">file_items</span><span class="p">])</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">next_marker</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_response</span><span class="o">.</span><span class="n">next_marker</span> <span class="ow">or</span> <span class="kc">None</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_page</span></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_response</span><span class="o">.</span><span class="n">next_marker</span> <span class="ow">or</span> <span class="kc">None</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_page</span></div>
 
 
 <div class="viewcode-block" id="FileProperties"><a class="viewcode-back" href="../../../../ref/azure.storage.file.html#azure.storage.file.models.FileProperties">[docs]</a><span class="k">class</span> <span class="nc">FileProperties</span><span class="p">(</span><span class="n">DictMixin</span><span class="p">):</span>

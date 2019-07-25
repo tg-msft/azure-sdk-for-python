@@ -356,12 +356,58 @@
 <div class="section" id="module-azure.core.async_paging">
 <span id="azure-core-async-paging-module"></span><h2>azure.core.async_paging module<a class="headerlink" href="#module-azure.core.async_paging" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
-<dt id="azure.core.async_paging.AsyncPagedMixin">
-<em class="property">class </em><code class="sig-prename descclassname">azure.core.async_paging.</code><code class="sig-name descname">AsyncPagedMixin</code><span class="sig-paren">(</span><em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/core/async_paging.html#AsyncPagedMixin"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.core.async_paging.AsyncPagedMixin" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3.5/library/collections.abc.html#collections.abc.AsyncIterator" title="(in Python v3.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">collections.abc.AsyncIterator</span></code></a></p>
-<p>Bring async to Paging.</p>
-<p><strong>Keyword argument:</strong></p>
-<p><em>async_command</em> - Mandatory keyword argument for this mixin to work.</p>
+<dt id="azure.core.async_paging.AsyncItemPaged">
+<em class="property">class </em><code class="sig-prename descclassname">azure.core.async_paging.</code><code class="sig-name descname">AsyncItemPaged</code><span class="sig-paren">(</span><em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/core/async_paging.html#AsyncItemPaged"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.core.async_paging.AsyncItemPaged" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3.5/library/typing.html#typing.AsyncIterator" title="(in Python v3.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">typing.AsyncIterator</span></code></a></p>
+<p>Return an async iterator of items.</p>
+<p>args and kwargs will be passed to the AsyncPageIterator constructor directly,
+except page_iterator_class</p>
+<dl class="method">
+<dt id="azure.core.async_paging.AsyncItemPaged.by_page">
+<code class="sig-name descname">by_page</code><span class="sig-paren">(</span><em class="sig-param">continuation_token: Optional[str] = None</em><span class="sig-paren">)</span> &#x2192; AsyncIterator[AsyncIterator[ReturnType]]<a class="reference internal" href="../_modules/azure/core/async_paging.html#AsyncItemPaged.by_page"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.core.async_paging.AsyncItemPaged.by_page" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get an async iterator of pages of objects, instead of an async iterator of objects.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>continuation_token</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – An opaque continuation token. This value can be retrieved from the
+continuation_token field of a previous generator object. If specified,
+this generator will begin returning results from this point.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>An async iterator of pages (themselves async iterator of objects)</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="azure.core.async_paging.AsyncList">
+<em class="property">class </em><code class="sig-prename descclassname">azure.core.async_paging.</code><code class="sig-name descname">AsyncList</code><span class="sig-paren">(</span><em class="sig-param">iterable: Iterable[ReturnType]</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/core/async_paging.html#AsyncList"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.core.async_paging.AsyncList" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3.5/library/typing.html#typing.AsyncIterator" title="(in Python v3.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">typing.AsyncIterator</span></code></a></p>
+<p>Change an iterable into a fake async iterator.</p>
+<p>Coul be useful to fill the async iterator contract when you get a list.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>iterable</strong> – A sync iterable of T</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="class">
+<dt id="azure.core.async_paging.AsyncPageIterator">
+<em class="property">class </em><code class="sig-prename descclassname">azure.core.async_paging.</code><code class="sig-name descname">AsyncPageIterator</code><span class="sig-paren">(</span><em class="sig-param">get_next: Callable[Optional[str], Awaitable[ResponseType]], extract_data: Callable[ResponseType, Awaitable[Tuple[str, AsyncIterator[ReturnType]]]], continuation_token: Optional[str] = None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/core/async_paging.html#AsyncPageIterator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.core.async_paging.AsyncPageIterator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3.5/library/typing.html#typing.AsyncIterator" title="(in Python v3.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">typing.AsyncIterator</span></code></a></p>
+<p>Return an async iterator of pages.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>get_next</strong> – Callable that take the continuation token and return a HTTP response</p></li>
+<li><p><strong>extract_data</strong> – Callable that take an HTTP response and return a tuple continuation token,
+list of ReturnType</p></li>
+<li><p><strong>continuation_token</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The continuation token needed by get_next</p></li>
+</ul>
+</dd>
+</dl>
 </dd></dl>
 
 </div>
@@ -684,23 +730,55 @@ This MUST be called inside a “except” clause.</p>
 <div class="section" id="module-azure.core.paging">
 <span id="azure-core-paging-module"></span><h2>azure.core.paging module<a class="headerlink" href="#module-azure.core.paging" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
-<dt id="azure.core.paging.Paged">
-<em class="property">class </em><code class="sig-prename descclassname">azure.core.paging.</code><code class="sig-name descname">Paged</code><span class="sig-paren">(</span><em class="sig-param">command</em>, <em class="sig-param">deserializer</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/core/paging.html#Paged"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.core.paging.Paged" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#azure.core.async_paging.AsyncPagedMixin" title="azure.core.async_paging.AsyncPagedMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">azure.core.async_paging.AsyncPagedMixin</span></code></a>, <a class="reference external" href="https://docs.python.org/3.5/library/collections.abc.html#collections.abc.Iterator" title="(in Python v3.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">collections.abc.Iterator</span></code></a></p>
-<p>A container for paged REST responses.</p>
+<dt id="azure.core.paging.ItemPaged">
+<em class="property">class </em><code class="sig-prename descclassname">azure.core.paging.</code><code class="sig-name descname">ItemPaged</code><span class="sig-paren">(</span><em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/core/paging.html#ItemPaged"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.core.paging.ItemPaged" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3.5/library/typing.html#typing.Iterator" title="(in Python v3.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">typing.Iterator</span></code></a></p>
+<p>Return an iterator of items.</p>
+<p>args and kwargs will be passed to the PageIterator constructor directly,
+except page_iterator_class</p>
+<dl class="method">
+<dt id="azure.core.paging.ItemPaged.by_page">
+<code class="sig-name descname">by_page</code><span class="sig-paren">(</span><em class="sig-param">continuation_token=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/core/paging.html#ItemPaged.by_page"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.core.paging.ItemPaged.by_page" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get an iterator of pages of objects, instead of an iterator of objects.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>continuation_token</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – An opaque continuation token. This value can be retrieved from the
+continuation_token field of a previous generator object. If specified,
+this generator will begin returning results from this point.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>An iterator of pages (themselves iterator of objects)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="azure.core.paging.ItemPaged.next">
+<code class="sig-name descname">next</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#azure.core.paging.ItemPaged.next" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the next item from the iterator. When exhausted, raise StopIteration</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="azure.core.paging.PageIterator">
+<em class="property">class </em><code class="sig-prename descclassname">azure.core.paging.</code><code class="sig-name descname">PageIterator</code><span class="sig-paren">(</span><em class="sig-param">get_next</em>, <em class="sig-param">extract_data</em>, <em class="sig-param">continuation_token=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/core/paging.html#PageIterator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.core.paging.PageIterator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3.5/library/typing.html#typing.Iterator" title="(in Python v3.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">typing.Iterator</span></code></a></p>
+<p>Return an iterator of pages.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>response</strong> (<a class="reference internal" href="azure.core.pipeline.transport.html#azure.core.pipeline.transport.HttpResponse" title="azure.core.pipeline.transport.HttpResponse"><em>HttpResponse</em></a>) – server response object.</p></li>
-<li><p><strong>command</strong> (<em>callable</em>) – Function to retrieve the next page of items.</p></li>
-<li><p><strong>deserializer</strong> (<em>Deserializer</em>) – a Deserializer instance to use</p></li>
+<li><p><strong>get_next</strong> – Callable that take the continuation token and return a HTTP response</p></li>
+<li><p><strong>extract_data</strong> – Callable that take an HTTP response and return a tuple continuation token,
+list of ReturnType</p></li>
+<li><p><strong>continuation_token</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The continuation token needed by get_next</p></li>
 </ul>
 </dd>
 </dl>
 <dl class="method">
-<dt id="azure.core.paging.Paged.next">
-<code class="sig-name descname">next</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#azure.core.paging.Paged.next" title="Permalink to this definition">¶</a></dt>
-<dd><p>Iterate through responses.</p>
+<dt id="azure.core.paging.PageIterator.next">
+<code class="sig-name descname">next</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#azure.core.paging.PageIterator.next" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the next item from the iterator. When exhausted, raise StopIteration</p>
 </dd></dl>
 
 </dd></dl>

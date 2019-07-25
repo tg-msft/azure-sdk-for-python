@@ -594,16 +594,13 @@ list of files.</p>
 
 <dl class="method">
 <dt id="azure.storage.file.directory_client.DirectoryClient.list_directories_and_files">
-<code class="sig-name descname">list_directories_and_files</code><span class="sig-paren">(</span><em class="sig-param">name_starts_with=None</em>, <em class="sig-param">marker=None</em>, <em class="sig-param">timeout=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/storage/file/directory_client.html#DirectoryClient.list_directories_and_files"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.storage.file.directory_client.DirectoryClient.list_directories_and_files" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">list_directories_and_files</code><span class="sig-paren">(</span><em class="sig-param">name_starts_with=None</em>, <em class="sig-param">timeout=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/storage/file/directory_client.html#DirectoryClient.list_directories_and_files"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.storage.file.directory_client.DirectoryClient.list_directories_and_files" title="Permalink to this definition">¶</a></dt>
 <dd><p>Lists all the directories and files under the directory.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>name_starts_with</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Filters the results to return only entities whose names
 begin with the specified prefix.</p></li>
-<li><p><strong>marker</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – An opaque continuation token. This value can be retrieved from the
-next_marker field of a previous generator object. If specified,
-this generator will begin returning results from this point.</p></li>
 <li><p><strong>timeout</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a>) – The timeout parameter is expressed in seconds.</p></li>
 </ul>
 </dd>
@@ -611,7 +608,7 @@ this generator will begin returning results from this point.</p></li>
 <dd class="field-even"><p>An auto-paging iterable of dict-like DirectoryProperties and FileProperties</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference internal" href="#azure.storage.file.models.DirectoryPropertiesPaged" title="azure.storage.file.models.DirectoryPropertiesPaged">DirectoryPropertiesPaged</a></p>
+<dd class="field-odd"><p><a class="reference internal" href="azure.core.html#azure.core.paging.ItemPaged" title="azure.core.paging.ItemPaged">ItemPaged</a>[<a class="reference internal" href="#azure.storage.file.models.DirectoryProperties" title="azure.storage.file.models.DirectoryProperties">DirectoryProperties</a>]</p>
 </dd>
 </dl>
 <dl>
@@ -629,14 +626,11 @@ this generator will begin returning results from this point.</p></li>
 
 <dl class="method">
 <dt id="azure.storage.file.directory_client.DirectoryClient.list_handles">
-<code class="sig-name descname">list_handles</code><span class="sig-paren">(</span><em class="sig-param">marker=None</em>, <em class="sig-param">recursive=False</em>, <em class="sig-param">timeout=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/storage/file/directory_client.html#DirectoryClient.list_handles"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.storage.file.directory_client.DirectoryClient.list_handles" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">list_handles</code><span class="sig-paren">(</span><em class="sig-param">recursive=False</em>, <em class="sig-param">timeout=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/storage/file/directory_client.html#DirectoryClient.list_handles"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.storage.file.directory_client.DirectoryClient.list_handles" title="Permalink to this definition">¶</a></dt>
 <dd><p>Lists opened handles on a directory or a file under the directory.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>marker</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – An opaque continuation token. This value can be retrieved from the
-next_marker field of a previous generator object. If specified,
-this generator will begin returning results from this point.</p></li>
 <li><p><strong>recursive</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#bool" title="(in Python v3.5)"><em>bool</em></a>) – Boolean that specifies if operation should apply to the directory specified by the client,
 its files, its subdirectories and their files. Default value is False.</p></li>
 <li><p><strong>timeout</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a>) – The timeout parameter is expressed in seconds.</p></li>
@@ -646,7 +640,7 @@ its files, its subdirectories and their files. Default value is False.</p></li>
 <dd class="field-even"><p>An auto-paging iterable of HandleItems</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference internal" href="#azure.storage.file.models.HandlesPaged" title="azure.storage.file.models.HandlesPaged">HandlesPaged</a></p>
+<dd class="field-odd"><p><a class="reference internal" href="azure.core.html#azure.core.paging.ItemPaged" title="azure.core.paging.ItemPaged">ItemPaged</a>[Handles]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -1068,19 +1062,17 @@ Ex: start_range=0, end_range=511 will download first 512 bytes of file.</p></li>
 
 <dl class="method">
 <dt id="azure.storage.file.file_client.FileClient.list_handles">
-<code class="sig-name descname">list_handles</code><span class="sig-paren">(</span><em class="sig-param">marker=None</em>, <em class="sig-param">timeout=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/storage/file/file_client.html#FileClient.list_handles"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.storage.file.file_client.FileClient.list_handles" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">list_handles</code><span class="sig-paren">(</span><em class="sig-param">timeout=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/storage/file/file_client.html#FileClient.list_handles"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.storage.file.file_client.FileClient.list_handles" title="Permalink to this definition">¶</a></dt>
 <dd><p>Lists handles for file.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>marker</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – An opaque continuation token. This value can be retrieved from the
-next_marker field of a previous generator object. If specified,
-this generator will begin returning results from this point.</p></li>
-<li><p><strong>timeout</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a>) – The timeout parameter is expressed in seconds.</p></li>
-</ul>
+<dd class="field-odd"><p><strong>timeout</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a>) – The timeout parameter is expressed in seconds.</p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>An auto-paging iterable of HandleItems</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="azure.core.html#azure.core.paging.ItemPaged" title="azure.core.paging.ItemPaged">ItemPaged</a>[<a class="reference internal" href="#azure.storage.file.models.Handle" title="azure.storage.file.models.Handle">Handle</a>]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -1480,7 +1472,7 @@ or an instance of ShareProperties.</p></li>
 
 <dl class="method">
 <dt id="azure.storage.file.file_service_client.FileServiceClient.list_shares">
-<code class="sig-name descname">list_shares</code><span class="sig-paren">(</span><em class="sig-param">name_starts_with=None</em>, <em class="sig-param">include_metadata=False</em>, <em class="sig-param">include_snapshots=False</em>, <em class="sig-param">marker=None</em>, <em class="sig-param">timeout=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/storage/file/file_service_client.html#FileServiceClient.list_shares"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.storage.file.file_service_client.FileServiceClient.list_shares" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">list_shares</code><span class="sig-paren">(</span><em class="sig-param">name_starts_with=None</em>, <em class="sig-param">include_metadata=False</em>, <em class="sig-param">include_snapshots=False</em>, <em class="sig-param">timeout=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/storage/file/file_service_client.html#FileServiceClient.list_shares"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.storage.file.file_service_client.FileServiceClient.list_shares" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns auto-paging iterable of dict-like ShareProperties under the specified account.
 The generator will lazily follow the continuation tokens returned by
 the service and stop when all shares have been returned.</p>
@@ -1491,9 +1483,6 @@ the service and stop when all shares have been returned.</p>
 begin with the specified name_starts_with.</p></li>
 <li><p><strong>include_metadata</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#bool" title="(in Python v3.5)"><em>bool</em></a>) – Specifies that share metadata be returned in the response.</p></li>
 <li><p><strong>include_snapshots</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#bool" title="(in Python v3.5)"><em>bool</em></a>) – Specifies that share snapshot be returned in the response.</p></li>
-<li><p><strong>marker</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – An opaque continuation token. This value can be retrieved from the
-next_marker field of a previous generator object. If specified,
-this generator will begin returning results from this point.</p></li>
 <li><p><strong>timeout</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a>) – The timeout parameter is expressed in seconds.</p></li>
 </ul>
 </dd>
@@ -1501,7 +1490,7 @@ this generator will begin returning results from this point.</p></li>
 <dd class="field-even"><p>An iterable (auto-paging) of ShareProperties.</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference internal" href="#azure.storage.file.models.SharePropertiesPaged" title="azure.storage.file.models.SharePropertiesPaged">SharePropertiesPaged</a></p>
+<dd class="field-odd"><p><a class="reference internal" href="azure.core.html#azure.core.paging.ItemPaged" title="azure.core.paging.ItemPaged">ItemPaged</a>[<a class="reference internal" href="#azure.storage.file.models.ShareProperties" title="azure.storage.file.models.ShareProperties">ShareProperties</a>]</p>
 </dd>
 </dl>
 <dl>
@@ -1760,8 +1749,8 @@ directory as metadata.</p></li>
 
 <dl class="class">
 <dt id="azure.storage.file.models.DirectoryPropertiesPaged">
-<em class="property">class </em><code class="sig-prename descclassname">azure.storage.file.models.</code><code class="sig-name descname">DirectoryPropertiesPaged</code><span class="sig-paren">(</span><em class="sig-param">command</em>, <em class="sig-param">prefix=None</em>, <em class="sig-param">results_per_page=None</em>, <em class="sig-param">marker=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/storage/file/models.html#DirectoryPropertiesPaged"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.storage.file.models.DirectoryPropertiesPaged" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="azure.core.html#azure.core.paging.Paged" title="azure.core.paging.Paged"><code class="xref py py-class docutils literal notranslate"><span class="pre">azure.core.paging.Paged</span></code></a></p>
+<em class="property">class </em><code class="sig-prename descclassname">azure.storage.file.models.</code><code class="sig-name descname">DirectoryPropertiesPaged</code><span class="sig-paren">(</span><em class="sig-param">command</em>, <em class="sig-param">prefix=None</em>, <em class="sig-param">results_per_page=None</em>, <em class="sig-param">continuation_token=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/storage/file/models.html#DirectoryPropertiesPaged"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.storage.file.models.DirectoryPropertiesPaged" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="azure.core.html#azure.core.paging.PageIterator" title="azure.core.paging.PageIterator"><code class="xref py py-class docutils literal notranslate"><span class="pre">azure.core.paging.PageIterator</span></code></a></p>
 <p>An iterable for the contents of a directory.</p>
 <p>This iterable will yield dicts for the contents of the directory. The dicts
 will have the keys ‘name’ (str) and ‘is_directory’ (bool).
@@ -1771,7 +1760,7 @@ Items that are files (is_directory=False) will have an additional ‘content_len
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>service_endpoint</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The service URL.</p></li>
 <li><p><strong>prefix</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – A file name prefix being used to filter the list.</p></li>
-<li><p><strong>current_marker</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The continuation token of the current page of results.</p></li>
+<li><p><strong>marker</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The continuation token of the current page of results.</p></li>
 <li><p><strong>results_per_page</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a>) – The maximum number of results retrieved per API call.</p></li>
 <li><p><strong>next_marker</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The continuation token to retrieve the next page of results.</p></li>
 <li><p><strong>location_mode</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The location mode being used to list results. The available
@@ -1786,7 +1775,7 @@ options include “primary” and “secondary”.</p></li>
 begin with the specified prefix.</p></li>
 <li><p><strong>results_per_page</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a>) – The maximum number of share names to retrieve per
 call.</p></li>
-<li><p><strong>marker</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – An opaque continuation token.</p></li>
+<li><p><strong>continuation_token</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – An opaque continuation token.</p></li>
 </ul>
 </dd>
 </dl>
@@ -1901,13 +1890,13 @@ the handle has last been reconnected. (UTC)</p></li>
 
 <dl class="class">
 <dt id="azure.storage.file.models.HandlesPaged">
-<em class="property">class </em><code class="sig-prename descclassname">azure.storage.file.models.</code><code class="sig-name descname">HandlesPaged</code><span class="sig-paren">(</span><em class="sig-param">command</em>, <em class="sig-param">results_per_page=None</em>, <em class="sig-param">marker=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/storage/file/models.html#HandlesPaged"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.storage.file.models.HandlesPaged" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="azure.core.html#azure.core.paging.Paged" title="azure.core.paging.Paged"><code class="xref py py-class docutils literal notranslate"><span class="pre">azure.core.paging.Paged</span></code></a></p>
+<em class="property">class </em><code class="sig-prename descclassname">azure.storage.file.models.</code><code class="sig-name descname">HandlesPaged</code><span class="sig-paren">(</span><em class="sig-param">command</em>, <em class="sig-param">results_per_page=None</em>, <em class="sig-param">continuation_token=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/storage/file/models.html#HandlesPaged"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.storage.file.models.HandlesPaged" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="azure.core.html#azure.core.paging.PageIterator" title="azure.core.paging.PageIterator"><code class="xref py py-class docutils literal notranslate"><span class="pre">azure.core.paging.PageIterator</span></code></a></p>
 <p>An iterable of Handles.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Variables</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>current_marker</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The continuation token of the current page of results.</p></li>
+<li><p><strong>marker</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The continuation token of the current page of results.</p></li>
 <li><p><strong>results_per_page</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a>) – The maximum number of results retrieved per API call.</p></li>
 <li><p><strong>next_marker</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The continuation token to retrieve the next page of results.</p></li>
 <li><p><strong>location_mode</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The location mode being used to list results. The available
@@ -1920,7 +1909,7 @@ options include “primary” and “secondary”.</p></li>
 <li><p><strong>command</strong> (<em>callable</em>) – Function to retrieve the next page of items.</p></li>
 <li><p><strong>results_per_page</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a>) – The maximum number of share names to retrieve per
 call.</p></li>
-<li><p><strong>marker</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – An opaque continuation token.</p></li>
+<li><p><strong>continuation_token</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – An opaque continuation token.</p></li>
 </ul>
 </dd>
 </dl>
@@ -2052,15 +2041,15 @@ share as metadata.</p></li>
 
 <dl class="class">
 <dt id="azure.storage.file.models.SharePropertiesPaged">
-<em class="property">class </em><code class="sig-prename descclassname">azure.storage.file.models.</code><code class="sig-name descname">SharePropertiesPaged</code><span class="sig-paren">(</span><em class="sig-param">command</em>, <em class="sig-param">prefix=None</em>, <em class="sig-param">results_per_page=None</em>, <em class="sig-param">marker=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/storage/file/models.html#SharePropertiesPaged"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.storage.file.models.SharePropertiesPaged" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="azure.core.html#azure.core.paging.Paged" title="azure.core.paging.Paged"><code class="xref py py-class docutils literal notranslate"><span class="pre">azure.core.paging.Paged</span></code></a></p>
+<em class="property">class </em><code class="sig-prename descclassname">azure.storage.file.models.</code><code class="sig-name descname">SharePropertiesPaged</code><span class="sig-paren">(</span><em class="sig-param">command</em>, <em class="sig-param">prefix=None</em>, <em class="sig-param">results_per_page=None</em>, <em class="sig-param">continuation_token=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/storage/file/models.html#SharePropertiesPaged"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.storage.file.models.SharePropertiesPaged" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="azure.core.html#azure.core.paging.PageIterator" title="azure.core.paging.PageIterator"><code class="xref py py-class docutils literal notranslate"><span class="pre">azure.core.paging.PageIterator</span></code></a></p>
 <p>An iterable of Share properties.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Variables</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>service_endpoint</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The service URL.</p></li>
 <li><p><strong>prefix</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – A file name prefix being used to filter the list.</p></li>
-<li><p><strong>current_marker</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The continuation token of the current page of results.</p></li>
+<li><p><strong>marker</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The continuation token of the current page of results.</p></li>
 <li><p><strong>results_per_page</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a>) – The maximum number of results retrieved per API call.</p></li>
 <li><p><strong>next_marker</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The continuation token to retrieve the next page of results.</p></li>
 <li><p><strong>location_mode</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The location mode being used to list results. The available
@@ -2075,7 +2064,7 @@ options include “primary” and “secondary”.</p></li>
 begin with the specified prefix.</p></li>
 <li><p><strong>results_per_page</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a>) – The maximum number of share names to retrieve per
 call.</p></li>
-<li><p><strong>marker</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – An opaque continuation token.</p></li>
+<li><p><strong>continuation_token</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – An opaque continuation token.</p></li>
 </ul>
 </dd>
 </dl>
@@ -3060,19 +3049,17 @@ Ex: start_range=0, end_range=511 will download first 512 bytes of file.</p></li>
 
 <dl class="method">
 <dt id="azure.storage.file.FileClient.list_handles">
-<code class="sig-name descname">list_handles</code><span class="sig-paren">(</span><em class="sig-param">marker=None</em>, <em class="sig-param">timeout=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/storage/file/file_client.html#FileClient.list_handles"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.storage.file.FileClient.list_handles" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">list_handles</code><span class="sig-paren">(</span><em class="sig-param">timeout=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/storage/file/file_client.html#FileClient.list_handles"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.storage.file.FileClient.list_handles" title="Permalink to this definition">¶</a></dt>
 <dd><p>Lists handles for file.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>marker</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – An opaque continuation token. This value can be retrieved from the
-next_marker field of a previous generator object. If specified,
-this generator will begin returning results from this point.</p></li>
-<li><p><strong>timeout</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a>) – The timeout parameter is expressed in seconds.</p></li>
-</ul>
+<dd class="field-odd"><p><strong>timeout</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a>) – The timeout parameter is expressed in seconds.</p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>An auto-paging iterable of HandleItems</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="azure.core.html#azure.core.paging.ItemPaged" title="azure.core.paging.ItemPaged">ItemPaged</a>[<a class="reference internal" href="#azure.storage.file.models.Handle" title="azure.storage.file.models.Handle">Handle</a>]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -3516,16 +3503,13 @@ list of files.</p>
 
 <dl class="method">
 <dt id="azure.storage.file.DirectoryClient.list_directories_and_files">
-<code class="sig-name descname">list_directories_and_files</code><span class="sig-paren">(</span><em class="sig-param">name_starts_with=None</em>, <em class="sig-param">marker=None</em>, <em class="sig-param">timeout=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/storage/file/directory_client.html#DirectoryClient.list_directories_and_files"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.storage.file.DirectoryClient.list_directories_and_files" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">list_directories_and_files</code><span class="sig-paren">(</span><em class="sig-param">name_starts_with=None</em>, <em class="sig-param">timeout=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/storage/file/directory_client.html#DirectoryClient.list_directories_and_files"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.storage.file.DirectoryClient.list_directories_and_files" title="Permalink to this definition">¶</a></dt>
 <dd><p>Lists all the directories and files under the directory.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>name_starts_with</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Filters the results to return only entities whose names
 begin with the specified prefix.</p></li>
-<li><p><strong>marker</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – An opaque continuation token. This value can be retrieved from the
-next_marker field of a previous generator object. If specified,
-this generator will begin returning results from this point.</p></li>
 <li><p><strong>timeout</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a>) – The timeout parameter is expressed in seconds.</p></li>
 </ul>
 </dd>
@@ -3533,7 +3517,7 @@ this generator will begin returning results from this point.</p></li>
 <dd class="field-even"><p>An auto-paging iterable of dict-like DirectoryProperties and FileProperties</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference internal" href="#azure.storage.file.models.DirectoryPropertiesPaged" title="azure.storage.file.models.DirectoryPropertiesPaged">DirectoryPropertiesPaged</a></p>
+<dd class="field-odd"><p><a class="reference internal" href="azure.core.html#azure.core.paging.ItemPaged" title="azure.core.paging.ItemPaged">ItemPaged</a>[<a class="reference internal" href="#azure.storage.file.models.DirectoryProperties" title="azure.storage.file.models.DirectoryProperties">DirectoryProperties</a>]</p>
 </dd>
 </dl>
 <dl>
@@ -3551,14 +3535,11 @@ this generator will begin returning results from this point.</p></li>
 
 <dl class="method">
 <dt id="azure.storage.file.DirectoryClient.list_handles">
-<code class="sig-name descname">list_handles</code><span class="sig-paren">(</span><em class="sig-param">marker=None</em>, <em class="sig-param">recursive=False</em>, <em class="sig-param">timeout=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/storage/file/directory_client.html#DirectoryClient.list_handles"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.storage.file.DirectoryClient.list_handles" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">list_handles</code><span class="sig-paren">(</span><em class="sig-param">recursive=False</em>, <em class="sig-param">timeout=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/storage/file/directory_client.html#DirectoryClient.list_handles"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.storage.file.DirectoryClient.list_handles" title="Permalink to this definition">¶</a></dt>
 <dd><p>Lists opened handles on a directory or a file under the directory.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>marker</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – An opaque continuation token. This value can be retrieved from the
-next_marker field of a previous generator object. If specified,
-this generator will begin returning results from this point.</p></li>
 <li><p><strong>recursive</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#bool" title="(in Python v3.5)"><em>bool</em></a>) – Boolean that specifies if operation should apply to the directory specified by the client,
 its files, its subdirectories and their files. Default value is False.</p></li>
 <li><p><strong>timeout</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a>) – The timeout parameter is expressed in seconds.</p></li>
@@ -3568,7 +3549,7 @@ its files, its subdirectories and their files. Default value is False.</p></li>
 <dd class="field-even"><p>An auto-paging iterable of HandleItems</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference internal" href="#azure.storage.file.models.HandlesPaged" title="azure.storage.file.models.HandlesPaged">HandlesPaged</a></p>
+<dd class="field-odd"><p><a class="reference internal" href="azure.core.html#azure.core.paging.ItemPaged" title="azure.core.paging.ItemPaged">ItemPaged</a>[Handles]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -4360,7 +4341,7 @@ or an instance of ShareProperties.</p></li>
 
 <dl class="method">
 <dt id="azure.storage.file.FileServiceClient.list_shares">
-<code class="sig-name descname">list_shares</code><span class="sig-paren">(</span><em class="sig-param">name_starts_with=None</em>, <em class="sig-param">include_metadata=False</em>, <em class="sig-param">include_snapshots=False</em>, <em class="sig-param">marker=None</em>, <em class="sig-param">timeout=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/storage/file/file_service_client.html#FileServiceClient.list_shares"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.storage.file.FileServiceClient.list_shares" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">list_shares</code><span class="sig-paren">(</span><em class="sig-param">name_starts_with=None</em>, <em class="sig-param">include_metadata=False</em>, <em class="sig-param">include_snapshots=False</em>, <em class="sig-param">timeout=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/storage/file/file_service_client.html#FileServiceClient.list_shares"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.storage.file.FileServiceClient.list_shares" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns auto-paging iterable of dict-like ShareProperties under the specified account.
 The generator will lazily follow the continuation tokens returned by
 the service and stop when all shares have been returned.</p>
@@ -4371,9 +4352,6 @@ the service and stop when all shares have been returned.</p>
 begin with the specified name_starts_with.</p></li>
 <li><p><strong>include_metadata</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#bool" title="(in Python v3.5)"><em>bool</em></a>) – Specifies that share metadata be returned in the response.</p></li>
 <li><p><strong>include_snapshots</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#bool" title="(in Python v3.5)"><em>bool</em></a>) – Specifies that share snapshot be returned in the response.</p></li>
-<li><p><strong>marker</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – An opaque continuation token. This value can be retrieved from the
-next_marker field of a previous generator object. If specified,
-this generator will begin returning results from this point.</p></li>
 <li><p><strong>timeout</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a>) – The timeout parameter is expressed in seconds.</p></li>
 </ul>
 </dd>
@@ -4381,7 +4359,7 @@ this generator will begin returning results from this point.</p></li>
 <dd class="field-even"><p>An iterable (auto-paging) of ShareProperties.</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference internal" href="#azure.storage.file.models.SharePropertiesPaged" title="azure.storage.file.models.SharePropertiesPaged">SharePropertiesPaged</a></p>
+<dd class="field-odd"><p><a class="reference internal" href="azure.core.html#azure.core.paging.ItemPaged" title="azure.core.paging.ItemPaged">ItemPaged</a>[<a class="reference internal" href="#azure.storage.file.models.ShareProperties" title="azure.storage.file.models.ShareProperties">ShareProperties</a>]</p>
 </dd>
 </dl>
 <dl>
@@ -5637,15 +5615,15 @@ share as metadata.</p></li>
 
 <dl class="class">
 <dt id="azure.storage.file.SharePropertiesPaged">
-<em class="property">class </em><code class="sig-prename descclassname">azure.storage.file.</code><code class="sig-name descname">SharePropertiesPaged</code><span class="sig-paren">(</span><em class="sig-param">command</em>, <em class="sig-param">prefix=None</em>, <em class="sig-param">results_per_page=None</em>, <em class="sig-param">marker=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/storage/file/models.html#SharePropertiesPaged"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.storage.file.SharePropertiesPaged" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="azure.core.html#azure.core.paging.Paged" title="azure.core.paging.Paged"><code class="xref py py-class docutils literal notranslate"><span class="pre">azure.core.paging.Paged</span></code></a></p>
+<em class="property">class </em><code class="sig-prename descclassname">azure.storage.file.</code><code class="sig-name descname">SharePropertiesPaged</code><span class="sig-paren">(</span><em class="sig-param">command</em>, <em class="sig-param">prefix=None</em>, <em class="sig-param">results_per_page=None</em>, <em class="sig-param">continuation_token=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/storage/file/models.html#SharePropertiesPaged"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.storage.file.SharePropertiesPaged" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="azure.core.html#azure.core.paging.PageIterator" title="azure.core.paging.PageIterator"><code class="xref py py-class docutils literal notranslate"><span class="pre">azure.core.paging.PageIterator</span></code></a></p>
 <p>An iterable of Share properties.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Variables</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>service_endpoint</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The service URL.</p></li>
 <li><p><strong>prefix</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – A file name prefix being used to filter the list.</p></li>
-<li><p><strong>current_marker</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The continuation token of the current page of results.</p></li>
+<li><p><strong>marker</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The continuation token of the current page of results.</p></li>
 <li><p><strong>results_per_page</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a>) – The maximum number of results retrieved per API call.</p></li>
 <li><p><strong>next_marker</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The continuation token to retrieve the next page of results.</p></li>
 <li><p><strong>location_mode</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The location mode being used to list results. The available
@@ -5660,7 +5638,7 @@ options include “primary” and “secondary”.</p></li>
 begin with the specified prefix.</p></li>
 <li><p><strong>results_per_page</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a>) – The maximum number of share names to retrieve per
 call.</p></li>
-<li><p><strong>marker</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – An opaque continuation token.</p></li>
+<li><p><strong>continuation_token</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – An opaque continuation token.</p></li>
 </ul>
 </dd>
 </dl>
@@ -5688,8 +5666,8 @@ directory as metadata.</p></li>
 
 <dl class="class">
 <dt id="azure.storage.file.DirectoryPropertiesPaged">
-<em class="property">class </em><code class="sig-prename descclassname">azure.storage.file.</code><code class="sig-name descname">DirectoryPropertiesPaged</code><span class="sig-paren">(</span><em class="sig-param">command</em>, <em class="sig-param">prefix=None</em>, <em class="sig-param">results_per_page=None</em>, <em class="sig-param">marker=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/storage/file/models.html#DirectoryPropertiesPaged"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.storage.file.DirectoryPropertiesPaged" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="azure.core.html#azure.core.paging.Paged" title="azure.core.paging.Paged"><code class="xref py py-class docutils literal notranslate"><span class="pre">azure.core.paging.Paged</span></code></a></p>
+<em class="property">class </em><code class="sig-prename descclassname">azure.storage.file.</code><code class="sig-name descname">DirectoryPropertiesPaged</code><span class="sig-paren">(</span><em class="sig-param">command</em>, <em class="sig-param">prefix=None</em>, <em class="sig-param">results_per_page=None</em>, <em class="sig-param">continuation_token=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/storage/file/models.html#DirectoryPropertiesPaged"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.storage.file.DirectoryPropertiesPaged" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="azure.core.html#azure.core.paging.PageIterator" title="azure.core.paging.PageIterator"><code class="xref py py-class docutils literal notranslate"><span class="pre">azure.core.paging.PageIterator</span></code></a></p>
 <p>An iterable for the contents of a directory.</p>
 <p>This iterable will yield dicts for the contents of the directory. The dicts
 will have the keys ‘name’ (str) and ‘is_directory’ (bool).
@@ -5699,7 +5677,7 @@ Items that are files (is_directory=False) will have an additional ‘content_len
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>service_endpoint</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The service URL.</p></li>
 <li><p><strong>prefix</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – A file name prefix being used to filter the list.</p></li>
-<li><p><strong>current_marker</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The continuation token of the current page of results.</p></li>
+<li><p><strong>marker</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The continuation token of the current page of results.</p></li>
 <li><p><strong>results_per_page</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a>) – The maximum number of results retrieved per API call.</p></li>
 <li><p><strong>next_marker</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The continuation token to retrieve the next page of results.</p></li>
 <li><p><strong>location_mode</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The location mode being used to list results. The available
@@ -5714,7 +5692,7 @@ options include “primary” and “secondary”.</p></li>
 begin with the specified prefix.</p></li>
 <li><p><strong>results_per_page</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a>) – The maximum number of share names to retrieve per
 call.</p></li>
-<li><p><strong>marker</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – An opaque continuation token.</p></li>
+<li><p><strong>continuation_token</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – An opaque continuation token.</p></li>
 </ul>
 </dd>
 </dl>

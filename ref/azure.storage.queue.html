@@ -392,8 +392,8 @@ The retention policy for the metrics.</p></li>
 
 <dl class="class">
 <dt id="azure.storage.queue.models.MessagesPaged">
-<em class="property">class </em><code class="sig-prename descclassname">azure.storage.queue.models.</code><code class="sig-name descname">MessagesPaged</code><span class="sig-paren">(</span><em class="sig-param">command</em>, <em class="sig-param">results_per_page=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/storage/queue/models.html#MessagesPaged"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.storage.queue.models.MessagesPaged" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="azure.core.html#azure.core.paging.Paged" title="azure.core.paging.Paged"><code class="xref py py-class docutils literal notranslate"><span class="pre">azure.core.paging.Paged</span></code></a></p>
+<em class="property">class </em><code class="sig-prename descclassname">azure.storage.queue.models.</code><code class="sig-name descname">MessagesPaged</code><span class="sig-paren">(</span><em class="sig-param">command</em>, <em class="sig-param">results_per_page=None</em>, <em class="sig-param">continuation_token=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/storage/queue/models.html#MessagesPaged"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.storage.queue.models.MessagesPaged" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="azure.core.html#azure.core.paging.PageIterator" title="azure.core.paging.PageIterator"><code class="xref py py-class docutils literal notranslate"><span class="pre">azure.core.paging.PageIterator</span></code></a></p>
 <p>An iterable of Queue Messages.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Variables</dt>
@@ -535,15 +535,15 @@ queue has no metadata, metadata will be set to an empty dictionary.</p></li>
 
 <dl class="class">
 <dt id="azure.storage.queue.models.QueuePropertiesPaged">
-<em class="property">class </em><code class="sig-prename descclassname">azure.storage.queue.models.</code><code class="sig-name descname">QueuePropertiesPaged</code><span class="sig-paren">(</span><em class="sig-param">command</em>, <em class="sig-param">prefix=None</em>, <em class="sig-param">results_per_page=None</em>, <em class="sig-param">marker=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/storage/queue/models.html#QueuePropertiesPaged"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.storage.queue.models.QueuePropertiesPaged" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="azure.core.html#azure.core.paging.Paged" title="azure.core.paging.Paged"><code class="xref py py-class docutils literal notranslate"><span class="pre">azure.core.paging.Paged</span></code></a></p>
+<em class="property">class </em><code class="sig-prename descclassname">azure.storage.queue.models.</code><code class="sig-name descname">QueuePropertiesPaged</code><span class="sig-paren">(</span><em class="sig-param">command</em>, <em class="sig-param">prefix=None</em>, <em class="sig-param">results_per_page=None</em>, <em class="sig-param">continuation_token=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/storage/queue/models.html#QueuePropertiesPaged"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.storage.queue.models.QueuePropertiesPaged" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="azure.core.html#azure.core.paging.PageIterator" title="azure.core.paging.PageIterator"><code class="xref py py-class docutils literal notranslate"><span class="pre">azure.core.paging.PageIterator</span></code></a></p>
 <p>An iterable of Queue properties.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Variables</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>service_endpoint</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The service URL.</p></li>
 <li><p><strong>prefix</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – A queue name prefix being used to filter the list.</p></li>
-<li><p><strong>current_marker</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The continuation token of the current page of results.</p></li>
+<li><p><strong>marker</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The continuation token of the current page of results.</p></li>
 <li><p><strong>results_per_page</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a>) – The maximum number of results retrieved per API call.</p></li>
 <li><p><strong>next_marker</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The continuation token to retrieve the next page of results.</p></li>
 <li><p><strong>location_mode</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The location mode being used to list results. The available
@@ -558,7 +558,7 @@ options include “primary” and “secondary”.</p></li>
 begin with the specified prefix.</p></li>
 <li><p><strong>results_per_page</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a>) – The maximum number of queue names to retrieve per
 call.</p></li>
-<li><p><strong>marker</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – An opaque continuation token.</p></li>
+<li><p><strong>continuation_token</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – An opaque continuation token.</p></li>
 </ul>
 </dd>
 </dl>
@@ -1020,7 +1020,7 @@ should be set to a value smaller than the time-to-live value.</p></li>
 <dd class="field-even"><p>Returns a message iterator of dict-like Message objects.</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference internal" href="#azure.storage.queue.models.MessagesPaged" title="azure.storage.queue.models.MessagesPaged">MessagesPaged</a></p>
+<dd class="field-odd"><p><a class="reference internal" href="azure.core.html#azure.core.paging.ItemPaged" title="azure.core.paging.ItemPaged">ItemPaged</a>[Message]</p>
 </dd>
 </dl>
 <dl>
@@ -1442,7 +1442,7 @@ replication is enabled for your storage account.</p>
 
 <dl class="method">
 <dt id="azure.storage.queue.queue_service_client.QueueServiceClient.list_queues">
-<code class="sig-name descname">list_queues</code><span class="sig-paren">(</span><em class="sig-param">name_starts_with=None</em>, <em class="sig-param">include_metadata=False</em>, <em class="sig-param">marker=None</em>, <em class="sig-param">results_per_page=None</em>, <em class="sig-param">timeout=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/storage/queue/queue_service_client.html#QueueServiceClient.list_queues"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.storage.queue.queue_service_client.QueueServiceClient.list_queues" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">list_queues</code><span class="sig-paren">(</span><em class="sig-param">name_starts_with=None</em>, <em class="sig-param">include_metadata=False</em>, <em class="sig-param">results_per_page=None</em>, <em class="sig-param">timeout=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/storage/queue/queue_service_client.html#QueueServiceClient.list_queues"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.storage.queue.queue_service_client.QueueServiceClient.list_queues" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns a generator to list the queues under the specified account.</p>
 <p>The generator will lazily follow the continuation tokens returned by
 the service and stop when all queues have been returned.</p>
@@ -1452,9 +1452,6 @@ the service and stop when all queues have been returned.</p>
 <li><p><strong>name_starts_with</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Filters the results to return only queues whose names
 begin with the specified prefix.</p></li>
 <li><p><strong>include_metadata</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#bool" title="(in Python v3.5)"><em>bool</em></a>) – Specifies that queue metadata be returned in the response.</p></li>
-<li><p><strong>marker</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – An opaque continuation token. This value can be retrieved from the
-next_marker field of a previous generator object. If specified,
-this generator will begin returning results from this point.</p></li>
 <li><p><strong>results_per_page</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a>) – The maximum number of queue names to retrieve per API
 call. If the request does not specify the server will return up to 5,000 items.</p></li>
 <li><p><strong>timeout</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a>) – The server timeout, expressed in seconds. This function may make multiple
@@ -1466,7 +1463,7 @@ applied to each individual call.</p></li>
 <dd class="field-even"><p>An iterable (auto-paging) of QueueProperties.</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>QueuePropertiesPaged</p>
+<dd class="field-odd"><p><a class="reference internal" href="azure.core.html#azure.core.paging.ItemPaged" title="azure.core.paging.ItemPaged">ItemPaged</a>[QueueProperties]</p>
 </dd>
 </dl>
 <dl>
@@ -1989,7 +1986,7 @@ should be set to a value smaller than the time-to-live value.</p></li>
 <dd class="field-even"><p>Returns a message iterator of dict-like Message objects.</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference internal" href="#azure.storage.queue.models.MessagesPaged" title="azure.storage.queue.models.MessagesPaged">MessagesPaged</a></p>
+<dd class="field-odd"><p><a class="reference internal" href="azure.core.html#azure.core.paging.ItemPaged" title="azure.core.paging.ItemPaged">ItemPaged</a>[Message]</p>
 </dd>
 </dl>
 <dl>
@@ -2408,7 +2405,7 @@ replication is enabled for your storage account.</p>
 
 <dl class="method">
 <dt id="azure.storage.queue.QueueServiceClient.list_queues">
-<code class="sig-name descname">list_queues</code><span class="sig-paren">(</span><em class="sig-param">name_starts_with=None</em>, <em class="sig-param">include_metadata=False</em>, <em class="sig-param">marker=None</em>, <em class="sig-param">results_per_page=None</em>, <em class="sig-param">timeout=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/storage/queue/queue_service_client.html#QueueServiceClient.list_queues"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.storage.queue.QueueServiceClient.list_queues" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">list_queues</code><span class="sig-paren">(</span><em class="sig-param">name_starts_with=None</em>, <em class="sig-param">include_metadata=False</em>, <em class="sig-param">results_per_page=None</em>, <em class="sig-param">timeout=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/storage/queue/queue_service_client.html#QueueServiceClient.list_queues"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.storage.queue.QueueServiceClient.list_queues" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns a generator to list the queues under the specified account.</p>
 <p>The generator will lazily follow the continuation tokens returned by
 the service and stop when all queues have been returned.</p>
@@ -2418,9 +2415,6 @@ the service and stop when all queues have been returned.</p>
 <li><p><strong>name_starts_with</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Filters the results to return only queues whose names
 begin with the specified prefix.</p></li>
 <li><p><strong>include_metadata</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#bool" title="(in Python v3.5)"><em>bool</em></a>) – Specifies that queue metadata be returned in the response.</p></li>
-<li><p><strong>marker</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – An opaque continuation token. This value can be retrieved from the
-next_marker field of a previous generator object. If specified,
-this generator will begin returning results from this point.</p></li>
 <li><p><strong>results_per_page</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a>) – The maximum number of queue names to retrieve per API
 call. If the request does not specify the server will return up to 5,000 items.</p></li>
 <li><p><strong>timeout</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a>) – The server timeout, expressed in seconds. This function may make multiple
@@ -2432,7 +2426,7 @@ applied to each individual call.</p></li>
 <dd class="field-even"><p>An iterable (auto-paging) of QueueProperties.</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>QueuePropertiesPaged</p>
+<dd class="field-odd"><p><a class="reference internal" href="azure.core.html#azure.core.paging.ItemPaged" title="azure.core.paging.ItemPaged">ItemPaged</a>[QueueProperties]</p>
 </dd>
 </dl>
 <dl>
@@ -3400,15 +3394,15 @@ queue has no metadata, metadata will be set to an empty dictionary.</p></li>
 
 <dl class="class">
 <dt id="azure.storage.queue.QueuePropertiesPaged">
-<em class="property">class </em><code class="sig-prename descclassname">azure.storage.queue.</code><code class="sig-name descname">QueuePropertiesPaged</code><span class="sig-paren">(</span><em class="sig-param">command</em>, <em class="sig-param">prefix=None</em>, <em class="sig-param">results_per_page=None</em>, <em class="sig-param">marker=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/storage/queue/models.html#QueuePropertiesPaged"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.storage.queue.QueuePropertiesPaged" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="azure.core.html#azure.core.paging.Paged" title="azure.core.paging.Paged"><code class="xref py py-class docutils literal notranslate"><span class="pre">azure.core.paging.Paged</span></code></a></p>
+<em class="property">class </em><code class="sig-prename descclassname">azure.storage.queue.</code><code class="sig-name descname">QueuePropertiesPaged</code><span class="sig-paren">(</span><em class="sig-param">command</em>, <em class="sig-param">prefix=None</em>, <em class="sig-param">results_per_page=None</em>, <em class="sig-param">continuation_token=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/storage/queue/models.html#QueuePropertiesPaged"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.storage.queue.QueuePropertiesPaged" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="azure.core.html#azure.core.paging.PageIterator" title="azure.core.paging.PageIterator"><code class="xref py py-class docutils literal notranslate"><span class="pre">azure.core.paging.PageIterator</span></code></a></p>
 <p>An iterable of Queue properties.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Variables</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>service_endpoint</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The service URL.</p></li>
 <li><p><strong>prefix</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – A queue name prefix being used to filter the list.</p></li>
-<li><p><strong>current_marker</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The continuation token of the current page of results.</p></li>
+<li><p><strong>marker</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The continuation token of the current page of results.</p></li>
 <li><p><strong>results_per_page</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a>) – The maximum number of results retrieved per API call.</p></li>
 <li><p><strong>next_marker</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The continuation token to retrieve the next page of results.</p></li>
 <li><p><strong>location_mode</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The location mode being used to list results. The available
@@ -3423,7 +3417,7 @@ options include “primary” and “secondary”.</p></li>
 begin with the specified prefix.</p></li>
 <li><p><strong>results_per_page</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a>) – The maximum number of queue names to retrieve per
 call.</p></li>
-<li><p><strong>marker</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – An opaque continuation token.</p></li>
+<li><p><strong>continuation_token</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – An opaque continuation token.</p></li>
 </ul>
 </dd>
 </dl>
@@ -3727,8 +3721,8 @@ be deleted.</p></li>
 
 <dl class="class">
 <dt id="azure.storage.queue.MessagesPaged">
-<em class="property">class </em><code class="sig-prename descclassname">azure.storage.queue.</code><code class="sig-name descname">MessagesPaged</code><span class="sig-paren">(</span><em class="sig-param">command</em>, <em class="sig-param">results_per_page=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/storage/queue/models.html#MessagesPaged"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.storage.queue.MessagesPaged" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="azure.core.html#azure.core.paging.Paged" title="azure.core.paging.Paged"><code class="xref py py-class docutils literal notranslate"><span class="pre">azure.core.paging.Paged</span></code></a></p>
+<em class="property">class </em><code class="sig-prename descclassname">azure.storage.queue.</code><code class="sig-name descname">MessagesPaged</code><span class="sig-paren">(</span><em class="sig-param">command</em>, <em class="sig-param">results_per_page=None</em>, <em class="sig-param">continuation_token=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/storage/queue/models.html#MessagesPaged"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.storage.queue.MessagesPaged" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="azure.core.html#azure.core.paging.PageIterator" title="azure.core.paging.PageIterator"><code class="xref py py-class docutils literal notranslate"><span class="pre">azure.core.paging.PageIterator</span></code></a></p>
 <p>An iterable of Queue Messages.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Variables</dt>

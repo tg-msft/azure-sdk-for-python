@@ -294,6 +294,7 @@
 
 <span class="kn">import</span> <span class="nn">six</span>
 <span class="kn">from</span> <span class="nn">azure.core.polling</span> <span class="k">import</span> <span class="n">LROPoller</span>
+<span class="kn">from</span> <span class="nn">azure.core.paging</span> <span class="k">import</span> <span class="n">ItemPaged</span>
 
 <span class="kn">from</span> <span class="nn">.file_client</span> <span class="k">import</span> <span class="n">FileClient</span>
 
@@ -547,21 +548,17 @@
         <span class="k">except</span> <span class="n">StorageErrorException</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
             <span class="n">process_storage_error</span><span class="p">(</span><span class="n">error</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="DirectoryClient.list_directories_and_files"><a class="viewcode-back" href="../../../../ref/azure.storage.file.html#azure.storage.file.directory_client.DirectoryClient.list_directories_and_files">[docs]</a>    <span class="k">def</span> <span class="nf">list_directories_and_files</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name_starts_with</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="c1"># type: (Optional[str], Optional[str], Optional[int], **Any) -&gt; DirectoryProperties</span>
+<div class="viewcode-block" id="DirectoryClient.list_directories_and_files"><a class="viewcode-back" href="../../../../ref/azure.storage.file.html#azure.storage.file.directory_client.DirectoryClient.list_directories_and_files">[docs]</a>    <span class="k">def</span> <span class="nf">list_directories_and_files</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name_starts_with</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="c1"># type: (Optional[str], Optional[str], Optional[int], **Any) -&gt; ItemPaged</span>
         <span class="sd">&quot;&quot;&quot;Lists all the directories and files under the directory.</span>
 
 <span class="sd">        :param str name_starts_with:</span>
 <span class="sd">            Filters the results to return only entities whose names</span>
 <span class="sd">            begin with the specified prefix.</span>
-<span class="sd">        :param str marker:</span>
-<span class="sd">            An opaque continuation token. This value can be retrieved from the</span>
-<span class="sd">            next_marker field of a previous generator object. If specified,</span>
-<span class="sd">            this generator will begin returning results from this point.</span>
 <span class="sd">        :param int timeout:</span>
 <span class="sd">            The timeout parameter is expressed in seconds.</span>
 <span class="sd">        :returns: An auto-paging iterable of dict-like DirectoryProperties and FileProperties</span>
-<span class="sd">        :rtype: ~azure.storage.file.models.DirectoryPropertiesPaged</span>
+<span class="sd">        :rtype: ~azure.core.paging.ItemPaged[~azure.storage.file.models.DirectoryProperties]</span>
 
 <span class="sd">        Example:</span>
 <span class="sd">            .. literalinclude:: ../tests/test_file_samples_directory.py</span>
@@ -577,23 +574,20 @@
             <span class="n">sharesnapshot</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">snapshot</span><span class="p">,</span>
             <span class="n">timeout</span><span class="o">=</span><span class="n">timeout</span><span class="p">,</span>
             <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">DirectoryPropertiesPaged</span><span class="p">(</span>
-            <span class="n">command</span><span class="p">,</span> <span class="n">prefix</span><span class="o">=</span><span class="n">name_starts_with</span><span class="p">,</span> <span class="n">results_per_page</span><span class="o">=</span><span class="n">results_per_page</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="n">marker</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="n">ItemPaged</span><span class="p">(</span>
+            <span class="n">command</span><span class="p">,</span> <span class="n">prefix</span><span class="o">=</span><span class="n">name_starts_with</span><span class="p">,</span> <span class="n">results_per_page</span><span class="o">=</span><span class="n">results_per_page</span><span class="p">,</span>
+            <span class="n">page_iterator_class</span><span class="o">=</span><span class="n">DirectoryPropertiesPaged</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="DirectoryClient.list_handles"><a class="viewcode-back" href="../../../../ref/azure.storage.file.html#azure.storage.file.directory_client.DirectoryClient.list_handles">[docs]</a>    <span class="k">def</span> <span class="nf">list_handles</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">recursive</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<div class="viewcode-block" id="DirectoryClient.list_handles"><a class="viewcode-back" href="../../../../ref/azure.storage.file.html#azure.storage.file.directory_client.DirectoryClient.list_handles">[docs]</a>    <span class="k">def</span> <span class="nf">list_handles</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">recursive</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Lists opened handles on a directory or a file under the directory.</span>
 
-<span class="sd">        :param str marker:</span>
-<span class="sd">            An opaque continuation token. This value can be retrieved from the</span>
-<span class="sd">            next_marker field of a previous generator object. If specified,</span>
-<span class="sd">            this generator will begin returning results from this point.</span>
 <span class="sd">        :param bool recursive:</span>
 <span class="sd">            Boolean that specifies if operation should apply to the directory specified by the client,</span>
 <span class="sd">            its files, its subdirectories and their files. Default value is False.</span>
 <span class="sd">        :param int timeout:</span>
 <span class="sd">            The timeout parameter is expressed in seconds.</span>
 <span class="sd">        :returns: An auto-paging iterable of HandleItems</span>
-<span class="sd">        :rtype: ~azure.storage.file.models.HandlesPaged</span>
+<span class="sd">        :rtype: ~azure.core.paging.ItemPaged[~azure.storage.file.models.Handles]</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">results_per_page</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;results_per_page&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
         <span class="n">command</span> <span class="o">=</span> <span class="n">functools</span><span class="o">.</span><span class="n">partial</span><span class="p">(</span>
@@ -602,8 +596,9 @@
             <span class="n">timeout</span><span class="o">=</span><span class="n">timeout</span><span class="p">,</span>
             <span class="n">recursive</span><span class="o">=</span><span class="n">recursive</span><span class="p">,</span>
             <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">HandlesPaged</span><span class="p">(</span>
-            <span class="n">command</span><span class="p">,</span> <span class="n">results_per_page</span><span class="o">=</span><span class="n">results_per_page</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="n">marker</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="n">ItemPaged</span><span class="p">(</span>
+            <span class="n">command</span><span class="p">,</span> <span class="n">results_per_page</span><span class="o">=</span><span class="n">results_per_page</span><span class="p">,</span>
+            <span class="n">page_iterator_class</span><span class="o">=</span><span class="n">HandlesPaged</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="DirectoryClient.close_handles"><a class="viewcode-back" href="../../../../ref/azure.storage.file.html#azure.storage.file.directory_client.DirectoryClient.close_handles">[docs]</a>    <span class="k">def</span> <span class="nf">close_handles</span><span class="p">(</span>
             <span class="bp">self</span><span class="p">,</span> <span class="n">handle</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="c1"># type: Union[str, HandleItem]</span>

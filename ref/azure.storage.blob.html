@@ -2043,7 +2043,7 @@ replication is enabled for your storage account.</p>
 
 <dl class="method">
 <dt id="azure.storage.blob.blob_service_client.BlobServiceClient.list_containers">
-<code class="sig-name descname">list_containers</code><span class="sig-paren">(</span><em class="sig-param">name_starts_with=None</em>, <em class="sig-param">include_metadata=False</em>, <em class="sig-param">marker=None</em>, <em class="sig-param">results_per_page=None</em>, <em class="sig-param">timeout=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/storage/blob/blob_service_client.html#BlobServiceClient.list_containers"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.storage.blob.blob_service_client.BlobServiceClient.list_containers" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">list_containers</code><span class="sig-paren">(</span><em class="sig-param">name_starts_with=None</em>, <em class="sig-param">include_metadata=False</em>, <em class="sig-param">results_per_page=None</em>, <em class="sig-param">timeout=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/storage/blob/blob_service_client.html#BlobServiceClient.list_containers"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.storage.blob.blob_service_client.BlobServiceClient.list_containers" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns a generator to list the containers under the specified account.</p>
 <p>The generator will lazily follow the continuation tokens returned by
 the service and stop when all containers have been returned.</p>
@@ -2054,9 +2054,6 @@ the service and stop when all containers have been returned.</p>
 begin with the specified prefix.</p></li>
 <li><p><strong>include_metadata</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#bool" title="(in Python v3.5)"><em>bool</em></a>) – Specifies that container metadata be returned in the response.
 The default value is <cite>False</cite>.</p></li>
-<li><p><strong>marker</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – An opaque continuation token. This value can be retrieved from the
-next_marker field of a previous generator object. If specified,
-this generator will begin returning results from this point.</p></li>
 <li><p><strong>results_per_page</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a>) – The maximum number of container names to retrieve per API
 call. If the request does not specify the server will return up to 5,000 items.</p></li>
 <li><p><strong>timeout</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a>) – The timeout parameter is expressed in seconds.</p></li>
@@ -2066,7 +2063,7 @@ call. If the request does not specify the server will return up to 5,000 items.<
 <dd class="field-even"><p>An iterable (auto-paging) of ContainerProperties.</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>ContainerPropertiesPaged</p>
+<dd class="field-odd"><p><a class="reference internal" href="azure.core.html#azure.core.paging.ItemPaged" title="azure.core.paging.ItemPaged">ItemPaged</a>[ContainerProperties]</p>
 </dd>
 </dl>
 <dl>
@@ -2614,7 +2611,7 @@ container’s lease is active and matches this ID.</p></li>
 
 <dl class="method">
 <dt id="azure.storage.blob.container_client.ContainerClient.list_blobs">
-<code class="sig-name descname">list_blobs</code><span class="sig-paren">(</span><em class="sig-param">name_starts_with=None</em>, <em class="sig-param">include=None</em>, <em class="sig-param">marker=None</em>, <em class="sig-param">timeout=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/storage/blob/container_client.html#ContainerClient.list_blobs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.storage.blob.container_client.ContainerClient.list_blobs" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">list_blobs</code><span class="sig-paren">(</span><em class="sig-param">name_starts_with=None</em>, <em class="sig-param">include=None</em>, <em class="sig-param">timeout=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/storage/blob/container_client.html#ContainerClient.list_blobs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.storage.blob.container_client.ContainerClient.list_blobs" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns a generator to list the blobs under the specified container.
 The generator will lazily follow the continuation tokens returned by
 the service.</p>
@@ -2625,9 +2622,6 @@ the service.</p>
 begin with the specified prefix.</p></li>
 <li><p><strong>include</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a><em>]</em>) – Specifies one or more additional datasets to include in the response.
 Options include: ‘snapshots’, ‘metadata’, ‘uncommittedblobs’, ‘copy’, ‘deleted’.</p></li>
-<li><p><strong>marker</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – An opaque continuation token. This value can be retrieved from the
-next_marker field of a previous generator object. If specified,
-this generator will begin returning results from this point.</p></li>
 <li><p><strong>timeout</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a>) – The timeout parameter is expressed in seconds.</p></li>
 </ul>
 </dd>
@@ -2635,7 +2629,7 @@ this generator will begin returning results from this point.</p></li>
 <dd class="field-even"><p>An iterable (auto-paging) response of BlobProperties.</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference internal" href="#azure.storage.blob.models.BlobPropertiesPaged" title="azure.storage.blob.models.BlobPropertiesPaged">BlobPropertiesPaged</a></p>
+<dd class="field-odd"><p><a class="reference internal" href="azure.core.html#azure.core.paging.ItemPaged" title="azure.core.paging.ItemPaged">ItemPaged</a>[<a class="reference internal" href="#azure.storage.blob.models.BlobProperties" title="azure.storage.blob.models.BlobProperties">BlobProperties</a>]</p>
 </dd>
 </dl>
 <dl>
@@ -2831,7 +2825,7 @@ MaxBlobSizeConditionNotMet error (HTTP status code 412 - Precondition Failed).</
 
 <dl class="method">
 <dt id="azure.storage.blob.container_client.ContainerClient.walk_blobs">
-<code class="sig-name descname">walk_blobs</code><span class="sig-paren">(</span><em class="sig-param">name_starts_with=None</em>, <em class="sig-param">include=None</em>, <em class="sig-param">delimiter='/'</em>, <em class="sig-param">marker=None</em>, <em class="sig-param">timeout=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/storage/blob/container_client.html#ContainerClient.walk_blobs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.storage.blob.container_client.ContainerClient.walk_blobs" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">walk_blobs</code><span class="sig-paren">(</span><em class="sig-param">name_starts_with=None</em>, <em class="sig-param">include=None</em>, <em class="sig-param">delimiter='/'</em>, <em class="sig-param">timeout=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/storage/blob/container_client.html#ContainerClient.walk_blobs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.storage.blob.container_client.ContainerClient.walk_blobs" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns a generator to list the blobs under the specified container.
 The generator will lazily follow the continuation tokens returned by
 the service. This operation will list blobs in accordance with a hierarchy,
@@ -2847,9 +2841,6 @@ Options include: ‘snapshots’, ‘metadata’, ‘uncommittedblobs’, ‘cop
 element in the response body that acts as a placeholder for all blobs whose
 names begin with the same substring up to the appearance of the delimiter
 character. The delimiter may be a single character or a string.</p></li>
-<li><p><strong>marker</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – An opaque continuation token. This value can be retrieved from the
-next_marker field of a previous generator object. If specified,
-this generator will begin returning results from this point.</p></li>
 <li><p><strong>timeout</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a>) – The timeout parameter is expressed in seconds.</p></li>
 </ul>
 </dd>
@@ -2857,7 +2848,7 @@ this generator will begin returning results from this point.</p></li>
 <dd class="field-even"><p>An iterable (auto-paging) response of BlobProperties.</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference internal" href="#azure.storage.blob.models.BlobPrefix" title="azure.storage.blob.models.BlobPrefix">BlobPrefix</a></p>
+<dd class="field-odd"><p><a class="reference internal" href="azure.core.html#azure.core.paging.ItemPaged" title="azure.core.paging.ItemPaged">ItemPaged</a>[<a class="reference internal" href="#azure.storage.blob.models.BlobProperties" title="azure.storage.blob.models.BlobProperties">BlobProperties</a>]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -3214,7 +3205,7 @@ destination of a copy operation within the same account.</p></li>
 <dl class="class">
 <dt id="azure.storage.blob.models.BlobPrefix">
 <em class="property">class </em><code class="sig-prename descclassname">azure.storage.blob.models.</code><code class="sig-name descname">BlobPrefix</code><span class="sig-paren">(</span><em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/storage/blob/models.html#BlobPrefix"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.storage.blob.models.BlobPrefix" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#azure.storage.blob.models.BlobPropertiesPaged" title="azure.storage.blob.models.BlobPropertiesPaged"><code class="xref py py-class docutils literal notranslate"><span class="pre">azure.storage.blob.models.BlobPropertiesPaged</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">azure.storage.blob._shared.models.DictMixin</span></code></p>
+<dd><p>Bases: <a class="reference internal" href="azure.core.html#azure.core.paging.ItemPaged" title="azure.core.paging.ItemPaged"><code class="xref py py-class docutils literal notranslate"><span class="pre">azure.core.paging.ItemPaged</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">azure.storage.blob._shared.models.DictMixin</span></code></p>
 <p>An Iterable of Blob properties.</p>
 <p>Returned from walk_blobs when a delimiter is used.
 Can be thought of as a virtual blob directory.</p>
@@ -3224,7 +3215,7 @@ Can be thought of as a virtual blob directory.</p>
 <li><p><a class="reference internal" href="azure.mgmt.alertsmanagement.models.html#azure.mgmt.alertsmanagement.models.AlertsSortByFields.name" title="azure.mgmt.alertsmanagement.models.AlertsSortByFields.name"><strong>name</strong></a> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The prefix, or “directory name” of the blob.</p></li>
 <li><p><strong>service_endpoint</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The service URL.</p></li>
 <li><p><strong>prefix</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – A blob name prefix being used to filter the list.</p></li>
-<li><p><strong>current_marker</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The continuation token of the current page of results.</p></li>
+<li><p><strong>marker</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The continuation token of the current page of results.</p></li>
 <li><p><strong>results_per_page</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a>) – The maximum number of results retrieved per API call.</p></li>
 <li><p><strong>next_marker</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The continuation token to retrieve the next page of results.</p></li>
 <li><p><strong>location_mode</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The location mode being used to list results. The available
@@ -3251,12 +3242,12 @@ Options include ‘primary’ or ‘secondary’.</p></li>
 </ul>
 </dd>
 </dl>
-<dl class="method">
-<dt id="azure.storage.blob.models.BlobPrefix.next">
-<code class="sig-name descname">next</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#azure.storage.blob.models.BlobPrefix.next" title="Permalink to this definition">¶</a></dt>
-<dd><p>Iterate through responses.</p>
 </dd></dl>
 
+<dl class="class">
+<dt id="azure.storage.blob.models.BlobPrefixPaged">
+<em class="property">class </em><code class="sig-prename descclassname">azure.storage.blob.models.</code><code class="sig-name descname">BlobPrefixPaged</code><span class="sig-paren">(</span><em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/storage/blob/models.html#BlobPrefixPaged"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.storage.blob.models.BlobPrefixPaged" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#azure.storage.blob.models.BlobPropertiesPaged" title="azure.storage.blob.models.BlobPropertiesPaged"><code class="xref py py-class docutils literal notranslate"><span class="pre">azure.storage.blob.models.BlobPropertiesPaged</span></code></a></p>
 </dd></dl>
 
 <dl class="class">
@@ -3308,17 +3299,17 @@ If false, it indicates that the tier was set explicitly.</p></li>
 
 <dl class="class">
 <dt id="azure.storage.blob.models.BlobPropertiesPaged">
-<em class="property">class </em><code class="sig-prename descclassname">azure.storage.blob.models.</code><code class="sig-name descname">BlobPropertiesPaged</code><span class="sig-paren">(</span><em class="sig-param">command</em>, <em class="sig-param">container=None</em>, <em class="sig-param">prefix=None</em>, <em class="sig-param">results_per_page=None</em>, <em class="sig-param">marker=None</em>, <em class="sig-param">delimiter=None</em>, <em class="sig-param">location_mode=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/storage/blob/models.html#BlobPropertiesPaged"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.storage.blob.models.BlobPropertiesPaged" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="azure.core.html#azure.core.paging.Paged" title="azure.core.paging.Paged"><code class="xref py py-class docutils literal notranslate"><span class="pre">azure.core.paging.Paged</span></code></a></p>
+<em class="property">class </em><code class="sig-prename descclassname">azure.storage.blob.models.</code><code class="sig-name descname">BlobPropertiesPaged</code><span class="sig-paren">(</span><em class="sig-param">command</em>, <em class="sig-param">container=None</em>, <em class="sig-param">prefix=None</em>, <em class="sig-param">results_per_page=None</em>, <em class="sig-param">continuation_token=None</em>, <em class="sig-param">delimiter=None</em>, <em class="sig-param">location_mode=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/storage/blob/models.html#BlobPropertiesPaged"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.storage.blob.models.BlobPropertiesPaged" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="azure.core.html#azure.core.paging.PageIterator" title="azure.core.paging.PageIterator"><code class="xref py py-class docutils literal notranslate"><span class="pre">azure.core.paging.PageIterator</span></code></a></p>
 <p>An Iterable of Blob properties.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Variables</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>service_endpoint</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The service URL.</p></li>
 <li><p><strong>prefix</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – A blob name prefix being used to filter the list.</p></li>
-<li><p><strong>current_marker</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The continuation token of the current page of results.</p></li>
+<li><p><strong>marker</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The continuation token of the current page of results.</p></li>
 <li><p><strong>results_per_page</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a>) – The maximum number of results retrieved per API call.</p></li>
-<li><p><strong>next_marker</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The continuation token to retrieve the next page of results.</p></li>
+<li><p><strong>continuation_token</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The continuation token to retrieve the next page of results.</p></li>
 <li><p><strong>location_mode</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The location mode being used to list results. The available
 options include “primary” and “secondary”.</p></li>
 <li><p><strong>current_page</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><em>list</em></a><em>(</em><a class="reference internal" href="#azure.storage.blob.models.BlobProperties" title="azure.storage.blob.models.BlobProperties"><em>BlobProperties</em></a><em>)</em>) – The current page of listed results.</p></li>
@@ -3333,7 +3324,7 @@ options include “primary” and “secondary”.</p></li>
 begin with the specified prefix.</p></li>
 <li><p><strong>results_per_page</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a>) – The maximum number of blobs to retrieve per
 call.</p></li>
-<li><p><strong>marker</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – An opaque continuation token.</p></li>
+<li><p><strong>continuation_token</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – An opaque continuation token.</p></li>
 <li><p><strong>delimiter</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Used to capture blobs whose names begin with the same substring up to
 the appearance of the delimiter character. The delimiter may be a single
 character or a string.</p></li>
@@ -3343,12 +3334,6 @@ Options include ‘primary’ or ‘secondary’.</p></li>
 </ul>
 </dd>
 </dl>
-<dl class="method">
-<dt id="azure.storage.blob.models.BlobPropertiesPaged.next">
-<code class="sig-name descname">next</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#azure.storage.blob.models.BlobPropertiesPaged.next" title="Permalink to this definition">¶</a></dt>
-<dd><p>Iterate through responses.</p>
-</dd></dl>
-
 </dd></dl>
 
 <dl class="class">
@@ -3486,17 +3471,17 @@ container as metadata.</p></li>
 
 <dl class="class">
 <dt id="azure.storage.blob.models.ContainerPropertiesPaged">
-<em class="property">class </em><code class="sig-prename descclassname">azure.storage.blob.models.</code><code class="sig-name descname">ContainerPropertiesPaged</code><span class="sig-paren">(</span><em class="sig-param">command</em>, <em class="sig-param">prefix=None</em>, <em class="sig-param">results_per_page=None</em>, <em class="sig-param">marker=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/storage/blob/models.html#ContainerPropertiesPaged"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.storage.blob.models.ContainerPropertiesPaged" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="azure.core.html#azure.core.paging.Paged" title="azure.core.paging.Paged"><code class="xref py py-class docutils literal notranslate"><span class="pre">azure.core.paging.Paged</span></code></a></p>
+<em class="property">class </em><code class="sig-prename descclassname">azure.storage.blob.models.</code><code class="sig-name descname">ContainerPropertiesPaged</code><span class="sig-paren">(</span><em class="sig-param">command</em>, <em class="sig-param">prefix=None</em>, <em class="sig-param">results_per_page=None</em>, <em class="sig-param">continuation_token=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/storage/blob/models.html#ContainerPropertiesPaged"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.storage.blob.models.ContainerPropertiesPaged" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="azure.core.html#azure.core.paging.PageIterator" title="azure.core.paging.PageIterator"><code class="xref py py-class docutils literal notranslate"><span class="pre">azure.core.paging.PageIterator</span></code></a></p>
 <p>An Iterable of Container properties.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Variables</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>service_endpoint</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The service URL.</p></li>
 <li><p><strong>prefix</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – A container name prefix being used to filter the list.</p></li>
-<li><p><strong>current_marker</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The continuation token of the current page of results.</p></li>
+<li><p><strong>marker</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The continuation token of the current page of results.</p></li>
 <li><p><strong>results_per_page</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a>) – The maximum number of results retrieved per API call.</p></li>
-<li><p><strong>next_marker</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The continuation token to retrieve the next page of results.</p></li>
+<li><p><strong>continuation_token</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The continuation token to retrieve the next page of results.</p></li>
 <li><p><strong>location_mode</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The location mode being used to list results. The available
 options include “primary” and “secondary”.</p></li>
 <li><p><strong>current_page</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><em>list</em></a><em>(</em><a class="reference internal" href="#azure.storage.blob.models.ContainerProperties" title="azure.storage.blob.models.ContainerProperties"><em>ContainerProperties</em></a><em>)</em>) – The current page of listed results.</p></li>
@@ -3509,16 +3494,10 @@ options include “primary” and “secondary”.</p></li>
 begin with the specified prefix.</p></li>
 <li><p><strong>results_per_page</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a>) – The maximum number of container names to retrieve per
 call.</p></li>
-<li><p><strong>marker</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – An opaque continuation token.</p></li>
+<li><p><strong>continuation_token</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – An opaque continuation token.</p></li>
 </ul>
 </dd>
 </dl>
-<dl class="method">
-<dt id="azure.storage.blob.models.ContainerPropertiesPaged.next">
-<code class="sig-name descname">next</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#azure.storage.blob.models.ContainerPropertiesPaged.next" title="Permalink to this definition">¶</a></dt>
-<dd><p>Iterate through responses.</p>
-</dd></dl>
-
 </dd></dl>
 
 <dl class="class">
@@ -4411,7 +4390,7 @@ replication is enabled for your storage account.</p>
 
 <dl class="method">
 <dt id="azure.storage.blob.BlobServiceClient.list_containers">
-<code class="sig-name descname">list_containers</code><span class="sig-paren">(</span><em class="sig-param">name_starts_with=None</em>, <em class="sig-param">include_metadata=False</em>, <em class="sig-param">marker=None</em>, <em class="sig-param">results_per_page=None</em>, <em class="sig-param">timeout=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/storage/blob/blob_service_client.html#BlobServiceClient.list_containers"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.storage.blob.BlobServiceClient.list_containers" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">list_containers</code><span class="sig-paren">(</span><em class="sig-param">name_starts_with=None</em>, <em class="sig-param">include_metadata=False</em>, <em class="sig-param">results_per_page=None</em>, <em class="sig-param">timeout=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/storage/blob/blob_service_client.html#BlobServiceClient.list_containers"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.storage.blob.BlobServiceClient.list_containers" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns a generator to list the containers under the specified account.</p>
 <p>The generator will lazily follow the continuation tokens returned by
 the service and stop when all containers have been returned.</p>
@@ -4422,9 +4401,6 @@ the service and stop when all containers have been returned.</p>
 begin with the specified prefix.</p></li>
 <li><p><strong>include_metadata</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#bool" title="(in Python v3.5)"><em>bool</em></a>) – Specifies that container metadata be returned in the response.
 The default value is <cite>False</cite>.</p></li>
-<li><p><strong>marker</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – An opaque continuation token. This value can be retrieved from the
-next_marker field of a previous generator object. If specified,
-this generator will begin returning results from this point.</p></li>
 <li><p><strong>results_per_page</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a>) – The maximum number of container names to retrieve per API
 call. If the request does not specify the server will return up to 5,000 items.</p></li>
 <li><p><strong>timeout</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a>) – The timeout parameter is expressed in seconds.</p></li>
@@ -4434,7 +4410,7 @@ call. If the request does not specify the server will return up to 5,000 items.<
 <dd class="field-even"><p>An iterable (auto-paging) of ContainerProperties.</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>ContainerPropertiesPaged</p>
+<dd class="field-odd"><p><a class="reference internal" href="azure.core.html#azure.core.paging.ItemPaged" title="azure.core.paging.ItemPaged">ItemPaged</a>[ContainerProperties]</p>
 </dd>
 </dl>
 <dl>
@@ -4979,7 +4955,7 @@ container’s lease is active and matches this ID.</p></li>
 
 <dl class="method">
 <dt id="azure.storage.blob.ContainerClient.list_blobs">
-<code class="sig-name descname">list_blobs</code><span class="sig-paren">(</span><em class="sig-param">name_starts_with=None</em>, <em class="sig-param">include=None</em>, <em class="sig-param">marker=None</em>, <em class="sig-param">timeout=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/storage/blob/container_client.html#ContainerClient.list_blobs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.storage.blob.ContainerClient.list_blobs" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">list_blobs</code><span class="sig-paren">(</span><em class="sig-param">name_starts_with=None</em>, <em class="sig-param">include=None</em>, <em class="sig-param">timeout=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/storage/blob/container_client.html#ContainerClient.list_blobs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.storage.blob.ContainerClient.list_blobs" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns a generator to list the blobs under the specified container.
 The generator will lazily follow the continuation tokens returned by
 the service.</p>
@@ -4990,9 +4966,6 @@ the service.</p>
 begin with the specified prefix.</p></li>
 <li><p><strong>include</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a><em>]</em>) – Specifies one or more additional datasets to include in the response.
 Options include: ‘snapshots’, ‘metadata’, ‘uncommittedblobs’, ‘copy’, ‘deleted’.</p></li>
-<li><p><strong>marker</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – An opaque continuation token. This value can be retrieved from the
-next_marker field of a previous generator object. If specified,
-this generator will begin returning results from this point.</p></li>
 <li><p><strong>timeout</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a>) – The timeout parameter is expressed in seconds.</p></li>
 </ul>
 </dd>
@@ -5000,7 +4973,7 @@ this generator will begin returning results from this point.</p></li>
 <dd class="field-even"><p>An iterable (auto-paging) response of BlobProperties.</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference internal" href="#azure.storage.blob.models.BlobPropertiesPaged" title="azure.storage.blob.models.BlobPropertiesPaged">BlobPropertiesPaged</a></p>
+<dd class="field-odd"><p><a class="reference internal" href="azure.core.html#azure.core.paging.ItemPaged" title="azure.core.paging.ItemPaged">ItemPaged</a>[<a class="reference internal" href="#azure.storage.blob.models.BlobProperties" title="azure.storage.blob.models.BlobProperties">BlobProperties</a>]</p>
 </dd>
 </dl>
 <dl>
@@ -5196,7 +5169,7 @@ MaxBlobSizeConditionNotMet error (HTTP status code 412 - Precondition Failed).</
 
 <dl class="method">
 <dt id="azure.storage.blob.ContainerClient.walk_blobs">
-<code class="sig-name descname">walk_blobs</code><span class="sig-paren">(</span><em class="sig-param">name_starts_with=None</em>, <em class="sig-param">include=None</em>, <em class="sig-param">delimiter='/'</em>, <em class="sig-param">marker=None</em>, <em class="sig-param">timeout=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/storage/blob/container_client.html#ContainerClient.walk_blobs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.storage.blob.ContainerClient.walk_blobs" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">walk_blobs</code><span class="sig-paren">(</span><em class="sig-param">name_starts_with=None</em>, <em class="sig-param">include=None</em>, <em class="sig-param">delimiter='/'</em>, <em class="sig-param">timeout=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/storage/blob/container_client.html#ContainerClient.walk_blobs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.storage.blob.ContainerClient.walk_blobs" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns a generator to list the blobs under the specified container.
 The generator will lazily follow the continuation tokens returned by
 the service. This operation will list blobs in accordance with a hierarchy,
@@ -5212,9 +5185,6 @@ Options include: ‘snapshots’, ‘metadata’, ‘uncommittedblobs’, ‘cop
 element in the response body that acts as a placeholder for all blobs whose
 names begin with the same substring up to the appearance of the delimiter
 character. The delimiter may be a single character or a string.</p></li>
-<li><p><strong>marker</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – An opaque continuation token. This value can be retrieved from the
-next_marker field of a previous generator object. If specified,
-this generator will begin returning results from this point.</p></li>
 <li><p><strong>timeout</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a>) – The timeout parameter is expressed in seconds.</p></li>
 </ul>
 </dd>
@@ -5222,7 +5192,7 @@ this generator will begin returning results from this point.</p></li>
 <dd class="field-even"><p>An iterable (auto-paging) response of BlobProperties.</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference internal" href="#azure.storage.blob.models.BlobPrefix" title="azure.storage.blob.models.BlobPrefix">BlobPrefix</a></p>
+<dd class="field-odd"><p><a class="reference internal" href="azure.core.html#azure.core.paging.ItemPaged" title="azure.core.paging.ItemPaged">ItemPaged</a>[<a class="reference internal" href="#azure.storage.blob.models.BlobProperties" title="azure.storage.blob.models.BlobProperties">BlobProperties</a>]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -7806,17 +7776,17 @@ container as metadata.</p></li>
 
 <dl class="class">
 <dt id="azure.storage.blob.ContainerPropertiesPaged">
-<em class="property">class </em><code class="sig-prename descclassname">azure.storage.blob.</code><code class="sig-name descname">ContainerPropertiesPaged</code><span class="sig-paren">(</span><em class="sig-param">command</em>, <em class="sig-param">prefix=None</em>, <em class="sig-param">results_per_page=None</em>, <em class="sig-param">marker=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/storage/blob/models.html#ContainerPropertiesPaged"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.storage.blob.ContainerPropertiesPaged" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="azure.core.html#azure.core.paging.Paged" title="azure.core.paging.Paged"><code class="xref py py-class docutils literal notranslate"><span class="pre">azure.core.paging.Paged</span></code></a></p>
+<em class="property">class </em><code class="sig-prename descclassname">azure.storage.blob.</code><code class="sig-name descname">ContainerPropertiesPaged</code><span class="sig-paren">(</span><em class="sig-param">command</em>, <em class="sig-param">prefix=None</em>, <em class="sig-param">results_per_page=None</em>, <em class="sig-param">continuation_token=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/storage/blob/models.html#ContainerPropertiesPaged"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.storage.blob.ContainerPropertiesPaged" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="azure.core.html#azure.core.paging.PageIterator" title="azure.core.paging.PageIterator"><code class="xref py py-class docutils literal notranslate"><span class="pre">azure.core.paging.PageIterator</span></code></a></p>
 <p>An Iterable of Container properties.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Variables</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>service_endpoint</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The service URL.</p></li>
 <li><p><strong>prefix</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – A container name prefix being used to filter the list.</p></li>
-<li><p><strong>current_marker</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The continuation token of the current page of results.</p></li>
+<li><p><strong>marker</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The continuation token of the current page of results.</p></li>
 <li><p><strong>results_per_page</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a>) – The maximum number of results retrieved per API call.</p></li>
-<li><p><strong>next_marker</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The continuation token to retrieve the next page of results.</p></li>
+<li><p><strong>continuation_token</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The continuation token to retrieve the next page of results.</p></li>
 <li><p><strong>location_mode</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The location mode being used to list results. The available
 options include “primary” and “secondary”.</p></li>
 <li><p><strong>current_page</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><em>list</em></a><em>(</em><a class="reference internal" href="#azure.storage.blob.models.ContainerProperties" title="azure.storage.blob.models.ContainerProperties"><em>ContainerProperties</em></a><em>)</em>) – The current page of listed results.</p></li>
@@ -7829,16 +7799,10 @@ options include “primary” and “secondary”.</p></li>
 begin with the specified prefix.</p></li>
 <li><p><strong>results_per_page</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a>) – The maximum number of container names to retrieve per
 call.</p></li>
-<li><p><strong>marker</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – An opaque continuation token.</p></li>
+<li><p><strong>continuation_token</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – An opaque continuation token.</p></li>
 </ul>
 </dd>
 </dl>
-<dl class="method">
-<dt id="azure.storage.blob.ContainerPropertiesPaged.next">
-<code class="sig-name descname">next</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#azure.storage.blob.ContainerPropertiesPaged.next" title="Permalink to this definition">¶</a></dt>
-<dd><p>Iterate through responses.</p>
-</dd></dl>
-
 </dd></dl>
 
 <dl class="class">
@@ -7890,17 +7854,17 @@ If false, it indicates that the tier was set explicitly.</p></li>
 
 <dl class="class">
 <dt id="azure.storage.blob.BlobPropertiesPaged">
-<em class="property">class </em><code class="sig-prename descclassname">azure.storage.blob.</code><code class="sig-name descname">BlobPropertiesPaged</code><span class="sig-paren">(</span><em class="sig-param">command</em>, <em class="sig-param">container=None</em>, <em class="sig-param">prefix=None</em>, <em class="sig-param">results_per_page=None</em>, <em class="sig-param">marker=None</em>, <em class="sig-param">delimiter=None</em>, <em class="sig-param">location_mode=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/storage/blob/models.html#BlobPropertiesPaged"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.storage.blob.BlobPropertiesPaged" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="azure.core.html#azure.core.paging.Paged" title="azure.core.paging.Paged"><code class="xref py py-class docutils literal notranslate"><span class="pre">azure.core.paging.Paged</span></code></a></p>
+<em class="property">class </em><code class="sig-prename descclassname">azure.storage.blob.</code><code class="sig-name descname">BlobPropertiesPaged</code><span class="sig-paren">(</span><em class="sig-param">command</em>, <em class="sig-param">container=None</em>, <em class="sig-param">prefix=None</em>, <em class="sig-param">results_per_page=None</em>, <em class="sig-param">continuation_token=None</em>, <em class="sig-param">delimiter=None</em>, <em class="sig-param">location_mode=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/storage/blob/models.html#BlobPropertiesPaged"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.storage.blob.BlobPropertiesPaged" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="azure.core.html#azure.core.paging.PageIterator" title="azure.core.paging.PageIterator"><code class="xref py py-class docutils literal notranslate"><span class="pre">azure.core.paging.PageIterator</span></code></a></p>
 <p>An Iterable of Blob properties.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Variables</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>service_endpoint</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The service URL.</p></li>
 <li><p><strong>prefix</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – A blob name prefix being used to filter the list.</p></li>
-<li><p><strong>current_marker</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The continuation token of the current page of results.</p></li>
+<li><p><strong>marker</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The continuation token of the current page of results.</p></li>
 <li><p><strong>results_per_page</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a>) – The maximum number of results retrieved per API call.</p></li>
-<li><p><strong>next_marker</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The continuation token to retrieve the next page of results.</p></li>
+<li><p><strong>continuation_token</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The continuation token to retrieve the next page of results.</p></li>
 <li><p><strong>location_mode</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The location mode being used to list results. The available
 options include “primary” and “secondary”.</p></li>
 <li><p><strong>current_page</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><em>list</em></a><em>(</em><a class="reference internal" href="#azure.storage.blob.models.BlobProperties" title="azure.storage.blob.models.BlobProperties"><em>BlobProperties</em></a><em>)</em>) – The current page of listed results.</p></li>
@@ -7915,7 +7879,7 @@ options include “primary” and “secondary”.</p></li>
 begin with the specified prefix.</p></li>
 <li><p><strong>results_per_page</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a>) – The maximum number of blobs to retrieve per
 call.</p></li>
-<li><p><strong>marker</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – An opaque continuation token.</p></li>
+<li><p><strong>continuation_token</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – An opaque continuation token.</p></li>
 <li><p><strong>delimiter</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Used to capture blobs whose names begin with the same substring up to
 the appearance of the delimiter character. The delimiter may be a single
 character or a string.</p></li>
@@ -7925,18 +7889,12 @@ Options include ‘primary’ or ‘secondary’.</p></li>
 </ul>
 </dd>
 </dl>
-<dl class="method">
-<dt id="azure.storage.blob.BlobPropertiesPaged.next">
-<code class="sig-name descname">next</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#azure.storage.blob.BlobPropertiesPaged.next" title="Permalink to this definition">¶</a></dt>
-<dd><p>Iterate through responses.</p>
-</dd></dl>
-
 </dd></dl>
 
 <dl class="class">
 <dt id="azure.storage.blob.BlobPrefix">
 <em class="property">class </em><code class="sig-prename descclassname">azure.storage.blob.</code><code class="sig-name descname">BlobPrefix</code><span class="sig-paren">(</span><em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/storage/blob/models.html#BlobPrefix"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.storage.blob.BlobPrefix" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#azure.storage.blob.models.BlobPropertiesPaged" title="azure.storage.blob.models.BlobPropertiesPaged"><code class="xref py py-class docutils literal notranslate"><span class="pre">azure.storage.blob.models.BlobPropertiesPaged</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">azure.storage.blob._shared.models.DictMixin</span></code></p>
+<dd><p>Bases: <a class="reference internal" href="azure.core.html#azure.core.paging.ItemPaged" title="azure.core.paging.ItemPaged"><code class="xref py py-class docutils literal notranslate"><span class="pre">azure.core.paging.ItemPaged</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">azure.storage.blob._shared.models.DictMixin</span></code></p>
 <p>An Iterable of Blob properties.</p>
 <p>Returned from walk_blobs when a delimiter is used.
 Can be thought of as a virtual blob directory.</p>
@@ -7946,7 +7904,7 @@ Can be thought of as a virtual blob directory.</p>
 <li><p><a class="reference internal" href="azure.mgmt.alertsmanagement.models.html#azure.mgmt.alertsmanagement.models.AlertsSortByFields.name" title="azure.mgmt.alertsmanagement.models.AlertsSortByFields.name"><strong>name</strong></a> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The prefix, or “directory name” of the blob.</p></li>
 <li><p><strong>service_endpoint</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The service URL.</p></li>
 <li><p><strong>prefix</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – A blob name prefix being used to filter the list.</p></li>
-<li><p><strong>current_marker</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The continuation token of the current page of results.</p></li>
+<li><p><strong>marker</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The continuation token of the current page of results.</p></li>
 <li><p><strong>results_per_page</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a>) – The maximum number of results retrieved per API call.</p></li>
 <li><p><strong>next_marker</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The continuation token to retrieve the next page of results.</p></li>
 <li><p><strong>location_mode</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The location mode being used to list results. The available
@@ -7973,12 +7931,6 @@ Options include ‘primary’ or ‘secondary’.</p></li>
 </ul>
 </dd>
 </dl>
-<dl class="method">
-<dt id="azure.storage.blob.BlobPrefix.next">
-<code class="sig-name descname">next</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#azure.storage.blob.BlobPrefix.next" title="Permalink to this definition">¶</a></dt>
-<dd><p>Iterate through responses.</p>
-</dd></dl>
-
 </dd></dl>
 
 <dl class="class">

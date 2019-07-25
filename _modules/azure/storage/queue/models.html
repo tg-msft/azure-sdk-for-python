@@ -285,7 +285,7 @@
 <span class="c1"># pylint: disable=super-init-not-called</span>
 
 <span class="kn">from</span> <span class="nn">typing</span> <span class="k">import</span> <span class="n">List</span> <span class="c1"># pylint: disable=unused-import</span>
-<span class="kn">from</span> <span class="nn">azure.core.paging</span> <span class="k">import</span> <span class="n">Paged</span>
+<span class="kn">from</span> <span class="nn">azure.core.paging</span> <span class="k">import</span> <span class="n">PageIterator</span>
 <span class="kn">from</span> <span class="nn">._shared.utils</span> <span class="k">import</span> <span class="p">(</span>
     <span class="n">return_context_and_deserialized</span><span class="p">,</span>
     <span class="n">process_storage_error</span><span class="p">)</span>
@@ -498,7 +498,7 @@
         <span class="k">return</span> <span class="n">message</span></div>
 
 
-<div class="viewcode-block" id="MessagesPaged"><a class="viewcode-back" href="../../../../ref/azure.storage.queue.html#azure.storage.queue.models.MessagesPaged">[docs]</a><span class="k">class</span> <span class="nc">MessagesPaged</span><span class="p">(</span><span class="n">Paged</span><span class="p">):</span>
+<div class="viewcode-block" id="MessagesPaged"><a class="viewcode-back" href="../../../../ref/azure.storage.queue.html#azure.storage.queue.models.MessagesPaged">[docs]</a><span class="k">class</span> <span class="nc">MessagesPaged</span><span class="p">(</span><span class="n">PageIterator</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;An iterable of Queue Messages.</span>
 
 <span class="sd">    :ivar int results_per_page: The maximum number of results retrieved per API call.</span>
@@ -509,28 +509,28 @@
 <span class="sd">    :param int results_per_page: The maximum number of messages to retrieve per</span>
 <span class="sd">        call.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">command</span><span class="p">,</span> <span class="n">results_per_page</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">(</span><span class="n">MessagesPaged</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">command</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">command</span><span class="p">,</span> <span class="n">results_per_page</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">continuation_token</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">continuation_token</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;This operation does not support continuation token&quot;</span><span class="p">)</span>
+
+        <span class="nb">super</span><span class="p">(</span><span class="n">MessagesPaged</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_get_next_cb</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_extract_data_cb</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_command</span> <span class="o">=</span> <span class="n">command</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">results_per_page</span> <span class="o">=</span> <span class="n">results_per_page</span>
 
-    <span class="k">def</span> <span class="nf">_advance_page</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Force moving the cursor to the next azure call.</span>
-
-<span class="sd">        This method is for advanced usage, iterator protocol is prefered.</span>
-
-<span class="sd">        :raises: StopIteration if no further page</span>
-<span class="sd">        :return: The current page list</span>
-<span class="sd">        :rtype: list</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_current_page_iter_index</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">def</span> <span class="nf">_get_next_cb</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">continuation_token</span><span class="p">):</span>
         <span class="k">try</span><span class="p">:</span>
-            <span class="n">messages</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_next</span><span class="p">(</span><span class="n">number_of_messages</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">results_per_page</span><span class="p">)</span>
-            <span class="k">if</span> <span class="ow">not</span> <span class="n">messages</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="ne">StopIteration</span><span class="p">()</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_command</span><span class="p">(</span><span class="n">number_of_messages</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">results_per_page</span><span class="p">)</span>
         <span class="k">except</span> <span class="n">StorageErrorException</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
             <span class="n">process_storage_error</span><span class="p">(</span><span class="n">error</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">current_page</span> <span class="o">=</span> <span class="p">[</span><span class="n">QueueMessage</span><span class="o">.</span><span class="n">_from_generated</span><span class="p">(</span><span class="n">q</span><span class="p">)</span> <span class="k">for</span> <span class="n">q</span> <span class="ow">in</span> <span class="n">messages</span><span class="p">]</span>  <span class="c1"># pylint: disable=protected-access</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_page</span></div>
+
+    <span class="k">def</span> <span class="nf">_extract_data_cb</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">messages</span><span class="p">):</span>
+        <span class="c1"># There is no concept of continuation token, so raising on my own condition</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">messages</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">StopIteration</span><span class="p">(</span><span class="s2">&quot;End of paging&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="s2">&quot;TOKEN_IGNORED&quot;</span><span class="p">,</span> <span class="p">[</span><span class="n">QueueMessage</span><span class="o">.</span><span class="n">_from_generated</span><span class="p">(</span><span class="n">q</span><span class="p">)</span> <span class="k">for</span> <span class="n">q</span> <span class="ow">in</span> <span class="n">messages</span><span class="p">]</span>  <span class="c1"># pylint: disable=protected-access</span></div>
 
 
 <div class="viewcode-block" id="QueueProperties"><a class="viewcode-back" href="../../../../ref/azure.storage.queue.html#azure.storage.queue.models.QueueProperties">[docs]</a><span class="k">class</span> <span class="nc">QueueProperties</span><span class="p">(</span><span class="n">DictMixin</span><span class="p">):</span>
@@ -558,12 +558,12 @@
         <span class="k">return</span> <span class="n">props</span></div>
 
 
-<div class="viewcode-block" id="QueuePropertiesPaged"><a class="viewcode-back" href="../../../../ref/azure.storage.queue.html#azure.storage.queue.models.QueuePropertiesPaged">[docs]</a><span class="k">class</span> <span class="nc">QueuePropertiesPaged</span><span class="p">(</span><span class="n">Paged</span><span class="p">):</span>
+<div class="viewcode-block" id="QueuePropertiesPaged"><a class="viewcode-back" href="../../../../ref/azure.storage.queue.html#azure.storage.queue.models.QueuePropertiesPaged">[docs]</a><span class="k">class</span> <span class="nc">QueuePropertiesPaged</span><span class="p">(</span><span class="n">PageIterator</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;An iterable of Queue properties.</span>
 
 <span class="sd">    :ivar str service_endpoint: The service URL.</span>
 <span class="sd">    :ivar str prefix: A queue name prefix being used to filter the list.</span>
-<span class="sd">    :ivar str current_marker: The continuation token of the current page of results.</span>
+<span class="sd">    :ivar str marker: The continuation token of the current page of results.</span>
 <span class="sd">    :ivar int results_per_page: The maximum number of results retrieved per API call.</span>
 <span class="sd">    :ivar str next_marker: The continuation token to retrieve the next page of results.</span>
 <span class="sd">    :ivar str location_mode: The location mode being used to list results. The available</span>
@@ -576,44 +576,39 @@
 <span class="sd">        begin with the specified prefix.</span>
 <span class="sd">    :param int results_per_page: The maximum number of queue names to retrieve per</span>
 <span class="sd">        call.</span>
-<span class="sd">    :param str marker: An opaque continuation token.</span>
+<span class="sd">    :param str continuation_token: An opaque continuation token.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">command</span><span class="p">,</span> <span class="n">prefix</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">results_per_page</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">(</span><span class="n">QueuePropertiesPaged</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">command</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">command</span><span class="p">,</span> <span class="n">prefix</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">results_per_page</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">continuation_token</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">QueuePropertiesPaged</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_get_next_cb</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_extract_data_cb</span><span class="p">,</span>
+            <span class="n">continuation_token</span><span class="o">=</span><span class="n">continuation_token</span> <span class="ow">or</span> <span class="s2">&quot;&quot;</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_command</span> <span class="o">=</span> <span class="n">command</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">service_endpoint</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">prefix</span> <span class="o">=</span> <span class="n">prefix</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">current_marker</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">marker</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">results_per_page</span> <span class="o">=</span> <span class="n">results_per_page</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">next_marker</span> <span class="o">=</span> <span class="n">marker</span> <span class="ow">or</span> <span class="s2">&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">location_mode</span> <span class="o">=</span> <span class="kc">None</span>
 
-    <span class="k">def</span> <span class="nf">_advance_page</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Force moving the cursor to the next azure call.</span>
-
-<span class="sd">        This method is for advanced usage, iterator protocol is prefered.</span>
-
-<span class="sd">        :raises: StopIteration if no further page</span>
-<span class="sd">        :return: The current page list</span>
-<span class="sd">        :rtype: list</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">next_marker</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">StopIteration</span><span class="p">(</span><span class="s2">&quot;End of paging&quot;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_current_page_iter_index</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">def</span> <span class="nf">_get_next_cb</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">continuation_token</span><span class="p">):</span>
         <span class="k">try</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">location_mode</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_next</span><span class="p">(</span>
-                <span class="n">marker</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">next_marker</span> <span class="ow">or</span> <span class="kc">None</span><span class="p">,</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_command</span><span class="p">(</span>
+                <span class="n">marker</span><span class="o">=</span><span class="n">continuation_token</span> <span class="ow">or</span> <span class="kc">None</span><span class="p">,</span>
                 <span class="n">maxresults</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">results_per_page</span><span class="p">,</span>
                 <span class="bp">cls</span><span class="o">=</span><span class="n">return_context_and_deserialized</span><span class="p">,</span>
                 <span class="n">use_location</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">location_mode</span><span class="p">)</span>
         <span class="k">except</span> <span class="n">StorageErrorException</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
             <span class="n">process_storage_error</span><span class="p">(</span><span class="n">error</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_extract_data_cb</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">get_next_return</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">location_mode</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_response</span> <span class="o">=</span> <span class="n">get_next_return</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">service_endpoint</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_response</span><span class="o">.</span><span class="n">service_endpoint</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">prefix</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_response</span><span class="o">.</span><span class="n">prefix</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">current_marker</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_response</span><span class="o">.</span><span class="n">marker</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">marker</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_response</span><span class="o">.</span><span class="n">marker</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">results_per_page</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_response</span><span class="o">.</span><span class="n">max_results</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">current_page</span> <span class="o">=</span> <span class="p">[</span><span class="n">QueueProperties</span><span class="o">.</span><span class="n">_from_generated</span><span class="p">(</span><span class="n">q</span><span class="p">)</span> <span class="k">for</span> <span class="n">q</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_response</span><span class="o">.</span><span class="n">queue_items</span><span class="p">]</span>  <span class="c1"># pylint: disable=protected-access</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">next_marker</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_response</span><span class="o">.</span><span class="n">next_marker</span> <span class="ow">or</span> <span class="kc">None</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_page</span></div>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_response</span><span class="o">.</span><span class="n">next_marker</span> <span class="ow">or</span> <span class="kc">None</span><span class="p">,</span> <span class="p">[</span><span class="n">QueueProperties</span><span class="o">.</span><span class="n">_from_generated</span><span class="p">(</span><span class="n">q</span><span class="p">)</span> <span class="k">for</span> <span class="n">q</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_response</span><span class="o">.</span><span class="n">queue_items</span><span class="p">]</span>  <span class="c1"># pylint: disable=protected-access</span></div>
 
 
 <div class="viewcode-block" id="QueuePermissions"><a class="viewcode-back" href="../../../../ref/azure.storage.queue.html#azure.storage.queue.models.QueuePermissions">[docs]</a><span class="k">class</span> <span class="nc">QueuePermissions</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>

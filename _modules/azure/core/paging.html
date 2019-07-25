@@ -301,87 +301,100 @@
 <span class="c1"># IN THE SOFTWARE.</span>
 <span class="c1">#</span>
 <span class="c1"># --------------------------------------------------------------------------</span>
-<span class="kn">import</span> <span class="nn">sys</span>
-<span class="k">try</span><span class="p">:</span>
-    <span class="kn">from</span> <span class="nn">collections.abc</span> <span class="k">import</span> <span class="n">Iterator</span>
-    <span class="n">xrange</span> <span class="o">=</span> <span class="nb">range</span>
-<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
-    <span class="kn">from</span> <span class="nn">collections</span> <span class="k">import</span> <span class="n">Iterator</span>
+<span class="kn">import</span> <span class="nn">itertools</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="k">import</span> <span class="p">(</span>
+    <span class="n">Callable</span><span class="p">,</span>
+    <span class="n">Optional</span><span class="p">,</span>
+    <span class="n">TypeVar</span><span class="p">,</span>
+    <span class="n">Iterator</span><span class="p">,</span>
+    <span class="n">Iterable</span><span class="p">,</span>
+    <span class="n">Tuple</span><span class="p">,</span>
+<span class="p">)</span>  <span class="c1"># pylint: disable=unused-import</span>
+<span class="kn">import</span> <span class="nn">logging</span>
 
-<span class="kn">from</span> <span class="nn">typing</span> <span class="k">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">TYPE_CHECKING</span>  <span class="c1"># pylint: disable=unused-import</span>
 
-<span class="k">if</span> <span class="n">TYPE_CHECKING</span><span class="p">:</span>
-    <span class="kn">from</span> <span class="nn">.pipeline.transport.base</span> <span class="k">import</span> <span class="n">HttpResponse</span>
-    <span class="kn">from</span> <span class="nn">msrest.serialization</span> <span class="k">import</span> <span class="n">Deserializer</span><span class="p">,</span> <span class="n">Model</span>  <span class="c1"># type: ignore # pylint: disable=unused-import</span>
+<span class="n">_LOGGER</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
 
-<span class="k">if</span> <span class="n">sys</span><span class="o">.</span><span class="n">version_info</span> <span class="o">&gt;=</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>
-    <span class="c1"># Not executed on old Python, no syntax error</span>
-    <span class="kn">from</span> <span class="nn">.async_paging</span> <span class="k">import</span> <span class="n">AsyncPagedMixin</span>  <span class="c1"># type: ignore</span>
-<span class="k">else</span><span class="p">:</span>
-    <span class="k">class</span> <span class="nc">AsyncPagedMixin</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>  <span class="c1"># type: ignore</span>
-        <span class="k">pass</span>
+<span class="n">ReturnType</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s2">&quot;ReturnType&quot;</span><span class="p">)</span>
+<span class="n">ResponseType</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s2">&quot;ResponseType&quot;</span><span class="p">)</span>
 
-<div class="viewcode-block" id="Paged"><a class="viewcode-back" href="../../../ref/azure.core.html#azure.core.paging.Paged">[docs]</a><span class="k">class</span> <span class="nc">Paged</span><span class="p">(</span><span class="n">AsyncPagedMixin</span><span class="p">,</span> <span class="n">Iterator</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;A container for paged REST responses.</span>
 
-<span class="sd">    :param response: server response object.</span>
-<span class="sd">    :type response: ~azure.core.pipeline.transport.HttpResponse</span>
-<span class="sd">    :param callable command: Function to retrieve the next page of items.</span>
-<span class="sd">    :param Deserializer deserializer: a Deserializer instance to use</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">_validation</span> <span class="o">=</span> <span class="p">{}</span>  <span class="c1"># type: Dict[str, Dict[str, Any]]</span>
-    <span class="n">_attribute_map</span> <span class="o">=</span> <span class="p">{}</span>  <span class="c1"># type: Dict[str, Dict[str, Any]]</span>
+<div class="viewcode-block" id="PageIterator"><a class="viewcode-back" href="../../../ref/azure.core.html#azure.core.paging.PageIterator">[docs]</a><span class="k">class</span> <span class="nc">PageIterator</span><span class="p">(</span><span class="n">Iterator</span><span class="p">[</span><span class="n">Iterator</span><span class="p">[</span><span class="n">ReturnType</span><span class="p">]]):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">get_next</span><span class="p">,</span>  <span class="c1"># type: Callable[[Optional[str]], ResponseType]</span>
+        <span class="n">extract_data</span><span class="p">,</span>  <span class="c1"># type: Callable[[ResponseType], Tuple[str, Iterable[ReturnType]]]</span>
+        <span class="n">continuation_token</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>  <span class="c1"># type: Optional[str]</span>
+    <span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return an iterator of pages.</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">command</span><span class="p">,</span> <span class="n">deserializer</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="c1"># type: (Callable[[str], HttpResponse], Deserializer, Any) -&gt; None</span>
-        <span class="nb">super</span><span class="p">(</span><span class="n">Paged</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>  <span class="c1"># type: ignore</span>
-        <span class="c1"># Sets next_link, current_page, and _current_page_iter_index.</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">next_link</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">current_page</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c1"># type: List[Model]</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_current_page_iter_index</span> <span class="o">=</span> <span class="mi">0</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_deserializer</span> <span class="o">=</span> <span class="n">deserializer</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_get_next</span> <span class="o">=</span> <span class="n">command</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_response</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># type: Optional[HttpResponse]</span>
+<span class="sd">        :param get_next: Callable that take the continuation token and return a HTTP response</span>
+<span class="sd">        :param extract_data: Callable that take an HTTP response and return a tuple continuation token,</span>
+<span class="sd">         list of ReturnType</span>
+<span class="sd">        :param str continuation_token: The continuation token needed by get_next</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_get_next</span> <span class="o">=</span> <span class="n">get_next</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_extract_data</span> <span class="o">=</span> <span class="n">extract_data</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">continuation_token</span> <span class="o">=</span> <span class="n">continuation_token</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_did_a_call_already</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_response</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># type: Optional[ResponseType]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_current_page</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># type: Optional[Iterable[ReturnType]]</span>
 
     <span class="k">def</span> <span class="nf">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Return &#39;self&#39;.&quot;&quot;&quot;</span>
-        <span class="c1"># Since iteration mutates this object, consider it an iterator in-and-of</span>
-        <span class="c1"># itself.</span>
         <span class="k">return</span> <span class="bp">self</span>
 
-    <span class="nd">@classmethod</span>
-    <span class="k">def</span> <span class="nf">_get_subtype_map</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Required for parity to Model object for deserialization.&quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="p">{}</span>
-
-    <span class="k">def</span> <span class="nf">_advance_page</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="c1"># type: () -&gt; List[Model]</span>
-        <span class="sd">&quot;&quot;&quot;Force moving the cursor to the next azure call.</span>
-
-<span class="sd">        This method is for advanced usage, iterator protocol is prefered.</span>
-
-<span class="sd">        :raises: StopIteration if no further page</span>
-<span class="sd">        :return: The current page list</span>
-<span class="sd">        :rtype: list</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">next_link</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__next__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># type: () -&gt; Iterator[ReturnType]</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">continuation_token</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_did_a_call_already</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">StopIteration</span><span class="p">(</span><span class="s2">&quot;End of paging&quot;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_current_page_iter_index</span> <span class="o">=</span> <span class="mi">0</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_next</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">next_link</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_deserializer</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_response</span><span class="p">)</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_page</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_next</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">continuation_token</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_did_a_call_already</span> <span class="o">=</span> <span class="kc">True</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">continuation_token</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_current_page</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_extract_data</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_response</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="nb">iter</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_current_page</span><span class="p">)</span>
+
+    <span class="nb">next</span> <span class="o">=</span> <span class="fm">__next__</span>  <span class="c1"># Python 2 compatibility.</span></div>
+
+
+<div class="viewcode-block" id="ItemPaged"><a class="viewcode-back" href="../../../ref/azure.core.html#azure.core.paging.ItemPaged">[docs]</a><span class="k">class</span> <span class="nc">ItemPaged</span><span class="p">(</span><span class="n">Iterator</span><span class="p">[</span><span class="n">ReturnType</span><span class="p">]):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return an iterator of items.</span>
+
+<span class="sd">        args and kwargs will be passed to the PageIterator constructor directly,</span>
+<span class="sd">        except page_iterator_class</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_args</span> <span class="o">=</span> <span class="n">args</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_kwargs</span> <span class="o">=</span> <span class="n">kwargs</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_page_iterator</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_page_iterator_class</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span>
+            <span class="s2">&quot;page_iterator_class&quot;</span><span class="p">,</span> <span class="n">PageIterator</span>
+        <span class="p">)</span>
+
+<div class="viewcode-block" id="ItemPaged.by_page"><a class="viewcode-back" href="../../../ref/azure.core.html#azure.core.paging.ItemPaged.by_page">[docs]</a>    <span class="k">def</span> <span class="nf">by_page</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">continuation_token</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="c1"># type: (Optional[str]) -&gt; Iterator[Iterator[ReturnType]]</span>
+        <span class="sd">&quot;&quot;&quot;Get an iterator of pages of objects, instead of an iterator of objects.</span>
+
+<span class="sd">        :param str continuation_token:</span>
+<span class="sd">            An opaque continuation token. This value can be retrieved from the</span>
+<span class="sd">            continuation_token field of a previous generator object. If specified,</span>
+<span class="sd">            this generator will begin returning results from this point.</span>
+<span class="sd">        :returns: An iterator of pages (themselves iterator of objects)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_page_iterator_class</span><span class="p">(</span>
+            <span class="n">continuation_token</span><span class="o">=</span><span class="n">continuation_token</span><span class="p">,</span> <span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">_args</span><span class="p">,</span> <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">_kwargs</span>
+        <span class="p">)</span></div>
+
+    <span class="k">def</span> <span class="nf">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return &#39;self&#39;.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span>
 
     <span class="k">def</span> <span class="nf">__next__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Iterate through responses.&quot;&quot;&quot;</span>
-        <span class="c1"># Storing the list iterator might work out better, but there&#39;s no</span>
-        <span class="c1"># guarantee that some code won&#39;t replace the list entirely with a copy,</span>
-        <span class="c1"># invalidating an list iterator that might be saved between iterations.</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_page</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_current_page_iter_index</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">current_page</span><span class="p">):</span>
-            <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_page</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_current_page_iter_index</span><span class="p">]</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_current_page_iter_index</span> <span class="o">+=</span> <span class="mi">1</span>
-            <span class="k">return</span> <span class="n">response</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_advance_page</span><span class="p">()</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="fm">__next__</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_page_iterator</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_page_iterator</span> <span class="o">=</span> <span class="n">itertools</span><span class="o">.</span><span class="n">chain</span><span class="o">.</span><span class="n">from_iterable</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">by_page</span><span class="p">())</span>
+        <span class="k">return</span> <span class="nb">next</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_page_iterator</span><span class="p">)</span>
 
     <span class="nb">next</span> <span class="o">=</span> <span class="fm">__next__</span>  <span class="c1"># Python 2 compatibility.</span></div>
 </pre></div>

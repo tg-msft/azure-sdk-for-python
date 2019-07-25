@@ -294,6 +294,8 @@
     <span class="kn">from</span> <span class="nn">urlparse</span> <span class="k">import</span> <span class="n">urlparse</span> <span class="c1"># type: ignore</span>
     <span class="kn">from</span> <span class="nn">urllib2</span> <span class="k">import</span> <span class="n">quote</span><span class="p">,</span> <span class="n">unquote</span> <span class="c1"># type: ignore</span>
 
+<span class="kn">from</span> <span class="nn">azure.core.paging</span> <span class="k">import</span> <span class="n">ItemPaged</span>
+
 <span class="kn">import</span> <span class="nn">six</span>
 
 <span class="kn">from</span> <span class="nn">._shared.shared_access_signature</span> <span class="k">import</span> <span class="n">BlobSharedAccessSignature</span>
@@ -936,8 +938,8 @@
         <span class="k">except</span> <span class="n">StorageErrorException</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
             <span class="n">process_storage_error</span><span class="p">(</span><span class="n">error</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="ContainerClient.list_blobs"><a class="viewcode-back" href="../../../../ref/azure.storage.blob.html#azure.storage.blob.container_client.ContainerClient.list_blobs">[docs]</a>    <span class="k">def</span> <span class="nf">list_blobs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name_starts_with</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">include</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="c1"># type: (Optional[str], Optional[Any], Optional[str], Optional[int], **Any) -&gt; Iterable[BlobProperties]</span>
+<div class="viewcode-block" id="ContainerClient.list_blobs"><a class="viewcode-back" href="../../../../ref/azure.storage.blob.html#azure.storage.blob.container_client.ContainerClient.list_blobs">[docs]</a>    <span class="k">def</span> <span class="nf">list_blobs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name_starts_with</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">include</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="c1"># type: (Optional[str], Optional[Any], Optional[int], **Any) -&gt; ItemPaged[BlobProperties]</span>
         <span class="sd">&quot;&quot;&quot;Returns a generator to list the blobs under the specified container.</span>
 <span class="sd">        The generator will lazily follow the continuation tokens returned by</span>
 <span class="sd">        the service.</span>
@@ -948,14 +950,10 @@
 <span class="sd">        :param list[str] include:</span>
 <span class="sd">            Specifies one or more additional datasets to include in the response.</span>
 <span class="sd">            Options include: &#39;snapshots&#39;, &#39;metadata&#39;, &#39;uncommittedblobs&#39;, &#39;copy&#39;, &#39;deleted&#39;.</span>
-<span class="sd">        :param str marker:</span>
-<span class="sd">            An opaque continuation token. This value can be retrieved from the</span>
-<span class="sd">            next_marker field of a previous generator object. If specified,</span>
-<span class="sd">            this generator will begin returning results from this point.</span>
 <span class="sd">        :param int timeout:</span>
 <span class="sd">            The timeout parameter is expressed in seconds.</span>
 <span class="sd">        :returns: An iterable (auto-paging) response of BlobProperties.</span>
-<span class="sd">        :rtype: ~azure.storage.blob.models.BlobPropertiesPaged</span>
+<span class="sd">        :rtype: ~azure.core.paging.ItemPaged[~azure.storage.blob.models.BlobProperties]</span>
 
 <span class="sd">        Example:</span>
 <span class="sd">            .. literalinclude:: ../tests/test_blob_samples_containers.py</span>
@@ -974,17 +972,19 @@
             <span class="n">include</span><span class="o">=</span><span class="n">include</span><span class="p">,</span>
             <span class="n">timeout</span><span class="o">=</span><span class="n">timeout</span><span class="p">,</span>
             <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">BlobPropertiesPaged</span><span class="p">(</span><span class="n">command</span><span class="p">,</span> <span class="n">prefix</span><span class="o">=</span><span class="n">name_starts_with</span><span class="p">,</span> <span class="n">results_per_page</span><span class="o">=</span><span class="n">results_per_page</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="n">marker</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="n">ItemPaged</span><span class="p">(</span>
+            <span class="n">command</span><span class="p">,</span> <span class="n">prefix</span><span class="o">=</span><span class="n">name_starts_with</span><span class="p">,</span> <span class="n">results_per_page</span><span class="o">=</span><span class="n">results_per_page</span><span class="p">,</span>
+            <span class="n">page_iterator_class</span><span class="o">=</span><span class="n">BlobPropertiesPaged</span><span class="p">)</span></div>
+
 
 <div class="viewcode-block" id="ContainerClient.walk_blobs"><a class="viewcode-back" href="../../../../ref/azure.storage.blob.html#azure.storage.blob.container_client.ContainerClient.walk_blobs">[docs]</a>    <span class="k">def</span> <span class="nf">walk_blobs</span><span class="p">(</span>
             <span class="bp">self</span><span class="p">,</span> <span class="n">name_starts_with</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="c1"># type: Optional[str]</span>
             <span class="n">include</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="c1"># type: Optional[Any]</span>
             <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;/&quot;</span><span class="p">,</span> <span class="c1"># type: str</span>
-            <span class="n">marker</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="c1"># type: Optional[str]</span>
             <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="c1"># type: Optional[int]</span>
             <span class="o">**</span><span class="n">kwargs</span> <span class="c1"># type: Optional[Any]</span>
         <span class="p">):</span>
-        <span class="c1"># type: (...) -&gt; Iterable[BlobProperties]</span>
+        <span class="c1"># type: (...) -&gt; ItemPaged[BlobProperties]</span>
         <span class="sd">&quot;&quot;&quot;Returns a generator to list the blobs under the specified container.</span>
 <span class="sd">        The generator will lazily follow the continuation tokens returned by</span>
 <span class="sd">        the service. This operation will list blobs in accordance with a hierarchy,</span>
@@ -1001,20 +1001,15 @@
 <span class="sd">            element in the response body that acts as a placeholder for all blobs whose</span>
 <span class="sd">            names begin with the same substring up to the appearance of the delimiter</span>
 <span class="sd">            character. The delimiter may be a single character or a string.</span>
-<span class="sd">        :param str marker:</span>
-<span class="sd">            An opaque continuation token. This value can be retrieved from the</span>
-<span class="sd">            next_marker field of a previous generator object. If specified,</span>
-<span class="sd">            this generator will begin returning results from this point.</span>
 <span class="sd">        :param int timeout:</span>
 <span class="sd">            The timeout parameter is expressed in seconds.</span>
 <span class="sd">        :returns: An iterable (auto-paging) response of BlobProperties.</span>
-<span class="sd">        :rtype: ~azure.storage.blob.models.BlobPrefix</span>
+<span class="sd">        :rtype: ~azure.core.paging.ItemPaged[~azure.storage.blob.models.BlobProperties]</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">include</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">include</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
             <span class="n">include</span> <span class="o">=</span> <span class="p">[</span><span class="n">include</span><span class="p">]</span>
 
         <span class="n">results_per_page</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;results_per_page&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-        <span class="n">marker</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;marker&#39;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
         <span class="n">command</span> <span class="o">=</span> <span class="n">functools</span><span class="o">.</span><span class="n">partial</span><span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_client</span><span class="o">.</span><span class="n">container</span><span class="o">.</span><span class="n">list_blob_hierarchy_segment</span><span class="p">,</span>
             <span class="n">delimiter</span><span class="o">=</span><span class="n">delimiter</span><span class="p">,</span>
@@ -1025,7 +1020,6 @@
             <span class="n">command</span><span class="p">,</span>
             <span class="n">prefix</span><span class="o">=</span><span class="n">name_starts_with</span><span class="p">,</span>
             <span class="n">results_per_page</span><span class="o">=</span><span class="n">results_per_page</span><span class="p">,</span>
-            <span class="n">marker</span><span class="o">=</span><span class="n">marker</span><span class="p">,</span>
             <span class="n">delimiter</span><span class="o">=</span><span class="n">delimiter</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="ContainerClient.upload_blob"><a class="viewcode-back" href="../../../../ref/azure.storage.blob.html#azure.storage.blob.container_client.ContainerClient.upload_blob">[docs]</a>    <span class="k">def</span> <span class="nf">upload_blob</span><span class="p">(</span>

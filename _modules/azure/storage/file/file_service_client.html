@@ -284,13 +284,15 @@
 
 <span class="kn">import</span> <span class="nn">functools</span>
 <span class="kn">from</span> <span class="nn">typing</span> <span class="k">import</span> <span class="p">(</span>  <span class="c1"># pylint: disable=unused-import</span>
-    <span class="n">Union</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Iterable</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span>
+    <span class="n">Union</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span>
     <span class="n">TYPE_CHECKING</span>
 <span class="p">)</span>
 <span class="k">try</span><span class="p">:</span>
     <span class="kn">from</span> <span class="nn">urllib.parse</span> <span class="k">import</span> <span class="n">urlparse</span>
 <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
     <span class="kn">from</span> <span class="nn">urlparse</span> <span class="k">import</span> <span class="n">urlparse</span> <span class="c1"># type: ignore</span>
+
+<span class="kn">from</span> <span class="nn">azure.core.paging</span> <span class="k">import</span> <span class="n">ItemPaged</span>
 
 <span class="kn">from</span> <span class="nn">.share_client</span> <span class="k">import</span> <span class="n">ShareClient</span>
 <span class="kn">from</span> <span class="nn">._shared.shared_access_signature</span> <span class="k">import</span> <span class="n">SharedAccessSignature</span>
@@ -548,11 +550,10 @@
             <span class="bp">self</span><span class="p">,</span> <span class="n">name_starts_with</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>  <span class="c1"># type: Optional[str]</span>
             <span class="n">include_metadata</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>  <span class="c1"># type: Optional[bool]</span>
             <span class="n">include_snapshots</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="c1"># type: Optional[bool]</span>
-            <span class="n">marker</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
             <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>  <span class="c1"># type: Optional[int]</span>
             <span class="o">**</span><span class="n">kwargs</span>
         <span class="p">):</span>
-        <span class="c1"># type: (...) -&gt; SharePropertiesPaged</span>
+        <span class="c1"># type: (...) -&gt; ItemPaged[ShareProperties]</span>
         <span class="sd">&quot;&quot;&quot;Returns auto-paging iterable of dict-like ShareProperties under the specified account.</span>
 <span class="sd">        The generator will lazily follow the continuation tokens returned by</span>
 <span class="sd">        the service and stop when all shares have been returned.</span>
@@ -564,14 +565,10 @@
 <span class="sd">            Specifies that share metadata be returned in the response.</span>
 <span class="sd">        :param bool include_snapshots:</span>
 <span class="sd">            Specifies that share snapshot be returned in the response.</span>
-<span class="sd">        :param str marker:</span>
-<span class="sd">            An opaque continuation token. This value can be retrieved from the</span>
-<span class="sd">            next_marker field of a previous generator object. If specified,</span>
-<span class="sd">            this generator will begin returning results from this point.</span>
 <span class="sd">        :param int timeout:</span>
 <span class="sd">            The timeout parameter is expressed in seconds.</span>
 <span class="sd">        :returns: An iterable (auto-paging) of ShareProperties.</span>
-<span class="sd">        :rtype: ~azure.storage.file.models.SharePropertiesPaged</span>
+<span class="sd">        :rtype: ~azure.core.paging.ItemPaged[~azure.storage.file.models.ShareProperties]</span>
 
 <span class="sd">        Example:</span>
 <span class="sd">            .. literalinclude:: ../tests/test_file_samples_service.py</span>
@@ -592,8 +589,9 @@
             <span class="n">include</span><span class="o">=</span><span class="n">include</span><span class="p">,</span>
             <span class="n">timeout</span><span class="o">=</span><span class="n">timeout</span><span class="p">,</span>
             <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">SharePropertiesPaged</span><span class="p">(</span>
-            <span class="n">command</span><span class="p">,</span> <span class="n">prefix</span><span class="o">=</span><span class="n">name_starts_with</span><span class="p">,</span> <span class="n">results_per_page</span><span class="o">=</span><span class="n">results_per_page</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="n">marker</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="n">ItemPaged</span><span class="p">(</span>
+            <span class="n">command</span><span class="p">,</span> <span class="n">prefix</span><span class="o">=</span><span class="n">name_starts_with</span><span class="p">,</span> <span class="n">results_per_page</span><span class="o">=</span><span class="n">results_per_page</span><span class="p">,</span>
+            <span class="n">page_iterator_class</span><span class="o">=</span><span class="n">SharePropertiesPaged</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="FileServiceClient.create_share"><a class="viewcode-back" href="../../../../ref/azure.storage.file.html#azure.storage.file.file_service_client.FileServiceClient.create_share">[docs]</a>    <span class="k">def</span> <span class="nf">create_share</span><span class="p">(</span>
             <span class="bp">self</span><span class="p">,</span> <span class="n">share_name</span><span class="p">,</span>  <span class="c1"># type: str</span>

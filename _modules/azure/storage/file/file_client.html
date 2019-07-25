@@ -296,6 +296,7 @@
 
 <span class="kn">import</span> <span class="nn">six</span>
 <span class="kn">from</span> <span class="nn">azure.core.polling</span> <span class="k">import</span> <span class="n">LROPoller</span>
+<span class="kn">from</span> <span class="nn">azure.core.paging</span> <span class="k">import</span> <span class="n">ItemPaged</span>
 
 <span class="kn">from</span> <span class="nn">.models</span> <span class="k">import</span> <span class="n">HandlesPaged</span>
 <span class="kn">from</span> <span class="nn">._generated</span> <span class="k">import</span> <span class="n">AzureFileStorage</span>
@@ -1059,16 +1060,14 @@
         <span class="k">except</span> <span class="n">StorageErrorException</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
             <span class="n">process_storage_error</span><span class="p">(</span><span class="n">error</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="FileClient.list_handles"><a class="viewcode-back" href="../../../../ref/azure.storage.file.html#azure.storage.file.file_client.FileClient.list_handles">[docs]</a>    <span class="k">def</span> <span class="nf">list_handles</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<div class="viewcode-block" id="FileClient.list_handles"><a class="viewcode-back" href="../../../../ref/azure.storage.file.html#azure.storage.file.file_client.FileClient.list_handles">[docs]</a>    <span class="k">def</span> <span class="nf">list_handles</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="c1"># type: (int, Any) -&gt; ItemPaged[Handle]</span>
         <span class="sd">&quot;&quot;&quot;Lists handles for file.</span>
 
-<span class="sd">        :param str marker:</span>
-<span class="sd">            An opaque continuation token. This value can be retrieved from the</span>
-<span class="sd">            next_marker field of a previous generator object. If specified,</span>
-<span class="sd">            this generator will begin returning results from this point.</span>
 <span class="sd">        :param int timeout:</span>
 <span class="sd">            The timeout parameter is expressed in seconds.</span>
 <span class="sd">        :returns: An auto-paging iterable of HandleItems</span>
+<span class="sd">        :rtype: ~azure.core.paging.ItemPaged[~azure.storage.file.models.Handle]</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">results_per_page</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;results_per_page&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
         <span class="n">command</span> <span class="o">=</span> <span class="n">functools</span><span class="o">.</span><span class="n">partial</span><span class="p">(</span>
@@ -1076,8 +1075,9 @@
             <span class="n">sharesnapshot</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">snapshot</span><span class="p">,</span>
             <span class="n">timeout</span><span class="o">=</span><span class="n">timeout</span><span class="p">,</span>
             <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">HandlesPaged</span><span class="p">(</span>
-            <span class="n">command</span><span class="p">,</span> <span class="n">results_per_page</span><span class="o">=</span><span class="n">results_per_page</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="n">marker</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="n">ItemPaged</span><span class="p">(</span>
+            <span class="n">command</span><span class="p">,</span> <span class="n">results_per_page</span><span class="o">=</span><span class="n">results_per_page</span><span class="p">,</span>
+            <span class="n">page_iterator_class</span><span class="o">=</span><span class="n">HandlesPaged</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="FileClient.close_handles"><a class="viewcode-back" href="../../../../ref/azure.storage.file.html#azure.storage.file.file_client.FileClient.close_handles">[docs]</a>    <span class="k">def</span> <span class="nf">close_handles</span><span class="p">(</span>
             <span class="bp">self</span><span class="p">,</span> <span class="n">handle</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="c1"># type: Union[str, HandleItem]</span>
