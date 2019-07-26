@@ -345,9 +345,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">status_code</span> <span class="o">=</span> <span class="n">requests_response</span><span class="o">.</span><span class="n">status_code</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">headers</span> <span class="o">=</span> <span class="n">requests_response</span><span class="o">.</span><span class="n">headers</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">reason</span> <span class="o">=</span> <span class="n">requests_response</span><span class="o">.</span><span class="n">reason</span>
-        <span class="n">content_type</span> <span class="o">=</span> <span class="n">requests_response</span><span class="o">.</span><span class="n">headers</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;content-type&#39;</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">content_type</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">content_type</span> <span class="o">=</span> <span class="n">content_type</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;;&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">content_type</span> <span class="o">=</span> <span class="n">requests_response</span><span class="o">.</span><span class="n">headers</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;content-type&#39;</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">body</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">internal_response</span><span class="o">.</span><span class="n">content</span>
@@ -362,18 +360,16 @@
     <span class="sd">&quot;&quot;&quot;Generator for streaming response data.</span>
 
 <span class="sd">    :param pipeline: The pipeline object</span>
-<span class="sd">    :param request: The request object</span>
 <span class="sd">    :param response: The response object.</span>
-<span class="sd">    :param int block_size: Number of bytes to read into memory.</span>
 <span class="sd">    :param generator iter_content_func: Iterator for response data.</span>
 <span class="sd">    :param int content_length: size of body in bytes.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pipeline</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">response</span><span class="p">,</span> <span class="n">block_size</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pipeline</span><span class="p">,</span> <span class="n">response</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">pipeline</span> <span class="o">=</span> <span class="n">pipeline</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">request</span> <span class="o">=</span> <span class="n">request</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">request</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">request</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">response</span> <span class="o">=</span> <span class="n">response</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">block_size</span> <span class="o">=</span> <span class="n">block_size</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">iter_content_func</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">response</span><span class="o">.</span><span class="n">iter_content</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">block_size</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">block_size</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">block_size</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">iter_content_func</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">response</span><span class="o">.</span><span class="n">internal_response</span><span class="o">.</span><span class="n">iter_content</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">block_size</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">content_length</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">headers</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;Content-Length&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">downloaded</span> <span class="o">=</span> <span class="mi">0</span>
 
@@ -395,7 +391,7 @@
                 <span class="bp">self</span><span class="o">.</span><span class="n">downloaded</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">block_size</span>
                 <span class="k">return</span> <span class="n">chunk</span>
             <span class="k">except</span> <span class="ne">StopIteration</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">response</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">response</span><span class="o">.</span><span class="n">internal_response</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
                 <span class="k">raise</span> <span class="ne">StopIteration</span><span class="p">()</span>
             <span class="k">except</span> <span class="p">(</span><span class="n">requests</span><span class="o">.</span><span class="n">exceptions</span><span class="o">.</span><span class="n">ChunkedEncodingError</span><span class="p">,</span>
                     <span class="n">requests</span><span class="o">.</span><span class="n">exceptions</span><span class="o">.</span><span class="n">ConnectionError</span><span class="p">):</span>
@@ -418,7 +414,7 @@
                 <span class="k">raise</span>
             <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
                 <span class="n">_LOGGER</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;Unable to stream download: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">err</span><span class="p">)</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">response</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">response</span><span class="o">.</span><span class="n">internal_response</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
                 <span class="k">raise</span>
     <span class="nb">next</span> <span class="o">=</span> <span class="fm">__next__</span>  <span class="c1"># Python 2 compatibility.</span></div>
 
@@ -429,7 +425,7 @@
 <div class="viewcode-block" id="RequestsTransportResponse.stream_download"><a class="viewcode-back" href="../../../../../ref/azure.core.pipeline.transport.html#azure.core.pipeline.transport.requests_basic.RequestsTransportResponse.stream_download">[docs]</a>    <span class="k">def</span> <span class="nf">stream_download</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pipeline</span><span class="p">):</span>
         <span class="c1"># type: (PipelineType) -&gt; Iterator[bytes]</span>
         <span class="sd">&quot;&quot;&quot;Generator for streaming request body data.&quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="n">StreamDownloadGenerator</span><span class="p">(</span><span class="n">pipeline</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">request</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">internal_response</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">block_size</span><span class="p">)</span></div></div>
+        <span class="k">return</span> <span class="n">StreamDownloadGenerator</span><span class="p">(</span><span class="n">pipeline</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span></div></div>
 
 
 <div class="viewcode-block" id="RequestsTransport"><a class="viewcode-back" href="../../../../../ref/azure.core.pipeline.transport.html#azure.core.pipeline.transport.requests_basic.RequestsTransport">[docs]</a><span class="k">class</span> <span class="nc">RequestsTransport</span><span class="p">(</span><span class="n">HttpTransport</span><span class="p">):</span>

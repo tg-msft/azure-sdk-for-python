@@ -318,15 +318,14 @@
 <span id="azure-core-pipeline-transport-aiohttp-module"></span><h2>azure.core.pipeline.transport.aiohttp module<a class="headerlink" href="#module-azure.core.pipeline.transport.aiohttp" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="azure.core.pipeline.transport.aiohttp.AioHttpStreamDownloadGenerator">
-<em class="property">class </em><code class="sig-prename descclassname">azure.core.pipeline.transport.aiohttp.</code><code class="sig-name descname">AioHttpStreamDownloadGenerator</code><span class="sig-paren">(</span><em class="sig-param">pipeline: azure.core.pipeline.base.Pipeline</em>, <em class="sig-param">request: azure.core.pipeline.transport.base.HttpRequest</em>, <em class="sig-param">response: aiohttp.client_reqrep.ClientResponse</em>, <em class="sig-param">block_size: int</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/core/pipeline/transport/aiohttp.html#AioHttpStreamDownloadGenerator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.core.pipeline.transport.aiohttp.AioHttpStreamDownloadGenerator" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">azure.core.pipeline.transport.aiohttp.</code><code class="sig-name descname">AioHttpStreamDownloadGenerator</code><span class="sig-paren">(</span><em class="sig-param">pipeline: azure.core.pipeline.base.Pipeline</em>, <em class="sig-param">response: azure.core.pipeline.transport.base_async.AsyncHttpResponse</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/core/pipeline/transport/aiohttp.html#AioHttpStreamDownloadGenerator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.core.pipeline.transport.aiohttp.AioHttpStreamDownloadGenerator" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3.5/library/collections.abc.html#collections.abc.AsyncIterator" title="(in Python v3.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">collections.abc.AsyncIterator</span></code></a></p>
 <p>Streams the response body data.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>pipeline</strong> – The pipeline object</p></li>
-<li><p><strong>request</strong> – The request object</p></li>
-<li><p><strong>response</strong> (<em>aiohttp.ClientResponse</em>) – The client response object.</p></li>
+<li><p><strong>response</strong> – The client response object.</p></li>
 <li><p><strong>block_size</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a>) – block size of data sent over connection.</p></li>
 </ul>
 </dd>
@@ -870,6 +869,11 @@ Anything else is sent straight to requests.
 <em>proxies</em> - will define the proxy to use. Proxy is a dict (protocol, url)</p>
 </dd></dl>
 
+<dl class="method">
+<dt id="azure.core.pipeline.transport.requests_asyncio.AsyncioRequestsTransport.sleep">
+<em class="property">async </em><code class="sig-name descname">sleep</code><span class="sig-paren">(</span><em class="sig-param">duration</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/core/pipeline/transport/requests_asyncio.html#AsyncioRequestsTransport.sleep"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.core.pipeline.transport.requests_asyncio.AsyncioRequestsTransport.sleep" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 </dd></dl>
 
 <dl class="class">
@@ -887,16 +891,14 @@ Anything else is sent straight to requests.
 
 <dl class="class">
 <dt id="azure.core.pipeline.transport.requests_asyncio.AsyncioStreamDownloadGenerator">
-<em class="property">class </em><code class="sig-prename descclassname">azure.core.pipeline.transport.requests_asyncio.</code><code class="sig-name descname">AsyncioStreamDownloadGenerator</code><span class="sig-paren">(</span><em class="sig-param">pipeline: azure.core.pipeline.base.Pipeline</em>, <em class="sig-param">request: azure.core.pipeline.transport.base.HttpRequest</em>, <em class="sig-param">response: requests.models.Response</em>, <em class="sig-param">block_size: int</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/core/pipeline/transport/requests_asyncio.html#AsyncioStreamDownloadGenerator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.core.pipeline.transport.requests_asyncio.AsyncioStreamDownloadGenerator" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">azure.core.pipeline.transport.requests_asyncio.</code><code class="sig-name descname">AsyncioStreamDownloadGenerator</code><span class="sig-paren">(</span><em class="sig-param">pipeline: azure.core.pipeline.base.Pipeline</em>, <em class="sig-param">response: azure.core.pipeline.transport.base_async.AsyncHttpResponse</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/core/pipeline/transport/requests_asyncio.html#AsyncioStreamDownloadGenerator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.core.pipeline.transport.requests_asyncio.AsyncioStreamDownloadGenerator" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3.5/library/collections.abc.html#collections.abc.AsyncIterator" title="(in Python v3.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">collections.abc.AsyncIterator</span></code></a></p>
 <p>Streams the response body data.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>pipeline</strong> – The pipeline object</p></li>
-<li><p><strong>request</strong> – The request object</p></li>
 <li><p><strong>response</strong> – The response object.</p></li>
-<li><p><strong>block_size</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a>) – block size of data sent over connection.</p></li>
 <li><p><strong>iter_content_func</strong> (<em>generator</em>) – Iterator for response data.</p></li>
 <li><p><strong>content_length</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a>) – size of body in bytes.</p></li>
 </ul>
@@ -984,16 +986,14 @@ Anything else is sent straight to requests.
 
 <dl class="class">
 <dt id="azure.core.pipeline.transport.requests_basic.StreamDownloadGenerator">
-<em class="property">class </em><code class="sig-prename descclassname">azure.core.pipeline.transport.requests_basic.</code><code class="sig-name descname">StreamDownloadGenerator</code><span class="sig-paren">(</span><em class="sig-param">pipeline</em>, <em class="sig-param">request</em>, <em class="sig-param">response</em>, <em class="sig-param">block_size</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/core/pipeline/transport/requests_basic.html#StreamDownloadGenerator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.core.pipeline.transport.requests_basic.StreamDownloadGenerator" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">azure.core.pipeline.transport.requests_basic.</code><code class="sig-name descname">StreamDownloadGenerator</code><span class="sig-paren">(</span><em class="sig-param">pipeline</em>, <em class="sig-param">response</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/core/pipeline/transport/requests_basic.html#StreamDownloadGenerator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.core.pipeline.transport.requests_basic.StreamDownloadGenerator" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3.5/library/functions.html#object" title="(in Python v3.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p>Generator for streaming response data.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>pipeline</strong> – The pipeline object</p></li>
-<li><p><strong>request</strong> – The request object</p></li>
 <li><p><strong>response</strong> – The response object.</p></li>
-<li><p><strong>block_size</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a>) – Number of bytes to read into memory.</p></li>
 <li><p><strong>iter_content_func</strong> (<em>generator</em>) – Iterator for response data.</p></li>
 <li><p><strong>content_length</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a>) – size of body in bytes.</p></li>
 </ul>
@@ -1073,16 +1073,14 @@ Anything else is sent straight to requests.
 
 <dl class="class">
 <dt id="azure.core.pipeline.transport.requests_trio.TrioStreamDownloadGenerator">
-<em class="property">class </em><code class="sig-prename descclassname">azure.core.pipeline.transport.requests_trio.</code><code class="sig-name descname">TrioStreamDownloadGenerator</code><span class="sig-paren">(</span><em class="sig-param">pipeline: azure.core.pipeline.base.Pipeline</em>, <em class="sig-param">request: azure.core.pipeline.transport.base.HttpRequest</em>, <em class="sig-param">response: requests.models.Response</em>, <em class="sig-param">block_size: int</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/core/pipeline/transport/requests_trio.html#TrioStreamDownloadGenerator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.core.pipeline.transport.requests_trio.TrioStreamDownloadGenerator" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">azure.core.pipeline.transport.requests_trio.</code><code class="sig-name descname">TrioStreamDownloadGenerator</code><span class="sig-paren">(</span><em class="sig-param">pipeline: azure.core.pipeline.base.Pipeline</em>, <em class="sig-param">response: azure.core.pipeline.transport.base_async.AsyncHttpResponse</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/core/pipeline/transport/requests_trio.html#TrioStreamDownloadGenerator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.core.pipeline.transport.requests_trio.TrioStreamDownloadGenerator" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3.5/library/collections.abc.html#collections.abc.AsyncIterator" title="(in Python v3.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">collections.abc.AsyncIterator</span></code></a></p>
 <p>Generator for streaming response data.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>pipeline</strong> – The pipeline object</p></li>
-<li><p><strong>request</strong> – The request object</p></li>
 <li><p><strong>response</strong> – The response object.</p></li>
-<li><p><strong>block_size</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a>) – Number of bytes to read into memory.</p></li>
 <li><p><strong>iter_content_func</strong> (<em>generator</em>) – Iterator for response data.</p></li>
 <li><p><strong>content_length</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a>) – size of body in bytes.</p></li>
 </ul>
@@ -1403,6 +1401,11 @@ asynchronous methods. Uses the built-in asyncio event loop.</p>
 Anything else is sent straight to requests.
 <em>proxies</em> - will define the proxy to use. Proxy is a dict (protocol, url)</p>
 </dd></dl>
+
+<dl class="method">
+<dt id="azure.core.pipeline.transport.AsyncioRequestsTransport.sleep">
+<em class="property">async </em><code class="sig-name descname">sleep</code><span class="sig-paren">(</span><em class="sig-param">duration</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/core/pipeline/transport/requests_asyncio.html#AsyncioRequestsTransport.sleep"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.core.pipeline.transport.AsyncioRequestsTransport.sleep" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
 </dd></dl>
 
