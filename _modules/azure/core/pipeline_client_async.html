@@ -326,7 +326,6 @@
 <span class="kn">from</span> <span class="nn">.pipeline</span> <span class="k">import</span> <span class="n">AsyncPipeline</span>
 <span class="kn">from</span> <span class="nn">.pipeline.transport.base</span> <span class="k">import</span> <span class="n">PipelineClientBase</span>
 <span class="kn">from</span> <span class="nn">.pipeline.policies</span> <span class="k">import</span> <span class="n">ContentDecodePolicy</span>
-<span class="kn">from</span> <span class="nn">.pipeline.transport</span> <span class="k">import</span> <span class="n">AioHttpTransport</span>
 <span class="kn">from</span> <span class="nn">.pipeline.policies.distributed_tracing</span> <span class="k">import</span> <span class="n">DistributedTracingPolicy</span>
 
 
@@ -399,6 +398,7 @@
             <span class="p">]</span>
 
         <span class="k">if</span> <span class="ow">not</span> <span class="n">transport</span><span class="p">:</span>
+            <span class="kn">from</span> <span class="nn">.pipeline.transport</span> <span class="k">import</span> <span class="n">AioHttpTransport</span>
             <span class="n">transport</span> <span class="o">=</span> <span class="n">AioHttpTransport</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="n">AsyncPipeline</span><span class="p">(</span><span class="n">transport</span><span class="p">,</span> <span class="n">policies</span><span class="p">)</span></div>
