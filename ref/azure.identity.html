@@ -782,6 +782,48 @@ environment variables:</p>
 </dd></dl>
 
 <dl class="class">
+<dt id="azure.identity.InteractiveBrowserCredential">
+<em class="property">class </em><code class="sig-prename descclassname">azure.identity.</code><code class="sig-name descname">InteractiveBrowserCredential</code><span class="sig-paren">(</span><em class="sig-param">client_id</em>, <em class="sig-param">client_secret</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/identity/browser_auth.html#InteractiveBrowserCredential"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.identity.InteractiveBrowserCredential" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">azure.identity._internal.msal_credentials.ConfidentialClientCredential</span></code></p>
+<p>Authenticates a user through the authorization code flow. This is an interactive flow: <code class="docutils literal notranslate"><span class="pre">get_token</span></code> opens a
+browser to a login URL provided by Azure Active Directory, and waits for the user to authenticate there.</p>
+<p>Azure Active Directory documentation describes the authorization code flow in more detail:
+<a class="reference external" href="https://docs.microsoft.com/en-us/azure/active-directory/develop/v1-protocols-oauth-code">https://docs.microsoft.com/en-us/azure/active-directory/develop/v1-protocols-oauth-code</a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>client_id</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – the application’s client ID</p></li>
+<li><p><strong>secret</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – one of the application’s client secrets</p></li>
+</ul>
+</dd>
+</dl>
+<p><strong>Keyword arguments:</strong></p>
+<dl class="simple">
+<dt><em>tenant (str)</em> - a tenant ID or a domain associated with a tenant. If not provided, the credential defaults to the</dt><dd><p>‘organizations’ tenant, which can authenticate work or school accounts.</p>
+</dd>
+</dl>
+<p><em>timeout (str)</em> - seconds to wait for the user to complete authentication. Defaults to 300 (5 minutes).</p>
+<dl class="method">
+<dt id="azure.identity.InteractiveBrowserCredential.get_token">
+<code class="sig-name descname">get_token</code><span class="sig-paren">(</span><em class="sig-param">*scopes</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/identity/browser_auth.html#InteractiveBrowserCredential.get_token"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.identity.InteractiveBrowserCredential.get_token" title="Permalink to this definition">¶</a></dt>
+<dd><p>Request an access token for <cite>scopes</cite>. This will open a browser to a login page and listen on localhost for a
+request indicating authentication has completed.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>scopes</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – desired scopes for the token</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference internal" href="azure.core.html#azure.core.credentials.AccessToken" title="azure.core.credentials.AccessToken"><code class="xref py py-class docutils literal notranslate"><span class="pre">azure.core.credentials.AccessToken</span></code></a></p>
+</dd>
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><p><a class="reference internal" href="azure.core.html#azure.core.exceptions.ClientAuthenticationError" title="azure.core.exceptions.ClientAuthenticationError"><code class="xref py py-class docutils literal notranslate"><span class="pre">azure.core.exceptions.ClientAuthenticationError</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
 <dt id="azure.identity.ManagedIdentityCredential">
 <em class="property">class </em><code class="sig-prename descclassname">azure.identity.</code><code class="sig-name descname">ManagedIdentityCredential</code><span class="sig-paren">(</span><em class="sig-param">client_id=None</em>, <em class="sig-param">config=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/identity/credentials.html#ManagedIdentityCredential"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.identity.ManagedIdentityCredential" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3.5/library/functions.html#object" title="(in Python v3.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
