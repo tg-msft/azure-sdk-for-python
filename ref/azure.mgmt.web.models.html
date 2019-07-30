@@ -993,7 +993,7 @@ sending a request.</p>
 <li><p><strong>deleted_site_id</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a>) – Numeric id for the deleted site</p></li>
 <li><p><strong>deleted_timestamp</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Time in UTC when the app was deleted.</p></li>
 <li><p><a class="reference internal" href="azure.mgmt.subscription.html#module-azure.mgmt.subscription" title="azure.mgmt.subscription"><strong>subscription</strong></a> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Subscription containing the deleted site</p></li>
-<li><p><strong>resource_group</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – ResourceGroup that contained the deleted site</p></li>
+<li><p><a class="reference internal" href="azure.mgmt.alertsmanagement.models.html#azure.mgmt.alertsmanagement.models.ScopeType.resource_group" title="azure.mgmt.alertsmanagement.models.ScopeType.resource_group"><strong>resource_group</strong></a> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – ResourceGroup that contained the deleted site</p></li>
 <li><p><strong>deleted_site_name</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Name of the deleted site</p></li>
 <li><p><a class="reference internal" href="#azure.mgmt.web.models.CheckNameResourceTypes.slot" title="azure.mgmt.web.models.CheckNameResourceTypes.slot"><strong>slot</strong></a> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Slot of the deleted site</p></li>
 <li><p><strong>deleted_site_kind</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Kind of site that was deleted</p></li>
@@ -1703,7 +1703,7 @@ all tenants. Read-only.</p></li>
 exceeded.</p></li>
 <li><p><strong>max_number_of_workers</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a>) – Maximum number of workers.
 This only applies to Functions container.</p></li>
-<li><p><strong>resource_group</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Name of the resource group the app belongs to.
+<li><p><a class="reference internal" href="azure.mgmt.alertsmanagement.models.html#azure.mgmt.alertsmanagement.models.ScopeType.resource_group" title="azure.mgmt.alertsmanagement.models.ScopeType.resource_group"><strong>resource_group</strong></a> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Name of the resource group the app belongs to.
 Read-only.</p></li>
 <li><p><strong>is_default_container</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#bool" title="(in Python v3.5)"><em>bool</em></a>) – &lt;code&gt;true&lt;/code&gt; if the app is a default
 container; otherwise, &lt;code&gt;false&lt;/code&gt;.</p></li>
@@ -1842,7 +1842,7 @@ sending a request.</p>
 assigned to this App Service plan.</p></li>
 <li><p><strong>geo_region</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Geographical location for the App Service plan.</p></li>
 <li><p><strong>number_of_sites</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a>) – Number of apps assigned to this App Service plan.</p></li>
-<li><p><strong>resource_group</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Resource group of the App Service plan.</p></li>
+<li><p><a class="reference internal" href="azure.mgmt.alertsmanagement.models.html#azure.mgmt.alertsmanagement.models.ScopeType.resource_group" title="azure.mgmt.alertsmanagement.models.ScopeType.resource_group"><strong>resource_group</strong></a> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Resource group of the App Service plan.</p></li>
 <li><p><strong>provisioning_state</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a><em> or
 </em><a class="reference internal" href="#azure.mgmt.web.models.ProvisioningState" title="azure.mgmt.web.models.ProvisioningState"><em>ProvisioningState</em></a>) – Provisioning state of the App Service
 Environment. Possible values include: ‘Succeeded’, ‘Failed’, ‘Canceled’,
@@ -2791,7 +2791,7 @@ capacities.</p></li>
 Service Environment is healthy.</p></li>
 <li><p><strong>environment_status</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Detailed message about with results of the last
 check of the App Service Environment.</p></li>
-<li><p><strong>resource_group</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Resource group of the App Service Environment.</p></li>
+<li><p><a class="reference internal" href="azure.mgmt.alertsmanagement.models.html#azure.mgmt.alertsmanagement.models.ScopeType.resource_group" title="azure.mgmt.alertsmanagement.models.ScopeType.resource_group"><strong>resource_group</strong></a> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Resource group of the App Service Environment.</p></li>
 <li><p><strong>default_front_end_scale_factor</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a>) – Default Scale Factor for FrontEnds.</p></li>
 </ul>
 </dd>
@@ -5598,7 +5598,7 @@ all tenants. Read-only.</p></li>
 exceeded.</p></li>
 <li><p><strong>max_number_of_workers</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a>) – Maximum number of workers.
 This only applies to Functions container.</p></li>
-<li><p><strong>resource_group</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Name of the resource group the app belongs to.
+<li><p><a class="reference internal" href="azure.mgmt.alertsmanagement.models.html#azure.mgmt.alertsmanagement.models.ScopeType.resource_group" title="azure.mgmt.alertsmanagement.models.ScopeType.resource_group"><strong>resource_group</strong></a> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Name of the resource group the app belongs to.
 Read-only.</p></li>
 <li><p><strong>is_default_container</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#bool" title="(in Python v3.5)"><em>bool</em></a>) – &lt;code&gt;true&lt;/code&gt; if the app is a default
 container; otherwise, &lt;code&gt;false&lt;/code&gt;.</p></li>
@@ -6129,7 +6129,7 @@ capacities.</p></li>
 Service Environment is healthy.</p></li>
 <li><p><strong>environment_status</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Detailed message about with results of the last
 check of the App Service Environment.</p></li>
-<li><p><strong>resource_group</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Resource group of the App Service Environment.</p></li>
+<li><p><a class="reference internal" href="azure.mgmt.alertsmanagement.models.html#azure.mgmt.alertsmanagement.models.ScopeType.resource_group" title="azure.mgmt.alertsmanagement.models.ScopeType.resource_group"><strong>resource_group</strong></a> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Resource group of the App Service Environment.</p></li>
 <li><p><strong>default_front_end_scale_factor</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a>) – Default Scale Factor for FrontEnds.</p></li>
 </ul>
 </dd>
@@ -6230,7 +6230,7 @@ capacities.</p></li>
 Service Environment is healthy.</p></li>
 <li><p><strong>environment_status</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Detailed message about with results of the last
 check of the App Service Environment.</p></li>
-<li><p><strong>resource_group</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Resource group of the App Service Environment.</p></li>
+<li><p><a class="reference internal" href="azure.mgmt.alertsmanagement.models.html#azure.mgmt.alertsmanagement.models.ScopeType.resource_group" title="azure.mgmt.alertsmanagement.models.ScopeType.resource_group"><strong>resource_group</strong></a> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Resource group of the App Service Environment.</p></li>
 <li><p><strong>default_front_end_scale_factor</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a>) – Default Scale Factor for FrontEnds.</p></li>
 </ul>
 </dd>
@@ -6515,7 +6515,7 @@ sending a request.</p>
 assigned to this App Service plan.</p></li>
 <li><p><strong>geo_region</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Geographical location for the App Service plan.</p></li>
 <li><p><strong>number_of_sites</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a>) – Number of apps assigned to this App Service plan.</p></li>
-<li><p><strong>resource_group</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Resource group of the App Service plan.</p></li>
+<li><p><a class="reference internal" href="azure.mgmt.alertsmanagement.models.html#azure.mgmt.alertsmanagement.models.ScopeType.resource_group" title="azure.mgmt.alertsmanagement.models.ScopeType.resource_group"><strong>resource_group</strong></a> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Resource group of the App Service plan.</p></li>
 <li><p><strong>provisioning_state</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a><em> or
 </em><a class="reference internal" href="#azure.mgmt.web.models.ProvisioningState" title="azure.mgmt.web.models.ProvisioningState"><em>ProvisioningState</em></a>) – Provisioning state of the App Service
 Environment. Possible values include: ‘Succeeded’, ‘Failed’, ‘Canceled’,

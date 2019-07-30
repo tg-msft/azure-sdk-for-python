@@ -292,44 +292,68 @@
   <div class="section" id="module-azure.mgmt.alertsmanagement.models">
 <span id="azure-mgmt-alertsmanagement-models-module"></span><h1>azure.mgmt.alertsmanagement.models module<a class="headerlink" href="#module-azure.mgmt.alertsmanagement.models" title="Permalink to this headline">¶</a></h1>
 <dl class="class">
-<dt id="azure.mgmt.alertsmanagement.models.OperationDisplay">
-<em class="property">class </em><code class="sig-prename descclassname">azure.mgmt.alertsmanagement.models.</code><code class="sig-name descname">OperationDisplay</code><span class="sig-paren">(</span><em class="sig-param">*</em>, <em class="sig-param">provider: str = None</em>, <em class="sig-param">resource: str = None</em>, <em class="sig-param">operation: str = None</em>, <em class="sig-param">description: str = None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/mgmt/alertsmanagement/models/operation_display_py3.html#OperationDisplay"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.alertsmanagement.models.OperationDisplay" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">msrest.serialization.Model</span></code></p>
-<p>Properties of the operation.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>provider</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Provider name</p></li>
-<li><p><strong>resource</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Resource name</p></li>
-<li><p><strong>operation</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Operation name</p></li>
-<li><p><strong>description</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Description of the operation</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="class">
-<dt id="azure.mgmt.alertsmanagement.models.Operation">
-<em class="property">class </em><code class="sig-prename descclassname">azure.mgmt.alertsmanagement.models.</code><code class="sig-name descname">Operation</code><span class="sig-paren">(</span><em class="sig-param">*</em>, <em class="sig-param">name: str = None</em>, <em class="sig-param">display=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/mgmt/alertsmanagement/models/operation_py3.html#Operation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.alertsmanagement.models.Operation" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">msrest.serialization.Model</span></code></p>
-<p>Operation provided by provider.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Name of the operation</p></li>
-<li><p><strong>display</strong> (<a class="reference internal" href="#azure.mgmt.alertsmanagement.models.OperationDisplay" title="azure.mgmt.alertsmanagement.models.OperationDisplay"><em>OperationDisplay</em></a>) – Properties of the operation</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="class">
-<dt id="azure.mgmt.alertsmanagement.models.Resource">
-<em class="property">class </em><code class="sig-prename descclassname">azure.mgmt.alertsmanagement.models.</code><code class="sig-name descname">Resource</code><span class="sig-paren">(</span><em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/mgmt/alertsmanagement/models/resource_py3.html#Resource"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.alertsmanagement.models.Resource" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">msrest.serialization.Model</span></code></p>
-<p>An azure resource object.</p>
+<dt id="azure.mgmt.alertsmanagement.models.ActionGroup">
+<em class="property">class </em><code class="sig-prename descclassname">azure.mgmt.alertsmanagement.models.</code><code class="sig-name descname">ActionGroup</code><span class="sig-paren">(</span><em class="sig-param">*</em>, <em class="sig-param">action_group_id: str</em>, <em class="sig-param">scope=None</em>, <em class="sig-param">conditions=None</em>, <em class="sig-param">description: str = None</em>, <em class="sig-param">status=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/mgmt/alertsmanagement/models/_models_py3.html#ActionGroup"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.alertsmanagement.models.ActionGroup" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">azure.mgmt.alertsmanagement.models._models_py3.ActionRuleProperties</span></code></p>
+<p>Action Group based Action Rule.</p>
+<p>Action rule with action group configuration.</p>
 <p>Variables are only populated by the server, and will be ignored when
 sending a request.</p>
+<p>All required parameters must be populated in order to send to Azure.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>scope</strong> (<a class="reference internal" href="#azure.mgmt.alertsmanagement.models.Scope" title="azure.mgmt.alertsmanagement.models.Scope"><em>Scope</em></a>) – scope on which action rule will apply</p></li>
+<li><p><strong>conditions</strong> (<a class="reference internal" href="#azure.mgmt.alertsmanagement.models.Conditions" title="azure.mgmt.alertsmanagement.models.Conditions"><em>Conditions</em></a>) – conditions on which alerts will be filtered</p></li>
+<li><p><strong>description</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Description of action rule</p></li>
+<li><p><strong>status</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a><em> or </em><a class="reference internal" href="#azure.mgmt.alertsmanagement.models.ActionRuleStatus" title="azure.mgmt.alertsmanagement.models.ActionRuleStatus"><em>ActionRuleStatus</em></a>) – Indicates if the given action rule is enabled or disabled.
+Possible values include: ‘Enabled’, ‘Disabled’</p></li>
+<li><p><strong>type</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Required. Constant filled by server.</p></li>
+<li><p><strong>action_group_id</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Required. Action group to trigger if action rule
+matches</p></li>
+</ul>
+</dd>
+<dt class="field-even">Variables</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>created_at</strong> (<em>datetime</em>) – Creation time of action rule. Date-Time in ISO-8601
+format.</p></li>
+<li><p><strong>last_modified_at</strong> (<em>datetime</em>) – Last updated time of action rule. Date-Time in
+ISO-8601 format.</p></li>
+<li><p><strong>created_by</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Created by user name.</p></li>
+<li><p><strong>last_modified_by</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Last modified by user name.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="class">
+<dt id="azure.mgmt.alertsmanagement.models.ActionGroupsInformation">
+<em class="property">class </em><code class="sig-prename descclassname">azure.mgmt.alertsmanagement.models.</code><code class="sig-name descname">ActionGroupsInformation</code><span class="sig-paren">(</span><em class="sig-param">*</em>, <em class="sig-param">group_ids</em>, <em class="sig-param">custom_email_subject: str = None</em>, <em class="sig-param">custom_webhook_payload: str = None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/mgmt/alertsmanagement/models/_models_py3.html#ActionGroupsInformation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.alertsmanagement.models.ActionGroupsInformation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">msrest.serialization.Model</span></code></p>
+<p>The Action Groups information, used by the alert rule.</p>
+<p>All required parameters must be populated in order to send to Azure.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>custom_email_subject</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – An optional custom email subject to use in
+email notifications.</p></li>
+<li><p><strong>custom_webhook_payload</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – An optional custom web-hook payload to use
+in web-hook notifications.</p></li>
+<li><p><strong>group_ids</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a><em>]</em>) – Required. The Action Group resource IDs.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="class">
+<dt id="azure.mgmt.alertsmanagement.models.ActionRule">
+<em class="property">class </em><code class="sig-prename descclassname">azure.mgmt.alertsmanagement.models.</code><code class="sig-name descname">ActionRule</code><span class="sig-paren">(</span><em class="sig-param">*</em>, <em class="sig-param">location: str</em>, <em class="sig-param">tags=None</em>, <em class="sig-param">properties=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/mgmt/alertsmanagement/models/_models_py3.html#ActionRule"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.alertsmanagement.models.ActionRule" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">azure.mgmt.alertsmanagement.models._models_py3.ManagedResource</span></code></p>
+<p>Action rule object containing target scope, conditions and suppression
+logic.</p>
+<p>Variables are only populated by the server, and will be ignored when
+sending a request.</p>
+<p>All required parameters must be populated in order to send to Azure.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Variables</dt>
 <dd class="field-odd"><ul class="simple">
@@ -338,83 +362,46 @@ sending a request.</p>
 <li><p><a class="reference internal" href="#azure.mgmt.alertsmanagement.models.AlertsSortByFields.name" title="azure.mgmt.alertsmanagement.models.AlertsSortByFields.name"><strong>name</strong></a> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Azure resource name</p></li>
 </ul>
 </dd>
-</dl>
-</dd></dl>
-
-<dl class="class">
-<dt id="azure.mgmt.alertsmanagement.models.Essentials">
-<em class="property">class </em><code class="sig-prename descclassname">azure.mgmt.alertsmanagement.models.</code><code class="sig-name descname">Essentials</code><span class="sig-paren">(</span><em class="sig-param">*</em>, <em class="sig-param">target_resource: str = None</em>, <em class="sig-param">target_resource_name: str = None</em>, <em class="sig-param">target_resource_group: str = None</em>, <em class="sig-param">target_resource_type: str = None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/mgmt/alertsmanagement/models/essentials_py3.html#Essentials"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.alertsmanagement.models.Essentials" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">msrest.serialization.Model</span></code></p>
-<p>This object contains normalized fields across different monitor service and
-also contains state related fields.</p>
-<p>Variables are only populated by the server, and will be ignored when
-sending a request.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Variables</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><a class="reference internal" href="#azure.mgmt.alertsmanagement.models.AlertsSortByFields.severity" title="azure.mgmt.alertsmanagement.models.AlertsSortByFields.severity"><strong>severity</strong></a> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a><em> or </em><a class="reference internal" href="#azure.mgmt.alertsmanagement.models.Severity" title="azure.mgmt.alertsmanagement.models.Severity"><em>Severity</em></a>) – Severity of alert Sev0 being highest and Sev3 being
-lowest. Possible values include: ‘Sev0’, ‘Sev1’, ‘Sev2’, ‘Sev3’, ‘Sev4’</p></li>
-<li><p><a class="reference internal" href="#azure.mgmt.alertsmanagement.models.AlertsSummaryGroupByFields.signal_type" title="azure.mgmt.alertsmanagement.models.AlertsSummaryGroupByFields.signal_type"><strong>signal_type</strong></a> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a><em> or
-</em><a class="reference internal" href="#azure.mgmt.alertsmanagement.models.SignalType" title="azure.mgmt.alertsmanagement.models.SignalType"><em>SignalType</em></a>) – Log based alert or metric based alert. Possible values
-include: ‘Metric’, ‘Log’, ‘Unknown’</p></li>
-<li><p><a class="reference internal" href="#azure.mgmt.alertsmanagement.models.AlertsSortByFields.alert_state" title="azure.mgmt.alertsmanagement.models.AlertsSortByFields.alert_state"><strong>alert_state</strong></a> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a><em> or
-</em><a class="reference internal" href="#azure.mgmt.alertsmanagement.models.AlertState" title="azure.mgmt.alertsmanagement.models.AlertState"><em>AlertState</em></a>) – Alert object state, which is modified by the user.
-Possible values include: ‘New’, ‘Acknowledged’, ‘Closed’</p></li>
-<li><p><a class="reference internal" href="#azure.mgmt.alertsmanagement.models.AlertsSortByFields.monitor_condition" title="azure.mgmt.alertsmanagement.models.AlertsSortByFields.monitor_condition"><strong>monitor_condition</strong></a> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a><em> or
-</em><a class="reference internal" href="#azure.mgmt.alertsmanagement.models.MonitorCondition" title="azure.mgmt.alertsmanagement.models.MonitorCondition"><em>MonitorCondition</em></a>) – Represents rule condition(Fired/Resolved)
-maintained by monitor service depending on the state of the state.
-Possible values include: ‘Fired’, ‘Resolved’</p></li>
-<li><p><a class="reference internal" href="#azure.mgmt.alertsmanagement.models.AlertsSummaryGroupByFields.monitor_service" title="azure.mgmt.alertsmanagement.models.AlertsSummaryGroupByFields.monitor_service"><strong>monitor_service</strong></a> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a><em> or
-</em><a class="reference internal" href="#azure.mgmt.alertsmanagement.models.MonitorService" title="azure.mgmt.alertsmanagement.models.MonitorService"><em>MonitorService</em></a>) – Monitor service on which the rule(monitor) is set.
-Possible values include: ‘Application Insights’, ‘ActivityLog
-Administrative’, ‘ActivityLog Security’, ‘ActivityLog Recommendation’,
-‘ActivityLog Policy’, ‘ActivityLog Autoscale’, ‘Log Analytics’, ‘Nagios’,
-‘Platform’, ‘SCOM’, ‘ServiceHealth’, ‘SmartDetector’, ‘VM Insights’,
-‘Zabbix’</p></li>
-<li><p><a class="reference internal" href="#azure.mgmt.alertsmanagement.models.AlertsSummaryGroupByFields.alert_rule" title="azure.mgmt.alertsmanagement.models.AlertsSummaryGroupByFields.alert_rule"><strong>alert_rule</strong></a> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Rule(monitor) which fired alert instance. Depending on
-the monitor service,  this would be ARM id or name of the rule.</p></li>
-<li><p><strong>source_created_id</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Unique Id created by monitor service for each
-alert instance. This could be used to track the issue at the monitor
-service, in case of Nagios, Zabbix, SCOM etc.</p></li>
-<li><p><strong>smart_group_id</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Unique Id of the smart group</p></li>
-<li><p><strong>smart_grouping_reason</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Verbose reason describing the reason why this
-alert instance is added to a smart group</p></li>
-<li><p><a class="reference internal" href="#azure.mgmt.alertsmanagement.models.AlertsSortByFields.start_date_time" title="azure.mgmt.alertsmanagement.models.AlertsSortByFields.start_date_time"><strong>start_date_time</strong></a> (<em>datetime</em>) – Creation time(ISO-8601 format) of alert instance.</p></li>
-<li><p><a class="reference internal" href="#azure.mgmt.alertsmanagement.models.AlertsSortByFields.last_modified_date_time" title="azure.mgmt.alertsmanagement.models.AlertsSortByFields.last_modified_date_time"><strong>last_modified_date_time</strong></a> (<em>datetime</em>) – Last modification time(ISO-8601 format) of
-alert instance.</p></li>
-<li><p><strong>monitor_condition_resolved_date_time</strong> (<em>datetime</em>) – Resolved time(ISO-8601 format)
-of alert instance. This will be updated when monitor service resolves the
-alert instance because of the rule condition is not met.</p></li>
-<li><p><strong>last_modified_user_name</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – User who last modified the alert, in case
-of monitor service updates user would be ‘system’, otherwise name of the
-user.</p></li>
-</ul>
-</dd>
 <dt class="field-even">Parameters</dt>
 <dd class="field-even"><ul class="simple">
-<li><p><strong>target_resource</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Target ARM resource, on which alert got created.</p></li>
-<li><p><strong>target_resource_name</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Name of the target ARM resource name, on
-which alert got created.</p></li>
-<li><p><strong>target_resource_group</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Resource group of target ARM resource, on
-which alert got created.</p></li>
-<li><p><strong>target_resource_type</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Resource type of target ARM resource, on
-which alert got created.</p></li>
+<li><p><strong>location</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Required. Resource location</p></li>
+<li><p><strong>tags</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#dict" title="(in Python v3.5)"><em>dict</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a><em>]</em>) – Resource tags</p></li>
+<li><p><strong>properties</strong> (<a class="reference internal" href="#azure.mgmt.alertsmanagement.models.ActionRuleProperties" title="azure.mgmt.alertsmanagement.models.ActionRuleProperties"><em>ActionRuleProperties</em></a>) – action rule properties</p></li>
 </ul>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="class">
-<dt id="azure.mgmt.alertsmanagement.models.AlertProperties">
-<em class="property">class </em><code class="sig-prename descclassname">azure.mgmt.alertsmanagement.models.</code><code class="sig-name descname">AlertProperties</code><span class="sig-paren">(</span><em class="sig-param">*</em>, <em class="sig-param">essentials=None</em>, <em class="sig-param">context=None</em>, <em class="sig-param">egress_config=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/mgmt/alertsmanagement/models/alert_properties_py3.html#AlertProperties"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.alertsmanagement.models.AlertProperties" title="Permalink to this definition">¶</a></dt>
+<dt id="azure.mgmt.alertsmanagement.models.ActionRuleProperties">
+<em class="property">class </em><code class="sig-prename descclassname">azure.mgmt.alertsmanagement.models.</code><code class="sig-name descname">ActionRuleProperties</code><span class="sig-paren">(</span><em class="sig-param">*</em>, <em class="sig-param">scope=None</em>, <em class="sig-param">conditions=None</em>, <em class="sig-param">description: str = None</em>, <em class="sig-param">status=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/mgmt/alertsmanagement/models/_models_py3.html#ActionRuleProperties"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.alertsmanagement.models.ActionRuleProperties" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">msrest.serialization.Model</span></code></p>
-<p>Alert property bag.</p>
+<p>Action rule properties defining scope, conditions, suppression logic for
+action rule.</p>
+<p>You probably want to use the sub-classes and not this class directly. Known
+sub-classes are: Suppression, ActionGroup, Diagnostics</p>
+<p>Variables are only populated by the server, and will be ignored when
+sending a request.</p>
+<p>All required parameters must be populated in order to send to Azure.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>essentials</strong> (<a class="reference internal" href="#azure.mgmt.alertsmanagement.models.Essentials" title="azure.mgmt.alertsmanagement.models.Essentials"><em>Essentials</em></a>) – </p></li>
-<li><p><strong>context</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#object" title="(in Python v3.5)"><em>object</em></a>) – </p></li>
-<li><p><strong>egress_config</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#object" title="(in Python v3.5)"><em>object</em></a>) – </p></li>
+<li><p><strong>scope</strong> (<a class="reference internal" href="#azure.mgmt.alertsmanagement.models.Scope" title="azure.mgmt.alertsmanagement.models.Scope"><em>Scope</em></a>) – scope on which action rule will apply</p></li>
+<li><p><strong>conditions</strong> (<a class="reference internal" href="#azure.mgmt.alertsmanagement.models.Conditions" title="azure.mgmt.alertsmanagement.models.Conditions"><em>Conditions</em></a>) – conditions on which alerts will be filtered</p></li>
+<li><p><strong>description</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Description of action rule</p></li>
+<li><p><strong>status</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a><em> or </em><a class="reference internal" href="#azure.mgmt.alertsmanagement.models.ActionRuleStatus" title="azure.mgmt.alertsmanagement.models.ActionRuleStatus"><em>ActionRuleStatus</em></a>) – Indicates if the given action rule is enabled or disabled.
+Possible values include: ‘Enabled’, ‘Disabled’</p></li>
+<li><p><strong>type</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Required. Constant filled by server.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Variables</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>created_at</strong> (<em>datetime</em>) – Creation time of action rule. Date-Time in ISO-8601
+format.</p></li>
+<li><p><strong>last_modified_at</strong> (<em>datetime</em>) – Last updated time of action rule. Date-Time in
+ISO-8601 format.</p></li>
+<li><p><strong>created_by</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Created by user name.</p></li>
+<li><p><strong>last_modified_by</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Last modified by user name.</p></li>
 </ul>
 </dd>
 </dl>
@@ -422,8 +409,8 @@ which alert got created.</p></li>
 
 <dl class="class">
 <dt id="azure.mgmt.alertsmanagement.models.Alert">
-<em class="property">class </em><code class="sig-prename descclassname">azure.mgmt.alertsmanagement.models.</code><code class="sig-name descname">Alert</code><span class="sig-paren">(</span><em class="sig-param">*</em>, <em class="sig-param">properties=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/mgmt/alertsmanagement/models/alert_py3.html#Alert"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.alertsmanagement.models.Alert" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">azure.mgmt.alertsmanagement.models.resource_py3.Resource</span></code></p>
+<em class="property">class </em><code class="sig-prename descclassname">azure.mgmt.alertsmanagement.models.</code><code class="sig-name descname">Alert</code><span class="sig-paren">(</span><em class="sig-param">*</em>, <em class="sig-param">properties=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/mgmt/alertsmanagement/models/_models_py3.html#Alert"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.alertsmanagement.models.Alert" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">azure.mgmt.alertsmanagement.models._models_py3.Resource</span></code></p>
 <p>An alert created in alert management service.</p>
 <p>Variables are only populated by the server, and will be ignored when
 sending a request.</p>
@@ -442,8 +429,29 @@ sending a request.</p>
 </dd></dl>
 
 <dl class="class">
+<dt id="azure.mgmt.alertsmanagement.models.AlertModification">
+<em class="property">class </em><code class="sig-prename descclassname">azure.mgmt.alertsmanagement.models.</code><code class="sig-name descname">AlertModification</code><span class="sig-paren">(</span><em class="sig-param">*</em>, <em class="sig-param">properties=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/mgmt/alertsmanagement/models/_models_py3.html#AlertModification"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.alertsmanagement.models.AlertModification" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">azure.mgmt.alertsmanagement.models._models_py3.Resource</span></code></p>
+<p>Alert Modification details.</p>
+<p>Variables are only populated by the server, and will be ignored when
+sending a request.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Variables</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><a class="reference external" href="https://docs.python.org/3.5/library/functions.html#id" title="(in Python v3.5)"><strong>id</strong></a> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Azure resource Id</p></li>
+<li><p><a class="reference internal" href="azure.batch.models.html#azure.batch.models.ContainerConfiguration.type" title="azure.batch.models.ContainerConfiguration.type"><strong>type</strong></a> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Azure resource type</p></li>
+<li><p><a class="reference internal" href="#azure.mgmt.alertsmanagement.models.AlertsSortByFields.name" title="azure.mgmt.alertsmanagement.models.AlertsSortByFields.name"><strong>name</strong></a> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Azure resource name</p></li>
+</ul>
+</dd>
+<dt class="field-even">Parameters</dt>
+<dd class="field-even"><p><strong>properties</strong> (<a class="reference internal" href="#azure.mgmt.alertsmanagement.models.AlertModificationProperties" title="azure.mgmt.alertsmanagement.models.AlertModificationProperties"><em>AlertModificationProperties</em></a>) – </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="class">
 <dt id="azure.mgmt.alertsmanagement.models.AlertModificationItem">
-<em class="property">class </em><code class="sig-prename descclassname">azure.mgmt.alertsmanagement.models.</code><code class="sig-name descname">AlertModificationItem</code><span class="sig-paren">(</span><em class="sig-param">*</em>, <em class="sig-param">modification_event=None</em>, <em class="sig-param">old_value: str = None</em>, <em class="sig-param">new_value: str = None</em>, <em class="sig-param">modified_at: str = None</em>, <em class="sig-param">modified_by: str = None</em>, <em class="sig-param">comments: str = None</em>, <em class="sig-param">description: str = None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/mgmt/alertsmanagement/models/alert_modification_item_py3.html#AlertModificationItem"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.alertsmanagement.models.AlertModificationItem" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">azure.mgmt.alertsmanagement.models.</code><code class="sig-name descname">AlertModificationItem</code><span class="sig-paren">(</span><em class="sig-param">*</em>, <em class="sig-param">modification_event=None</em>, <em class="sig-param">old_value: str = None</em>, <em class="sig-param">new_value: str = None</em>, <em class="sig-param">modified_at: str = None</em>, <em class="sig-param">modified_by: str = None</em>, <em class="sig-param">comments: str = None</em>, <em class="sig-param">description: str = None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/mgmt/alertsmanagement/models/_models_py3.html#AlertModificationItem"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.alertsmanagement.models.AlertModificationItem" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">msrest.serialization.Model</span></code></p>
 <p>Alert modification item.</p>
 <dl class="field-list simple">
@@ -465,7 +473,7 @@ include: ‘AlertCreated’, ‘StateChange’, ‘MonitorConditionChange’</p>
 
 <dl class="class">
 <dt id="azure.mgmt.alertsmanagement.models.AlertModificationProperties">
-<em class="property">class </em><code class="sig-prename descclassname">azure.mgmt.alertsmanagement.models.</code><code class="sig-name descname">AlertModificationProperties</code><span class="sig-paren">(</span><em class="sig-param">*</em>, <em class="sig-param">modifications=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/mgmt/alertsmanagement/models/alert_modification_properties_py3.html#AlertModificationProperties"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.alertsmanagement.models.AlertModificationProperties" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">azure.mgmt.alertsmanagement.models.</code><code class="sig-name descname">AlertModificationProperties</code><span class="sig-paren">(</span><em class="sig-param">*</em>, <em class="sig-param">modifications=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/mgmt/alertsmanagement/models/_models_py3.html#AlertModificationProperties"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.alertsmanagement.models.AlertModificationProperties" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">msrest.serialization.Model</span></code></p>
 <p>Properties of the alert modification item.</p>
 <p>Variables are only populated by the server, and will be ignored when
@@ -482,128 +490,120 @@ retrieved</p>
 </dd></dl>
 
 <dl class="class">
-<dt id="azure.mgmt.alertsmanagement.models.AlertModification">
-<em class="property">class </em><code class="sig-prename descclassname">azure.mgmt.alertsmanagement.models.</code><code class="sig-name descname">AlertModification</code><span class="sig-paren">(</span><em class="sig-param">*</em>, <em class="sig-param">properties=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/mgmt/alertsmanagement/models/alert_modification_py3.html#AlertModification"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.alertsmanagement.models.AlertModification" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">azure.mgmt.alertsmanagement.models.resource_py3.Resource</span></code></p>
-<p>Alert Modification details.</p>
-<p>Variables are only populated by the server, and will be ignored when
-sending a request.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Variables</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><a class="reference external" href="https://docs.python.org/3.5/library/functions.html#id" title="(in Python v3.5)"><strong>id</strong></a> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Azure resource Id</p></li>
-<li><p><a class="reference internal" href="azure.batch.models.html#azure.batch.models.ContainerConfiguration.type" title="azure.batch.models.ContainerConfiguration.type"><strong>type</strong></a> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Azure resource type</p></li>
-<li><p><a class="reference internal" href="#azure.mgmt.alertsmanagement.models.AlertsSortByFields.name" title="azure.mgmt.alertsmanagement.models.AlertsSortByFields.name"><strong>name</strong></a> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Azure resource name</p></li>
-</ul>
-</dd>
-<dt class="field-even">Parameters</dt>
-<dd class="field-even"><p><strong>properties</strong> (<a class="reference internal" href="#azure.mgmt.alertsmanagement.models.AlertModificationProperties" title="azure.mgmt.alertsmanagement.models.AlertModificationProperties"><em>AlertModificationProperties</em></a>) – </p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="class">
-<dt id="azure.mgmt.alertsmanagement.models.SmartGroupModificationItem">
-<em class="property">class </em><code class="sig-prename descclassname">azure.mgmt.alertsmanagement.models.</code><code class="sig-name descname">SmartGroupModificationItem</code><span class="sig-paren">(</span><em class="sig-param">*</em>, <em class="sig-param">modification_event=None</em>, <em class="sig-param">old_value: str = None</em>, <em class="sig-param">new_value: str = None</em>, <em class="sig-param">modified_at: str = None</em>, <em class="sig-param">modified_by: str = None</em>, <em class="sig-param">comments: str = None</em>, <em class="sig-param">description: str = None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/mgmt/alertsmanagement/models/smart_group_modification_item_py3.html#SmartGroupModificationItem"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.alertsmanagement.models.SmartGroupModificationItem" title="Permalink to this definition">¶</a></dt>
+<dt id="azure.mgmt.alertsmanagement.models.AlertProperties">
+<em class="property">class </em><code class="sig-prename descclassname">azure.mgmt.alertsmanagement.models.</code><code class="sig-name descname">AlertProperties</code><span class="sig-paren">(</span><em class="sig-param">*</em>, <em class="sig-param">essentials=None</em>, <em class="sig-param">context=None</em>, <em class="sig-param">egress_config=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/mgmt/alertsmanagement/models/_models_py3.html#AlertProperties"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.alertsmanagement.models.AlertProperties" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">msrest.serialization.Model</span></code></p>
-<p>smartGroup modification item.</p>
+<p>Alert property bag.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>modification_event</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a><em> or
-</em><a class="reference internal" href="#azure.mgmt.alertsmanagement.models.SmartGroupModificationEvent" title="azure.mgmt.alertsmanagement.models.SmartGroupModificationEvent"><em>SmartGroupModificationEvent</em></a>) – Reason for the modification. Possible values
-include: ‘SmartGroupCreated’, ‘StateChange’, ‘AlertAdded’, ‘AlertRemoved’</p></li>
-<li><p><strong>old_value</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Old value</p></li>
-<li><p><strong>new_value</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – New value</p></li>
-<li><p><strong>modified_at</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Modified date and time</p></li>
-<li><p><strong>modified_by</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Modified user details (Principal client name)</p></li>
-<li><p><strong>comments</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Modification comments</p></li>
-<li><p><strong>description</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Description of the modification</p></li>
+<li><p><strong>essentials</strong> (<a class="reference internal" href="#azure.mgmt.alertsmanagement.models.Essentials" title="azure.mgmt.alertsmanagement.models.Essentials"><em>Essentials</em></a>) – </p></li>
+<li><p><strong>context</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#object" title="(in Python v3.5)"><em>object</em></a>) – </p></li>
+<li><p><strong>egress_config</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#object" title="(in Python v3.5)"><em>object</em></a>) – </p></li>
 </ul>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="class">
-<dt id="azure.mgmt.alertsmanagement.models.SmartGroupModificationProperties">
-<em class="property">class </em><code class="sig-prename descclassname">azure.mgmt.alertsmanagement.models.</code><code class="sig-name descname">SmartGroupModificationProperties</code><span class="sig-paren">(</span><em class="sig-param">*</em>, <em class="sig-param">modifications=None</em>, <em class="sig-param">next_link: str = None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/mgmt/alertsmanagement/models/smart_group_modification_properties_py3.html#SmartGroupModificationProperties"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.alertsmanagement.models.SmartGroupModificationProperties" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">msrest.serialization.Model</span></code></p>
-<p>Properties of the smartGroup modification item.</p>
+<dt id="azure.mgmt.alertsmanagement.models.AlertRule">
+<em class="property">class </em><code class="sig-prename descclassname">azure.mgmt.alertsmanagement.models.</code><code class="sig-name descname">AlertRule</code><span class="sig-paren">(</span><em class="sig-param">*</em>, <em class="sig-param">state</em>, <em class="sig-param">severity</em>, <em class="sig-param">frequency</em>, <em class="sig-param">detector</em>, <em class="sig-param">scope</em>, <em class="sig-param">action_groups</em>, <em class="sig-param">location: str = 'global'</em>, <em class="sig-param">tags=None</em>, <em class="sig-param">description: str = None</em>, <em class="sig-param">throttling=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/mgmt/alertsmanagement/models/_models_py3.html#AlertRule"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.alertsmanagement.models.AlertRule" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">azure.mgmt.alertsmanagement.models._models_py3.AzureResource</span></code></p>
+<p>The alert rule information.</p>
 <p>Variables are only populated by the server, and will be ignored when
 sending a request.</p>
+<p>All required parameters must be populated in order to send to Azure.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Variables</dt>
-<dd class="field-odd"><p><strong>smart_group_id</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Unique Id of the smartGroup for which the history is
-being retrieved</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><a class="reference external" href="https://docs.python.org/3.5/library/functions.html#id" title="(in Python v3.5)"><strong>id</strong></a> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The resource ID.</p></li>
+<li><p><a class="reference internal" href="azure.batch.models.html#azure.batch.models.ContainerConfiguration.type" title="azure.batch.models.ContainerConfiguration.type"><strong>type</strong></a> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The resource type.</p></li>
+<li><p><a class="reference internal" href="#azure.mgmt.alertsmanagement.models.AlertsSortByFields.name" title="azure.mgmt.alertsmanagement.models.AlertsSortByFields.name"><strong>name</strong></a> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The resource name.</p></li>
+</ul>
 </dd>
 <dt class="field-even">Parameters</dt>
 <dd class="field-even"><ul class="simple">
-<li><p><strong>modifications</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><em>list</em></a><em>[</em><a class="reference internal" href="#azure.mgmt.alertsmanagement.models.SmartGroupModificationItem" title="azure.mgmt.alertsmanagement.models.SmartGroupModificationItem"><em>SmartGroupModificationItem</em></a><em>]</em>) – Modification details</p></li>
-<li><p><strong>next_link</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – URL to fetch the next set of results.</p></li>
+<li><p><strong>location</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The resource location. Default value: “global” .</p></li>
+<li><p><strong>tags</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#object" title="(in Python v3.5)"><em>object</em></a>) – The resource tags.</p></li>
+<li><p><strong>description</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The alert rule description.</p></li>
+<li><p><strong>state</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a><em> or </em><a class="reference internal" href="#azure.mgmt.alertsmanagement.models.AlertRuleState" title="azure.mgmt.alertsmanagement.models.AlertRuleState"><em>AlertRuleState</em></a>) – Required. The alert rule state. Possible values include:
+‘Enabled’, ‘Disabled’</p></li>
+<li><p><strong>severity</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a><em> or </em><a class="reference internal" href="#azure.mgmt.alertsmanagement.models.Severity" title="azure.mgmt.alertsmanagement.models.Severity"><em>Severity</em></a>) – Required. The alert rule severity. Possible values
+include: ‘Sev0’, ‘Sev1’, ‘Sev2’, ‘Sev3’, ‘Sev4’</p></li>
+<li><p><strong>frequency</strong> (<em>timedelta</em>) – Required. The alert rule frequency in ISO8601 format.
+The time granularity must be in minutes and minimum value is 5 minutes.</p></li>
+<li><p><strong>detector</strong> (<a class="reference internal" href="#azure.mgmt.alertsmanagement.models.Detector" title="azure.mgmt.alertsmanagement.models.Detector"><em>Detector</em></a>) – Required. The alert rule’s detector.</p></li>
+<li><p><strong>scope</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a><em>]</em>) – Required. The alert rule resources scope.</p></li>
+<li><p><strong>action_groups</strong> (<a class="reference internal" href="#azure.mgmt.alertsmanagement.models.ActionGroupsInformation" title="azure.mgmt.alertsmanagement.models.ActionGroupsInformation"><em>ActionGroupsInformation</em></a>) – Required. The alert rule actions.</p></li>
+<li><p><strong>throttling</strong> (<a class="reference internal" href="#azure.mgmt.alertsmanagement.models.ThrottlingInformation" title="azure.mgmt.alertsmanagement.models.ThrottlingInformation"><em>ThrottlingInformation</em></a>) – The alert rule throttling information.</p></li>
 </ul>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="class">
-<dt id="azure.mgmt.alertsmanagement.models.SmartGroupModification">
-<em class="property">class </em><code class="sig-prename descclassname">azure.mgmt.alertsmanagement.models.</code><code class="sig-name descname">SmartGroupModification</code><span class="sig-paren">(</span><em class="sig-param">*</em>, <em class="sig-param">properties=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/mgmt/alertsmanagement/models/smart_group_modification_py3.html#SmartGroupModification"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.alertsmanagement.models.SmartGroupModification" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">azure.mgmt.alertsmanagement.models.resource_py3.Resource</span></code></p>
-<p>Alert Modification details.</p>
+<dt id="azure.mgmt.alertsmanagement.models.AlertRulePatchObject">
+<em class="property">class </em><code class="sig-prename descclassname">azure.mgmt.alertsmanagement.models.</code><code class="sig-name descname">AlertRulePatchObject</code><span class="sig-paren">(</span><em class="sig-param">*</em>, <em class="sig-param">tags=None</em>, <em class="sig-param">description: str = None</em>, <em class="sig-param">state=None</em>, <em class="sig-param">severity=None</em>, <em class="sig-param">frequency=None</em>, <em class="sig-param">action_groups=None</em>, <em class="sig-param">throttling=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/mgmt/alertsmanagement/models/_models_py3.html#AlertRulePatchObject"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.alertsmanagement.models.AlertRulePatchObject" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">msrest.serialization.Model</span></code></p>
+<p>The alert rule patch information.</p>
 <p>Variables are only populated by the server, and will be ignored when
 sending a request.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Variables</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><a class="reference external" href="https://docs.python.org/3.5/library/functions.html#id" title="(in Python v3.5)"><strong>id</strong></a> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Azure resource Id</p></li>
-<li><p><a class="reference internal" href="azure.batch.models.html#azure.batch.models.ContainerConfiguration.type" title="azure.batch.models.ContainerConfiguration.type"><strong>type</strong></a> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Azure resource type</p></li>
-<li><p><a class="reference internal" href="#azure.mgmt.alertsmanagement.models.AlertsSortByFields.name" title="azure.mgmt.alertsmanagement.models.AlertsSortByFields.name"><strong>name</strong></a> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Azure resource name</p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3.5/library/functions.html#id" title="(in Python v3.5)"><strong>id</strong></a> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The resource ID.</p></li>
+<li><p><a class="reference internal" href="azure.batch.models.html#azure.batch.models.ContainerConfiguration.type" title="azure.batch.models.ContainerConfiguration.type"><strong>type</strong></a> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The resource type.</p></li>
+<li><p><a class="reference internal" href="#azure.mgmt.alertsmanagement.models.AlertsSortByFields.name" title="azure.mgmt.alertsmanagement.models.AlertsSortByFields.name"><strong>name</strong></a> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The resource name.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Parameters</dt>
-<dd class="field-even"><p><strong>properties</strong> (<a class="reference internal" href="#azure.mgmt.alertsmanagement.models.SmartGroupModificationProperties" title="azure.mgmt.alertsmanagement.models.SmartGroupModificationProperties"><em>SmartGroupModificationProperties</em></a>) – </p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="class">
-<dt id="azure.mgmt.alertsmanagement.models.AlertsSummaryGroupItem">
-<em class="property">class </em><code class="sig-prename descclassname">azure.mgmt.alertsmanagement.models.</code><code class="sig-name descname">AlertsSummaryGroupItem</code><span class="sig-paren">(</span><em class="sig-param">*</em>, <em class="sig-param">name: str = None</em>, <em class="sig-param">count: int = None</em>, <em class="sig-param">groupedby: str = None</em>, <em class="sig-param">values=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/mgmt/alertsmanagement/models/alerts_summary_group_item_py3.html#AlertsSummaryGroupItem"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.alertsmanagement.models.AlertsSummaryGroupItem" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">msrest.serialization.Model</span></code></p>
-<p>Alerts summary group item.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Value of the aggregated field</p></li>
-<li><p><strong>count</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a>) – Count of the aggregated field</p></li>
-<li><p><strong>groupedby</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Name of the field aggregated</p></li>
-<li><p><strong>values</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><em>list</em></a><em>[</em><a class="reference internal" href="#azure.mgmt.alertsmanagement.models.AlertsSummaryGroupItem" title="azure.mgmt.alertsmanagement.models.AlertsSummaryGroupItem"><em>AlertsSummaryGroupItem</em></a><em>]</em>) – List of the items</p></li>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>tags</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#object" title="(in Python v3.5)"><em>object</em></a>) – The resource tags.</p></li>
+<li><p><strong>description</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The alert rule description.</p></li>
+<li><p><strong>state</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a><em> or </em><a class="reference internal" href="#azure.mgmt.alertsmanagement.models.AlertRuleState" title="azure.mgmt.alertsmanagement.models.AlertRuleState"><em>AlertRuleState</em></a>) – The alert rule state. Possible values include: ‘Enabled’,
+‘Disabled’</p></li>
+<li><p><strong>severity</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a><em> or </em><a class="reference internal" href="#azure.mgmt.alertsmanagement.models.Severity" title="azure.mgmt.alertsmanagement.models.Severity"><em>Severity</em></a>) – The alert rule severity. Possible values include: ‘Sev0’,
+‘Sev1’, ‘Sev2’, ‘Sev3’, ‘Sev4’</p></li>
+<li><p><strong>frequency</strong> (<em>timedelta</em>) – The alert rule frequency in ISO8601 format. The time
+granularity must be in minutes and minimum value is 5 minutes.</p></li>
+<li><p><strong>action_groups</strong> (<a class="reference internal" href="#azure.mgmt.alertsmanagement.models.ActionGroupsInformation" title="azure.mgmt.alertsmanagement.models.ActionGroupsInformation"><em>ActionGroupsInformation</em></a>) – The alert rule actions.</p></li>
+<li><p><strong>throttling</strong> (<a class="reference internal" href="#azure.mgmt.alertsmanagement.models.ThrottlingInformation" title="azure.mgmt.alertsmanagement.models.ThrottlingInformation"><em>ThrottlingInformation</em></a>) – The alert rule throttling information.</p></li>
 </ul>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="class">
-<dt id="azure.mgmt.alertsmanagement.models.AlertsSummaryGroup">
-<em class="property">class </em><code class="sig-prename descclassname">azure.mgmt.alertsmanagement.models.</code><code class="sig-name descname">AlertsSummaryGroup</code><span class="sig-paren">(</span><em class="sig-param">*</em>, <em class="sig-param">total: int = None</em>, <em class="sig-param">smart_groups_count: int = None</em>, <em class="sig-param">groupedby: str = None</em>, <em class="sig-param">values=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/mgmt/alertsmanagement/models/alerts_summary_group_py3.html#AlertsSummaryGroup"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.alertsmanagement.models.AlertsSummaryGroup" title="Permalink to this definition">¶</a></dt>
+<dt id="azure.mgmt.alertsmanagement.models.AlertsMetaData">
+<em class="property">class </em><code class="sig-prename descclassname">azure.mgmt.alertsmanagement.models.</code><code class="sig-name descname">AlertsMetaData</code><span class="sig-paren">(</span><em class="sig-param">*</em>, <em class="sig-param">properties=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/mgmt/alertsmanagement/models/_models_py3.html#AlertsMetaData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.alertsmanagement.models.AlertsMetaData" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">msrest.serialization.Model</span></code></p>
-<p>Group the result set.</p>
+<p>alert meta data information.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>total</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a>) – Total count of the result set.</p></li>
-<li><p><strong>smart_groups_count</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a>) – Total count of the smart groups.</p></li>
-<li><p><strong>groupedby</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Name of the field aggregated</p></li>
-<li><p><strong>values</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><em>list</em></a><em>[</em><a class="reference internal" href="#azure.mgmt.alertsmanagement.models.AlertsSummaryGroupItem" title="azure.mgmt.alertsmanagement.models.AlertsSummaryGroupItem"><em>AlertsSummaryGroupItem</em></a><em>]</em>) – List of the items</p></li>
-</ul>
+<dd class="field-odd"><p><strong>properties</strong> (<a class="reference internal" href="#azure.mgmt.alertsmanagement.models.AlertsMetaDataProperties" title="azure.mgmt.alertsmanagement.models.AlertsMetaDataProperties"><em>AlertsMetaDataProperties</em></a>) – </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="class">
+<dt id="azure.mgmt.alertsmanagement.models.AlertsMetaDataProperties">
+<em class="property">class </em><code class="sig-prename descclassname">azure.mgmt.alertsmanagement.models.</code><code class="sig-name descname">AlertsMetaDataProperties</code><span class="sig-paren">(</span><em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/mgmt/alertsmanagement/models/_models_py3.html#AlertsMetaDataProperties"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.alertsmanagement.models.AlertsMetaDataProperties" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">msrest.serialization.Model</span></code></p>
+<p>alert meta data property bag.</p>
+<p>You probably want to use the sub-classes and not this class directly. Known
+sub-classes are: MonitorServiceList</p>
+<p>All required parameters must be populated in order to send to Azure.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>metadata_identifier</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Required. Constant filled by server.</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="class">
 <dt id="azure.mgmt.alertsmanagement.models.AlertsSummary">
-<em class="property">class </em><code class="sig-prename descclassname">azure.mgmt.alertsmanagement.models.</code><code class="sig-name descname">AlertsSummary</code><span class="sig-paren">(</span><em class="sig-param">*</em>, <em class="sig-param">properties=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/mgmt/alertsmanagement/models/alerts_summary_py3.html#AlertsSummary"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.alertsmanagement.models.AlertsSummary" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">azure.mgmt.alertsmanagement.models.resource_py3.Resource</span></code></p>
+<em class="property">class </em><code class="sig-prename descclassname">azure.mgmt.alertsmanagement.models.</code><code class="sig-name descname">AlertsSummary</code><span class="sig-paren">(</span><em class="sig-param">*</em>, <em class="sig-param">properties=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/mgmt/alertsmanagement/models/_models_py3.html#AlertsSummary"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.alertsmanagement.models.AlertsSummary" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">azure.mgmt.alertsmanagement.models._models_py3.Resource</span></code></p>
 <p>Summary of alerts based on the input filters and ‘groupby’ parameters.</p>
 <p>Variables are only populated by the server, and will be ignored when
 sending a request.</p>
@@ -622,15 +622,435 @@ sending a request.</p>
 </dd></dl>
 
 <dl class="class">
-<dt id="azure.mgmt.alertsmanagement.models.SmartGroupAggregatedProperty">
-<em class="property">class </em><code class="sig-prename descclassname">azure.mgmt.alertsmanagement.models.</code><code class="sig-name descname">SmartGroupAggregatedProperty</code><span class="sig-paren">(</span><em class="sig-param">*</em>, <em class="sig-param">name: str = None</em>, <em class="sig-param">count: int = None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/mgmt/alertsmanagement/models/smart_group_aggregated_property_py3.html#SmartGroupAggregatedProperty"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.alertsmanagement.models.SmartGroupAggregatedProperty" title="Permalink to this definition">¶</a></dt>
+<dt id="azure.mgmt.alertsmanagement.models.AlertsSummaryGroup">
+<em class="property">class </em><code class="sig-prename descclassname">azure.mgmt.alertsmanagement.models.</code><code class="sig-name descname">AlertsSummaryGroup</code><span class="sig-paren">(</span><em class="sig-param">*</em>, <em class="sig-param">total: int = None</em>, <em class="sig-param">smart_groups_count: int = None</em>, <em class="sig-param">groupedby: str = None</em>, <em class="sig-param">values=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/mgmt/alertsmanagement/models/_models_py3.html#AlertsSummaryGroup"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.alertsmanagement.models.AlertsSummaryGroup" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">msrest.serialization.Model</span></code></p>
-<p>Aggregated property of each type.</p>
+<p>Group the result set.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Name of the type.</p></li>
-<li><p><strong>count</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a>) – Total number of items of type.</p></li>
+<li><p><strong>total</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a>) – Total count of the result set.</p></li>
+<li><p><strong>smart_groups_count</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a>) – Total count of the smart groups.</p></li>
+<li><p><strong>groupedby</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Name of the field aggregated</p></li>
+<li><p><strong>values</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><em>list</em></a><em>[</em><a class="reference internal" href="#azure.mgmt.alertsmanagement.models.AlertsSummaryGroupItem" title="azure.mgmt.alertsmanagement.models.AlertsSummaryGroupItem"><em>AlertsSummaryGroupItem</em></a><em>]</em>) – List of the items</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="class">
+<dt id="azure.mgmt.alertsmanagement.models.AlertsSummaryGroupItem">
+<em class="property">class </em><code class="sig-prename descclassname">azure.mgmt.alertsmanagement.models.</code><code class="sig-name descname">AlertsSummaryGroupItem</code><span class="sig-paren">(</span><em class="sig-param">*</em>, <em class="sig-param">name: str = None</em>, <em class="sig-param">count: int = None</em>, <em class="sig-param">groupedby: str = None</em>, <em class="sig-param">values=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/mgmt/alertsmanagement/models/_models_py3.html#AlertsSummaryGroupItem"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.alertsmanagement.models.AlertsSummaryGroupItem" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">msrest.serialization.Model</span></code></p>
+<p>Alerts summary group item.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Value of the aggregated field</p></li>
+<li><p><strong>count</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a>) – Count of the aggregated field</p></li>
+<li><p><strong>groupedby</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Name of the field aggregated</p></li>
+<li><p><strong>values</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><em>list</em></a><em>[</em><a class="reference internal" href="#azure.mgmt.alertsmanagement.models.AlertsSummaryGroupItem" title="azure.mgmt.alertsmanagement.models.AlertsSummaryGroupItem"><em>AlertsSummaryGroupItem</em></a><em>]</em>) – List of the items</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="class">
+<dt id="azure.mgmt.alertsmanagement.models.AzureResource">
+<em class="property">class </em><code class="sig-prename descclassname">azure.mgmt.alertsmanagement.models.</code><code class="sig-name descname">AzureResource</code><span class="sig-paren">(</span><em class="sig-param">*</em>, <em class="sig-param">location: str = 'global'</em>, <em class="sig-param">tags=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/mgmt/alertsmanagement/models/_models_py3.html#AzureResource"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.alertsmanagement.models.AzureResource" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">msrest.serialization.Model</span></code></p>
+<p>An Azure resource object.</p>
+<p>Variables are only populated by the server, and will be ignored when
+sending a request.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Variables</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><a class="reference external" href="https://docs.python.org/3.5/library/functions.html#id" title="(in Python v3.5)"><strong>id</strong></a> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The resource ID.</p></li>
+<li><p><a class="reference internal" href="azure.batch.models.html#azure.batch.models.ContainerConfiguration.type" title="azure.batch.models.ContainerConfiguration.type"><strong>type</strong></a> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The resource type.</p></li>
+<li><p><a class="reference internal" href="#azure.mgmt.alertsmanagement.models.AlertsSortByFields.name" title="azure.mgmt.alertsmanagement.models.AlertsSortByFields.name"><strong>name</strong></a> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The resource name.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Parameters</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>location</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The resource location. Default value: “global” .</p></li>
+<li><p><strong>tags</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#object" title="(in Python v3.5)"><em>object</em></a>) – The resource tags.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="class">
+<dt id="azure.mgmt.alertsmanagement.models.Condition">
+<em class="property">class </em><code class="sig-prename descclassname">azure.mgmt.alertsmanagement.models.</code><code class="sig-name descname">Condition</code><span class="sig-paren">(</span><em class="sig-param">*</em>, <em class="sig-param">operator=None</em>, <em class="sig-param">values=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/mgmt/alertsmanagement/models/_models_py3.html#Condition"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.alertsmanagement.models.Condition" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">msrest.serialization.Model</span></code></p>
+<p>condition to trigger an action rule.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>operator</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a><em> or </em><a class="reference internal" href="#azure.mgmt.alertsmanagement.models.Operator" title="azure.mgmt.alertsmanagement.models.Operator"><em>Operator</em></a>) – operator for a given condition. Possible values include:
+‘Equals’, ‘NotEquals’, ‘Contains’, ‘DoesNotContain’</p></li>
+<li><p><strong>values</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a><em>]</em>) – list of values to match for a given condition.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="class">
+<dt id="azure.mgmt.alertsmanagement.models.Conditions">
+<em class="property">class </em><code class="sig-prename descclassname">azure.mgmt.alertsmanagement.models.</code><code class="sig-name descname">Conditions</code><span class="sig-paren">(</span><em class="sig-param">*</em>, <em class="sig-param">severity=None</em>, <em class="sig-param">monitor_service=None</em>, <em class="sig-param">monitor_condition=None</em>, <em class="sig-param">target_resource_type=None</em>, <em class="sig-param">alert_rule_id=None</em>, <em class="sig-param">description=None</em>, <em class="sig-param">alert_context=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/mgmt/alertsmanagement/models/_models_py3.html#Conditions"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.alertsmanagement.models.Conditions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">msrest.serialization.Model</span></code></p>
+<p>Conditions in alert instance to be matched for a given action rule. Default
+value is all. Multiple values could be provided with comma separation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>severity</strong> (<a class="reference internal" href="#azure.mgmt.alertsmanagement.models.Condition" title="azure.mgmt.alertsmanagement.models.Condition"><em>Condition</em></a>) – filter alerts by severity</p></li>
+<li><p><strong>monitor_service</strong> (<a class="reference internal" href="#azure.mgmt.alertsmanagement.models.Condition" title="azure.mgmt.alertsmanagement.models.Condition"><em>Condition</em></a>) – filter alerts by monitor service</p></li>
+<li><p><strong>monitor_condition</strong> (<a class="reference internal" href="#azure.mgmt.alertsmanagement.models.Condition" title="azure.mgmt.alertsmanagement.models.Condition"><em>Condition</em></a>) – filter alerts by monitor condition</p></li>
+<li><p><strong>target_resource_type</strong> (<a class="reference internal" href="#azure.mgmt.alertsmanagement.models.Condition" title="azure.mgmt.alertsmanagement.models.Condition"><em>Condition</em></a>) – filter alerts by target resource type</p></li>
+<li><p><strong>alert_rule_id</strong> (<a class="reference internal" href="#azure.mgmt.alertsmanagement.models.Condition" title="azure.mgmt.alertsmanagement.models.Condition"><em>Condition</em></a>) – filter alerts by alert rule id</p></li>
+<li><p><strong>description</strong> (<a class="reference internal" href="#azure.mgmt.alertsmanagement.models.Condition" title="azure.mgmt.alertsmanagement.models.Condition"><em>Condition</em></a>) – filter alerts by alert rule description</p></li>
+<li><p><strong>alert_context</strong> (<a class="reference internal" href="#azure.mgmt.alertsmanagement.models.Condition" title="azure.mgmt.alertsmanagement.models.Condition"><em>Condition</em></a>) – filter alerts by alert context (payload)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="class">
+<dt id="azure.mgmt.alertsmanagement.models.Detector">
+<em class="property">class </em><code class="sig-prename descclassname">azure.mgmt.alertsmanagement.models.</code><code class="sig-name descname">Detector</code><span class="sig-paren">(</span><em class="sig-param">*</em>, <em class="sig-param">id: str</em>, <em class="sig-param">parameters=None</em>, <em class="sig-param">name: str = None</em>, <em class="sig-param">description: str = None</em>, <em class="sig-param">supported_resource_types=None</em>, <em class="sig-param">image_paths=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/mgmt/alertsmanagement/models/_models_py3.html#Detector"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.alertsmanagement.models.Detector" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">msrest.serialization.Model</span></code></p>
+<p>The detector information. By default this is not populated, unless it’s
+specified in expandDetector.</p>
+<p>All required parameters must be populated in order to send to Azure.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>id</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Required. The detector id.</p></li>
+<li><p><strong>parameters</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#dict" title="(in Python v3.5)"><em>dict</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3.5/library/functions.html#object" title="(in Python v3.5)"><em>object</em></a><em>]</em>) – The detector’s parameters.’</p></li>
+<li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The Smart Detector name. By default this is not populated,
+unless it’s specified in expandDetector</p></li>
+<li><p><strong>description</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The Smart Detector description. By default this is not
+populated, unless it’s specified in expandDetector</p></li>
+<li><p><strong>supported_resource_types</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a><em>]</em>) – The Smart Detector supported resource
+types. By default this is not populated, unless it’s specified in
+expandDetector</p></li>
+<li><p><strong>image_paths</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a><em>]</em>) – The Smart Detector image path. By default this is not
+populated, unless it’s specified in expandDetector</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="class">
+<dt id="azure.mgmt.alertsmanagement.models.Diagnostics">
+<em class="property">class </em><code class="sig-prename descclassname">azure.mgmt.alertsmanagement.models.</code><code class="sig-name descname">Diagnostics</code><span class="sig-paren">(</span><em class="sig-param">*</em>, <em class="sig-param">scope=None</em>, <em class="sig-param">conditions=None</em>, <em class="sig-param">description: str = None</em>, <em class="sig-param">status=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/mgmt/alertsmanagement/models/_models_py3.html#Diagnostics"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.alertsmanagement.models.Diagnostics" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">azure.mgmt.alertsmanagement.models._models_py3.ActionRuleProperties</span></code></p>
+<p>Diagnostics based Action Rule.</p>
+<p>Action rule with diagnostics configuration.</p>
+<p>Variables are only populated by the server, and will be ignored when
+sending a request.</p>
+<p>All required parameters must be populated in order to send to Azure.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>scope</strong> (<a class="reference internal" href="#azure.mgmt.alertsmanagement.models.Scope" title="azure.mgmt.alertsmanagement.models.Scope"><em>Scope</em></a>) – scope on which action rule will apply</p></li>
+<li><p><strong>conditions</strong> (<a class="reference internal" href="#azure.mgmt.alertsmanagement.models.Conditions" title="azure.mgmt.alertsmanagement.models.Conditions"><em>Conditions</em></a>) – conditions on which alerts will be filtered</p></li>
+<li><p><strong>description</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Description of action rule</p></li>
+<li><p><strong>status</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a><em> or </em><a class="reference internal" href="#azure.mgmt.alertsmanagement.models.ActionRuleStatus" title="azure.mgmt.alertsmanagement.models.ActionRuleStatus"><em>ActionRuleStatus</em></a>) – Indicates if the given action rule is enabled or disabled.
+Possible values include: ‘Enabled’, ‘Disabled’</p></li>
+<li><p><strong>type</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Required. Constant filled by server.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Variables</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>created_at</strong> (<em>datetime</em>) – Creation time of action rule. Date-Time in ISO-8601
+format.</p></li>
+<li><p><strong>last_modified_at</strong> (<em>datetime</em>) – Last updated time of action rule. Date-Time in
+ISO-8601 format.</p></li>
+<li><p><strong>created_by</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Created by user name.</p></li>
+<li><p><strong>last_modified_by</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Last modified by user name.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="class">
+<dt id="azure.mgmt.alertsmanagement.models.ErrorResponse">
+<em class="property">class </em><code class="sig-prename descclassname">azure.mgmt.alertsmanagement.models.</code><code class="sig-name descname">ErrorResponse</code><span class="sig-paren">(</span><em class="sig-param">*</em>, <em class="sig-param">error=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/mgmt/alertsmanagement/models/_models_py3.html#ErrorResponse"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.alertsmanagement.models.ErrorResponse" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">msrest.serialization.Model</span></code></p>
+<p>An error response from the service.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>error</strong> (<a class="reference internal" href="#azure.mgmt.alertsmanagement.models.ErrorResponseBody" title="azure.mgmt.alertsmanagement.models.ErrorResponseBody"><em>ErrorResponseBody</em></a>) – </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="exception">
+<dt id="azure.mgmt.alertsmanagement.models.ErrorResponseException">
+<em class="property">exception </em><code class="sig-prename descclassname">azure.mgmt.alertsmanagement.models.</code><code class="sig-name descname">ErrorResponseException</code><span class="sig-paren">(</span><em class="sig-param">deserialize</em>, <em class="sig-param">response</em>, <em class="sig-param">*args</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/mgmt/alertsmanagement/models/_models_py3.html#ErrorResponseException"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.alertsmanagement.models.ErrorResponseException" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">msrest.exceptions.HttpOperationError</span></code></p>
+<p>Server responsed with exception of type: ‘ErrorResponse’.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>deserialize</strong> – A deserializer</p></li>
+<li><p><strong>response</strong> – Server response to be deserialized.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="class">
+<dt id="azure.mgmt.alertsmanagement.models.ErrorResponse1">
+<em class="property">class </em><code class="sig-prename descclassname">azure.mgmt.alertsmanagement.models.</code><code class="sig-name descname">ErrorResponse1</code><span class="sig-paren">(</span><em class="sig-param">*</em>, <em class="sig-param">code: str = None</em>, <em class="sig-param">message: str = None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/mgmt/alertsmanagement/models/_models_py3.html#ErrorResponse1"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.alertsmanagement.models.ErrorResponse1" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">msrest.serialization.Model</span></code></p>
+<p>Describe the format of an Error response.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>code</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Error code</p></li>
+<li><p><strong>message</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Error message indicating why the operation failed.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="exception">
+<dt id="azure.mgmt.alertsmanagement.models.ErrorResponse1Exception">
+<em class="property">exception </em><code class="sig-prename descclassname">azure.mgmt.alertsmanagement.models.</code><code class="sig-name descname">ErrorResponse1Exception</code><span class="sig-paren">(</span><em class="sig-param">deserialize</em>, <em class="sig-param">response</em>, <em class="sig-param">*args</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/mgmt/alertsmanagement/models/_models_py3.html#ErrorResponse1Exception"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.alertsmanagement.models.ErrorResponse1Exception" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">msrest.exceptions.HttpOperationError</span></code></p>
+<p>Server responsed with exception of type: ‘ErrorResponse1’.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>deserialize</strong> – A deserializer</p></li>
+<li><p><strong>response</strong> – Server response to be deserialized.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="class">
+<dt id="azure.mgmt.alertsmanagement.models.ErrorResponseBody">
+<em class="property">class </em><code class="sig-prename descclassname">azure.mgmt.alertsmanagement.models.</code><code class="sig-name descname">ErrorResponseBody</code><span class="sig-paren">(</span><em class="sig-param">*</em>, <em class="sig-param">code: str = None</em>, <em class="sig-param">message: str = None</em>, <em class="sig-param">target: str = None</em>, <em class="sig-param">details=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/mgmt/alertsmanagement/models/_models_py3.html#ErrorResponseBody"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.alertsmanagement.models.ErrorResponseBody" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">msrest.serialization.Model</span></code></p>
+<p>Details of error response.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>code</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Error code, intended to be consumed programmatically.</p></li>
+<li><p><strong>message</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Description of the error, intended for display in user
+interface.</p></li>
+<li><p><strong>target</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Target of the particular error, for example name of the
+property.</p></li>
+<li><p><strong>details</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><em>list</em></a><em>[</em><a class="reference internal" href="#azure.mgmt.alertsmanagement.models.ErrorResponseBody" title="azure.mgmt.alertsmanagement.models.ErrorResponseBody"><em>ErrorResponseBody</em></a><em>]</em>) – A list of additional details about the error.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="class">
+<dt id="azure.mgmt.alertsmanagement.models.Essentials">
+<em class="property">class </em><code class="sig-prename descclassname">azure.mgmt.alertsmanagement.models.</code><code class="sig-name descname">Essentials</code><span class="sig-paren">(</span><em class="sig-param">*</em>, <em class="sig-param">target_resource: str = None</em>, <em class="sig-param">target_resource_name: str = None</em>, <em class="sig-param">target_resource_group: str = None</em>, <em class="sig-param">target_resource_type: str = None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/mgmt/alertsmanagement/models/_models_py3.html#Essentials"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.alertsmanagement.models.Essentials" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">msrest.serialization.Model</span></code></p>
+<p>This object contains consistent fields across different monitor services.</p>
+<p>Variables are only populated by the server, and will be ignored when
+sending a request.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Variables</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><a class="reference internal" href="#azure.mgmt.alertsmanagement.models.AlertsSortByFields.severity" title="azure.mgmt.alertsmanagement.models.AlertsSortByFields.severity"><strong>severity</strong></a> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a><em> or </em><a class="reference internal" href="#azure.mgmt.alertsmanagement.models.Severity" title="azure.mgmt.alertsmanagement.models.Severity"><em>Severity</em></a>) – Severity of alert Sev0 being highest and Sev4 being
+lowest. Possible values include: ‘Sev0’, ‘Sev1’, ‘Sev2’, ‘Sev3’, ‘Sev4’</p></li>
+<li><p><a class="reference internal" href="#azure.mgmt.alertsmanagement.models.AlertsSummaryGroupByFields.signal_type" title="azure.mgmt.alertsmanagement.models.AlertsSummaryGroupByFields.signal_type"><strong>signal_type</strong></a> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a><em> or
+</em><a class="reference internal" href="#azure.mgmt.alertsmanagement.models.SignalType" title="azure.mgmt.alertsmanagement.models.SignalType"><em>SignalType</em></a>) – The type of signal the alert is based on, which could
+be metrics, logs or activity logs. Possible values include: ‘Metric’,
+‘Log’, ‘Unknown’</p></li>
+<li><p><a class="reference internal" href="#azure.mgmt.alertsmanagement.models.AlertsSortByFields.alert_state" title="azure.mgmt.alertsmanagement.models.AlertsSortByFields.alert_state"><strong>alert_state</strong></a> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a><em> or
+</em><a class="reference internal" href="#azure.mgmt.alertsmanagement.models.AlertState" title="azure.mgmt.alertsmanagement.models.AlertState"><em>AlertState</em></a>) – Alert object state, which can be modified by the user.
+Possible values include: ‘New’, ‘Acknowledged’, ‘Closed’</p></li>
+<li><p><a class="reference internal" href="#azure.mgmt.alertsmanagement.models.AlertsSortByFields.monitor_condition" title="azure.mgmt.alertsmanagement.models.AlertsSortByFields.monitor_condition"><strong>monitor_condition</strong></a> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a><em> or
+</em><a class="reference internal" href="#azure.mgmt.alertsmanagement.models.MonitorCondition" title="azure.mgmt.alertsmanagement.models.MonitorCondition"><em>MonitorCondition</em></a>) – Condition of the rule at the monitor service. It
+represents whether the underlying conditions have crossed the defined
+alert rule thresholds. Possible values include: ‘Fired’, ‘Resolved’</p></li>
+<li><p><a class="reference internal" href="#azure.mgmt.alertsmanagement.models.AlertsSummaryGroupByFields.monitor_service" title="azure.mgmt.alertsmanagement.models.AlertsSummaryGroupByFields.monitor_service"><strong>monitor_service</strong></a> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a><em> or
+</em><a class="reference internal" href="#azure.mgmt.alertsmanagement.models.MonitorService" title="azure.mgmt.alertsmanagement.models.MonitorService"><em>MonitorService</em></a>) – Monitor service on which the rule(monitor) is set.
+Possible values include: ‘Application Insights’, ‘ActivityLog
+Administrative’, ‘ActivityLog Security’, ‘ActivityLog Recommendation’,
+‘ActivityLog Policy’, ‘ActivityLog Autoscale’, ‘Log Analytics’, ‘Nagios’,
+‘Platform’, ‘SCOM’, ‘ServiceHealth’, ‘SmartDetector’, ‘VM Insights’,
+‘Zabbix’</p></li>
+<li><p><a class="reference internal" href="#azure.mgmt.alertsmanagement.models.AlertsSummaryGroupByFields.alert_rule" title="azure.mgmt.alertsmanagement.models.AlertsSummaryGroupByFields.alert_rule"><strong>alert_rule</strong></a> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Rule(monitor) which fired alert instance. Depending on
+the monitor service,  this would be ARM id or name of the rule.</p></li>
+<li><p><strong>source_created_id</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Unique Id created by monitor service for each
+alert instance. This could be used to track the issue at the monitor
+service, in case of Nagios, Zabbix, SCOM etc.</p></li>
+<li><p><strong>smart_group_id</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Unique Id of the smart group</p></li>
+<li><p><strong>smart_grouping_reason</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Verbose reason describing the reason why this
+alert instance is added to a smart group</p></li>
+<li><p><a class="reference internal" href="#azure.mgmt.alertsmanagement.models.AlertsSortByFields.start_date_time" title="azure.mgmt.alertsmanagement.models.AlertsSortByFields.start_date_time"><strong>start_date_time</strong></a> (<em>datetime</em>) – Creation time(ISO-8601 format) of alert instance.</p></li>
+<li><p><a class="reference internal" href="#azure.mgmt.alertsmanagement.models.AlertsSortByFields.last_modified_date_time" title="azure.mgmt.alertsmanagement.models.AlertsSortByFields.last_modified_date_time"><strong>last_modified_date_time</strong></a> (<em>datetime</em>) – Last modification time(ISO-8601 format) of
+alert instance.</p></li>
+<li><p><strong>monitor_condition_resolved_date_time</strong> (<em>datetime</em>) – Resolved time(ISO-8601 format)
+of alert instance. This will be updated when monitor service resolves the
+alert instance because the rule condition is no longer met.</p></li>
+<li><p><strong>last_modified_user_name</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – User who last modified the alert, in case
+of monitor service updates user would be ‘system’, otherwise name of the
+user.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Parameters</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>target_resource</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Target ARM resource, on which alert got created.</p></li>
+<li><p><strong>target_resource_name</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Name of the target ARM resource name, on
+which alert got created.</p></li>
+<li><p><strong>target_resource_group</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Resource group of target ARM resource, on
+which alert got created.</p></li>
+<li><p><strong>target_resource_type</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Resource type of target ARM resource, on
+which alert got created.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="class">
+<dt id="azure.mgmt.alertsmanagement.models.ManagedResource">
+<em class="property">class </em><code class="sig-prename descclassname">azure.mgmt.alertsmanagement.models.</code><code class="sig-name descname">ManagedResource</code><span class="sig-paren">(</span><em class="sig-param">*</em>, <em class="sig-param">location: str</em>, <em class="sig-param">tags=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/mgmt/alertsmanagement/models/_models_py3.html#ManagedResource"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.alertsmanagement.models.ManagedResource" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">azure.mgmt.alertsmanagement.models._models_py3.Resource</span></code></p>
+<p>An azure managed resource object.</p>
+<p>Variables are only populated by the server, and will be ignored when
+sending a request.</p>
+<p>All required parameters must be populated in order to send to Azure.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Variables</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><a class="reference external" href="https://docs.python.org/3.5/library/functions.html#id" title="(in Python v3.5)"><strong>id</strong></a> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Azure resource Id</p></li>
+<li><p><a class="reference internal" href="azure.batch.models.html#azure.batch.models.ContainerConfiguration.type" title="azure.batch.models.ContainerConfiguration.type"><strong>type</strong></a> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Azure resource type</p></li>
+<li><p><a class="reference internal" href="#azure.mgmt.alertsmanagement.models.AlertsSortByFields.name" title="azure.mgmt.alertsmanagement.models.AlertsSortByFields.name"><strong>name</strong></a> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Azure resource name</p></li>
+</ul>
+</dd>
+<dt class="field-even">Parameters</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>location</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Required. Resource location</p></li>
+<li><p><strong>tags</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#dict" title="(in Python v3.5)"><em>dict</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a><em>]</em>) – Resource tags</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="class">
+<dt id="azure.mgmt.alertsmanagement.models.MonitorServiceDetails">
+<em class="property">class </em><code class="sig-prename descclassname">azure.mgmt.alertsmanagement.models.</code><code class="sig-name descname">MonitorServiceDetails</code><span class="sig-paren">(</span><em class="sig-param">*</em>, <em class="sig-param">name: str = None</em>, <em class="sig-param">display_name: str = None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/mgmt/alertsmanagement/models/_models_py3.html#MonitorServiceDetails"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.alertsmanagement.models.MonitorServiceDetails" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">msrest.serialization.Model</span></code></p>
+<p>Details of a monitor service.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Monitor service name</p></li>
+<li><p><strong>display_name</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Monitor service display name</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="class">
+<dt id="azure.mgmt.alertsmanagement.models.MonitorServiceList">
+<em class="property">class </em><code class="sig-prename descclassname">azure.mgmt.alertsmanagement.models.</code><code class="sig-name descname">MonitorServiceList</code><span class="sig-paren">(</span><em class="sig-param">*</em>, <em class="sig-param">data</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/mgmt/alertsmanagement/models/_models_py3.html#MonitorServiceList"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.alertsmanagement.models.MonitorServiceList" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">azure.mgmt.alertsmanagement.models._models_py3.AlertsMetaDataProperties</span></code></p>
+<p>Monitor service details.</p>
+<p>Monitor service details.</p>
+<p>All required parameters must be populated in order to send to Azure.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>metadata_identifier</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Required. Constant filled by server.</p></li>
+<li><p><strong>data</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><em>list</em></a><em>[</em><a class="reference internal" href="#azure.mgmt.alertsmanagement.models.MonitorServiceDetails" title="azure.mgmt.alertsmanagement.models.MonitorServiceDetails"><em>MonitorServiceDetails</em></a><em>]</em>) – Required. Array of operations</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="class">
+<dt id="azure.mgmt.alertsmanagement.models.Operation">
+<em class="property">class </em><code class="sig-prename descclassname">azure.mgmt.alertsmanagement.models.</code><code class="sig-name descname">Operation</code><span class="sig-paren">(</span><em class="sig-param">*</em>, <em class="sig-param">name: str = None</em>, <em class="sig-param">display=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/mgmt/alertsmanagement/models/_models_py3.html#Operation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.alertsmanagement.models.Operation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">msrest.serialization.Model</span></code></p>
+<p>Operation provided by provider.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Name of the operation</p></li>
+<li><p><strong>display</strong> (<a class="reference internal" href="#azure.mgmt.alertsmanagement.models.OperationDisplay" title="azure.mgmt.alertsmanagement.models.OperationDisplay"><em>OperationDisplay</em></a>) – Properties of the operation</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="class">
+<dt id="azure.mgmt.alertsmanagement.models.OperationDisplay">
+<em class="property">class </em><code class="sig-prename descclassname">azure.mgmt.alertsmanagement.models.</code><code class="sig-name descname">OperationDisplay</code><span class="sig-paren">(</span><em class="sig-param">*</em>, <em class="sig-param">provider: str = None</em>, <em class="sig-param">resource: str = None</em>, <em class="sig-param">operation: str = None</em>, <em class="sig-param">description: str = None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/mgmt/alertsmanagement/models/_models_py3.html#OperationDisplay"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.alertsmanagement.models.OperationDisplay" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">msrest.serialization.Model</span></code></p>
+<p>Properties of the operation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>provider</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Provider name</p></li>
+<li><p><strong>resource</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Resource name</p></li>
+<li><p><strong>operation</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Operation name</p></li>
+<li><p><strong>description</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Description of the operation</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="class">
+<dt id="azure.mgmt.alertsmanagement.models.PatchObject">
+<em class="property">class </em><code class="sig-prename descclassname">azure.mgmt.alertsmanagement.models.</code><code class="sig-name descname">PatchObject</code><span class="sig-paren">(</span><em class="sig-param">*</em>, <em class="sig-param">status=None</em>, <em class="sig-param">tags=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/mgmt/alertsmanagement/models/_models_py3.html#PatchObject"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.alertsmanagement.models.PatchObject" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">msrest.serialization.Model</span></code></p>
+<p>Data contract for patch.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>status</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a><em> or </em><a class="reference internal" href="#azure.mgmt.alertsmanagement.models.ActionRuleStatus" title="azure.mgmt.alertsmanagement.models.ActionRuleStatus"><em>ActionRuleStatus</em></a>) – Indicates if the given action rule is enabled or disabled.
+Possible values include: ‘Enabled’, ‘Disabled’</p></li>
+<li><p><strong>tags</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#object" title="(in Python v3.5)"><em>object</em></a>) – tags to be updated</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="class">
+<dt id="azure.mgmt.alertsmanagement.models.Resource">
+<em class="property">class </em><code class="sig-prename descclassname">azure.mgmt.alertsmanagement.models.</code><code class="sig-name descname">Resource</code><span class="sig-paren">(</span><em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/mgmt/alertsmanagement/models/_models_py3.html#Resource"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.alertsmanagement.models.Resource" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">msrest.serialization.Model</span></code></p>
+<p>An azure resource object.</p>
+<p>Variables are only populated by the server, and will be ignored when
+sending a request.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Variables</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><a class="reference external" href="https://docs.python.org/3.5/library/functions.html#id" title="(in Python v3.5)"><strong>id</strong></a> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Azure resource Id</p></li>
+<li><p><a class="reference internal" href="azure.batch.models.html#azure.batch.models.ContainerConfiguration.type" title="azure.batch.models.ContainerConfiguration.type"><strong>type</strong></a> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Azure resource type</p></li>
+<li><p><a class="reference internal" href="#azure.mgmt.alertsmanagement.models.AlertsSortByFields.name" title="azure.mgmt.alertsmanagement.models.AlertsSortByFields.name"><strong>name</strong></a> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Azure resource name</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="class">
+<dt id="azure.mgmt.alertsmanagement.models.Scope">
+<em class="property">class </em><code class="sig-prename descclassname">azure.mgmt.alertsmanagement.models.</code><code class="sig-name descname">Scope</code><span class="sig-paren">(</span><em class="sig-param">*</em>, <em class="sig-param">scope_type=None</em>, <em class="sig-param">values=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/mgmt/alertsmanagement/models/_models_py3.html#Scope"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.alertsmanagement.models.Scope" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">msrest.serialization.Model</span></code></p>
+<p>Target scope for a given action rule. By default scope will be the
+subscription. User can also provide list of resource groups or list of
+resources from the scope subscription as well.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>scope_type</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a><em> or </em><a class="reference internal" href="#azure.mgmt.alertsmanagement.models.ScopeType" title="azure.mgmt.alertsmanagement.models.ScopeType"><em>ScopeType</em></a>) – type of target scope. Possible values include:
+‘ResourceGroup’, ‘Resource’</p></li>
+<li><p><strong>values</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a><em>]</em>) – list of ARM IDs of the given scope type which will be the
+target of the given action rule.</p></li>
 </ul>
 </dd>
 </dl>
@@ -638,8 +1058,8 @@ sending a request.</p>
 
 <dl class="class">
 <dt id="azure.mgmt.alertsmanagement.models.SmartGroup">
-<em class="property">class </em><code class="sig-prename descclassname">azure.mgmt.alertsmanagement.models.</code><code class="sig-name descname">SmartGroup</code><span class="sig-paren">(</span><em class="sig-param">*</em>, <em class="sig-param">alerts_count: int = None</em>, <em class="sig-param">resources=None</em>, <em class="sig-param">resource_types=None</em>, <em class="sig-param">resource_groups=None</em>, <em class="sig-param">monitor_services=None</em>, <em class="sig-param">monitor_conditions=None</em>, <em class="sig-param">alert_states=None</em>, <em class="sig-param">alert_severities=None</em>, <em class="sig-param">next_link: str = None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/mgmt/alertsmanagement/models/smart_group_py3.html#SmartGroup"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.alertsmanagement.models.SmartGroup" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">azure.mgmt.alertsmanagement.models.resource_py3.Resource</span></code></p>
+<em class="property">class </em><code class="sig-prename descclassname">azure.mgmt.alertsmanagement.models.</code><code class="sig-name descname">SmartGroup</code><span class="sig-paren">(</span><em class="sig-param">*</em>, <em class="sig-param">alerts_count: int = None</em>, <em class="sig-param">resources=None</em>, <em class="sig-param">resource_types=None</em>, <em class="sig-param">resource_groups=None</em>, <em class="sig-param">monitor_services=None</em>, <em class="sig-param">monitor_conditions=None</em>, <em class="sig-param">alert_states=None</em>, <em class="sig-param">alert_severities=None</em>, <em class="sig-param">next_link: str = None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/mgmt/alertsmanagement/models/_models_py3.html#SmartGroup"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.alertsmanagement.models.SmartGroup" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">azure.mgmt.alertsmanagement.models._models_py3.Resource</span></code></p>
 <p>Set of related alerts grouped together smartly by AMS.</p>
 <p>Variables are only populated by the server, and will be ignored when
 sending a request.</p>
@@ -681,37 +1101,208 @@ ListNext() with this URI to fetch the next page alerts.</p></li>
 </dd></dl>
 
 <dl class="class">
-<dt id="azure.mgmt.alertsmanagement.models.SmartGroupsList">
-<em class="property">class </em><code class="sig-prename descclassname">azure.mgmt.alertsmanagement.models.</code><code class="sig-name descname">SmartGroupsList</code><span class="sig-paren">(</span><em class="sig-param">*</em>, <em class="sig-param">next_link: str = None</em>, <em class="sig-param">value=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/mgmt/alertsmanagement/models/smart_groups_list_py3.html#SmartGroupsList"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.alertsmanagement.models.SmartGroupsList" title="Permalink to this definition">¶</a></dt>
+<dt id="azure.mgmt.alertsmanagement.models.SmartGroupAggregatedProperty">
+<em class="property">class </em><code class="sig-prename descclassname">azure.mgmt.alertsmanagement.models.</code><code class="sig-name descname">SmartGroupAggregatedProperty</code><span class="sig-paren">(</span><em class="sig-param">*</em>, <em class="sig-param">name: str = None</em>, <em class="sig-param">count: int = None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/mgmt/alertsmanagement/models/_models_py3.html#SmartGroupAggregatedProperty"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.alertsmanagement.models.SmartGroupAggregatedProperty" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">msrest.serialization.Model</span></code></p>
-<p>List the alerts.</p>
+<p>Aggregated property of each type.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>next_link</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – URL to fetch the next set of alerts.</p></li>
-<li><p><strong>value</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><em>list</em></a><em>[</em><a class="reference internal" href="#azure.mgmt.alertsmanagement.models.SmartGroup" title="azure.mgmt.alertsmanagement.models.SmartGroup"><em>SmartGroup</em></a><em>]</em>) – List of alerts</p></li>
+<li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Name of the type.</p></li>
+<li><p><strong>count</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a>) – Total number of items of type.</p></li>
 </ul>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="class">
+<dt id="azure.mgmt.alertsmanagement.models.SmartGroupModification">
+<em class="property">class </em><code class="sig-prename descclassname">azure.mgmt.alertsmanagement.models.</code><code class="sig-name descname">SmartGroupModification</code><span class="sig-paren">(</span><em class="sig-param">*</em>, <em class="sig-param">properties=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/mgmt/alertsmanagement/models/_models_py3.html#SmartGroupModification"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.alertsmanagement.models.SmartGroupModification" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">azure.mgmt.alertsmanagement.models._models_py3.Resource</span></code></p>
+<p>Alert Modification details.</p>
+<p>Variables are only populated by the server, and will be ignored when
+sending a request.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Variables</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><a class="reference external" href="https://docs.python.org/3.5/library/functions.html#id" title="(in Python v3.5)"><strong>id</strong></a> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Azure resource Id</p></li>
+<li><p><a class="reference internal" href="azure.batch.models.html#azure.batch.models.ContainerConfiguration.type" title="azure.batch.models.ContainerConfiguration.type"><strong>type</strong></a> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Azure resource type</p></li>
+<li><p><a class="reference internal" href="#azure.mgmt.alertsmanagement.models.AlertsSortByFields.name" title="azure.mgmt.alertsmanagement.models.AlertsSortByFields.name"><strong>name</strong></a> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Azure resource name</p></li>
+</ul>
+</dd>
+<dt class="field-even">Parameters</dt>
+<dd class="field-even"><p><strong>properties</strong> (<a class="reference internal" href="#azure.mgmt.alertsmanagement.models.SmartGroupModificationProperties" title="azure.mgmt.alertsmanagement.models.SmartGroupModificationProperties"><em>SmartGroupModificationProperties</em></a>) – </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="class">
+<dt id="azure.mgmt.alertsmanagement.models.SmartGroupModificationItem">
+<em class="property">class </em><code class="sig-prename descclassname">azure.mgmt.alertsmanagement.models.</code><code class="sig-name descname">SmartGroupModificationItem</code><span class="sig-paren">(</span><em class="sig-param">*</em>, <em class="sig-param">modification_event=None</em>, <em class="sig-param">old_value: str = None</em>, <em class="sig-param">new_value: str = None</em>, <em class="sig-param">modified_at: str = None</em>, <em class="sig-param">modified_by: str = None</em>, <em class="sig-param">comments: str = None</em>, <em class="sig-param">description: str = None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/mgmt/alertsmanagement/models/_models_py3.html#SmartGroupModificationItem"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.alertsmanagement.models.SmartGroupModificationItem" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">msrest.serialization.Model</span></code></p>
+<p>smartGroup modification item.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>modification_event</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a><em> or
+</em><a class="reference internal" href="#azure.mgmt.alertsmanagement.models.SmartGroupModificationEvent" title="azure.mgmt.alertsmanagement.models.SmartGroupModificationEvent"><em>SmartGroupModificationEvent</em></a>) – Reason for the modification. Possible values
+include: ‘SmartGroupCreated’, ‘StateChange’, ‘AlertAdded’, ‘AlertRemoved’</p></li>
+<li><p><strong>old_value</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Old value</p></li>
+<li><p><strong>new_value</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – New value</p></li>
+<li><p><strong>modified_at</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Modified date and time</p></li>
+<li><p><strong>modified_by</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Modified user details (Principal client name)</p></li>
+<li><p><strong>comments</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Modification comments</p></li>
+<li><p><strong>description</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Description of the modification</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="class">
+<dt id="azure.mgmt.alertsmanagement.models.SmartGroupModificationProperties">
+<em class="property">class </em><code class="sig-prename descclassname">azure.mgmt.alertsmanagement.models.</code><code class="sig-name descname">SmartGroupModificationProperties</code><span class="sig-paren">(</span><em class="sig-param">*</em>, <em class="sig-param">modifications=None</em>, <em class="sig-param">next_link: str = None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/mgmt/alertsmanagement/models/_models_py3.html#SmartGroupModificationProperties"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.alertsmanagement.models.SmartGroupModificationProperties" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">msrest.serialization.Model</span></code></p>
+<p>Properties of the smartGroup modification item.</p>
+<p>Variables are only populated by the server, and will be ignored when
+sending a request.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Variables</dt>
+<dd class="field-odd"><p><strong>smart_group_id</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Unique Id of the smartGroup for which the history is
+being retrieved</p>
+</dd>
+<dt class="field-even">Parameters</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>modifications</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><em>list</em></a><em>[</em><a class="reference internal" href="#azure.mgmt.alertsmanagement.models.SmartGroupModificationItem" title="azure.mgmt.alertsmanagement.models.SmartGroupModificationItem"><em>SmartGroupModificationItem</em></a><em>]</em>) – Modification details</p></li>
+<li><p><strong>next_link</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – URL to fetch the next set of results.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="class">
+<dt id="azure.mgmt.alertsmanagement.models.Suppression">
+<em class="property">class </em><code class="sig-prename descclassname">azure.mgmt.alertsmanagement.models.</code><code class="sig-name descname">Suppression</code><span class="sig-paren">(</span><em class="sig-param">*</em>, <em class="sig-param">suppression_config</em>, <em class="sig-param">scope=None</em>, <em class="sig-param">conditions=None</em>, <em class="sig-param">description: str = None</em>, <em class="sig-param">status=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/mgmt/alertsmanagement/models/_models_py3.html#Suppression"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.alertsmanagement.models.Suppression" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">azure.mgmt.alertsmanagement.models._models_py3.ActionRuleProperties</span></code></p>
+<p>Suppression based Action Rule.</p>
+<p>Action rule with suppression configuration.</p>
+<p>Variables are only populated by the server, and will be ignored when
+sending a request.</p>
+<p>All required parameters must be populated in order to send to Azure.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>scope</strong> (<a class="reference internal" href="#azure.mgmt.alertsmanagement.models.Scope" title="azure.mgmt.alertsmanagement.models.Scope"><em>Scope</em></a>) – scope on which action rule will apply</p></li>
+<li><p><strong>conditions</strong> (<a class="reference internal" href="#azure.mgmt.alertsmanagement.models.Conditions" title="azure.mgmt.alertsmanagement.models.Conditions"><em>Conditions</em></a>) – conditions on which alerts will be filtered</p></li>
+<li><p><strong>description</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Description of action rule</p></li>
+<li><p><strong>status</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a><em> or </em><a class="reference internal" href="#azure.mgmt.alertsmanagement.models.ActionRuleStatus" title="azure.mgmt.alertsmanagement.models.ActionRuleStatus"><em>ActionRuleStatus</em></a>) – Indicates if the given action rule is enabled or disabled.
+Possible values include: ‘Enabled’, ‘Disabled’</p></li>
+<li><p><strong>type</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Required. Constant filled by server.</p></li>
+<li><p><strong>suppression_config</strong> (<a class="reference internal" href="#azure.mgmt.alertsmanagement.models.SuppressionConfig" title="azure.mgmt.alertsmanagement.models.SuppressionConfig"><em>SuppressionConfig</em></a>) – Required. suppression configuration for the
+action rule</p></li>
+</ul>
+</dd>
+<dt class="field-even">Variables</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>created_at</strong> (<em>datetime</em>) – Creation time of action rule. Date-Time in ISO-8601
+format.</p></li>
+<li><p><strong>last_modified_at</strong> (<em>datetime</em>) – Last updated time of action rule. Date-Time in
+ISO-8601 format.</p></li>
+<li><p><strong>created_by</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Created by user name.</p></li>
+<li><p><strong>last_modified_by</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Last modified by user name.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="class">
+<dt id="azure.mgmt.alertsmanagement.models.SuppressionConfig">
+<em class="property">class </em><code class="sig-prename descclassname">azure.mgmt.alertsmanagement.models.</code><code class="sig-name descname">SuppressionConfig</code><span class="sig-paren">(</span><em class="sig-param">*</em>, <em class="sig-param">recurrence_type</em>, <em class="sig-param">schedule=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/mgmt/alertsmanagement/models/_models_py3.html#SuppressionConfig"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.alertsmanagement.models.SuppressionConfig" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">msrest.serialization.Model</span></code></p>
+<p>Suppression logic for a given action rule.</p>
+<p>All required parameters must be populated in order to send to Azure.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>recurrence_type</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a><em> or
+</em><a class="reference internal" href="#azure.mgmt.alertsmanagement.models.SuppressionType" title="azure.mgmt.alertsmanagement.models.SuppressionType"><em>SuppressionType</em></a>) – Required. Specifies when the suppression should be
+applied. Possible values include: ‘Always’, ‘Once’, ‘Daily’, ‘Weekly’,
+‘Monthly’</p></li>
+<li><p><strong>schedule</strong> (<a class="reference internal" href="#azure.mgmt.alertsmanagement.models.SuppressionSchedule" title="azure.mgmt.alertsmanagement.models.SuppressionSchedule"><em>SuppressionSchedule</em></a>) – suppression schedule configuration</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="class">
+<dt id="azure.mgmt.alertsmanagement.models.SuppressionSchedule">
+<em class="property">class </em><code class="sig-prename descclassname">azure.mgmt.alertsmanagement.models.</code><code class="sig-name descname">SuppressionSchedule</code><span class="sig-paren">(</span><em class="sig-param">*</em>, <em class="sig-param">start_date: str = None</em>, <em class="sig-param">end_date: str = None</em>, <em class="sig-param">start_time: str = None</em>, <em class="sig-param">end_time: str = None</em>, <em class="sig-param">recurrence_values=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/mgmt/alertsmanagement/models/_models_py3.html#SuppressionSchedule"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.alertsmanagement.models.SuppressionSchedule" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">msrest.serialization.Model</span></code></p>
+<p>Schedule for a given suppression configuration.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>start_date</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Start date for suppression</p></li>
+<li><p><strong>end_date</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – End date for suppression</p></li>
+<li><p><strong>start_time</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Start time for suppression</p></li>
+<li><p><strong>end_time</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – End date for suppression</p></li>
+<li><p><strong>recurrence_values</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3.5/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a><em>]</em>) – Specifies the values for recurrence pattern</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="class">
+<dt id="azure.mgmt.alertsmanagement.models.ThrottlingInformation">
+<em class="property">class </em><code class="sig-prename descclassname">azure.mgmt.alertsmanagement.models.</code><code class="sig-name descname">ThrottlingInformation</code><span class="sig-paren">(</span><em class="sig-param">*</em>, <em class="sig-param">duration=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/mgmt/alertsmanagement/models/_models_py3.html#ThrottlingInformation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.alertsmanagement.models.ThrottlingInformation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">msrest.serialization.Model</span></code></p>
+<p>Optional throttling information for the alert rule.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>duration</strong> (<em>timedelta</em>) – The required duration (in ISO8601 format) to wait before
+notifying on the alert rule again. The time granularity must be in minutes
+and minimum value is 0 minutes</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="class">
 <dt id="azure.mgmt.alertsmanagement.models.OperationPaged">
-<em class="property">class </em><code class="sig-prename descclassname">azure.mgmt.alertsmanagement.models.</code><code class="sig-name descname">OperationPaged</code><span class="sig-paren">(</span><em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/mgmt/alertsmanagement/models/operation_paged.html#OperationPaged"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.alertsmanagement.models.OperationPaged" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">azure.mgmt.alertsmanagement.models.</code><code class="sig-name descname">OperationPaged</code><span class="sig-paren">(</span><em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/mgmt/alertsmanagement/models/_paged_models.html#OperationPaged"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.alertsmanagement.models.OperationPaged" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">msrest.paging.Paged</span></code></p>
 <p>A paging container for iterating over a list of <a class="reference internal" href="#azure.mgmt.alertsmanagement.models.Operation" title="azure.mgmt.alertsmanagement.models.Operation"><code class="xref py py-class docutils literal notranslate"><span class="pre">Operation</span></code></a> object</p>
 </dd></dl>
 
 <dl class="class">
 <dt id="azure.mgmt.alertsmanagement.models.AlertPaged">
-<em class="property">class </em><code class="sig-prename descclassname">azure.mgmt.alertsmanagement.models.</code><code class="sig-name descname">AlertPaged</code><span class="sig-paren">(</span><em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/mgmt/alertsmanagement/models/alert_paged.html#AlertPaged"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.alertsmanagement.models.AlertPaged" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">azure.mgmt.alertsmanagement.models.</code><code class="sig-name descname">AlertPaged</code><span class="sig-paren">(</span><em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/mgmt/alertsmanagement/models/_paged_models.html#AlertPaged"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.alertsmanagement.models.AlertPaged" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">msrest.paging.Paged</span></code></p>
 <p>A paging container for iterating over a list of <a class="reference internal" href="#azure.mgmt.alertsmanagement.models.Alert" title="azure.mgmt.alertsmanagement.models.Alert"><code class="xref py py-class docutils literal notranslate"><span class="pre">Alert</span></code></a> object</p>
 </dd></dl>
 
 <dl class="class">
+<dt id="azure.mgmt.alertsmanagement.models.SmartGroupPaged">
+<em class="property">class </em><code class="sig-prename descclassname">azure.mgmt.alertsmanagement.models.</code><code class="sig-name descname">SmartGroupPaged</code><span class="sig-paren">(</span><em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/mgmt/alertsmanagement/models/_paged_models.html#SmartGroupPaged"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.alertsmanagement.models.SmartGroupPaged" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">msrest.paging.Paged</span></code></p>
+<p>A paging container for iterating over a list of <a class="reference internal" href="#azure.mgmt.alertsmanagement.models.SmartGroup" title="azure.mgmt.alertsmanagement.models.SmartGroup"><code class="xref py py-class docutils literal notranslate"><span class="pre">SmartGroup</span></code></a> object</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="azure.mgmt.alertsmanagement.models.ActionRulePaged">
+<em class="property">class </em><code class="sig-prename descclassname">azure.mgmt.alertsmanagement.models.</code><code class="sig-name descname">ActionRulePaged</code><span class="sig-paren">(</span><em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/mgmt/alertsmanagement/models/_paged_models.html#ActionRulePaged"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.alertsmanagement.models.ActionRulePaged" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">msrest.paging.Paged</span></code></p>
+<p>A paging container for iterating over a list of <a class="reference internal" href="#azure.mgmt.alertsmanagement.models.ActionRule" title="azure.mgmt.alertsmanagement.models.ActionRule"><code class="xref py py-class docutils literal notranslate"><span class="pre">ActionRule</span></code></a> object</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="azure.mgmt.alertsmanagement.models.AlertRulePaged">
+<em class="property">class </em><code class="sig-prename descclassname">azure.mgmt.alertsmanagement.models.</code><code class="sig-name descname">AlertRulePaged</code><span class="sig-paren">(</span><em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/mgmt/alertsmanagement/models/_paged_models.html#AlertRulePaged"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.alertsmanagement.models.AlertRulePaged" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">msrest.paging.Paged</span></code></p>
+<p>A paging container for iterating over a list of <a class="reference internal" href="#azure.mgmt.alertsmanagement.models.AlertRule" title="azure.mgmt.alertsmanagement.models.AlertRule"><code class="xref py py-class docutils literal notranslate"><span class="pre">AlertRule</span></code></a> object</p>
+</dd></dl>
+
+<dl class="class">
 <dt id="azure.mgmt.alertsmanagement.models.Severity">
-<em class="property">class </em><code class="sig-prename descclassname">azure.mgmt.alertsmanagement.models.</code><code class="sig-name descname">Severity</code><a class="reference internal" href="../_modules/azure/mgmt/alertsmanagement/models/alerts_management_client_enums.html#Severity"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.alertsmanagement.models.Severity" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">azure.mgmt.alertsmanagement.models.</code><code class="sig-name descname">Severity</code><a class="reference internal" href="../_modules/azure/mgmt/alertsmanagement/models/_alerts_management_client_enums.html#Severity"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.alertsmanagement.models.Severity" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3.5/library/enum.html#enum.Enum" title="(in Python v3.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></a></p>
 <p>An enumeration.</p>
 <dl class="attribute">
@@ -743,7 +1334,7 @@ ListNext() with this URI to fetch the next page alerts.</p></li>
 
 <dl class="class">
 <dt id="azure.mgmt.alertsmanagement.models.SignalType">
-<em class="property">class </em><code class="sig-prename descclassname">azure.mgmt.alertsmanagement.models.</code><code class="sig-name descname">SignalType</code><a class="reference internal" href="../_modules/azure/mgmt/alertsmanagement/models/alerts_management_client_enums.html#SignalType"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.alertsmanagement.models.SignalType" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">azure.mgmt.alertsmanagement.models.</code><code class="sig-name descname">SignalType</code><a class="reference internal" href="../_modules/azure/mgmt/alertsmanagement/models/_alerts_management_client_enums.html#SignalType"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.alertsmanagement.models.SignalType" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3.5/library/enum.html#enum.Enum" title="(in Python v3.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></a></p>
 <p>An enumeration.</p>
 <dl class="attribute">
@@ -765,7 +1356,7 @@ ListNext() with this URI to fetch the next page alerts.</p></li>
 
 <dl class="class">
 <dt id="azure.mgmt.alertsmanagement.models.AlertState">
-<em class="property">class </em><code class="sig-prename descclassname">azure.mgmt.alertsmanagement.models.</code><code class="sig-name descname">AlertState</code><a class="reference internal" href="../_modules/azure/mgmt/alertsmanagement/models/alerts_management_client_enums.html#AlertState"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.alertsmanagement.models.AlertState" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">azure.mgmt.alertsmanagement.models.</code><code class="sig-name descname">AlertState</code><a class="reference internal" href="../_modules/azure/mgmt/alertsmanagement/models/_alerts_management_client_enums.html#AlertState"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.alertsmanagement.models.AlertState" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3.5/library/enum.html#enum.Enum" title="(in Python v3.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></a></p>
 <p>An enumeration.</p>
 <dl class="attribute">
@@ -787,7 +1378,7 @@ ListNext() with this URI to fetch the next page alerts.</p></li>
 
 <dl class="class">
 <dt id="azure.mgmt.alertsmanagement.models.MonitorCondition">
-<em class="property">class </em><code class="sig-prename descclassname">azure.mgmt.alertsmanagement.models.</code><code class="sig-name descname">MonitorCondition</code><a class="reference internal" href="../_modules/azure/mgmt/alertsmanagement/models/alerts_management_client_enums.html#MonitorCondition"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.alertsmanagement.models.MonitorCondition" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">azure.mgmt.alertsmanagement.models.</code><code class="sig-name descname">MonitorCondition</code><a class="reference internal" href="../_modules/azure/mgmt/alertsmanagement/models/_alerts_management_client_enums.html#MonitorCondition"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.alertsmanagement.models.MonitorCondition" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3.5/library/enum.html#enum.Enum" title="(in Python v3.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></a></p>
 <p>An enumeration.</p>
 <dl class="attribute">
@@ -804,7 +1395,7 @@ ListNext() with this URI to fetch the next page alerts.</p></li>
 
 <dl class="class">
 <dt id="azure.mgmt.alertsmanagement.models.MonitorService">
-<em class="property">class </em><code class="sig-prename descclassname">azure.mgmt.alertsmanagement.models.</code><code class="sig-name descname">MonitorService</code><a class="reference internal" href="../_modules/azure/mgmt/alertsmanagement/models/alerts_management_client_enums.html#MonitorService"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.alertsmanagement.models.MonitorService" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">azure.mgmt.alertsmanagement.models.</code><code class="sig-name descname">MonitorService</code><a class="reference internal" href="../_modules/azure/mgmt/alertsmanagement/models/_alerts_management_client_enums.html#MonitorService"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.alertsmanagement.models.MonitorService" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3.5/library/enum.html#enum.Enum" title="(in Python v3.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></a></p>
 <p>An enumeration.</p>
 <dl class="attribute">
@@ -881,7 +1472,7 @@ ListNext() with this URI to fetch the next page alerts.</p></li>
 
 <dl class="class">
 <dt id="azure.mgmt.alertsmanagement.models.AlertModificationEvent">
-<em class="property">class </em><code class="sig-prename descclassname">azure.mgmt.alertsmanagement.models.</code><code class="sig-name descname">AlertModificationEvent</code><a class="reference internal" href="../_modules/azure/mgmt/alertsmanagement/models/alerts_management_client_enums.html#AlertModificationEvent"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.alertsmanagement.models.AlertModificationEvent" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">azure.mgmt.alertsmanagement.models.</code><code class="sig-name descname">AlertModificationEvent</code><a class="reference internal" href="../_modules/azure/mgmt/alertsmanagement/models/_alerts_management_client_enums.html#AlertModificationEvent"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.alertsmanagement.models.AlertModificationEvent" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3.5/library/enum.html#enum.Enum" title="(in Python v3.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></a></p>
 <p>An enumeration.</p>
 <dl class="attribute">
@@ -903,7 +1494,7 @@ ListNext() with this URI to fetch the next page alerts.</p></li>
 
 <dl class="class">
 <dt id="azure.mgmt.alertsmanagement.models.SmartGroupModificationEvent">
-<em class="property">class </em><code class="sig-prename descclassname">azure.mgmt.alertsmanagement.models.</code><code class="sig-name descname">SmartGroupModificationEvent</code><a class="reference internal" href="../_modules/azure/mgmt/alertsmanagement/models/alerts_management_client_enums.html#SmartGroupModificationEvent"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.alertsmanagement.models.SmartGroupModificationEvent" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">azure.mgmt.alertsmanagement.models.</code><code class="sig-name descname">SmartGroupModificationEvent</code><a class="reference internal" href="../_modules/azure/mgmt/alertsmanagement/models/_alerts_management_client_enums.html#SmartGroupModificationEvent"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.alertsmanagement.models.SmartGroupModificationEvent" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3.5/library/enum.html#enum.Enum" title="(in Python v3.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></a></p>
 <p>An enumeration.</p>
 <dl class="attribute">
@@ -930,7 +1521,7 @@ ListNext() with this URI to fetch the next page alerts.</p></li>
 
 <dl class="class">
 <dt id="azure.mgmt.alertsmanagement.models.State">
-<em class="property">class </em><code class="sig-prename descclassname">azure.mgmt.alertsmanagement.models.</code><code class="sig-name descname">State</code><a class="reference internal" href="../_modules/azure/mgmt/alertsmanagement/models/alerts_management_client_enums.html#State"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.alertsmanagement.models.State" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">azure.mgmt.alertsmanagement.models.</code><code class="sig-name descname">State</code><a class="reference internal" href="../_modules/azure/mgmt/alertsmanagement/models/_alerts_management_client_enums.html#State"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.alertsmanagement.models.State" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3.5/library/enum.html#enum.Enum" title="(in Python v3.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></a></p>
 <p>An enumeration.</p>
 <dl class="attribute">
@@ -951,8 +1542,118 @@ ListNext() with this URI to fetch the next page alerts.</p></li>
 </dd></dl>
 
 <dl class="class">
+<dt id="azure.mgmt.alertsmanagement.models.ScopeType">
+<em class="property">class </em><code class="sig-prename descclassname">azure.mgmt.alertsmanagement.models.</code><code class="sig-name descname">ScopeType</code><a class="reference internal" href="../_modules/azure/mgmt/alertsmanagement/models/_alerts_management_client_enums.html#ScopeType"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.alertsmanagement.models.ScopeType" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3.5/library/enum.html#enum.Enum" title="(in Python v3.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></a></p>
+<p>An enumeration.</p>
+<dl class="attribute">
+<dt id="azure.mgmt.alertsmanagement.models.ScopeType.resource">
+<code class="sig-name descname">resource</code><em class="property"> = 'Resource'</em><a class="headerlink" href="#azure.mgmt.alertsmanagement.models.ScopeType.resource" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="azure.mgmt.alertsmanagement.models.ScopeType.resource_group">
+<code class="sig-name descname">resource_group</code><em class="property"> = 'ResourceGroup'</em><a class="headerlink" href="#azure.mgmt.alertsmanagement.models.ScopeType.resource_group" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="azure.mgmt.alertsmanagement.models.Operator">
+<em class="property">class </em><code class="sig-prename descclassname">azure.mgmt.alertsmanagement.models.</code><code class="sig-name descname">Operator</code><a class="reference internal" href="../_modules/azure/mgmt/alertsmanagement/models/_alerts_management_client_enums.html#Operator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.alertsmanagement.models.Operator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3.5/library/enum.html#enum.Enum" title="(in Python v3.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></a></p>
+<p>An enumeration.</p>
+<dl class="attribute">
+<dt id="azure.mgmt.alertsmanagement.models.Operator.contains">
+<code class="sig-name descname">contains</code><em class="property"> = 'Contains'</em><a class="headerlink" href="#azure.mgmt.alertsmanagement.models.Operator.contains" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="azure.mgmt.alertsmanagement.models.Operator.does_not_contain">
+<code class="sig-name descname">does_not_contain</code><em class="property"> = 'DoesNotContain'</em><a class="headerlink" href="#azure.mgmt.alertsmanagement.models.Operator.does_not_contain" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="azure.mgmt.alertsmanagement.models.Operator.equals">
+<code class="sig-name descname">equals</code><em class="property"> = 'Equals'</em><a class="headerlink" href="#azure.mgmt.alertsmanagement.models.Operator.equals" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="azure.mgmt.alertsmanagement.models.Operator.not_equals">
+<code class="sig-name descname">not_equals</code><em class="property"> = 'NotEquals'</em><a class="headerlink" href="#azure.mgmt.alertsmanagement.models.Operator.not_equals" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="azure.mgmt.alertsmanagement.models.SuppressionType">
+<em class="property">class </em><code class="sig-prename descclassname">azure.mgmt.alertsmanagement.models.</code><code class="sig-name descname">SuppressionType</code><a class="reference internal" href="../_modules/azure/mgmt/alertsmanagement/models/_alerts_management_client_enums.html#SuppressionType"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.alertsmanagement.models.SuppressionType" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3.5/library/enum.html#enum.Enum" title="(in Python v3.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></a></p>
+<p>An enumeration.</p>
+<dl class="attribute">
+<dt id="azure.mgmt.alertsmanagement.models.SuppressionType.always">
+<code class="sig-name descname">always</code><em class="property"> = 'Always'</em><a class="headerlink" href="#azure.mgmt.alertsmanagement.models.SuppressionType.always" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="azure.mgmt.alertsmanagement.models.SuppressionType.daily">
+<code class="sig-name descname">daily</code><em class="property"> = 'Daily'</em><a class="headerlink" href="#azure.mgmt.alertsmanagement.models.SuppressionType.daily" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="azure.mgmt.alertsmanagement.models.SuppressionType.monthly">
+<code class="sig-name descname">monthly</code><em class="property"> = 'Monthly'</em><a class="headerlink" href="#azure.mgmt.alertsmanagement.models.SuppressionType.monthly" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="azure.mgmt.alertsmanagement.models.SuppressionType.once">
+<code class="sig-name descname">once</code><em class="property"> = 'Once'</em><a class="headerlink" href="#azure.mgmt.alertsmanagement.models.SuppressionType.once" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="azure.mgmt.alertsmanagement.models.SuppressionType.weekly">
+<code class="sig-name descname">weekly</code><em class="property"> = 'Weekly'</em><a class="headerlink" href="#azure.mgmt.alertsmanagement.models.SuppressionType.weekly" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="azure.mgmt.alertsmanagement.models.ActionRuleStatus">
+<em class="property">class </em><code class="sig-prename descclassname">azure.mgmt.alertsmanagement.models.</code><code class="sig-name descname">ActionRuleStatus</code><a class="reference internal" href="../_modules/azure/mgmt/alertsmanagement/models/_alerts_management_client_enums.html#ActionRuleStatus"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.alertsmanagement.models.ActionRuleStatus" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3.5/library/enum.html#enum.Enum" title="(in Python v3.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></a></p>
+<p>An enumeration.</p>
+<dl class="attribute">
+<dt id="azure.mgmt.alertsmanagement.models.ActionRuleStatus.disabled">
+<code class="sig-name descname">disabled</code><em class="property"> = 'Disabled'</em><a class="headerlink" href="#azure.mgmt.alertsmanagement.models.ActionRuleStatus.disabled" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="azure.mgmt.alertsmanagement.models.ActionRuleStatus.enabled">
+<code class="sig-name descname">enabled</code><em class="property"> = 'Enabled'</em><a class="headerlink" href="#azure.mgmt.alertsmanagement.models.ActionRuleStatus.enabled" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="azure.mgmt.alertsmanagement.models.AlertRuleState">
+<em class="property">class </em><code class="sig-prename descclassname">azure.mgmt.alertsmanagement.models.</code><code class="sig-name descname">AlertRuleState</code><a class="reference internal" href="../_modules/azure/mgmt/alertsmanagement/models/_alerts_management_client_enums.html#AlertRuleState"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.alertsmanagement.models.AlertRuleState" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3.5/library/enum.html#enum.Enum" title="(in Python v3.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></a></p>
+<p>An enumeration.</p>
+<dl class="attribute">
+<dt id="azure.mgmt.alertsmanagement.models.AlertRuleState.disabled">
+<code class="sig-name descname">disabled</code><em class="property"> = 'Disabled'</em><a class="headerlink" href="#azure.mgmt.alertsmanagement.models.AlertRuleState.disabled" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="azure.mgmt.alertsmanagement.models.AlertRuleState.enabled">
+<code class="sig-name descname">enabled</code><em class="property"> = 'Enabled'</em><a class="headerlink" href="#azure.mgmt.alertsmanagement.models.AlertRuleState.enabled" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
 <dt id="azure.mgmt.alertsmanagement.models.TimeRange">
-<em class="property">class </em><code class="sig-prename descclassname">azure.mgmt.alertsmanagement.models.</code><code class="sig-name descname">TimeRange</code><a class="reference internal" href="../_modules/azure/mgmt/alertsmanagement/models/alerts_management_client_enums.html#TimeRange"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.alertsmanagement.models.TimeRange" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">azure.mgmt.alertsmanagement.models.</code><code class="sig-name descname">TimeRange</code><a class="reference internal" href="../_modules/azure/mgmt/alertsmanagement/models/_alerts_management_client_enums.html#TimeRange"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.alertsmanagement.models.TimeRange" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3.5/library/enum.html#enum.Enum" title="(in Python v3.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></a></p>
 <p>An enumeration.</p>
 <dl class="attribute">
@@ -979,7 +1680,7 @@ ListNext() with this URI to fetch the next page alerts.</p></li>
 
 <dl class="class">
 <dt id="azure.mgmt.alertsmanagement.models.AlertsSortByFields">
-<em class="property">class </em><code class="sig-prename descclassname">azure.mgmt.alertsmanagement.models.</code><code class="sig-name descname">AlertsSortByFields</code><a class="reference internal" href="../_modules/azure/mgmt/alertsmanagement/models/alerts_management_client_enums.html#AlertsSortByFields"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.alertsmanagement.models.AlertsSortByFields" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">azure.mgmt.alertsmanagement.models.</code><code class="sig-name descname">AlertsSortByFields</code><a class="reference internal" href="../_modules/azure/mgmt/alertsmanagement/models/_alerts_management_client_enums.html#AlertsSortByFields"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.alertsmanagement.models.AlertsSortByFields" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3.5/library/enum.html#enum.Enum" title="(in Python v3.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></a></p>
 <p>An enumeration.</p>
 <dl class="attribute">
@@ -1036,7 +1737,7 @@ ListNext() with this URI to fetch the next page alerts.</p></li>
 
 <dl class="class">
 <dt id="azure.mgmt.alertsmanagement.models.AlertsSummaryGroupByFields">
-<em class="property">class </em><code class="sig-prename descclassname">azure.mgmt.alertsmanagement.models.</code><code class="sig-name descname">AlertsSummaryGroupByFields</code><a class="reference internal" href="../_modules/azure/mgmt/alertsmanagement/models/alerts_management_client_enums.html#AlertsSummaryGroupByFields"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.alertsmanagement.models.AlertsSummaryGroupByFields" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">azure.mgmt.alertsmanagement.models.</code><code class="sig-name descname">AlertsSummaryGroupByFields</code><a class="reference internal" href="../_modules/azure/mgmt/alertsmanagement/models/_alerts_management_client_enums.html#AlertsSummaryGroupByFields"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.alertsmanagement.models.AlertsSummaryGroupByFields" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3.5/library/enum.html#enum.Enum" title="(in Python v3.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></a></p>
 <p>An enumeration.</p>
 <dl class="attribute">
@@ -1073,7 +1774,7 @@ ListNext() with this URI to fetch the next page alerts.</p></li>
 
 <dl class="class">
 <dt id="azure.mgmt.alertsmanagement.models.SmartGroupsSortByFields">
-<em class="property">class </em><code class="sig-prename descclassname">azure.mgmt.alertsmanagement.models.</code><code class="sig-name descname">SmartGroupsSortByFields</code><a class="reference internal" href="../_modules/azure/mgmt/alertsmanagement/models/alerts_management_client_enums.html#SmartGroupsSortByFields"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.alertsmanagement.models.SmartGroupsSortByFields" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">azure.mgmt.alertsmanagement.models.</code><code class="sig-name descname">SmartGroupsSortByFields</code><a class="reference internal" href="../_modules/azure/mgmt/alertsmanagement/models/_alerts_management_client_enums.html#SmartGroupsSortByFields"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.alertsmanagement.models.SmartGroupsSortByFields" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3.5/library/enum.html#enum.Enum" title="(in Python v3.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></a></p>
 <p>An enumeration.</p>
 <dl class="attribute">

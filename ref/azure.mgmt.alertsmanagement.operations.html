@@ -293,9 +293,10 @@
 <span id="azure-mgmt-alertsmanagement-operations-module"></span><h1>azure.mgmt.alertsmanagement.operations module<a class="headerlink" href="#module-azure.mgmt.alertsmanagement.operations" title="Permalink to this headline">¶</a></h1>
 <dl class="class">
 <dt id="azure.mgmt.alertsmanagement.operations.Operations">
-<em class="property">class </em><code class="sig-prename descclassname">azure.mgmt.alertsmanagement.operations.</code><code class="sig-name descname">Operations</code><span class="sig-paren">(</span><em class="sig-param">client</em>, <em class="sig-param">config</em>, <em class="sig-param">serializer</em>, <em class="sig-param">deserializer</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/mgmt/alertsmanagement/operations/operations.html#Operations"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.alertsmanagement.operations.Operations" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">azure.mgmt.alertsmanagement.operations.</code><code class="sig-name descname">Operations</code><span class="sig-paren">(</span><em class="sig-param">client</em>, <em class="sig-param">config</em>, <em class="sig-param">serializer</em>, <em class="sig-param">deserializer</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/mgmt/alertsmanagement/operations/_operations.html#Operations"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.alertsmanagement.operations.Operations" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3.5/library/functions.html#object" title="(in Python v3.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p>Operations operations.</p>
+<p>You should not instantiate directly this class, but create a Client instance that will create it for you and attach it as attribute.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -306,12 +307,12 @@
 </ul>
 </dd>
 <dt class="field-even">Variables</dt>
-<dd class="field-even"><p><strong>api_version</strong> – API version. Constant value: “2018-05-05”.</p>
+<dd class="field-even"><p><strong>api_version</strong> – client API version. Constant value: “2019-05-05-preview”.</p>
 </dd>
 </dl>
 <dl class="method">
 <dt id="azure.mgmt.alertsmanagement.operations.Operations.list">
-<code class="sig-name descname">list</code><span class="sig-paren">(</span><em class="sig-param">custom_headers=None</em>, <em class="sig-param">raw=False</em>, <em class="sig-param">**operation_config</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/mgmt/alertsmanagement/operations/operations.html#Operations.list"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.alertsmanagement.operations.Operations.list" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">list</code><span class="sig-paren">(</span><em class="sig-param">custom_headers=None</em>, <em class="sig-param">raw=False</em>, <em class="sig-param">**operation_config</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/mgmt/alertsmanagement/operations/_operations.html#Operations.list"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.alertsmanagement.operations.Operations.list" title="Permalink to this definition">¶</a></dt>
 <dd><p>List all operations available through Azure Alerts Management Resource
 Provider.</p>
 <dl class="field-list simple">
@@ -345,9 +346,10 @@ overrides</span>.</p></li>
 
 <dl class="class">
 <dt id="azure.mgmt.alertsmanagement.operations.AlertsOperations">
-<em class="property">class </em><code class="sig-prename descclassname">azure.mgmt.alertsmanagement.operations.</code><code class="sig-name descname">AlertsOperations</code><span class="sig-paren">(</span><em class="sig-param">client</em>, <em class="sig-param">config</em>, <em class="sig-param">serializer</em>, <em class="sig-param">deserializer</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/mgmt/alertsmanagement/operations/alerts_operations.html#AlertsOperations"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.alertsmanagement.operations.AlertsOperations" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">azure.mgmt.alertsmanagement.operations.</code><code class="sig-name descname">AlertsOperations</code><span class="sig-paren">(</span><em class="sig-param">client</em>, <em class="sig-param">config</em>, <em class="sig-param">serializer</em>, <em class="sig-param">deserializer</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/mgmt/alertsmanagement/operations/_alerts_operations.html#AlertsOperations"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.alertsmanagement.operations.AlertsOperations" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3.5/library/functions.html#object" title="(in Python v3.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p>AlertsOperations operations.</p>
+<p>You should not instantiate directly this class, but create a Client instance that will create it for you and attach it as attribute.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -358,13 +360,16 @@ overrides</span>.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Variables</dt>
-<dd class="field-even"><p><strong>api_version</strong> – API version. Constant value: “2018-05-05”.</p>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>api_version</strong> – client API version. Constant value: “2019-05-05-preview”.</p></li>
+<li><p><strong>identifier</strong> – Identification of the information to be retrieved by API call. Constant value: “MonitorServiceList”.</p></li>
+</ul>
 </dd>
 </dl>
 <dl class="method">
 <dt id="azure.mgmt.alertsmanagement.operations.AlertsOperations.change_state">
-<code class="sig-name descname">change_state</code><span class="sig-paren">(</span><em class="sig-param">alert_id</em>, <em class="sig-param">new_state</em>, <em class="sig-param">custom_headers=None</em>, <em class="sig-param">raw=False</em>, <em class="sig-param">**operation_config</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/mgmt/alertsmanagement/operations/alerts_operations.html#AlertsOperations.change_state"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.alertsmanagement.operations.AlertsOperations.change_state" title="Permalink to this definition">¶</a></dt>
-<dd><p>Change the state of the alert.</p>
+<code class="sig-name descname">change_state</code><span class="sig-paren">(</span><em class="sig-param">alert_id</em>, <em class="sig-param">new_state</em>, <em class="sig-param">custom_headers=None</em>, <em class="sig-param">raw=False</em>, <em class="sig-param">**operation_config</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/mgmt/alertsmanagement/operations/_alerts_operations.html#AlertsOperations.change_state"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.alertsmanagement.operations.AlertsOperations.change_state" title="Permalink to this definition">¶</a></dt>
+<dd><p>Change the state of an alert.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -386,17 +391,18 @@ overrides</span>.</p></li>
 ClientRawResponse</p>
 </dd>
 <dt class="field-even">Raises</dt>
-<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">ErrorResponseException</span></code></p>
+<dd class="field-even"><p><a class="reference internal" href="azure.mgmt.alertsmanagement.models.html#azure.mgmt.alertsmanagement.models.ErrorResponseException" title="azure.mgmt.alertsmanagement.models.ErrorResponseException"><code class="xref py py-class docutils literal notranslate"><span class="pre">ErrorResponseException</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="azure.mgmt.alertsmanagement.operations.AlertsOperations.get_all">
-<code class="sig-name descname">get_all</code><span class="sig-paren">(</span><em class="sig-param">target_resource=None</em>, <em class="sig-param">target_resource_type=None</em>, <em class="sig-param">target_resource_group=None</em>, <em class="sig-param">monitor_service=None</em>, <em class="sig-param">monitor_condition=None</em>, <em class="sig-param">severity=None</em>, <em class="sig-param">alert_state=None</em>, <em class="sig-param">alert_rule=None</em>, <em class="sig-param">smart_group_id=None</em>, <em class="sig-param">include_context=None</em>, <em class="sig-param">include_egress_config=None</em>, <em class="sig-param">page_count=None</em>, <em class="sig-param">sort_by=None</em>, <em class="sig-param">sort_order=None</em>, <em class="sig-param">select=None</em>, <em class="sig-param">time_range=None</em>, <em class="sig-param">custom_time_range=None</em>, <em class="sig-param">custom_headers=None</em>, <em class="sig-param">raw=False</em>, <em class="sig-param">**operation_config</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/mgmt/alertsmanagement/operations/alerts_operations.html#AlertsOperations.get_all"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.alertsmanagement.operations.AlertsOperations.get_all" title="Permalink to this definition">¶</a></dt>
-<dd><p>List all the existing alerts, where the results can be selective by
-passing multiple filter parameters including time range and sorted on
-specific fields. .</p>
+<code class="sig-name descname">get_all</code><span class="sig-paren">(</span><em class="sig-param">target_resource=None</em>, <em class="sig-param">target_resource_type=None</em>, <em class="sig-param">target_resource_group=None</em>, <em class="sig-param">monitor_service=None</em>, <em class="sig-param">monitor_condition=None</em>, <em class="sig-param">severity=None</em>, <em class="sig-param">alert_state=None</em>, <em class="sig-param">alert_rule=None</em>, <em class="sig-param">smart_group_id=None</em>, <em class="sig-param">include_context=None</em>, <em class="sig-param">include_egress_config=None</em>, <em class="sig-param">page_count=None</em>, <em class="sig-param">sort_by=None</em>, <em class="sig-param">sort_order=None</em>, <em class="sig-param">select=None</em>, <em class="sig-param">time_range=None</em>, <em class="sig-param">custom_time_range=None</em>, <em class="sig-param">custom_headers=None</em>, <em class="sig-param">raw=False</em>, <em class="sig-param">**operation_config</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/mgmt/alertsmanagement/operations/_alerts_operations.html#AlertsOperations.get_all"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.alertsmanagement.operations.AlertsOperations.get_all" title="Permalink to this definition">¶</a></dt>
+<dd><p>List all existing alerts, where the results can be filtered on the
+basis of multiple parameters (e.g. time range). The results can then be
+sorted on the basis specific fields, with the default being
+lastModifiedDateTime. .</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -407,29 +413,28 @@ value is select all.</p></li>
 <li><p><strong>target_resource_group</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Filter by target resource group name.
 Default value is select all.</p></li>
 <li><p><strong>monitor_service</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a><em> or
-</em><a class="reference internal" href="azure.mgmt.alertsmanagement.models.html#azure.mgmt.alertsmanagement.models.MonitorService" title="azure.mgmt.alertsmanagement.models.MonitorService"><em>MonitorService</em></a>) – Filter by monitor service which is the source
-of the alert instance. Default value is select all. Possible values
-include: ‘Application Insights’, ‘ActivityLog Administrative’,
-‘ActivityLog Security’, ‘ActivityLog Recommendation’, ‘ActivityLog
-Policy’, ‘ActivityLog Autoscale’, ‘Log Analytics’, ‘Nagios’,
-‘Platform’, ‘SCOM’, ‘ServiceHealth’, ‘SmartDetector’, ‘VM Insights’,
-‘Zabbix’</p></li>
+</em><a class="reference internal" href="azure.mgmt.alertsmanagement.models.html#azure.mgmt.alertsmanagement.models.MonitorService" title="azure.mgmt.alertsmanagement.models.MonitorService"><em>MonitorService</em></a>) – Filter by monitor service which generates the
+alert instance. Default value is select all. Possible values include:
+‘Application Insights’, ‘ActivityLog Administrative’, ‘ActivityLog
+Security’, ‘ActivityLog Recommendation’, ‘ActivityLog Policy’,
+‘ActivityLog Autoscale’, ‘Log Analytics’, ‘Nagios’, ‘Platform’,
+‘SCOM’, ‘ServiceHealth’, ‘SmartDetector’, ‘VM Insights’, ‘Zabbix’</p></li>
 <li><p><strong>monitor_condition</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a><em> or
-</em><a class="reference internal" href="azure.mgmt.alertsmanagement.models.html#azure.mgmt.alertsmanagement.models.MonitorCondition" title="azure.mgmt.alertsmanagement.models.MonitorCondition"><em>MonitorCondition</em></a>) – Filter by monitor condition which is the
-state of the  monitor(alertRule) at monitor service. Default value is
-to select all. Possible values include: ‘Fired’, ‘Resolved’</p></li>
-<li><p><strong>severity</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a><em> or </em><a class="reference internal" href="azure.mgmt.alertsmanagement.models.html#azure.mgmt.alertsmanagement.models.Severity" title="azure.mgmt.alertsmanagement.models.Severity"><em>Severity</em></a>) – Filter by severity.  Defaut value is select all.
+</em><a class="reference internal" href="azure.mgmt.alertsmanagement.models.html#azure.mgmt.alertsmanagement.models.MonitorCondition" title="azure.mgmt.alertsmanagement.models.MonitorCondition"><em>MonitorCondition</em></a>) – Filter by monitor condition which is either
+‘Fired’ or ‘Resolved’. Default value is to select all. Possible values
+include: ‘Fired’, ‘Resolved’</p></li>
+<li><p><strong>severity</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a><em> or </em><a class="reference internal" href="azure.mgmt.alertsmanagement.models.html#azure.mgmt.alertsmanagement.models.Severity" title="azure.mgmt.alertsmanagement.models.Severity"><em>Severity</em></a>) – Filter by severity.  Default value is select all.
 Possible values include: ‘Sev0’, ‘Sev1’, ‘Sev2’, ‘Sev3’, ‘Sev4’</p></li>
 <li><p><strong>alert_state</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a><em> or
 </em><a class="reference internal" href="azure.mgmt.alertsmanagement.models.html#azure.mgmt.alertsmanagement.models.AlertState" title="azure.mgmt.alertsmanagement.models.AlertState"><em>AlertState</em></a>) – Filter by state of the alert instance. Default
 value is to select all. Possible values include: ‘New’,
 ‘Acknowledged’, ‘Closed’</p></li>
-<li><p><strong>alert_rule</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Filter by alert rule(monitor) which fired alert
-instance.  Default value is to select all.</p></li>
+<li><p><strong>alert_rule</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Filter by specific alert rule.  Default value is to
+select all.</p></li>
 <li><p><strong>smart_group_id</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Filter the alerts list by the Smart Group Id.
 Default value is none.</p></li>
-<li><p><strong>include_context</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#bool" title="(in Python v3.5)"><em>bool</em></a>) – Include context which has data contextual to
-the monitor service. Default value is false’</p></li>
+<li><p><strong>include_context</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#bool" title="(in Python v3.5)"><em>bool</em></a>) – Include context which has contextual data
+specific to the monitor service. Default value is false’</p></li>
 <li><p><strong>include_egress_config</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#bool" title="(in Python v3.5)"><em>bool</em></a>) – Include egress config which would be
 used for displaying the content in portal.  Default value is ‘false’.</p></li>
 <li><p><strong>page_count</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a>) – Determines number of alerts returned per page in
@@ -446,9 +451,9 @@ is ‘lastModifiedDateTime’. Possible values include: ‘name’,
 descending.  Default value is ‘desc’ for time fields and ‘asc’ for
 others. Possible values include: ‘asc’, ‘desc’</p></li>
 <li><p><strong>select</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – This filter allows to selection of the fields(comma
-seperated) which would  be part of the the essential section. This
-would allow to project only the  required fields rather than getting
-entire content.  Default is to fetch all the fields in the essentials
+separated) which would  be part of the essential section. This would
+allow to project only the  required fields rather than getting entire
+content.  Default is to fetch all the fields in the essentials
 section.</p></li>
 <li><p><strong>time_range</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a><em> or </em><a class="reference internal" href="azure.mgmt.alertsmanagement.models.html#azure.mgmt.alertsmanagement.models.TimeRange" title="azure.mgmt.alertsmanagement.models.TimeRange"><em>TimeRange</em></a>) – Filter by time range by below listed values.
 Default value is 1 day. Possible values include: ‘1h’, ‘1d’, ‘7d’,
@@ -472,14 +477,14 @@ overrides</span>.</p></li>
 <dd class="field-odd"><p><a class="reference internal" href="azure.mgmt.alertsmanagement.models.html#azure.mgmt.alertsmanagement.models.AlertPaged" title="azure.mgmt.alertsmanagement.models.AlertPaged">AlertPaged</a>[<a class="reference internal" href="azure.mgmt.alertsmanagement.models.html#azure.mgmt.alertsmanagement.models.Alert" title="azure.mgmt.alertsmanagement.models.Alert">Alert</a>]</p>
 </dd>
 <dt class="field-even">Raises</dt>
-<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">ErrorResponseException</span></code></p>
+<dd class="field-even"><p><a class="reference internal" href="azure.mgmt.alertsmanagement.models.html#azure.mgmt.alertsmanagement.models.ErrorResponseException" title="azure.mgmt.alertsmanagement.models.ErrorResponseException"><code class="xref py py-class docutils literal notranslate"><span class="pre">ErrorResponseException</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="azure.mgmt.alertsmanagement.operations.AlertsOperations.get_by_id">
-<code class="sig-name descname">get_by_id</code><span class="sig-paren">(</span><em class="sig-param">alert_id</em>, <em class="sig-param">custom_headers=None</em>, <em class="sig-param">raw=False</em>, <em class="sig-param">**operation_config</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/mgmt/alertsmanagement/operations/alerts_operations.html#AlertsOperations.get_by_id"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.alertsmanagement.operations.AlertsOperations.get_by_id" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_by_id</code><span class="sig-paren">(</span><em class="sig-param">alert_id</em>, <em class="sig-param">custom_headers=None</em>, <em class="sig-param">raw=False</em>, <em class="sig-param">**operation_config</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/mgmt/alertsmanagement/operations/_alerts_operations.html#AlertsOperations.get_by_id"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.alertsmanagement.operations.AlertsOperations.get_by_id" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get a specific alert.</p>
 <p>Get information related to a specific alert.</p>
 <dl class="field-list simple">
@@ -501,15 +506,17 @@ overrides</span>.</p></li>
 ClientRawResponse</p>
 </dd>
 <dt class="field-even">Raises</dt>
-<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">ErrorResponseException</span></code></p>
+<dd class="field-even"><p><a class="reference internal" href="azure.mgmt.alertsmanagement.models.html#azure.mgmt.alertsmanagement.models.ErrorResponseException" title="azure.mgmt.alertsmanagement.models.ErrorResponseException"><code class="xref py py-class docutils literal notranslate"><span class="pre">ErrorResponseException</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="azure.mgmt.alertsmanagement.operations.AlertsOperations.get_history">
-<code class="sig-name descname">get_history</code><span class="sig-paren">(</span><em class="sig-param">alert_id</em>, <em class="sig-param">custom_headers=None</em>, <em class="sig-param">raw=False</em>, <em class="sig-param">**operation_config</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/mgmt/alertsmanagement/operations/alerts_operations.html#AlertsOperations.get_history"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.alertsmanagement.operations.AlertsOperations.get_history" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get the history of the changes of an alert.</p>
+<code class="sig-name descname">get_history</code><span class="sig-paren">(</span><em class="sig-param">alert_id</em>, <em class="sig-param">custom_headers=None</em>, <em class="sig-param">raw=False</em>, <em class="sig-param">**operation_config</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/mgmt/alertsmanagement/operations/_alerts_operations.html#AlertsOperations.get_history"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.alertsmanagement.operations.AlertsOperations.get_history" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the history of an alert, which captures any monitor condition
+changes (Fired/Resolved) and alert state changes
+(New/Acknowledged/Closed).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -529,21 +536,24 @@ overrides</span>.</p></li>
 ClientRawResponse</p>
 </dd>
 <dt class="field-even">Raises</dt>
-<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">ErrorResponseException</span></code></p>
+<dd class="field-even"><p><a class="reference internal" href="azure.mgmt.alertsmanagement.models.html#azure.mgmt.alertsmanagement.models.ErrorResponseException" title="azure.mgmt.alertsmanagement.models.ErrorResponseException"><code class="xref py py-class docutils literal notranslate"><span class="pre">ErrorResponseException</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="azure.mgmt.alertsmanagement.operations.AlertsOperations.get_summary">
-<code class="sig-name descname">get_summary</code><span class="sig-paren">(</span><em class="sig-param">groupby</em>, <em class="sig-param">include_smart_groups_count=None</em>, <em class="sig-param">target_resource=None</em>, <em class="sig-param">target_resource_type=None</em>, <em class="sig-param">target_resource_group=None</em>, <em class="sig-param">monitor_service=None</em>, <em class="sig-param">monitor_condition=None</em>, <em class="sig-param">severity=None</em>, <em class="sig-param">alert_state=None</em>, <em class="sig-param">alert_rule=None</em>, <em class="sig-param">time_range=None</em>, <em class="sig-param">custom_time_range=None</em>, <em class="sig-param">custom_headers=None</em>, <em class="sig-param">raw=False</em>, <em class="sig-param">**operation_config</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/mgmt/alertsmanagement/operations/alerts_operations.html#AlertsOperations.get_summary"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.alertsmanagement.operations.AlertsOperations.get_summary" title="Permalink to this definition">¶</a></dt>
-<dd><p>Summary of alerts with the count each severity.</p>
+<code class="sig-name descname">get_summary</code><span class="sig-paren">(</span><em class="sig-param">groupby</em>, <em class="sig-param">include_smart_groups_count=None</em>, <em class="sig-param">target_resource=None</em>, <em class="sig-param">target_resource_type=None</em>, <em class="sig-param">target_resource_group=None</em>, <em class="sig-param">monitor_service=None</em>, <em class="sig-param">monitor_condition=None</em>, <em class="sig-param">severity=None</em>, <em class="sig-param">alert_state=None</em>, <em class="sig-param">alert_rule=None</em>, <em class="sig-param">time_range=None</em>, <em class="sig-param">custom_time_range=None</em>, <em class="sig-param">custom_headers=None</em>, <em class="sig-param">raw=False</em>, <em class="sig-param">**operation_config</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/mgmt/alertsmanagement/operations/_alerts_operations.html#AlertsOperations.get_summary"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.alertsmanagement.operations.AlertsOperations.get_summary" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get a summarized count of your alerts grouped by various parameters
+(e.g. grouping by ‘Severity’ returns the count of alerts for each
+severity).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>groupby</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a><em> or
-</em><a class="reference internal" href="azure.mgmt.alertsmanagement.models.html#azure.mgmt.alertsmanagement.models.AlertsSummaryGroupByFields" title="azure.mgmt.alertsmanagement.models.AlertsSummaryGroupByFields"><em>AlertsSummaryGroupByFields</em></a>) – This parameter allows the result set to be aggregated
-by input fields. For example, groupby=severity,alertstate. Possible
+</em><a class="reference internal" href="azure.mgmt.alertsmanagement.models.html#azure.mgmt.alertsmanagement.models.AlertsSummaryGroupByFields" title="azure.mgmt.alertsmanagement.models.AlertsSummaryGroupByFields"><em>AlertsSummaryGroupByFields</em></a>) – This parameter allows the result set to be grouped by
+input fields (Maximum 2 comma separated fields supported). For
+example, groupby=severity or groupby=severity,alertstate. Possible
 values include: ‘severity’, ‘alertState’, ‘monitorCondition’,
 ‘monitorService’, ‘signalType’, ‘alertRule’</p></li>
 <li><p><strong>include_smart_groups_count</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#bool" title="(in Python v3.5)"><em>bool</em></a>) – Include count of the SmartGroups as
@@ -555,25 +565,24 @@ value is select all.</p></li>
 <li><p><strong>target_resource_group</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Filter by target resource group name.
 Default value is select all.</p></li>
 <li><p><strong>monitor_service</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a><em> or
-</em><a class="reference internal" href="azure.mgmt.alertsmanagement.models.html#azure.mgmt.alertsmanagement.models.MonitorService" title="azure.mgmt.alertsmanagement.models.MonitorService"><em>MonitorService</em></a>) – Filter by monitor service which is the source
-of the alert instance. Default value is select all. Possible values
-include: ‘Application Insights’, ‘ActivityLog Administrative’,
-‘ActivityLog Security’, ‘ActivityLog Recommendation’, ‘ActivityLog
-Policy’, ‘ActivityLog Autoscale’, ‘Log Analytics’, ‘Nagios’,
-‘Platform’, ‘SCOM’, ‘ServiceHealth’, ‘SmartDetector’, ‘VM Insights’,
-‘Zabbix’</p></li>
+</em><a class="reference internal" href="azure.mgmt.alertsmanagement.models.html#azure.mgmt.alertsmanagement.models.MonitorService" title="azure.mgmt.alertsmanagement.models.MonitorService"><em>MonitorService</em></a>) – Filter by monitor service which generates the
+alert instance. Default value is select all. Possible values include:
+‘Application Insights’, ‘ActivityLog Administrative’, ‘ActivityLog
+Security’, ‘ActivityLog Recommendation’, ‘ActivityLog Policy’,
+‘ActivityLog Autoscale’, ‘Log Analytics’, ‘Nagios’, ‘Platform’,
+‘SCOM’, ‘ServiceHealth’, ‘SmartDetector’, ‘VM Insights’, ‘Zabbix’</p></li>
 <li><p><strong>monitor_condition</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a><em> or
-</em><a class="reference internal" href="azure.mgmt.alertsmanagement.models.html#azure.mgmt.alertsmanagement.models.MonitorCondition" title="azure.mgmt.alertsmanagement.models.MonitorCondition"><em>MonitorCondition</em></a>) – Filter by monitor condition which is the
-state of the  monitor(alertRule) at monitor service. Default value is
-to select all. Possible values include: ‘Fired’, ‘Resolved’</p></li>
-<li><p><strong>severity</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a><em> or </em><a class="reference internal" href="azure.mgmt.alertsmanagement.models.html#azure.mgmt.alertsmanagement.models.Severity" title="azure.mgmt.alertsmanagement.models.Severity"><em>Severity</em></a>) – Filter by severity.  Defaut value is select all.
+</em><a class="reference internal" href="azure.mgmt.alertsmanagement.models.html#azure.mgmt.alertsmanagement.models.MonitorCondition" title="azure.mgmt.alertsmanagement.models.MonitorCondition"><em>MonitorCondition</em></a>) – Filter by monitor condition which is either
+‘Fired’ or ‘Resolved’. Default value is to select all. Possible values
+include: ‘Fired’, ‘Resolved’</p></li>
+<li><p><strong>severity</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a><em> or </em><a class="reference internal" href="azure.mgmt.alertsmanagement.models.html#azure.mgmt.alertsmanagement.models.Severity" title="azure.mgmt.alertsmanagement.models.Severity"><em>Severity</em></a>) – Filter by severity.  Default value is select all.
 Possible values include: ‘Sev0’, ‘Sev1’, ‘Sev2’, ‘Sev3’, ‘Sev4’</p></li>
 <li><p><strong>alert_state</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a><em> or
 </em><a class="reference internal" href="azure.mgmt.alertsmanagement.models.html#azure.mgmt.alertsmanagement.models.AlertState" title="azure.mgmt.alertsmanagement.models.AlertState"><em>AlertState</em></a>) – Filter by state of the alert instance. Default
 value is to select all. Possible values include: ‘New’,
 ‘Acknowledged’, ‘Closed’</p></li>
-<li><p><strong>alert_rule</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Filter by alert rule(monitor) which fired alert
-instance.  Default value is to select all.</p></li>
+<li><p><strong>alert_rule</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Filter by specific alert rule.  Default value is to
+select all.</p></li>
 <li><p><strong>time_range</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a><em> or </em><a class="reference internal" href="azure.mgmt.alertsmanagement.models.html#azure.mgmt.alertsmanagement.models.TimeRange" title="azure.mgmt.alertsmanagement.models.TimeRange"><em>TimeRange</em></a>) – Filter by time range by below listed values.
 Default value is 1 day. Possible values include: ‘1h’, ‘1d’, ‘7d’,
 ‘30d’</p></li>
@@ -597,7 +606,35 @@ overrides</span>.</p></li>
 ClientRawResponse</p>
 </dd>
 <dt class="field-even">Raises</dt>
-<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">ErrorResponseException</span></code></p>
+<dd class="field-even"><p><a class="reference internal" href="azure.mgmt.alertsmanagement.models.html#azure.mgmt.alertsmanagement.models.ErrorResponseException" title="azure.mgmt.alertsmanagement.models.ErrorResponseException"><code class="xref py py-class docutils literal notranslate"><span class="pre">ErrorResponseException</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="azure.mgmt.alertsmanagement.operations.AlertsOperations.meta_data">
+<code class="sig-name descname">meta_data</code><span class="sig-paren">(</span><em class="sig-param">custom_headers=None</em>, <em class="sig-param">raw=False</em>, <em class="sig-param">**operation_config</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/mgmt/alertsmanagement/operations/_alerts_operations.html#AlertsOperations.meta_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.alertsmanagement.operations.AlertsOperations.meta_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>List alerts meta data information based on value of identifier
+parameter.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>custom_headers</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#dict" title="(in Python v3.5)"><em>dict</em></a>) – headers that will be added to the request</p></li>
+<li><p><strong>raw</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#bool" title="(in Python v3.5)"><em>bool</em></a>) – returns the direct response alongside the
+deserialized response</p></li>
+<li><p><strong>operation_config</strong> – <span class="xref std std-ref">Operation configuration
+overrides</span>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>AlertsMetaData or ClientRawResponse if raw=true</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="azure.mgmt.alertsmanagement.models.html#azure.mgmt.alertsmanagement.models.AlertsMetaData" title="azure.mgmt.alertsmanagement.models.AlertsMetaData">AlertsMetaData</a> or
+ClientRawResponse</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">CloudError</span></code></p>
 </dd>
 </dl>
 </dd></dl>
@@ -611,9 +648,10 @@ ClientRawResponse</p>
 
 <dl class="class">
 <dt id="azure.mgmt.alertsmanagement.operations.SmartGroupsOperations">
-<em class="property">class </em><code class="sig-prename descclassname">azure.mgmt.alertsmanagement.operations.</code><code class="sig-name descname">SmartGroupsOperations</code><span class="sig-paren">(</span><em class="sig-param">client</em>, <em class="sig-param">config</em>, <em class="sig-param">serializer</em>, <em class="sig-param">deserializer</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/mgmt/alertsmanagement/operations/smart_groups_operations.html#SmartGroupsOperations"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.alertsmanagement.operations.SmartGroupsOperations" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">azure.mgmt.alertsmanagement.operations.</code><code class="sig-name descname">SmartGroupsOperations</code><span class="sig-paren">(</span><em class="sig-param">client</em>, <em class="sig-param">config</em>, <em class="sig-param">serializer</em>, <em class="sig-param">deserializer</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/mgmt/alertsmanagement/operations/_smart_groups_operations.html#SmartGroupsOperations"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.alertsmanagement.operations.SmartGroupsOperations" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3.5/library/functions.html#object" title="(in Python v3.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p>SmartGroupsOperations operations.</p>
+<p>You should not instantiate directly this class, but create a Client instance that will create it for you and attach it as attribute.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -624,14 +662,13 @@ ClientRawResponse</p>
 </ul>
 </dd>
 <dt class="field-even">Variables</dt>
-<dd class="field-even"><p><strong>api_version</strong> – API version. Constant value: “2018-05-05”.</p>
+<dd class="field-even"><p><strong>api_version</strong> – client API version. Constant value: “2019-05-05-preview”.</p>
 </dd>
 </dl>
 <dl class="method">
 <dt id="azure.mgmt.alertsmanagement.operations.SmartGroupsOperations.change_state">
-<code class="sig-name descname">change_state</code><span class="sig-paren">(</span><em class="sig-param">smart_group_id</em>, <em class="sig-param">new_state</em>, <em class="sig-param">custom_headers=None</em>, <em class="sig-param">raw=False</em>, <em class="sig-param">**operation_config</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/mgmt/alertsmanagement/operations/smart_groups_operations.html#SmartGroupsOperations.change_state"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.alertsmanagement.operations.SmartGroupsOperations.change_state" title="Permalink to this definition">¶</a></dt>
-<dd><p>Change the state from unresolved to resolved and all the alerts within
-the smart group will also be resolved.</p>
+<code class="sig-name descname">change_state</code><span class="sig-paren">(</span><em class="sig-param">smart_group_id</em>, <em class="sig-param">new_state</em>, <em class="sig-param">custom_headers=None</em>, <em class="sig-param">raw=False</em>, <em class="sig-param">**operation_config</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/mgmt/alertsmanagement/operations/_smart_groups_operations.html#SmartGroupsOperations.change_state"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.alertsmanagement.operations.SmartGroupsOperations.change_state" title="Permalink to this definition">¶</a></dt>
+<dd><p>Change the state of a Smart Group.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -653,16 +690,16 @@ overrides</span>.</p></li>
 ClientRawResponse</p>
 </dd>
 <dt class="field-even">Raises</dt>
-<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">ErrorResponseException</span></code></p>
+<dd class="field-even"><p><a class="reference internal" href="azure.mgmt.alertsmanagement.models.html#azure.mgmt.alertsmanagement.models.ErrorResponseException" title="azure.mgmt.alertsmanagement.models.ErrorResponseException"><code class="xref py py-class docutils literal notranslate"><span class="pre">ErrorResponseException</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="azure.mgmt.alertsmanagement.operations.SmartGroupsOperations.get_all">
-<code class="sig-name descname">get_all</code><span class="sig-paren">(</span><em class="sig-param">target_resource=None</em>, <em class="sig-param">target_resource_group=None</em>, <em class="sig-param">target_resource_type=None</em>, <em class="sig-param">monitor_service=None</em>, <em class="sig-param">monitor_condition=None</em>, <em class="sig-param">severity=None</em>, <em class="sig-param">smart_group_state=None</em>, <em class="sig-param">time_range=None</em>, <em class="sig-param">page_count=None</em>, <em class="sig-param">sort_by=None</em>, <em class="sig-param">sort_order=None</em>, <em class="sig-param">custom_headers=None</em>, <em class="sig-param">raw=False</em>, <em class="sig-param">**operation_config</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/mgmt/alertsmanagement/operations/smart_groups_operations.html#SmartGroupsOperations.get_all"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.alertsmanagement.operations.SmartGroupsOperations.get_all" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get all smartGroups within the subscription.</p>
-<p>List all the smartGroups within the specified subscription. .</p>
+<code class="sig-name descname">get_all</code><span class="sig-paren">(</span><em class="sig-param">target_resource=None</em>, <em class="sig-param">target_resource_group=None</em>, <em class="sig-param">target_resource_type=None</em>, <em class="sig-param">monitor_service=None</em>, <em class="sig-param">monitor_condition=None</em>, <em class="sig-param">severity=None</em>, <em class="sig-param">smart_group_state=None</em>, <em class="sig-param">time_range=None</em>, <em class="sig-param">page_count=None</em>, <em class="sig-param">sort_by=None</em>, <em class="sig-param">sort_order=None</em>, <em class="sig-param">custom_headers=None</em>, <em class="sig-param">raw=False</em>, <em class="sig-param">**operation_config</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/mgmt/alertsmanagement/operations/_smart_groups_operations.html#SmartGroupsOperations.get_all"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.alertsmanagement.operations.SmartGroupsOperations.get_all" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get all Smart Groups within a specified subscription.</p>
+<p>List all the Smart Groups within a specified subscription. .</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -673,18 +710,17 @@ Default value is select all.</p></li>
 <li><p><strong>target_resource_type</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Filter by target resource type. Default
 value is select all.</p></li>
 <li><p><strong>monitor_service</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a><em> or
-</em><a class="reference internal" href="azure.mgmt.alertsmanagement.models.html#azure.mgmt.alertsmanagement.models.MonitorService" title="azure.mgmt.alertsmanagement.models.MonitorService"><em>MonitorService</em></a>) – Filter by monitor service which is the source
-of the alert instance. Default value is select all. Possible values
-include: ‘Application Insights’, ‘ActivityLog Administrative’,
-‘ActivityLog Security’, ‘ActivityLog Recommendation’, ‘ActivityLog
-Policy’, ‘ActivityLog Autoscale’, ‘Log Analytics’, ‘Nagios’,
-‘Platform’, ‘SCOM’, ‘ServiceHealth’, ‘SmartDetector’, ‘VM Insights’,
-‘Zabbix’</p></li>
+</em><a class="reference internal" href="azure.mgmt.alertsmanagement.models.html#azure.mgmt.alertsmanagement.models.MonitorService" title="azure.mgmt.alertsmanagement.models.MonitorService"><em>MonitorService</em></a>) – Filter by monitor service which generates the
+alert instance. Default value is select all. Possible values include:
+‘Application Insights’, ‘ActivityLog Administrative’, ‘ActivityLog
+Security’, ‘ActivityLog Recommendation’, ‘ActivityLog Policy’,
+‘ActivityLog Autoscale’, ‘Log Analytics’, ‘Nagios’, ‘Platform’,
+‘SCOM’, ‘ServiceHealth’, ‘SmartDetector’, ‘VM Insights’, ‘Zabbix’</p></li>
 <li><p><strong>monitor_condition</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a><em> or
-</em><a class="reference internal" href="azure.mgmt.alertsmanagement.models.html#azure.mgmt.alertsmanagement.models.MonitorCondition" title="azure.mgmt.alertsmanagement.models.MonitorCondition"><em>MonitorCondition</em></a>) – Filter by monitor condition which is the
-state of the  monitor(alertRule) at monitor service. Default value is
-to select all. Possible values include: ‘Fired’, ‘Resolved’</p></li>
-<li><p><strong>severity</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a><em> or </em><a class="reference internal" href="azure.mgmt.alertsmanagement.models.html#azure.mgmt.alertsmanagement.models.Severity" title="azure.mgmt.alertsmanagement.models.Severity"><em>Severity</em></a>) – Filter by severity.  Defaut value is select all.
+</em><a class="reference internal" href="azure.mgmt.alertsmanagement.models.html#azure.mgmt.alertsmanagement.models.MonitorCondition" title="azure.mgmt.alertsmanagement.models.MonitorCondition"><em>MonitorCondition</em></a>) – Filter by monitor condition which is either
+‘Fired’ or ‘Resolved’. Default value is to select all. Possible values
+include: ‘Fired’, ‘Resolved’</p></li>
+<li><p><strong>severity</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a><em> or </em><a class="reference internal" href="azure.mgmt.alertsmanagement.models.html#azure.mgmt.alertsmanagement.models.Severity" title="azure.mgmt.alertsmanagement.models.Severity"><em>Severity</em></a>) – Filter by severity.  Default value is select all.
 Possible values include: ‘Sev0’, ‘Sev1’, ‘Sev2’, ‘Sev3’, ‘Sev4’</p></li>
 <li><p><strong>smart_group_state</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a><em> or
 </em><a class="reference internal" href="azure.mgmt.alertsmanagement.models.html#azure.mgmt.alertsmanagement.models.AlertState" title="azure.mgmt.alertsmanagement.models.AlertState"><em>AlertState</em></a>) – Filter by state of the smart group. Default
@@ -698,7 +734,7 @@ response. Permissible value is between 1 to 250. When the
 “includeContent”  filter is selected, maximum value allowed is 25.
 Default value is 25.</p></li>
 <li><p><strong>sort_by</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a><em> or
-</em><a class="reference internal" href="azure.mgmt.alertsmanagement.models.html#azure.mgmt.alertsmanagement.models.SmartGroupsSortByFields" title="azure.mgmt.alertsmanagement.models.SmartGroupsSortByFields"><em>SmartGroupsSortByFields</em></a>) – Sort the query results by input field  Default value
+</em><a class="reference internal" href="azure.mgmt.alertsmanagement.models.html#azure.mgmt.alertsmanagement.models.SmartGroupsSortByFields" title="azure.mgmt.alertsmanagement.models.SmartGroupsSortByFields"><em>SmartGroupsSortByFields</em></a>) – Sort the query results by input field. Default value
 is sort by ‘lastModifiedDateTime’. Possible values include:
 ‘alertsCount’, ‘state’, ‘severity’, ‘startDateTime’,
 ‘lastModifiedDateTime’</p></li>
@@ -713,23 +749,22 @@ overrides</span>.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>SmartGroupsList or ClientRawResponse if raw=true</p>
+<dd class="field-even"><p>An iterator like instance of SmartGroup</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference internal" href="azure.mgmt.alertsmanagement.models.html#azure.mgmt.alertsmanagement.models.SmartGroupsList" title="azure.mgmt.alertsmanagement.models.SmartGroupsList">SmartGroupsList</a> or
-ClientRawResponse</p>
+<dd class="field-odd"><p><a class="reference internal" href="azure.mgmt.alertsmanagement.models.html#azure.mgmt.alertsmanagement.models.SmartGroupPaged" title="azure.mgmt.alertsmanagement.models.SmartGroupPaged">SmartGroupPaged</a>[<a class="reference internal" href="azure.mgmt.alertsmanagement.models.html#azure.mgmt.alertsmanagement.models.SmartGroup" title="azure.mgmt.alertsmanagement.models.SmartGroup">SmartGroup</a>]</p>
 </dd>
 <dt class="field-even">Raises</dt>
-<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">ErrorResponseException</span></code></p>
+<dd class="field-even"><p><a class="reference internal" href="azure.mgmt.alertsmanagement.models.html#azure.mgmt.alertsmanagement.models.ErrorResponseException" title="azure.mgmt.alertsmanagement.models.ErrorResponseException"><code class="xref py py-class docutils literal notranslate"><span class="pre">ErrorResponseException</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="azure.mgmt.alertsmanagement.operations.SmartGroupsOperations.get_by_id">
-<code class="sig-name descname">get_by_id</code><span class="sig-paren">(</span><em class="sig-param">smart_group_id</em>, <em class="sig-param">custom_headers=None</em>, <em class="sig-param">raw=False</em>, <em class="sig-param">**operation_config</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/mgmt/alertsmanagement/operations/smart_groups_operations.html#SmartGroupsOperations.get_by_id"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.alertsmanagement.operations.SmartGroupsOperations.get_by_id" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get information of smart alerts group.</p>
-<p>Get details of smart group.</p>
+<code class="sig-name descname">get_by_id</code><span class="sig-paren">(</span><em class="sig-param">smart_group_id</em>, <em class="sig-param">custom_headers=None</em>, <em class="sig-param">raw=False</em>, <em class="sig-param">**operation_config</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/mgmt/alertsmanagement/operations/_smart_groups_operations.html#SmartGroupsOperations.get_by_id"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.alertsmanagement.operations.SmartGroupsOperations.get_by_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get information related to a specific Smart Group.</p>
+<p>Get information related to a specific Smart Group.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -749,15 +784,16 @@ overrides</span>.</p></li>
 ClientRawResponse</p>
 </dd>
 <dt class="field-even">Raises</dt>
-<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">ErrorResponseException</span></code></p>
+<dd class="field-even"><p><a class="reference internal" href="azure.mgmt.alertsmanagement.models.html#azure.mgmt.alertsmanagement.models.ErrorResponseException" title="azure.mgmt.alertsmanagement.models.ErrorResponseException"><code class="xref py py-class docutils literal notranslate"><span class="pre">ErrorResponseException</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="azure.mgmt.alertsmanagement.operations.SmartGroupsOperations.get_history">
-<code class="sig-name descname">get_history</code><span class="sig-paren">(</span><em class="sig-param">smart_group_id</em>, <em class="sig-param">custom_headers=None</em>, <em class="sig-param">raw=False</em>, <em class="sig-param">**operation_config</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/mgmt/alertsmanagement/operations/smart_groups_operations.html#SmartGroupsOperations.get_history"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.alertsmanagement.operations.SmartGroupsOperations.get_history" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get the history of the changes of smart group.</p>
+<code class="sig-name descname">get_history</code><span class="sig-paren">(</span><em class="sig-param">smart_group_id</em>, <em class="sig-param">custom_headers=None</em>, <em class="sig-param">raw=False</em>, <em class="sig-param">**operation_config</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/mgmt/alertsmanagement/operations/_smart_groups_operations.html#SmartGroupsOperations.get_history"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.alertsmanagement.operations.SmartGroupsOperations.get_history" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the history a smart group, which captures any Smart Group state
+changes (New/Acknowledged/Closed) .</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -777,7 +813,7 @@ overrides</span>.</p></li>
 ClientRawResponse</p>
 </dd>
 <dt class="field-even">Raises</dt>
-<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">ErrorResponseException</span></code></p>
+<dd class="field-even"><p><a class="reference internal" href="azure.mgmt.alertsmanagement.models.html#azure.mgmt.alertsmanagement.models.ErrorResponseException" title="azure.mgmt.alertsmanagement.models.ErrorResponseException"><code class="xref py py-class docutils literal notranslate"><span class="pre">ErrorResponseException</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -786,6 +822,469 @@ ClientRawResponse</p>
 <dt id="azure.mgmt.alertsmanagement.operations.SmartGroupsOperations.models">
 <code class="sig-name descname">models</code><em class="property"> = &lt;module 'azure.mgmt.alertsmanagement.models' from 'd:\\a\\1\\s\\sdk\\alertsmanagement\\azure-mgmt-alertsmanagement\\azure\\mgmt\\alertsmanagement\\models\\__init__.py'&gt;</em><a class="headerlink" href="#azure.mgmt.alertsmanagement.operations.SmartGroupsOperations.models" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="azure.mgmt.alertsmanagement.operations.ActionRulesOperations">
+<em class="property">class </em><code class="sig-prename descclassname">azure.mgmt.alertsmanagement.operations.</code><code class="sig-name descname">ActionRulesOperations</code><span class="sig-paren">(</span><em class="sig-param">client</em>, <em class="sig-param">config</em>, <em class="sig-param">serializer</em>, <em class="sig-param">deserializer</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/mgmt/alertsmanagement/operations/_action_rules_operations.html#ActionRulesOperations"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.alertsmanagement.operations.ActionRulesOperations" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3.5/library/functions.html#object" title="(in Python v3.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>ActionRulesOperations operations.</p>
+<p>You should not instantiate directly this class, but create a Client instance that will create it for you and attach it as attribute.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>client</strong> – Client for service requests.</p></li>
+<li><p><strong>config</strong> – Configuration of service client.</p></li>
+<li><p><strong>serializer</strong> – An object model serializer.</p></li>
+<li><p><strong>deserializer</strong> – An object model deserializer.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Variables</dt>
+<dd class="field-even"><p><strong>api_version</strong> – client API version. Constant value: “2019-05-05-preview”.</p>
+</dd>
+</dl>
+<dl class="method">
+<dt id="azure.mgmt.alertsmanagement.operations.ActionRulesOperations.create_update">
+<code class="sig-name descname">create_update</code><span class="sig-paren">(</span><em class="sig-param">resource_group_name</em>, <em class="sig-param">action_rule_name</em>, <em class="sig-param">action_rule</em>, <em class="sig-param">custom_headers=None</em>, <em class="sig-param">raw=False</em>, <em class="sig-param">**operation_config</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/mgmt/alertsmanagement/operations/_action_rules_operations.html#ActionRulesOperations.create_update"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.alertsmanagement.operations.ActionRulesOperations.create_update" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create/update an action rule.</p>
+<p>Creates/Updates a specific action rule.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>resource_group_name</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Resource group name where the resource is
+created.</p></li>
+<li><p><strong>action_rule_name</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The name of action rule that needs to be
+created/updated</p></li>
+<li><p><strong>action_rule</strong> (<a class="reference internal" href="azure.mgmt.alertsmanagement.models.html#azure.mgmt.alertsmanagement.models.ActionRule" title="azure.mgmt.alertsmanagement.models.ActionRule"><em>ActionRule</em></a>) – action rule to be created/updated</p></li>
+<li><p><strong>custom_headers</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#dict" title="(in Python v3.5)"><em>dict</em></a>) – headers that will be added to the request</p></li>
+<li><p><strong>raw</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#bool" title="(in Python v3.5)"><em>bool</em></a>) – returns the direct response alongside the
+deserialized response</p></li>
+<li><p><strong>operation_config</strong> – <span class="xref std std-ref">Operation configuration
+overrides</span>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>ActionRule or ClientRawResponse if raw=true</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="azure.mgmt.alertsmanagement.models.html#azure.mgmt.alertsmanagement.models.ActionRule" title="azure.mgmt.alertsmanagement.models.ActionRule">ActionRule</a> or
+ClientRawResponse</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><a class="reference internal" href="azure.mgmt.alertsmanagement.models.html#azure.mgmt.alertsmanagement.models.ErrorResponseException" title="azure.mgmt.alertsmanagement.models.ErrorResponseException"><code class="xref py py-class docutils literal notranslate"><span class="pre">ErrorResponseException</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="azure.mgmt.alertsmanagement.operations.ActionRulesOperations.delete">
+<code class="sig-name descname">delete</code><span class="sig-paren">(</span><em class="sig-param">resource_group_name</em>, <em class="sig-param">action_rule_name</em>, <em class="sig-param">custom_headers=None</em>, <em class="sig-param">raw=False</em>, <em class="sig-param">**operation_config</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/mgmt/alertsmanagement/operations/_action_rules_operations.html#ActionRulesOperations.delete"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.alertsmanagement.operations.ActionRulesOperations.delete" title="Permalink to this definition">¶</a></dt>
+<dd><p>Delete action rule.</p>
+<p>Deletes a given action rule.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>resource_group_name</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Resource group name where the resource is
+created.</p></li>
+<li><p><strong>action_rule_name</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The name that needs to be deleted</p></li>
+<li><p><strong>custom_headers</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#dict" title="(in Python v3.5)"><em>dict</em></a>) – headers that will be added to the request</p></li>
+<li><p><strong>raw</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#bool" title="(in Python v3.5)"><em>bool</em></a>) – returns the direct response alongside the
+deserialized response</p></li>
+<li><p><strong>operation_config</strong> – <span class="xref std std-ref">Operation configuration
+overrides</span>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>bool or ClientRawResponse if raw=true</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3.5/library/functions.html#bool" title="(in Python v3.5)">bool</a> or ClientRawResponse</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><a class="reference internal" href="azure.mgmt.alertsmanagement.models.html#azure.mgmt.alertsmanagement.models.ErrorResponseException" title="azure.mgmt.alertsmanagement.models.ErrorResponseException"><code class="xref py py-class docutils literal notranslate"><span class="pre">ErrorResponseException</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="azure.mgmt.alertsmanagement.operations.ActionRulesOperations.get_by_name">
+<code class="sig-name descname">get_by_name</code><span class="sig-paren">(</span><em class="sig-param">resource_group_name</em>, <em class="sig-param">action_rule_name</em>, <em class="sig-param">custom_headers=None</em>, <em class="sig-param">raw=False</em>, <em class="sig-param">**operation_config</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/mgmt/alertsmanagement/operations/_action_rules_operations.html#ActionRulesOperations.get_by_name"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.alertsmanagement.operations.ActionRulesOperations.get_by_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get action rule by name.</p>
+<p>Get a specific action rule.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>resource_group_name</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Resource group name where the resource is
+created.</p></li>
+<li><p><strong>action_rule_name</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The name of action rule that needs to be
+fetched</p></li>
+<li><p><strong>custom_headers</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#dict" title="(in Python v3.5)"><em>dict</em></a>) – headers that will be added to the request</p></li>
+<li><p><strong>raw</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#bool" title="(in Python v3.5)"><em>bool</em></a>) – returns the direct response alongside the
+deserialized response</p></li>
+<li><p><strong>operation_config</strong> – <span class="xref std std-ref">Operation configuration
+overrides</span>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>ActionRule or ClientRawResponse if raw=true</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="azure.mgmt.alertsmanagement.models.html#azure.mgmt.alertsmanagement.models.ActionRule" title="azure.mgmt.alertsmanagement.models.ActionRule">ActionRule</a> or
+ClientRawResponse</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><a class="reference internal" href="azure.mgmt.alertsmanagement.models.html#azure.mgmt.alertsmanagement.models.ErrorResponseException" title="azure.mgmt.alertsmanagement.models.ErrorResponseException"><code class="xref py py-class docutils literal notranslate"><span class="pre">ErrorResponseException</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="azure.mgmt.alertsmanagement.operations.ActionRulesOperations.list_by_resource_group">
+<code class="sig-name descname">list_by_resource_group</code><span class="sig-paren">(</span><em class="sig-param">resource_group_name</em>, <em class="sig-param">target_resource_group=None</em>, <em class="sig-param">target_resource_type=None</em>, <em class="sig-param">target_resource=None</em>, <em class="sig-param">severity=None</em>, <em class="sig-param">monitor_service=None</em>, <em class="sig-param">impacted_scope=None</em>, <em class="sig-param">description=None</em>, <em class="sig-param">alert_rule_id=None</em>, <em class="sig-param">action_group=None</em>, <em class="sig-param">name=None</em>, <em class="sig-param">custom_headers=None</em>, <em class="sig-param">raw=False</em>, <em class="sig-param">**operation_config</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/mgmt/alertsmanagement/operations/_action_rules_operations.html#ActionRulesOperations.list_by_resource_group"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.alertsmanagement.operations.ActionRulesOperations.list_by_resource_group" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get all action rules created in a resource group.</p>
+<p>List all action rules of the subscription, created in given resource
+group and given input filters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>resource_group_name</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Resource group name where the resource is
+created.</p></li>
+<li><p><strong>target_resource_group</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Filter by target resource group name.
+Default value is select all.</p></li>
+<li><p><strong>target_resource_type</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Filter by target resource type. Default
+value is select all.</p></li>
+<li><p><strong>target_resource</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Filter by target resource( which is full ARM
+ID) Default value is select all.</p></li>
+<li><p><strong>severity</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a><em> or </em><a class="reference internal" href="azure.mgmt.alertsmanagement.models.html#azure.mgmt.alertsmanagement.models.Severity" title="azure.mgmt.alertsmanagement.models.Severity"><em>Severity</em></a>) – Filter by severity.  Default value is select all.
+Possible values include: ‘Sev0’, ‘Sev1’, ‘Sev2’, ‘Sev3’, ‘Sev4’</p></li>
+<li><p><strong>monitor_service</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a><em> or
+</em><a class="reference internal" href="azure.mgmt.alertsmanagement.models.html#azure.mgmt.alertsmanagement.models.MonitorService" title="azure.mgmt.alertsmanagement.models.MonitorService"><em>MonitorService</em></a>) – Filter by monitor service which generates the
+alert instance. Default value is select all. Possible values include:
+‘Application Insights’, ‘ActivityLog Administrative’, ‘ActivityLog
+Security’, ‘ActivityLog Recommendation’, ‘ActivityLog Policy’,
+‘ActivityLog Autoscale’, ‘Log Analytics’, ‘Nagios’, ‘Platform’,
+‘SCOM’, ‘ServiceHealth’, ‘SmartDetector’, ‘VM Insights’, ‘Zabbix’</p></li>
+<li><p><strong>impacted_scope</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – filter by impacted/target scope (provide comma
+separated list for multiple scopes). The value should be an well
+constructed ARM id of the scope.</p></li>
+<li><p><strong>description</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – filter by alert rule description</p></li>
+<li><p><strong>alert_rule_id</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – filter by alert rule id</p></li>
+<li><p><strong>action_group</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – filter by action group configured as part of
+action rule</p></li>
+<li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – filter by action rule name</p></li>
+<li><p><strong>custom_headers</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#dict" title="(in Python v3.5)"><em>dict</em></a>) – headers that will be added to the request</p></li>
+<li><p><strong>raw</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#bool" title="(in Python v3.5)"><em>bool</em></a>) – returns the direct response alongside the
+deserialized response</p></li>
+<li><p><strong>operation_config</strong> – <span class="xref std std-ref">Operation configuration
+overrides</span>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>An iterator like instance of ActionRule</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="azure.mgmt.alertsmanagement.models.html#azure.mgmt.alertsmanagement.models.ActionRulePaged" title="azure.mgmt.alertsmanagement.models.ActionRulePaged">ActionRulePaged</a>[<a class="reference internal" href="azure.mgmt.alertsmanagement.models.html#azure.mgmt.alertsmanagement.models.ActionRule" title="azure.mgmt.alertsmanagement.models.ActionRule">ActionRule</a>]</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><a class="reference internal" href="azure.mgmt.alertsmanagement.models.html#azure.mgmt.alertsmanagement.models.ErrorResponseException" title="azure.mgmt.alertsmanagement.models.ErrorResponseException"><code class="xref py py-class docutils literal notranslate"><span class="pre">ErrorResponseException</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="azure.mgmt.alertsmanagement.operations.ActionRulesOperations.list_by_subscription">
+<code class="sig-name descname">list_by_subscription</code><span class="sig-paren">(</span><em class="sig-param">target_resource_group=None</em>, <em class="sig-param">target_resource_type=None</em>, <em class="sig-param">target_resource=None</em>, <em class="sig-param">severity=None</em>, <em class="sig-param">monitor_service=None</em>, <em class="sig-param">impacted_scope=None</em>, <em class="sig-param">description=None</em>, <em class="sig-param">alert_rule_id=None</em>, <em class="sig-param">action_group=None</em>, <em class="sig-param">name=None</em>, <em class="sig-param">custom_headers=None</em>, <em class="sig-param">raw=False</em>, <em class="sig-param">**operation_config</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/mgmt/alertsmanagement/operations/_action_rules_operations.html#ActionRulesOperations.list_by_subscription"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.alertsmanagement.operations.ActionRulesOperations.list_by_subscription" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get all action rule in a given subscription.</p>
+<p>List all action rules of the subscription and given input filters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>target_resource_group</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Filter by target resource group name.
+Default value is select all.</p></li>
+<li><p><strong>target_resource_type</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Filter by target resource type. Default
+value is select all.</p></li>
+<li><p><strong>target_resource</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Filter by target resource( which is full ARM
+ID) Default value is select all.</p></li>
+<li><p><strong>severity</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a><em> or </em><a class="reference internal" href="azure.mgmt.alertsmanagement.models.html#azure.mgmt.alertsmanagement.models.Severity" title="azure.mgmt.alertsmanagement.models.Severity"><em>Severity</em></a>) – Filter by severity.  Default value is select all.
+Possible values include: ‘Sev0’, ‘Sev1’, ‘Sev2’, ‘Sev3’, ‘Sev4’</p></li>
+<li><p><strong>monitor_service</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a><em> or
+</em><a class="reference internal" href="azure.mgmt.alertsmanagement.models.html#azure.mgmt.alertsmanagement.models.MonitorService" title="azure.mgmt.alertsmanagement.models.MonitorService"><em>MonitorService</em></a>) – Filter by monitor service which generates the
+alert instance. Default value is select all. Possible values include:
+‘Application Insights’, ‘ActivityLog Administrative’, ‘ActivityLog
+Security’, ‘ActivityLog Recommendation’, ‘ActivityLog Policy’,
+‘ActivityLog Autoscale’, ‘Log Analytics’, ‘Nagios’, ‘Platform’,
+‘SCOM’, ‘ServiceHealth’, ‘SmartDetector’, ‘VM Insights’, ‘Zabbix’</p></li>
+<li><p><strong>impacted_scope</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – filter by impacted/target scope (provide comma
+separated list for multiple scopes). The value should be an well
+constructed ARM id of the scope.</p></li>
+<li><p><strong>description</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – filter by alert rule description</p></li>
+<li><p><strong>alert_rule_id</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – filter by alert rule id</p></li>
+<li><p><strong>action_group</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – filter by action group configured as part of
+action rule</p></li>
+<li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – filter by action rule name</p></li>
+<li><p><strong>custom_headers</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#dict" title="(in Python v3.5)"><em>dict</em></a>) – headers that will be added to the request</p></li>
+<li><p><strong>raw</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#bool" title="(in Python v3.5)"><em>bool</em></a>) – returns the direct response alongside the
+deserialized response</p></li>
+<li><p><strong>operation_config</strong> – <span class="xref std std-ref">Operation configuration
+overrides</span>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>An iterator like instance of ActionRule</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="azure.mgmt.alertsmanagement.models.html#azure.mgmt.alertsmanagement.models.ActionRulePaged" title="azure.mgmt.alertsmanagement.models.ActionRulePaged">ActionRulePaged</a>[<a class="reference internal" href="azure.mgmt.alertsmanagement.models.html#azure.mgmt.alertsmanagement.models.ActionRule" title="azure.mgmt.alertsmanagement.models.ActionRule">ActionRule</a>]</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><a class="reference internal" href="azure.mgmt.alertsmanagement.models.html#azure.mgmt.alertsmanagement.models.ErrorResponseException" title="azure.mgmt.alertsmanagement.models.ErrorResponseException"><code class="xref py py-class docutils literal notranslate"><span class="pre">ErrorResponseException</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="azure.mgmt.alertsmanagement.operations.ActionRulesOperations.models">
+<code class="sig-name descname">models</code><em class="property"> = &lt;module 'azure.mgmt.alertsmanagement.models' from 'd:\\a\\1\\s\\sdk\\alertsmanagement\\azure-mgmt-alertsmanagement\\azure\\mgmt\\alertsmanagement\\models\\__init__.py'&gt;</em><a class="headerlink" href="#azure.mgmt.alertsmanagement.operations.ActionRulesOperations.models" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="azure.mgmt.alertsmanagement.operations.ActionRulesOperations.update">
+<code class="sig-name descname">update</code><span class="sig-paren">(</span><em class="sig-param">resource_group_name</em>, <em class="sig-param">action_rule_name</em>, <em class="sig-param">status=None</em>, <em class="sig-param">tags=None</em>, <em class="sig-param">custom_headers=None</em>, <em class="sig-param">raw=False</em>, <em class="sig-param">**operation_config</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/mgmt/alertsmanagement/operations/_action_rules_operations.html#ActionRulesOperations.update"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.alertsmanagement.operations.ActionRulesOperations.update" title="Permalink to this definition">¶</a></dt>
+<dd><p>Patch action rule.</p>
+<p>Update enabled flag and/or tags for the given action rule.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>resource_group_name</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Resource group name where the resource is
+created.</p></li>
+<li><p><strong>action_rule_name</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The name that needs to be updated</p></li>
+<li><p><strong>status</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a><em> or
+</em><a class="reference internal" href="azure.mgmt.alertsmanagement.models.html#azure.mgmt.alertsmanagement.models.ActionRuleStatus" title="azure.mgmt.alertsmanagement.models.ActionRuleStatus"><em>ActionRuleStatus</em></a>) – Indicates if the given action rule is enabled or
+disabled. Possible values include: ‘Enabled’, ‘Disabled’</p></li>
+<li><p><strong>tags</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#object" title="(in Python v3.5)"><em>object</em></a>) – tags to be updated</p></li>
+<li><p><strong>custom_headers</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#dict" title="(in Python v3.5)"><em>dict</em></a>) – headers that will be added to the request</p></li>
+<li><p><strong>raw</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#bool" title="(in Python v3.5)"><em>bool</em></a>) – returns the direct response alongside the
+deserialized response</p></li>
+<li><p><strong>operation_config</strong> – <span class="xref std std-ref">Operation configuration
+overrides</span>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>ActionRule or ClientRawResponse if raw=true</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="azure.mgmt.alertsmanagement.models.html#azure.mgmt.alertsmanagement.models.ActionRule" title="azure.mgmt.alertsmanagement.models.ActionRule">ActionRule</a> or
+ClientRawResponse</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><a class="reference internal" href="azure.mgmt.alertsmanagement.models.html#azure.mgmt.alertsmanagement.models.ErrorResponseException" title="azure.mgmt.alertsmanagement.models.ErrorResponseException"><code class="xref py py-class docutils literal notranslate"><span class="pre">ErrorResponseException</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="azure.mgmt.alertsmanagement.operations.SmartDetectorAlertRulesOperations">
+<em class="property">class </em><code class="sig-prename descclassname">azure.mgmt.alertsmanagement.operations.</code><code class="sig-name descname">SmartDetectorAlertRulesOperations</code><span class="sig-paren">(</span><em class="sig-param">client</em>, <em class="sig-param">config</em>, <em class="sig-param">serializer</em>, <em class="sig-param">deserializer</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/mgmt/alertsmanagement/operations/_smart_detector_alert_rules_operations.html#SmartDetectorAlertRulesOperations"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.alertsmanagement.operations.SmartDetectorAlertRulesOperations" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3.5/library/functions.html#object" title="(in Python v3.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>SmartDetectorAlertRulesOperations operations.</p>
+<p>You should not instantiate directly this class, but create a Client instance that will create it for you and attach it as attribute.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>client</strong> – Client for service requests.</p></li>
+<li><p><strong>config</strong> – Configuration of service client.</p></li>
+<li><p><strong>serializer</strong> – An object model serializer.</p></li>
+<li><p><strong>deserializer</strong> – An object model deserializer.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Variables</dt>
+<dd class="field-even"><p><strong>api_version</strong> – Client Api Version. Constant value: “2019-06-01”.</p>
+</dd>
+</dl>
+<dl class="method">
+<dt id="azure.mgmt.alertsmanagement.operations.SmartDetectorAlertRulesOperations.create_or_update">
+<code class="sig-name descname">create_or_update</code><span class="sig-paren">(</span><em class="sig-param">resource_group_name</em>, <em class="sig-param">alert_rule_name</em>, <em class="sig-param">parameters</em>, <em class="sig-param">custom_headers=None</em>, <em class="sig-param">raw=False</em>, <em class="sig-param">**operation_config</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/mgmt/alertsmanagement/operations/_smart_detector_alert_rules_operations.html#SmartDetectorAlertRulesOperations.create_or_update"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.alertsmanagement.operations.SmartDetectorAlertRulesOperations.create_or_update" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create or update a Smart Detector alert rule.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>resource_group_name</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The name of the resource group.</p></li>
+<li><p><strong>alert_rule_name</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The name of the alert rule.</p></li>
+<li><p><strong>parameters</strong> (<a class="reference internal" href="azure.mgmt.alertsmanagement.models.html#azure.mgmt.alertsmanagement.models.AlertRule" title="azure.mgmt.alertsmanagement.models.AlertRule"><em>AlertRule</em></a>) – Parameters supplied to the operation.</p></li>
+<li><p><strong>custom_headers</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#dict" title="(in Python v3.5)"><em>dict</em></a>) – headers that will be added to the request</p></li>
+<li><p><strong>raw</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#bool" title="(in Python v3.5)"><em>bool</em></a>) – returns the direct response alongside the
+deserialized response</p></li>
+<li><p><strong>operation_config</strong> – <span class="xref std std-ref">Operation configuration
+overrides</span>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>AlertRule or ClientRawResponse if raw=true</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="azure.mgmt.alertsmanagement.models.html#azure.mgmt.alertsmanagement.models.AlertRule" title="azure.mgmt.alertsmanagement.models.AlertRule">AlertRule</a> or
+ClientRawResponse</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><a class="reference internal" href="azure.mgmt.alertsmanagement.models.html#azure.mgmt.alertsmanagement.models.ErrorResponse1Exception" title="azure.mgmt.alertsmanagement.models.ErrorResponse1Exception"><code class="xref py py-class docutils literal notranslate"><span class="pre">ErrorResponse1Exception</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="azure.mgmt.alertsmanagement.operations.SmartDetectorAlertRulesOperations.delete">
+<code class="sig-name descname">delete</code><span class="sig-paren">(</span><em class="sig-param">resource_group_name</em>, <em class="sig-param">alert_rule_name</em>, <em class="sig-param">custom_headers=None</em>, <em class="sig-param">raw=False</em>, <em class="sig-param">**operation_config</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/mgmt/alertsmanagement/operations/_smart_detector_alert_rules_operations.html#SmartDetectorAlertRulesOperations.delete"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.alertsmanagement.operations.SmartDetectorAlertRulesOperations.delete" title="Permalink to this definition">¶</a></dt>
+<dd><p>Delete an existing Smart Detector alert rule.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>resource_group_name</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The name of the resource group.</p></li>
+<li><p><strong>alert_rule_name</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The name of the alert rule.</p></li>
+<li><p><strong>custom_headers</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#dict" title="(in Python v3.5)"><em>dict</em></a>) – headers that will be added to the request</p></li>
+<li><p><strong>raw</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#bool" title="(in Python v3.5)"><em>bool</em></a>) – returns the direct response alongside the
+deserialized response</p></li>
+<li><p><strong>operation_config</strong> – <span class="xref std std-ref">Operation configuration
+overrides</span>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None or ClientRawResponse if raw=true</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3.5/library/constants.html#None" title="(in Python v3.5)">None</a> or ClientRawResponse</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><a class="reference internal" href="azure.mgmt.alertsmanagement.models.html#azure.mgmt.alertsmanagement.models.ErrorResponse1Exception" title="azure.mgmt.alertsmanagement.models.ErrorResponse1Exception"><code class="xref py py-class docutils literal notranslate"><span class="pre">ErrorResponse1Exception</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="azure.mgmt.alertsmanagement.operations.SmartDetectorAlertRulesOperations.get">
+<code class="sig-name descname">get</code><span class="sig-paren">(</span><em class="sig-param">resource_group_name</em>, <em class="sig-param">alert_rule_name</em>, <em class="sig-param">expand_detector=None</em>, <em class="sig-param">custom_headers=None</em>, <em class="sig-param">raw=False</em>, <em class="sig-param">**operation_config</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/mgmt/alertsmanagement/operations/_smart_detector_alert_rules_operations.html#SmartDetectorAlertRulesOperations.get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.alertsmanagement.operations.SmartDetectorAlertRulesOperations.get" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get a specific Smart Detector alert rule.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>resource_group_name</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The name of the resource group.</p></li>
+<li><p><strong>alert_rule_name</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The name of the alert rule.</p></li>
+<li><p><strong>expand_detector</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#bool" title="(in Python v3.5)"><em>bool</em></a>) – Indicates if Smart Detector should be
+expanded.</p></li>
+<li><p><strong>custom_headers</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#dict" title="(in Python v3.5)"><em>dict</em></a>) – headers that will be added to the request</p></li>
+<li><p><strong>raw</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#bool" title="(in Python v3.5)"><em>bool</em></a>) – returns the direct response alongside the
+deserialized response</p></li>
+<li><p><strong>operation_config</strong> – <span class="xref std std-ref">Operation configuration
+overrides</span>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>AlertRule or ClientRawResponse if raw=true</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="azure.mgmt.alertsmanagement.models.html#azure.mgmt.alertsmanagement.models.AlertRule" title="azure.mgmt.alertsmanagement.models.AlertRule">AlertRule</a> or
+ClientRawResponse</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><a class="reference internal" href="azure.mgmt.alertsmanagement.models.html#azure.mgmt.alertsmanagement.models.ErrorResponse1Exception" title="azure.mgmt.alertsmanagement.models.ErrorResponse1Exception"><code class="xref py py-class docutils literal notranslate"><span class="pre">ErrorResponse1Exception</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="azure.mgmt.alertsmanagement.operations.SmartDetectorAlertRulesOperations.list">
+<code class="sig-name descname">list</code><span class="sig-paren">(</span><em class="sig-param">expand_detector=None</em>, <em class="sig-param">custom_headers=None</em>, <em class="sig-param">raw=False</em>, <em class="sig-param">**operation_config</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/mgmt/alertsmanagement/operations/_smart_detector_alert_rules_operations.html#SmartDetectorAlertRulesOperations.list"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.alertsmanagement.operations.SmartDetectorAlertRulesOperations.list" title="Permalink to this definition">¶</a></dt>
+<dd><p>List all the existing Smart Detector alert rules within the
+subscription.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>expand_detector</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#bool" title="(in Python v3.5)"><em>bool</em></a>) – Indicates if Smart Detector should be
+expanded.</p></li>
+<li><p><strong>custom_headers</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#dict" title="(in Python v3.5)"><em>dict</em></a>) – headers that will be added to the request</p></li>
+<li><p><strong>raw</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#bool" title="(in Python v3.5)"><em>bool</em></a>) – returns the direct response alongside the
+deserialized response</p></li>
+<li><p><strong>operation_config</strong> – <span class="xref std std-ref">Operation configuration
+overrides</span>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>An iterator like instance of AlertRule</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="azure.mgmt.alertsmanagement.models.html#azure.mgmt.alertsmanagement.models.AlertRulePaged" title="azure.mgmt.alertsmanagement.models.AlertRulePaged">AlertRulePaged</a>[<a class="reference internal" href="azure.mgmt.alertsmanagement.models.html#azure.mgmt.alertsmanagement.models.AlertRule" title="azure.mgmt.alertsmanagement.models.AlertRule">AlertRule</a>]</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><a class="reference internal" href="azure.mgmt.alertsmanagement.models.html#azure.mgmt.alertsmanagement.models.ErrorResponse1Exception" title="azure.mgmt.alertsmanagement.models.ErrorResponse1Exception"><code class="xref py py-class docutils literal notranslate"><span class="pre">ErrorResponse1Exception</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="azure.mgmt.alertsmanagement.operations.SmartDetectorAlertRulesOperations.list_by_resource_group">
+<code class="sig-name descname">list_by_resource_group</code><span class="sig-paren">(</span><em class="sig-param">resource_group_name</em>, <em class="sig-param">expand_detector=None</em>, <em class="sig-param">custom_headers=None</em>, <em class="sig-param">raw=False</em>, <em class="sig-param">**operation_config</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/mgmt/alertsmanagement/operations/_smart_detector_alert_rules_operations.html#SmartDetectorAlertRulesOperations.list_by_resource_group"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.alertsmanagement.operations.SmartDetectorAlertRulesOperations.list_by_resource_group" title="Permalink to this definition">¶</a></dt>
+<dd><p>List all the existing Smart Detector alert rules within the
+subscription and resource group.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>resource_group_name</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The name of the resource group.</p></li>
+<li><p><strong>expand_detector</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#bool" title="(in Python v3.5)"><em>bool</em></a>) – Indicates if Smart Detector should be
+expanded.</p></li>
+<li><p><strong>custom_headers</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#dict" title="(in Python v3.5)"><em>dict</em></a>) – headers that will be added to the request</p></li>
+<li><p><strong>raw</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#bool" title="(in Python v3.5)"><em>bool</em></a>) – returns the direct response alongside the
+deserialized response</p></li>
+<li><p><strong>operation_config</strong> – <span class="xref std std-ref">Operation configuration
+overrides</span>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>An iterator like instance of AlertRule</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="azure.mgmt.alertsmanagement.models.html#azure.mgmt.alertsmanagement.models.AlertRulePaged" title="azure.mgmt.alertsmanagement.models.AlertRulePaged">AlertRulePaged</a>[<a class="reference internal" href="azure.mgmt.alertsmanagement.models.html#azure.mgmt.alertsmanagement.models.AlertRule" title="azure.mgmt.alertsmanagement.models.AlertRule">AlertRule</a>]</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><a class="reference internal" href="azure.mgmt.alertsmanagement.models.html#azure.mgmt.alertsmanagement.models.ErrorResponse1Exception" title="azure.mgmt.alertsmanagement.models.ErrorResponse1Exception"><code class="xref py py-class docutils literal notranslate"><span class="pre">ErrorResponse1Exception</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="azure.mgmt.alertsmanagement.operations.SmartDetectorAlertRulesOperations.models">
+<code class="sig-name descname">models</code><em class="property"> = &lt;module 'azure.mgmt.alertsmanagement.models' from 'd:\\a\\1\\s\\sdk\\alertsmanagement\\azure-mgmt-alertsmanagement\\azure\\mgmt\\alertsmanagement\\models\\__init__.py'&gt;</em><a class="headerlink" href="#azure.mgmt.alertsmanagement.operations.SmartDetectorAlertRulesOperations.models" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="azure.mgmt.alertsmanagement.operations.SmartDetectorAlertRulesOperations.patch">
+<code class="sig-name descname">patch</code><span class="sig-paren">(</span><em class="sig-param">resource_group_name</em>, <em class="sig-param">alert_rule_name</em>, <em class="sig-param">parameters</em>, <em class="sig-param">custom_headers=None</em>, <em class="sig-param">raw=False</em>, <em class="sig-param">**operation_config</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/mgmt/alertsmanagement/operations/_smart_detector_alert_rules_operations.html#SmartDetectorAlertRulesOperations.patch"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.alertsmanagement.operations.SmartDetectorAlertRulesOperations.patch" title="Permalink to this definition">¶</a></dt>
+<dd><p>Patch a specific Smart Detector alert rule.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>resource_group_name</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The name of the resource group.</p></li>
+<li><p><strong>alert_rule_name</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The name of the alert rule.</p></li>
+<li><p><strong>parameters</strong> (<a class="reference internal" href="azure.mgmt.alertsmanagement.models.html#azure.mgmt.alertsmanagement.models.AlertRulePatchObject" title="azure.mgmt.alertsmanagement.models.AlertRulePatchObject"><em>AlertRulePatchObject</em></a>) – Parameters supplied to the operation.</p></li>
+<li><p><strong>custom_headers</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#dict" title="(in Python v3.5)"><em>dict</em></a>) – headers that will be added to the request</p></li>
+<li><p><strong>raw</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#bool" title="(in Python v3.5)"><em>bool</em></a>) – returns the direct response alongside the
+deserialized response</p></li>
+<li><p><strong>operation_config</strong> – <span class="xref std std-ref">Operation configuration
+overrides</span>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>AlertRule or ClientRawResponse if raw=true</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="azure.mgmt.alertsmanagement.models.html#azure.mgmt.alertsmanagement.models.AlertRule" title="azure.mgmt.alertsmanagement.models.AlertRule">AlertRule</a> or
+ClientRawResponse</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><a class="reference internal" href="azure.mgmt.alertsmanagement.models.html#azure.mgmt.alertsmanagement.models.ErrorResponse1Exception" title="azure.mgmt.alertsmanagement.models.ErrorResponse1Exception"><code class="xref py py-class docutils literal notranslate"><span class="pre">ErrorResponse1Exception</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
 
 </dd></dl>
 
