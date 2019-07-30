@@ -346,8 +346,18 @@
 <dd></dd></dl>
 
 <dl class="attribute">
+<dt id="azure.identity.constants.EnvironmentVariables.AZURE_PASSWORD">
+<code class="sig-name descname">AZURE_PASSWORD</code><em class="property"> = 'AZURE_PASSWORD'</em><a class="headerlink" href="#azure.identity.constants.EnvironmentVariables.AZURE_PASSWORD" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
 <dt id="azure.identity.constants.EnvironmentVariables.AZURE_TENANT_ID">
 <code class="sig-name descname">AZURE_TENANT_ID</code><em class="property"> = 'AZURE_TENANT_ID'</em><a class="headerlink" href="#azure.identity.constants.EnvironmentVariables.AZURE_TENANT_ID" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="azure.identity.constants.EnvironmentVariables.AZURE_USERNAME">
+<code class="sig-name descname">AZURE_USERNAME</code><em class="property"> = 'AZURE_USERNAME'</em><a class="headerlink" href="#azure.identity.constants.EnvironmentVariables.AZURE_USERNAME" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
@@ -368,6 +378,11 @@
 <dl class="attribute">
 <dt id="azure.identity.constants.EnvironmentVariables.MSI_SECRET">
 <code class="sig-name descname">MSI_SECRET</code><em class="property"> = 'MSI_SECRET'</em><a class="headerlink" href="#azure.identity.constants.EnvironmentVariables.MSI_SECRET" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="azure.identity.constants.EnvironmentVariables.USERNAME_PASSWORD_VARS">
+<code class="sig-name descname">USERNAME_PASSWORD_VARS</code><em class="property"> = ('AZURE_CLIENT_ID', 'AZURE_USERNAME', 'AZURE_PASSWORD')</em><a class="headerlink" href="#azure.identity.constants.EnvironmentVariables.USERNAME_PASSWORD_VARS" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -477,22 +492,29 @@ error message from each credential.</p>
 <dt id="azure.identity.credentials.EnvironmentCredential">
 <em class="property">class </em><code class="sig-prename descclassname">azure.identity.credentials.</code><code class="sig-name descname">EnvironmentCredential</code><span class="sig-paren">(</span><em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/identity/credentials.html#EnvironmentCredential"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.identity.credentials.EnvironmentCredential" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3.5/library/functions.html#object" title="(in Python v3.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
-<p>Authenticates as a service principal using a client ID/secret pair or a certificate,
-depending on environment variable settings.</p>
-<p>These environment variables are required:</p>
-<blockquote>
-<div><ul class="simple">
+<p>Authenticates as a service principal using a client secret or a certificate, or as a user with a username and
+password, depending on environment variable settings. Configuration is attempted in this order, using these
+environment variables:</p>
+<dl class="simple">
+<dt>Service principal with secret:</dt><dd><ul class="simple">
 <li><p><strong>AZURE_CLIENT_ID</strong>: the service principal’s client ID</p></li>
+<li><p><strong>AZURE_CLIENT_SECRET</strong>: one of the service principal’s client secrets</p></li>
 <li><p><strong>AZURE_TENANT_ID</strong>: ID of the service principal’s tenant. Also called its ‘directory’ ID.</p></li>
 </ul>
-</div></blockquote>
-<p>Additionally, set <strong>one</strong> of these to configure client secret or certificate authentication:</p>
-<blockquote>
-<div><ul class="simple">
-<li><p><strong>AZURE_CLIENT_SECRET</strong>: one of the service principal’s client secrets</p></li>
+</dd>
+<dt>Service principal with certificate:</dt><dd><ul class="simple">
+<li><p><strong>AZURE_CLIENT_ID</strong>: the service principal’s client ID</p></li>
 <li><p><strong>AZURE_CLIENT_CERTIFICATE_PATH</strong>: path to a PEM-encoded certificate file including the private key</p></li>
+<li><p><strong>AZURE_TENANT_ID</strong>: ID of the service principal’s tenant. Also called its ‘directory’ ID.</p></li>
 </ul>
-</div></blockquote>
+</dd>
+<dt>User with username and password:</dt><dd><ul class="simple">
+<li><p><strong>AZURE_CLIENT_ID</strong>: the application’s client ID</p></li>
+<li><p><strong>AZURE_USERNAME</strong>: a username (usually an email address)</p></li>
+<li><p><strong>AZURE_PASSWORD</strong>: that user’s password</p></li>
+</ul>
+</dd>
+</dl>
 <dl class="method">
 <dt id="azure.identity.credentials.EnvironmentCredential.get_token">
 <code class="sig-name descname">get_token</code><span class="sig-paren">(</span><em class="sig-param">*scopes</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/identity/credentials.html#EnvironmentCredential.get_token"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.identity.credentials.EnvironmentCredential.get_token" title="Permalink to this definition">¶</a></dt>
@@ -539,6 +561,50 @@ depending on environment variable settings.</p>
 <dl class="method">
 <dt id="azure.identity.credentials.ManagedIdentityCredential.get_token">
 <code class="sig-name descname">get_token</code><span class="sig-paren">(</span><em class="sig-param">*scopes</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/identity/credentials.html#ManagedIdentityCredential.get_token"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.identity.credentials.ManagedIdentityCredential.get_token" title="Permalink to this definition">¶</a></dt>
+<dd><p>Request an access token for <cite>scopes</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>scopes</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – desired scopes for the token</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference internal" href="azure.core.html#azure.core.credentials.AccessToken" title="azure.core.credentials.AccessToken"><code class="xref py py-class docutils literal notranslate"><span class="pre">azure.core.credentials.AccessToken</span></code></a></p>
+</dd>
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><p><a class="reference internal" href="azure.core.html#azure.core.exceptions.ClientAuthenticationError" title="azure.core.exceptions.ClientAuthenticationError"><code class="xref py py-class docutils literal notranslate"><span class="pre">azure.core.exceptions.ClientAuthenticationError</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="azure.identity.credentials.UsernamePasswordCredential">
+<em class="property">class </em><code class="sig-prename descclassname">azure.identity.credentials.</code><code class="sig-name descname">UsernamePasswordCredential</code><span class="sig-paren">(</span><em class="sig-param">client_id</em>, <em class="sig-param">username</em>, <em class="sig-param">password</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/identity/credentials.html#UsernamePasswordCredential"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.identity.credentials.UsernamePasswordCredential" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">azure.identity._internal.msal_credentials.PublicClientCredential</span></code></p>
+<p>Authenticates a user with a username and password. In general, Microsoft doesn’t recommend this kind of
+authentication, because it’s less secure than other authentication flows.</p>
+<p>Authentication with this credential is not interactive, so it is <strong>not compatible with any form of
+multi-factor authentication or consent prompting</strong>. The application must already have the user’s consent.</p>
+<p>This credential can only authenticate work and school accounts; Microsoft accounts are not supported.
+See this document for more information about account types:
+<a class="reference external" href="https://docs.microsoft.com/en-us/azure/active-directory/fundamentals/sign-up-organization">https://docs.microsoft.com/en-us/azure/active-directory/fundamentals/sign-up-organization</a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>client_id</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – the application’s client ID</p></li>
+<li><p><strong>username</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – the user’s username (usually an email address)</p></li>
+<li><p><strong>password</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – the user’s password</p></li>
+</ul>
+</dd>
+</dl>
+<p><strong>Keyword arguments:</strong></p>
+<dl class="simple">
+<dt><em>tenant (str)</em> - a tenant ID or a domain associated with a tenant. If not provided, the credential defaults to the</dt><dd><p>‘organizations’ tenant.</p>
+</dd>
+</dl>
+<dl class="method">
+<dt id="azure.identity.credentials.UsernamePasswordCredential.get_token">
+<code class="sig-name descname">get_token</code><span class="sig-paren">(</span><em class="sig-param">*scopes</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/identity/credentials.html#UsernamePasswordCredential.get_token"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.identity.credentials.UsernamePasswordCredential.get_token" title="Permalink to this definition">¶</a></dt>
 <dd><p>Request an access token for <cite>scopes</cite>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -673,22 +739,29 @@ using <code class="xref py py-class docutils literal notranslate"><span class="p
 <dt id="azure.identity.EnvironmentCredential">
 <em class="property">class </em><code class="sig-prename descclassname">azure.identity.</code><code class="sig-name descname">EnvironmentCredential</code><span class="sig-paren">(</span><em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/identity/credentials.html#EnvironmentCredential"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.identity.EnvironmentCredential" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3.5/library/functions.html#object" title="(in Python v3.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
-<p>Authenticates as a service principal using a client ID/secret pair or a certificate,
-depending on environment variable settings.</p>
-<p>These environment variables are required:</p>
-<blockquote>
-<div><ul class="simple">
+<p>Authenticates as a service principal using a client secret or a certificate, or as a user with a username and
+password, depending on environment variable settings. Configuration is attempted in this order, using these
+environment variables:</p>
+<dl class="simple">
+<dt>Service principal with secret:</dt><dd><ul class="simple">
 <li><p><strong>AZURE_CLIENT_ID</strong>: the service principal’s client ID</p></li>
+<li><p><strong>AZURE_CLIENT_SECRET</strong>: one of the service principal’s client secrets</p></li>
 <li><p><strong>AZURE_TENANT_ID</strong>: ID of the service principal’s tenant. Also called its ‘directory’ ID.</p></li>
 </ul>
-</div></blockquote>
-<p>Additionally, set <strong>one</strong> of these to configure client secret or certificate authentication:</p>
-<blockquote>
-<div><ul class="simple">
-<li><p><strong>AZURE_CLIENT_SECRET</strong>: one of the service principal’s client secrets</p></li>
+</dd>
+<dt>Service principal with certificate:</dt><dd><ul class="simple">
+<li><p><strong>AZURE_CLIENT_ID</strong>: the service principal’s client ID</p></li>
 <li><p><strong>AZURE_CLIENT_CERTIFICATE_PATH</strong>: path to a PEM-encoded certificate file including the private key</p></li>
+<li><p><strong>AZURE_TENANT_ID</strong>: ID of the service principal’s tenant. Also called its ‘directory’ ID.</p></li>
 </ul>
-</div></blockquote>
+</dd>
+<dt>User with username and password:</dt><dd><ul class="simple">
+<li><p><strong>AZURE_CLIENT_ID</strong>: the application’s client ID</p></li>
+<li><p><strong>AZURE_USERNAME</strong>: a username (usually an email address)</p></li>
+<li><p><strong>AZURE_PASSWORD</strong>: that user’s password</p></li>
+</ul>
+</dd>
+</dl>
 <dl class="method">
 <dt id="azure.identity.EnvironmentCredential.get_token">
 <code class="sig-name descname">get_token</code><span class="sig-paren">(</span><em class="sig-param">*scopes</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/identity/credentials.html#EnvironmentCredential.get_token"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.identity.EnvironmentCredential.get_token" title="Permalink to this definition">¶</a></dt>
@@ -735,6 +808,50 @@ depending on environment variable settings.</p>
 <dl class="method">
 <dt id="azure.identity.ManagedIdentityCredential.get_token">
 <code class="sig-name descname">get_token</code><span class="sig-paren">(</span><em class="sig-param">*scopes</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/identity/credentials.html#ManagedIdentityCredential.get_token"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.identity.ManagedIdentityCredential.get_token" title="Permalink to this definition">¶</a></dt>
+<dd><p>Request an access token for <cite>scopes</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>scopes</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – desired scopes for the token</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference internal" href="azure.core.html#azure.core.credentials.AccessToken" title="azure.core.credentials.AccessToken"><code class="xref py py-class docutils literal notranslate"><span class="pre">azure.core.credentials.AccessToken</span></code></a></p>
+</dd>
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><p><a class="reference internal" href="azure.core.html#azure.core.exceptions.ClientAuthenticationError" title="azure.core.exceptions.ClientAuthenticationError"><code class="xref py py-class docutils literal notranslate"><span class="pre">azure.core.exceptions.ClientAuthenticationError</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="azure.identity.UsernamePasswordCredential">
+<em class="property">class </em><code class="sig-prename descclassname">azure.identity.</code><code class="sig-name descname">UsernamePasswordCredential</code><span class="sig-paren">(</span><em class="sig-param">client_id</em>, <em class="sig-param">username</em>, <em class="sig-param">password</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/identity/credentials.html#UsernamePasswordCredential"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.identity.UsernamePasswordCredential" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">azure.identity._internal.msal_credentials.PublicClientCredential</span></code></p>
+<p>Authenticates a user with a username and password. In general, Microsoft doesn’t recommend this kind of
+authentication, because it’s less secure than other authentication flows.</p>
+<p>Authentication with this credential is not interactive, so it is <strong>not compatible with any form of
+multi-factor authentication or consent prompting</strong>. The application must already have the user’s consent.</p>
+<p>This credential can only authenticate work and school accounts; Microsoft accounts are not supported.
+See this document for more information about account types:
+<a class="reference external" href="https://docs.microsoft.com/en-us/azure/active-directory/fundamentals/sign-up-organization">https://docs.microsoft.com/en-us/azure/active-directory/fundamentals/sign-up-organization</a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>client_id</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – the application’s client ID</p></li>
+<li><p><strong>username</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – the user’s username (usually an email address)</p></li>
+<li><p><strong>password</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – the user’s password</p></li>
+</ul>
+</dd>
+</dl>
+<p><strong>Keyword arguments:</strong></p>
+<dl class="simple">
+<dt><em>tenant (str)</em> - a tenant ID or a domain associated with a tenant. If not provided, the credential defaults to the</dt><dd><p>‘organizations’ tenant.</p>
+</dd>
+</dl>
+<dl class="method">
+<dt id="azure.identity.UsernamePasswordCredential.get_token">
+<code class="sig-name descname">get_token</code><span class="sig-paren">(</span><em class="sig-param">*scopes</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/identity/credentials.html#UsernamePasswordCredential.get_token"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.identity.UsernamePasswordCredential.get_token" title="Permalink to this definition">¶</a></dt>
 <dd><p>Request an access token for <cite>scopes</cite>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
