@@ -325,82 +325,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="module-azure.cosmos.query_iterable">
-<span id="azure-cosmos-query-iterable-module"></span><h1>azure.cosmos.query_iterable module<a class="headerlink" href="#module-azure.cosmos.query_iterable" title="Permalink to this headline">¶</a></h1>
-<p>Iterable query results in the Azure Cosmos database service.</p>
-<dl class="class">
-<dt id="azure.cosmos.query_iterable.QueryIterable">
-<em class="property">class </em><code class="sig-prename descclassname">azure.cosmos.query_iterable.</code><code class="sig-name descname">QueryIterable</code><span class="sig-paren">(</span><em class="sig-param">client</em>, <em class="sig-param">query</em>, <em class="sig-param">options</em>, <em class="sig-param">fetch_function</em>, <em class="sig-param">collection_link=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/cosmos/query_iterable.html#QueryIterable"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.cosmos.query_iterable.QueryIterable" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3.5/library/functions.html#object" title="(in Python v3.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
-<p>Represents an iterable object of the query results.
-QueryIterable is a wrapper for query execution context.</p>
-<p>Instantiates a QueryIterable for non-client side partitioning queries.
-_ProxyQueryExecutionContext will be used as the internal query execution context</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>client</strong> (<a class="reference internal" href="azure.cosmos.html#azure.cosmos.CosmosClient" title="azure.cosmos.CosmosClient"><em>CosmosClient</em></a>) – Instance of document client.</p></li>
-<li><p><strong>or dict</strong><strong>) </strong><strong>query</strong> (<em>(</em><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – </p></li>
-<li><p><strong>options</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#dict" title="(in Python v3.5)"><em>dict</em></a>) – The request options for the request.</p></li>
-<li><p><strong>fetch_function</strong> (<em>method</em>) – </p></li>
-<li><p><strong>collection_link</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – If this is a Document query/feed collection_link is required.</p></li>
-</ul>
-</dd>
-</dl>
-<p>Example of <cite>fetch_function</cite>:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">result_fn</span><span class="p">(</span><span class="n">result</span><span class="p">):</span>
-<span class="gp">&gt;&gt;&gt; </span>    <span class="k">return</span> <span class="n">result</span><span class="p">[</span><span class="s1">&#39;Databases&#39;</span><span class="p">]</span>
-</pre></div>
-</div>
-<dl class="class">
-<dt id="azure.cosmos.query_iterable.QueryIterable.Iterator">
-<em class="property">class </em><code class="sig-name descname">Iterator</code><span class="sig-paren">(</span><em class="sig-param">iterable</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/cosmos/query_iterable.html#QueryIterable.Iterator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.cosmos.query_iterable.QueryIterable.Iterator" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3.5/library/functions.html#object" title="(in Python v3.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
-<dl class="method">
-<dt id="azure.cosmos.query_iterable.QueryIterable.Iterator.next">
-<code class="sig-name descname">next</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/cosmos/query_iterable.html#QueryIterable.Iterator.next"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.cosmos.query_iterable.QueryIterable.Iterator.next" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
-<dl class="method">
-<dt id="azure.cosmos.query_iterable.QueryIterable.PartitioningQueryIterable">
-<em class="property">classmethod </em><code class="sig-name descname">PartitioningQueryIterable</code><span class="sig-paren">(</span><em class="sig-param">client</em>, <em class="sig-param">query</em>, <em class="sig-param">options</em>, <em class="sig-param">database_link</em>, <em class="sig-param">partition_key</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/cosmos/query_iterable.html#QueryIterable.PartitioningQueryIterable"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.cosmos.query_iterable.QueryIterable.PartitioningQueryIterable" title="Permalink to this definition">¶</a></dt>
-<dd><p>Represents a client side partitioning query iterable.</p>
-<p>This constructor instantiates a QueryIterable for
-client side partitioning queries, and sets _MultiCollectionQueryExecutionContext
-as the internal execution context.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>client</strong> (<a class="reference internal" href="azure.cosmos.html#azure.cosmos.CosmosClient" title="azure.cosmos.CosmosClient"><em>CosmosClient</em></a>) – Instance of document client</p></li>
-<li><p><strong>or dict</strong><strong>) </strong><strong>options</strong> (<em>(</em><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – </p></li>
-<li><p><strong>options</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#dict" title="(in Python v3.5)"><em>dict</em></a>) – The request options for the request.</p></li>
-<li><p><strong>database_link</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Database self link or ID based link</p></li>
-<li><p><strong>partition_key</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Partition key for the query</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="method">
-<dt id="azure.cosmos.query_iterable.QueryIterable.fetch_next_block">
-<code class="sig-name descname">fetch_next_block</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/cosmos/query_iterable.html#QueryIterable.fetch_next_block"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.cosmos.query_iterable.QueryIterable.fetch_next_block" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns a block of results with respecting retry policy.</p>
-<p>This method only exists for backward compatibility reasons. (Because QueryIterable
-has exposed fetch_next_block api).</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>List of results.</p>
-</dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)">list</a></p>
-</dd>
-</dl>
-</dd></dl>
-
-</dd></dl>
-
+  <div class="section" id="azure-cosmos-query-iterable-module">
+<h1>azure.cosmos.query_iterable module<a class="headerlink" href="#azure-cosmos-query-iterable-module" title="Permalink to this headline">¶</a></h1>
 </div>
 
 

@@ -344,7 +344,7 @@
 <li class="toctree-l3"><a class="reference internal" href="azure.cosmos.execution_context.query_execution_info.html">azure.cosmos.execution_context.query_execution_info module</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="azure.cosmos.execution_context.html#module-azure.cosmos.execution_context">Module contents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="azure.cosmos.execution_context.html#module-contents">Module contents</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="azure.cosmos.routing.html">azure.cosmos.routing package</a><ul>
@@ -354,7 +354,7 @@
 <li class="toctree-l3"><a class="reference internal" href="azure.cosmos.routing.routing_range.html">azure.cosmos.routing.routing_range module</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="azure.cosmos.routing.html#module-azure.cosmos.routing">Module contents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="azure.cosmos.routing.html#module-contents">Module contents</a></li>
 </ul>
 </li>
 </ul>
@@ -542,7 +542,7 @@
 :param max_item_count: Max number of items to be returned in the enumeration operation.
 :param feed_options: Dictionary of additional properties to be used for the request.
 :param response_hook: a callable invoked with the response metadata
-:returns: A <code class="xref py py-class docutils literal notranslate"><span class="pre">QueryIterable</span></code> instance representing an iterable of conflicts (dicts).</p>
+:returns: An Iterable of conflicts (dicts).</p>
 </dd></dl>
 
 <dl class="method">
@@ -567,7 +567,7 @@
 :param populate_query_metrics: Enable returning query metrics in response headers.
 :param feed_options: Dictionary of additional properties to be used for the request.
 :param response_hook: a callable invoked with the response metadata
-:returns: A <code class="xref py py-class docutils literal notranslate"><span class="pre">QueryIterable</span></code> instance representing an iterable of items (dicts).</p>
+:returns: An Iterable of items (dicts).</p>
 <p>You can use any value for the container name in the FROM clause, but typically the container name is used.
 In the examples below, the container name is “products,” and is aliased as “p” for easier referencing
 in the WHERE clause.</p>
@@ -589,7 +589,7 @@ By default it’s start from current (false).
 :param max_item_count: Max number of items to be returned in the enumeration operation.
 :param feed_options: Dictionary of additional properties to be used for the request.
 :param response_hook: a callable invoked with the response metadata
-:returns: A <code class="xref py py-class docutils literal notranslate"><span class="pre">QueryIterable</span></code> instance representing an iterable of items (dicts).</p>
+:returns: An Iterable of items (dicts).</p>
 </dd></dl>
 
 <dl class="method">
@@ -630,7 +630,7 @@ By default it’s start from current (false).
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>A <code class="xref py py-class docutils literal notranslate"><span class="pre">QueryIterable</span></code> instance representing an iterable of conflicts (dicts).</p>
+<dd class="field-even"><p>An Iterable of conflicts (dicts).</p>
 </dd>
 </dl>
 </dd></dl>
@@ -651,7 +651,7 @@ By default it’s start from current (false).
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>A <code class="xref py py-class docutils literal notranslate"><span class="pre">QueryIterable</span></code> instance representing an iterable of items (dicts).</p>
+<dd class="field-even"><p>An Iterable of items (dicts).</p>
 </dd>
 </dl>
 </dd></dl>
@@ -897,7 +897,7 @@ authorization key.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>A <code class="xref py py-class docutils literal notranslate"><span class="pre">QueryIterable</span></code> instance representing an iterable of database properties (dicts).</p>
+<dd class="field-even"><p>An Iterable of database properties (dicts).</p>
 </dd>
 </dl>
 </dd></dl>
@@ -918,7 +918,7 @@ authorization key.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>A <code class="xref py py-class docutils literal notranslate"><span class="pre">QueryIterable</span></code> instance representing an iterable of database properties (dicts).</p>
+<dd class="field-even"><p>An Iterable of database properties (dicts).</p>
 </dd>
 </dl>
 </dd></dl>
@@ -1092,7 +1092,7 @@ triggers, user defined functions, or items.</p>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>A <code class="xref py py-class docutils literal notranslate"><span class="pre">QueryIterable</span></code> instance representing an iterable of container properties (dicts).</p>
+<dd class="field-even"><p>An Iterable of container properties (dicts).</p>
 </dd>
 </dl>
 </dd></dl>
@@ -1112,7 +1112,7 @@ triggers, user defined functions, or items.</p>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>A <code class="xref py py-class docutils literal notranslate"><span class="pre">QueryIterable</span></code> instance representing an iterable of user properties (dicts).</p>
+<dd class="field-even"><p>An Iterable of user properties (dicts).</p>
 </dd>
 </dl>
 </dd></dl>
@@ -1157,7 +1157,7 @@ triggers, user defined functions, or items.</p>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>A <code class="xref py py-class docutils literal notranslate"><span class="pre">QueryIterable</span></code> instance representing an iterable of container properties (dicts).</p>
+<dd class="field-even"><p>An Iterable of container properties (dicts).</p>
 </dd>
 </dl>
 </dd></dl>
@@ -1175,7 +1175,7 @@ triggers, user defined functions, or items.</p>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>A <code class="xref py py-class docutils literal notranslate"><span class="pre">QueryIterable</span></code> instance representing an iterable of user properties (dicts).</p>
+<dd class="field-even"><p>An Iterable of user properties (dicts).</p>
 </dd>
 </dl>
 </dd></dl>
@@ -1545,7 +1545,7 @@ on how to choose partition keys.</p>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>A <code class="xref py py-class docutils literal notranslate"><span class="pre">QueryIterable</span></code> instance representing an iterable of stored procedures (dicts).</p>
+<dd class="field-even"><p>An Iterable of stored procedures (dicts).</p>
 </dd>
 </dl>
 </dd></dl>
@@ -1562,7 +1562,7 @@ on how to choose partition keys.</p>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>A <code class="xref py py-class docutils literal notranslate"><span class="pre">QueryIterable</span></code> instance representing an iterable of triggers (dicts).</p>
+<dd class="field-even"><p>An Iterable of triggers (dicts).</p>
 </dd>
 </dl>
 </dd></dl>
@@ -1579,7 +1579,7 @@ on how to choose partition keys.</p>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>A <code class="xref py py-class docutils literal notranslate"><span class="pre">QueryIterable</span></code> instance representing an iterable of user defined functions (dicts).</p>
+<dd class="field-even"><p>An Iterable of user defined functions (dicts).</p>
 </dd>
 </dl>
 </dd></dl>
@@ -1598,7 +1598,7 @@ on how to choose partition keys.</p>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>A <code class="xref py py-class docutils literal notranslate"><span class="pre">QueryIterable</span></code> instance representing an iterable of stored procedures (dicts).</p>
+<dd class="field-even"><p>An Iterable of stored procedures (dicts).</p>
 </dd>
 </dl>
 </dd></dl>
@@ -1617,7 +1617,7 @@ on how to choose partition keys.</p>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>A <code class="xref py py-class docutils literal notranslate"><span class="pre">QueryIterable</span></code> instance representing an iterable of triggers (dicts).</p>
+<dd class="field-even"><p>An Iterable of triggers (dicts).</p>
 </dd>
 </dl>
 </dd></dl>
@@ -1636,7 +1636,7 @@ on how to choose partition keys.</p>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>A <code class="xref py py-class docutils literal notranslate"><span class="pre">QueryIterable</span></code> instance representing an iterable of user defined functions (dicts).</p>
+<dd class="field-even"><p>An Iterable of user defined functions (dicts).</p>
 </dd>
 </dl>
 </dd></dl>
@@ -1786,7 +1786,7 @@ on how to choose partition keys.</p>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>A <code class="xref py py-class docutils literal notranslate"><span class="pre">QueryIterable</span></code> instance representing an iterable of permissions (dicts).</p>
+<dd class="field-even"><p>An Iterable of permissions (dicts).</p>
 </dd>
 </dl>
 </dd></dl>
@@ -1824,7 +1824,7 @@ on how to choose partition keys.</p>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>A <code class="xref py py-class docutils literal notranslate"><span class="pre">QueryIterable</span></code> instance representing an iterable of permissions (dicts).</p>
+<dd class="field-even"><p>An Iterable of permissions (dicts).</p>
 </dd>
 </dl>
 </dd></dl>

@@ -301,9 +301,9 @@
 <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="kn">import</span> <span class="nn">six</span>
-<span class="kn">from</span> <span class="nn">azure.cosmos.cosmos_client_connection</span> <span class="k">import</span> <span class="n">CosmosClientConnection</span>
+<span class="kn">from</span> <span class="nn">azure.cosmos._cosmos_client_connection</span> <span class="k">import</span> <span class="n">CosmosClientConnection</span>
 <span class="kn">from</span> <span class="nn">.partition_key</span> <span class="k">import</span> <span class="n">NonePartitionKeyValue</span>
-<span class="n">from</span><span class="o">.</span><span class="n">query_iterable</span> <span class="kn">import</span> <span class="nn">QueryIterable</span>
+<span class="kn">from</span> <span class="nn">._query_iterable</span> <span class="k">import</span> <span class="n">QueryIterable</span>
 <span class="kn">from</span> <span class="nn">typing</span> <span class="k">import</span> <span class="p">(</span>
     <span class="n">Any</span><span class="p">,</span>
     <span class="n">List</span><span class="p">,</span>
@@ -342,7 +342,7 @@
 
 <span class="sd">        :param max_item_count: Max number of items to be returned in the enumeration operation.</span>
 <span class="sd">        :param feed_options: Dictionary of additional properties to be used for the request.</span>
-<span class="sd">        :returns: A :class:`QueryIterable` instance representing an iterable of stored procedures (dicts).</span>
+<span class="sd">        :returns: An Iterable of stored procedures (dicts).</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">feed_options</span><span class="p">:</span>
@@ -369,7 +369,7 @@
 <span class="sd">        :param parameters: Optional array of parameters to the query. Ignored if no query is provided.</span>
 <span class="sd">        :param max_item_count: Max number of items to be returned in the enumeration operation.</span>
 <span class="sd">        :param feed_options: Dictionary of additional properties to be used for the request.</span>
-<span class="sd">        :returns: A :class:`QueryIterable` instance representing an iterable of stored procedures (dicts).</span>
+<span class="sd">        :returns: An Iterable of stored procedures (dicts).</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">feed_options</span><span class="p">:</span>
@@ -524,7 +524,7 @@
 
 <span class="sd">        :param max_item_count: Max number of items to be returned in the enumeration operation.</span>
 <span class="sd">        :param feed_options: Dictionary of additional properties to be used for the request.</span>
-<span class="sd">        :returns: A :class:`QueryIterable` instance representing an iterable of triggers (dicts).</span>
+<span class="sd">        :returns: An Iterable of triggers (dicts).</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">feed_options</span><span class="p">:</span>
@@ -551,7 +551,7 @@
 <span class="sd">        :param parameters: Optional array of parameters to the query. Ignored if no query is provided.</span>
 <span class="sd">        :param max_item_count: Max number of items to be returned in the enumeration operation.</span>
 <span class="sd">        :param feed_options: Dictionary of additional properties to be used for the request.</span>
-<span class="sd">        :returns: A :class:`QueryIterable` instance representing an iterable of triggers (dicts).</span>
+<span class="sd">        :returns: An Iterable of triggers (dicts).</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">feed_options</span><span class="p">:</span>
@@ -672,7 +672,7 @@
 
 <span class="sd">        :param max_item_count: Max number of items to be returned in the enumeration operation.</span>
 <span class="sd">        :param feed_options: Dictionary of additional properties to be used for the request.</span>
-<span class="sd">        :returns: A :class:`QueryIterable` instance representing an iterable of user defined functions (dicts).</span>
+<span class="sd">        :returns: An Iterable of user defined functions (dicts).</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">feed_options</span><span class="p">:</span>
@@ -699,7 +699,7 @@
 <span class="sd">        :param parameters: Optional array of parameters to the query. Ignored if no query is provided.</span>
 <span class="sd">        :param max_item_count: Max number of items to be returned in the enumeration operation.</span>
 <span class="sd">        :param feed_options: Dictionary of additional properties to be used for the request.</span>
-<span class="sd">        :returns: A :class:`QueryIterable` instance representing an iterable of user defined functions (dicts).</span>
+<span class="sd">        :returns: An Iterable of user defined functions (dicts).</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">feed_options</span><span class="p">:</span>

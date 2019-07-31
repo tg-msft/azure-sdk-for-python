@@ -301,13 +301,13 @@
 <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="kn">import</span> <span class="nn">six</span>
-<span class="kn">from</span> <span class="nn">.cosmos_client_connection</span> <span class="k">import</span> <span class="n">CosmosClientConnection</span>
+<span class="kn">from</span> <span class="nn">._cosmos_client_connection</span> <span class="k">import</span> <span class="n">CosmosClientConnection</span>
 <span class="kn">from</span> <span class="nn">.container</span> <span class="k">import</span> <span class="n">Container</span>
 <span class="kn">from</span> <span class="nn">.offer</span> <span class="k">import</span> <span class="n">Offer</span>
 <span class="kn">from</span> <span class="nn">.http_constants</span> <span class="k">import</span> <span class="n">StatusCodes</span>
 <span class="kn">from</span> <span class="nn">.errors</span> <span class="k">import</span> <span class="n">HTTPFailure</span>
 <span class="kn">from</span> <span class="nn">.user</span> <span class="k">import</span> <span class="n">User</span>
-<span class="kn">from</span> <span class="nn">.query_iterable</span> <span class="k">import</span> <span class="n">QueryIterable</span>
+<span class="kn">from</span> <span class="nn">._query_iterable</span> <span class="k">import</span> <span class="n">QueryIterable</span>
 <span class="kn">from</span> <span class="nn">.partition_key</span> <span class="k">import</span>  <span class="n">PartitionKey</span>
 
 <span class="kn">from</span> <span class="nn">typing</span> <span class="k">import</span> <span class="p">(</span>
@@ -610,7 +610,7 @@
 <span class="sd">        :param populate_query_metrics: Enable returning query metrics in response headers.</span>
 <span class="sd">        :param feed_options: Dictionary of additional properties to be used for the request.</span>
 <span class="sd">        :param response_hook: a callable invoked with the response metadata</span>
-<span class="sd">        :returns: A :class:`QueryIterable` instance representing an iterable of container properties (dicts).</span>
+<span class="sd">        :returns: An Iterable of container properties (dicts).</span>
 
 <span class="sd">        .. literalinclude:: ../../examples/examples.py</span>
 <span class="sd">            :start-after: [START list_containers]</span>
@@ -663,7 +663,7 @@
 <span class="sd">        :param populate_query_metrics: Enable returning query metrics in response headers.</span>
 <span class="sd">        :param feed_options: Dictionary of additional properties to be used for the request.</span>
 <span class="sd">        :param response_hook: a callable invoked with the response metadata</span>
-<span class="sd">        :returns: A :class:`QueryIterable` instance representing an iterable of container properties (dicts).</span>
+<span class="sd">        :returns: An Iterable of container properties (dicts).</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">feed_options</span><span class="p">:</span>
@@ -781,7 +781,7 @@
 <span class="sd">        :param max_item_count: Max number of users to be returned in the enumeration operation.</span>
 <span class="sd">        :param feed_options: Dictionary of additional properties to be used for the request.</span>
 <span class="sd">        :param response_hook: a callable invoked with the response metadata</span>
-<span class="sd">        :returns: A :class:`QueryIterable` instance representing an iterable of user properties (dicts).</span>
+<span class="sd">        :returns: An Iterable of user properties (dicts).</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">feed_options</span><span class="p">:</span>
@@ -814,7 +814,7 @@
 <span class="sd">        :param max_item_count: Max number of users to be returned in the enumeration operation.</span>
 <span class="sd">        :param feed_options: Dictionary of additional properties to be used for the request.</span>
 <span class="sd">        :param response_hook: a callable invoked with the response metadata</span>
-<span class="sd">        :returns: A :class:`QueryIterable` instance representing an iterable of user properties (dicts).</span>
+<span class="sd">        :returns: An Iterable of user properties (dicts).</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">feed_options</span><span class="p">:</span>

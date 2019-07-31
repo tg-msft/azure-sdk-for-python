@@ -325,61 +325,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="module-azure.cosmos.hash_partition_resolver">
-<span id="azure-cosmos-hash-partition-resolver-module"></span><h1>azure.cosmos.hash_partition_resolver module<a class="headerlink" href="#module-azure.cosmos.hash_partition_resolver" title="Permalink to this headline">¶</a></h1>
-<p>Hash partition resolver implementation in the Azure Cosmos database service.</p>
-<dl class="class">
-<dt id="azure.cosmos.hash_partition_resolver.HashPartitionResolver">
-<em class="property">class </em><code class="sig-prename descclassname">azure.cosmos.hash_partition_resolver.</code><code class="sig-name descname">HashPartitionResolver</code><span class="sig-paren">(</span><em class="sig-param">partition_key_extractor</em>, <em class="sig-param">collection_links</em>, <em class="sig-param">default_number_of_virtual_nodes_per_collection=128</em>, <em class="sig-param">hash_generator=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/cosmos/hash_partition_resolver.html#HashPartitionResolver"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.cosmos.hash_partition_resolver.HashPartitionResolver" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3.5/library/functions.html#object" title="(in Python v3.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
-<p>HashPartitionResolver implements partitioning based on the value of a hash function, allowing you to evenly
-distribute requests and data across a number of partitions.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>partition_key_extractor</strong> (<em>lambda</em>) – Returning the partition key from the document passed.</p></li>
-<li><p><strong>collection_links</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><em>list</em></a>) – The links of collections participating in partitioning.</p></li>
-<li><p><strong>default_number_of_virtual_nodes_per_collection</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a>) – Number of virtual nodes per collection.</p></li>
-<li><p><strong>hash_generator</strong> (<em>HashGenerator</em>) – The hash generator to be used for hashing algorithm.</p></li>
-</ul>
-</dd>
-</dl>
-<dl class="method">
-<dt id="azure.cosmos.hash_partition_resolver.HashPartitionResolver.ResolveForCreate">
-<code class="sig-name descname">ResolveForCreate</code><span class="sig-paren">(</span><em class="sig-param">document</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/cosmos/hash_partition_resolver.html#HashPartitionResolver.ResolveForCreate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.cosmos.hash_partition_resolver.HashPartitionResolver.ResolveForCreate" title="Permalink to this definition">¶</a></dt>
-<dd><p>Resolves the collection for creating the document based on the partition key.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>document</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#dict" title="(in Python v3.5)"><em>dict</em></a>) – The document to be created.</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>Collection Self link or Name based link which should handle the Create operation.</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)">str</a></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="method">
-<dt id="azure.cosmos.hash_partition_resolver.HashPartitionResolver.ResolveForRead">
-<code class="sig-name descname">ResolveForRead</code><span class="sig-paren">(</span><em class="sig-param">partition_key</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/cosmos/hash_partition_resolver.html#HashPartitionResolver.ResolveForRead"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.cosmos.hash_partition_resolver.HashPartitionResolver.ResolveForRead" title="Permalink to this definition">¶</a></dt>
-<dd><p>Resolves the collection for reading/querying the documents based on the partition key.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>document</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#dict" title="(in Python v3.5)"><em>dict</em></a>) – The document to be read/queried.</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>Collection Self link(s) or Name based link(s) which should handle the Read operation.</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)">list</a></p>
-</dd>
-</dl>
-</dd></dl>
-
-</dd></dl>
-
+  <div class="section" id="azure-cosmos-hash-partition-resolver-module">
+<h1>azure.cosmos.hash_partition_resolver module<a class="headerlink" href="#azure-cosmos-hash-partition-resolver-module" title="Permalink to this headline">¶</a></h1>
 </div>
 
 
