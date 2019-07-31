@@ -289,7 +289,6 @@
 
 <span class="kn">import</span> <span class="nn">uuid</span>
 <span class="kn">from</span> <span class="nn">msrest.pipeline</span> <span class="k">import</span> <span class="n">ClientRawResponse</span>
-<span class="kn">from</span> <span class="nn">msrestazure.azure_exceptions</span> <span class="k">import</span> <span class="n">CloudError</span>
 <span class="kn">from</span> <span class="nn">msrest.polling</span> <span class="k">import</span> <span class="n">LROPoller</span><span class="p">,</span> <span class="n">NoPolling</span>
 <span class="kn">from</span> <span class="nn">msrestazure.polling.arm_polling</span> <span class="k">import</span> <span class="n">ARMPolling</span>
 
@@ -1014,95 +1013,7 @@
         <span class="k">elif</span> <span class="n">polling</span> <span class="ow">is</span> <span class="kc">False</span><span class="p">:</span> <span class="n">polling_method</span> <span class="o">=</span> <span class="n">NoPolling</span><span class="p">()</span>
         <span class="k">else</span><span class="p">:</span> <span class="n">polling_method</span> <span class="o">=</span> <span class="n">polling</span>
         <span class="k">return</span> <span class="n">LROPoller</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_client</span><span class="p">,</span> <span class="n">raw_result</span><span class="p">,</span> <span class="n">get_long_running_output</span><span class="p">,</span> <span class="n">polling_method</span><span class="p">)</span></div>
-    <span class="n">shutdown</span><span class="o">.</span><span class="n">metadata</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;url&#39;</span><span class="p">:</span> <span class="s1">&#39;/subscriptions/</span><span class="si">{subscriptionId}</span><span class="s1">/resourceGroups/</span><span class="si">{resourceGroupName}</span><span class="s1">/providers/Microsoft.HanaOnAzure/hanaInstances/</span><span class="si">{hanaInstanceName}</span><span class="s1">/shutdown&#39;</span><span class="p">}</span>
-
-
-    <span class="k">def</span> <span class="nf">_enable_monitoring_initial</span><span class="p">(</span>
-            <span class="bp">self</span><span class="p">,</span> <span class="n">resource_group_name</span><span class="p">,</span> <span class="n">hana_instance_name</span><span class="p">,</span> <span class="n">monitoring_parameter</span><span class="p">,</span> <span class="n">custom_headers</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">raw</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="o">**</span><span class="n">operation_config</span><span class="p">):</span>
-        <span class="c1"># Construct URL</span>
-        <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">enable_monitoring</span><span class="o">.</span><span class="n">metadata</span><span class="p">[</span><span class="s1">&#39;url&#39;</span><span class="p">]</span>
-        <span class="n">path_format_arguments</span> <span class="o">=</span> <span class="p">{</span>
-            <span class="s1">&#39;subscriptionId&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_serialize</span><span class="o">.</span><span class="n">url</span><span class="p">(</span><span class="s2">&quot;self.config.subscription_id&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">subscription_id</span><span class="p">,</span> <span class="s1">&#39;str&#39;</span><span class="p">),</span>
-            <span class="s1">&#39;resourceGroupName&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_serialize</span><span class="o">.</span><span class="n">url</span><span class="p">(</span><span class="s2">&quot;resource_group_name&quot;</span><span class="p">,</span> <span class="n">resource_group_name</span><span class="p">,</span> <span class="s1">&#39;str&#39;</span><span class="p">),</span>
-            <span class="s1">&#39;hanaInstanceName&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_serialize</span><span class="o">.</span><span class="n">url</span><span class="p">(</span><span class="s2">&quot;hana_instance_name&quot;</span><span class="p">,</span> <span class="n">hana_instance_name</span><span class="p">,</span> <span class="s1">&#39;str&#39;</span><span class="p">)</span>
-        <span class="p">}</span>
-        <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_client</span><span class="o">.</span><span class="n">format_url</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="o">**</span><span class="n">path_format_arguments</span><span class="p">)</span>
-
-        <span class="c1"># Construct parameters</span>
-        <span class="n">query_parameters</span> <span class="o">=</span> <span class="p">{}</span>
-        <span class="n">query_parameters</span><span class="p">[</span><span class="s1">&#39;api-version&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_serialize</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot;self.api_version&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">api_version</span><span class="p">,</span> <span class="s1">&#39;str&#39;</span><span class="p">)</span>
-
-        <span class="c1"># Construct headers</span>
-        <span class="n">header_parameters</span> <span class="o">=</span> <span class="p">{}</span>
-        <span class="n">header_parameters</span><span class="p">[</span><span class="s1">&#39;Content-Type&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;application/json; charset=utf-8&#39;</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">generate_client_request_id</span><span class="p">:</span>
-            <span class="n">header_parameters</span><span class="p">[</span><span class="s1">&#39;x-ms-client-request-id&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">uuid</span><span class="o">.</span><span class="n">uuid1</span><span class="p">())</span>
-        <span class="k">if</span> <span class="n">custom_headers</span><span class="p">:</span>
-            <span class="n">header_parameters</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">custom_headers</span><span class="p">)</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">accept_language</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">header_parameters</span><span class="p">[</span><span class="s1">&#39;accept-language&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_serialize</span><span class="o">.</span><span class="n">header</span><span class="p">(</span><span class="s2">&quot;self.config.accept_language&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">accept_language</span><span class="p">,</span> <span class="s1">&#39;str&#39;</span><span class="p">)</span>
-
-        <span class="c1"># Construct body</span>
-        <span class="n">body_content</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_serialize</span><span class="o">.</span><span class="n">body</span><span class="p">(</span><span class="n">monitoring_parameter</span><span class="p">,</span> <span class="s1">&#39;MonitoringDetails&#39;</span><span class="p">)</span>
-
-        <span class="c1"># Construct and send request</span>
-        <span class="n">request</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_client</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">query_parameters</span><span class="p">,</span> <span class="n">header_parameters</span><span class="p">,</span> <span class="n">body_content</span><span class="p">)</span>
-        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_client</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">stream</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="o">**</span><span class="n">operation_config</span><span class="p">)</span>
-
-        <span class="k">if</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">200</span><span class="p">,</span> <span class="mi">202</span><span class="p">]:</span>
-            <span class="n">exp</span> <span class="o">=</span> <span class="n">CloudError</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
-            <span class="n">exp</span><span class="o">.</span><span class="n">request_id</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">headers</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;x-ms-request-id&#39;</span><span class="p">)</span>
-            <span class="k">raise</span> <span class="n">exp</span>
-
-        <span class="k">if</span> <span class="n">raw</span><span class="p">:</span>
-            <span class="n">client_raw_response</span> <span class="o">=</span> <span class="n">ClientRawResponse</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">response</span><span class="p">)</span>
-            <span class="k">return</span> <span class="n">client_raw_response</span>
-
-<div class="viewcode-block" id="HanaInstancesOperations.enable_monitoring"><a class="viewcode-back" href="../../../../../ref/azure.mgmt.hanaonazure.operations.html#azure.mgmt.hanaonazure.operations.HanaInstancesOperations.enable_monitoring">[docs]</a>    <span class="k">def</span> <span class="nf">enable_monitoring</span><span class="p">(</span>
-            <span class="bp">self</span><span class="p">,</span> <span class="n">resource_group_name</span><span class="p">,</span> <span class="n">hana_instance_name</span><span class="p">,</span> <span class="n">monitoring_parameter</span><span class="p">,</span> <span class="n">custom_headers</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">raw</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">polling</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="o">**</span><span class="n">operation_config</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;The operation to add a monitor to an SAP HANA instance.</span>
-
-<span class="sd">        :param resource_group_name: Name of the resource group.</span>
-<span class="sd">        :type resource_group_name: str</span>
-<span class="sd">        :param hana_instance_name: Name of the SAP HANA on Azure instance.</span>
-<span class="sd">        :type hana_instance_name: str</span>
-<span class="sd">        :param monitoring_parameter: Request body that only contains</span>
-<span class="sd">         monitoring attributes</span>
-<span class="sd">        :type monitoring_parameter:</span>
-<span class="sd">         ~azure.mgmt.hanaonazure.models.MonitoringDetails</span>
-<span class="sd">        :param dict custom_headers: headers that will be added to the request</span>
-<span class="sd">        :param bool raw: The poller return type is ClientRawResponse, the</span>
-<span class="sd">         direct response alongside the deserialized response</span>
-<span class="sd">        :param polling: True for ARMPolling, False for no polling, or a</span>
-<span class="sd">         polling object for personal polling strategy</span>
-<span class="sd">        :return: An instance of LROPoller that returns None or</span>
-<span class="sd">         ClientRawResponse&lt;None&gt; if raw==True</span>
-<span class="sd">        :rtype: ~msrestazure.azure_operation.AzureOperationPoller[None] or</span>
-<span class="sd">         ~msrestazure.azure_operation.AzureOperationPoller[~msrest.pipeline.ClientRawResponse[None]]</span>
-<span class="sd">        :raises: :class:`CloudError&lt;msrestazure.azure_exceptions.CloudError&gt;`</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">raw_result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_enable_monitoring_initial</span><span class="p">(</span>
-            <span class="n">resource_group_name</span><span class="o">=</span><span class="n">resource_group_name</span><span class="p">,</span>
-            <span class="n">hana_instance_name</span><span class="o">=</span><span class="n">hana_instance_name</span><span class="p">,</span>
-            <span class="n">monitoring_parameter</span><span class="o">=</span><span class="n">monitoring_parameter</span><span class="p">,</span>
-            <span class="n">custom_headers</span><span class="o">=</span><span class="n">custom_headers</span><span class="p">,</span>
-            <span class="n">raw</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-            <span class="o">**</span><span class="n">operation_config</span>
-        <span class="p">)</span>
-
-        <span class="k">def</span> <span class="nf">get_long_running_output</span><span class="p">(</span><span class="n">response</span><span class="p">):</span>
-            <span class="k">if</span> <span class="n">raw</span><span class="p">:</span>
-                <span class="n">client_raw_response</span> <span class="o">=</span> <span class="n">ClientRawResponse</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">response</span><span class="p">)</span>
-                <span class="k">return</span> <span class="n">client_raw_response</span>
-
-        <span class="n">lro_delay</span> <span class="o">=</span> <span class="n">operation_config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
-            <span class="s1">&#39;long_running_operation_timeout&#39;</span><span class="p">,</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">long_running_operation_timeout</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">polling</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span> <span class="n">polling_method</span> <span class="o">=</span> <span class="n">ARMPolling</span><span class="p">(</span><span class="n">lro_delay</span><span class="p">,</span> <span class="o">**</span><span class="n">operation_config</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="n">polling</span> <span class="ow">is</span> <span class="kc">False</span><span class="p">:</span> <span class="n">polling_method</span> <span class="o">=</span> <span class="n">NoPolling</span><span class="p">()</span>
-        <span class="k">else</span><span class="p">:</span> <span class="n">polling_method</span> <span class="o">=</span> <span class="n">polling</span>
-        <span class="k">return</span> <span class="n">LROPoller</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_client</span><span class="p">,</span> <span class="n">raw_result</span><span class="p">,</span> <span class="n">get_long_running_output</span><span class="p">,</span> <span class="n">polling_method</span><span class="p">)</span></div>
-    <span class="n">enable_monitoring</span><span class="o">.</span><span class="n">metadata</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;url&#39;</span><span class="p">:</span> <span class="s1">&#39;/subscriptions/</span><span class="si">{subscriptionId}</span><span class="s1">/resourceGroups/</span><span class="si">{resourceGroupName}</span><span class="s1">/providers/Microsoft.HanaOnAzure/hanaInstances/</span><span class="si">{hanaInstanceName}</span><span class="s1">/monitoring&#39;</span><span class="p">}</span></div>
+    <span class="n">shutdown</span><span class="o">.</span><span class="n">metadata</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;url&#39;</span><span class="p">:</span> <span class="s1">&#39;/subscriptions/</span><span class="si">{subscriptionId}</span><span class="s1">/resourceGroups/</span><span class="si">{resourceGroupName}</span><span class="s1">/providers/Microsoft.HanaOnAzure/hanaInstances/</span><span class="si">{hanaInstanceName}</span><span class="s1">/shutdown&#39;</span><span class="p">}</span></div>
 </pre></div>
 
            </div>

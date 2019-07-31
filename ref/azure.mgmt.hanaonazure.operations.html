@@ -430,38 +430,6 @@ AzureOperationPoller[ClientRawResponse[<a class="reference external" href="https
 </dd></dl>
 
 <dl class="method">
-<dt id="azure.mgmt.hanaonazure.operations.HanaInstancesOperations.enable_monitoring">
-<code class="sig-name descname">enable_monitoring</code><span class="sig-paren">(</span><em class="sig-param">resource_group_name</em>, <em class="sig-param">hana_instance_name</em>, <em class="sig-param">monitoring_parameter</em>, <em class="sig-param">custom_headers=None</em>, <em class="sig-param">raw=False</em>, <em class="sig-param">polling=True</em>, <em class="sig-param">**operation_config</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/mgmt/hanaonazure/operations/_hana_instances_operations.html#HanaInstancesOperations.enable_monitoring"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.hanaonazure.operations.HanaInstancesOperations.enable_monitoring" title="Permalink to this definition">¶</a></dt>
-<dd><p>The operation to add a monitor to an SAP HANA instance.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>resource_group_name</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Name of the resource group.</p></li>
-<li><p><strong>hana_instance_name</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Name of the SAP HANA on Azure instance.</p></li>
-<li><p><strong>monitoring_parameter</strong> (<a class="reference internal" href="azure.mgmt.hanaonazure.models.html#azure.mgmt.hanaonazure.models.MonitoringDetails" title="azure.mgmt.hanaonazure.models.MonitoringDetails"><em>MonitoringDetails</em></a>) – Request body that only contains
-monitoring attributes</p></li>
-<li><p><strong>custom_headers</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#dict" title="(in Python v3.5)"><em>dict</em></a>) – headers that will be added to the request</p></li>
-<li><p><strong>raw</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#bool" title="(in Python v3.5)"><em>bool</em></a>) – The poller return type is ClientRawResponse, the
-direct response alongside the deserialized response</p></li>
-<li><p><strong>polling</strong> – True for ARMPolling, False for no polling, or a
-polling object for personal polling strategy</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>An instance of LROPoller that returns None or
-ClientRawResponse&lt;None&gt; if raw==True</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>AzureOperationPoller[<a class="reference external" href="https://docs.python.org/3.5/library/constants.html#None" title="(in Python v3.5)">None</a>] or
-AzureOperationPoller[ClientRawResponse[<a class="reference external" href="https://docs.python.org/3.5/library/constants.html#None" title="(in Python v3.5)">None</a>]]</p>
-</dd>
-<dt class="field-even">Raises</dt>
-<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">CloudError</span></code></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="method">
 <dt id="azure.mgmt.hanaonazure.operations.HanaInstancesOperations.get">
 <code class="sig-name descname">get</code><span class="sig-paren">(</span><em class="sig-param">resource_group_name</em>, <em class="sig-param">hana_instance_name</em>, <em class="sig-param">custom_headers=None</em>, <em class="sig-param">raw=False</em>, <em class="sig-param">**operation_config</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/mgmt/hanaonazure/operations/_hana_instances_operations.html#HanaInstancesOperations.get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.hanaonazure.operations.HanaInstancesOperations.get" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets properties of a SAP HANA instance.</p>
