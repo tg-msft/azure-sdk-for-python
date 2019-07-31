@@ -546,10 +546,9 @@
 <div class="viewcode-block" id="ContentDecodePolicy"><a class="viewcode-back" href="../../../../../ref/azure.core.pipeline.policies.html#azure.core.pipeline.policies.universal.ContentDecodePolicy">[docs]</a><span class="k">class</span> <span class="nc">ContentDecodePolicy</span><span class="p">(</span><span class="n">SansIOHTTPPolicy</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Policy for decoding unstreamed response content.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">JSON_MIMETYPES</span> <span class="o">=</span> <span class="p">[</span>
-        <span class="s1">&#39;application/json&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;text/json&#39;</span> <span class="c1"># Because we&#39;re open minded people...</span>
-    <span class="p">]</span>
+    <span class="c1"># Accept &quot;text&quot; because we&#39;re open minded people...</span>
+    <span class="n">JSON_REGEXP</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;^(application|text)/([0-9a-z+.]+\+)?json$&#39;</span><span class="p">)</span>
+
     <span class="c1"># Name used in context</span>
     <span class="n">CONTEXT_NAME</span> <span class="o">=</span> <span class="s2">&quot;deserialized_data&quot;</span>
 
@@ -581,7 +580,7 @@
         <span class="k">if</span> <span class="n">content_type</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">data</span>
 
-        <span class="k">if</span> <span class="n">content_type</span> <span class="ow">in</span> <span class="bp">cls</span><span class="o">.</span><span class="n">JSON_MIMETYPES</span><span class="p">:</span>
+        <span class="k">if</span> <span class="bp">cls</span><span class="o">.</span><span class="n">JSON_REGEXP</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">content_type</span><span class="p">):</span>
             <span class="k">try</span><span class="p">:</span>
                 <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">data_as_str</span><span class="p">)</span>
             <span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>

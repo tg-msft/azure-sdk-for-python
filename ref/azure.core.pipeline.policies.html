@@ -1204,8 +1204,8 @@ this method will return immediately.</p>
 <dd></dd></dl>
 
 <dl class="attribute">
-<dt id="azure.core.pipeline.policies.universal.ContentDecodePolicy.JSON_MIMETYPES">
-<code class="sig-name descname">JSON_MIMETYPES</code><em class="property"> = ['application/json', 'text/json']</em><a class="headerlink" href="#azure.core.pipeline.policies.universal.ContentDecodePolicy.JSON_MIMETYPES" title="Permalink to this definition">¶</a></dt>
+<dt id="azure.core.pipeline.policies.universal.ContentDecodePolicy.JSON_REGEXP">
+<code class="sig-name descname">JSON_REGEXP</code><em class="property"> = re.compile('^(application|text)/([0-9a-z+.]+\\+)?json$')</em><a class="headerlink" href="#azure.core.pipeline.policies.universal.ContentDecodePolicy.JSON_REGEXP" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -1853,8 +1853,8 @@ operations, and additional headers can also be added dynamically per operation.<
 <dd></dd></dl>
 
 <dl class="attribute">
-<dt id="azure.core.pipeline.policies.ContentDecodePolicy.JSON_MIMETYPES">
-<code class="sig-name descname">JSON_MIMETYPES</code><em class="property"> = ['application/json', 'text/json']</em><a class="headerlink" href="#azure.core.pipeline.policies.ContentDecodePolicy.JSON_MIMETYPES" title="Permalink to this definition">¶</a></dt>
+<dt id="azure.core.pipeline.policies.ContentDecodePolicy.JSON_REGEXP">
+<code class="sig-name descname">JSON_REGEXP</code><em class="property"> = re.compile('^(application|text)/([0-9a-z+.]+\\+)?json$')</em><a class="headerlink" href="#azure.core.pipeline.policies.ContentDecodePolicy.JSON_REGEXP" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
