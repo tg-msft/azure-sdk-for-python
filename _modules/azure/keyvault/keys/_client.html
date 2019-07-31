@@ -631,8 +631,12 @@
 <span class="sd">                :dedent: 8</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">max_page_size</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;max_page_size&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-        <span class="n">pages</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_client</span><span class="o">.</span><span class="n">get_deleted_keys</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_vault_url</span><span class="p">,</span> <span class="n">maxresults</span><span class="o">=</span><span class="n">max_page_size</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-        <span class="k">return</span> <span class="p">(</span><span class="n">DeletedKey</span><span class="o">.</span><span class="n">_from_deleted_key_item</span><span class="p">(</span><span class="n">item</span><span class="p">)</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">pages</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_client</span><span class="o">.</span><span class="n">get_deleted_keys</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_vault_url</span><span class="p">,</span>
+            <span class="n">maxresults</span><span class="o">=</span><span class="n">max_page_size</span><span class="p">,</span>
+            <span class="bp">cls</span><span class="o">=</span><span class="k">lambda</span> <span class="n">objs</span><span class="p">:</span> <span class="p">[</span><span class="n">DeletedKey</span><span class="o">.</span><span class="n">_from_deleted_key_item</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">objs</span><span class="p">],</span>
+            <span class="o">**</span><span class="n">kwargs</span>
+        <span class="p">)</span></div>
 
 <div class="viewcode-block" id="KeyClient.list_keys"><a class="viewcode-back" href="../../../../ref/azure.keyvault.keys.html#azure.keyvault.keys.KeyClient.list_keys">[docs]</a>    <span class="nd">@distributed_trace</span>
     <span class="k">def</span> <span class="nf">list_keys</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
@@ -659,8 +663,12 @@
 <span class="sd">                :dedent: 8</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">max_page_size</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;max_page_size&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-        <span class="n">pages</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_client</span><span class="o">.</span><span class="n">get_keys</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_vault_url</span><span class="p">,</span> <span class="n">maxresults</span><span class="o">=</span><span class="n">max_page_size</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-        <span class="k">return</span> <span class="p">(</span><span class="n">KeyBase</span><span class="o">.</span><span class="n">_from_key_item</span><span class="p">(</span><span class="n">item</span><span class="p">)</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">pages</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_client</span><span class="o">.</span><span class="n">get_keys</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_vault_url</span><span class="p">,</span>
+            <span class="n">maxresults</span><span class="o">=</span><span class="n">max_page_size</span><span class="p">,</span>
+            <span class="bp">cls</span><span class="o">=</span><span class="k">lambda</span> <span class="n">objs</span><span class="p">:</span> <span class="p">[</span><span class="n">KeyBase</span><span class="o">.</span><span class="n">_from_key_item</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">objs</span><span class="p">],</span>
+            <span class="o">**</span><span class="n">kwargs</span>
+        <span class="p">)</span></div>
 
 <div class="viewcode-block" id="KeyClient.list_key_versions"><a class="viewcode-back" href="../../../../ref/azure.keyvault.keys.html#azure.keyvault.keys.KeyClient.list_key_versions">[docs]</a>    <span class="nd">@distributed_trace</span>
     <span class="k">def</span> <span class="nf">list_key_versions</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
@@ -685,8 +693,13 @@
 <span class="sd">                :dedent: 8</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">max_page_size</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;max_page_size&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-        <span class="n">pages</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_client</span><span class="o">.</span><span class="n">get_key_versions</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_vault_url</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">maxresults</span><span class="o">=</span><span class="n">max_page_size</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-        <span class="k">return</span> <span class="p">(</span><span class="n">KeyBase</span><span class="o">.</span><span class="n">_from_key_item</span><span class="p">(</span><span class="n">item</span><span class="p">)</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">pages</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_client</span><span class="o">.</span><span class="n">get_key_versions</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_vault_url</span><span class="p">,</span>
+            <span class="n">name</span><span class="p">,</span>
+            <span class="n">maxresults</span><span class="o">=</span><span class="n">max_page_size</span><span class="p">,</span>
+            <span class="bp">cls</span><span class="o">=</span><span class="k">lambda</span> <span class="n">objs</span><span class="p">:</span> <span class="p">[</span><span class="n">KeyBase</span><span class="o">.</span><span class="n">_from_key_item</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">objs</span><span class="p">],</span>
+            <span class="o">**</span><span class="n">kwargs</span>
+        <span class="p">)</span></div>
 
 <div class="viewcode-block" id="KeyClient.purge_deleted_key"><a class="viewcode-back" href="../../../../ref/azure.keyvault.keys.html#azure.keyvault.keys.KeyClient.purge_deleted_key">[docs]</a>    <span class="nd">@distributed_trace</span>
     <span class="k">def</span> <span class="nf">purge_deleted_key</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>

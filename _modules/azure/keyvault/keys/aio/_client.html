@@ -287,7 +287,7 @@
 <span class="kn">from</span> <span class="nn">azure.core.tracing.decorator</span> <span class="k">import</span> <span class="n">distributed_trace</span>
 <span class="kn">from</span> <span class="nn">azure.core.tracing.decorator_async</span> <span class="k">import</span> <span class="n">distributed_trace_async</span>
 <span class="kn">from</span> <span class="nn">azure.keyvault.keys._models</span> <span class="k">import</span> <span class="n">Key</span><span class="p">,</span> <span class="n">DeletedKey</span><span class="p">,</span> <span class="n">KeyBase</span><span class="p">,</span> <span class="n">KeyOperationResult</span>
-<span class="kn">from</span> <span class="nn">azure.keyvault.keys._shared</span> <span class="k">import</span> <span class="n">AsyncKeyVaultClientBase</span><span class="p">,</span> <span class="n">AsyncPagingAdapter</span>
+<span class="kn">from</span> <span class="nn">azure.keyvault.keys._shared</span> <span class="k">import</span> <span class="n">AsyncKeyVaultClientBase</span>
 
 
 <div class="viewcode-block" id="KeyClient"><a class="viewcode-back" href="../../../../../ref/azure.keyvault.keys.aio.html#azure.keyvault.keys.aio.KeyClient">[docs]</a><span class="k">class</span> <span class="nc">KeyClient</span><span class="p">(</span><span class="n">AsyncKeyVaultClientBase</span><span class="p">):</span>
@@ -632,9 +632,12 @@
 <span class="sd">                :dedent: 8</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">max_results</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;max_page_size&quot;</span><span class="p">)</span>
-        <span class="n">pages</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_client</span><span class="o">.</span><span class="n">get_keys</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">vault_url</span><span class="p">,</span> <span class="n">maxresults</span><span class="o">=</span><span class="n">max_results</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-        <span class="n">iterable</span> <span class="o">=</span> <span class="n">AsyncPagingAdapter</span><span class="p">(</span><span class="n">pages</span><span class="p">,</span> <span class="n">KeyBase</span><span class="o">.</span><span class="n">_from_key_item</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">iterable</span></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_client</span><span class="o">.</span><span class="n">get_keys</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">vault_url</span><span class="p">,</span>
+            <span class="n">maxresults</span><span class="o">=</span><span class="n">max_results</span><span class="p">,</span>
+            <span class="bp">cls</span><span class="o">=</span><span class="k">lambda</span> <span class="n">objs</span><span class="p">:</span> <span class="p">[</span><span class="n">KeyBase</span><span class="o">.</span><span class="n">_from_key_item</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">objs</span><span class="p">],</span>
+            <span class="o">**</span><span class="n">kwargs</span>
+        <span class="p">)</span></div>
 
 <div class="viewcode-block" id="KeyClient.list_key_versions"><a class="viewcode-back" href="../../../../../ref/azure.keyvault.keys.aio.html#azure.keyvault.keys.aio.KeyClient.list_key_versions">[docs]</a>    <span class="nd">@distributed_trace</span>
     <span class="k">def</span> <span class="nf">list_key_versions</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">AsyncIterable</span><span class="p">[</span><span class="n">KeyBase</span><span class="p">]:</span>
@@ -658,9 +661,13 @@
 <span class="sd">                :dedent: 8</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">max_results</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;max_page_size&quot;</span><span class="p">)</span>
-        <span class="n">pages</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_client</span><span class="o">.</span><span class="n">get_key_versions</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">vault_url</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">maxresults</span><span class="o">=</span><span class="n">max_results</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-        <span class="n">iterable</span> <span class="o">=</span> <span class="n">AsyncPagingAdapter</span><span class="p">(</span><span class="n">pages</span><span class="p">,</span> <span class="n">KeyBase</span><span class="o">.</span><span class="n">_from_key_item</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">iterable</span></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_client</span><span class="o">.</span><span class="n">get_key_versions</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">vault_url</span><span class="p">,</span>
+            <span class="n">name</span><span class="p">,</span>
+            <span class="n">maxresults</span><span class="o">=</span><span class="n">max_results</span><span class="p">,</span>
+            <span class="bp">cls</span><span class="o">=</span><span class="k">lambda</span> <span class="n">objs</span><span class="p">:</span> <span class="p">[</span><span class="n">KeyBase</span><span class="o">.</span><span class="n">_from_key_item</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">objs</span><span class="p">],</span>
+            <span class="o">**</span><span class="n">kwargs</span>
+        <span class="p">)</span></div>
 
 <div class="viewcode-block" id="KeyClient.backup_key"><a class="viewcode-back" href="../../../../../ref/azure.keyvault.keys.aio.html#azure.keyvault.keys.aio.KeyClient.backup_key">[docs]</a>    <span class="nd">@distributed_trace_async</span>
     <span class="k">async</span> <span class="k">def</span> <span class="nf">backup_key</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span>
@@ -816,9 +823,12 @@
 <span class="sd">                :dedent: 8</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">max_results</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;max_page_size&quot;</span><span class="p">)</span>
-        <span class="n">pages</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_client</span><span class="o">.</span><span class="n">get_deleted_keys</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">vault_url</span><span class="p">,</span> <span class="n">maxresults</span><span class="o">=</span><span class="n">max_results</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-        <span class="n">iterable</span> <span class="o">=</span> <span class="n">AsyncPagingAdapter</span><span class="p">(</span><span class="n">pages</span><span class="p">,</span> <span class="n">DeletedKey</span><span class="o">.</span><span class="n">_from_deleted_key_item</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">iterable</span></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_client</span><span class="o">.</span><span class="n">get_deleted_keys</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">vault_url</span><span class="p">,</span>
+            <span class="n">maxresults</span><span class="o">=</span><span class="n">max_results</span><span class="p">,</span>
+            <span class="bp">cls</span><span class="o">=</span><span class="k">lambda</span> <span class="n">objs</span><span class="p">:</span> <span class="p">[</span><span class="n">DeletedKey</span><span class="o">.</span><span class="n">_from_deleted_key_item</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">objs</span><span class="p">],</span>
+            <span class="o">**</span><span class="n">kwargs</span>
+        <span class="p">)</span></div>
 
 <div class="viewcode-block" id="KeyClient.purge_deleted_key"><a class="viewcode-back" href="../../../../../ref/azure.keyvault.keys.aio.html#azure.keyvault.keys.aio.KeyClient.purge_deleted_key">[docs]</a>    <span class="nd">@distributed_trace_async</span>
     <span class="k">async</span> <span class="k">def</span> <span class="nf">purge_deleted_key</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
