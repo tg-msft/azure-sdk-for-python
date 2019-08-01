@@ -298,7 +298,7 @@
 <span class="kn">from</span> <span class="nn">azure.core.credentials</span> <span class="k">import</span> <span class="n">AccessToken</span>
 <span class="kn">from</span> <span class="nn">azure.core.exceptions</span> <span class="k">import</span> <span class="n">ClientAuthenticationError</span>
 
-<span class="kn">from</span> <span class="nn">._internal</span> <span class="k">import</span> <span class="n">AuthCodeRedirectServer</span><span class="p">,</span> <span class="n">ConfidentialClientCredential</span>
+<span class="kn">from</span> <span class="nn">._internal</span> <span class="k">import</span> <span class="n">AuthCodeRedirectServer</span><span class="p">,</span> <span class="n">ConfidentialClientCredential</span><span class="p">,</span> <span class="n">wrap_exceptions</span>
 
 
 <div class="viewcode-block" id="InteractiveBrowserCredential"><a class="viewcode-back" href="../../../ref/azure.identity.html#azure.identity.InteractiveBrowserCredential">[docs]</a><span class="k">class</span> <span class="nc">InteractiveBrowserCredential</span><span class="p">(</span><span class="n">ConfidentialClientCredential</span><span class="p">):</span>
@@ -328,7 +328,8 @@
             <span class="n">client_id</span><span class="o">=</span><span class="n">client_id</span><span class="p">,</span> <span class="n">client_credential</span><span class="o">=</span><span class="n">client_secret</span><span class="p">,</span> <span class="n">authority</span><span class="o">=</span><span class="n">authority</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span>
         <span class="p">)</span>
 
-<div class="viewcode-block" id="InteractiveBrowserCredential.get_token"><a class="viewcode-back" href="../../../ref/azure.identity.html#azure.identity.InteractiveBrowserCredential.get_token">[docs]</a>    <span class="k">def</span> <span class="nf">get_token</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">scopes</span><span class="p">):</span>
+<div class="viewcode-block" id="InteractiveBrowserCredential.get_token"><a class="viewcode-back" href="../../../ref/azure.identity.html#azure.identity.InteractiveBrowserCredential.get_token">[docs]</a>    <span class="nd">@wrap_exceptions</span>
+    <span class="k">def</span> <span class="nf">get_token</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">scopes</span><span class="p">):</span>
         <span class="c1"># type: (str) -&gt; AccessToken</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Request an access token for `scopes`. This will open a browser to a login page and listen on localhost for a</span>
