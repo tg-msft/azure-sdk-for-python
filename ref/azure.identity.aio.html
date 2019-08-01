@@ -307,7 +307,7 @@
 <p>Credentials for asynchronous Azure SDK authentication.</p>
 <dl class="class">
 <dt id="azure.identity.aio.credentials.CertificateCredential">
-<em class="property">class </em><code class="sig-prename descclassname">azure.identity.aio.credentials.</code><code class="sig-name descname">CertificateCredential</code><span class="sig-paren">(</span><em class="sig-param">client_id: str</em>, <em class="sig-param">tenant_id: str</em>, <em class="sig-param">certificate_path: str</em>, <em class="sig-param">config: Optional[azure.core.configuration.Configuration] = None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/identity/aio/credentials.html#CertificateCredential"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.identity.aio.credentials.CertificateCredential" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">azure.identity.aio.credentials.</code><code class="sig-name descname">CertificateCredential</code><span class="sig-paren">(</span><em class="sig-param">client_id: str</em>, <em class="sig-param">tenant_id: str</em>, <em class="sig-param">certificate_path: str</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/identity/aio/credentials.html#CertificateCredential"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.identity.aio.credentials.CertificateCredential" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">azure.identity._base.CertificateCredentialBase</span></code></p>
 <p>Authenticates as a service principal using a certificate.</p>
 <dl class="field-list simple">
@@ -316,7 +316,6 @@
 <li><p><strong>client_id</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – the service principal’s client ID</p></li>
 <li><p><strong>tenant_id</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – ID of the service principal’s tenant. Also called its ‘directory’ ID.</p></li>
 <li><p><strong>certificate_path</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – path to a PEM-encoded certificate file including the private key</p></li>
-<li><p><strong>config</strong> (<a class="reference internal" href="azure.core.html#module-azure.core.configuration" title="azure.core.configuration"><code class="xref py py-class docutils literal notranslate"><span class="pre">azure.core.configuration</span></code></a>) – optional configuration for the underlying HTTP pipeline</p></li>
 </ul>
 </dd>
 </dl>
@@ -370,7 +369,7 @@ with an error message from each credential.</p>
 
 <dl class="class">
 <dt id="azure.identity.aio.credentials.ClientSecretCredential">
-<em class="property">class </em><code class="sig-prename descclassname">azure.identity.aio.credentials.</code><code class="sig-name descname">ClientSecretCredential</code><span class="sig-paren">(</span><em class="sig-param">client_id: str</em>, <em class="sig-param">secret: str</em>, <em class="sig-param">tenant_id: str</em>, <em class="sig-param">config: Optional[azure.core.configuration.Configuration] = None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/identity/aio/credentials.html#ClientSecretCredential"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.identity.aio.credentials.ClientSecretCredential" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">azure.identity.aio.credentials.</code><code class="sig-name descname">ClientSecretCredential</code><span class="sig-paren">(</span><em class="sig-param">client_id: str</em>, <em class="sig-param">secret: str</em>, <em class="sig-param">tenant_id: str</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/identity/aio/credentials.html#ClientSecretCredential"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.identity.aio.credentials.ClientSecretCredential" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">azure.identity._base.ClientSecretCredentialBase</span></code></p>
 <p>Authenticates as a service principal using a client ID and client secret.</p>
 <dl class="field-list simple">
@@ -379,7 +378,6 @@ with an error message from each credential.</p>
 <li><p><strong>client_id</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – the service principal’s client ID</p></li>
 <li><p><strong>secret</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – one of the service principal’s client secrets</p></li>
 <li><p><strong>tenant_id</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – ID of the service principal’s tenant. Also called its ‘directory’ ID.</p></li>
-<li><p><strong>config</strong> (<a class="reference internal" href="azure.core.html#module-azure.core.configuration" title="azure.core.configuration"><code class="xref py py-class docutils literal notranslate"><span class="pre">azure.core.configuration</span></code></a>) – optional configuration for the underlying HTTP pipeline</p></li>
 </ul>
 </dd>
 </dl>
@@ -443,28 +441,14 @@ depending on environment variable settings.</p>
 
 <dl class="class">
 <dt id="azure.identity.aio.credentials.ManagedIdentityCredential">
-<em class="property">class </em><code class="sig-prename descclassname">azure.identity.aio.credentials.</code><code class="sig-name descname">ManagedIdentityCredential</code><span class="sig-paren">(</span><em class="sig-param">client_id: Optional[str] = None</em>, <em class="sig-param">config: Optional[azure.core.configuration.Configuration] = None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/identity/aio/credentials.html#ManagedIdentityCredential"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.identity.aio.credentials.ManagedIdentityCredential" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">azure.identity.aio.credentials.</code><code class="sig-name descname">ManagedIdentityCredential</code><span class="sig-paren">(</span><em class="sig-param">client_id: Optional[str] = None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/identity/aio/credentials.html#ManagedIdentityCredential"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.identity.aio.credentials.ManagedIdentityCredential" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3.5/library/functions.html#object" title="(in Python v3.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p>Authenticates with a managed identity in an App Service, Azure VM or Cloud Shell environment.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>client_id</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Optional client ID of a user-assigned identity. Leave unspecified to use a system-assigned identity.</p></li>
-<li><p><strong>config</strong> (<a class="reference internal" href="azure.core.html#module-azure.core.configuration" title="azure.core.configuration"><code class="xref py py-class docutils literal notranslate"><span class="pre">azure.core.configuration</span></code></a>) – optional configuration for the underlying HTTP pipeline</p></li>
-</ul>
+<dd class="field-odd"><p><strong>client_id</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Optional client ID of a user-assigned identity. Leave unspecified to use a system-assigned identity.</p>
 </dd>
 </dl>
-<dl class="method">
-<dt id="azure.identity.aio.credentials.ManagedIdentityCredential.create_config">
-<em class="property">static </em><code class="sig-name descname">create_config</code><span class="sig-paren">(</span><em class="sig-param">**kwargs</em><span class="sig-paren">)</span> &#x2192; azure.core.configuration.Configuration<a class="reference internal" href="../_modules/azure/identity/aio/credentials.html#ManagedIdentityCredential.create_config"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.identity.aio.credentials.ManagedIdentityCredential.create_config" title="Permalink to this definition">¶</a></dt>
-<dd><p>Build a default configuration for the credential’s HTTP pipeline.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference internal" href="azure.core.html#module-azure.core.configuration" title="azure.core.configuration"><code class="xref py py-class docutils literal notranslate"><span class="pre">azure.core.configuration</span></code></a></p>
-</dd>
-</dl>
-</dd></dl>
-
 <dl class="method">
 <dt id="azure.identity.aio.credentials.ManagedIdentityCredential.get_token">
 <em class="property">async </em><code class="sig-name descname">get_token</code><span class="sig-paren">(</span><em class="sig-param">*scopes</em><span class="sig-paren">)</span> &#x2192; azure.core.credentials.AccessToken<a class="reference internal" href="../_modules/azure/identity/aio/credentials.html#ManagedIdentityCredential.get_token"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.identity.aio.credentials.ManagedIdentityCredential.get_token" title="Permalink to this definition">¶</a></dt>
@@ -489,7 +473,7 @@ depending on environment variable settings.</p>
 <span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-azure.identity.aio" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="azure.identity.aio.CertificateCredential">
-<em class="property">class </em><code class="sig-prename descclassname">azure.identity.aio.</code><code class="sig-name descname">CertificateCredential</code><span class="sig-paren">(</span><em class="sig-param">client_id: str</em>, <em class="sig-param">tenant_id: str</em>, <em class="sig-param">certificate_path: str</em>, <em class="sig-param">config: Optional[azure.core.configuration.Configuration] = None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/identity/aio/credentials.html#CertificateCredential"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.identity.aio.CertificateCredential" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">azure.identity.aio.</code><code class="sig-name descname">CertificateCredential</code><span class="sig-paren">(</span><em class="sig-param">client_id: str</em>, <em class="sig-param">tenant_id: str</em>, <em class="sig-param">certificate_path: str</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/identity/aio/credentials.html#CertificateCredential"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.identity.aio.CertificateCredential" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">azure.identity._base.CertificateCredentialBase</span></code></p>
 <p>Authenticates as a service principal using a certificate.</p>
 <dl class="field-list simple">
@@ -498,7 +482,6 @@ depending on environment variable settings.</p>
 <li><p><strong>client_id</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – the service principal’s client ID</p></li>
 <li><p><strong>tenant_id</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – ID of the service principal’s tenant. Also called its ‘directory’ ID.</p></li>
 <li><p><strong>certificate_path</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – path to a PEM-encoded certificate file including the private key</p></li>
-<li><p><strong>config</strong> (<a class="reference internal" href="azure.core.html#module-azure.core.configuration" title="azure.core.configuration"><code class="xref py py-class docutils literal notranslate"><span class="pre">azure.core.configuration</span></code></a>) – optional configuration for the underlying HTTP pipeline</p></li>
 </ul>
 </dd>
 </dl>
@@ -523,7 +506,7 @@ depending on environment variable settings.</p>
 
 <dl class="class">
 <dt id="azure.identity.aio.ClientSecretCredential">
-<em class="property">class </em><code class="sig-prename descclassname">azure.identity.aio.</code><code class="sig-name descname">ClientSecretCredential</code><span class="sig-paren">(</span><em class="sig-param">client_id: str</em>, <em class="sig-param">secret: str</em>, <em class="sig-param">tenant_id: str</em>, <em class="sig-param">config: Optional[azure.core.configuration.Configuration] = None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/identity/aio/credentials.html#ClientSecretCredential"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.identity.aio.ClientSecretCredential" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">azure.identity.aio.</code><code class="sig-name descname">ClientSecretCredential</code><span class="sig-paren">(</span><em class="sig-param">client_id: str</em>, <em class="sig-param">secret: str</em>, <em class="sig-param">tenant_id: str</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/identity/aio/credentials.html#ClientSecretCredential"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.identity.aio.ClientSecretCredential" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">azure.identity._base.ClientSecretCredentialBase</span></code></p>
 <p>Authenticates as a service principal using a client ID and client secret.</p>
 <dl class="field-list simple">
@@ -532,7 +515,6 @@ depending on environment variable settings.</p>
 <li><p><strong>client_id</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – the service principal’s client ID</p></li>
 <li><p><strong>secret</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – one of the service principal’s client secrets</p></li>
 <li><p><strong>tenant_id</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – ID of the service principal’s tenant. Also called its ‘directory’ ID.</p></li>
-<li><p><strong>config</strong> (<a class="reference internal" href="azure.core.html#module-azure.core.configuration" title="azure.core.configuration"><code class="xref py py-class docutils literal notranslate"><span class="pre">azure.core.configuration</span></code></a>) – optional configuration for the underlying HTTP pipeline</p></li>
 </ul>
 </dd>
 </dl>
@@ -607,28 +589,14 @@ depending on environment variable settings.</p>
 
 <dl class="class">
 <dt id="azure.identity.aio.ManagedIdentityCredential">
-<em class="property">class </em><code class="sig-prename descclassname">azure.identity.aio.</code><code class="sig-name descname">ManagedIdentityCredential</code><span class="sig-paren">(</span><em class="sig-param">client_id: Optional[str] = None</em>, <em class="sig-param">config: Optional[azure.core.configuration.Configuration] = None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/identity/aio/credentials.html#ManagedIdentityCredential"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.identity.aio.ManagedIdentityCredential" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">azure.identity.aio.</code><code class="sig-name descname">ManagedIdentityCredential</code><span class="sig-paren">(</span><em class="sig-param">client_id: Optional[str] = None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/identity/aio/credentials.html#ManagedIdentityCredential"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.identity.aio.ManagedIdentityCredential" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3.5/library/functions.html#object" title="(in Python v3.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p>Authenticates with a managed identity in an App Service, Azure VM or Cloud Shell environment.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>client_id</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Optional client ID of a user-assigned identity. Leave unspecified to use a system-assigned identity.</p></li>
-<li><p><strong>config</strong> (<a class="reference internal" href="azure.core.html#module-azure.core.configuration" title="azure.core.configuration"><code class="xref py py-class docutils literal notranslate"><span class="pre">azure.core.configuration</span></code></a>) – optional configuration for the underlying HTTP pipeline</p></li>
-</ul>
+<dd class="field-odd"><p><strong>client_id</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Optional client ID of a user-assigned identity. Leave unspecified to use a system-assigned identity.</p>
 </dd>
 </dl>
-<dl class="method">
-<dt id="azure.identity.aio.ManagedIdentityCredential.create_config">
-<em class="property">static </em><code class="sig-name descname">create_config</code><span class="sig-paren">(</span><em class="sig-param">**kwargs</em><span class="sig-paren">)</span> &#x2192; azure.core.configuration.Configuration<a class="reference internal" href="../_modules/azure/identity/aio/credentials.html#ManagedIdentityCredential.create_config"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.identity.aio.ManagedIdentityCredential.create_config" title="Permalink to this definition">¶</a></dt>
-<dd><p>Build a default configuration for the credential’s HTTP pipeline.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference internal" href="azure.core.html#module-azure.core.configuration" title="azure.core.configuration"><code class="xref py py-class docutils literal notranslate"><span class="pre">azure.core.configuration</span></code></a></p>
-</dd>
-</dl>
-</dd></dl>
-
 <dl class="method">
 <dt id="azure.identity.aio.ManagedIdentityCredential.get_token">
 <em class="property">async </em><code class="sig-name descname">get_token</code><span class="sig-paren">(</span><em class="sig-param">*scopes</em><span class="sig-paren">)</span> &#x2192; azure.core.credentials.AccessToken<a class="reference internal" href="../_modules/azure/identity/aio/credentials.html#ManagedIdentityCredential.get_token"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.identity.aio.ManagedIdentityCredential.get_token" title="Permalink to this definition">¶</a></dt>
