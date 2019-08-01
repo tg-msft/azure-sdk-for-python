@@ -342,7 +342,9 @@
 <div class="viewcode-block" id="AsyncPageIterator"><a class="viewcode-back" href="../../../ref/azure.core.html#azure.core.async_paging.AsyncPageIterator">[docs]</a><span class="k">class</span> <span class="nc">AsyncPageIterator</span><span class="p">(</span><span class="n">AsyncIterator</span><span class="p">[</span><span class="n">AsyncIterator</span><span class="p">[</span><span class="n">ReturnType</span><span class="p">]]):</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
-        <span class="n">get_next</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]],</span> <span class="n">Awaitable</span><span class="p">[</span><span class="n">ResponseType</span><span class="p">]],</span>
+        <span class="n">get_next</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[</span>
+            <span class="p">[</span><span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]],</span> <span class="n">Awaitable</span><span class="p">[</span><span class="n">ResponseType</span><span class="p">]</span>
+        <span class="p">],</span>
         <span class="n">extract_data</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[</span>
             <span class="p">[</span><span class="n">ResponseType</span><span class="p">],</span> <span class="n">Awaitable</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">AsyncIterator</span><span class="p">[</span><span class="n">ReturnType</span><span class="p">]]]</span>
         <span class="p">],</span>
@@ -398,7 +400,8 @@
         <span class="p">)</span>
 
 <div class="viewcode-block" id="AsyncItemPaged.by_page"><a class="viewcode-back" href="../../../ref/azure.core.html#azure.core.async_paging.AsyncItemPaged.by_page">[docs]</a>    <span class="k">def</span> <span class="nf">by_page</span><span class="p">(</span>
-        <span class="bp">self</span><span class="p">,</span> <span class="n">continuation_token</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">continuation_token</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">AsyncIterator</span><span class="p">[</span><span class="n">AsyncIterator</span><span class="p">[</span><span class="n">ReturnType</span><span class="p">]]:</span>
         <span class="sd">&quot;&quot;&quot;Get an async iterator of pages of objects, instead of an async iterator of objects.</span>
 
