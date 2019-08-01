@@ -299,24 +299,18 @@
 <span class="sd">    :param credentials: Credentials needed for the client to connect to Azure.</span>
 <span class="sd">    :type credentials: :mod:`A msrestazure Credentials</span>
 <span class="sd">     object&lt;msrestazure.azure_active_directory&gt;`</span>
-<span class="sd">    :param subscription_id: Subscription credentials which uniquely identify</span>
-<span class="sd">     Microsoft Azure subscription. The subscription ID forms part of the URI</span>
-<span class="sd">     for every service call.</span>
+<span class="sd">    :param subscription_id: The ID of the target subscription.</span>
 <span class="sd">    :type subscription_id: str</span>
-<span class="sd">    :param subscription_id1: The Azure subscription id.</span>
-<span class="sd">    :type subscription_id1: str</span>
 <span class="sd">    :param str base_url: Service URL</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span>
-            <span class="bp">self</span><span class="p">,</span> <span class="n">credentials</span><span class="p">,</span> <span class="n">subscription_id</span><span class="p">,</span> <span class="n">subscription_id1</span><span class="p">,</span> <span class="n">base_url</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+            <span class="bp">self</span><span class="p">,</span> <span class="n">credentials</span><span class="p">,</span> <span class="n">subscription_id</span><span class="p">,</span> <span class="n">base_url</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 
         <span class="k">if</span> <span class="n">credentials</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Parameter &#39;credentials&#39; must not be None.&quot;</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">subscription_id</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Parameter &#39;subscription_id&#39; must not be None.&quot;</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">subscription_id1</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Parameter &#39;subscription_id1&#39; must not be None.&quot;</span><span class="p">)</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">base_url</span><span class="p">:</span>
             <span class="n">base_url</span> <span class="o">=</span> <span class="s1">&#39;https://management.azure.com&#39;</span>
 
@@ -329,8 +323,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">add_user_agent</span><span class="p">(</span><span class="s1">&#39;Azure-SDK-For-Python&#39;</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">credentials</span> <span class="o">=</span> <span class="n">credentials</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">subscription_id</span> <span class="o">=</span> <span class="n">subscription_id</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">subscription_id1</span> <span class="o">=</span> <span class="n">subscription_id1</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">subscription_id</span> <span class="o">=</span> <span class="n">subscription_id</span></div>
 </pre></div>
 
            </div>
