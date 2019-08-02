@@ -291,7 +291,11 @@
 
 
 <div class="viewcode-block" id="KeyClient"><a class="viewcode-back" href="../../../../../ref/azure.keyvault.keys.aio.html#azure.keyvault.keys.aio.KeyClient">[docs]</a><span class="k">class</span> <span class="nc">KeyClient</span><span class="p">(</span><span class="n">AsyncKeyVaultClientBase</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;A high-level interface for managing a vault&#39;s keys.</span>
+    <span class="sd">&quot;&quot;&quot;A high-level asynchronous interface for managing a vault&#39;s keys.</span>
+
+<span class="sd">    :param credential: An object which can provide an access token for the vault, such as a credential from</span>
+<span class="sd">        :mod:`azure.identity.aio`</span>
+<span class="sd">    :param str vault_url: URL of the vault the client will access</span>
 
 <span class="sd">    Example:</span>
 <span class="sd">        .. literalinclude:: ../tests/test_samples_keys_async.py</span>
