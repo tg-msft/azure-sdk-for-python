@@ -461,7 +461,7 @@
 <span class="sd">         if one is available.</span>
 <span class="sd">        :raises CloudError: Server problem with the query.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">wait</span><span class="p">(</span><span class="n">timeout</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">wait</span><span class="p">(</span><span class="n">timeout</span><span class="p">)</span>  <span class="c1"># type: ignore</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_polling_method</span><span class="o">.</span><span class="n">resource</span><span class="p">()</span></div>
 
 <div class="viewcode-block" id="LROPoller.wait"><a class="viewcode-back" href="../../../../ref/azure.core.polling.html#azure.core.polling.poller.LROPoller.wait">[docs]</a>    <span class="nd">@distributed_trace</span>
