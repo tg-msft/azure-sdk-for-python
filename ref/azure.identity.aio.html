@@ -133,9 +133,9 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="azure.identity.html#submodules">Submodules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="azure.identity.html#module-azure.identity.constants">azure.identity.constants module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="azure.identity.html#azure-identity-constants-module">azure.identity.constants module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="azure.identity.html#module-azure.identity.credentials">azure.identity.credentials module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="azure.identity.html#module-azure.identity.version">azure.identity.version module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="azure.identity.html#azure-identity-version-module">azure.identity.version module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="azure.identity.html#module-azure.identity">Module contents</a></li>
 </ul>
 </li>
@@ -404,22 +404,29 @@ with an error message from each credential.</p>
 <dt id="azure.identity.aio.credentials.EnvironmentCredential">
 <em class="property">class </em><code class="sig-prename descclassname">azure.identity.aio.credentials.</code><code class="sig-name descname">EnvironmentCredential</code><span class="sig-paren">(</span><em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/identity/aio/credentials.html#EnvironmentCredential"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.identity.aio.credentials.EnvironmentCredential" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3.5/library/functions.html#object" title="(in Python v3.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
-<p>Authenticates as a service principal using a client ID/secret pair or a certificate,
-depending on environment variable settings.</p>
-<p>These environment variables are required:</p>
-<blockquote>
-<div><ul class="simple">
+<p>Authenticates as a service principal using a client secret or a certificate, or as a user with a username and
+password, depending on environment variable settings. Configuration is attempted in this order, using these
+environment variables:</p>
+<dl class="simple">
+<dt>Service principal with secret:</dt><dd><ul class="simple">
 <li><p><strong>AZURE_CLIENT_ID</strong>: the service principal’s client ID</p></li>
+<li><p><strong>AZURE_CLIENT_SECRET</strong>: one of the service principal’s client secrets</p></li>
 <li><p><strong>AZURE_TENANT_ID</strong>: ID of the service principal’s tenant. Also called its ‘directory’ ID.</p></li>
 </ul>
-</div></blockquote>
-<p>Additionally, set <strong>one</strong> of these to configure client secret or certificate authentication:</p>
-<blockquote>
-<div><ul class="simple">
-<li><p><strong>AZURE_CLIENT_SECRET</strong>: one of the service principal’s client secrets</p></li>
+</dd>
+<dt>Service principal with certificate:</dt><dd><ul class="simple">
+<li><p><strong>AZURE_CLIENT_ID</strong>: the service principal’s client ID</p></li>
 <li><p><strong>AZURE_CLIENT_CERTIFICATE_PATH</strong>: path to a PEM-encoded certificate file including the private key</p></li>
+<li><p><strong>AZURE_TENANT_ID</strong>: ID of the service principal’s tenant. Also called its ‘directory’ ID.</p></li>
 </ul>
-</div></blockquote>
+</dd>
+<dt>User with username and password:</dt><dd><ul class="simple">
+<li><p><strong>AZURE_CLIENT_ID</strong>: the application’s client ID</p></li>
+<li><p><strong>AZURE_USERNAME</strong>: a username (usually an email address)</p></li>
+<li><p><strong>AZURE_PASSWORD</strong>: that user’s password</p></li>
+</ul>
+</dd>
+</dl>
 <dl class="method">
 <dt id="azure.identity.aio.credentials.EnvironmentCredential.get_token">
 <em class="property">async </em><code class="sig-name descname">get_token</code><span class="sig-paren">(</span><em class="sig-param">*scopes</em><span class="sig-paren">)</span> &#x2192; azure.core.credentials.AccessToken<a class="reference internal" href="../_modules/azure/identity/aio/credentials.html#EnvironmentCredential.get_token"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.identity.aio.credentials.EnvironmentCredential.get_token" title="Permalink to this definition">¶</a></dt>
@@ -543,31 +550,38 @@ depending on environment variable settings.</p>
 <dd><p>Bases: <a class="reference internal" href="#azure.identity.aio.credentials.ChainedTokenCredential" title="azure.identity.aio.credentials.ChainedTokenCredential"><code class="xref py py-class docutils literal notranslate"><span class="pre">azure.identity.aio.credentials.ChainedTokenCredential</span></code></a></p>
 <p>A default credential capable of handling most Azure SDK authentication scenarios.</p>
 <p>When environment variable configuration is present, it authenticates as a service principal
-using <code class="xref py py-class docutils literal notranslate"><span class="pre">identity.aio.EnvironmentCredential</span></code>.</p>
+using <a class="reference internal" href="#azure.identity.aio.EnvironmentCredential" title="azure.identity.aio.EnvironmentCredential"><code class="xref py py-class docutils literal notranslate"><span class="pre">azure.identity.aio.EnvironmentCredential</span></code></a>.</p>
 <p>When environment configuration is not present, it authenticates with a managed identity
-using <code class="xref py py-class docutils literal notranslate"><span class="pre">identity.aio.ManagedIdentityCredential</span></code>.</p>
+using <a class="reference internal" href="#azure.identity.aio.ManagedIdentityCredential" title="azure.identity.aio.ManagedIdentityCredential"><code class="xref py py-class docutils literal notranslate"><span class="pre">azure.identity.aio.ManagedIdentityCredential</span></code></a>.</p>
 </dd></dl>
 
 <dl class="class">
 <dt id="azure.identity.aio.EnvironmentCredential">
 <em class="property">class </em><code class="sig-prename descclassname">azure.identity.aio.</code><code class="sig-name descname">EnvironmentCredential</code><span class="sig-paren">(</span><em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/identity/aio/credentials.html#EnvironmentCredential"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.identity.aio.EnvironmentCredential" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3.5/library/functions.html#object" title="(in Python v3.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
-<p>Authenticates as a service principal using a client ID/secret pair or a certificate,
-depending on environment variable settings.</p>
-<p>These environment variables are required:</p>
-<blockquote>
-<div><ul class="simple">
+<p>Authenticates as a service principal using a client secret or a certificate, or as a user with a username and
+password, depending on environment variable settings. Configuration is attempted in this order, using these
+environment variables:</p>
+<dl class="simple">
+<dt>Service principal with secret:</dt><dd><ul class="simple">
 <li><p><strong>AZURE_CLIENT_ID</strong>: the service principal’s client ID</p></li>
+<li><p><strong>AZURE_CLIENT_SECRET</strong>: one of the service principal’s client secrets</p></li>
 <li><p><strong>AZURE_TENANT_ID</strong>: ID of the service principal’s tenant. Also called its ‘directory’ ID.</p></li>
 </ul>
-</div></blockquote>
-<p>Additionally, set <strong>one</strong> of these to configure client secret or certificate authentication:</p>
-<blockquote>
-<div><ul class="simple">
-<li><p><strong>AZURE_CLIENT_SECRET</strong>: one of the service principal’s client secrets</p></li>
+</dd>
+<dt>Service principal with certificate:</dt><dd><ul class="simple">
+<li><p><strong>AZURE_CLIENT_ID</strong>: the service principal’s client ID</p></li>
 <li><p><strong>AZURE_CLIENT_CERTIFICATE_PATH</strong>: path to a PEM-encoded certificate file including the private key</p></li>
+<li><p><strong>AZURE_TENANT_ID</strong>: ID of the service principal’s tenant. Also called its ‘directory’ ID.</p></li>
 </ul>
-</div></blockquote>
+</dd>
+<dt>User with username and password:</dt><dd><ul class="simple">
+<li><p><strong>AZURE_CLIENT_ID</strong>: the application’s client ID</p></li>
+<li><p><strong>AZURE_USERNAME</strong>: a username (usually an email address)</p></li>
+<li><p><strong>AZURE_PASSWORD</strong>: that user’s password</p></li>
+</ul>
+</dd>
+</dl>
 <dl class="method">
 <dt id="azure.identity.aio.EnvironmentCredential.get_token">
 <em class="property">async </em><code class="sig-name descname">get_token</code><span class="sig-paren">(</span><em class="sig-param">*scopes</em><span class="sig-paren">)</span> &#x2192; azure.core.credentials.AccessToken<a class="reference internal" href="../_modules/azure/identity/aio/credentials.html#EnvironmentCredential.get_token"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.identity.aio.EnvironmentCredential.get_token" title="Permalink to this definition">¶</a></dt>

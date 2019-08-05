@@ -128,9 +128,9 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#submodules">Submodules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#module-azure.identity.constants">azure.identity.constants module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#azure-identity-constants-module">azure.identity.constants module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#module-azure.identity.credentials">azure.identity.credentials module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#module-azure.identity.version">azure.identity.version module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#azure-identity-version-module">azure.identity.version module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#module-azure.identity">Module contents</a></li>
 </ul>
 </li>
@@ -308,85 +308,8 @@
 <div class="section" id="submodules">
 <h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
 </div>
-<div class="section" id="module-azure.identity.constants">
-<span id="azure-identity-constants-module"></span><h2>azure.identity.constants module<a class="headerlink" href="#module-azure.identity.constants" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
-<dt id="azure.identity.constants.Endpoints">
-<em class="property">class </em><code class="sig-prename descclassname">azure.identity.constants.</code><code class="sig-name descname">Endpoints</code><a class="reference internal" href="../_modules/azure/identity/constants.html#Endpoints"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.identity.constants.Endpoints" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3.5/library/functions.html#object" title="(in Python v3.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
-<dl class="attribute">
-<dt id="azure.identity.constants.Endpoints.AAD_OAUTH2_V2_FORMAT">
-<code class="sig-name descname">AAD_OAUTH2_V2_FORMAT</code><em class="property"> = 'https://login.microsoftonline.com/{}/oauth2/v2.0/token'</em><a class="headerlink" href="#azure.identity.constants.Endpoints.AAD_OAUTH2_V2_FORMAT" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="azure.identity.constants.Endpoints.IMDS">
-<code class="sig-name descname">IMDS</code><em class="property"> = 'http://169.254.169.254/metadata/identity/oauth2/token'</em><a class="headerlink" href="#azure.identity.constants.Endpoints.IMDS" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
-<dl class="class">
-<dt id="azure.identity.constants.EnvironmentVariables">
-<em class="property">class </em><code class="sig-prename descclassname">azure.identity.constants.</code><code class="sig-name descname">EnvironmentVariables</code><a class="reference internal" href="../_modules/azure/identity/constants.html#EnvironmentVariables"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.identity.constants.EnvironmentVariables" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3.5/library/functions.html#object" title="(in Python v3.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
-<dl class="attribute">
-<dt id="azure.identity.constants.EnvironmentVariables.AZURE_CLIENT_CERTIFICATE_PATH">
-<code class="sig-name descname">AZURE_CLIENT_CERTIFICATE_PATH</code><em class="property"> = 'AZURE_CLIENT_CERTIFICATE_PATH'</em><a class="headerlink" href="#azure.identity.constants.EnvironmentVariables.AZURE_CLIENT_CERTIFICATE_PATH" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="azure.identity.constants.EnvironmentVariables.AZURE_CLIENT_ID">
-<code class="sig-name descname">AZURE_CLIENT_ID</code><em class="property"> = 'AZURE_CLIENT_ID'</em><a class="headerlink" href="#azure.identity.constants.EnvironmentVariables.AZURE_CLIENT_ID" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="azure.identity.constants.EnvironmentVariables.AZURE_CLIENT_SECRET">
-<code class="sig-name descname">AZURE_CLIENT_SECRET</code><em class="property"> = 'AZURE_CLIENT_SECRET'</em><a class="headerlink" href="#azure.identity.constants.EnvironmentVariables.AZURE_CLIENT_SECRET" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="azure.identity.constants.EnvironmentVariables.AZURE_PASSWORD">
-<code class="sig-name descname">AZURE_PASSWORD</code><em class="property"> = 'AZURE_PASSWORD'</em><a class="headerlink" href="#azure.identity.constants.EnvironmentVariables.AZURE_PASSWORD" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="azure.identity.constants.EnvironmentVariables.AZURE_TENANT_ID">
-<code class="sig-name descname">AZURE_TENANT_ID</code><em class="property"> = 'AZURE_TENANT_ID'</em><a class="headerlink" href="#azure.identity.constants.EnvironmentVariables.AZURE_TENANT_ID" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="azure.identity.constants.EnvironmentVariables.AZURE_USERNAME">
-<code class="sig-name descname">AZURE_USERNAME</code><em class="property"> = 'AZURE_USERNAME'</em><a class="headerlink" href="#azure.identity.constants.EnvironmentVariables.AZURE_USERNAME" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="azure.identity.constants.EnvironmentVariables.CERT_VARS">
-<code class="sig-name descname">CERT_VARS</code><em class="property"> = ('AZURE_CLIENT_ID', 'AZURE_CLIENT_CERTIFICATE_PATH', 'AZURE_TENANT_ID')</em><a class="headerlink" href="#azure.identity.constants.EnvironmentVariables.CERT_VARS" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="azure.identity.constants.EnvironmentVariables.CLIENT_SECRET_VARS">
-<code class="sig-name descname">CLIENT_SECRET_VARS</code><em class="property"> = ('AZURE_CLIENT_ID', 'AZURE_CLIENT_SECRET', 'AZURE_TENANT_ID')</em><a class="headerlink" href="#azure.identity.constants.EnvironmentVariables.CLIENT_SECRET_VARS" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="azure.identity.constants.EnvironmentVariables.MSI_ENDPOINT">
-<code class="sig-name descname">MSI_ENDPOINT</code><em class="property"> = 'MSI_ENDPOINT'</em><a class="headerlink" href="#azure.identity.constants.EnvironmentVariables.MSI_ENDPOINT" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="azure.identity.constants.EnvironmentVariables.MSI_SECRET">
-<code class="sig-name descname">MSI_SECRET</code><em class="property"> = 'MSI_SECRET'</em><a class="headerlink" href="#azure.identity.constants.EnvironmentVariables.MSI_SECRET" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="azure.identity.constants.EnvironmentVariables.USERNAME_PASSWORD_VARS">
-<code class="sig-name descname">USERNAME_PASSWORD_VARS</code><em class="property"> = ('AZURE_CLIENT_ID', 'AZURE_USERNAME', 'AZURE_PASSWORD')</em><a class="headerlink" href="#azure.identity.constants.EnvironmentVariables.USERNAME_PASSWORD_VARS" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
+<div class="section" id="azure-identity-constants-module">
+<h2>azure.identity.constants module<a class="headerlink" href="#azure-identity-constants-module" title="Permalink to this headline">¶</a></h2>
 </div>
 <div class="section" id="module-azure.identity.credentials">
 <span id="azure-identity-credentials-module"></span><h2>azure.identity.credentials module<a class="headerlink" href="#module-azure.identity.credentials" title="Permalink to this headline">¶</a></h2>
@@ -492,7 +415,8 @@ error message from each credential.</p>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">azure.identity._internal.msal_credentials.PublicClientCredential</span></code></p>
 <p>Authenticates users through the device code flow. When <code class="docutils literal notranslate"><span class="pre">get_token</span></code> is called, this credential acquires a
 verification URL and code from Azure Active Directory. A user must browse to the URL, enter the code, and
-authenticate with Directory. If the user authenticates successfully, the credential receives an access token.</p>
+authenticate with Azure Active Directory. If the user authenticates successfully, the credential receives
+an access token.</p>
 <p>This credential doesn’t cache tokens–each <code class="docutils literal notranslate"><span class="pre">get_token</span></code> call begins a new authentication flow.</p>
 <p>For more information about the device code flow, see Azure Active Directory documentation:
 <a class="reference external" href="https://docs.microsoft.com/en-us/azure/active-directory/develop/v2-oauth2-device-code">https://docs.microsoft.com/en-us/azure/active-directory/develop/v2-oauth2-device-code</a></p>
@@ -500,21 +424,29 @@ authenticate with Directory. If the user authenticates successfully, the credent
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>client_id</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – the application’s ID</p></li>
-<li><p><strong>prompt_callback</strong> (A callable accepting arguments (<code class="docutils literal notranslate"><span class="pre">verification_uri</span></code>, <code class="docutils literal notranslate"><span class="pre">user_code</span></code>, <code class="docutils literal notranslate"><span class="pre">expires_in</span></code>):
-- <code class="docutils literal notranslate"><span class="pre">verification_uri</span></code> (str) the URL the user must visit
-- <code class="docutils literal notranslate"><span class="pre">user_code</span></code> (str) the code the user must enter there
-- <code class="docutils literal notranslate"><span class="pre">expires_in</span></code> (int) the number of seconds the code will be valid) – (optional) A callback enabling control of how authentication instructions are presented.
-If not provided, the credential will print instructions to stdout.</p></li>
+<li><p><strong>prompt_callback</strong> – <p>(optional) A callback enabling control of how authentication instructions are presented.
+Must accept arguments (<code class="docutils literal notranslate"><span class="pre">verification_uri</span></code>, <code class="docutils literal notranslate"><span class="pre">user_code</span></code>, <code class="docutils literal notranslate"><span class="pre">expires_in</span></code>):</p>
+<blockquote>
+<div><ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">verification_uri</span></code> (str) the URL the user must visit</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">user_code</span></code> (str) the code the user must enter there</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">expires_in</span></code> (int) the number of seconds the code will be valid</p></li>
+</ul>
+</div></blockquote>
+<p>If not provided, the credential will print instructions to stdout.</p>
+</p></li>
 </ul>
 </dd>
 </dl>
-<p><strong>Keyword arguments:</strong></p>
-<ul class="simple">
-<li><p><em>tenant (str)</em> - tenant ID or a domain associated with a tenant. If not provided, the credential defaults to the
+<dl class="simple">
+<dt>Keyword arguments</dt><dd><ul class="simple">
+<li><p><em>tenant (str)</em> - tenant ID or a domain associated with a tenant. If not provided, defaults to the
 ‘organizations’ tenant, which supports only Azure Active Directory work or school accounts.</p></li>
-<li><p><em>timeout (int)</em> - seconds to wait for the user to authenticate. Defaults to the validity period of the device code
-as set by Azure Active Directory, which also prevails when <code class="docutils literal notranslate"><span class="pre">timeout</span></code> is longer.</p></li>
+<li><p><em>timeout (int)</em> - seconds to wait for the user to authenticate. Defaults to the validity period of the device
+code as set by Azure Active Directory, which also prevails when <code class="docutils literal notranslate"><span class="pre">timeout</span></code> is longer.</p></li>
 </ul>
+</dd>
+</dl>
 <dl class="method">
 <dt id="azure.identity.credentials.DeviceCodeCredential.get_token">
 <code class="sig-name descname">get_token</code><span class="sig-paren">(</span><em class="sig-param">*scopes</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/identity/credentials.html#DeviceCodeCredential.get_token"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.identity.credentials.DeviceCodeCredential.get_token" title="Permalink to this definition">¶</a></dt>
@@ -630,11 +562,13 @@ See this document for more information about account types:
 </ul>
 </dd>
 </dl>
-<p><strong>Keyword arguments:</strong></p>
-<ul class="simple">
-<li><p><strong>tenant (str)</strong> - a tenant ID or a domain associated with a tenant. If not provided, defaults to the
-‘organizations’ tenant.</p></li>
+<dl class="simple">
+<dt>Keyword arguments</dt><dd><ul class="simple">
+<li><p><em>tenant (str)</em> - tenant ID or a domain associated with a tenant. If not provided, defaults to the
+‘organizations’ tenant, which supports only Azure Active Directory work or school accounts.</p></li>
 </ul>
+</dd>
+</dl>
 <dl class="method">
 <dt id="azure.identity.credentials.UsernamePasswordCredential.get_token">
 <code class="sig-name descname">get_token</code><span class="sig-paren">(</span><em class="sig-param">*scopes</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/identity/credentials.html#UsernamePasswordCredential.get_token"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.identity.credentials.UsernamePasswordCredential.get_token" title="Permalink to this definition">¶</a></dt>
@@ -655,8 +589,8 @@ See this document for more information about account types:
 </dd></dl>
 
 </div>
-<div class="section" id="module-azure.identity.version">
-<span id="azure-identity-version-module"></span><h2>azure.identity.version module<a class="headerlink" href="#module-azure.identity.version" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="azure-identity-version-module">
+<h2>azure.identity.version module<a class="headerlink" href="#azure-identity-version-module" title="Permalink to this headline">¶</a></h2>
 </div>
 <div class="section" id="module-azure.identity">
 <span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-azure.identity" title="Permalink to this headline">¶</a></h2>
@@ -761,9 +695,9 @@ error message from each credential.</p>
 <dd><p>Bases: <a class="reference internal" href="#azure.identity.credentials.ChainedTokenCredential" title="azure.identity.credentials.ChainedTokenCredential"><code class="xref py py-class docutils literal notranslate"><span class="pre">azure.identity.credentials.ChainedTokenCredential</span></code></a></p>
 <p>A default credential capable of handling most Azure SDK authentication scenarios.</p>
 <p>When environment variable configuration is present, it authenticates as a service principal
-using <code class="xref py py-class docutils literal notranslate"><span class="pre">identity.EnvironmentCredential</span></code>.</p>
+using <a class="reference internal" href="#azure.identity.EnvironmentCredential" title="azure.identity.EnvironmentCredential"><code class="xref py py-class docutils literal notranslate"><span class="pre">azure.identity.EnvironmentCredential</span></code></a>.</p>
 <p>When environment configuration is not present, it authenticates with a managed identity
-using <code class="xref py py-class docutils literal notranslate"><span class="pre">identity.ManagedIdentityCredential</span></code>.</p>
+using <a class="reference internal" href="#azure.identity.ManagedIdentityCredential" title="azure.identity.ManagedIdentityCredential"><code class="xref py py-class docutils literal notranslate"><span class="pre">azure.identity.ManagedIdentityCredential</span></code></a>.</p>
 </dd></dl>
 
 <dl class="class">
@@ -772,7 +706,8 @@ using <code class="xref py py-class docutils literal notranslate"><span class="p
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">azure.identity._internal.msal_credentials.PublicClientCredential</span></code></p>
 <p>Authenticates users through the device code flow. When <code class="docutils literal notranslate"><span class="pre">get_token</span></code> is called, this credential acquires a
 verification URL and code from Azure Active Directory. A user must browse to the URL, enter the code, and
-authenticate with Directory. If the user authenticates successfully, the credential receives an access token.</p>
+authenticate with Azure Active Directory. If the user authenticates successfully, the credential receives
+an access token.</p>
 <p>This credential doesn’t cache tokens–each <code class="docutils literal notranslate"><span class="pre">get_token</span></code> call begins a new authentication flow.</p>
 <p>For more information about the device code flow, see Azure Active Directory documentation:
 <a class="reference external" href="https://docs.microsoft.com/en-us/azure/active-directory/develop/v2-oauth2-device-code">https://docs.microsoft.com/en-us/azure/active-directory/develop/v2-oauth2-device-code</a></p>
@@ -780,21 +715,29 @@ authenticate with Directory. If the user authenticates successfully, the credent
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>client_id</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – the application’s ID</p></li>
-<li><p><strong>prompt_callback</strong> (A callable accepting arguments (<code class="docutils literal notranslate"><span class="pre">verification_uri</span></code>, <code class="docutils literal notranslate"><span class="pre">user_code</span></code>, <code class="docutils literal notranslate"><span class="pre">expires_in</span></code>):
-- <code class="docutils literal notranslate"><span class="pre">verification_uri</span></code> (str) the URL the user must visit
-- <code class="docutils literal notranslate"><span class="pre">user_code</span></code> (str) the code the user must enter there
-- <code class="docutils literal notranslate"><span class="pre">expires_in</span></code> (int) the number of seconds the code will be valid) – (optional) A callback enabling control of how authentication instructions are presented.
-If not provided, the credential will print instructions to stdout.</p></li>
+<li><p><strong>prompt_callback</strong> – <p>(optional) A callback enabling control of how authentication instructions are presented.
+Must accept arguments (<code class="docutils literal notranslate"><span class="pre">verification_uri</span></code>, <code class="docutils literal notranslate"><span class="pre">user_code</span></code>, <code class="docutils literal notranslate"><span class="pre">expires_in</span></code>):</p>
+<blockquote>
+<div><ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">verification_uri</span></code> (str) the URL the user must visit</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">user_code</span></code> (str) the code the user must enter there</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">expires_in</span></code> (int) the number of seconds the code will be valid</p></li>
+</ul>
+</div></blockquote>
+<p>If not provided, the credential will print instructions to stdout.</p>
+</p></li>
 </ul>
 </dd>
 </dl>
-<p><strong>Keyword arguments:</strong></p>
-<ul class="simple">
-<li><p><em>tenant (str)</em> - tenant ID or a domain associated with a tenant. If not provided, the credential defaults to the
+<dl class="simple">
+<dt>Keyword arguments</dt><dd><ul class="simple">
+<li><p><em>tenant (str)</em> - tenant ID or a domain associated with a tenant. If not provided, defaults to the
 ‘organizations’ tenant, which supports only Azure Active Directory work or school accounts.</p></li>
-<li><p><em>timeout (int)</em> - seconds to wait for the user to authenticate. Defaults to the validity period of the device code
-as set by Azure Active Directory, which also prevails when <code class="docutils literal notranslate"><span class="pre">timeout</span></code> is longer.</p></li>
+<li><p><em>timeout (int)</em> - seconds to wait for the user to authenticate. Defaults to the validity period of the device
+code as set by Azure Active Directory, which also prevails when <code class="docutils literal notranslate"><span class="pre">timeout</span></code> is longer.</p></li>
 </ul>
+</dd>
+</dl>
 <dl class="method">
 <dt id="azure.identity.DeviceCodeCredential.get_token">
 <code class="sig-name descname">get_token</code><span class="sig-paren">(</span><em class="sig-param">*scopes</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/identity/credentials.html#DeviceCodeCredential.get_token"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.identity.DeviceCodeCredential.get_token" title="Permalink to this definition">¶</a></dt>
@@ -863,7 +806,7 @@ environment variables:</p>
 
 <dl class="class">
 <dt id="azure.identity.InteractiveBrowserCredential">
-<em class="property">class </em><code class="sig-prename descclassname">azure.identity.</code><code class="sig-name descname">InteractiveBrowserCredential</code><span class="sig-paren">(</span><em class="sig-param">client_id</em>, <em class="sig-param">client_secret</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/identity/browser_auth.html#InteractiveBrowserCredential"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.identity.InteractiveBrowserCredential" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">azure.identity.</code><code class="sig-name descname">InteractiveBrowserCredential</code><span class="sig-paren">(</span><em class="sig-param">client_id</em>, <em class="sig-param">client_secret</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/identity/_browser_auth.html#InteractiveBrowserCredential"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.identity.InteractiveBrowserCredential" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">azure.identity._internal.msal_credentials.ConfidentialClientCredential</span></code></p>
 <p>Authenticates a user through the authorization code flow. This is an interactive flow: <code class="docutils literal notranslate"><span class="pre">get_token</span></code> opens a
 browser to a login URL provided by Azure Active Directory, and waits for the user to authenticate there.</p>
@@ -873,19 +816,21 @@ browser to a login URL provided by Azure Active Directory, and waits for the use
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>client_id</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – the application’s client ID</p></li>
-<li><p><strong>secret</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – one of the application’s client secrets</p></li>
+<li><p><strong>client_secret</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – one of the application’s client secrets</p></li>
 </ul>
 </dd>
 </dl>
-<p><strong>Keyword arguments:</strong></p>
 <dl class="simple">
-<dt><em>tenant (str)</em> - a tenant ID or a domain associated with a tenant. If not provided, the credential defaults to the</dt><dd><p>‘organizations’ tenant, which can authenticate work or school accounts.</p>
+<dt>Keyword arguments</dt><dd><ul class="simple">
+<li><p><em>tenant (str)</em>: a tenant ID or a domain associated with a tenant. Defaults to the ‘organizations’ tenant,
+which can authenticate work or school accounts.</p></li>
+<li><p><em>timeout (int)</em>: seconds to wait for the user to complete authentication. Defaults to 300 (5 minutes).</p></li>
+</ul>
 </dd>
 </dl>
-<p><em>timeout (str)</em> - seconds to wait for the user to complete authentication. Defaults to 300 (5 minutes).</p>
 <dl class="method">
 <dt id="azure.identity.InteractiveBrowserCredential.get_token">
-<code class="sig-name descname">get_token</code><span class="sig-paren">(</span><em class="sig-param">*scopes</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/identity/browser_auth.html#InteractiveBrowserCredential.get_token"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.identity.InteractiveBrowserCredential.get_token" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_token</code><span class="sig-paren">(</span><em class="sig-param">*scopes</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/identity/_browser_auth.html#InteractiveBrowserCredential.get_token"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.identity.InteractiveBrowserCredential.get_token" title="Permalink to this definition">¶</a></dt>
 <dd><p>Request an access token for <cite>scopes</cite>. This will open a browser to a login page and listen on localhost for a
 request indicating authentication has completed.</p>
 <dl class="field-list simple">
@@ -952,11 +897,13 @@ See this document for more information about account types:
 </ul>
 </dd>
 </dl>
-<p><strong>Keyword arguments:</strong></p>
-<ul class="simple">
-<li><p><strong>tenant (str)</strong> - a tenant ID or a domain associated with a tenant. If not provided, defaults to the
-‘organizations’ tenant.</p></li>
+<dl class="simple">
+<dt>Keyword arguments</dt><dd><ul class="simple">
+<li><p><em>tenant (str)</em> - tenant ID or a domain associated with a tenant. If not provided, defaults to the
+‘organizations’ tenant, which supports only Azure Active Directory work or school accounts.</p></li>
 </ul>
+</dd>
+</dl>
 <dl class="method">
 <dt id="azure.identity.UsernamePasswordCredential.get_token">
 <code class="sig-name descname">get_token</code><span class="sig-paren">(</span><em class="sig-param">*scopes</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/identity/credentials.html#UsernamePasswordCredential.get_token"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.identity.UsernamePasswordCredential.get_token" title="Permalink to this definition">¶</a></dt>
