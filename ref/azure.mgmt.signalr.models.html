@@ -438,23 +438,23 @@ available.</p></li>
 <dt id="azure.mgmt.signalr.models.ResourceSku">
 <em class="property">class </em><code class="sig-prename descclassname">azure.mgmt.signalr.models.</code><code class="sig-name descname">ResourceSku</code><span class="sig-paren">(</span><em class="sig-param">*</em>, <em class="sig-param">name: str</em>, <em class="sig-param">tier=None</em>, <em class="sig-param">size: str = None</em>, <em class="sig-param">family: str = None</em>, <em class="sig-param">capacity: int = None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/mgmt/signalr/models/resource_sku_py3.html#ResourceSku"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.signalr.models.ResourceSku" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">msrest.serialization.Model</span></code></p>
-<p>The billing information of the resource.(e.g. basic vs. standard).</p>
+<p>The billing information of the SignalR resource.</p>
 <p>All required parameters must be populated in order to send to Azure.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Required. The name of the SKU. This is typically a letter +
-number code, such as A0 or P3.  Required (if sku is specified)</p></li>
-<li><p><strong>tier</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a><em> or </em><a class="reference internal" href="#azure.mgmt.signalr.models.SignalRSkuTier" title="azure.mgmt.signalr.models.SignalRSkuTier"><em>SignalRSkuTier</em></a>) – Optional tier of this particular SKU. <cite>Basic</cite> is deprecated,
-use <cite>Standard</cite> instead. Possible values include: ‘Free’, ‘Basic’,
-‘Standard’, ‘Premium’</p></li>
-<li><p><strong>size</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Optional, string. When the name field is the combination of
-tier and some other value, this would be the standalone code.</p></li>
-<li><p><strong>family</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Optional, string. If the service has different generations
-of hardware, for the same SKU, then that can be captured here.</p></li>
-<li><p><strong>capacity</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a>) – Optional, integer. If the SKU supports scale out/in then
-the capacity integer should be included. If scale out/in is not
-possible for the resource this may be omitted.</p></li>
+<li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Required. The name of the SKU. Required.
+Allowed values: Standard_S1, Free_F1</p></li>
+<li><p><strong>tier</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a><em> or </em><a class="reference internal" href="#azure.mgmt.signalr.models.SignalRSkuTier" title="azure.mgmt.signalr.models.SignalRSkuTier"><em>SignalRSkuTier</em></a>) – Optional tier of this particular SKU. ‘Standard’ or ‘Free’.
+<cite>Basic</cite> is deprecated, use <cite>Standard</cite> instead. Possible values include:
+‘Free’, ‘Basic’, ‘Standard’, ‘Premium’</p></li>
+<li><p><strong>size</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Optional string. For future use.</p></li>
+<li><p><strong>family</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Optional string. For future use.</p></li>
+<li><p><strong>capacity</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a>) – Optional, integer. The unit count of SignalR resource. 1
+by default.
+If present, following values are allowed:
+Free: 1
+Standard: 1,2,5,10,20,50,100</p></li>
 </ul>
 </dd>
 </dl>
@@ -462,7 +462,7 @@ possible for the resource this may be omitted.</p></li>
 
 <dl class="class">
 <dt id="azure.mgmt.signalr.models.SignalRResource">
-<em class="property">class </em><code class="sig-prename descclassname">azure.mgmt.signalr.models.</code><code class="sig-name descname">SignalRResource</code><span class="sig-paren">(</span><em class="sig-param">*</em>, <em class="sig-param">location: str = None</em>, <em class="sig-param">tags=None</em>, <em class="sig-param">sku=None</em>, <em class="sig-param">host_name_prefix: str = None</em>, <em class="sig-param">version: str = None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/mgmt/signalr/models/signal_rresource_py3.html#SignalRResource"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.signalr.models.SignalRResource" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">azure.mgmt.signalr.models.</code><code class="sig-name descname">SignalRResource</code><span class="sig-paren">(</span><em class="sig-param">*</em>, <em class="sig-param">location: str = None</em>, <em class="sig-param">tags=None</em>, <em class="sig-param">sku=None</em>, <em class="sig-param">host_name_prefix: str = None</em>, <em class="sig-param">features=None</em>, <em class="sig-param">cors=None</em>, <em class="sig-param">version: str = None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/mgmt/signalr/models/signal_rresource_py3.html#SignalRResource"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.signalr.models.SignalRResource" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">azure.mgmt.signalr.models.tracked_resource_py3.TrackedResource</span></code></p>
 <p>A class represent a SignalR service resource.</p>
 <p>Variables are only populated by the server, and will be ignored when
@@ -498,6 +498,15 @@ describe the resource.</p></li>
 Retained for future use.
 The hostname will be of format:
 &amp;lt;hostNamePrefix&amp;gt;.service.signalr.net.</p></li>
+<li><p><strong>features</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><em>list</em></a><em>[</em><a class="reference internal" href="#azure.mgmt.signalr.models.SignalRFeature" title="azure.mgmt.signalr.models.SignalRFeature"><em>SignalRFeature</em></a><em>]</em>) – List of SignalR featureFlags. e.g. ServiceMode.
+FeatureFlags that are not included in the parameters for the update
+operation will not be modified.
+And the response will only include featureFlags that are explicitly set.
+When a featureFlag is not explicitly set, SignalR service will use its
+globally default value.
+But keep in mind, the default value doesn’t mean “false”. It varies in
+terms of different FeatureFlags.</p></li>
+<li><p><strong>cors</strong> (<a class="reference internal" href="#azure.mgmt.signalr.models.SignalRCorsSettings" title="azure.mgmt.signalr.models.SignalRCorsSettings"><em>SignalRCorsSettings</em></a>) – Cross-Origin Resource Sharing (CORS) settings.</p></li>
 <li><p><strong>version</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Version of the SignalR resource. Probably you need the
 same or higher version of client SDKs.</p></li>
 </ul>
@@ -552,16 +561,71 @@ sending a request.</p>
 </dd></dl>
 
 <dl class="class">
+<dt id="azure.mgmt.signalr.models.SignalRFeature">
+<em class="property">class </em><code class="sig-prename descclassname">azure.mgmt.signalr.models.</code><code class="sig-name descname">SignalRFeature</code><span class="sig-paren">(</span><em class="sig-param">*</em>, <em class="sig-param">value: str</em>, <em class="sig-param">properties=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/mgmt/signalr/models/signal_rfeature_py3.html#SignalRFeature"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.signalr.models.SignalRFeature" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">msrest.serialization.Model</span></code></p>
+<p>Feature of a SignalR resource, which controls the SignalR runtime behavior.</p>
+<p>Variables are only populated by the server, and will be ignored when
+sending a request.</p>
+<p>All required parameters must be populated in order to send to Azure.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Variables</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#azure.mgmt.signalr.models.SignalRFeature.flag" title="azure.mgmt.signalr.models.SignalRFeature.flag"><strong>flag</strong></a> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Required. Kind of feature. Required. Default value:
+“ServiceMode” .</p>
+</dd>
+<dt class="field-even">Parameters</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>value</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Required. Value of the feature flag. See Azure SignalR
+service document <a class="reference external" href="https://docs.microsoft.com/en-us/azure/azure-signalr/">https://docs.microsoft.com/en-us/azure/azure-signalr/</a> for
+allowed values.</p></li>
+<li><p><strong>properties</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#dict" title="(in Python v3.5)"><em>dict</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a><em>]</em>) – Optional properties related to this feature.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="attribute">
+<dt id="azure.mgmt.signalr.models.SignalRFeature.flag">
+<code class="sig-name descname">flag</code><em class="property"> = 'ServiceMode'</em><a class="headerlink" href="#azure.mgmt.signalr.models.SignalRFeature.flag" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="azure.mgmt.signalr.models.SignalRCorsSettings">
+<em class="property">class </em><code class="sig-prename descclassname">azure.mgmt.signalr.models.</code><code class="sig-name descname">SignalRCorsSettings</code><span class="sig-paren">(</span><em class="sig-param">*</em>, <em class="sig-param">allowed_origins=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/mgmt/signalr/models/signal_rcors_settings_py3.html#SignalRCorsSettings"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.signalr.models.SignalRCorsSettings" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">msrest.serialization.Model</span></code></p>
+<p>Cross-Origin Resource Sharing (CORS) settings.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>allowed_origins</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a><em>]</em>) – Gets or sets the list of origins that should be
+allowed to make cross-origin calls (for example:
+<a class="reference external" href="http://example.com:12345">http://example.com:12345</a>). Use “*” to allow all. If omitted, allow all by
+default.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="class">
 <dt id="azure.mgmt.signalr.models.SignalRCreateOrUpdateProperties">
-<em class="property">class </em><code class="sig-prename descclassname">azure.mgmt.signalr.models.</code><code class="sig-name descname">SignalRCreateOrUpdateProperties</code><span class="sig-paren">(</span><em class="sig-param">*</em>, <em class="sig-param">host_name_prefix: str = None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/mgmt/signalr/models/signal_rcreate_or_update_properties_py3.html#SignalRCreateOrUpdateProperties"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.signalr.models.SignalRCreateOrUpdateProperties" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">azure.mgmt.signalr.models.</code><code class="sig-name descname">SignalRCreateOrUpdateProperties</code><span class="sig-paren">(</span><em class="sig-param">*</em>, <em class="sig-param">host_name_prefix: str = None</em>, <em class="sig-param">features=None</em>, <em class="sig-param">cors=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/mgmt/signalr/models/signal_rcreate_or_update_properties_py3.html#SignalRCreateOrUpdateProperties"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.signalr.models.SignalRCreateOrUpdateProperties" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">msrest.serialization.Model</span></code></p>
 <p>Settings used to provision or configure the resource.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>host_name_prefix</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Prefix for the hostName of the SignalR service.
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>host_name_prefix</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Prefix for the hostName of the SignalR service.
 Retained for future use.
 The hostname will be of format:
-&amp;lt;hostNamePrefix&amp;gt;.service.signalr.net.</p>
+&amp;lt;hostNamePrefix&amp;gt;.service.signalr.net.</p></li>
+<li><p><strong>features</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><em>list</em></a><em>[</em><a class="reference internal" href="#azure.mgmt.signalr.models.SignalRFeature" title="azure.mgmt.signalr.models.SignalRFeature"><em>SignalRFeature</em></a><em>]</em>) – List of SignalR featureFlags. e.g. ServiceMode.
+FeatureFlags that are not included in the parameters for the update
+operation will not be modified.
+And the response will only include featureFlags that are explicitly set.
+When a featureFlag is not explicitly set, SignalR service will use its
+globally default value.
+But keep in mind, the default value doesn’t mean “false”. It varies in
+terms of different FeatureFlags.</p></li>
+<li><p><strong>cors</strong> (<a class="reference internal" href="#azure.mgmt.signalr.models.SignalRCorsSettings" title="azure.mgmt.signalr.models.SignalRCorsSettings"><em>SignalRCorsSettings</em></a>) – Cross-Origin Resource Sharing (CORS) settings.</p></li>
+</ul>
 </dd>
 </dl>
 </dd></dl>

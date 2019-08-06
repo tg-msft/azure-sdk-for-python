@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>azure.mgmt.signalr.models.signal_rcreate_or_update_properties_py3 &mdash; Azure SDK for Python 2.0.0 documentation</title>
+  <title>azure.mgmt.signalr.models.signal_rcors_settings_py3 &mdash; Azure SDK for Python 2.0.0 documentation</title>
   
 
   
@@ -260,7 +260,7 @@
         
           <li><a href="../../../../index.html">Module code</a> &raquo;</li>
         
-      <li>azure.mgmt.signalr.models.signal_rcreate_or_update_properties_py3</li>
+      <li>azure.mgmt.signalr.models.signal_rcors_settings_py3</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -275,7 +275,7 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <h1>Source code for azure.mgmt.signalr.models.signal_rcreate_or_update_properties_py3</h1><div class="highlight"><pre>
+  <h1>Source code for azure.mgmt.signalr.models.signal_rcors_settings_py3</h1><div class="highlight"><pre>
 <span></span><span class="c1"># coding=utf-8</span>
 <span class="c1"># --------------------------------------------------------------------------</span>
 <span class="c1"># Copyright (c) Microsoft Corporation. All rights reserved.</span>
@@ -290,38 +290,23 @@
 <span class="kn">from</span> <span class="nn">msrest.serialization</span> <span class="k">import</span> <span class="n">Model</span>
 
 
-<div class="viewcode-block" id="SignalRCreateOrUpdateProperties"><a class="viewcode-back" href="../../../../../ref/azure.mgmt.signalr.models.html#azure.mgmt.signalr.models.SignalRCreateOrUpdateProperties">[docs]</a><span class="k">class</span> <span class="nc">SignalRCreateOrUpdateProperties</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Settings used to provision or configure the resource.</span>
+<div class="viewcode-block" id="SignalRCorsSettings"><a class="viewcode-back" href="../../../../../ref/azure.mgmt.signalr.models.html#azure.mgmt.signalr.models.SignalRCorsSettings">[docs]</a><span class="k">class</span> <span class="nc">SignalRCorsSettings</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Cross-Origin Resource Sharing (CORS) settings.</span>
 
-<span class="sd">    :param host_name_prefix: Prefix for the hostName of the SignalR service.</span>
-<span class="sd">     Retained for future use.</span>
-<span class="sd">     The hostname will be of format:</span>
-<span class="sd">     &amp;lt;hostNamePrefix&amp;gt;.service.signalr.net.</span>
-<span class="sd">    :type host_name_prefix: str</span>
-<span class="sd">    :param features: List of SignalR featureFlags. e.g. ServiceMode.</span>
-<span class="sd">     FeatureFlags that are not included in the parameters for the update</span>
-<span class="sd">     operation will not be modified.</span>
-<span class="sd">     And the response will only include featureFlags that are explicitly set.</span>
-<span class="sd">     When a featureFlag is not explicitly set, SignalR service will use its</span>
-<span class="sd">     globally default value.</span>
-<span class="sd">     But keep in mind, the default value doesn&#39;t mean &quot;false&quot;. It varies in</span>
-<span class="sd">     terms of different FeatureFlags.</span>
-<span class="sd">    :type features: list[~azure.mgmt.signalr.models.SignalRFeature]</span>
-<span class="sd">    :param cors: Cross-Origin Resource Sharing (CORS) settings.</span>
-<span class="sd">    :type cors: ~azure.mgmt.signalr.models.SignalRCorsSettings</span>
+<span class="sd">    :param allowed_origins: Gets or sets the list of origins that should be</span>
+<span class="sd">     allowed to make cross-origin calls (for example:</span>
+<span class="sd">     http://example.com:12345). Use &quot;*&quot; to allow all. If omitted, allow all by</span>
+<span class="sd">     default.</span>
+<span class="sd">    :type allowed_origins: list[str]</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">_attribute_map</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="s1">&#39;host_name_prefix&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;key&#39;</span><span class="p">:</span> <span class="s1">&#39;hostNamePrefix&#39;</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;str&#39;</span><span class="p">},</span>
-        <span class="s1">&#39;features&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;key&#39;</span><span class="p">:</span> <span class="s1">&#39;features&#39;</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;[SignalRFeature]&#39;</span><span class="p">},</span>
-        <span class="s1">&#39;cors&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;key&#39;</span><span class="p">:</span> <span class="s1">&#39;cors&#39;</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;SignalRCorsSettings&#39;</span><span class="p">},</span>
+        <span class="s1">&#39;allowed_origins&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;key&#39;</span><span class="p">:</span> <span class="s1">&#39;allowedOrigins&#39;</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;[str]&#39;</span><span class="p">},</span>
     <span class="p">}</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">host_name_prefix</span><span class="p">:</span> <span class="nb">str</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">features</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">cors</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="nb">super</span><span class="p">(</span><span class="n">SignalRCreateOrUpdateProperties</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">host_name_prefix</span> <span class="o">=</span> <span class="n">host_name_prefix</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">features</span> <span class="o">=</span> <span class="n">features</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">cors</span> <span class="o">=</span> <span class="n">cors</span></div>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">allowed_origins</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">SignalRCorsSettings</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">allowed_origins</span> <span class="o">=</span> <span class="n">allowed_origins</span></div>
 </pre></div>
 
            </div>

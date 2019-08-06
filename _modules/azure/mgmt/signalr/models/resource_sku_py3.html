@@ -291,26 +291,26 @@
 
 
 <div class="viewcode-block" id="ResourceSku"><a class="viewcode-back" href="../../../../../ref/azure.mgmt.signalr.models.html#azure.mgmt.signalr.models.ResourceSku">[docs]</a><span class="k">class</span> <span class="nc">ResourceSku</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;The billing information of the resource.(e.g. basic vs. standard).</span>
+    <span class="sd">&quot;&quot;&quot;The billing information of the SignalR resource.</span>
 
 <span class="sd">    All required parameters must be populated in order to send to Azure.</span>
 
-<span class="sd">    :param name: Required. The name of the SKU. This is typically a letter +</span>
-<span class="sd">     number code, such as A0 or P3.  Required (if sku is specified)</span>
+<span class="sd">    :param name: Required. The name of the SKU. Required.</span>
+<span class="sd">     Allowed values: Standard_S1, Free_F1</span>
 <span class="sd">    :type name: str</span>
-<span class="sd">    :param tier: Optional tier of this particular SKU. `Basic` is deprecated,</span>
-<span class="sd">     use `Standard` instead. Possible values include: &#39;Free&#39;, &#39;Basic&#39;,</span>
-<span class="sd">     &#39;Standard&#39;, &#39;Premium&#39;</span>
+<span class="sd">    :param tier: Optional tier of this particular SKU. &#39;Standard&#39; or &#39;Free&#39;.</span>
+<span class="sd">     `Basic` is deprecated, use `Standard` instead. Possible values include:</span>
+<span class="sd">     &#39;Free&#39;, &#39;Basic&#39;, &#39;Standard&#39;, &#39;Premium&#39;</span>
 <span class="sd">    :type tier: str or ~azure.mgmt.signalr.models.SignalRSkuTier</span>
-<span class="sd">    :param size: Optional, string. When the name field is the combination of</span>
-<span class="sd">     tier and some other value, this would be the standalone code.</span>
+<span class="sd">    :param size: Optional string. For future use.</span>
 <span class="sd">    :type size: str</span>
-<span class="sd">    :param family: Optional, string. If the service has different generations</span>
-<span class="sd">     of hardware, for the same SKU, then that can be captured here.</span>
+<span class="sd">    :param family: Optional string. For future use.</span>
 <span class="sd">    :type family: str</span>
-<span class="sd">    :param capacity: Optional, integer. If the SKU supports scale out/in then</span>
-<span class="sd">     the capacity integer should be included. If scale out/in is not</span>
-<span class="sd">     possible for the resource this may be omitted.</span>
+<span class="sd">    :param capacity: Optional, integer. The unit count of SignalR resource. 1</span>
+<span class="sd">     by default.</span>
+<span class="sd">     If present, following values are allowed:</span>
+<span class="sd">     Free: 1</span>
+<span class="sd">     Standard: 1,2,5,10,20,50,100</span>
 <span class="sd">    :type capacity: int</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
