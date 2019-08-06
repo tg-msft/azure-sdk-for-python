@@ -300,7 +300,7 @@
     <span class="n">TYPE_CHECKING</span> <span class="o">=</span> <span class="kc">False</span>
 <span class="k">if</span> <span class="n">TYPE_CHECKING</span><span class="p">:</span>
     <span class="kn">from</span> <span class="nn">azure.core.credentials</span> <span class="k">import</span> <span class="n">TokenCredential</span>
-    <span class="kn">from</span> <span class="nn">typing</span> <span class="k">import</span> <span class="n">Union</span>
+    <span class="kn">from</span> <span class="nn">typing</span> <span class="k">import</span> <span class="n">Union</span><span class="p">,</span> <span class="n">Any</span>
 
 <span class="kn">from</span> <span class="nn">azure.eventhub</span> <span class="k">import</span> <span class="n">__version__</span>
 <span class="kn">from</span> <span class="nn">azure.eventhub.configuration</span> <span class="k">import</span> <span class="n">_Configuration</span>
@@ -372,7 +372,7 @@
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">host</span><span class="p">,</span> <span class="n">event_hub_path</span><span class="p">,</span> <span class="n">credential</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="c1"># type:(str, str, Union[EventHubSharedKeyCredential, EventHubSASTokenCredential, TokenCredential], ...) -&gt; None</span>
+        <span class="c1"># type:(str, str, Union[EventHubSharedKeyCredential, EventHubSASTokenCredential, TokenCredential], Any) -&gt; None</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Constructs a new EventHubClient.</span>
 
@@ -396,9 +396,9 @@
 <span class="sd">        :type auth_timeout: float</span>
 <span class="sd">        :param user_agent: The user agent that needs to be appended to the built in user agent string.</span>
 <span class="sd">        :type user_agent: str</span>
-<span class="sd">        :param max_retries: The max number of attempts to redo the failed operation when an error happened. Default</span>
+<span class="sd">        :param retry_total: The total number of attempts to redo the failed operation when an error happened. Default</span>
 <span class="sd">         value is 3.</span>
-<span class="sd">        :type max_retries: int</span>
+<span class="sd">        :type retry_total: int</span>
 <span class="sd">        :param transport_type: The type of transport protocol that will be used for communicating with</span>
 <span class="sd">         the Event Hubs service. Default is ~azure.eventhub.TransportType.Amqp.</span>
 <span class="sd">        :type transport_type: ~azure.eventhub.TransportType</span>
@@ -497,7 +497,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">mgmt_target</span> <span class="o">=</span> <span class="n">redirect_uri</span>
 
 <div class="viewcode-block" id="EventHubClientAbstract.from_connection_string"><a class="viewcode-back" href="../../../ref/azure.eventhub.html#azure.eventhub.client_abstract.EventHubClientAbstract.from_connection_string">[docs]</a>    <span class="nd">@classmethod</span>
-    <span class="k">def</span> <span class="nf">from_connection_string</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">conn_str</span><span class="p">,</span> <span class="n">event_hub_path</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">from_connection_string</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">conn_str</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Create an EventHubClient from an EventHub/IotHub connection string.</span>
 
 <span class="sd">        :param conn_str: The connection string of an eventhub or IoT hub</span>
@@ -517,9 +517,9 @@
 <span class="sd">        :type auth_timeout: float</span>
 <span class="sd">        :param user_agent: The user agent that needs to be appended to the built in user agent string.</span>
 <span class="sd">        :type user_agent: str</span>
-<span class="sd">        :param max_retries: The max number of attempts to redo the failed operation when an error happened. Default</span>
+<span class="sd">        :param retry_total: The total number of attempts to redo the failed operation when an error happened. Default</span>
 <span class="sd">         value is 3.</span>
-<span class="sd">        :type max_retries: int</span>
+<span class="sd">        :type retry_total: int</span>
 <span class="sd">        :param transport_type: The type of transport protocol that will be used for communicating with</span>
 <span class="sd">         the Event Hubs service. Default is ~azure.eventhub.TransportType.Amqp.</span>
 <span class="sd">        :type transport_type: ~azure.eventhub.TransportType</span>
@@ -544,6 +544,7 @@
 <span class="sd">                :caption: Create an EventHubClient from a connection string.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">event_hub_path</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;event_hub_path&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
         <span class="n">is_iot_conn_str</span> <span class="o">=</span> <span class="n">conn_str</span><span class="o">.</span><span class="n">lstrip</span><span class="p">()</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;hostname&quot;</span><span class="p">)</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">is_iot_conn_str</span><span class="p">:</span>
             <span class="n">address</span><span class="p">,</span> <span class="n">policy</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">entity</span> <span class="o">=</span> <span class="n">_parse_conn_str</span><span class="p">(</span><span class="n">conn_str</span><span class="p">)</span>
@@ -553,16 +554,13 @@
                 <span class="n">host</span> <span class="o">=</span> <span class="n">address</span><span class="p">[</span><span class="n">left_slash_pos</span> <span class="o">+</span> <span class="mi">2</span><span class="p">:]</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">host</span> <span class="o">=</span> <span class="n">address</span>
+            <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;event_hub_path&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
             <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">host</span><span class="p">,</span> <span class="n">entity</span><span class="p">,</span> <span class="n">EventHubSharedKeyCredential</span><span class="p">(</span><span class="n">policy</span><span class="p">,</span> <span class="n">key</span><span class="p">),</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_from_iothub_connection_string</span><span class="p">(</span><span class="n">conn_str</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="EventHubClientAbstract.create_consumer"><a class="viewcode-back" href="../../../ref/azure.eventhub.html#azure.eventhub.client_abstract.EventHubClientAbstract.create_consumer">[docs]</a>    <span class="nd">@abstractmethod</span>
-    <span class="k">def</span> <span class="nf">create_consumer</span><span class="p">(</span>
-            <span class="bp">self</span><span class="p">,</span> <span class="n">consumer_group</span><span class="p">,</span> <span class="n">partition_id</span><span class="p">,</span> <span class="n">event_position</span><span class="p">,</span> <span class="n">owner_level</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-            <span class="n">operation</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-            <span class="n">prefetch</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-    <span class="p">):</span>
+    <span class="k">def</span> <span class="nf">create_consumer</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">consumer_group</span><span class="p">,</span> <span class="n">partition_id</span><span class="p">,</span> <span class="n">event_position</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="k">pass</span></div>
 
 <div class="viewcode-block" id="EventHubClientAbstract.create_producer"><a class="viewcode-back" href="../../../ref/azure.eventhub.html#azure.eventhub.client_abstract.EventHubClientAbstract.create_producer">[docs]</a>    <span class="nd">@abstractmethod</span>

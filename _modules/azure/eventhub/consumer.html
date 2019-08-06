@@ -288,38 +288,38 @@
 <span class="kn">from</span> <span class="nn">typing</span> <span class="k">import</span> <span class="n">List</span>
 
 <span class="kn">from</span> <span class="nn">uamqp</span> <span class="k">import</span> <span class="n">types</span><span class="p">,</span> <span class="n">errors</span>
-<span class="kn">from</span> <span class="nn">uamqp</span> <span class="k">import</span> <span class="n">compat</span>
 <span class="kn">from</span> <span class="nn">uamqp</span> <span class="k">import</span> <span class="n">ReceiveClient</span><span class="p">,</span> <span class="n">Source</span>
 
 <span class="kn">from</span> <span class="nn">azure.eventhub.common</span> <span class="k">import</span> <span class="n">EventData</span><span class="p">,</span> <span class="n">EventPosition</span>
-<span class="kn">from</span> <span class="nn">azure.eventhub.error</span> <span class="k">import</span> <span class="n">EventHubError</span><span class="p">,</span> <span class="n">AuthenticationError</span><span class="p">,</span> <span class="n">ConnectError</span><span class="p">,</span> <span class="n">ConnectionLostError</span><span class="p">,</span> <span class="n">_error_handler</span>
+<span class="kn">from</span> <span class="nn">azure.eventhub.error</span> <span class="k">import</span> <span class="n">_error_handler</span>
+<span class="kn">from</span> <span class="nn">._consumer_producer_mixin</span> <span class="k">import</span> <span class="n">ConsumerProducerMixin</span><span class="p">,</span> <span class="n">_retry_decorator</span>
 
 
 <span class="n">log</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
 
 
-<div class="viewcode-block" id="EventHubConsumer"><a class="viewcode-back" href="../../../ref/azure.eventhub.html#azure.eventhub.consumer.EventHubConsumer">[docs]</a><span class="k">class</span> <span class="nc">EventHubConsumer</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<div class="viewcode-block" id="EventHubConsumer"><a class="viewcode-back" href="../../../ref/azure.eventhub.html#azure.eventhub.consumer.EventHubConsumer">[docs]</a><span class="k">class</span> <span class="nc">EventHubConsumer</span><span class="p">(</span><span class="n">ConsumerProducerMixin</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    A consumer responsible for reading EventData from a specific Event Hub</span>
-<span class="sd">     partition and as a member of a specific consumer group.</span>
+<span class="sd">    partition and as a member of a specific consumer group.</span>
 
 <span class="sd">    A consumer may be exclusive, which asserts ownership over the partition for the consumer</span>
-<span class="sd">     group to ensure that only one consumer from that group is reading the from the partition.</span>
-<span class="sd">     These exclusive consumers are sometimes referred to as &quot;Epoch Consumers.&quot;</span>
+<span class="sd">    group to ensure that only one consumer from that group is reading the from the partition.</span>
+<span class="sd">    These exclusive consumers are sometimes referred to as &quot;Epoch Consumers.&quot;</span>
 
 <span class="sd">    A consumer may also be non-exclusive, allowing multiple consumers from the same consumer</span>
-<span class="sd">     group to be actively reading events from the partition.  These non-exclusive consumers are</span>
-<span class="sd">     sometimes referred to as &quot;Non-Epoch Consumers.&quot;</span>
+<span class="sd">    group to be actively reading events from the partition.  These non-exclusive consumers are</span>
+<span class="sd">    sometimes referred to as &quot;Non-Epoch Consumers.&quot;</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">timeout</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="n">_epoch</span> <span class="o">=</span> <span class="sa">b</span><span class="s1">&#39;com.microsoft:epoch&#39;</span>
+    <span class="n">_timeout</span> <span class="o">=</span> <span class="sa">b</span><span class="s1">&#39;com.microsoft:timeout&#39;</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">client</span><span class="p">,</span> <span class="n">source</span><span class="p">,</span> <span class="n">event_position</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">prefetch</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span> <span class="n">owner_level</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-                 <span class="n">keep_alive</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">auto_reconnect</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">client</span><span class="p">,</span> <span class="n">source</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Instantiate a consumer. EventHubConsumer should be instantiated by calling the `create_consumer` method</span>
-<span class="sd">         in EventHubClient.</span>
+<span class="sd">        in EventHubClient.</span>
 
 <span class="sd">        :param client: The parent EventHubClient.</span>
 <span class="sd">        :type client: ~azure.eventhub.client.EventHubClient</span>
@@ -332,6 +332,13 @@
 <span class="sd">         consumer if owner_level is set.</span>
 <span class="sd">        :type owner_level: int</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">event_position</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;event_position&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="n">prefetch</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;prefetch&quot;</span><span class="p">,</span> <span class="mi">300</span><span class="p">)</span>
+        <span class="n">owner_level</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;owner_level&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="n">keep_alive</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;keep_alive&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="n">auto_reconnect</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;auto_reconnect&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+
+        <span class="nb">super</span><span class="p">(</span><span class="n">EventHubConsumer</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">running</span> <span class="o">=</span> <span class="kc">False</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">client</span> <span class="o">=</span> <span class="n">client</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">source</span> <span class="o">=</span> <span class="n">source</span>
@@ -343,118 +350,64 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">auto_reconnect</span> <span class="o">=</span> <span class="n">auto_reconnect</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">retry_policy</span> <span class="o">=</span> <span class="n">errors</span><span class="o">.</span><span class="n">ErrorPolicy</span><span class="p">(</span><span class="n">max_retries</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">max_retries</span><span class="p">,</span> <span class="n">on_error</span><span class="o">=</span><span class="n">_error_handler</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">reconnect_backoff</span> <span class="o">=</span> <span class="mi">1</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">properties</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_link_properties</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">redirected</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">error</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="n">partition</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">source</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;EHReceiver-</span><span class="si">{}</span><span class="s2">-partition</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">uuid</span><span class="o">.</span><span class="n">uuid4</span><span class="p">(),</span> <span class="n">partition</span><span class="p">)</span>
-        <span class="n">source</span> <span class="o">=</span> <span class="n">Source</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">source</span><span class="p">)</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">offset</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">source</span><span class="o">.</span><span class="n">set_filter</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">offset</span><span class="o">.</span><span class="n">_selector</span><span class="p">())</span>  <span class="c1"># pylint: disable=protected-access</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">partition</span> <span class="o">=</span> <span class="n">partition</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;EHConsumer-</span><span class="si">{}</span><span class="s2">-partition</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">uuid</span><span class="o">.</span><span class="n">uuid4</span><span class="p">(),</span> <span class="n">partition</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">owner_level</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">properties</span> <span class="o">=</span> <span class="p">{</span><span class="n">types</span><span class="o">.</span><span class="n">AMQPSymbol</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_epoch</span><span class="p">):</span> <span class="n">types</span><span class="o">.</span><span class="n">AMQPLong</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">owner_level</span><span class="p">))}</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_handler</span> <span class="o">=</span> <span class="n">ReceiveClient</span><span class="p">(</span>
-            <span class="n">source</span><span class="p">,</span>
-            <span class="n">auth</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">get_auth</span><span class="p">(),</span>
-            <span class="n">debug</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">network_tracing</span><span class="p">,</span>
-            <span class="n">prefetch</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">prefetch</span><span class="p">,</span>
-            <span class="n">link_properties</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">properties</span><span class="p">,</span>
-            <span class="n">timeout</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">timeout</span><span class="p">,</span>
-            <span class="n">error_policy</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">retry_policy</span><span class="p">,</span>
-            <span class="n">keep_alive_interval</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">keep_alive</span><span class="p">,</span>
-            <span class="n">client_name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
-            <span class="n">properties</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">_create_properties</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">user_agent</span><span class="p">))</span>  <span class="c1"># pylint: disable=protected-access</span>
-
-    <span class="k">def</span> <span class="nf">__enter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span>
-
-    <span class="k">def</span> <span class="nf">__exit__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">exc_type</span><span class="p">,</span> <span class="n">exc_val</span><span class="p">,</span> <span class="n">exc_tb</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="n">exc_val</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_link_properties</span><span class="p">[</span><span class="n">types</span><span class="o">.</span><span class="n">AMQPSymbol</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_epoch</span><span class="p">)]</span> <span class="o">=</span> <span class="n">types</span><span class="o">.</span><span class="n">AMQPLong</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">owner_level</span><span class="p">))</span>
+        <span class="n">link_property_timeout_ms</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">receive_timeout</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">timeout</span><span class="p">)</span> <span class="o">*</span> <span class="mi">1000</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_link_properties</span><span class="p">[</span><span class="n">types</span><span class="o">.</span><span class="n">AMQPSymbol</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_timeout</span><span class="p">)]</span> <span class="o">=</span> <span class="n">types</span><span class="o">.</span><span class="n">AMQPLong</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">link_property_timeout_ms</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_handler</span> <span class="o">=</span> <span class="kc">None</span>
 
     <span class="k">def</span> <span class="nf">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span>
 
     <span class="k">def</span> <span class="nf">__next__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_open</span><span class="p">()</span>
         <span class="n">max_retries</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">max_retries</span>
-        <span class="n">connecting_count</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">retry_count</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
-            <span class="n">connecting_count</span> <span class="o">+=</span> <span class="mi">1</span>
             <span class="k">try</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_open</span><span class="p">()</span>
                 <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">messages_iter</span><span class="p">:</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">messages_iter</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_handler</span><span class="o">.</span><span class="n">receive_messages_iter</span><span class="p">()</span>
                 <span class="n">message</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">messages_iter</span><span class="p">)</span>
-                <span class="n">event_data</span> <span class="o">=</span> <span class="n">EventData</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="n">message</span><span class="p">)</span>
+                <span class="n">event_data</span> <span class="o">=</span> <span class="n">EventData</span><span class="o">.</span><span class="n">_from_message</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">offset</span> <span class="o">=</span> <span class="n">EventPosition</span><span class="p">(</span><span class="n">event_data</span><span class="o">.</span><span class="n">offset</span><span class="p">,</span> <span class="n">inclusive</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+                <span class="n">retry_count</span> <span class="o">=</span> <span class="mi">0</span>
                 <span class="k">return</span> <span class="n">event_data</span>
-            <span class="k">except</span> <span class="n">errors</span><span class="o">.</span><span class="n">AuthenticationException</span> <span class="k">as</span> <span class="n">auth_error</span><span class="p">:</span>
-                <span class="k">if</span> <span class="n">connecting_count</span> <span class="o">&lt;</span> <span class="n">max_retries</span><span class="p">:</span>
-                    <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;EventHubConsumer disconnected due to token error. Attempting reconnect.&quot;</span><span class="p">)</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">_reconnect</span><span class="p">()</span>
-                <span class="k">else</span><span class="p">:</span>
-                    <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;EventHubConsumer authentication failed. Shutting down.&quot;</span><span class="p">)</span>
-                    <span class="n">error</span> <span class="o">=</span> <span class="n">AuthenticationError</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">auth_error</span><span class="p">),</span> <span class="n">auth_error</span><span class="p">)</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="n">auth_error</span><span class="p">)</span>
-                    <span class="k">raise</span> <span class="n">error</span>
-            <span class="k">except</span> <span class="p">(</span><span class="n">errors</span><span class="o">.</span><span class="n">LinkDetach</span><span class="p">,</span> <span class="n">errors</span><span class="o">.</span><span class="n">ConnectionClose</span><span class="p">)</span> <span class="k">as</span> <span class="n">shutdown</span><span class="p">:</span>
-                <span class="k">if</span> <span class="n">shutdown</span><span class="o">.</span><span class="n">action</span><span class="o">.</span><span class="n">retry</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">auto_reconnect</span><span class="p">:</span>
-                    <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;EventHubConsumer detached. Attempting reconnect.&quot;</span><span class="p">)</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">_reconnect</span><span class="p">()</span>
-                <span class="k">else</span><span class="p">:</span>
-                    <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;EventHubConsumer detached. Shutting down.&quot;</span><span class="p">)</span>
-                    <span class="n">error</span> <span class="o">=</span> <span class="n">ConnectionLostError</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">shutdown</span><span class="p">),</span> <span class="n">shutdown</span><span class="p">)</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="n">exception</span><span class="o">=</span><span class="n">error</span><span class="p">)</span>
-                    <span class="k">raise</span> <span class="n">error</span>
-            <span class="k">except</span> <span class="n">errors</span><span class="o">.</span><span class="n">MessageHandlerError</span> <span class="k">as</span> <span class="n">shutdown</span><span class="p">:</span>
-                <span class="k">if</span> <span class="n">connecting_count</span> <span class="o">&lt;</span> <span class="n">max_retries</span><span class="p">:</span>
-                    <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;EventHubConsumer detached. Attempting reconnect.&quot;</span><span class="p">)</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">_reconnect</span><span class="p">()</span>
-                <span class="k">else</span><span class="p">:</span>
-                    <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;EventHubConsumer detached. Shutting down.&quot;</span><span class="p">)</span>
-                    <span class="n">error</span> <span class="o">=</span> <span class="n">ConnectionLostError</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">shutdown</span><span class="p">),</span> <span class="n">shutdown</span><span class="p">)</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="n">error</span><span class="p">)</span>
-                    <span class="k">raise</span> <span class="n">error</span>
-            <span class="k">except</span> <span class="n">errors</span><span class="o">.</span><span class="n">AMQPConnectionError</span> <span class="k">as</span> <span class="n">shutdown</span><span class="p">:</span>
-                <span class="k">if</span> <span class="n">connecting_count</span> <span class="o">&lt;</span> <span class="n">max_retries</span><span class="p">:</span>
-                    <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;EventHubConsumer connection lost. Attempting reconnect.&quot;</span><span class="p">)</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">_reconnect</span><span class="p">()</span>
-                <span class="k">else</span><span class="p">:</span>
-                    <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;EventHubConsumer connection lost. Shutting down.&quot;</span><span class="p">)</span>
-                    <span class="n">error</span> <span class="o">=</span> <span class="n">ConnectionLostError</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">shutdown</span><span class="p">),</span> <span class="n">shutdown</span><span class="p">)</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="n">error</span><span class="p">)</span>
-                    <span class="k">raise</span> <span class="n">error</span>
-            <span class="k">except</span> <span class="n">compat</span><span class="o">.</span><span class="n">TimeoutException</span> <span class="k">as</span> <span class="n">shutdown</span><span class="p">:</span>
-                <span class="k">if</span> <span class="n">connecting_count</span> <span class="o">&lt;</span> <span class="n">max_retries</span><span class="p">:</span>
-                    <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;EventHubConsumer timed out receiving event data. Attempting reconnect.&quot;</span><span class="p">)</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">_reconnect</span><span class="p">()</span>
-                <span class="k">else</span><span class="p">:</span>
-                    <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;EventHubConsumer timed out. Shutting down.&quot;</span><span class="p">)</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="n">shutdown</span><span class="p">)</span>
-                    <span class="k">raise</span> <span class="n">ConnectionLostError</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">shutdown</span><span class="p">),</span> <span class="n">shutdown</span><span class="p">)</span>
-            <span class="k">except</span> <span class="ne">StopIteration</span><span class="p">:</span>
-                <span class="k">raise</span>
-            <span class="k">except</span> <span class="ne">KeyboardInterrupt</span><span class="p">:</span>
-                <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;EventHubConsumer stops due to keyboard interrupt&quot;</span><span class="p">)</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-                <span class="k">raise</span>
-            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-                <span class="n">log</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Unexpected error occurred (</span><span class="si">%r</span><span class="s2">). Shutting down.&quot;</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
-                <span class="n">error</span> <span class="o">=</span> <span class="n">EventHubError</span><span class="p">(</span><span class="s2">&quot;Receive failed: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">e</span><span class="p">),</span> <span class="n">e</span><span class="p">)</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="n">exception</span><span class="o">=</span><span class="n">error</span><span class="p">)</span>
-                <span class="k">raise</span> <span class="n">error</span>
+            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">exception</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_handle_exception</span><span class="p">(</span><span class="n">exception</span><span class="p">,</span> <span class="n">retry_count</span><span class="p">,</span> <span class="n">max_retries</span><span class="p">)</span>
+                <span class="n">retry_count</span> <span class="o">+=</span> <span class="mi">1</span>
 
-    <span class="k">def</span> <span class="nf">_check_closed</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">error</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="n">EventHubError</span><span class="p">(</span><span class="s2">&quot;This consumer has been closed. Please create a new consumer to receive event data.&quot;</span><span class="p">,</span>
-                                <span class="bp">self</span><span class="o">.</span><span class="n">error</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">_create_handler</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">alt_creds</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;username&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">_auth_config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;iot_username&quot;</span><span class="p">),</span>
+            <span class="s2">&quot;password&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">_auth_config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;iot_password&quot;</span><span class="p">)}</span>
+        <span class="n">source</span> <span class="o">=</span> <span class="n">Source</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">source</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">offset</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">source</span><span class="o">.</span><span class="n">set_filter</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">offset</span><span class="o">.</span><span class="n">_selector</span><span class="p">())</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_handler</span> <span class="o">=</span> <span class="n">ReceiveClient</span><span class="p">(</span>
+            <span class="n">source</span><span class="p">,</span>
+            <span class="n">auth</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">get_auth</span><span class="p">(</span><span class="o">**</span><span class="n">alt_creds</span><span class="p">),</span>
+            <span class="n">debug</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">network_tracing</span><span class="p">,</span>
+            <span class="n">prefetch</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">prefetch</span><span class="p">,</span>
+            <span class="n">link_properties</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_link_properties</span><span class="p">,</span>
+            <span class="n">timeout</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">timeout</span><span class="p">,</span>
+            <span class="n">error_policy</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">retry_policy</span><span class="p">,</span>
+            <span class="n">keep_alive_interval</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">keep_alive</span><span class="p">,</span>
+            <span class="n">client_name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+            <span class="n">properties</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">_create_properties</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">user_agent</span><span class="p">))</span>  <span class="c1"># pylint: disable=protected-access</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">messages_iter</span> <span class="o">=</span> <span class="kc">None</span>
 
     <span class="k">def</span> <span class="nf">_redirect</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">redirect</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">redirected</span> <span class="o">=</span> <span class="n">redirect</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">running</span> <span class="o">=</span> <span class="kc">False</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">messages_iter</span> <span class="o">=</span> <span class="kc">None</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_open</span><span class="p">()</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">EventHubConsumer</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">_redirect</span><span class="p">(</span><span class="n">redirect</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">_open</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">_open</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">timeout_time</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Open the EventHubConsumer using the supplied connection.</span>
 <span class="sd">        If the handler has previously been redirected, the redirect</span>
@@ -462,129 +415,35 @@
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1"># pylint: disable=protected-access</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_check_closed</span><span class="p">()</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">redirected</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">running</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">redirected</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">_process_redirect_uri</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">redirected</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">source</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">redirected</span><span class="o">.</span><span class="n">address</span>
-            <span class="n">source</span> <span class="o">=</span> <span class="n">Source</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">source</span><span class="p">)</span>
-            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">offset</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-                <span class="n">source</span><span class="o">.</span><span class="n">set_filter</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">offset</span><span class="o">.</span><span class="n">_selector</span><span class="p">())</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">EventHubConsumer</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">_open</span><span class="p">(</span><span class="n">timeout_time</span><span class="p">)</span>
 
-            <span class="n">alt_creds</span> <span class="o">=</span> <span class="p">{</span>
-                <span class="s2">&quot;username&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">_auth_config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;iot_username&quot;</span><span class="p">),</span>
-                <span class="s2">&quot;password&quot;</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">_auth_config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;iot_password&quot;</span><span class="p">)}</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_handler</span> <span class="o">=</span> <span class="n">ReceiveClient</span><span class="p">(</span>
-                <span class="n">source</span><span class="p">,</span>
-                <span class="n">auth</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">get_auth</span><span class="p">(</span><span class="o">**</span><span class="n">alt_creds</span><span class="p">),</span>
-                <span class="n">debug</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">network_tracing</span><span class="p">,</span>
-                <span class="n">prefetch</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">prefetch</span><span class="p">,</span>
-                <span class="n">link_properties</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">properties</span><span class="p">,</span>
-                <span class="n">timeout</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">timeout</span><span class="p">,</span>
-                <span class="n">error_policy</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">retry_policy</span><span class="p">,</span>
-                <span class="n">keep_alive_interval</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">keep_alive</span><span class="p">,</span>
-                <span class="n">client_name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
-                <span class="n">properties</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">_create_properties</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">user_agent</span><span class="p">))</span>  <span class="c1"># pylint: disable=protected-access</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">running</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_connect</span><span class="p">()</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">running</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="k">def</span> <span class="nf">_receive</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">timeout_time</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">max_batch_size</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">last_exception</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;last_exception&quot;</span><span class="p">)</span>
+        <span class="n">data_batch</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;data_batch&quot;</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">_connect</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="n">connected</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_build_connection</span><span class="p">()</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">connected</span><span class="p">:</span>
-            <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">reconnect_backoff</span><span class="p">)</span>
-            <span class="k">while</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_build_connection</span><span class="p">(</span><span class="n">is_reconnect</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-                <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">reconnect_backoff</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_open</span><span class="p">(</span><span class="n">timeout_time</span><span class="p">)</span>
+        <span class="n">remaining_time</span> <span class="o">=</span> <span class="n">timeout_time</span> <span class="o">-</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">remaining_time</span> <span class="o">&lt;=</span> <span class="mf">0.0</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">last_exception</span><span class="p">:</span>
+                <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%r</span><span class="s2"> receive operation timed out. (</span><span class="si">%r</span><span class="s2">)&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">last_exception</span><span class="p">)</span>
+                <span class="k">raise</span> <span class="n">last_exception</span>
+            <span class="k">return</span> <span class="n">data_batch</span>
+        <span class="n">remaining_time_ms</span> <span class="o">=</span> <span class="mi">1000</span> <span class="o">*</span> <span class="n">remaining_time</span>
+        <span class="n">message_batch</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_handler</span><span class="o">.</span><span class="n">receive_message_batch</span><span class="p">(</span>
+            <span class="n">max_batch_size</span><span class="o">=</span><span class="n">max_batch_size</span> <span class="o">-</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">data_batch</span><span class="p">)</span> <span class="k">if</span> <span class="n">data_batch</span> <span class="k">else</span> <span class="mi">0</span><span class="p">),</span>
+            <span class="n">timeout</span><span class="o">=</span><span class="n">remaining_time_ms</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">message</span> <span class="ow">in</span> <span class="n">message_batch</span><span class="p">:</span>
+            <span class="n">event_data</span> <span class="o">=</span> <span class="n">EventData</span><span class="o">.</span><span class="n">_from_message</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">offset</span> <span class="o">=</span> <span class="n">EventPosition</span><span class="p">(</span><span class="n">event_data</span><span class="o">.</span><span class="n">offset</span><span class="p">)</span>
+            <span class="n">data_batch</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">event_data</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">data_batch</span>
 
-    <span class="k">def</span> <span class="nf">_build_connection</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">is_reconnect</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-
-<span class="sd">        :param is_reconnect: True - trying to reconnect after fail to connect or a connection is lost.</span>
-<span class="sd">                             False - the 1st time to connect</span>
-<span class="sd">        :return: True - connected.  False - not connected</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="c1"># pylint: disable=protected-access</span>
-        <span class="k">if</span> <span class="n">is_reconnect</span><span class="p">:</span>
-            <span class="n">alt_creds</span> <span class="o">=</span> <span class="p">{</span>
-                <span class="s2">&quot;username&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">_auth_config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;iot_username&quot;</span><span class="p">),</span>
-                <span class="s2">&quot;password&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">_auth_config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;iot_password&quot;</span><span class="p">)}</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_handler</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-            <span class="n">source</span> <span class="o">=</span> <span class="n">Source</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">source</span><span class="p">)</span>
-            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">offset</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-                <span class="n">source</span><span class="o">.</span><span class="n">set_filter</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">offset</span><span class="o">.</span><span class="n">_selector</span><span class="p">())</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_handler</span> <span class="o">=</span> <span class="n">ReceiveClient</span><span class="p">(</span>
-                <span class="n">source</span><span class="p">,</span>
-                <span class="n">auth</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">get_auth</span><span class="p">(</span><span class="o">**</span><span class="n">alt_creds</span><span class="p">),</span>
-                <span class="n">debug</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">network_tracing</span><span class="p">,</span>
-                <span class="n">prefetch</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">prefetch</span><span class="p">,</span>
-                <span class="n">link_properties</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">properties</span><span class="p">,</span>
-                <span class="n">timeout</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">timeout</span><span class="p">,</span>
-                <span class="n">error_policy</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">retry_policy</span><span class="p">,</span>
-                <span class="n">keep_alive_interval</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">keep_alive</span><span class="p">,</span>
-                <span class="n">client_name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
-                <span class="n">properties</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">_create_properties</span><span class="p">(</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">user_agent</span><span class="p">))</span>  <span class="c1"># pylint: disable=protected-access</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">messages_iter</span> <span class="o">=</span> <span class="kc">None</span>
-        <span class="k">try</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_handler</span><span class="o">.</span><span class="n">open</span><span class="p">()</span>
-            <span class="k">while</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_handler</span><span class="o">.</span><span class="n">client_ready</span><span class="p">():</span>
-                <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.05</span><span class="p">)</span>
-            <span class="k">return</span> <span class="kc">True</span>
-        <span class="k">except</span> <span class="n">errors</span><span class="o">.</span><span class="n">AuthenticationException</span> <span class="k">as</span> <span class="n">shutdown</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">is_reconnect</span><span class="p">:</span>
-                <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;EventHubConsumer couldn&#39;t authenticate. Shutting down. (</span><span class="si">%r</span><span class="s2">)&quot;</span><span class="p">,</span> <span class="n">shutdown</span><span class="p">)</span>
-                <span class="n">error</span> <span class="o">=</span> <span class="n">AuthenticationError</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">shutdown</span><span class="p">),</span> <span class="n">shutdown</span><span class="p">)</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="n">exception</span><span class="o">=</span><span class="n">error</span><span class="p">)</span>
-                <span class="k">raise</span> <span class="n">error</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;EventHubConsumer couldn&#39;t authenticate. Attempting reconnect.&quot;</span><span class="p">)</span>
-                <span class="k">return</span> <span class="kc">False</span>
-        <span class="k">except</span> <span class="n">errors</span><span class="o">.</span><span class="n">LinkRedirect</span> <span class="k">as</span> <span class="n">redirect</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_redirect</span><span class="p">(</span><span class="n">redirect</span><span class="p">)</span>
-            <span class="k">return</span> <span class="kc">True</span>
-        <span class="k">except</span> <span class="p">(</span><span class="n">errors</span><span class="o">.</span><span class="n">LinkDetach</span><span class="p">,</span> <span class="n">errors</span><span class="o">.</span><span class="n">ConnectionClose</span><span class="p">)</span> <span class="k">as</span> <span class="n">shutdown</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">shutdown</span><span class="o">.</span><span class="n">action</span><span class="o">.</span><span class="n">retry</span><span class="p">:</span>
-                <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;EventHubConsumer detached. Attempting reconnect.&quot;</span><span class="p">)</span>
-                <span class="k">return</span> <span class="kc">False</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;EventHubConsumer detached. Shutting down.&quot;</span><span class="p">)</span>
-                <span class="n">error</span> <span class="o">=</span> <span class="n">ConnectError</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">shutdown</span><span class="p">),</span> <span class="n">shutdown</span><span class="p">)</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="n">exception</span><span class="o">=</span><span class="n">error</span><span class="p">)</span>
-                <span class="k">raise</span> <span class="n">error</span>
-        <span class="k">except</span> <span class="n">errors</span><span class="o">.</span><span class="n">MessageHandlerError</span> <span class="k">as</span> <span class="n">shutdown</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">is_reconnect</span><span class="p">:</span>
-                <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;EventHubConsumer detached. Shutting down.&quot;</span><span class="p">)</span>
-                <span class="n">error</span> <span class="o">=</span> <span class="n">ConnectError</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">shutdown</span><span class="p">),</span> <span class="n">shutdown</span><span class="p">)</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="n">exception</span><span class="o">=</span><span class="n">error</span><span class="p">)</span>
-                <span class="k">raise</span> <span class="n">error</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;EventHubConsumer detached. Attempting reconnect.&quot;</span><span class="p">)</span>
-                <span class="k">return</span> <span class="kc">False</span>
-        <span class="k">except</span> <span class="n">errors</span><span class="o">.</span><span class="n">AMQPConnectionError</span> <span class="k">as</span> <span class="n">shutdown</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">is_reconnect</span><span class="p">:</span>
-                <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;EventHubConsumer connection error (</span><span class="si">%r</span><span class="s2">). Shutting down.&quot;</span><span class="p">,</span> <span class="n">shutdown</span><span class="p">)</span>
-                <span class="n">error</span> <span class="o">=</span> <span class="n">AuthenticationError</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">shutdown</span><span class="p">),</span> <span class="n">shutdown</span><span class="p">)</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="n">exception</span><span class="o">=</span><span class="n">error</span><span class="p">)</span>
-                <span class="k">raise</span> <span class="n">error</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;EventHubConsumer couldn&#39;t authenticate. Attempting reconnect.&quot;</span><span class="p">)</span>
-                <span class="k">return</span> <span class="kc">False</span>
-        <span class="k">except</span> <span class="n">compat</span><span class="o">.</span><span class="n">TimeoutException</span> <span class="k">as</span> <span class="n">shutdown</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">is_reconnect</span><span class="p">:</span>
-                <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;EventHubConsumer authentication timed out. Shutting down.&quot;</span><span class="p">)</span>
-                <span class="n">error</span> <span class="o">=</span> <span class="n">AuthenticationError</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">shutdown</span><span class="p">),</span> <span class="n">shutdown</span><span class="p">)</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="n">exception</span><span class="o">=</span><span class="n">error</span><span class="p">)</span>
-                <span class="k">raise</span> <span class="n">error</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;EventHubConsumer authentication timed out. Attempting reconnect.&quot;</span><span class="p">)</span>
-                <span class="k">return</span> <span class="kc">False</span>
-        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-            <span class="n">log</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Unexpected error occurred when building connection (</span><span class="si">%r</span><span class="s2">). Shutting down.&quot;</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
-            <span class="n">error</span> <span class="o">=</span> <span class="n">EventHubError</span><span class="p">(</span><span class="s2">&quot;Unexpected error occurred when building connection&quot;</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="n">exception</span><span class="o">=</span><span class="n">error</span><span class="p">)</span>
-            <span class="k">raise</span> <span class="n">error</span>
-
-    <span class="k">def</span> <span class="nf">_reconnect</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_build_connection</span><span class="p">(</span><span class="n">is_reconnect</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="nd">@_retry_decorator</span>
+    <span class="k">def</span> <span class="nf">_receive_with_try</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">timeout_time</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">max_batch_size</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_receive</span><span class="p">(</span><span class="n">timeout_time</span><span class="o">=</span><span class="n">timeout_time</span><span class="p">,</span> <span class="n">max_batch_size</span><span class="o">=</span><span class="n">max_batch_size</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">queue_size</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -600,7 +459,7 @@
         <span class="k">return</span> <span class="mi">0</span>
 
 <div class="viewcode-block" id="EventHubConsumer.receive"><a class="viewcode-back" href="../../../ref/azure.eventhub.html#azure.eventhub.consumer.EventHubConsumer.receive">[docs]</a>    <span class="k">def</span> <span class="nf">receive</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">max_batch_size</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="c1"># type:(int, float) -&gt; List[EventData]</span>
+        <span class="c1"># type: (int, float) -&gt; List[EventData]</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Receive events from the EventHub.</span>
 
@@ -626,79 +485,12 @@
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_check_closed</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_open</span><span class="p">()</span>
 
-        <span class="n">max_batch_size</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">max_batch_size</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">prefetch</span><span class="p">)</span> <span class="k">if</span> <span class="n">max_batch_size</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">max_batch_size</span>
-        <span class="n">timeout</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">receive_timeout</span> <span class="k">if</span> <span class="n">timeout</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">timeout</span>
-
+        <span class="n">timeout</span> <span class="o">=</span> <span class="n">timeout</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">receive_timeout</span>
+        <span class="n">max_batch_size</span> <span class="o">=</span> <span class="n">max_batch_size</span> <span class="ow">or</span> <span class="nb">min</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">max_batch_size</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">prefetch</span><span class="p">)</span>
         <span class="n">data_batch</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c1"># type: List[EventData]</span>
-        <span class="n">max_retries</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">max_retries</span>
-        <span class="n">connecting_count</span> <span class="o">=</span> <span class="mi">0</span>
-        <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
-            <span class="n">connecting_count</span> <span class="o">+=</span> <span class="mi">1</span>
-            <span class="k">try</span><span class="p">:</span>
-                <span class="n">timeout_ms</span> <span class="o">=</span> <span class="mi">1000</span> <span class="o">*</span> <span class="n">timeout</span> <span class="k">if</span> <span class="n">timeout</span> <span class="k">else</span> <span class="mi">0</span>
-                <span class="n">message_batch</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_handler</span><span class="o">.</span><span class="n">receive_message_batch</span><span class="p">(</span>
-                    <span class="n">max_batch_size</span><span class="o">=</span><span class="n">max_batch_size</span> <span class="o">-</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">data_batch</span><span class="p">)</span> <span class="k">if</span> <span class="n">data_batch</span> <span class="k">else</span> <span class="mi">0</span><span class="p">),</span>
-                    <span class="n">timeout</span><span class="o">=</span><span class="n">timeout_ms</span><span class="p">)</span>
-                <span class="k">for</span> <span class="n">message</span> <span class="ow">in</span> <span class="n">message_batch</span><span class="p">:</span>
-                    <span class="n">event_data</span> <span class="o">=</span> <span class="n">EventData</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="n">message</span><span class="p">)</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">offset</span> <span class="o">=</span> <span class="n">EventPosition</span><span class="p">(</span><span class="n">event_data</span><span class="o">.</span><span class="n">offset</span><span class="p">)</span>
-                    <span class="n">data_batch</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">event_data</span><span class="p">)</span>
-                <span class="k">return</span> <span class="n">data_batch</span>
-            <span class="k">except</span> <span class="n">errors</span><span class="o">.</span><span class="n">AuthenticationException</span> <span class="k">as</span> <span class="n">auth_error</span><span class="p">:</span>
-                <span class="k">if</span> <span class="n">connecting_count</span> <span class="o">&lt;</span> <span class="n">max_retries</span><span class="p">:</span>
-                    <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;EventHubConsumer disconnected due to token error. Attempting reconnect.&quot;</span><span class="p">)</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">_reconnect</span><span class="p">()</span>
-                <span class="k">else</span><span class="p">:</span>
-                    <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;EventHubConsumer authentication failed. Shutting down.&quot;</span><span class="p">)</span>
-                    <span class="n">error</span> <span class="o">=</span> <span class="n">AuthenticationError</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">auth_error</span><span class="p">),</span> <span class="n">auth_error</span><span class="p">)</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="n">auth_error</span><span class="p">)</span>
-                    <span class="k">raise</span> <span class="n">error</span>
-            <span class="k">except</span> <span class="p">(</span><span class="n">errors</span><span class="o">.</span><span class="n">LinkDetach</span><span class="p">,</span> <span class="n">errors</span><span class="o">.</span><span class="n">ConnectionClose</span><span class="p">)</span> <span class="k">as</span> <span class="n">shutdown</span><span class="p">:</span>
-                <span class="k">if</span> <span class="n">shutdown</span><span class="o">.</span><span class="n">action</span><span class="o">.</span><span class="n">retry</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">auto_reconnect</span><span class="p">:</span>
-                    <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;EventHubConsumer detached. Attempting reconnect.&quot;</span><span class="p">)</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">_reconnect</span><span class="p">()</span>
-                <span class="k">else</span><span class="p">:</span>
-                    <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;EventHubConsumer detached. Shutting down.&quot;</span><span class="p">)</span>
-                    <span class="n">error</span> <span class="o">=</span> <span class="n">ConnectionLostError</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">shutdown</span><span class="p">),</span> <span class="n">shutdown</span><span class="p">)</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="n">exception</span><span class="o">=</span><span class="n">error</span><span class="p">)</span>
-                    <span class="k">raise</span> <span class="n">error</span>
-            <span class="k">except</span> <span class="n">errors</span><span class="o">.</span><span class="n">MessageHandlerError</span> <span class="k">as</span> <span class="n">shutdown</span><span class="p">:</span>
-                <span class="k">if</span> <span class="n">connecting_count</span> <span class="o">&lt;</span> <span class="n">max_retries</span><span class="p">:</span>
-                    <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;EventHubConsumer detached. Attempting reconnect.&quot;</span><span class="p">)</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">_reconnect</span><span class="p">()</span>
-                <span class="k">else</span><span class="p">:</span>
-                    <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;EventHubConsumer detached. Shutting down.&quot;</span><span class="p">)</span>
-                    <span class="n">error</span> <span class="o">=</span> <span class="n">ConnectionLostError</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">shutdown</span><span class="p">),</span> <span class="n">shutdown</span><span class="p">)</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="n">error</span><span class="p">)</span>
-                    <span class="k">raise</span> <span class="n">error</span>
-            <span class="k">except</span> <span class="n">errors</span><span class="o">.</span><span class="n">AMQPConnectionError</span> <span class="k">as</span> <span class="n">shutdown</span><span class="p">:</span>
-                <span class="k">if</span> <span class="n">connecting_count</span> <span class="o">&lt;</span> <span class="n">max_retries</span><span class="p">:</span>
-                    <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;EventHubConsumer connection lost. Attempting reconnect.&quot;</span><span class="p">)</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">_reconnect</span><span class="p">()</span>
-                <span class="k">else</span><span class="p">:</span>
-                    <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;EventHubConsumer connection lost. Shutting down.&quot;</span><span class="p">)</span>
-                    <span class="n">error</span> <span class="o">=</span> <span class="n">ConnectionLostError</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">shutdown</span><span class="p">),</span> <span class="n">shutdown</span><span class="p">)</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="n">error</span><span class="p">)</span>
-                    <span class="k">raise</span> <span class="n">error</span>
-            <span class="k">except</span> <span class="n">compat</span><span class="o">.</span><span class="n">TimeoutException</span> <span class="k">as</span> <span class="n">shutdown</span><span class="p">:</span>
-                <span class="k">if</span> <span class="n">connecting_count</span> <span class="o">&lt;</span> <span class="n">max_retries</span><span class="p">:</span>
-                    <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;EventHubConsumer timed out receiving event data. Attempting reconnect.&quot;</span><span class="p">)</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">_reconnect</span><span class="p">()</span>
-                <span class="k">else</span><span class="p">:</span>
-                    <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;EventHubConsumer timed out. Shutting down.&quot;</span><span class="p">)</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="n">shutdown</span><span class="p">)</span>
-                    <span class="k">raise</span> <span class="n">ConnectionLostError</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">shutdown</span><span class="p">),</span> <span class="n">shutdown</span><span class="p">)</span>
-            <span class="k">except</span> <span class="ne">KeyboardInterrupt</span><span class="p">:</span>
-                <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;EventHubConsumer stops due to keyboard interrupt&quot;</span><span class="p">)</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-                <span class="k">raise</span>
-            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-                <span class="n">log</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Unexpected error occurred (</span><span class="si">%r</span><span class="s2">). Shutting down.&quot;</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
-                <span class="n">error</span> <span class="o">=</span> <span class="n">EventHubError</span><span class="p">(</span><span class="s2">&quot;Receive failed: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">e</span><span class="p">),</span> <span class="n">e</span><span class="p">)</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="n">exception</span><span class="o">=</span><span class="n">error</span><span class="p">)</span>
-                <span class="k">raise</span> <span class="n">error</span></div>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_receive_with_try</span><span class="p">(</span><span class="n">timeout</span><span class="o">=</span><span class="n">timeout</span><span class="p">,</span> <span class="n">max_batch_size</span><span class="o">=</span><span class="n">max_batch_size</span><span class="p">,</span> <span class="n">data_batch</span><span class="o">=</span><span class="n">data_batch</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="EventHubConsumer.close"><a class="viewcode-back" href="../../../ref/azure.eventhub.html#azure.eventhub.consumer.EventHubConsumer.close">[docs]</a>    <span class="k">def</span> <span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">exception</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="c1"># type:(Exception) -&gt; None</span>
@@ -723,18 +515,7 @@
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">messages_iter</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">messages_iter</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">messages_iter</span> <span class="o">=</span> <span class="kc">None</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">running</span> <span class="o">=</span> <span class="kc">False</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">error</span><span class="p">:</span>
-            <span class="k">return</span>
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">exception</span><span class="p">,</span> <span class="n">errors</span><span class="o">.</span><span class="n">LinkRedirect</span><span class="p">):</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">redirected</span> <span class="o">=</span> <span class="n">exception</span>
-        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">exception</span><span class="p">,</span> <span class="n">EventHubError</span><span class="p">):</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">error</span> <span class="o">=</span> <span class="n">exception</span>
-        <span class="k">elif</span> <span class="n">exception</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">error</span> <span class="o">=</span> <span class="n">EventHubError</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">exception</span><span class="p">))</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">error</span> <span class="o">=</span> <span class="n">EventHubError</span><span class="p">(</span><span class="s2">&quot;This receive handler is now closed.&quot;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_handler</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
+        <span class="nb">super</span><span class="p">(</span><span class="n">EventHubConsumer</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="n">exception</span><span class="p">)</span></div>
 
     <span class="nb">next</span> <span class="o">=</span> <span class="fm">__next__</span>  <span class="c1"># for python2.7</span></div>
 </pre></div>
