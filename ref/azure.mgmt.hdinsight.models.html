@@ -344,7 +344,7 @@ sending a request.</p>
 <li><p><strong>location</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The location of the endpoint.</p></li>
 <li><p><strong>destination_port</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a>) – The destination port to connect to.</p></li>
 <li><p><strong>public_port</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a>) – The public port to connect to.</p></li>
-<li><p><strong>sub_domain_suffix</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The subDomainSuffix of the application.</p></li>
+<li><p><strong>sub_domain_suffix</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The subdomain suffix of the application.</p></li>
 <li><p><strong>disable_gateway_auth</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#bool" title="(in Python v3.5)"><em>bool</em></a>) – The value indicates whether to disable
 GatewayAuth.</p></li>
 </ul>
@@ -377,6 +377,155 @@ sending a request.</p>
 <li><p><strong>application_state</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The application state.</p></li>
 <li><p><strong>created_date</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The application create date time.</p></li>
 <li><p><strong>marketplace_identifier</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The marketplace identifier.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="class">
+<dt id="azure.mgmt.hdinsight.models.Autoscale">
+<em class="property">class </em><code class="sig-prename descclassname">azure.mgmt.hdinsight.models.</code><code class="sig-name descname">Autoscale</code><span class="sig-paren">(</span><em class="sig-param">*</em>, <em class="sig-param">capacity=None</em>, <em class="sig-param">recurrence=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/mgmt/hdinsight/models/_models_py3.html#Autoscale"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.hdinsight.models.Autoscale" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">msrest.serialization.Model</span></code></p>
+<p>The autoscale request parameters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>capacity</strong> (<a class="reference internal" href="#azure.mgmt.hdinsight.models.AutoscaleCapacity" title="azure.mgmt.hdinsight.models.AutoscaleCapacity"><em>AutoscaleCapacity</em></a>) – Parameters for load-based autoscale</p></li>
+<li><p><strong>recurrence</strong> (<a class="reference internal" href="#azure.mgmt.hdinsight.models.AutoscaleRecurrence" title="azure.mgmt.hdinsight.models.AutoscaleRecurrence"><em>AutoscaleRecurrence</em></a>) – Parameters for schedule-based autoscale</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="class">
+<dt id="azure.mgmt.hdinsight.models.AutoscaleCapacity">
+<em class="property">class </em><code class="sig-prename descclassname">azure.mgmt.hdinsight.models.</code><code class="sig-name descname">AutoscaleCapacity</code><span class="sig-paren">(</span><em class="sig-param">*</em>, <em class="sig-param">min_instance_count: int = None</em>, <em class="sig-param">max_instance_count: int = None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/mgmt/hdinsight/models/_models_py3.html#AutoscaleCapacity"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.hdinsight.models.AutoscaleCapacity" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">msrest.serialization.Model</span></code></p>
+<p>The load-based autoscale request parameters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>min_instance_count</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a>) – The minimum instance count of the cluster</p></li>
+<li><p><strong>max_instance_count</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a>) – The maximum instance count of the cluster</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="class">
+<dt id="azure.mgmt.hdinsight.models.AutoscaleRecurrence">
+<em class="property">class </em><code class="sig-prename descclassname">azure.mgmt.hdinsight.models.</code><code class="sig-name descname">AutoscaleRecurrence</code><span class="sig-paren">(</span><em class="sig-param">*</em>, <em class="sig-param">time_zone: str = None</em>, <em class="sig-param">schedule=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/mgmt/hdinsight/models/_models_py3.html#AutoscaleRecurrence"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.hdinsight.models.AutoscaleRecurrence" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">msrest.serialization.Model</span></code></p>
+<p>Schedule-based autoscale request parameters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>time_zone</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The time zone for the autoscale schedule times</p></li>
+<li><p><strong>schedule</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><em>list</em></a><em>[</em><a class="reference internal" href="#azure.mgmt.hdinsight.models.AutoscaleSchedule" title="azure.mgmt.hdinsight.models.AutoscaleSchedule"><em>AutoscaleSchedule</em></a><em>]</em>) – Array of schedule-based autoscale rules</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="class">
+<dt id="azure.mgmt.hdinsight.models.AutoscaleSchedule">
+<em class="property">class </em><code class="sig-prename descclassname">azure.mgmt.hdinsight.models.</code><code class="sig-name descname">AutoscaleSchedule</code><span class="sig-paren">(</span><em class="sig-param">*</em>, <em class="sig-param">days=None</em>, <em class="sig-param">time_and_capacity=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/mgmt/hdinsight/models/_models_py3.html#AutoscaleSchedule"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.hdinsight.models.AutoscaleSchedule" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">msrest.serialization.Model</span></code></p>
+<p>Parameters for a schedule-based autoscale rule, consisting of an array of
+days + a time and capacity.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>days</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a><em> or </em><a class="reference internal" href="#azure.mgmt.hdinsight.models.DaysOfWeek" title="azure.mgmt.hdinsight.models.DaysOfWeek"><em>DaysOfWeek</em></a><em>]</em>) – Days of the week for a schedule-based autoscale rule</p></li>
+<li><p><strong>time_and_capacity</strong> (<a class="reference internal" href="#azure.mgmt.hdinsight.models.AutoscaleTimeAndCapacity" title="azure.mgmt.hdinsight.models.AutoscaleTimeAndCapacity"><em>AutoscaleTimeAndCapacity</em></a>) – Time and capacity for a schedule-based autoscale
+rule</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="class">
+<dt id="azure.mgmt.hdinsight.models.AutoscaleTimeAndCapacity">
+<em class="property">class </em><code class="sig-prename descclassname">azure.mgmt.hdinsight.models.</code><code class="sig-name descname">AutoscaleTimeAndCapacity</code><span class="sig-paren">(</span><em class="sig-param">*</em>, <em class="sig-param">time: str = None</em>, <em class="sig-param">min_instance_count: int = None</em>, <em class="sig-param">max_instance_count: int = None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/mgmt/hdinsight/models/_models_py3.html#AutoscaleTimeAndCapacity"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.hdinsight.models.AutoscaleTimeAndCapacity" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">msrest.serialization.Model</span></code></p>
+<p>Time and capacity request parameters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>time</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – 24-hour time in the form xx:xx</p></li>
+<li><p><strong>min_instance_count</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a>) – The minimum instance count of the cluster</p></li>
+<li><p><strong>max_instance_count</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a>) – The maximum instance count of the cluster</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="class">
+<dt id="azure.mgmt.hdinsight.models.BillingMeters">
+<em class="property">class </em><code class="sig-prename descclassname">azure.mgmt.hdinsight.models.</code><code class="sig-name descname">BillingMeters</code><span class="sig-paren">(</span><em class="sig-param">*</em>, <em class="sig-param">meter_parameter: str = None</em>, <em class="sig-param">meter: str = None</em>, <em class="sig-param">unit: str = None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/mgmt/hdinsight/models/_models_py3.html#BillingMeters"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.hdinsight.models.BillingMeters" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">msrest.serialization.Model</span></code></p>
+<p>The billing meters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>meter_parameter</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The virtual machine sizes.</p></li>
+<li><p><strong>meter</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The HDInsight meter guid.</p></li>
+<li><p><strong>unit</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The unit of meter, VMHours or CoreHours.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="class">
+<dt id="azure.mgmt.hdinsight.models.BillingResources">
+<em class="property">class </em><code class="sig-prename descclassname">azure.mgmt.hdinsight.models.</code><code class="sig-name descname">BillingResources</code><span class="sig-paren">(</span><em class="sig-param">*</em>, <em class="sig-param">region: str = None</em>, <em class="sig-param">billing_meters=None</em>, <em class="sig-param">disk_billing_meters=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/mgmt/hdinsight/models/_models_py3.html#BillingResources"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.hdinsight.models.BillingResources" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">msrest.serialization.Model</span></code></p>
+<p>The billing resources.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>region</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The region or location.</p></li>
+<li><p><strong>billing_meters</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><em>list</em></a><em>[</em><a class="reference internal" href="#azure.mgmt.hdinsight.models.BillingMeters" title="azure.mgmt.hdinsight.models.BillingMeters"><em>BillingMeters</em></a><em>]</em>) – The billing meter information.</p></li>
+<li><p><strong>disk_billing_meters</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><em>list</em></a><em>[</em><a class="reference internal" href="#azure.mgmt.hdinsight.models.DiskBillingMeters" title="azure.mgmt.hdinsight.models.DiskBillingMeters"><em>DiskBillingMeters</em></a><em>]</em>) – The managed disk billing information.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="class">
+<dt id="azure.mgmt.hdinsight.models.BillingResponseListResult">
+<em class="property">class </em><code class="sig-prename descclassname">azure.mgmt.hdinsight.models.</code><code class="sig-name descname">BillingResponseListResult</code><span class="sig-paren">(</span><em class="sig-param">*</em>, <em class="sig-param">vm_sizes=None</em>, <em class="sig-param">vm_size_filters=None</em>, <em class="sig-param">billing_resources=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/mgmt/hdinsight/models/_models_py3.html#BillingResponseListResult"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.hdinsight.models.BillingResponseListResult" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">msrest.serialization.Model</span></code></p>
+<p>The response for the operation to get regional billingSpecs for a
+subscription.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>vm_sizes</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a><em>]</em>) – The virtual machine sizes to include or exclude.</p></li>
+<li><p><strong>vm_size_filters</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><em>list</em></a><em>[</em><a class="reference internal" href="#azure.mgmt.hdinsight.models.VmSizeCompatibilityFilterV2" title="azure.mgmt.hdinsight.models.VmSizeCompatibilityFilterV2"><em>VmSizeCompatibilityFilterV2</em></a><em>]</em>) – The virtual machine filtering mode. Effectively
+this can enabling or disabling the virtual machine sizes in a particular
+set.</p></li>
+<li><p><strong>billing_resources</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><em>list</em></a><em>[</em><a class="reference internal" href="#azure.mgmt.hdinsight.models.BillingResources" title="azure.mgmt.hdinsight.models.BillingResources"><em>BillingResources</em></a><em>]</em>) – The billing and managed disk billing resources
+for a region.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="class">
+<dt id="azure.mgmt.hdinsight.models.CapabilitiesResult">
+<em class="property">class </em><code class="sig-prename descclassname">azure.mgmt.hdinsight.models.</code><code class="sig-name descname">CapabilitiesResult</code><span class="sig-paren">(</span><em class="sig-param">*</em>, <em class="sig-param">versions=None</em>, <em class="sig-param">regions=None</em>, <em class="sig-param">vm_sizes=None</em>, <em class="sig-param">vm_size_filters=None</em>, <em class="sig-param">features=None</em>, <em class="sig-param">quota=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/mgmt/hdinsight/models/_models_py3.html#CapabilitiesResult"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.hdinsight.models.CapabilitiesResult" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">msrest.serialization.Model</span></code></p>
+<p>The Get Capabilities operation response.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>versions</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#dict" title="(in Python v3.5)"><em>dict</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a><em>, </em><a class="reference internal" href="#azure.mgmt.hdinsight.models.VersionsCapability" title="azure.mgmt.hdinsight.models.VersionsCapability"><em>VersionsCapability</em></a><em>]</em>) – The version capability.</p></li>
+<li><p><strong>regions</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#dict" title="(in Python v3.5)"><em>dict</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a><em>, </em><a class="reference internal" href="#azure.mgmt.hdinsight.models.RegionsCapability" title="azure.mgmt.hdinsight.models.RegionsCapability"><em>RegionsCapability</em></a><em>]</em>) – The virtual machine size compatibility features.</p></li>
+<li><p><strong>vm_sizes</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#dict" title="(in Python v3.5)"><em>dict</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a><em>, </em><a class="reference internal" href="#azure.mgmt.hdinsight.models.VmSizesCapability" title="azure.mgmt.hdinsight.models.VmSizesCapability"><em>VmSizesCapability</em></a><em>]</em>) – The virtual machine sizes.</p></li>
+<li><p><strong>vm_size_filters</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><em>list</em></a><em>[</em><a class="reference internal" href="#azure.mgmt.hdinsight.models.VmSizeCompatibilityFilter" title="azure.mgmt.hdinsight.models.VmSizeCompatibilityFilter"><em>VmSizeCompatibilityFilter</em></a><em>]</em>) – The virtual machine size compatibility filters.</p></li>
+<li><p><strong>features</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a><em>]</em>) – The capability features.</p></li>
+<li><p><strong>quota</strong> (<a class="reference internal" href="#azure.mgmt.hdinsight.models.QuotaCapability" title="azure.mgmt.hdinsight.models.QuotaCapability"><em>QuotaCapability</em></a>) – The quota capability.</p></li>
 </ul>
 </dd>
 </dl>
@@ -720,6 +869,23 @@ this value.</p></li>
 </dd></dl>
 
 <dl class="class">
+<dt id="azure.mgmt.hdinsight.models.DiskBillingMeters">
+<em class="property">class </em><code class="sig-prename descclassname">azure.mgmt.hdinsight.models.</code><code class="sig-name descname">DiskBillingMeters</code><span class="sig-paren">(</span><em class="sig-param">*</em>, <em class="sig-param">disk_rp_meter: str = None</em>, <em class="sig-param">sku: str = None</em>, <em class="sig-param">tier=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/mgmt/hdinsight/models/_models_py3.html#DiskBillingMeters"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.hdinsight.models.DiskBillingMeters" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">msrest.serialization.Model</span></code></p>
+<p>The disk billing meters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>disk_rp_meter</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The managed disk meter guid.</p></li>
+<li><p><strong>sku</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The managed disk billing sku, P30 or S30.</p></li>
+<li><p><strong>tier</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a><em> or </em><a class="reference internal" href="#azure.mgmt.hdinsight.models.Tier" title="azure.mgmt.hdinsight.models.Tier"><em>Tier</em></a>) – The managed disk billing tier, Standard or Premium. Possible
+values include: ‘Standard’, ‘Premium’</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="class">
 <dt id="azure.mgmt.hdinsight.models.DiskEncryptionProperties">
 <em class="property">class </em><code class="sig-prename descclassname">azure.mgmt.hdinsight.models.</code><code class="sig-name descname">DiskEncryptionProperties</code><span class="sig-paren">(</span><em class="sig-param">*</em>, <em class="sig-param">vault_uri: str = None</em>, <em class="sig-param">key_name: str = None</em>, <em class="sig-param">key_version: str = None</em>, <em class="sig-param">encryption_algorithm=None</em>, <em class="sig-param">msi_resource_id: str = None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/mgmt/hdinsight/models/_models_py3.html#DiskEncryptionProperties"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.hdinsight.models.DiskEncryptionProperties" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">msrest.serialization.Model</span></code></p>
@@ -962,6 +1128,23 @@ sending a request.</p>
 </dd></dl>
 
 <dl class="class">
+<dt id="azure.mgmt.hdinsight.models.QuotaCapability">
+<em class="property">class </em><code class="sig-prename descclassname">azure.mgmt.hdinsight.models.</code><code class="sig-name descname">QuotaCapability</code><span class="sig-paren">(</span><em class="sig-param">*</em>, <em class="sig-param">cores_used: int = None</em>, <em class="sig-param">max_cores_allowed: int = None</em>, <em class="sig-param">regional_quotas=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/mgmt/hdinsight/models/_models_py3.html#QuotaCapability"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.hdinsight.models.QuotaCapability" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">msrest.serialization.Model</span></code></p>
+<p>The regional quota capability.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>cores_used</strong> (<em>long</em>) – The number of cores used in the subscription.</p></li>
+<li><p><strong>max_cores_allowed</strong> (<em>long</em>) – The number of cores that the subscription
+allowed.</p></li>
+<li><p><strong>regional_quotas</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><em>list</em></a><em>[</em><a class="reference internal" href="#azure.mgmt.hdinsight.models.RegionalQuotaCapability" title="azure.mgmt.hdinsight.models.RegionalQuotaCapability"><em>RegionalQuotaCapability</em></a><em>]</em>) – The list of region quota capabilities.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="class">
 <dt id="azure.mgmt.hdinsight.models.QuotaInfo">
 <em class="property">class </em><code class="sig-prename descclassname">azure.mgmt.hdinsight.models.</code><code class="sig-name descname">QuotaInfo</code><span class="sig-paren">(</span><em class="sig-param">*</em>, <em class="sig-param">cores_used: int = None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/mgmt/hdinsight/models/_models_py3.html#QuotaInfo"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.hdinsight.models.QuotaInfo" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">msrest.serialization.Model</span></code></p>
@@ -969,6 +1152,34 @@ sending a request.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>cores_used</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a>) – The cores used by the cluster.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="class">
+<dt id="azure.mgmt.hdinsight.models.RegionalQuotaCapability">
+<em class="property">class </em><code class="sig-prename descclassname">azure.mgmt.hdinsight.models.</code><code class="sig-name descname">RegionalQuotaCapability</code><span class="sig-paren">(</span><em class="sig-param">*</em>, <em class="sig-param">region_name: str = None</em>, <em class="sig-param">cores_used: int = None</em>, <em class="sig-param">cores_available: int = None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/mgmt/hdinsight/models/_models_py3.html#RegionalQuotaCapability"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.hdinsight.models.RegionalQuotaCapability" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">msrest.serialization.Model</span></code></p>
+<p>The regional quota capacity.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>region_name</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The region name.</p></li>
+<li><p><strong>cores_used</strong> (<em>long</em>) – The number of cores used in the region.</p></li>
+<li><p><strong>cores_available</strong> (<em>long</em>) – The number of cores available in the region.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="class">
+<dt id="azure.mgmt.hdinsight.models.RegionsCapability">
+<em class="property">class </em><code class="sig-prename descclassname">azure.mgmt.hdinsight.models.</code><code class="sig-name descname">RegionsCapability</code><span class="sig-paren">(</span><em class="sig-param">*</em>, <em class="sig-param">available=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/mgmt/hdinsight/models/_models_py3.html#RegionsCapability"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.hdinsight.models.RegionsCapability" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">msrest.serialization.Model</span></code></p>
+<p>The regions capability.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>available</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a><em>]</em>) – The list of region capabilities.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -993,7 +1204,7 @@ sending a request.</p>
 
 <dl class="class">
 <dt id="azure.mgmt.hdinsight.models.Role">
-<em class="property">class </em><code class="sig-prename descclassname">azure.mgmt.hdinsight.models.</code><code class="sig-name descname">Role</code><span class="sig-paren">(</span><em class="sig-param">*</em>, <em class="sig-param">name: str = None</em>, <em class="sig-param">min_instance_count: int = None</em>, <em class="sig-param">target_instance_count: int = None</em>, <em class="sig-param">hardware_profile=None</em>, <em class="sig-param">os_profile=None</em>, <em class="sig-param">virtual_network_profile=None</em>, <em class="sig-param">data_disks_groups=None</em>, <em class="sig-param">script_actions=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/mgmt/hdinsight/models/_models_py3.html#Role"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.hdinsight.models.Role" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">azure.mgmt.hdinsight.models.</code><code class="sig-name descname">Role</code><span class="sig-paren">(</span><em class="sig-param">*</em>, <em class="sig-param">name: str = None</em>, <em class="sig-param">min_instance_count: int = None</em>, <em class="sig-param">target_instance_count: int = None</em>, <em class="sig-param">autoscale_configuration=None</em>, <em class="sig-param">hardware_profile=None</em>, <em class="sig-param">os_profile=None</em>, <em class="sig-param">virtual_network_profile=None</em>, <em class="sig-param">data_disks_groups=None</em>, <em class="sig-param">script_actions=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/mgmt/hdinsight/models/_models_py3.html#Role"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.hdinsight.models.Role" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">msrest.serialization.Model</span></code></p>
 <p>Describes a role on the cluster.</p>
 <dl class="field-list simple">
@@ -1002,6 +1213,7 @@ sending a request.</p>
 <li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The name of the role.</p></li>
 <li><p><strong>min_instance_count</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a>) – The minimum instance count of the cluster.</p></li>
 <li><p><strong>target_instance_count</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a>) – The instance count of the cluster.</p></li>
+<li><p><strong>autoscale_configuration</strong> (<a class="reference internal" href="#azure.mgmt.hdinsight.models.Autoscale" title="azure.mgmt.hdinsight.models.Autoscale"><em>Autoscale</em></a>) – The autoscale configurations.</p></li>
 <li><p><strong>hardware_profile</strong> (<a class="reference internal" href="#azure.mgmt.hdinsight.models.HardwareProfile" title="azure.mgmt.hdinsight.models.HardwareProfile"><em>HardwareProfile</em></a>) – The hardware profile.</p></li>
 <li><p><strong>os_profile</strong> (<a class="reference internal" href="#azure.mgmt.hdinsight.models.OsProfile" title="azure.mgmt.hdinsight.models.OsProfile"><em>OsProfile</em></a>) – The operating system profile.</p></li>
 <li><p><strong>virtual_network_profile</strong> (<a class="reference internal" href="#azure.mgmt.hdinsight.models.VirtualNetworkProfile" title="azure.mgmt.hdinsight.models.VirtualNetworkProfile"><em>VirtualNetworkProfile</em></a>) – The virtual network profile.</p></li>
@@ -1283,6 +1495,35 @@ settings based authorization is enabled. Default value: True .</p></li>
 </dd></dl>
 
 <dl class="class">
+<dt id="azure.mgmt.hdinsight.models.VersionsCapability">
+<em class="property">class </em><code class="sig-prename descclassname">azure.mgmt.hdinsight.models.</code><code class="sig-name descname">VersionsCapability</code><span class="sig-paren">(</span><em class="sig-param">*</em>, <em class="sig-param">available=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/mgmt/hdinsight/models/_models_py3.html#VersionsCapability"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.hdinsight.models.VersionsCapability" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">msrest.serialization.Model</span></code></p>
+<p>The version capability.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>available</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><em>list</em></a><em>[</em><a class="reference internal" href="#azure.mgmt.hdinsight.models.VersionSpec" title="azure.mgmt.hdinsight.models.VersionSpec"><em>VersionSpec</em></a><em>]</em>) – The list of version capabilities.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="class">
+<dt id="azure.mgmt.hdinsight.models.VersionSpec">
+<em class="property">class </em><code class="sig-prename descclassname">azure.mgmt.hdinsight.models.</code><code class="sig-name descname">VersionSpec</code><span class="sig-paren">(</span><em class="sig-param">*</em>, <em class="sig-param">friendly_name: str = None</em>, <em class="sig-param">display_name: str = None</em>, <em class="sig-param">is_default: str = None</em>, <em class="sig-param">component_versions=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/mgmt/hdinsight/models/_models_py3.html#VersionSpec"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.hdinsight.models.VersionSpec" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">msrest.serialization.Model</span></code></p>
+<p>The version properties.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>friendly_name</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The friendly name</p></li>
+<li><p><strong>display_name</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The display name</p></li>
+<li><p><strong>is_default</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Whether or not the version is the default version.</p></li>
+<li><p><strong>component_versions</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#dict" title="(in Python v3.5)"><em>dict</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a><em>]</em>) – The component version property.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="class">
 <dt id="azure.mgmt.hdinsight.models.VirtualNetworkProfile">
 <em class="property">class </em><code class="sig-prename descclassname">azure.mgmt.hdinsight.models.</code><code class="sig-name descname">VirtualNetworkProfile</code><span class="sig-paren">(</span><em class="sig-param">*</em>, <em class="sig-param">id: str = None</em>, <em class="sig-param">subnet: str = None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/mgmt/hdinsight/models/_models_py3.html#VirtualNetworkProfile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.hdinsight.models.VirtualNetworkProfile" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">msrest.serialization.Model</span></code></p>
@@ -1293,6 +1534,66 @@ settings based authorization is enabled. Default value: True .</p></li>
 <li><p><strong>id</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The ID of the virtual network.</p></li>
 <li><p><strong>subnet</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The name of the subnet.</p></li>
 </ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="class">
+<dt id="azure.mgmt.hdinsight.models.VmSizeCompatibilityFilter">
+<em class="property">class </em><code class="sig-prename descclassname">azure.mgmt.hdinsight.models.</code><code class="sig-name descname">VmSizeCompatibilityFilter</code><span class="sig-paren">(</span><em class="sig-param">*</em>, <em class="sig-param">filter_mode: str = None</em>, <em class="sig-param">regions=None</em>, <em class="sig-param">cluster_flavors=None</em>, <em class="sig-param">node_types=None</em>, <em class="sig-param">cluster_versions=None</em>, <em class="sig-param">vmsizes=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/mgmt/hdinsight/models/_models_py3.html#VmSizeCompatibilityFilter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.hdinsight.models.VmSizeCompatibilityFilter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">msrest.serialization.Model</span></code></p>
+<p>The virtual machine type compatibility filter.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filter_mode</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The mode for the filter.</p></li>
+<li><p><strong>regions</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a><em>]</em>) – The list of regions.</p></li>
+<li><p><strong>cluster_flavors</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a><em>]</em>) – The list of cluster types available.</p></li>
+<li><p><strong>node_types</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a><em>]</em>) – The list of node types.</p></li>
+<li><p><strong>cluster_versions</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a><em>]</em>) – The list of cluster versions.</p></li>
+<li><p><strong>vmsizes</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a><em>]</em>) – The list of virtual machine sizes.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="class">
+<dt id="azure.mgmt.hdinsight.models.VmSizeCompatibilityFilterV2">
+<em class="property">class </em><code class="sig-prename descclassname">azure.mgmt.hdinsight.models.</code><code class="sig-name descname">VmSizeCompatibilityFilterV2</code><span class="sig-paren">(</span><em class="sig-param">*</em>, <em class="sig-param">filter_mode=None</em>, <em class="sig-param">regions=None</em>, <em class="sig-param">cluster_flavors=None</em>, <em class="sig-param">node_types=None</em>, <em class="sig-param">cluster_versions=None</em>, <em class="sig-param">os_type=None</em>, <em class="sig-param">vm_sizes=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/mgmt/hdinsight/models/_models_py3.html#VmSizeCompatibilityFilterV2"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.hdinsight.models.VmSizeCompatibilityFilterV2" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">msrest.serialization.Model</span></code></p>
+<p>This class represent a single filter object that defines a multidimensional
+set. The dimensions of this set are Regions, ClusterFlavors, NodeTypes and
+ClusterVersions. The constraint should be defined based on the following:
+FilterMode (Exclude vs Include), VMSizes (the vm sizes in affect of
+exclusion/inclusion) and the ordering of the Filters. Later filters
+override previous settings if conflicted.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filter_mode</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a><em> or </em><a class="reference internal" href="#azure.mgmt.hdinsight.models.FilterMode" title="azure.mgmt.hdinsight.models.FilterMode"><em>FilterMode</em></a>) – The filtering mode. Effectively this can enabling or
+disabling the VM sizes in a particular set. Possible values include:
+‘Exclude’, ‘Include’</p></li>
+<li><p><strong>regions</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a><em>]</em>) – The list of regions under the effect of the filter.</p></li>
+<li><p><strong>cluster_flavors</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a><em>]</em>) – The list of cluster flavors under the effect of
+the filter.</p></li>
+<li><p><strong>node_types</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a><em>]</em>) – The list of node types affected by the filter.</p></li>
+<li><p><strong>cluster_versions</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a><em>]</em>) – The list of cluster versions affected in
+Major.Minor format.</p></li>
+<li><p><strong>os_type</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a><em> or </em><a class="reference internal" href="#azure.mgmt.hdinsight.models.OSType" title="azure.mgmt.hdinsight.models.OSType"><em>OSType</em></a><em>]</em>) – The OSType affected, Windows or Linux.</p></li>
+<li><p><strong>vm_sizes</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a><em>]</em>) – The list of virtual machine sizes to include or exclude.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="class">
+<dt id="azure.mgmt.hdinsight.models.VmSizesCapability">
+<em class="property">class </em><code class="sig-prename descclassname">azure.mgmt.hdinsight.models.</code><code class="sig-name descname">VmSizesCapability</code><span class="sig-paren">(</span><em class="sig-param">*</em>, <em class="sig-param">available=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/mgmt/hdinsight/models/_models_py3.html#VmSizesCapability"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.hdinsight.models.VmSizesCapability" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">msrest.serialization.Model</span></code></p>
+<p>The virtual machine sizes capability.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>available</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a><em>]</em>) – The list of virtual machine size capabilities.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -1333,6 +1634,48 @@ settings based authorization is enabled. Default value: True .</p></li>
 <dl class="attribute">
 <dt id="azure.mgmt.hdinsight.models.DirectoryType.active_directory">
 <code class="sig-name descname">active_directory</code><em class="property"> = 'ActiveDirectory'</em><a class="headerlink" href="#azure.mgmt.hdinsight.models.DirectoryType.active_directory" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="azure.mgmt.hdinsight.models.DaysOfWeek">
+<em class="property">class </em><code class="sig-prename descclassname">azure.mgmt.hdinsight.models.</code><code class="sig-name descname">DaysOfWeek</code><a class="reference internal" href="../_modules/azure/mgmt/hdinsight/models/_hd_insight_management_client_enums.html#DaysOfWeek"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.hdinsight.models.DaysOfWeek" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3.5/library/enum.html#enum.Enum" title="(in Python v3.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></a></p>
+<p>An enumeration.</p>
+<dl class="attribute">
+<dt id="azure.mgmt.hdinsight.models.DaysOfWeek.friday">
+<code class="sig-name descname">friday</code><em class="property"> = 'Friday'</em><a class="headerlink" href="#azure.mgmt.hdinsight.models.DaysOfWeek.friday" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="azure.mgmt.hdinsight.models.DaysOfWeek.monday">
+<code class="sig-name descname">monday</code><em class="property"> = 'Monday'</em><a class="headerlink" href="#azure.mgmt.hdinsight.models.DaysOfWeek.monday" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="azure.mgmt.hdinsight.models.DaysOfWeek.saturday">
+<code class="sig-name descname">saturday</code><em class="property"> = 'Saturday'</em><a class="headerlink" href="#azure.mgmt.hdinsight.models.DaysOfWeek.saturday" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="azure.mgmt.hdinsight.models.DaysOfWeek.sunday">
+<code class="sig-name descname">sunday</code><em class="property"> = 'Sunday'</em><a class="headerlink" href="#azure.mgmt.hdinsight.models.DaysOfWeek.sunday" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="azure.mgmt.hdinsight.models.DaysOfWeek.thursday">
+<code class="sig-name descname">thursday</code><em class="property"> = 'Thursday'</em><a class="headerlink" href="#azure.mgmt.hdinsight.models.DaysOfWeek.thursday" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="azure.mgmt.hdinsight.models.DaysOfWeek.tuesday">
+<code class="sig-name descname">tuesday</code><em class="property"> = 'Tuesday'</em><a class="headerlink" href="#azure.mgmt.hdinsight.models.DaysOfWeek.tuesday" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="azure.mgmt.hdinsight.models.DaysOfWeek.wednesday">
+<code class="sig-name descname">wednesday</code><em class="property"> = 'Wednesday'</em><a class="headerlink" href="#azure.mgmt.hdinsight.models.DaysOfWeek.wednesday" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -1470,6 +1813,23 @@ settings based authorization is enabled. Default value: True .</p></li>
 <dl class="attribute">
 <dt id="azure.mgmt.hdinsight.models.AsyncOperationState.succeeded">
 <code class="sig-name descname">succeeded</code><em class="property"> = 'Succeeded'</em><a class="headerlink" href="#azure.mgmt.hdinsight.models.AsyncOperationState.succeeded" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="azure.mgmt.hdinsight.models.FilterMode">
+<em class="property">class </em><code class="sig-prename descclassname">azure.mgmt.hdinsight.models.</code><code class="sig-name descname">FilterMode</code><a class="reference internal" href="../_modules/azure/mgmt/hdinsight/models/_hd_insight_management_client_enums.html#FilterMode"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.mgmt.hdinsight.models.FilterMode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3.5/library/enum.html#enum.Enum" title="(in Python v3.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></a></p>
+<p>An enumeration.</p>
+<dl class="attribute">
+<dt id="azure.mgmt.hdinsight.models.FilterMode.exclude">
+<code class="sig-name descname">exclude</code><em class="property"> = 'Exclude'</em><a class="headerlink" href="#azure.mgmt.hdinsight.models.FilterMode.exclude" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="azure.mgmt.hdinsight.models.FilterMode.include">
+<code class="sig-name descname">include</code><em class="property"> = 'Include'</em><a class="headerlink" href="#azure.mgmt.hdinsight.models.FilterMode.include" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
