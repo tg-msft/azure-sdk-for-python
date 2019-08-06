@@ -295,23 +295,16 @@
 <span class="kn">import</span> <span class="nn">six</span>
 
 <span class="kn">from</span> <span class="nn">azure.core.paging</span> <span class="k">import</span> <span class="n">ItemPaged</span>
-
+<span class="kn">from</span> <span class="nn">azure.core.tracing.decorator</span> <span class="k">import</span> <span class="n">distributed_trace</span>
 <span class="kn">from</span> <span class="nn">._shared.shared_access_signature</span> <span class="k">import</span> <span class="n">QueueSharedAccessSignature</span>
-<span class="kn">from</span> <span class="nn">._shared.utils</span> <span class="k">import</span> <span class="p">(</span>
-    <span class="n">StorageAccountHostsMixin</span><span class="p">,</span>
-    <span class="n">add_metadata_headers</span><span class="p">,</span>
+<span class="kn">from</span> <span class="nn">._shared.base_client</span> <span class="k">import</span> <span class="n">StorageAccountHostsMixin</span><span class="p">,</span> <span class="n">parse_connection_str</span><span class="p">,</span> <span class="n">parse_query</span>
+<span class="kn">from</span> <span class="nn">._shared.request_handlers</span> <span class="k">import</span> <span class="n">add_metadata_headers</span><span class="p">,</span> <span class="n">serialize_iso</span>
+<span class="kn">from</span> <span class="nn">._shared.response_handlers</span> <span class="k">import</span> <span class="p">(</span>
     <span class="n">process_storage_error</span><span class="p">,</span>
     <span class="n">return_response_headers</span><span class="p">,</span>
-    <span class="n">return_headers_and_deserialized</span><span class="p">,</span>
-    <span class="n">parse_query</span><span class="p">,</span>
-    <span class="n">serialize_iso</span><span class="p">,</span>
-    <span class="n">parse_connection_str</span>
-<span class="p">)</span>
-<span class="kn">from</span> <span class="nn">._queue_utils</span> <span class="k">import</span> <span class="p">(</span>
-    <span class="n">TextXMLEncodePolicy</span><span class="p">,</span>
-    <span class="n">TextXMLDecodePolicy</span><span class="p">,</span>
-    <span class="n">deserialize_queue_properties</span><span class="p">,</span>
-    <span class="n">deserialize_queue_creation</span><span class="p">)</span>
+    <span class="n">return_headers_and_deserialized</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">._message_encoding</span> <span class="k">import</span> <span class="n">TextXMLEncodePolicy</span><span class="p">,</span> <span class="n">TextXMLDecodePolicy</span>
+<span class="kn">from</span> <span class="nn">._deserialize</span> <span class="k">import</span> <span class="n">deserialize_queue_properties</span><span class="p">,</span> <span class="n">deserialize_queue_creation</span>
 <span class="kn">from</span> <span class="nn">._generated</span> <span class="k">import</span> <span class="n">AzureQueueStorage</span>
 <span class="kn">from</span> <span class="nn">._generated.models</span> <span class="k">import</span> <span class="n">StorageErrorException</span><span class="p">,</span> <span class="n">SignedIdentifier</span>
 <span class="kn">from</span> <span class="nn">._generated.models</span> <span class="k">import</span> <span class="n">QueueMessage</span> <span class="k">as</span> <span class="n">GenQueueMessage</span>
@@ -516,7 +509,8 @@
             <span class="n">protocol</span><span class="o">=</span><span class="n">protocol</span><span class="p">,</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="QueueClient.create_queue"><a class="viewcode-back" href="../../../../ref/azure.storage.queue.html#azure.storage.queue.queue_client.QueueClient.create_queue">[docs]</a>    <span class="k">def</span> <span class="nf">create_queue</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">metadata</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<div class="viewcode-block" id="QueueClient.create_queue"><a class="viewcode-back" href="../../../../ref/azure.storage.queue.html#azure.storage.queue.queue_client.QueueClient.create_queue">[docs]</a>    <span class="nd">@distributed_trace</span>
+    <span class="k">def</span> <span class="nf">create_queue</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">metadata</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="c1"># type: (Optional[Dict[str, Any]], Optional[int], Optional[Any]) -&gt; None</span>
         <span class="sd">&quot;&quot;&quot;Creates a new queue in the storage account.</span>
 
@@ -554,7 +548,8 @@
         <span class="k">except</span> <span class="n">StorageErrorException</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
             <span class="n">process_storage_error</span><span class="p">(</span><span class="n">error</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="QueueClient.delete_queue"><a class="viewcode-back" href="../../../../ref/azure.storage.queue.html#azure.storage.queue.queue_client.QueueClient.delete_queue">[docs]</a>    <span class="k">def</span> <span class="nf">delete_queue</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<div class="viewcode-block" id="QueueClient.delete_queue"><a class="viewcode-back" href="../../../../ref/azure.storage.queue.html#azure.storage.queue.queue_client.QueueClient.delete_queue">[docs]</a>    <span class="nd">@distributed_trace</span>
+    <span class="k">def</span> <span class="nf">delete_queue</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="c1"># type: (Optional[int], Optional[Any]) -&gt; None</span>
         <span class="sd">&quot;&quot;&quot;Deletes the specified queue and any messages it contains.</span>
 
@@ -583,7 +578,8 @@
         <span class="k">except</span> <span class="n">StorageErrorException</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
             <span class="n">process_storage_error</span><span class="p">(</span><span class="n">error</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="QueueClient.get_queue_properties"><a class="viewcode-back" href="../../../../ref/azure.storage.queue.html#azure.storage.queue.queue_client.QueueClient.get_queue_properties">[docs]</a>    <span class="k">def</span> <span class="nf">get_queue_properties</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<div class="viewcode-block" id="QueueClient.get_queue_properties"><a class="viewcode-back" href="../../../../ref/azure.storage.queue.html#azure.storage.queue.queue_client.QueueClient.get_queue_properties">[docs]</a>    <span class="nd">@distributed_trace</span>
+    <span class="k">def</span> <span class="nf">get_queue_properties</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="c1"># type: (Optional[int], Optional[Any]) -&gt; QueueProperties</span>
         <span class="sd">&quot;&quot;&quot;Returns all user-defined metadata for the specified queue.</span>
 
@@ -612,7 +608,8 @@
         <span class="n">response</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">queue_name</span>
         <span class="k">return</span> <span class="n">response</span> <span class="c1"># type: ignore</span></div>
 
-<div class="viewcode-block" id="QueueClient.set_queue_metadata"><a class="viewcode-back" href="../../../../ref/azure.storage.queue.html#azure.storage.queue.queue_client.QueueClient.set_queue_metadata">[docs]</a>    <span class="k">def</span> <span class="nf">set_queue_metadata</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">metadata</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<div class="viewcode-block" id="QueueClient.set_queue_metadata"><a class="viewcode-back" href="../../../../ref/azure.storage.queue.html#azure.storage.queue.queue_client.QueueClient.set_queue_metadata">[docs]</a>    <span class="nd">@distributed_trace</span>
+    <span class="k">def</span> <span class="nf">set_queue_metadata</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">metadata</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="c1"># type: (Optional[Dict[str, Any]], Optional[int], Optional[Any]) -&gt; None</span>
         <span class="sd">&quot;&quot;&quot;Sets user-defined metadata on the specified queue.</span>
 
@@ -644,7 +641,8 @@
         <span class="k">except</span> <span class="n">StorageErrorException</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
             <span class="n">process_storage_error</span><span class="p">(</span><span class="n">error</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="QueueClient.get_queue_access_policy"><a class="viewcode-back" href="../../../../ref/azure.storage.queue.html#azure.storage.queue.queue_client.QueueClient.get_queue_access_policy">[docs]</a>    <span class="k">def</span> <span class="nf">get_queue_access_policy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<div class="viewcode-block" id="QueueClient.get_queue_access_policy"><a class="viewcode-back" href="../../../../ref/azure.storage.queue.html#azure.storage.queue.queue_client.QueueClient.get_queue_access_policy">[docs]</a>    <span class="nd">@distributed_trace</span>
+    <span class="k">def</span> <span class="nf">get_queue_access_policy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="c1"># type: (Optional[int], Optional[Any]) -&gt; Dict[str, Any]</span>
         <span class="sd">&quot;&quot;&quot;Returns details about any stored access policies specified on the</span>
 <span class="sd">        queue that may be used with Shared Access Signatures.</span>
@@ -663,7 +661,8 @@
             <span class="n">process_storage_error</span><span class="p">(</span><span class="n">error</span><span class="p">)</span>
         <span class="k">return</span> <span class="p">{</span><span class="n">s</span><span class="o">.</span><span class="n">id</span><span class="p">:</span> <span class="n">s</span><span class="o">.</span><span class="n">access_policy</span> <span class="ow">or</span> <span class="n">AccessPolicy</span><span class="p">()</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">identifiers</span><span class="p">}</span></div>
 
-<div class="viewcode-block" id="QueueClient.set_queue_access_policy"><a class="viewcode-back" href="../../../../ref/azure.storage.queue.html#azure.storage.queue.queue_client.QueueClient.set_queue_access_policy">[docs]</a>    <span class="k">def</span> <span class="nf">set_queue_access_policy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">signed_identifiers</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<div class="viewcode-block" id="QueueClient.set_queue_access_policy"><a class="viewcode-back" href="../../../../ref/azure.storage.queue.html#azure.storage.queue.queue_client.QueueClient.set_queue_access_policy">[docs]</a>    <span class="nd">@distributed_trace</span>
+    <span class="k">def</span> <span class="nf">set_queue_access_policy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">signed_identifiers</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="c1"># type: (Optional[Dict[str, Optional[AccessPolicy]]], Optional[int], Optional[Any]) -&gt; None</span>
         <span class="sd">&quot;&quot;&quot;Sets stored access policies for the queue that may be used with Shared</span>
 <span class="sd">        Access Signatures.</span>
@@ -715,7 +714,8 @@
         <span class="k">except</span> <span class="n">StorageErrorException</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
             <span class="n">process_storage_error</span><span class="p">(</span><span class="n">error</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="QueueClient.enqueue_message"><a class="viewcode-back" href="../../../../ref/azure.storage.queue.html#azure.storage.queue.queue_client.QueueClient.enqueue_message">[docs]</a>    <span class="k">def</span> <span class="nf">enqueue_message</span><span class="p">(</span> <span class="c1"># type: ignore</span>
+<div class="viewcode-block" id="QueueClient.enqueue_message"><a class="viewcode-back" href="../../../../ref/azure.storage.queue.html#azure.storage.queue.queue_client.QueueClient.enqueue_message">[docs]</a>    <span class="nd">@distributed_trace</span>
+    <span class="k">def</span> <span class="nf">enqueue_message</span><span class="p">(</span> <span class="c1"># type: ignore</span>
             <span class="bp">self</span><span class="p">,</span> <span class="n">content</span><span class="p">,</span> <span class="c1"># type: Any</span>
             <span class="n">visibility_timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="c1"># type: Optional[int]</span>
             <span class="n">time_to_live</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="c1"># type: Optional[int]</span>
@@ -791,7 +791,8 @@
         <span class="k">except</span> <span class="n">StorageErrorException</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
             <span class="n">process_storage_error</span><span class="p">(</span><span class="n">error</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="QueueClient.receive_messages"><a class="viewcode-back" href="../../../../ref/azure.storage.queue.html#azure.storage.queue.queue_client.QueueClient.receive_messages">[docs]</a>    <span class="k">def</span> <span class="nf">receive_messages</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">messages_per_page</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">visibility_timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span> <span class="c1"># type: ignore</span>
+<div class="viewcode-block" id="QueueClient.receive_messages"><a class="viewcode-back" href="../../../../ref/azure.storage.queue.html#azure.storage.queue.queue_client.QueueClient.receive_messages">[docs]</a>    <span class="nd">@distributed_trace</span>
+    <span class="k">def</span> <span class="nf">receive_messages</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">messages_per_page</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">visibility_timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span> <span class="c1"># type: ignore</span>
         <span class="c1"># type: (Optional[int], Optional[int], Optional[int], Optional[Any]) -&gt; ItemPaged[Message]</span>
         <span class="sd">&quot;&quot;&quot;Removes one or more messages from the front of the queue.</span>
 
@@ -846,7 +847,8 @@
         <span class="k">except</span> <span class="n">StorageErrorException</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
             <span class="n">process_storage_error</span><span class="p">(</span><span class="n">error</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="QueueClient.update_message"><a class="viewcode-back" href="../../../../ref/azure.storage.queue.html#azure.storage.queue.queue_client.QueueClient.update_message">[docs]</a>    <span class="k">def</span> <span class="nf">update_message</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">,</span> <span class="n">visibility_timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">pop_receipt</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="c1"># type: ignore</span>
+<div class="viewcode-block" id="QueueClient.update_message"><a class="viewcode-back" href="../../../../ref/azure.storage.queue.html#azure.storage.queue.queue_client.QueueClient.update_message">[docs]</a>    <span class="nd">@distributed_trace</span>
+    <span class="k">def</span> <span class="nf">update_message</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">,</span> <span class="n">visibility_timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">pop_receipt</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="c1"># type: ignore</span>
                        <span class="n">content</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="c1"># type: (Any, int, Optional[str], Optional[Any], Optional[int], Any) -&gt; QueueMessage</span>
         <span class="sd">&quot;&quot;&quot;Updates the visibility timeout of a message. You can also use this</span>
@@ -939,7 +941,8 @@
         <span class="k">except</span> <span class="n">StorageErrorException</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
             <span class="n">process_storage_error</span><span class="p">(</span><span class="n">error</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="QueueClient.peek_messages"><a class="viewcode-back" href="../../../../ref/azure.storage.queue.html#azure.storage.queue.queue_client.QueueClient.peek_messages">[docs]</a>    <span class="k">def</span> <span class="nf">peek_messages</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">max_messages</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span> <span class="c1"># type: ignore</span>
+<div class="viewcode-block" id="QueueClient.peek_messages"><a class="viewcode-back" href="../../../../ref/azure.storage.queue.html#azure.storage.queue.queue_client.QueueClient.peek_messages">[docs]</a>    <span class="nd">@distributed_trace</span>
+    <span class="k">def</span> <span class="nf">peek_messages</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">max_messages</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span> <span class="c1"># type: ignore</span>
         <span class="c1"># type: (Optional[int], Optional[int], Optional[Any]) -&gt; List[QueueMessage]</span>
         <span class="sd">&quot;&quot;&quot;Retrieves one or more messages from the front of the queue, but does</span>
 <span class="sd">        not alter the visibility of the message.</span>
@@ -994,7 +997,8 @@
         <span class="k">except</span> <span class="n">StorageErrorException</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
             <span class="n">process_storage_error</span><span class="p">(</span><span class="n">error</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="QueueClient.clear_messages"><a class="viewcode-back" href="../../../../ref/azure.storage.queue.html#azure.storage.queue.queue_client.QueueClient.clear_messages">[docs]</a>    <span class="k">def</span> <span class="nf">clear_messages</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<div class="viewcode-block" id="QueueClient.clear_messages"><a class="viewcode-back" href="../../../../ref/azure.storage.queue.html#azure.storage.queue.queue_client.QueueClient.clear_messages">[docs]</a>    <span class="nd">@distributed_trace</span>
+    <span class="k">def</span> <span class="nf">clear_messages</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="c1"># type: (Optional[int], Optional[Any]) -&gt; None</span>
         <span class="sd">&quot;&quot;&quot;Deletes all messages from the specified queue.</span>
 
@@ -1014,7 +1018,8 @@
         <span class="k">except</span> <span class="n">StorageErrorException</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
             <span class="n">process_storage_error</span><span class="p">(</span><span class="n">error</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="QueueClient.delete_message"><a class="viewcode-back" href="../../../../ref/azure.storage.queue.html#azure.storage.queue.queue_client.QueueClient.delete_message">[docs]</a>    <span class="k">def</span> <span class="nf">delete_message</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">,</span> <span class="n">pop_receipt</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<div class="viewcode-block" id="QueueClient.delete_message"><a class="viewcode-back" href="../../../../ref/azure.storage.queue.html#azure.storage.queue.queue_client.QueueClient.delete_message">[docs]</a>    <span class="nd">@distributed_trace</span>
+    <span class="k">def</span> <span class="nf">delete_message</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">,</span> <span class="n">pop_receipt</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="c1"># type: (Any, Optional[str], Optional[str], Optional[int]) -&gt; None</span>
         <span class="sd">&quot;&quot;&quot;Deletes the specified message.</span>
 

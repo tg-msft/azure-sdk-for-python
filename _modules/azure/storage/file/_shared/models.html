@@ -488,30 +488,6 @@
         <span class="k">return</span> <span class="n">default</span>
 
 
-<span class="k">class</span> <span class="nc">ModifiedAccessConditions</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Additional parameters for a set of operations.</span>
-
-<span class="sd">    :param if_modified_since: Specify this header value to operate only on a</span>
-<span class="sd">     blob if it has been modified since the specified date/time.</span>
-<span class="sd">    :type if_modified_since: datetime</span>
-<span class="sd">    :param if_unmodified_since: Specify this header value to operate only on a</span>
-<span class="sd">     blob if it has not been modified since the specified date/time.</span>
-<span class="sd">    :type if_unmodified_since: datetime</span>
-<span class="sd">    :param if_match: Specify an ETag value to operate only on blobs with a</span>
-<span class="sd">     matching value.</span>
-<span class="sd">    :type if_match: str</span>
-<span class="sd">    :param if_none_match: Specify an ETag value to operate only on blobs</span>
-<span class="sd">     without a matching value.</span>
-<span class="sd">    :type if_none_match: str</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">if_modified_since</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;if_modified_since&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">if_unmodified_since</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;if_unmodified_since&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">if_match</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;if_match&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">if_none_match</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;if_none_match&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-
-
 <div class="viewcode-block" id="LocationMode"><a class="viewcode-back" href="../../../../../ref/azure.storage.file.html#azure.storage.file.LocationMode">[docs]</a><span class="k">class</span> <span class="nc">LocationMode</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Specifies the location the request should be sent to. This mode only applies</span>
@@ -681,32 +657,31 @@
 
 
 <span class="k">class</span> <span class="nc">Services</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Specifies the services accessible with the account SAS.</span>
+    <span class="sd">&quot;&quot;&quot;Specifies the services accessible with the account SAS.</span>
 
 <span class="sd">    :cvar Services Services.BLOB: The blob service.</span>
 <span class="sd">    :cvar Services Services.FILE: The file service</span>
 <span class="sd">    :cvar Services Services.QUEUE: The queue service.</span>
-<span class="sd">    :cvar Services Services.TABLE: The table service.</span>
 <span class="sd">    :param bool blob:</span>
-<span class="sd">        Access to any blob service, for example, the `.BlockBlobService`</span>
+<span class="sd">        Access for the `~azure.storage.blob.blob_service_client.BlobServiceClient`</span>
 <span class="sd">    :param bool queue:</span>
-<span class="sd">        Access to the `.QueueService`</span>
+<span class="sd">        Access for the `~azure.storage.queue.queue_service_client.QueueServiceClient`</span>
 <span class="sd">    :param bool file:</span>
-<span class="sd">        Access to the `.FileService`</span>
-<span class="sd">    :param bool table:</span>
-<span class="sd">        Access to the TableService</span>
+<span class="sd">        Access for the `~azure.storage.file.file_service_client.FileServiceClient`</span>
 <span class="sd">    :param str _str:</span>
 <span class="sd">        A string representing the services.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">blob</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">queue</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">table</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">_str</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="n">BLOB</span> <span class="o">=</span> <span class="kc">None</span> <span class="c1"># type: Services</span>
+    <span class="n">QUEUE</span> <span class="o">=</span> <span class="kc">None</span> <span class="c1"># type: Services</span>
+    <span class="n">FILE</span> <span class="o">=</span> <span class="kc">None</span> <span class="c1"># type: Services</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">blob</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">queue</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">_str</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">_str</span><span class="p">:</span>
             <span class="n">_str</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">blob</span> <span class="o">=</span> <span class="n">blob</span> <span class="ow">or</span> <span class="p">(</span><span class="s1">&#39;b&#39;</span> <span class="ow">in</span> <span class="n">_str</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">queue</span> <span class="o">=</span> <span class="n">queue</span> <span class="ow">or</span> <span class="p">(</span><span class="s1">&#39;q&#39;</span> <span class="ow">in</span> <span class="n">_str</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">file</span> <span class="o">=</span> <span class="n">file</span> <span class="ow">or</span> <span class="p">(</span><span class="s1">&#39;f&#39;</span> <span class="ow">in</span> <span class="n">_str</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">table</span> <span class="o">=</span> <span class="n">table</span> <span class="ow">or</span> <span class="p">(</span><span class="s1">&#39;t&#39;</span> <span class="ow">in</span> <span class="n">_str</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">__or__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">Services</span><span class="p">(</span><span class="n">_str</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">other</span><span class="p">))</span>
@@ -717,14 +692,12 @@
     <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="p">((</span><span class="s1">&#39;b&#39;</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">blob</span> <span class="k">else</span> <span class="s1">&#39;&#39;</span><span class="p">)</span> <span class="o">+</span>
                 <span class="p">(</span><span class="s1">&#39;q&#39;</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">queue</span> <span class="k">else</span> <span class="s1">&#39;&#39;</span><span class="p">)</span> <span class="o">+</span>
-                <span class="p">(</span><span class="s1">&#39;t&#39;</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">table</span> <span class="k">else</span> <span class="s1">&#39;&#39;</span><span class="p">)</span> <span class="o">+</span>
                 <span class="p">(</span><span class="s1">&#39;f&#39;</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">file</span> <span class="k">else</span> <span class="s1">&#39;&#39;</span><span class="p">))</span>
 
 
-<span class="n">Services</span><span class="o">.</span><span class="n">BLOB</span> <span class="o">=</span> <span class="n">Services</span><span class="p">(</span><span class="n">blob</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="c1"># type: ignore</span>
-<span class="n">Services</span><span class="o">.</span><span class="n">QUEUE</span> <span class="o">=</span> <span class="n">Services</span><span class="p">(</span><span class="n">queue</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="c1"># type: ignore</span>
-<span class="n">Services</span><span class="o">.</span><span class="n">TABLE</span> <span class="o">=</span> <span class="n">Services</span><span class="p">(</span><span class="n">table</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="c1"># type: ignore</span>
-<span class="n">Services</span><span class="o">.</span><span class="n">FILE</span> <span class="o">=</span> <span class="n">Services</span><span class="p">(</span><span class="n">file</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="c1"># type: ignore</span>
+<span class="n">Services</span><span class="o">.</span><span class="n">BLOB</span> <span class="o">=</span> <span class="n">Services</span><span class="p">(</span><span class="n">blob</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">Services</span><span class="o">.</span><span class="n">QUEUE</span> <span class="o">=</span> <span class="n">Services</span><span class="p">(</span><span class="n">queue</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">Services</span><span class="o">.</span><span class="n">FILE</span> <span class="o">=</span> <span class="n">Services</span><span class="p">(</span><span class="n">file</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 
            </div>

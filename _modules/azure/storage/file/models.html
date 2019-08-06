@@ -285,10 +285,7 @@
 <span class="c1"># pylint: disable=super-init-not-called, too-many-lines</span>
 
 <span class="kn">from</span> <span class="nn">azure.core.paging</span> <span class="k">import</span> <span class="n">PageIterator</span>
-<span class="kn">from</span> <span class="nn">._shared.utils</span> <span class="k">import</span> <span class="p">(</span>
-    <span class="n">return_context_and_deserialized</span><span class="p">,</span>
-    <span class="n">process_storage_error</span><span class="p">)</span>
-
+<span class="kn">from</span> <span class="nn">._shared.response_handlers</span> <span class="k">import</span> <span class="n">return_context_and_deserialized</span><span class="p">,</span> <span class="n">process_storage_error</span>
 <span class="kn">from</span> <span class="nn">._shared.models</span> <span class="k">import</span> <span class="n">DictMixin</span><span class="p">,</span> <span class="n">get_enum_value</span>
 <span class="kn">from</span> <span class="nn">._generated.models</span> <span class="k">import</span> <span class="n">StorageErrorException</span>
 <span class="kn">from</span> <span class="nn">._generated.models</span> <span class="k">import</span> <span class="n">Metrics</span> <span class="k">as</span> <span class="n">GeneratedMetrics</span>
@@ -528,7 +525,7 @@
 <span class="sd">    :ivar str prefix: A file name prefix being used to filter the list.</span>
 <span class="sd">    :ivar str marker: The continuation token of the current page of results.</span>
 <span class="sd">    :ivar int results_per_page: The maximum number of results retrieved per API call.</span>
-<span class="sd">    :ivar str next_marker: The continuation token to retrieve the next page of results.</span>
+<span class="sd">    :ivar str continuation_token: The continuation token to retrieve the next page of results.</span>
 <span class="sd">    :ivar str location_mode: The location mode being used to list results. The available</span>
 <span class="sd">        options include &quot;primary&quot; and &quot;secondary&quot;.</span>
 <span class="sd">    :ivar current_page: The current page of listed results.</span>
@@ -560,6 +557,7 @@
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_command</span><span class="p">(</span>
                 <span class="n">marker</span><span class="o">=</span><span class="n">continuation_token</span> <span class="ow">or</span> <span class="kc">None</span><span class="p">,</span>
                 <span class="n">maxresults</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">results_per_page</span><span class="p">,</span>
+                <span class="n">prefix</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">prefix</span><span class="p">,</span>
                 <span class="bp">cls</span><span class="o">=</span><span class="n">return_context_and_deserialized</span><span class="p">,</span>
                 <span class="n">use_location</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">location_mode</span><span class="p">)</span>
         <span class="k">except</span> <span class="n">StorageErrorException</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
@@ -632,7 +630,7 @@
 
 <span class="sd">    :ivar str marker: The continuation token of the current page of results.</span>
 <span class="sd">    :ivar int results_per_page: The maximum number of results retrieved per API call.</span>
-<span class="sd">    :ivar str next_marker: The continuation token to retrieve the next page of results.</span>
+<span class="sd">    :ivar str continuation_token: The continuation token to retrieve the next page of results.</span>
 <span class="sd">    :ivar str location_mode: The location mode being used to list results. The available</span>
 <span class="sd">        options include &quot;primary&quot; and &quot;secondary&quot;.</span>
 <span class="sd">    :ivar current_page: The current page of listed results.</span>
@@ -716,7 +714,7 @@
 <span class="sd">    :ivar str prefix: A file name prefix being used to filter the list.</span>
 <span class="sd">    :ivar str marker: The continuation token of the current page of results.</span>
 <span class="sd">    :ivar int results_per_page: The maximum number of results retrieved per API call.</span>
-<span class="sd">    :ivar str next_marker: The continuation token to retrieve the next page of results.</span>
+<span class="sd">    :ivar str continuation_token: The continuation token to retrieve the next page of results.</span>
 <span class="sd">    :ivar str location_mode: The location mode being used to list results. The available</span>
 <span class="sd">        options include &quot;primary&quot; and &quot;secondary&quot;.</span>
 <span class="sd">    :ivar current_page: The current page of listed results.</span>

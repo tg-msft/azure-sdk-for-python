@@ -218,7 +218,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#module-azure.storage.file.file_client">azure.storage.file.file_client module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#module-azure.storage.file.file_service_client">azure.storage.file.file_service_client module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#module-azure.storage.file.models">azure.storage.file.models module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#module-azure.storage.file.polling">azure.storage.file.polling module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#azure-storage-file-polling-module">azure.storage.file.polling module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#module-azure.storage.file.share_client">azure.storage.file.share_client module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#module-azure.storage.file.version">azure.storage.file.version module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#module-azure.storage.file">Module contents</a></li>
@@ -300,7 +300,7 @@
 <dl class="class">
 <dt id="azure.storage.file.directory_client.DirectoryClient">
 <em class="property">class </em><code class="sig-prename descclassname">azure.storage.file.directory_client.</code><code class="sig-name descname">DirectoryClient</code><span class="sig-paren">(</span><em class="sig-param">directory_url</em>, <em class="sig-param">share=None</em>, <em class="sig-param">directory_path=None</em>, <em class="sig-param">snapshot=None</em>, <em class="sig-param">credential=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/storage/file/directory_client.html#DirectoryClient"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.storage.file.directory_client.DirectoryClient" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">azure.storage.file._shared.utils.StorageAccountHostsMixin</span></code></p>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">azure.storage.file._shared.base_client.StorageAccountHostsMixin</span></code></p>
 <p>A client to interact with a specific directory, although it may not yet exist.</p>
 <p>For operations relating to a specific subdirectory or file in this share, the clients for those
 entities can also be retrieved using the <cite>get_subdirectory_client</cite> and <cite>get_file_client</cite> functions.s</p>
@@ -720,7 +720,7 @@ file.</p></li>
 <dl class="class">
 <dt id="azure.storage.file.file_client.FileClient">
 <em class="property">class </em><code class="sig-prename descclassname">azure.storage.file.file_client.</code><code class="sig-name descname">FileClient</code><span class="sig-paren">(</span><em class="sig-param">file_url</em>, <em class="sig-param">share=None</em>, <em class="sig-param">file_path=None</em>, <em class="sig-param">snapshot=None</em>, <em class="sig-param">credential=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/storage/file/file_client.html#FileClient"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.storage.file.file_client.FileClient" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">azure.storage.file._shared.utils.StorageAccountHostsMixin</span></code></p>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">azure.storage.file._shared.base_client.StorageAccountHostsMixin</span></code></p>
 <p>A client to interact with a specific file, although that file may not yet exist.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Variables</dt>
@@ -754,6 +754,23 @@ shared access key.</p></li>
 </ul>
 </dd>
 </dl>
+<dl class="method">
+<dt id="azure.storage.file.file_client.FileClient.abort_copy">
+<code class="sig-name descname">abort_copy</code><span class="sig-paren">(</span><em class="sig-param">copy_id</em>, <em class="sig-param">timeout=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/storage/file/file_client.html#FileClient.abort_copy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.storage.file.file_client.FileClient.abort_copy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Abort an ongoing copy operation.</p>
+<p>This will leave a destination file with zero length and full metadata.
+This will raise an error if the copy operation has already ended.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>copy_id</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a><em> or </em><a class="reference internal" href="#azure.storage.file.models.FileProperties" title="azure.storage.file.models.FileProperties"><em>FileProperties</em></a>) – The copy operation to abort. This can be either an ID, or an
+instance of FileProperties.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3.5/library/constants.html#None" title="(in Python v3.5)">None</a></p>
+</dd>
+</dl>
+</dd></dl>
+
 <dl class="method">
 <dt id="azure.storage.file.file_client.FileClient.clear_range">
 <code class="sig-name descname">clear_range</code><span class="sig-paren">(</span><em class="sig-param">start_range</em>, <em class="sig-param">end_range</em>, <em class="sig-param">timeout=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/storage/file/file_client.html#FileClient.clear_range"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.storage.file.file_client.FileClient.clear_range" title="Permalink to this definition">¶</a></dt>
@@ -806,37 +823,6 @@ which will attempt to close all open handles.</p></li>
 </dd></dl>
 
 <dl class="method">
-<dt id="azure.storage.file.file_client.FileClient.copy_file_from_url">
-<code class="sig-name descname">copy_file_from_url</code><span class="sig-paren">(</span><em class="sig-param">source_url</em>, <em class="sig-param">metadata=None</em>, <em class="sig-param">timeout=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/storage/file/file_client.html#FileClient.copy_file_from_url"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.storage.file.file_client.FileClient.copy_file_from_url" title="Permalink to this definition">¶</a></dt>
-<dd><p>Copies the file from the provided URL to the file referenced by
-the client.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>source_url</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Specifies the URL of the source file.</p></li>
-<li><p><strong>metadata</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#dict" title="(in Python v3.5)"><em>dict</em></a><em>(</em><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a><em>)</em>) – Name-value pairs associated with the file as metadata.</p></li>
-<li><p><strong>timeout</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a>) – The timeout parameter is expressed in seconds.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>Polling object in order to wait on or abort the operation</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference internal" href="#azure.storage.file.polling.CopyStatusPoller" title="azure.storage.file.polling.CopyStatusPoller">CopyStatusPoller</a></p>
-</dd>
-</dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id9">
-<div class="code-block-caption"><span class="caption-text">Copy a file from a URL</span><a class="headerlink" href="#id9" title="Permalink to this code">¶</a></div>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">destination_file</span><span class="o">.</span><span class="n">copy_file_from_url</span><span class="p">(</span><span class="n">source_url</span><span class="o">=</span><span class="n">source_url</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="method">
 <dt id="azure.storage.file.file_client.FileClient.create_file">
 <code class="sig-name descname">create_file</code><span class="sig-paren">(</span><em class="sig-param">size</em>, <em class="sig-param">content_settings=None</em>, <em class="sig-param">metadata=None</em>, <em class="sig-param">timeout=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/storage/file/file_client.html#FileClient.create_file"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.storage.file.file_client.FileClient.create_file" title="Permalink to this definition">¶</a></dt>
 <dd><p>Creates a new file.</p>
@@ -859,8 +845,8 @@ up to 1 TB.</p></li>
 </dd>
 </dl>
 <dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id10">
-<div class="code-block-caption"><span class="caption-text">Create a file.</span><a class="headerlink" href="#id10" title="Permalink to this code">¶</a></div>
+<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id9">
+<div class="code-block-caption"><span class="caption-text">Create a file.</span><a class="headerlink" href="#id9" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create and allocate bytes for the file (no content added yet)</span>
 <span class="nb">file</span><span class="o">.</span><span class="n">create_file</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
 </pre></div>
@@ -884,8 +870,8 @@ later deleted during garbage collection.</p>
 </dd>
 </dl>
 <dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id11">
-<div class="code-block-caption"><span class="caption-text">Delete a file.</span><a class="headerlink" href="#id11" title="Permalink to this code">¶</a></div>
+<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id10">
+<div class="code-block-caption"><span class="caption-text">Delete a file.</span><a class="headerlink" href="#id10" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">file2</span><span class="o">.</span><span class="n">delete_file</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -921,8 +907,8 @@ entire blocks, and doing so defeats the purpose of the memory-efficient algorith
 </dd>
 </dl>
 <dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id12">
-<div class="code-block-caption"><span class="caption-text">Download a file.</span><a class="headerlink" href="#id12" title="Permalink to this code">¶</a></div>
+<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id11">
+<div class="code-block-caption"><span class="caption-text">Download a file.</span><a class="headerlink" href="#id11" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">DEST_FILE</span><span class="p">,</span> <span class="s2">&quot;wb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">data</span><span class="p">:</span>
     <span class="n">data</span><span class="o">.</span><span class="n">writelines</span><span class="p">(</span><span class="n">file2</span><span class="o">.</span><span class="n">download_file</span><span class="p">())</span>
 </pre></div>
@@ -951,8 +937,8 @@ shared access key.</p></li>
 </dd>
 </dl>
 <dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id13">
-<div class="code-block-caption"><span class="caption-text">Creates the file client with connection string.</span><a class="headerlink" href="#id13" title="Permalink to this code">¶</a></div>
+<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id12">
+<div class="code-block-caption"><span class="caption-text">Creates the file client with connection string.</span><a class="headerlink" href="#id12" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">azure.storage.file</span> <span class="kn">import</span> <span class="n">FileClient</span>
 <span class="nb">file</span> <span class="o">=</span> <span class="n">FileClient</span><span class="o">.</span><span class="n">from_connection_string</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">connection_string</span><span class="p">,</span> <span class="n">share</span><span class="o">=</span><span class="s2">&quot;share&quot;</span><span class="p">,</span> <span class="n">file_path</span><span class="o">=</span><span class="s2">&quot;myfile&quot;</span><span class="p">)</span>
 </pre></div>
@@ -1142,6 +1128,36 @@ call this operation with no metadata dict.</p>
 </dd></dl>
 
 <dl class="method">
+<dt id="azure.storage.file.file_client.FileClient.start_copy_from_url">
+<code class="sig-name descname">start_copy_from_url</code><span class="sig-paren">(</span><em class="sig-param">source_url</em>, <em class="sig-param">metadata=None</em>, <em class="sig-param">timeout=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/storage/file/file_client.html#FileClient.start_copy_from_url"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.storage.file.file_client.FileClient.start_copy_from_url" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initiates the copying of data from a source URL into the file
+referenced by the client.</p>
+<p>The status of this copy operation can be found using the <cite>get_properties</cite>
+method.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>source_url</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Specifies the URL of the source file.</p></li>
+<li><p><strong>metadata</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#dict" title="(in Python v3.5)"><em>dict</em></a><em>(</em><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a><em>)</em>) – Name-value pairs associated with the file as metadata.</p></li>
+<li><p><strong>timeout</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a>) – The timeout parameter is expressed in seconds.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#dict" title="(in Python v3.5)">dict</a>(<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)">str</a>, Any)</p>
+</dd>
+</dl>
+<dl>
+<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id13">
+<div class="code-block-caption"><span class="caption-text">Copy a file from a URL</span><a class="headerlink" href="#id13" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">destination_file</span><span class="o">.</span><span class="n">start_copy_from_url</span><span class="p">(</span><span class="n">source_url</span><span class="o">=</span><span class="n">source_url</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
 <dt id="azure.storage.file.file_client.FileClient.upload_file">
 <code class="sig-name descname">upload_file</code><span class="sig-paren">(</span><em class="sig-param">data</em>, <em class="sig-param">length=None</em>, <em class="sig-param">metadata=None</em>, <em class="sig-param">content_settings=None</em>, <em class="sig-param">validate_content=False</em>, <em class="sig-param">max_connections=1</em>, <em class="sig-param">timeout=None</em>, <em class="sig-param">encoding='UTF-8'</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/storage/file/file_client.html#FileClient.upload_file"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.storage.file.file_client.FileClient.upload_file" title="Permalink to this definition">¶</a></dt>
 <dd><p>Uploads a new file.</p>
@@ -1225,7 +1241,7 @@ file.</p></li>
 <dl class="class">
 <dt id="azure.storage.file.file_service_client.FileServiceClient">
 <em class="property">class </em><code class="sig-prename descclassname">azure.storage.file.file_service_client.</code><code class="sig-name descname">FileServiceClient</code><span class="sig-paren">(</span><em class="sig-param">account_url</em>, <em class="sig-param">credential=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/storage/file/file_service_client.html#FileServiceClient"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.storage.file.file_service_client.FileServiceClient" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">azure.storage.file._shared.utils.StorageAccountHostsMixin</span></code></p>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">azure.storage.file._shared.base_client.StorageAccountHostsMixin</span></code></p>
 <p>A client to interact with the File Service at the account level.</p>
 <p>This client provides operations to retrieve and configure the account properties
 as well as list, create and delete shares within the account.
@@ -1762,7 +1778,7 @@ Items that are files (is_directory=False) will have an additional ‘content_len
 <li><p><strong>prefix</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – A file name prefix being used to filter the list.</p></li>
 <li><p><strong>marker</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The continuation token of the current page of results.</p></li>
 <li><p><strong>results_per_page</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a>) – The maximum number of results retrieved per API call.</p></li>
-<li><p><strong>next_marker</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The continuation token to retrieve the next page of results.</p></li>
+<li><p><strong>continuation_token</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The continuation token to retrieve the next page of results.</p></li>
 <li><p><strong>location_mode</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The location mode being used to list results. The available
 options include “primary” and “secondary”.</p></li>
 <li><p><strong>current_page</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><em>list</em></a><em>(</em><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#dict" title="(in Python v3.5)"><em>dict</em></a><em>(</em><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a><em>, </em><em>Any</em><em>)</em><em>)</em>) – The current page of listed results.</p></li>
@@ -1898,7 +1914,7 @@ the handle has last been reconnected. (UTC)</p></li>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>marker</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The continuation token of the current page of results.</p></li>
 <li><p><strong>results_per_page</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a>) – The maximum number of results retrieved per API call.</p></li>
-<li><p><strong>next_marker</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The continuation token to retrieve the next page of results.</p></li>
+<li><p><strong>continuation_token</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The continuation token to retrieve the next page of results.</p></li>
 <li><p><strong>location_mode</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The location mode being used to list results. The available
 options include “primary” and “secondary”.</p></li>
 <li><p><strong>current_page</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><em>list</em></a><em>(</em><a class="reference internal" href="#azure.storage.file.models.Handle" title="azure.storage.file.models.Handle"><em>Handle</em></a><em>)</em>) – The current page of listed results.</p></li>
@@ -2051,7 +2067,7 @@ share as metadata.</p></li>
 <li><p><strong>prefix</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – A file name prefix being used to filter the list.</p></li>
 <li><p><strong>marker</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The continuation token of the current page of results.</p></li>
 <li><p><strong>results_per_page</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a>) – The maximum number of results retrieved per API call.</p></li>
-<li><p><strong>next_marker</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The continuation token to retrieve the next page of results.</p></li>
+<li><p><strong>continuation_token</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The continuation token to retrieve the next page of results.</p></li>
 <li><p><strong>location_mode</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The location mode being used to list results. The available
 options include “primary” and “secondary”.</p></li>
 <li><p><strong>current_page</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><em>list</em></a><em>(</em><a class="reference internal" href="#azure.storage.file.models.ShareProperties" title="azure.storage.file.models.ShareProperties"><em>ShareProperties</em></a><em>)</em>) – The current page of listed results.</p></li>
@@ -2071,169 +2087,15 @@ call.</p></li>
 </dd></dl>
 
 </div>
-<div class="section" id="module-azure.storage.file.polling">
-<span id="azure-storage-file-polling-module"></span><h2>azure.storage.file.polling module<a class="headerlink" href="#module-azure.storage.file.polling" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
-<dt id="azure.storage.file.polling.CloseHandles">
-<em class="property">class </em><code class="sig-prename descclassname">azure.storage.file.polling.</code><code class="sig-name descname">CloseHandles</code><span class="sig-paren">(</span><em class="sig-param">interval</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/storage/file/polling.html#CloseHandles"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.storage.file.polling.CloseHandles" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="azure.core.polling.html#azure.core.polling.poller.PollingMethod" title="azure.core.polling.poller.PollingMethod"><code class="xref py py-class docutils literal notranslate"><span class="pre">azure.core.polling.poller.PollingMethod</span></code></a></p>
-<dl class="method">
-<dt id="azure.storage.file.polling.CloseHandles.finished">
-<code class="sig-name descname">finished</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/storage/file/polling.html#CloseHandles.finished"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.storage.file.polling.CloseHandles.finished" title="Permalink to this definition">¶</a></dt>
-<dd><p>Is this polling finished?
-:rtype: bool</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="azure.storage.file.polling.CloseHandles.initialize">
-<code class="sig-name descname">initialize</code><span class="sig-paren">(</span><em class="sig-param">command</em>, <em class="sig-param">initial_status</em>, <em class="sig-param">_</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/storage/file/polling.html#CloseHandles.initialize"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.storage.file.polling.CloseHandles.initialize" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="azure.storage.file.polling.CloseHandles.resource">
-<code class="sig-name descname">resource</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/storage/file/polling.html#CloseHandles.resource"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.storage.file.polling.CloseHandles.resource" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="azure.storage.file.polling.CloseHandles.run">
-<code class="sig-name descname">run</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/storage/file/polling.html#CloseHandles.run"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.storage.file.polling.CloseHandles.run" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="azure.storage.file.polling.CloseHandles.status">
-<code class="sig-name descname">status</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/storage/file/polling.html#CloseHandles.status"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.storage.file.polling.CloseHandles.status" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
-<dl class="class">
-<dt id="azure.storage.file.polling.CopyFile">
-<em class="property">class </em><code class="sig-prename descclassname">azure.storage.file.polling.</code><code class="sig-name descname">CopyFile</code><span class="sig-paren">(</span><em class="sig-param">interval</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/storage/file/polling.html#CopyFile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.storage.file.polling.CopyFile" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="azure.core.polling.html#azure.core.polling.poller.PollingMethod" title="azure.core.polling.poller.PollingMethod"><code class="xref py py-class docutils literal notranslate"><span class="pre">azure.core.polling.poller.PollingMethod</span></code></a></p>
-<p>An empty poller that returns the deserialized initial response.</p>
-<dl class="method">
-<dt id="azure.storage.file.polling.CopyFile.abort">
-<code class="sig-name descname">abort</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/storage/file/polling.html#CopyFile.abort"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.storage.file.polling.CopyFile.abort" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="azure.storage.file.polling.CopyFile.finished">
-<code class="sig-name descname">finished</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/storage/file/polling.html#CopyFile.finished"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.storage.file.polling.CopyFile.finished" title="Permalink to this definition">¶</a></dt>
-<dd><p>Is this polling finished?
-:rtype: bool</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="azure.storage.file.polling.CopyFile.initialize">
-<code class="sig-name descname">initialize</code><span class="sig-paren">(</span><em class="sig-param">client</em>, <em class="sig-param">initial_status</em>, <em class="sig-param">_</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/storage/file/polling.html#CopyFile.initialize"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.storage.file.polling.CopyFile.initialize" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="azure.storage.file.polling.CopyFile.resource">
-<code class="sig-name descname">resource</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/storage/file/polling.html#CopyFile.resource"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.storage.file.polling.CopyFile.resource" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="azure.storage.file.polling.CopyFile.run">
-<code class="sig-name descname">run</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/storage/file/polling.html#CopyFile.run"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.storage.file.polling.CopyFile.run" title="Permalink to this definition">¶</a></dt>
-<dd><p>Empty run, no polling.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="azure.storage.file.polling.CopyFile.status">
-<code class="sig-name descname">status</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/storage/file/polling.html#CopyFile.status"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.storage.file.polling.CopyFile.status" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
-<dl class="class">
-<dt id="azure.storage.file.polling.CopyFilePolling">
-<em class="property">class </em><code class="sig-prename descclassname">azure.storage.file.polling.</code><code class="sig-name descname">CopyFilePolling</code><span class="sig-paren">(</span><em class="sig-param">interval</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/storage/file/polling.html#CopyFilePolling"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.storage.file.polling.CopyFilePolling" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#azure.storage.file.polling.CopyFile" title="azure.storage.file.polling.CopyFile"><code class="xref py py-class docutils literal notranslate"><span class="pre">azure.storage.file.polling.CopyFile</span></code></a></p>
-<dl class="method">
-<dt id="azure.storage.file.polling.CopyFilePolling.resource">
-<code class="sig-name descname">resource</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/storage/file/polling.html#CopyFilePolling.resource"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.storage.file.polling.CopyFilePolling.resource" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="azure.storage.file.polling.CopyFilePolling.run">
-<code class="sig-name descname">run</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/storage/file/polling.html#CopyFilePolling.run"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.storage.file.polling.CopyFilePolling.run" title="Permalink to this definition">¶</a></dt>
-<dd><p>Empty run, no polling.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="azure.storage.file.polling.CopyFilePolling.status">
-<code class="sig-name descname">status</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/storage/file/polling.html#CopyFilePolling.status"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.storage.file.polling.CopyFilePolling.status" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return the current status as a string.
-:rtype: str</p>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="class">
-<dt id="azure.storage.file.polling.CopyStatusPoller">
-<em class="property">class </em><code class="sig-prename descclassname">azure.storage.file.polling.</code><code class="sig-name descname">CopyStatusPoller</code><span class="sig-paren">(</span><em class="sig-param">client</em>, <em class="sig-param">copy_id</em>, <em class="sig-param">polling=True</em>, <em class="sig-param">configuration=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/storage/file/polling.html#CopyStatusPoller"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.storage.file.polling.CopyStatusPoller" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="azure.core.polling.html#azure.core.polling.poller.LROPoller" title="azure.core.polling.poller.LROPoller"><code class="xref py py-class docutils literal notranslate"><span class="pre">azure.core.polling.poller.LROPoller</span></code></a></p>
-<p>Poller for a long-running copy operation.</p>
-<dl class="method">
-<dt id="azure.storage.file.polling.CopyStatusPoller.abort">
-<code class="sig-name descname">abort</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/storage/file/polling.html#CopyStatusPoller.abort"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.storage.file.polling.CopyStatusPoller.abort" title="Permalink to this definition">¶</a></dt>
-<dd><p>Abort the copy operation.</p>
-<p>This will leave a destination file with zero length and full metadata.
-This will raise an error if the copy operation has already ended.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3.5/library/constants.html#None" title="(in Python v3.5)">None</a></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="method">
-<dt id="azure.storage.file.polling.CopyStatusPoller.copy_id">
-<code class="sig-name descname">copy_id</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/storage/file/polling.html#CopyStatusPoller.copy_id"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.storage.file.polling.CopyStatusPoller.copy_id" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get the ID of the copy operation.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)">str</a></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="method">
-<dt id="azure.storage.file.polling.CopyStatusPoller.result">
-<code class="sig-name descname">result</code><span class="sig-paren">(</span><em class="sig-param">timeout=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/storage/file/polling.html#CopyStatusPoller.result"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.storage.file.polling.CopyStatusPoller.result" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return the FileProperties after the completion of the copy operation,
-or the properties available after the specified timeout.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>The destination file properties.</p>
-</dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference internal" href="#azure.storage.file.models.FileProperties" title="azure.storage.file.models.FileProperties">FileProperties</a></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="method">
-<dt id="azure.storage.file.polling.CopyStatusPoller.status">
-<code class="sig-name descname">status</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/storage/file/polling.html#CopyStatusPoller.status"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.storage.file.polling.CopyStatusPoller.status" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the current status of the copy operation.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)">str</a></p>
-</dd>
-</dl>
-</dd></dl>
-
-</dd></dl>
-
+<div class="section" id="azure-storage-file-polling-module">
+<h2>azure.storage.file.polling module<a class="headerlink" href="#azure-storage-file-polling-module" title="Permalink to this headline">¶</a></h2>
 </div>
 <div class="section" id="module-azure.storage.file.share_client">
 <span id="azure-storage-file-share-client-module"></span><h2>azure.storage.file.share_client module<a class="headerlink" href="#module-azure.storage.file.share_client" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="azure.storage.file.share_client.ShareClient">
 <em class="property">class </em><code class="sig-prename descclassname">azure.storage.file.share_client.</code><code class="sig-name descname">ShareClient</code><span class="sig-paren">(</span><em class="sig-param">share_url</em>, <em class="sig-param">share=None</em>, <em class="sig-param">snapshot=None</em>, <em class="sig-param">credential=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/storage/file/share_client.html#ShareClient"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.storage.file.share_client.ShareClient" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">azure.storage.file._shared.utils.StorageAccountHostsMixin</span></code></p>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">azure.storage.file._shared.base_client.StorageAccountHostsMixin</span></code></p>
 <p>A client to interact with a specific share, although that share may not yet exist.</p>
 <p>For operations relating to a specific directory or file in this share, the clients for
 those entities can also be retrieved using the <cite>get_directory_client</cite> and <cite>get_file_client</cite> functions.</p>
@@ -2707,7 +2569,7 @@ Must be greater than 0, and less than or equal to 5TB.</p></li>
 <dl class="class">
 <dt id="azure.storage.file.FileClient">
 <em class="property">class </em><code class="sig-prename descclassname">azure.storage.file.</code><code class="sig-name descname">FileClient</code><span class="sig-paren">(</span><em class="sig-param">file_url</em>, <em class="sig-param">share=None</em>, <em class="sig-param">file_path=None</em>, <em class="sig-param">snapshot=None</em>, <em class="sig-param">credential=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/storage/file/file_client.html#FileClient"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.storage.file.FileClient" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">azure.storage.file._shared.utils.StorageAccountHostsMixin</span></code></p>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">azure.storage.file._shared.base_client.StorageAccountHostsMixin</span></code></p>
 <p>A client to interact with a specific file, although that file may not yet exist.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Variables</dt>
@@ -2741,6 +2603,23 @@ shared access key.</p></li>
 </ul>
 </dd>
 </dl>
+<dl class="method">
+<dt id="azure.storage.file.FileClient.abort_copy">
+<code class="sig-name descname">abort_copy</code><span class="sig-paren">(</span><em class="sig-param">copy_id</em>, <em class="sig-param">timeout=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/storage/file/file_client.html#FileClient.abort_copy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.storage.file.FileClient.abort_copy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Abort an ongoing copy operation.</p>
+<p>This will leave a destination file with zero length and full metadata.
+This will raise an error if the copy operation has already ended.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>copy_id</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a><em> or </em><a class="reference internal" href="#azure.storage.file.models.FileProperties" title="azure.storage.file.models.FileProperties"><em>FileProperties</em></a>) – The copy operation to abort. This can be either an ID, or an
+instance of FileProperties.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3.5/library/constants.html#None" title="(in Python v3.5)">None</a></p>
+</dd>
+</dl>
+</dd></dl>
+
 <dl class="method">
 <dt id="azure.storage.file.FileClient.clear_range">
 <code class="sig-name descname">clear_range</code><span class="sig-paren">(</span><em class="sig-param">start_range</em>, <em class="sig-param">end_range</em>, <em class="sig-param">timeout=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/storage/file/file_client.html#FileClient.clear_range"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.storage.file.FileClient.clear_range" title="Permalink to this definition">¶</a></dt>
@@ -2793,37 +2672,6 @@ which will attempt to close all open handles.</p></li>
 </dd></dl>
 
 <dl class="method">
-<dt id="azure.storage.file.FileClient.copy_file_from_url">
-<code class="sig-name descname">copy_file_from_url</code><span class="sig-paren">(</span><em class="sig-param">source_url</em>, <em class="sig-param">metadata=None</em>, <em class="sig-param">timeout=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/storage/file/file_client.html#FileClient.copy_file_from_url"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.storage.file.FileClient.copy_file_from_url" title="Permalink to this definition">¶</a></dt>
-<dd><p>Copies the file from the provided URL to the file referenced by
-the client.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>source_url</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Specifies the URL of the source file.</p></li>
-<li><p><strong>metadata</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#dict" title="(in Python v3.5)"><em>dict</em></a><em>(</em><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a><em>)</em>) – Name-value pairs associated with the file as metadata.</p></li>
-<li><p><strong>timeout</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a>) – The timeout parameter is expressed in seconds.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>Polling object in order to wait on or abort the operation</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference internal" href="#azure.storage.file.polling.CopyStatusPoller" title="azure.storage.file.polling.CopyStatusPoller">CopyStatusPoller</a></p>
-</dd>
-</dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id32">
-<div class="code-block-caption"><span class="caption-text">Copy a file from a URL</span><a class="headerlink" href="#id32" title="Permalink to this code">¶</a></div>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">destination_file</span><span class="o">.</span><span class="n">copy_file_from_url</span><span class="p">(</span><span class="n">source_url</span><span class="o">=</span><span class="n">source_url</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="method">
 <dt id="azure.storage.file.FileClient.create_file">
 <code class="sig-name descname">create_file</code><span class="sig-paren">(</span><em class="sig-param">size</em>, <em class="sig-param">content_settings=None</em>, <em class="sig-param">metadata=None</em>, <em class="sig-param">timeout=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/storage/file/file_client.html#FileClient.create_file"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.storage.file.FileClient.create_file" title="Permalink to this definition">¶</a></dt>
 <dd><p>Creates a new file.</p>
@@ -2846,8 +2694,8 @@ up to 1 TB.</p></li>
 </dd>
 </dl>
 <dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id33">
-<div class="code-block-caption"><span class="caption-text">Create a file.</span><a class="headerlink" href="#id33" title="Permalink to this code">¶</a></div>
+<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id32">
+<div class="code-block-caption"><span class="caption-text">Create a file.</span><a class="headerlink" href="#id32" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create and allocate bytes for the file (no content added yet)</span>
 <span class="nb">file</span><span class="o">.</span><span class="n">create_file</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
 </pre></div>
@@ -2871,8 +2719,8 @@ later deleted during garbage collection.</p>
 </dd>
 </dl>
 <dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id34">
-<div class="code-block-caption"><span class="caption-text">Delete a file.</span><a class="headerlink" href="#id34" title="Permalink to this code">¶</a></div>
+<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id33">
+<div class="code-block-caption"><span class="caption-text">Delete a file.</span><a class="headerlink" href="#id33" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">file2</span><span class="o">.</span><span class="n">delete_file</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -2908,8 +2756,8 @@ entire blocks, and doing so defeats the purpose of the memory-efficient algorith
 </dd>
 </dl>
 <dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id35">
-<div class="code-block-caption"><span class="caption-text">Download a file.</span><a class="headerlink" href="#id35" title="Permalink to this code">¶</a></div>
+<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id34">
+<div class="code-block-caption"><span class="caption-text">Download a file.</span><a class="headerlink" href="#id34" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">DEST_FILE</span><span class="p">,</span> <span class="s2">&quot;wb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">data</span><span class="p">:</span>
     <span class="n">data</span><span class="o">.</span><span class="n">writelines</span><span class="p">(</span><span class="n">file2</span><span class="o">.</span><span class="n">download_file</span><span class="p">())</span>
 </pre></div>
@@ -2938,8 +2786,8 @@ shared access key.</p></li>
 </dd>
 </dl>
 <dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id36">
-<div class="code-block-caption"><span class="caption-text">Creates the file client with connection string.</span><a class="headerlink" href="#id36" title="Permalink to this code">¶</a></div>
+<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id35">
+<div class="code-block-caption"><span class="caption-text">Creates the file client with connection string.</span><a class="headerlink" href="#id35" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">azure.storage.file</span> <span class="kn">import</span> <span class="n">FileClient</span>
 <span class="nb">file</span> <span class="o">=</span> <span class="n">FileClient</span><span class="o">.</span><span class="n">from_connection_string</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">connection_string</span><span class="p">,</span> <span class="n">share</span><span class="o">=</span><span class="s2">&quot;share&quot;</span><span class="p">,</span> <span class="n">file_path</span><span class="o">=</span><span class="s2">&quot;myfile&quot;</span><span class="p">)</span>
 </pre></div>
@@ -3129,6 +2977,36 @@ call this operation with no metadata dict.</p>
 </dd></dl>
 
 <dl class="method">
+<dt id="azure.storage.file.FileClient.start_copy_from_url">
+<code class="sig-name descname">start_copy_from_url</code><span class="sig-paren">(</span><em class="sig-param">source_url</em>, <em class="sig-param">metadata=None</em>, <em class="sig-param">timeout=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/storage/file/file_client.html#FileClient.start_copy_from_url"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.storage.file.FileClient.start_copy_from_url" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initiates the copying of data from a source URL into the file
+referenced by the client.</p>
+<p>The status of this copy operation can be found using the <cite>get_properties</cite>
+method.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>source_url</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Specifies the URL of the source file.</p></li>
+<li><p><strong>metadata</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#dict" title="(in Python v3.5)"><em>dict</em></a><em>(</em><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a><em>)</em>) – Name-value pairs associated with the file as metadata.</p></li>
+<li><p><strong>timeout</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a>) – The timeout parameter is expressed in seconds.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#dict" title="(in Python v3.5)">dict</a>(<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)">str</a>, Any)</p>
+</dd>
+</dl>
+<dl>
+<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id36">
+<div class="code-block-caption"><span class="caption-text">Copy a file from a URL</span><a class="headerlink" href="#id36" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">destination_file</span><span class="o">.</span><span class="n">start_copy_from_url</span><span class="p">(</span><span class="n">source_url</span><span class="o">=</span><span class="n">source_url</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
 <dt id="azure.storage.file.FileClient.upload_file">
 <code class="sig-name descname">upload_file</code><span class="sig-paren">(</span><em class="sig-param">data</em>, <em class="sig-param">length=None</em>, <em class="sig-param">metadata=None</em>, <em class="sig-param">content_settings=None</em>, <em class="sig-param">validate_content=False</em>, <em class="sig-param">max_connections=1</em>, <em class="sig-param">timeout=None</em>, <em class="sig-param">encoding='UTF-8'</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/storage/file/file_client.html#FileClient.upload_file"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.storage.file.FileClient.upload_file" title="Permalink to this definition">¶</a></dt>
 <dd><p>Uploads a new file.</p>
@@ -3209,7 +3087,7 @@ file.</p></li>
 <dl class="class">
 <dt id="azure.storage.file.DirectoryClient">
 <em class="property">class </em><code class="sig-prename descclassname">azure.storage.file.</code><code class="sig-name descname">DirectoryClient</code><span class="sig-paren">(</span><em class="sig-param">directory_url</em>, <em class="sig-param">share=None</em>, <em class="sig-param">directory_path=None</em>, <em class="sig-param">snapshot=None</em>, <em class="sig-param">credential=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/storage/file/directory_client.html#DirectoryClient"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.storage.file.DirectoryClient" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">azure.storage.file._shared.utils.StorageAccountHostsMixin</span></code></p>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">azure.storage.file._shared.base_client.StorageAccountHostsMixin</span></code></p>
 <p>A client to interact with a specific directory, although it may not yet exist.</p>
 <p>For operations relating to a specific subdirectory or file in this share, the clients for those
 entities can also be retrieved using the <cite>get_subdirectory_client</cite> and <cite>get_file_client</cite> functions.s</p>
@@ -3626,7 +3504,7 @@ file.</p></li>
 <dl class="class">
 <dt id="azure.storage.file.ShareClient">
 <em class="property">class </em><code class="sig-prename descclassname">azure.storage.file.</code><code class="sig-name descname">ShareClient</code><span class="sig-paren">(</span><em class="sig-param">share_url</em>, <em class="sig-param">share=None</em>, <em class="sig-param">snapshot=None</em>, <em class="sig-param">credential=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/storage/file/share_client.html#ShareClient"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.storage.file.ShareClient" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">azure.storage.file._shared.utils.StorageAccountHostsMixin</span></code></p>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">azure.storage.file._shared.base_client.StorageAccountHostsMixin</span></code></p>
 <p>A client to interact with a specific share, although that share may not yet exist.</p>
 <p>For operations relating to a specific directory or file in this share, the clients for
 those entities can also be retrieved using the <cite>get_directory_client</cite> and <cite>get_file_client</cite> functions.</p>
@@ -4094,7 +3972,7 @@ Must be greater than 0, and less than or equal to 5TB.</p></li>
 <dl class="class">
 <dt id="azure.storage.file.FileServiceClient">
 <em class="property">class </em><code class="sig-prename descclassname">azure.storage.file.</code><code class="sig-name descname">FileServiceClient</code><span class="sig-paren">(</span><em class="sig-param">account_url</em>, <em class="sig-param">credential=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/storage/file/file_service_client.html#FileServiceClient"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.storage.file.FileServiceClient" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">azure.storage.file._shared.utils.StorageAccountHostsMixin</span></code></p>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">azure.storage.file._shared.base_client.StorageAccountHostsMixin</span></code></p>
 <p>A client to interact with the File Service at the account level.</p>
 <p>This client provides operations to retrieve and configure the account properties
 as well as list, create and delete shares within the account.
@@ -5625,7 +5503,7 @@ share as metadata.</p></li>
 <li><p><strong>prefix</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – A file name prefix being used to filter the list.</p></li>
 <li><p><strong>marker</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The continuation token of the current page of results.</p></li>
 <li><p><strong>results_per_page</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a>) – The maximum number of results retrieved per API call.</p></li>
-<li><p><strong>next_marker</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The continuation token to retrieve the next page of results.</p></li>
+<li><p><strong>continuation_token</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The continuation token to retrieve the next page of results.</p></li>
 <li><p><strong>location_mode</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The location mode being used to list results. The available
 options include “primary” and “secondary”.</p></li>
 <li><p><strong>current_page</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><em>list</em></a><em>(</em><a class="reference internal" href="#azure.storage.file.models.ShareProperties" title="azure.storage.file.models.ShareProperties"><em>ShareProperties</em></a><em>)</em>) – The current page of listed results.</p></li>
@@ -5679,7 +5557,7 @@ Items that are files (is_directory=False) will have an additional ‘content_len
 <li><p><strong>prefix</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – A file name prefix being used to filter the list.</p></li>
 <li><p><strong>marker</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The continuation token of the current page of results.</p></li>
 <li><p><strong>results_per_page</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a>) – The maximum number of results retrieved per API call.</p></li>
-<li><p><strong>next_marker</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The continuation token to retrieve the next page of results.</p></li>
+<li><p><strong>continuation_token</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The continuation token to retrieve the next page of results.</p></li>
 <li><p><strong>location_mode</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The location mode being used to list results. The available
 options include “primary” and “secondary”.</p></li>
 <li><p><strong>current_page</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><em>list</em></a><em>(</em><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#dict" title="(in Python v3.5)"><em>dict</em></a><em>(</em><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a><em>, </em><em>Any</em><em>)</em><em>)</em>) – The current page of listed results.</p></li>
@@ -5750,6 +5628,60 @@ the file, that value is stored.</p></li>
 <li><p><strong>content_md5</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – If the content_md5 has been set for the file, this response
 header is stored so that the client can check for message content
 integrity.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="class">
+<dt id="azure.storage.file.Handle">
+<em class="property">class </em><code class="sig-prename descclassname">azure.storage.file.</code><code class="sig-name descname">Handle</code><span class="sig-paren">(</span><em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/storage/file/models.html#Handle"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.storage.file.Handle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">azure.storage.file._shared.models.DictMixin</span></code></p>
+<p>A listed Azure Storage handle item.</p>
+<p>All required parameters must be populated in order to send to Azure.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>handle_id</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Required. XSMB service handle ID</p></li>
+<li><p><strong>path</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Required. File or directory name including full path starting
+from share root</p></li>
+<li><p><strong>file_id</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Required. FileId uniquely identifies the file or
+directory.</p></li>
+<li><p><strong>parent_id</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – ParentId uniquely identifies the parent directory of the
+object.</p></li>
+<li><p><strong>session_id</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Required. SMB session ID in context of which the file
+handle was opened</p></li>
+<li><p><strong>client_ip</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Required. Client IP that opened the handle</p></li>
+<li><p><strong>open_time</strong> (<em>datetime</em>) – Required. Time when the session that previously opened
+the handle has last been reconnected. (UTC)</p></li>
+<li><p><strong>last_reconnect_time</strong> (<em>datetime</em>) – Time handle was last connected to (UTC)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="class">
+<dt id="azure.storage.file.HandlesPaged">
+<em class="property">class </em><code class="sig-prename descclassname">azure.storage.file.</code><code class="sig-name descname">HandlesPaged</code><span class="sig-paren">(</span><em class="sig-param">command</em>, <em class="sig-param">results_per_page=None</em>, <em class="sig-param">continuation_token=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/storage/file/models.html#HandlesPaged"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.storage.file.HandlesPaged" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="azure.core.html#azure.core.paging.PageIterator" title="azure.core.paging.PageIterator"><code class="xref py py-class docutils literal notranslate"><span class="pre">azure.core.paging.PageIterator</span></code></a></p>
+<p>An iterable of Handles.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Variables</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>marker</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The continuation token of the current page of results.</p></li>
+<li><p><strong>results_per_page</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a>) – The maximum number of results retrieved per API call.</p></li>
+<li><p><strong>continuation_token</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The continuation token to retrieve the next page of results.</p></li>
+<li><p><strong>location_mode</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The location mode being used to list results. The available
+options include “primary” and “secondary”.</p></li>
+<li><p><strong>current_page</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><em>list</em></a><em>(</em><a class="reference internal" href="#azure.storage.file.models.Handle" title="azure.storage.file.models.Handle"><em>Handle</em></a><em>)</em>) – The current page of listed results.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Parameters</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>command</strong> (<em>callable</em>) – Function to retrieve the next page of items.</p></li>
+<li><p><strong>results_per_page</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a>) – The maximum number of share names to retrieve per
+call.</p></li>
+<li><p><strong>continuation_token</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – An opaque continuation token.</p></li>
 </ul>
 </dd>
 </dl>

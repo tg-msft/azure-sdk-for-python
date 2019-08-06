@@ -286,9 +286,7 @@
 
 <span class="kn">from</span> <span class="nn">typing</span> <span class="k">import</span> <span class="n">List</span> <span class="c1"># pylint: disable=unused-import</span>
 <span class="kn">from</span> <span class="nn">azure.core.paging</span> <span class="k">import</span> <span class="n">PageIterator</span>
-<span class="kn">from</span> <span class="nn">._shared.utils</span> <span class="k">import</span> <span class="p">(</span>
-    <span class="n">return_context_and_deserialized</span><span class="p">,</span>
-    <span class="n">process_storage_error</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">._shared.response_handlers</span> <span class="k">import</span> <span class="n">return_context_and_deserialized</span><span class="p">,</span> <span class="n">process_storage_error</span>
 <span class="kn">from</span> <span class="nn">._shared.models</span> <span class="k">import</span> <span class="n">DictMixin</span>
 <span class="kn">from</span> <span class="nn">._generated.models</span> <span class="k">import</span> <span class="n">StorageErrorException</span>
 <span class="kn">from</span> <span class="nn">._generated.models</span> <span class="k">import</span> <span class="n">AccessPolicy</span> <span class="k">as</span> <span class="n">GenAccessPolicy</span>
@@ -526,7 +524,7 @@
         <span class="k">except</span> <span class="n">StorageErrorException</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
             <span class="n">process_storage_error</span><span class="p">(</span><span class="n">error</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">_extract_data_cb</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">messages</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">_extract_data_cb</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">messages</span><span class="p">):</span> <span class="c1"># pylint: disable=no-self-use</span>
         <span class="c1"># There is no concept of continuation token, so raising on my own condition</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">messages</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">StopIteration</span><span class="p">(</span><span class="s2">&quot;End of paging&quot;</span><span class="p">)</span>
@@ -607,8 +605,8 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">prefix</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_response</span><span class="o">.</span><span class="n">prefix</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">marker</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_response</span><span class="o">.</span><span class="n">marker</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">results_per_page</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_response</span><span class="o">.</span><span class="n">max_results</span>
-
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_response</span><span class="o">.</span><span class="n">next_marker</span> <span class="ow">or</span> <span class="kc">None</span><span class="p">,</span> <span class="p">[</span><span class="n">QueueProperties</span><span class="o">.</span><span class="n">_from_generated</span><span class="p">(</span><span class="n">q</span><span class="p">)</span> <span class="k">for</span> <span class="n">q</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_response</span><span class="o">.</span><span class="n">queue_items</span><span class="p">]</span>  <span class="c1"># pylint: disable=protected-access</span></div>
+        <span class="n">props_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">QueueProperties</span><span class="o">.</span><span class="n">_from_generated</span><span class="p">(</span><span class="n">q</span><span class="p">)</span> <span class="k">for</span> <span class="n">q</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_response</span><span class="o">.</span><span class="n">queue_items</span><span class="p">]</span> <span class="c1"># pylint: disable=protected-access</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_response</span><span class="o">.</span><span class="n">next_marker</span> <span class="ow">or</span> <span class="kc">None</span><span class="p">,</span> <span class="n">props_list</span></div>
 
 
 <div class="viewcode-block" id="QueuePermissions"><a class="viewcode-back" href="../../../../ref/azure.storage.queue.html#azure.storage.queue.models.QueuePermissions">[docs]</a><span class="k">class</span> <span class="nc">QueuePermissions</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>

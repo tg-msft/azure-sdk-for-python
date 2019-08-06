@@ -292,14 +292,11 @@
     <span class="kn">from</span> <span class="nn">urlparse</span> <span class="k">import</span> <span class="n">urlparse</span> <span class="c1"># type: ignore</span>
 
 <span class="kn">from</span> <span class="nn">azure.core.paging</span> <span class="k">import</span> <span class="n">ItemPaged</span>
-
+<span class="kn">from</span> <span class="nn">azure.core.tracing.decorator</span> <span class="k">import</span> <span class="n">distributed_trace</span>
 <span class="kn">from</span> <span class="nn">._shared.shared_access_signature</span> <span class="k">import</span> <span class="n">SharedAccessSignature</span>
 <span class="kn">from</span> <span class="nn">._shared.models</span> <span class="k">import</span> <span class="n">LocationMode</span><span class="p">,</span> <span class="n">Services</span>
-<span class="kn">from</span> <span class="nn">._shared.utils</span> <span class="k">import</span> <span class="p">(</span>
-    <span class="n">StorageAccountHostsMixin</span><span class="p">,</span>
-    <span class="n">parse_query</span><span class="p">,</span>
-    <span class="n">parse_connection_str</span><span class="p">,</span>
-    <span class="n">process_storage_error</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">._shared.base_client</span> <span class="k">import</span> <span class="n">StorageAccountHostsMixin</span><span class="p">,</span> <span class="n">parse_connection_str</span><span class="p">,</span> <span class="n">parse_query</span>
+<span class="kn">from</span> <span class="nn">._shared.response_handlers</span> <span class="k">import</span> <span class="n">process_storage_error</span>
 <span class="kn">from</span> <span class="nn">._generated</span> <span class="k">import</span> <span class="n">AzureQueueStorage</span>
 <span class="kn">from</span> <span class="nn">._generated.models</span> <span class="k">import</span> <span class="n">StorageServiceProperties</span><span class="p">,</span> <span class="n">StorageErrorException</span>
 
@@ -472,7 +469,8 @@
         <span class="k">return</span> <span class="n">sas</span><span class="o">.</span><span class="n">generate_account</span><span class="p">(</span>
             <span class="n">Services</span><span class="o">.</span><span class="n">QUEUE</span><span class="p">,</span> <span class="n">resource_types</span><span class="p">,</span> <span class="n">permission</span><span class="p">,</span> <span class="n">expiry</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="n">start</span><span class="p">,</span> <span class="n">ip</span><span class="o">=</span><span class="n">ip</span><span class="p">,</span> <span class="n">protocol</span><span class="o">=</span><span class="n">protocol</span><span class="p">)</span> <span class="c1"># type: ignore</span></div>
 
-<div class="viewcode-block" id="QueueServiceClient.get_service_stats"><a class="viewcode-back" href="../../../../ref/azure.storage.queue.html#azure.storage.queue.queue_service_client.QueueServiceClient.get_service_stats">[docs]</a>    <span class="k">def</span> <span class="nf">get_service_stats</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span> <span class="c1"># type: ignore</span>
+<div class="viewcode-block" id="QueueServiceClient.get_service_stats"><a class="viewcode-back" href="../../../../ref/azure.storage.queue.html#azure.storage.queue.queue_service_client.QueueServiceClient.get_service_stats">[docs]</a>    <span class="nd">@distributed_trace</span>
+    <span class="k">def</span> <span class="nf">get_service_stats</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span> <span class="c1"># type: ignore</span>
         <span class="c1"># type: (Optional[int], Optional[Any]) -&gt; Dict[str, Any]</span>
         <span class="sd">&quot;&quot;&quot;Retrieves statistics related to replication for the Queue service.</span>
 
@@ -503,7 +501,8 @@
         <span class="k">except</span> <span class="n">StorageErrorException</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
             <span class="n">process_storage_error</span><span class="p">(</span><span class="n">error</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="QueueServiceClient.get_service_properties"><a class="viewcode-back" href="../../../../ref/azure.storage.queue.html#azure.storage.queue.queue_service_client.QueueServiceClient.get_service_properties">[docs]</a>    <span class="k">def</span> <span class="nf">get_service_properties</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span> <span class="c1"># type: ignore</span>
+<div class="viewcode-block" id="QueueServiceClient.get_service_properties"><a class="viewcode-back" href="../../../../ref/azure.storage.queue.html#azure.storage.queue.queue_service_client.QueueServiceClient.get_service_properties">[docs]</a>    <span class="nd">@distributed_trace</span>
+    <span class="k">def</span> <span class="nf">get_service_properties</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span> <span class="c1"># type: ignore</span>
         <span class="c1"># type: (Optional[int], Optional[Any]) -&gt; Dict[str, Any]</span>
         <span class="sd">&quot;&quot;&quot;Gets the properties of a storage account&#39;s Queue service, including</span>
 <span class="sd">        Azure Storage Analytics.</span>
@@ -525,7 +524,8 @@
         <span class="k">except</span> <span class="n">StorageErrorException</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
             <span class="n">process_storage_error</span><span class="p">(</span><span class="n">error</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="QueueServiceClient.set_service_properties"><a class="viewcode-back" href="../../../../ref/azure.storage.queue.html#azure.storage.queue.queue_service_client.QueueServiceClient.set_service_properties">[docs]</a>    <span class="k">def</span> <span class="nf">set_service_properties</span><span class="p">(</span> <span class="c1"># type: ignore</span>
+<div class="viewcode-block" id="QueueServiceClient.set_service_properties"><a class="viewcode-back" href="../../../../ref/azure.storage.queue.html#azure.storage.queue.queue_service_client.QueueServiceClient.set_service_properties">[docs]</a>    <span class="nd">@distributed_trace</span>
+    <span class="k">def</span> <span class="nf">set_service_properties</span><span class="p">(</span> <span class="c1"># type: ignore</span>
             <span class="bp">self</span><span class="p">,</span> <span class="n">logging</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>  <span class="c1"># type: Optional[Logging]</span>
             <span class="n">hour_metrics</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>  <span class="c1"># type: Optional[Metrics]</span>
             <span class="n">minute_metrics</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>  <span class="c1"># type: Optional[Metrics]</span>
@@ -579,7 +579,8 @@
         <span class="k">except</span> <span class="n">StorageErrorException</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
             <span class="n">process_storage_error</span><span class="p">(</span><span class="n">error</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="QueueServiceClient.list_queues"><a class="viewcode-back" href="../../../../ref/azure.storage.queue.html#azure.storage.queue.queue_service_client.QueueServiceClient.list_queues">[docs]</a>    <span class="k">def</span> <span class="nf">list_queues</span><span class="p">(</span>
+<div class="viewcode-block" id="QueueServiceClient.list_queues"><a class="viewcode-back" href="../../../../ref/azure.storage.queue.html#azure.storage.queue.queue_service_client.QueueServiceClient.list_queues">[docs]</a>    <span class="nd">@distributed_trace</span>
+    <span class="k">def</span> <span class="nf">list_queues</span><span class="p">(</span>
             <span class="bp">self</span><span class="p">,</span> <span class="n">name_starts_with</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>  <span class="c1"># type: Optional[str]</span>
             <span class="n">include_metadata</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>  <span class="c1"># type: Optional[bool]</span>
             <span class="n">results_per_page</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>  <span class="c1"># type: Optional[int]</span>
@@ -627,7 +628,8 @@
             <span class="n">page_iterator_class</span><span class="o">=</span><span class="n">QueuePropertiesPaged</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="QueueServiceClient.create_queue"><a class="viewcode-back" href="../../../../ref/azure.storage.queue.html#azure.storage.queue.queue_service_client.QueueServiceClient.create_queue">[docs]</a>    <span class="k">def</span> <span class="nf">create_queue</span><span class="p">(</span>
+<div class="viewcode-block" id="QueueServiceClient.create_queue"><a class="viewcode-back" href="../../../../ref/azure.storage.queue.html#azure.storage.queue.queue_service_client.QueueServiceClient.create_queue">[docs]</a>    <span class="nd">@distributed_trace</span>
+    <span class="k">def</span> <span class="nf">create_queue</span><span class="p">(</span>
             <span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span>  <span class="c1"># type: str</span>
             <span class="n">metadata</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>  <span class="c1"># type: Optional[Dict[str, str]]</span>
             <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>  <span class="c1"># type: Optional[int]</span>
@@ -661,7 +663,8 @@
             <span class="n">metadata</span><span class="o">=</span><span class="n">metadata</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="n">timeout</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">queue</span></div>
 
-<div class="viewcode-block" id="QueueServiceClient.delete_queue"><a class="viewcode-back" href="../../../../ref/azure.storage.queue.html#azure.storage.queue.queue_service_client.QueueServiceClient.delete_queue">[docs]</a>    <span class="k">def</span> <span class="nf">delete_queue</span><span class="p">(</span>
+<div class="viewcode-block" id="QueueServiceClient.delete_queue"><a class="viewcode-back" href="../../../../ref/azure.storage.queue.html#azure.storage.queue.queue_service_client.QueueServiceClient.delete_queue">[docs]</a>    <span class="nd">@distributed_trace</span>
+    <span class="k">def</span> <span class="nf">delete_queue</span><span class="p">(</span>
             <span class="bp">self</span><span class="p">,</span> <span class="n">queue</span><span class="p">,</span>  <span class="c1"># type: Union[QueueProperties, str]</span>
             <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>  <span class="c1"># type: Optional[int]</span>
             <span class="o">**</span><span class="n">kwargs</span>

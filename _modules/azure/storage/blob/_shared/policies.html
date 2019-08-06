@@ -339,6 +339,20 @@
     <span class="k">return</span> <span class="n">encoded</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
 
 
+<span class="k">def</span> <span class="nf">is_exhausted</span><span class="p">(</span><span class="n">settings</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Are we out of retries?&quot;&quot;&quot;</span>
+    <span class="n">retry_counts</span> <span class="o">=</span> <span class="p">(</span><span class="n">settings</span><span class="p">[</span><span class="s1">&#39;total&#39;</span><span class="p">],</span> <span class="n">settings</span><span class="p">[</span><span class="s1">&#39;connect&#39;</span><span class="p">],</span> <span class="n">settings</span><span class="p">[</span><span class="s1">&#39;read&#39;</span><span class="p">],</span> <span class="n">settings</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">])</span>
+    <span class="n">retry_counts</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">retry_counts</span><span class="p">))</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">retry_counts</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">False</span>
+    <span class="k">return</span> <span class="nb">min</span><span class="p">(</span><span class="n">retry_counts</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">0</span>
+
+
+<span class="k">def</span> <span class="nf">retry_hook</span><span class="p">(</span><span class="n">settings</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">settings</span><span class="p">[</span><span class="s1">&#39;hook&#39;</span><span class="p">]:</span>
+        <span class="n">settings</span><span class="p">[</span><span class="s1">&#39;hook&#39;</span><span class="p">](</span><span class="n">retry_count</span><span class="o">=</span><span class="n">settings</span><span class="p">[</span><span class="s1">&#39;count&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">location_mode</span><span class="o">=</span><span class="n">settings</span><span class="p">[</span><span class="s1">&#39;mode&#39;</span><span class="p">],</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+
 <span class="k">def</span> <span class="nf">is_retry</span><span class="p">(</span><span class="n">response</span><span class="p">,</span> <span class="n">mode</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Is this method/status code retryable? (Based on whitelists and control</span>
 <span class="sd">    variables such as the number of total retries to allow, whether to</span>
@@ -374,7 +388,7 @@
 
 <span class="k">class</span> <span class="nc">QueueMessagePolicy</span><span class="p">(</span><span class="n">SansIOHTTPPolicy</span><span class="p">):</span>
 
-    <span class="k">def</span> <span class="nf">on_request</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">on_request</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">):</span>
         <span class="n">message_id</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;queue_message_id&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">message_id</span><span class="p">:</span>
             <span class="n">request</span><span class="o">.</span><span class="n">http_request</span><span class="o">.</span><span class="n">url</span> <span class="o">=</span> <span class="n">urljoin</span><span class="p">(</span>
@@ -382,28 +396,9 @@
                 <span class="n">message_id</span><span class="p">)</span>
 
 
-<span class="k">class</span> <span class="nc">StorageBlobSettings</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">max_single_put_size</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;max_single_put_size&#39;</span><span class="p">,</span> <span class="mi">64</span> <span class="o">*</span> <span class="mi">1024</span> <span class="o">*</span> <span class="mi">1024</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">copy_polling_interval</span> <span class="o">=</span> <span class="mi">15</span>
-
-        <span class="c1"># Block blob uploads</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">max_block_size</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;max_block_size&#39;</span><span class="p">,</span> <span class="mi">4</span> <span class="o">*</span> <span class="mi">1024</span> <span class="o">*</span> <span class="mi">1024</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">min_large_block_upload_threshold</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;min_large_block_upload_threshold&#39;</span><span class="p">,</span> <span class="mi">4</span> <span class="o">*</span> <span class="mi">1024</span> <span class="o">*</span> <span class="mi">1024</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">use_byte_buffer</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;use_byte_buffer&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
-
-        <span class="c1"># Page blob uploads</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">max_page_size</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;max_page_size&#39;</span><span class="p">,</span> <span class="mi">4</span> <span class="o">*</span> <span class="mi">1024</span> <span class="o">*</span> <span class="mi">1024</span><span class="p">)</span>
-
-        <span class="c1"># Blob downloads</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">max_single_get_size</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;max_single_get_size&#39;</span><span class="p">,</span> <span class="mi">32</span> <span class="o">*</span> <span class="mi">1024</span> <span class="o">*</span> <span class="mi">1024</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">max_chunk_get_size</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;max_chunk_get_size&#39;</span><span class="p">,</span> <span class="mi">4</span> <span class="o">*</span> <span class="mi">1024</span> <span class="o">*</span> <span class="mi">1024</span><span class="p">)</span>
-
-
 <span class="k">class</span> <span class="nc">StorageHeadersPolicy</span><span class="p">(</span><span class="n">HeadersPolicy</span><span class="p">):</span>
 
-    <span class="k">def</span> <span class="nf">on_request</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">on_request</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">):</span>
         <span class="c1"># type: (PipelineRequest, Any) -&gt; None</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">StorageHeadersPolicy</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">on_request</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
         <span class="n">current_time</span> <span class="o">=</span> <span class="n">format_date_time</span><span class="p">(</span><span class="n">time</span><span class="p">())</span>
@@ -419,7 +414,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">hosts</span> <span class="o">=</span> <span class="n">hosts</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">StorageHosts</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
 
-    <span class="k">def</span> <span class="nf">on_request</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">on_request</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">):</span>
         <span class="c1"># type: (PipelineRequest, Any) -&gt; None</span>
         <span class="n">request</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">options</span><span class="p">[</span><span class="s1">&#39;hosts&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">hosts</span>
         <span class="n">parsed_url</span> <span class="o">=</span> <span class="n">urlparse</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">http_request</span><span class="o">.</span><span class="n">url</span><span class="p">)</span>
@@ -452,7 +447,7 @@
 <span class="sd">    This accepts both global configuration, and per-request level with &quot;enable_http_logger&quot;</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="nf">on_request</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">on_request</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">):</span>
         <span class="c1"># type: (PipelineRequest, Any) -&gt; None</span>
         <span class="n">http_request</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">http_request</span>
         <span class="n">options</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">options</span>
@@ -492,7 +487,7 @@
             <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>  <span class="c1"># pylint: disable=broad-except</span>
                 <span class="n">_LOGGER</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Failed to log request: </span><span class="si">%r</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">err</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">on_response</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">response</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">on_response</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">response</span><span class="p">):</span>
         <span class="c1"># type: (PipelineRequest, PipelineResponse, Any) -&gt; None</span>
         <span class="k">if</span> <span class="n">response</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;logging_enable&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">enable_http_logger</span><span class="p">):</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="n">_LOGGER</span><span class="o">.</span><span class="n">isEnabledFor</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">):</span>
@@ -531,13 +526,15 @@
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_application</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;user_agent&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_user_agent</span> <span class="o">=</span> <span class="s2">&quot;azsdk-python-storage-blob/</span><span class="si">{}</span><span class="s2"> Python/</span><span class="si">{}</span><span class="s2"> (</span><span class="si">{}</span><span class="s2">)&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+        <span class="n">storage_sdk</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;storage_sdk&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_user_agent</span> <span class="o">=</span> <span class="s2">&quot;azsdk-python-storage-</span><span class="si">{}</span><span class="s2">/</span><span class="si">{}</span><span class="s2"> Python/</span><span class="si">{}</span><span class="s2"> (</span><span class="si">{}</span><span class="s2">)&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+            <span class="n">storage_sdk</span><span class="p">,</span>
             <span class="n">VERSION</span><span class="p">,</span>
             <span class="n">platform</span><span class="o">.</span><span class="n">python_version</span><span class="p">(),</span>
             <span class="n">platform</span><span class="o">.</span><span class="n">platform</span><span class="p">())</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">StorageUserAgentPolicy</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
 
-    <span class="k">def</span> <span class="nf">on_request</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">on_request</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">):</span>
         <span class="n">existing</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">http_request</span><span class="o">.</span><span class="n">headers</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_USERAGENT</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
         <span class="n">app_string</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;user_agent&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">_application</span>
         <span class="k">if</span> <span class="n">app_string</span><span class="p">:</span>
@@ -555,7 +552,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_request_callback</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;raw_request_hook&#39;</span><span class="p">)</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">StorageRequestHook</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
 
-    <span class="k">def</span> <span class="nf">on_request</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">on_request</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">):</span>
         <span class="c1"># type: (PipelineRequest, **Any) -&gt; PipelineResponse</span>
         <span class="n">request_callback</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;raw_request_hook&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_request_callback</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">request_callback</span><span class="p">:</span>
@@ -634,7 +631,7 @@
 
         <span class="k">return</span> <span class="n">md5</span><span class="o">.</span><span class="n">digest</span><span class="p">()</span>
 
-    <span class="k">def</span> <span class="nf">on_request</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">on_request</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">):</span>
         <span class="c1"># type: (PipelineRequest, Any) -&gt; None</span>
         <span class="n">validate_content</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;validate_content&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">validate_content</span> <span class="ow">and</span> <span class="n">request</span><span class="o">.</span><span class="n">http_request</span><span class="o">.</span><span class="n">method</span> <span class="o">!=</span> <span class="s1">&#39;GET&#39;</span><span class="p">:</span>
@@ -643,7 +640,7 @@
             <span class="n">request</span><span class="o">.</span><span class="n">context</span><span class="p">[</span><span class="s1">&#39;validate_content_md5&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">computed_md5</span>
         <span class="n">request</span><span class="o">.</span><span class="n">context</span><span class="p">[</span><span class="s1">&#39;validate_content&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">validate_content</span>
 
-    <span class="k">def</span> <span class="nf">on_response</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">response</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">on_response</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">response</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">response</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;validate_content&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span> <span class="ow">and</span> <span class="n">response</span><span class="o">.</span><span class="n">http_response</span><span class="o">.</span><span class="n">headers</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;content-md5&#39;</span><span class="p">):</span>
             <span class="n">computed_md5</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;validate_content_md5&#39;</span><span class="p">)</span> <span class="ow">or</span> \
                 <span class="n">encode_base64</span><span class="p">(</span><span class="n">StorageContentValidation</span><span class="o">.</span><span class="n">get_content_md5</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">http_response</span><span class="o">.</span><span class="n">body</span><span class="p">()))</span>
@@ -723,15 +720,6 @@
             <span class="k">return</span>
         <span class="n">transport</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">backoff</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">is_exhausted</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">settings</span><span class="p">):</span>  <span class="c1"># pylint: disable=no-self-use</span>
-        <span class="sd">&quot;&quot;&quot;Are we out of retries?&quot;&quot;&quot;</span>
-        <span class="n">retry_counts</span> <span class="o">=</span> <span class="p">(</span><span class="n">settings</span><span class="p">[</span><span class="s1">&#39;total&#39;</span><span class="p">],</span> <span class="n">settings</span><span class="p">[</span><span class="s1">&#39;connect&#39;</span><span class="p">],</span> <span class="n">settings</span><span class="p">[</span><span class="s1">&#39;read&#39;</span><span class="p">],</span> <span class="n">settings</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">])</span>
-        <span class="n">retry_counts</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">retry_counts</span><span class="p">))</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">retry_counts</span><span class="p">:</span>
-            <span class="k">return</span> <span class="kc">False</span>
-
-        <span class="k">return</span> <span class="nb">min</span><span class="p">(</span><span class="n">retry_counts</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">0</span>
-
     <span class="k">def</span> <span class="nf">increment</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">settings</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">response</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">error</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Increment the retry counters.</span>
 
@@ -762,7 +750,7 @@
                 <span class="n">settings</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span> <span class="o">-=</span> <span class="mi">1</span>
                 <span class="n">settings</span><span class="p">[</span><span class="s1">&#39;history&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">RequestHistory</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">http_response</span><span class="o">=</span><span class="n">response</span><span class="p">))</span>
 
-        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_exhausted</span><span class="p">(</span><span class="n">settings</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">is_exhausted</span><span class="p">(</span><span class="n">settings</span><span class="p">):</span>
             <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;PUT&#39;</span><span class="p">]</span> <span class="ow">and</span> <span class="n">settings</span><span class="p">[</span><span class="s1">&#39;retry_secondary&#39;</span><span class="p">]:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">_set_next_host_location</span><span class="p">(</span><span class="n">settings</span><span class="p">,</span> <span class="n">request</span><span class="p">)</span>
 
@@ -774,16 +762,9 @@
                 <span class="k">try</span><span class="p">:</span>
                     <span class="c1"># attempt to rewind the body to the initial position</span>
                     <span class="n">request</span><span class="o">.</span><span class="n">body</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="n">settings</span><span class="p">[</span><span class="s1">&#39;body_position&#39;</span><span class="p">],</span> <span class="n">SEEK_SET</span><span class="p">)</span>
-                <span class="k">except</span> <span class="n">UnsupportedOperation</span><span class="p">:</span>
+                <span class="k">except</span> <span class="p">(</span><span class="n">UnsupportedOperation</span><span class="p">,</span> <span class="ne">ValueError</span><span class="p">):</span>
                     <span class="c1"># if body is not seekable, then retry would not work</span>
                     <span class="k">return</span> <span class="kc">False</span>
-            <span class="k">if</span> <span class="n">settings</span><span class="p">[</span><span class="s1">&#39;hook&#39;</span><span class="p">]:</span>
-                <span class="n">settings</span><span class="p">[</span><span class="s1">&#39;hook&#39;</span><span class="p">](</span>
-                    <span class="n">request</span><span class="o">=</span><span class="n">request</span><span class="p">,</span>
-                    <span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="p">,</span>
-                    <span class="n">error</span><span class="o">=</span><span class="n">error</span><span class="p">,</span>
-                    <span class="n">retry_count</span><span class="o">=</span><span class="n">settings</span><span class="p">[</span><span class="s1">&#39;count&#39;</span><span class="p">],</span>
-                    <span class="n">location_mode</span><span class="o">=</span><span class="n">settings</span><span class="p">[</span><span class="s1">&#39;mode&#39;</span><span class="p">])</span>
             <span class="n">settings</span><span class="p">[</span><span class="s1">&#39;count&#39;</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
             <span class="k">return</span> <span class="kc">True</span>
         <span class="k">return</span> <span class="kc">False</span>
@@ -801,14 +782,23 @@
                         <span class="n">request</span><span class="o">=</span><span class="n">request</span><span class="o">.</span><span class="n">http_request</span><span class="p">,</span>
                         <span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="o">.</span><span class="n">http_response</span><span class="p">)</span>
                     <span class="k">if</span> <span class="n">retries_remaining</span><span class="p">:</span>
+                        <span class="n">retry_hook</span><span class="p">(</span>
+                            <span class="n">retry_settings</span><span class="p">,</span>
+                            <span class="n">request</span><span class="o">=</span><span class="n">request</span><span class="o">.</span><span class="n">http_request</span><span class="p">,</span>
+                            <span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="o">.</span><span class="n">http_response</span><span class="p">,</span>
+                            <span class="n">error</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
                         <span class="bp">self</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">retry_settings</span><span class="p">,</span> <span class="n">request</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">transport</span><span class="p">)</span>
-
                         <span class="k">continue</span>
                 <span class="k">break</span>
             <span class="k">except</span> <span class="n">AzureError</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
                 <span class="n">retries_remaining</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">increment</span><span class="p">(</span>
                     <span class="n">retry_settings</span><span class="p">,</span> <span class="n">request</span><span class="o">=</span><span class="n">request</span><span class="o">.</span><span class="n">http_request</span><span class="p">,</span> <span class="n">error</span><span class="o">=</span><span class="n">err</span><span class="p">)</span>
                 <span class="k">if</span> <span class="n">retries_remaining</span><span class="p">:</span>
+                    <span class="n">retry_hook</span><span class="p">(</span>
+                        <span class="n">retry_settings</span><span class="p">,</span>
+                        <span class="n">request</span><span class="o">=</span><span class="n">request</span><span class="o">.</span><span class="n">http_request</span><span class="p">,</span>
+                        <span class="n">response</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                        <span class="n">error</span><span class="o">=</span><span class="n">err</span><span class="p">)</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">retry_settings</span><span class="p">,</span> <span class="n">request</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">transport</span><span class="p">)</span>
                     <span class="k">continue</span>
                 <span class="k">raise</span> <span class="n">err</span>

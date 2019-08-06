@@ -292,27 +292,23 @@
     <span class="kn">from</span> <span class="nn">urllib2</span> <span class="k">import</span> <span class="n">quote</span><span class="p">,</span> <span class="n">unquote</span> <span class="c1"># type: ignore</span>
 
 <span class="kn">import</span> <span class="nn">six</span>
-
+<span class="kn">from</span> <span class="nn">azure.core.tracing.decorator</span> <span class="k">import</span> <span class="n">distributed_trace</span>
 <span class="kn">from</span> <span class="nn">._shared.shared_access_signature</span> <span class="k">import</span> <span class="n">FileSharedAccessSignature</span>
-<span class="kn">from</span> <span class="nn">.directory_client</span> <span class="k">import</span> <span class="n">DirectoryClient</span>
-<span class="kn">from</span> <span class="nn">.file_client</span> <span class="k">import</span> <span class="n">FileClient</span>
+<span class="kn">from</span> <span class="nn">._shared.base_client</span> <span class="k">import</span> <span class="n">StorageAccountHostsMixin</span><span class="p">,</span> <span class="n">parse_connection_str</span><span class="p">,</span> <span class="n">parse_query</span>
+<span class="kn">from</span> <span class="nn">._shared.request_handlers</span> <span class="k">import</span> <span class="n">add_metadata_headers</span><span class="p">,</span> <span class="n">serialize_iso</span>
+<span class="kn">from</span> <span class="nn">._shared.response_handlers</span> <span class="k">import</span> <span class="p">(</span>
+    <span class="n">return_response_headers</span><span class="p">,</span>
+    <span class="n">process_storage_error</span><span class="p">,</span>
+    <span class="n">return_headers_and_deserialized</span><span class="p">)</span>
 <span class="kn">from</span> <span class="nn">._generated</span> <span class="k">import</span> <span class="n">AzureFileStorage</span>
 <span class="kn">from</span> <span class="nn">._generated.version</span> <span class="k">import</span> <span class="n">VERSION</span>
 <span class="kn">from</span> <span class="nn">._generated.models</span> <span class="k">import</span> <span class="p">(</span>
     <span class="n">StorageErrorException</span><span class="p">,</span>
     <span class="n">SignedIdentifier</span><span class="p">,</span>
     <span class="n">DeleteSnapshotsOptionType</span><span class="p">)</span>
-<span class="kn">from</span> <span class="nn">._shared.utils</span> <span class="k">import</span> <span class="p">(</span>
-    <span class="n">StorageAccountHostsMixin</span><span class="p">,</span>
-    <span class="n">serialize_iso</span><span class="p">,</span>
-    <span class="n">return_headers_and_deserialized</span><span class="p">,</span>
-    <span class="n">parse_query</span><span class="p">,</span>
-    <span class="n">return_response_headers</span><span class="p">,</span>
-    <span class="n">add_metadata_headers</span><span class="p">,</span>
-    <span class="n">process_storage_error</span><span class="p">,</span>
-    <span class="n">parse_connection_str</span><span class="p">)</span>
-
-<span class="kn">from</span> <span class="nn">._share_utils</span> <span class="k">import</span> <span class="n">deserialize_share_properties</span>
+<span class="kn">from</span> <span class="nn">._deserialize</span> <span class="k">import</span> <span class="n">deserialize_share_properties</span>
+<span class="kn">from</span> <span class="nn">.directory_client</span> <span class="k">import</span> <span class="n">DirectoryClient</span>
+<span class="kn">from</span> <span class="nn">.file_client</span> <span class="k">import</span> <span class="n">FileClient</span>
 
 <span class="k">if</span> <span class="n">TYPE_CHECKING</span><span class="p">:</span>
     <span class="kn">from</span> <span class="nn">.models</span> <span class="k">import</span> <span class="n">ShareProperties</span><span class="p">,</span> <span class="n">AccessPolicy</span>
@@ -562,7 +558,8 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">url</span><span class="p">,</span> <span class="n">file_path</span><span class="o">=</span><span class="n">file_path</span><span class="p">,</span> <span class="n">snapshot</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">snapshot</span><span class="p">,</span> <span class="n">credential</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">credential</span><span class="p">,</span> <span class="n">_hosts</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_hosts</span><span class="p">,</span>
             <span class="n">_configuration</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_config</span><span class="p">,</span> <span class="n">_pipeline</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_pipeline</span><span class="p">,</span> <span class="n">_location_mode</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_location_mode</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="ShareClient.create_share"><a class="viewcode-back" href="../../../../ref/azure.storage.file.html#azure.storage.file.share_client.ShareClient.create_share">[docs]</a>    <span class="k">def</span> <span class="nf">create_share</span><span class="p">(</span> <span class="c1"># type: ignore</span>
+<div class="viewcode-block" id="ShareClient.create_share"><a class="viewcode-back" href="../../../../ref/azure.storage.file.html#azure.storage.file.share_client.ShareClient.create_share">[docs]</a>    <span class="nd">@distributed_trace</span>
+    <span class="k">def</span> <span class="nf">create_share</span><span class="p">(</span> <span class="c1"># type: ignore</span>
             <span class="bp">self</span><span class="p">,</span> <span class="n">metadata</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>  <span class="c1"># type: Optional[Dict[str, str]]</span>
             <span class="n">quota</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="c1"># type: Optional[int]</span>
             <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="c1"># type: Optional[int]</span>
@@ -590,8 +587,6 @@
 <span class="sd">                :dedent: 8</span>
 <span class="sd">                :caption: Creates a file share.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">require_encryption</span> <span class="ow">and</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">key_encryption_key</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Encryption required but no key was provided.&quot;</span><span class="p">)</span>
         <span class="n">headers</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;headers&#39;</span><span class="p">,</span> <span class="p">{})</span>
         <span class="n">headers</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">add_metadata_headers</span><span class="p">(</span><span class="n">metadata</span><span class="p">))</span> <span class="c1"># type: ignore</span>
 
@@ -606,7 +601,8 @@
         <span class="k">except</span> <span class="n">StorageErrorException</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
             <span class="n">process_storage_error</span><span class="p">(</span><span class="n">error</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="ShareClient.create_snapshot"><a class="viewcode-back" href="../../../../ref/azure.storage.file.html#azure.storage.file.share_client.ShareClient.create_snapshot">[docs]</a>    <span class="k">def</span> <span class="nf">create_snapshot</span><span class="p">(</span> <span class="c1"># type: ignore</span>
+<div class="viewcode-block" id="ShareClient.create_snapshot"><a class="viewcode-back" href="../../../../ref/azure.storage.file.html#azure.storage.file.share_client.ShareClient.create_snapshot">[docs]</a>    <span class="nd">@distributed_trace</span>
+    <span class="k">def</span> <span class="nf">create_snapshot</span><span class="p">(</span> <span class="c1"># type: ignore</span>
             <span class="bp">self</span><span class="p">,</span> <span class="n">metadata</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>  <span class="c1"># type: Optional[Dict[str, str]]</span>
             <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>  <span class="c1"># type: Optional[int]</span>
             <span class="o">**</span><span class="n">kwargs</span> <span class="c1"># type: Optional[Any]</span>
@@ -649,7 +645,8 @@
         <span class="k">except</span> <span class="n">StorageErrorException</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
             <span class="n">process_storage_error</span><span class="p">(</span><span class="n">error</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="ShareClient.delete_share"><a class="viewcode-back" href="../../../../ref/azure.storage.file.html#azure.storage.file.share_client.ShareClient.delete_share">[docs]</a>    <span class="k">def</span> <span class="nf">delete_share</span><span class="p">(</span>
+<div class="viewcode-block" id="ShareClient.delete_share"><a class="viewcode-back" href="../../../../ref/azure.storage.file.html#azure.storage.file.share_client.ShareClient.delete_share">[docs]</a>    <span class="nd">@distributed_trace</span>
+    <span class="k">def</span> <span class="nf">delete_share</span><span class="p">(</span>
             <span class="bp">self</span><span class="p">,</span> <span class="n">delete_snapshots</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="c1"># type: Optional[bool]</span>
             <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>  <span class="c1"># type: Optional[int]</span>
             <span class="o">**</span><span class="n">kwargs</span>
@@ -684,7 +681,8 @@
         <span class="k">except</span> <span class="n">StorageErrorException</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
             <span class="n">process_storage_error</span><span class="p">(</span><span class="n">error</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="ShareClient.get_share_properties"><a class="viewcode-back" href="../../../../ref/azure.storage.file.html#azure.storage.file.share_client.ShareClient.get_share_properties">[docs]</a>    <span class="k">def</span> <span class="nf">get_share_properties</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<div class="viewcode-block" id="ShareClient.get_share_properties"><a class="viewcode-back" href="../../../../ref/azure.storage.file.html#azure.storage.file.share_client.ShareClient.get_share_properties">[docs]</a>    <span class="nd">@distributed_trace</span>
+    <span class="k">def</span> <span class="nf">get_share_properties</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="c1"># type: (Optional[int], Any) -&gt; ShareProperties</span>
         <span class="sd">&quot;&quot;&quot;Returns all user-defined metadata and system properties for the</span>
 <span class="sd">        specified share. The data returned does not include the shares&#39;s</span>
@@ -715,7 +713,8 @@
         <span class="n">props</span><span class="o">.</span><span class="n">snapshot</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">snapshot</span>
         <span class="k">return</span> <span class="n">props</span> <span class="c1"># type: ignore</span></div>
 
-<div class="viewcode-block" id="ShareClient.set_share_quota"><a class="viewcode-back" href="../../../../ref/azure.storage.file.html#azure.storage.file.share_client.ShareClient.set_share_quota">[docs]</a>    <span class="k">def</span> <span class="nf">set_share_quota</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">quota</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span> <span class="c1"># type: ignore</span>
+<div class="viewcode-block" id="ShareClient.set_share_quota"><a class="viewcode-back" href="../../../../ref/azure.storage.file.html#azure.storage.file.share_client.ShareClient.set_share_quota">[docs]</a>    <span class="nd">@distributed_trace</span>
+    <span class="k">def</span> <span class="nf">set_share_quota</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">quota</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span> <span class="c1"># type: ignore</span>
         <span class="c1"># type: (int, Optional[int], Any) -&gt;  Dict[str, Any]</span>
         <span class="sd">&quot;&quot;&quot;Sets the quota for the share.</span>
 
@@ -744,7 +743,8 @@
         <span class="k">except</span> <span class="n">StorageErrorException</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
             <span class="n">process_storage_error</span><span class="p">(</span><span class="n">error</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="ShareClient.set_share_metadata"><a class="viewcode-back" href="../../../../ref/azure.storage.file.html#azure.storage.file.share_client.ShareClient.set_share_metadata">[docs]</a>    <span class="k">def</span> <span class="nf">set_share_metadata</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">metadata</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span> <span class="c1"># type: ignore</span>
+<div class="viewcode-block" id="ShareClient.set_share_metadata"><a class="viewcode-back" href="../../../../ref/azure.storage.file.html#azure.storage.file.share_client.ShareClient.set_share_metadata">[docs]</a>    <span class="nd">@distributed_trace</span>
+    <span class="k">def</span> <span class="nf">set_share_metadata</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">metadata</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span> <span class="c1"># type: ignore</span>
         <span class="c1"># type: (Dict[str, Any], Optional[int], Any) -&gt;  Dict[str, Any]</span>
         <span class="sd">&quot;&quot;&quot;Sets the metadata for the share.</span>
 
@@ -779,7 +779,8 @@
         <span class="k">except</span> <span class="n">StorageErrorException</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
             <span class="n">process_storage_error</span><span class="p">(</span><span class="n">error</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="ShareClient.get_share_access_policy"><a class="viewcode-back" href="../../../../ref/azure.storage.file.html#azure.storage.file.share_client.ShareClient.get_share_access_policy">[docs]</a>    <span class="k">def</span> <span class="nf">get_share_access_policy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<div class="viewcode-block" id="ShareClient.get_share_access_policy"><a class="viewcode-back" href="../../../../ref/azure.storage.file.html#azure.storage.file.share_client.ShareClient.get_share_access_policy">[docs]</a>    <span class="nd">@distributed_trace</span>
+    <span class="k">def</span> <span class="nf">get_share_access_policy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="c1"># type: (Optional[int], **Any) -&gt; Dict[str, Any]</span>
         <span class="sd">&quot;&quot;&quot;Gets the permissions for the share. The permissions</span>
 <span class="sd">        indicate whether files in a share may be accessed publicly.</span>
@@ -801,7 +802,8 @@
             <span class="s1">&#39;signed_identifiers&#39;</span><span class="p">:</span> <span class="n">identifiers</span> <span class="ow">or</span> <span class="p">[]</span>
         <span class="p">}</span></div>
 
-<div class="viewcode-block" id="ShareClient.set_share_access_policy"><a class="viewcode-back" href="../../../../ref/azure.storage.file.html#azure.storage.file.share_client.ShareClient.set_share_access_policy">[docs]</a>    <span class="k">def</span> <span class="nf">set_share_access_policy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">signed_identifiers</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span> <span class="c1"># type: ignore</span>
+<div class="viewcode-block" id="ShareClient.set_share_access_policy"><a class="viewcode-back" href="../../../../ref/azure.storage.file.html#azure.storage.file.share_client.ShareClient.set_share_access_policy">[docs]</a>    <span class="nd">@distributed_trace</span>
+    <span class="k">def</span> <span class="nf">set_share_access_policy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">signed_identifiers</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span> <span class="c1"># type: ignore</span>
         <span class="c1"># type: (Optional[Dict[str, Optional[AccessPolicy]]], Optional[int], **Any) -&gt; Dict[str, str]</span>
         <span class="sd">&quot;&quot;&quot;Sets the permissions for the share, or stored access</span>
 <span class="sd">        policies that may be used with Shared Access Signatures. The permissions</span>
@@ -839,7 +841,8 @@
         <span class="k">except</span> <span class="n">StorageErrorException</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
             <span class="n">process_storage_error</span><span class="p">(</span><span class="n">error</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="ShareClient.get_share_stats"><a class="viewcode-back" href="../../../../ref/azure.storage.file.html#azure.storage.file.share_client.ShareClient.get_share_stats">[docs]</a>    <span class="k">def</span> <span class="nf">get_share_stats</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span> <span class="c1"># type: ignore</span>
+<div class="viewcode-block" id="ShareClient.get_share_stats"><a class="viewcode-back" href="../../../../ref/azure.storage.file.html#azure.storage.file.share_client.ShareClient.get_share_stats">[docs]</a>    <span class="nd">@distributed_trace</span>
+    <span class="k">def</span> <span class="nf">get_share_stats</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span> <span class="c1"># type: ignore</span>
         <span class="c1"># type: (Optional[int], **Any) -&gt; int</span>
         <span class="sd">&quot;&quot;&quot;Gets the approximate size of the data stored on the share in bytes.</span>
 
@@ -859,7 +862,8 @@
         <span class="k">except</span> <span class="n">StorageErrorException</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
             <span class="n">process_storage_error</span><span class="p">(</span><span class="n">error</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="ShareClient.list_directories_and_files"><a class="viewcode-back" href="../../../../ref/azure.storage.file.html#azure.storage.file.share_client.ShareClient.list_directories_and_files">[docs]</a>    <span class="k">def</span> <span class="nf">list_directories_and_files</span><span class="p">(</span> <span class="c1"># type: ignore</span>
+<div class="viewcode-block" id="ShareClient.list_directories_and_files"><a class="viewcode-back" href="../../../../ref/azure.storage.file.html#azure.storage.file.share_client.ShareClient.list_directories_and_files">[docs]</a>    <span class="nd">@distributed_trace</span>
+    <span class="k">def</span> <span class="nf">list_directories_and_files</span><span class="p">(</span> <span class="c1"># type: ignore</span>
             <span class="bp">self</span><span class="p">,</span> <span class="n">directory_name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>  <span class="c1"># type: Optional[str]</span>
             <span class="n">name_starts_with</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>  <span class="c1"># type: Optional[str]</span>
             <span class="n">marker</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>  <span class="c1"># type: Optional[str]</span>
@@ -894,7 +898,8 @@
         <span class="k">return</span> <span class="n">directory</span><span class="o">.</span><span class="n">list_directories_and_files</span><span class="p">(</span>
             <span class="n">name_starts_with</span><span class="o">=</span><span class="n">name_starts_with</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="n">marker</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="n">timeout</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="ShareClient.create_directory"><a class="viewcode-back" href="../../../../ref/azure.storage.file.html#azure.storage.file.share_client.ShareClient.create_directory">[docs]</a>    <span class="k">def</span> <span class="nf">create_directory</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">directory_name</span><span class="p">,</span> <span class="n">metadata</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<div class="viewcode-block" id="ShareClient.create_directory"><a class="viewcode-back" href="../../../../ref/azure.storage.file.html#azure.storage.file.share_client.ShareClient.create_directory">[docs]</a>    <span class="nd">@distributed_trace</span>
+    <span class="k">def</span> <span class="nf">create_directory</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">directory_name</span><span class="p">,</span> <span class="n">metadata</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="c1"># type: (str, Optional[Dict[str, Any]], Optional[int], Any) -&gt; DirectoryClient</span>
         <span class="sd">&quot;&quot;&quot;Creates a directory in the share and returns a client to interact</span>
 <span class="sd">        with the directory.</span>

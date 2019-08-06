@@ -590,7 +590,7 @@ be deleted.</p></li>
 <dl class="class">
 <dt id="azure.storage.queue.queue_client.QueueClient">
 <em class="property">class </em><code class="sig-prename descclassname">azure.storage.queue.queue_client.</code><code class="sig-name descname">QueueClient</code><span class="sig-paren">(</span><em class="sig-param">queue_url</em>, <em class="sig-param">queue=None</em>, <em class="sig-param">credential=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/storage/queue/queue_client.html#QueueClient"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.storage.queue.queue_client.QueueClient" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">azure.storage.queue._shared.utils.StorageAccountHostsMixin</span></code></p>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">azure.storage.queue._shared.base_client.StorageAccountHostsMixin</span></code></p>
 <p>A client to interact with a specific Queue.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Variables</dt>
@@ -1182,7 +1182,7 @@ this object is also populated with the content, although it is not returned by t
 <dl class="class">
 <dt id="azure.storage.queue.queue_service_client.QueueServiceClient">
 <em class="property">class </em><code class="sig-prename descclassname">azure.storage.queue.queue_service_client.</code><code class="sig-name descname">QueueServiceClient</code><span class="sig-paren">(</span><em class="sig-param">account_url</em>, <em class="sig-param">credential=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/storage/queue/queue_service_client.html#QueueServiceClient"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.storage.queue.queue_service_client.QueueServiceClient" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">azure.storage.queue._shared.utils.StorageAccountHostsMixin</span></code></p>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">azure.storage.queue._shared.base_client.StorageAccountHostsMixin</span></code></p>
 <p>A client to interact with the Queue Service at the account level.</p>
 <p>This client provides operations to retrieve and configure the account properties
 as well as list, create and delete queues within the account.
@@ -1556,7 +1556,7 @@ and CORS will be disabled for the service.</p></li>
 <dl class="class">
 <dt id="azure.storage.queue.QueueClient">
 <em class="property">class </em><code class="sig-prename descclassname">azure.storage.queue.</code><code class="sig-name descname">QueueClient</code><span class="sig-paren">(</span><em class="sig-param">queue_url</em>, <em class="sig-param">queue=None</em>, <em class="sig-param">credential=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/storage/queue/queue_client.html#QueueClient"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.storage.queue.QueueClient" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">azure.storage.queue._shared.utils.StorageAccountHostsMixin</span></code></p>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">azure.storage.queue._shared.base_client.StorageAccountHostsMixin</span></code></p>
 <p>A client to interact with a specific Queue.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Variables</dt>
@@ -2145,7 +2145,7 @@ this object is also populated with the content, although it is not returned by t
 <dl class="class">
 <dt id="azure.storage.queue.QueueServiceClient">
 <em class="property">class </em><code class="sig-prename descclassname">azure.storage.queue.</code><code class="sig-name descname">QueueServiceClient</code><span class="sig-paren">(</span><em class="sig-param">account_url</em>, <em class="sig-param">credential=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/storage/queue/queue_service_client.html#QueueServiceClient"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.storage.queue.QueueServiceClient" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">azure.storage.queue._shared.utils.StorageAccountHostsMixin</span></code></p>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">azure.storage.queue._shared.base_client.StorageAccountHostsMixin</span></code></p>
 <p>A client to interact with the Queue Service at the account level.</p>
 <p>This client provides operations to retrieve and configure the account properties
 as well as list, create and delete queues within the account.
@@ -2852,8 +2852,18 @@ blobs or files.</p></li>
 <dd></dd></dl>
 
 <dl class="attribute">
+<dt id="azure.storage.queue.StorageErrorCode.cannot_delete_file_or_directory">
+<code class="sig-name descname">cannot_delete_file_or_directory</code><em class="property"> = 'CannotDeleteFileOrDirectory'</em><a class="headerlink" href="#azure.storage.queue.StorageErrorCode.cannot_delete_file_or_directory" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
 <dt id="azure.storage.queue.StorageErrorCode.cannot_verify_copy_source">
 <code class="sig-name descname">cannot_verify_copy_source</code><em class="property"> = 'CannotVerifyCopySource'</em><a class="headerlink" href="#azure.storage.queue.StorageErrorCode.cannot_verify_copy_source" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="azure.storage.queue.StorageErrorCode.client_cache_flush_delay">
+<code class="sig-name descname">client_cache_flush_delay</code><em class="property"> = 'ClientCacheFlushDelay'</em><a class="headerlink" href="#azure.storage.queue.StorageErrorCode.client_cache_flush_delay" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
@@ -2887,6 +2897,11 @@ blobs or files.</p></li>
 <dd></dd></dl>
 
 <dl class="attribute">
+<dt id="azure.storage.queue.StorageErrorCode.container_quota_downgrade_not_allowed">
+<code class="sig-name descname">container_quota_downgrade_not_allowed</code><em class="property"> = 'ContainerQuotaDowngradeNotAllowed'</em><a class="headerlink" href="#azure.storage.queue.StorageErrorCode.container_quota_downgrade_not_allowed" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
 <dt id="azure.storage.queue.StorageErrorCode.content_length_larger_than_tier_limit">
 <code class="sig-name descname">content_length_larger_than_tier_limit</code><em class="property"> = 'ContentLengthLargerThanTierLimit'</em><a class="headerlink" href="#azure.storage.queue.StorageErrorCode.content_length_larger_than_tier_limit" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
@@ -2902,6 +2917,16 @@ blobs or files.</p></li>
 <dd></dd></dl>
 
 <dl class="attribute">
+<dt id="azure.storage.queue.StorageErrorCode.delete_pending">
+<code class="sig-name descname">delete_pending</code><em class="property"> = 'DeletePending'</em><a class="headerlink" href="#azure.storage.queue.StorageErrorCode.delete_pending" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="azure.storage.queue.StorageErrorCode.directory_not_empty">
+<code class="sig-name descname">directory_not_empty</code><em class="property"> = 'DirectoryNotEmpty'</em><a class="headerlink" href="#azure.storage.queue.StorageErrorCode.directory_not_empty" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
 <dt id="azure.storage.queue.StorageErrorCode.empty_metadata_key">
 <code class="sig-name descname">empty_metadata_key</code><em class="property"> = 'EmptyMetadataKey'</em><a class="headerlink" href="#azure.storage.queue.StorageErrorCode.empty_metadata_key" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
@@ -2909,6 +2934,11 @@ blobs or files.</p></li>
 <dl class="attribute">
 <dt id="azure.storage.queue.StorageErrorCode.feature_version_mismatch">
 <code class="sig-name descname">feature_version_mismatch</code><em class="property"> = 'FeatureVersionMismatch'</em><a class="headerlink" href="#azure.storage.queue.StorageErrorCode.feature_version_mismatch" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="azure.storage.queue.StorageErrorCode.file_lock_conflict">
+<code class="sig-name descname">file_lock_conflict</code><em class="property"> = 'FileLockConflict'</em><a class="headerlink" href="#azure.storage.queue.StorageErrorCode.file_lock_conflict" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
@@ -2969,6 +2999,11 @@ blobs or files.</p></li>
 <dl class="attribute">
 <dt id="azure.storage.queue.StorageErrorCode.invalid_block_list">
 <code class="sig-name descname">invalid_block_list</code><em class="property"> = 'InvalidBlockList'</em><a class="headerlink" href="#azure.storage.queue.StorageErrorCode.invalid_block_list" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="azure.storage.queue.StorageErrorCode.invalid_file_or_directory_path_name">
+<code class="sig-name descname">invalid_file_or_directory_path_name</code><em class="property"> = 'InvalidFileOrDirectoryPathName'</em><a class="headerlink" href="#azure.storage.queue.StorageErrorCode.invalid_file_or_directory_path_name" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
@@ -3197,6 +3232,11 @@ blobs or files.</p></li>
 <dd></dd></dl>
 
 <dl class="attribute">
+<dt id="azure.storage.queue.StorageErrorCode.parent_not_found">
+<code class="sig-name descname">parent_not_found</code><em class="property"> = 'ParentNotFound'</em><a class="headerlink" href="#azure.storage.queue.StorageErrorCode.parent_not_found" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
 <dt id="azure.storage.queue.StorageErrorCode.pending_copy_operation">
 <code class="sig-name descname">pending_copy_operation</code><em class="property"> = 'PendingCopyOperation'</em><a class="headerlink" href="#azure.storage.queue.StorageErrorCode.pending_copy_operation" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
@@ -3247,6 +3287,11 @@ blobs or files.</p></li>
 <dd></dd></dl>
 
 <dl class="attribute">
+<dt id="azure.storage.queue.StorageErrorCode.read_only_attribute">
+<code class="sig-name descname">read_only_attribute</code><em class="property"> = 'ReadOnlyAttribute'</em><a class="headerlink" href="#azure.storage.queue.StorageErrorCode.read_only_attribute" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
 <dt id="azure.storage.queue.StorageErrorCode.request_body_too_large">
 <code class="sig-name descname">request_body_too_large</code><em class="property"> = 'RequestBodyTooLarge'</em><a class="headerlink" href="#azure.storage.queue.StorageErrorCode.request_body_too_large" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
@@ -3284,6 +3329,51 @@ blobs or files.</p></li>
 <dl class="attribute">
 <dt id="azure.storage.queue.StorageErrorCode.server_busy">
 <code class="sig-name descname">server_busy</code><em class="property"> = 'ServerBusy'</em><a class="headerlink" href="#azure.storage.queue.StorageErrorCode.server_busy" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="azure.storage.queue.StorageErrorCode.share_already_exists">
+<code class="sig-name descname">share_already_exists</code><em class="property"> = 'ShareAlreadyExists'</em><a class="headerlink" href="#azure.storage.queue.StorageErrorCode.share_already_exists" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="azure.storage.queue.StorageErrorCode.share_being_deleted">
+<code class="sig-name descname">share_being_deleted</code><em class="property"> = 'ShareBeingDeleted'</em><a class="headerlink" href="#azure.storage.queue.StorageErrorCode.share_being_deleted" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="azure.storage.queue.StorageErrorCode.share_disabled">
+<code class="sig-name descname">share_disabled</code><em class="property"> = 'ShareDisabled'</em><a class="headerlink" href="#azure.storage.queue.StorageErrorCode.share_disabled" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="azure.storage.queue.StorageErrorCode.share_has_snapshots">
+<code class="sig-name descname">share_has_snapshots</code><em class="property"> = 'ShareHasSnapshots'</em><a class="headerlink" href="#azure.storage.queue.StorageErrorCode.share_has_snapshots" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="azure.storage.queue.StorageErrorCode.share_not_found">
+<code class="sig-name descname">share_not_found</code><em class="property"> = 'ShareNotFound'</em><a class="headerlink" href="#azure.storage.queue.StorageErrorCode.share_not_found" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="azure.storage.queue.StorageErrorCode.share_snapshot_count_exceeded">
+<code class="sig-name descname">share_snapshot_count_exceeded</code><em class="property"> = 'ShareSnapshotCountExceeded'</em><a class="headerlink" href="#azure.storage.queue.StorageErrorCode.share_snapshot_count_exceeded" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="azure.storage.queue.StorageErrorCode.share_snapshot_in_progress">
+<code class="sig-name descname">share_snapshot_in_progress</code><em class="property"> = 'ShareSnapshotInProgress'</em><a class="headerlink" href="#azure.storage.queue.StorageErrorCode.share_snapshot_in_progress" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="azure.storage.queue.StorageErrorCode.share_snapshot_operation_not_supported">
+<code class="sig-name descname">share_snapshot_operation_not_supported</code><em class="property"> = 'ShareSnapshotOperationNotSupported'</em><a class="headerlink" href="#azure.storage.queue.StorageErrorCode.share_snapshot_operation_not_supported" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="azure.storage.queue.StorageErrorCode.sharing_violation">
+<code class="sig-name descname">sharing_violation</code><em class="property"> = 'SharingViolation'</em><a class="headerlink" href="#azure.storage.queue.StorageErrorCode.sharing_violation" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
@@ -3521,108 +3611,108 @@ be UTC.</p></li>
 
 <dl class="class">
 <dt id="azure.storage.queue.TextBase64EncodePolicy">
-<em class="property">class </em><code class="sig-prename descclassname">azure.storage.queue.</code><code class="sig-name descname">TextBase64EncodePolicy</code><a class="reference internal" href="../_modules/azure/storage/queue/_queue_utils.html#TextBase64EncodePolicy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.storage.queue.TextBase64EncodePolicy" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">azure.storage.queue._queue_utils.MessageEncodePolicy</span></code></p>
+<em class="property">class </em><code class="sig-prename descclassname">azure.storage.queue.</code><code class="sig-name descname">TextBase64EncodePolicy</code><a class="reference internal" href="../_modules/azure/storage/queue/_message_encoding.html#TextBase64EncodePolicy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.storage.queue.TextBase64EncodePolicy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">azure.storage.queue._message_encoding.MessageEncodePolicy</span></code></p>
 <p>Base 64 message encoding policy for text messages.</p>
 <p>Encodes text (unicode) messages to base 64. If the input content
 is not text, a TypeError will be raised. Input text must support UTF-8.</p>
 <dl class="method">
 <dt id="azure.storage.queue.TextBase64EncodePolicy.encode">
-<code class="sig-name descname">encode</code><span class="sig-paren">(</span><em class="sig-param">content</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/storage/queue/_queue_utils.html#TextBase64EncodePolicy.encode"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.storage.queue.TextBase64EncodePolicy.encode" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">encode</code><span class="sig-paren">(</span><em class="sig-param">content</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/storage/queue/_message_encoding.html#TextBase64EncodePolicy.encode"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.storage.queue.TextBase64EncodePolicy.encode" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
 <dl class="class">
 <dt id="azure.storage.queue.TextBase64DecodePolicy">
-<em class="property">class </em><code class="sig-prename descclassname">azure.storage.queue.</code><code class="sig-name descname">TextBase64DecodePolicy</code><a class="reference internal" href="../_modules/azure/storage/queue/_queue_utils.html#TextBase64DecodePolicy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.storage.queue.TextBase64DecodePolicy" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">azure.storage.queue._queue_utils.MessageDecodePolicy</span></code></p>
+<em class="property">class </em><code class="sig-prename descclassname">azure.storage.queue.</code><code class="sig-name descname">TextBase64DecodePolicy</code><a class="reference internal" href="../_modules/azure/storage/queue/_message_encoding.html#TextBase64DecodePolicy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.storage.queue.TextBase64DecodePolicy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">azure.storage.queue._message_encoding.MessageDecodePolicy</span></code></p>
 <p>Message decoding policy for base 64-encoded messages into text.</p>
 <p>Decodes base64-encoded messages to text (unicode). If the input content
 is not valid base 64, a DecodeError will be raised. Message data must
 support UTF-8.</p>
 <dl class="method">
 <dt id="azure.storage.queue.TextBase64DecodePolicy.decode">
-<code class="sig-name descname">decode</code><span class="sig-paren">(</span><em class="sig-param">content</em>, <em class="sig-param">response</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/storage/queue/_queue_utils.html#TextBase64DecodePolicy.decode"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.storage.queue.TextBase64DecodePolicy.decode" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">decode</code><span class="sig-paren">(</span><em class="sig-param">content</em>, <em class="sig-param">response</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/storage/queue/_message_encoding.html#TextBase64DecodePolicy.decode"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.storage.queue.TextBase64DecodePolicy.decode" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
 <dl class="class">
 <dt id="azure.storage.queue.BinaryBase64EncodePolicy">
-<em class="property">class </em><code class="sig-prename descclassname">azure.storage.queue.</code><code class="sig-name descname">BinaryBase64EncodePolicy</code><a class="reference internal" href="../_modules/azure/storage/queue/_queue_utils.html#BinaryBase64EncodePolicy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.storage.queue.BinaryBase64EncodePolicy" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">azure.storage.queue._queue_utils.MessageEncodePolicy</span></code></p>
+<em class="property">class </em><code class="sig-prename descclassname">azure.storage.queue.</code><code class="sig-name descname">BinaryBase64EncodePolicy</code><a class="reference internal" href="../_modules/azure/storage/queue/_message_encoding.html#BinaryBase64EncodePolicy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.storage.queue.BinaryBase64EncodePolicy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">azure.storage.queue._message_encoding.MessageEncodePolicy</span></code></p>
 <p>Base 64 message encoding policy for binary messages.</p>
 <p>Encodes binary messages to base 64. If the input content
 is not bytes, a TypeError will be raised.</p>
 <dl class="method">
 <dt id="azure.storage.queue.BinaryBase64EncodePolicy.encode">
-<code class="sig-name descname">encode</code><span class="sig-paren">(</span><em class="sig-param">content</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/storage/queue/_queue_utils.html#BinaryBase64EncodePolicy.encode"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.storage.queue.BinaryBase64EncodePolicy.encode" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">encode</code><span class="sig-paren">(</span><em class="sig-param">content</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/storage/queue/_message_encoding.html#BinaryBase64EncodePolicy.encode"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.storage.queue.BinaryBase64EncodePolicy.encode" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
 <dl class="class">
 <dt id="azure.storage.queue.BinaryBase64DecodePolicy">
-<em class="property">class </em><code class="sig-prename descclassname">azure.storage.queue.</code><code class="sig-name descname">BinaryBase64DecodePolicy</code><a class="reference internal" href="../_modules/azure/storage/queue/_queue_utils.html#BinaryBase64DecodePolicy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.storage.queue.BinaryBase64DecodePolicy" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">azure.storage.queue._queue_utils.MessageDecodePolicy</span></code></p>
+<em class="property">class </em><code class="sig-prename descclassname">azure.storage.queue.</code><code class="sig-name descname">BinaryBase64DecodePolicy</code><a class="reference internal" href="../_modules/azure/storage/queue/_message_encoding.html#BinaryBase64DecodePolicy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.storage.queue.BinaryBase64DecodePolicy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">azure.storage.queue._message_encoding.MessageDecodePolicy</span></code></p>
 <p>Message decoding policy for base 64-encoded messages into bytes.</p>
 <p>Decodes base64-encoded messages to bytes. If the input content
 is not valid base 64, a DecodeError will be raised.</p>
 <dl class="method">
 <dt id="azure.storage.queue.BinaryBase64DecodePolicy.decode">
-<code class="sig-name descname">decode</code><span class="sig-paren">(</span><em class="sig-param">content</em>, <em class="sig-param">response</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/storage/queue/_queue_utils.html#BinaryBase64DecodePolicy.decode"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.storage.queue.BinaryBase64DecodePolicy.decode" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">decode</code><span class="sig-paren">(</span><em class="sig-param">content</em>, <em class="sig-param">response</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/storage/queue/_message_encoding.html#BinaryBase64DecodePolicy.decode"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.storage.queue.BinaryBase64DecodePolicy.decode" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
 <dl class="class">
 <dt id="azure.storage.queue.TextXMLEncodePolicy">
-<em class="property">class </em><code class="sig-prename descclassname">azure.storage.queue.</code><code class="sig-name descname">TextXMLEncodePolicy</code><a class="reference internal" href="../_modules/azure/storage/queue/_queue_utils.html#TextXMLEncodePolicy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.storage.queue.TextXMLEncodePolicy" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">azure.storage.queue._queue_utils.MessageEncodePolicy</span></code></p>
+<em class="property">class </em><code class="sig-prename descclassname">azure.storage.queue.</code><code class="sig-name descname">TextXMLEncodePolicy</code><a class="reference internal" href="../_modules/azure/storage/queue/_message_encoding.html#TextXMLEncodePolicy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.storage.queue.TextXMLEncodePolicy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">azure.storage.queue._message_encoding.MessageEncodePolicy</span></code></p>
 <p>XML message encoding policy for text messages.</p>
 <p>Encodes text (unicode) messages to XML. If the input content
 is not text, a TypeError will be raised.</p>
 <dl class="method">
 <dt id="azure.storage.queue.TextXMLEncodePolicy.encode">
-<code class="sig-name descname">encode</code><span class="sig-paren">(</span><em class="sig-param">content</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/storage/queue/_queue_utils.html#TextXMLEncodePolicy.encode"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.storage.queue.TextXMLEncodePolicy.encode" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">encode</code><span class="sig-paren">(</span><em class="sig-param">content</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/storage/queue/_message_encoding.html#TextXMLEncodePolicy.encode"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.storage.queue.TextXMLEncodePolicy.encode" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
 <dl class="class">
 <dt id="azure.storage.queue.TextXMLDecodePolicy">
-<em class="property">class </em><code class="sig-prename descclassname">azure.storage.queue.</code><code class="sig-name descname">TextXMLDecodePolicy</code><a class="reference internal" href="../_modules/azure/storage/queue/_queue_utils.html#TextXMLDecodePolicy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.storage.queue.TextXMLDecodePolicy" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">azure.storage.queue._queue_utils.MessageDecodePolicy</span></code></p>
+<em class="property">class </em><code class="sig-prename descclassname">azure.storage.queue.</code><code class="sig-name descname">TextXMLDecodePolicy</code><a class="reference internal" href="../_modules/azure/storage/queue/_message_encoding.html#TextXMLDecodePolicy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.storage.queue.TextXMLDecodePolicy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">azure.storage.queue._message_encoding.MessageDecodePolicy</span></code></p>
 <p>Message decoding policy for XML-encoded messages into text.</p>
 <p>Decodes XML-encoded messages to text (unicode).</p>
 <dl class="method">
 <dt id="azure.storage.queue.TextXMLDecodePolicy.decode">
-<code class="sig-name descname">decode</code><span class="sig-paren">(</span><em class="sig-param">content</em>, <em class="sig-param">response</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/storage/queue/_queue_utils.html#TextXMLDecodePolicy.decode"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.storage.queue.TextXMLDecodePolicy.decode" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">decode</code><span class="sig-paren">(</span><em class="sig-param">content</em>, <em class="sig-param">response</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/storage/queue/_message_encoding.html#TextXMLDecodePolicy.decode"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.storage.queue.TextXMLDecodePolicy.decode" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
 <dl class="class">
 <dt id="azure.storage.queue.NoEncodePolicy">
-<em class="property">class </em><code class="sig-prename descclassname">azure.storage.queue.</code><code class="sig-name descname">NoEncodePolicy</code><a class="reference internal" href="../_modules/azure/storage/queue/_queue_utils.html#NoEncodePolicy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.storage.queue.NoEncodePolicy" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">azure.storage.queue._queue_utils.MessageEncodePolicy</span></code></p>
+<em class="property">class </em><code class="sig-prename descclassname">azure.storage.queue.</code><code class="sig-name descname">NoEncodePolicy</code><a class="reference internal" href="../_modules/azure/storage/queue/_message_encoding.html#NoEncodePolicy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.storage.queue.NoEncodePolicy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">azure.storage.queue._message_encoding.MessageEncodePolicy</span></code></p>
 <p>Bypass any message content encoding.</p>
 <dl class="method">
 <dt id="azure.storage.queue.NoEncodePolicy.encode">
-<code class="sig-name descname">encode</code><span class="sig-paren">(</span><em class="sig-param">content</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/storage/queue/_queue_utils.html#NoEncodePolicy.encode"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.storage.queue.NoEncodePolicy.encode" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">encode</code><span class="sig-paren">(</span><em class="sig-param">content</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/storage/queue/_message_encoding.html#NoEncodePolicy.encode"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.storage.queue.NoEncodePolicy.encode" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
 <dl class="class">
 <dt id="azure.storage.queue.NoDecodePolicy">
-<em class="property">class </em><code class="sig-prename descclassname">azure.storage.queue.</code><code class="sig-name descname">NoDecodePolicy</code><a class="reference internal" href="../_modules/azure/storage/queue/_queue_utils.html#NoDecodePolicy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.storage.queue.NoDecodePolicy" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">azure.storage.queue._queue_utils.MessageDecodePolicy</span></code></p>
+<em class="property">class </em><code class="sig-prename descclassname">azure.storage.queue.</code><code class="sig-name descname">NoDecodePolicy</code><a class="reference internal" href="../_modules/azure/storage/queue/_message_encoding.html#NoDecodePolicy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.storage.queue.NoDecodePolicy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">azure.storage.queue._message_encoding.MessageDecodePolicy</span></code></p>
 <p>Bypass any message content decoding.</p>
 <dl class="method">
 <dt id="azure.storage.queue.NoDecodePolicy.decode">
-<code class="sig-name descname">decode</code><span class="sig-paren">(</span><em class="sig-param">content</em>, <em class="sig-param">response</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/storage/queue/_queue_utils.html#NoDecodePolicy.decode"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.storage.queue.NoDecodePolicy.decode" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">decode</code><span class="sig-paren">(</span><em class="sig-param">content</em>, <em class="sig-param">response</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/storage/queue/_message_encoding.html#NoDecodePolicy.decode"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.storage.queue.NoDecodePolicy.decode" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>

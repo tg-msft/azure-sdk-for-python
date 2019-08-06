@@ -414,7 +414,27 @@
     <span class="n">queue_being_deleted</span> <span class="o">=</span> <span class="s2">&quot;QueueBeingDeleted&quot;</span>
     <span class="n">queue_disabled</span> <span class="o">=</span> <span class="s2">&quot;QueueDisabled&quot;</span>
     <span class="n">queue_not_empty</span> <span class="o">=</span> <span class="s2">&quot;QueueNotEmpty&quot;</span>
-    <span class="n">queue_not_found</span> <span class="o">=</span> <span class="s2">&quot;QueueNotFound&quot;</span></div>
+    <span class="n">queue_not_found</span> <span class="o">=</span> <span class="s2">&quot;QueueNotFound&quot;</span>
+
+    <span class="c1"># File values</span>
+    <span class="n">cannot_delete_file_or_directory</span> <span class="o">=</span> <span class="s2">&quot;CannotDeleteFileOrDirectory&quot;</span>
+    <span class="n">client_cache_flush_delay</span> <span class="o">=</span> <span class="s2">&quot;ClientCacheFlushDelay&quot;</span>
+    <span class="n">delete_pending</span> <span class="o">=</span> <span class="s2">&quot;DeletePending&quot;</span>
+    <span class="n">directory_not_empty</span> <span class="o">=</span> <span class="s2">&quot;DirectoryNotEmpty&quot;</span>
+    <span class="n">file_lock_conflict</span> <span class="o">=</span> <span class="s2">&quot;FileLockConflict&quot;</span>
+    <span class="n">invalid_file_or_directory_path_name</span> <span class="o">=</span> <span class="s2">&quot;InvalidFileOrDirectoryPathName&quot;</span>
+    <span class="n">parent_not_found</span> <span class="o">=</span> <span class="s2">&quot;ParentNotFound&quot;</span>
+    <span class="n">read_only_attribute</span> <span class="o">=</span> <span class="s2">&quot;ReadOnlyAttribute&quot;</span>
+    <span class="n">share_already_exists</span> <span class="o">=</span> <span class="s2">&quot;ShareAlreadyExists&quot;</span>
+    <span class="n">share_being_deleted</span> <span class="o">=</span> <span class="s2">&quot;ShareBeingDeleted&quot;</span>
+    <span class="n">share_disabled</span> <span class="o">=</span> <span class="s2">&quot;ShareDisabled&quot;</span>
+    <span class="n">share_not_found</span> <span class="o">=</span> <span class="s2">&quot;ShareNotFound&quot;</span>
+    <span class="n">sharing_violation</span> <span class="o">=</span> <span class="s2">&quot;SharingViolation&quot;</span>
+    <span class="n">share_snapshot_in_progress</span> <span class="o">=</span> <span class="s2">&quot;ShareSnapshotInProgress&quot;</span>
+    <span class="n">share_snapshot_count_exceeded</span> <span class="o">=</span> <span class="s2">&quot;ShareSnapshotCountExceeded&quot;</span>
+    <span class="n">share_snapshot_operation_not_supported</span> <span class="o">=</span> <span class="s2">&quot;ShareSnapshotOperationNotSupported&quot;</span>
+    <span class="n">share_has_snapshots</span> <span class="o">=</span> <span class="s2">&quot;ShareHasSnapshots&quot;</span>
+    <span class="n">container_quota_downgrade_not_allowed</span> <span class="o">=</span> <span class="s2">&quot;ContainerQuotaDowngradeNotAllowed&quot;</span></div>
 
 
 <span class="k">class</span> <span class="nc">DictMixin</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
@@ -466,30 +486,6 @@
         <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
         <span class="k">return</span> <span class="n">default</span>
-
-
-<span class="k">class</span> <span class="nc">ModifiedAccessConditions</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Additional parameters for a set of operations.</span>
-
-<span class="sd">    :param if_modified_since: Specify this header value to operate only on a</span>
-<span class="sd">     blob if it has been modified since the specified date/time.</span>
-<span class="sd">    :type if_modified_since: datetime</span>
-<span class="sd">    :param if_unmodified_since: Specify this header value to operate only on a</span>
-<span class="sd">     blob if it has not been modified since the specified date/time.</span>
-<span class="sd">    :type if_unmodified_since: datetime</span>
-<span class="sd">    :param if_match: Specify an ETag value to operate only on blobs with a</span>
-<span class="sd">     matching value.</span>
-<span class="sd">    :type if_match: str</span>
-<span class="sd">    :param if_none_match: Specify an ETag value to operate only on blobs</span>
-<span class="sd">     without a matching value.</span>
-<span class="sd">    :type if_none_match: str</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">if_modified_since</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;if_modified_since&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">if_unmodified_since</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;if_unmodified_since&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">if_match</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;if_match&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">if_none_match</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;if_none_match&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
 
 
 <div class="viewcode-block" id="LocationMode"><a class="viewcode-back" href="../../../../../ref/azure.storage.blob.html#azure.storage.blob.LocationMode">[docs]</a><span class="k">class</span> <span class="nc">LocationMode</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>

@@ -289,15 +289,28 @@
     <span class="n">TypeVar</span><span class="p">,</span> <span class="n">TYPE_CHECKING</span>
 <span class="p">)</span>
 
-<span class="kn">from</span> <span class="nn">._shared.utils</span> <span class="k">import</span> <span class="n">return_response_headers</span><span class="p">,</span> <span class="n">process_storage_error</span>
-<span class="kn">from</span> <span class="nn">._generated.models</span> <span class="k">import</span> <span class="n">StorageErrorException</span>
-<span class="kn">from</span> <span class="nn">._blob_utils</span> <span class="k">import</span> <span class="n">get_modification_conditions</span>
+<span class="kn">from</span> <span class="nn">azure.core.tracing.decorator</span> <span class="k">import</span> <span class="n">distributed_trace</span>
+
+<span class="kn">from</span> <span class="nn">._shared.response_handlers</span> <span class="k">import</span> <span class="n">return_response_headers</span><span class="p">,</span> <span class="n">process_storage_error</span>
+<span class="kn">from</span> <span class="nn">._generated.models</span> <span class="k">import</span> <span class="p">(</span>
+    <span class="n">StorageErrorException</span><span class="p">,</span>
+    <span class="n">ModifiedAccessConditions</span><span class="p">,</span>
+    <span class="n">LeaseAccessConditions</span><span class="p">)</span>
 
 <span class="k">if</span> <span class="n">TYPE_CHECKING</span><span class="p">:</span>
     <span class="kn">from</span> <span class="nn">datetime</span> <span class="k">import</span> <span class="n">datetime</span>
     <span class="kn">from</span> <span class="nn">._generated.operations</span> <span class="k">import</span> <span class="n">BlobOperations</span><span class="p">,</span> <span class="n">ContainerOperations</span>
     <span class="n">BlobClient</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s2">&quot;BlobClient&quot;</span><span class="p">)</span>
     <span class="n">ContainerClient</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s2">&quot;ContainerClient&quot;</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="get_access_conditions"><a class="viewcode-back" href="../../../../ref/azure.storage.blob.html#azure.storage.blob.lease.get_access_conditions">[docs]</a><span class="k">def</span> <span class="nf">get_access_conditions</span><span class="p">(</span><span class="n">lease</span><span class="p">):</span>
+    <span class="c1"># type: (Optional[Union[LeaseClient, str]]) -&gt; Union[LeaseAccessConditions, None]</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">lease_id</span> <span class="o">=</span> <span class="n">lease</span><span class="o">.</span><span class="n">id</span> <span class="c1"># type: ignore</span>
+    <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
+        <span class="n">lease_id</span> <span class="o">=</span> <span class="n">lease</span> <span class="c1"># type: ignore</span>
+    <span class="k">return</span> <span class="n">LeaseAccessConditions</span><span class="p">(</span><span class="n">lease_id</span><span class="o">=</span><span class="n">lease_id</span><span class="p">)</span> <span class="k">if</span> <span class="n">lease_id</span> <span class="k">else</span> <span class="kc">None</span></div>
 
 
 <div class="viewcode-block" id="LeaseClient"><a class="viewcode-back" href="../../../../ref/azure.storage.blob.html#azure.storage.blob.lease.LeaseClient">[docs]</a><span class="k">class</span> <span class="nc">LeaseClient</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
@@ -341,15 +354,9 @@
     <span class="k">def</span> <span class="nf">__exit__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">release</span><span class="p">()</span>
 
-<div class="viewcode-block" id="LeaseClient.acquire"><a class="viewcode-back" href="../../../../ref/azure.storage.blob.html#azure.storage.blob.lease.LeaseClient.acquire">[docs]</a>    <span class="k">def</span> <span class="nf">acquire</span><span class="p">(</span>
-            <span class="bp">self</span><span class="p">,</span> <span class="n">lease_duration</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span>  <span class="c1"># type: int</span>
-            <span class="n">if_modified_since</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>  <span class="c1"># type: Optional[datetime]</span>
-            <span class="n">if_unmodified_since</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>  <span class="c1"># type: Optional[datetime]</span>
-            <span class="n">if_match</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>  <span class="c1"># type: Optional[str]</span>
-            <span class="n">if_none_match</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>  <span class="c1"># type: Optional[str]</span>
-            <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>  <span class="c1"># type: Optional[int]</span>
-            <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="c1"># type: (...) -&gt; None</span>
+<div class="viewcode-block" id="LeaseClient.acquire"><a class="viewcode-back" href="../../../../ref/azure.storage.blob.html#azure.storage.blob.lease.LeaseClient.acquire">[docs]</a>    <span class="nd">@distributed_trace</span>
+    <span class="k">def</span> <span class="nf">acquire</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lease_duration</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="c1"># type: (int, Optional[int], **Any) -&gt; None</span>
         <span class="sd">&quot;&quot;&quot;Requests a new lease.</span>
 
 <span class="sd">        If the container does not have an active lease, the Blob service creates a</span>
@@ -385,8 +392,11 @@
 <span class="sd">            The timeout parameter is expressed in seconds.</span>
 <span class="sd">        :rtype: None</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">mod_conditions</span> <span class="o">=</span> <span class="n">get_modification_conditions</span><span class="p">(</span>
-            <span class="n">if_modified_since</span><span class="p">,</span> <span class="n">if_unmodified_since</span><span class="p">,</span> <span class="n">if_match</span><span class="p">,</span> <span class="n">if_none_match</span><span class="p">)</span>
+        <span class="n">mod_conditions</span> <span class="o">=</span> <span class="n">ModifiedAccessConditions</span><span class="p">(</span>
+            <span class="n">if_modified_since</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;if_modified_since&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
+            <span class="n">if_unmodified_since</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;if_unmodified_since&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
+            <span class="n">if_match</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;if_match&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
+            <span class="n">if_none_match</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;if_none_match&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">))</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_client</span><span class="o">.</span><span class="n">acquire_lease</span><span class="p">(</span>
                 <span class="n">timeout</span><span class="o">=</span><span class="n">timeout</span><span class="p">,</span>
@@ -401,15 +411,9 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">last_modified</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;last_modified&#39;</span><span class="p">)</span>   <span class="c1"># type: datetime</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">etag</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;etag&#39;</span><span class="p">)</span>  <span class="c1"># type: str</span></div>
 
-<div class="viewcode-block" id="LeaseClient.renew"><a class="viewcode-back" href="../../../../ref/azure.storage.blob.html#azure.storage.blob.lease.LeaseClient.renew">[docs]</a>    <span class="k">def</span> <span class="nf">renew</span><span class="p">(</span>
-            <span class="bp">self</span><span class="p">,</span> <span class="n">if_modified_since</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>  <span class="c1"># type: Optional[datetime]</span>
-            <span class="n">if_unmodified_since</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>  <span class="c1"># type: Optional[datetime]</span>
-            <span class="n">if_match</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>  <span class="c1"># type: Optional[str]</span>
-            <span class="n">if_none_match</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>  <span class="c1"># type: Optional[str]</span>
-            <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>  <span class="c1"># type: Optional[int]</span>
-            <span class="o">**</span><span class="n">kwargs</span>
-        <span class="p">):</span>
-        <span class="c1"># type: (...) -&gt; None</span>
+<div class="viewcode-block" id="LeaseClient.renew"><a class="viewcode-back" href="../../../../ref/azure.storage.blob.html#azure.storage.blob.lease.LeaseClient.renew">[docs]</a>    <span class="nd">@distributed_trace</span>
+    <span class="k">def</span> <span class="nf">renew</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="c1"># type: (Optional[int], Any) -&gt; None</span>
         <span class="sd">&quot;&quot;&quot;Renews the lease.</span>
 
 <span class="sd">        The lease can be renewed if the lease ID specified in the</span>
@@ -443,8 +447,11 @@
 <span class="sd">            The timeout parameter is expressed in seconds.</span>
 <span class="sd">        :return: None</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">mod_conditions</span> <span class="o">=</span> <span class="n">get_modification_conditions</span><span class="p">(</span>
-            <span class="n">if_modified_since</span><span class="p">,</span> <span class="n">if_unmodified_since</span><span class="p">,</span> <span class="n">if_match</span><span class="p">,</span> <span class="n">if_none_match</span><span class="p">)</span>
+        <span class="n">mod_conditions</span> <span class="o">=</span> <span class="n">ModifiedAccessConditions</span><span class="p">(</span>
+            <span class="n">if_modified_since</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;if_modified_since&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
+            <span class="n">if_unmodified_since</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;if_unmodified_since&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
+            <span class="n">if_match</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;if_match&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
+            <span class="n">if_none_match</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;if_none_match&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">))</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_client</span><span class="o">.</span><span class="n">renew_lease</span><span class="p">(</span>
                 <span class="n">lease_id</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">,</span>
@@ -458,15 +465,9 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;lease_id&#39;</span><span class="p">)</span>  <span class="c1"># type: str</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">last_modified</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;last_modified&#39;</span><span class="p">)</span>   <span class="c1"># type: datetime</span></div>
 
-<div class="viewcode-block" id="LeaseClient.release"><a class="viewcode-back" href="../../../../ref/azure.storage.blob.html#azure.storage.blob.lease.LeaseClient.release">[docs]</a>    <span class="k">def</span> <span class="nf">release</span><span class="p">(</span>
-            <span class="bp">self</span><span class="p">,</span> <span class="n">if_modified_since</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>  <span class="c1"># type: Optional[datetime]</span>
-            <span class="n">if_unmodified_since</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>  <span class="c1"># type: Optional[datetime]</span>
-            <span class="n">if_match</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>  <span class="c1"># type: Optional[str]</span>
-            <span class="n">if_none_match</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>  <span class="c1"># type: Optional[str]</span>
-            <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>  <span class="c1"># type: Optional[int]</span>
-            <span class="o">**</span><span class="n">kwargs</span>
-        <span class="p">):</span>
-        <span class="c1"># type: (...) -&gt; None</span>
+<div class="viewcode-block" id="LeaseClient.release"><a class="viewcode-back" href="../../../../ref/azure.storage.blob.html#azure.storage.blob.lease.LeaseClient.release">[docs]</a>    <span class="nd">@distributed_trace</span>
+    <span class="k">def</span> <span class="nf">release</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="c1"># type: (Optional[int], Any) -&gt; None</span>
         <span class="sd">&quot;&quot;&quot;Release the lease.</span>
 
 <span class="sd">        The lease may be released if the client lease id specified matches</span>
@@ -498,8 +499,11 @@
 <span class="sd">            The timeout parameter is expressed in seconds.</span>
 <span class="sd">        :return: None</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">mod_conditions</span> <span class="o">=</span> <span class="n">get_modification_conditions</span><span class="p">(</span>
-            <span class="n">if_modified_since</span><span class="p">,</span> <span class="n">if_unmodified_since</span><span class="p">,</span> <span class="n">if_match</span><span class="p">,</span> <span class="n">if_none_match</span><span class="p">)</span>
+        <span class="n">mod_conditions</span> <span class="o">=</span> <span class="n">ModifiedAccessConditions</span><span class="p">(</span>
+            <span class="n">if_modified_since</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;if_modified_since&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
+            <span class="n">if_unmodified_since</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;if_unmodified_since&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
+            <span class="n">if_match</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;if_match&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
+            <span class="n">if_none_match</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;if_none_match&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">))</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_client</span><span class="o">.</span><span class="n">release_lease</span><span class="p">(</span>
                 <span class="n">lease_id</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">,</span>
@@ -513,16 +517,9 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;lease_id&#39;</span><span class="p">)</span>  <span class="c1"># type: str</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">last_modified</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;last_modified&#39;</span><span class="p">)</span>   <span class="c1"># type: datetime</span></div>
 
-<div class="viewcode-block" id="LeaseClient.change"><a class="viewcode-back" href="../../../../ref/azure.storage.blob.html#azure.storage.blob.lease.LeaseClient.change">[docs]</a>    <span class="k">def</span> <span class="nf">change</span><span class="p">(</span>
-            <span class="bp">self</span><span class="p">,</span> <span class="n">proposed_lease_id</span><span class="p">,</span>  <span class="c1"># type: str</span>
-            <span class="n">if_modified_since</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>  <span class="c1"># type: Optional[datetime]</span>
-            <span class="n">if_unmodified_since</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>  <span class="c1"># type: Optional[datetime]</span>
-            <span class="n">if_match</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>  <span class="c1"># type: Optional[str]</span>
-            <span class="n">if_none_match</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>  <span class="c1"># type: Optional[str]</span>
-            <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>  <span class="c1"># type: Optional[int]</span>
-            <span class="o">**</span><span class="n">kwargs</span>
-        <span class="p">):</span>
-        <span class="c1"># type: (...) -&gt; None</span>
+<div class="viewcode-block" id="LeaseClient.change"><a class="viewcode-back" href="../../../../ref/azure.storage.blob.html#azure.storage.blob.lease.LeaseClient.change">[docs]</a>    <span class="nd">@distributed_trace</span>
+    <span class="k">def</span> <span class="nf">change</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">proposed_lease_id</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="c1"># type: (str, Optional[int], Any) -&gt; None</span>
         <span class="sd">&quot;&quot;&quot;Change the lease ID of an active lease.</span>
 
 <span class="sd">        :param str proposed_lease_id:</span>
@@ -553,8 +550,11 @@
 <span class="sd">            The timeout parameter is expressed in seconds.</span>
 <span class="sd">        :return: None</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">mod_conditions</span> <span class="o">=</span> <span class="n">get_modification_conditions</span><span class="p">(</span>
-            <span class="n">if_modified_since</span><span class="p">,</span> <span class="n">if_unmodified_since</span><span class="p">,</span> <span class="n">if_match</span><span class="p">,</span> <span class="n">if_none_match</span><span class="p">)</span>
+        <span class="n">mod_conditions</span> <span class="o">=</span> <span class="n">ModifiedAccessConditions</span><span class="p">(</span>
+            <span class="n">if_modified_since</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;if_modified_since&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
+            <span class="n">if_unmodified_since</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;if_unmodified_since&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
+            <span class="n">if_match</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;if_match&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
+            <span class="n">if_none_match</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;if_none_match&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">))</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_client</span><span class="o">.</span><span class="n">change_lease</span><span class="p">(</span>
                 <span class="n">lease_id</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">,</span>
@@ -569,13 +569,9 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;lease_id&#39;</span><span class="p">)</span>  <span class="c1"># type: str</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">last_modified</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;last_modified&#39;</span><span class="p">)</span>   <span class="c1"># type: datetime</span></div>
 
-<div class="viewcode-block" id="LeaseClient.break_lease"><a class="viewcode-back" href="../../../../ref/azure.storage.blob.html#azure.storage.blob.lease.LeaseClient.break_lease">[docs]</a>    <span class="k">def</span> <span class="nf">break_lease</span><span class="p">(</span>
-            <span class="bp">self</span><span class="p">,</span> <span class="n">lease_break_period</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>  <span class="c1"># type: Optional[int]</span>
-            <span class="n">if_modified_since</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>  <span class="c1"># type: Optional[datetime]</span>
-            <span class="n">if_unmodified_since</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>  <span class="c1"># type: Optional[datetime]</span>
-            <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>  <span class="c1"># type: Optional[int]</span>
-            <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="c1"># type: (...) -&gt; int</span>
+<div class="viewcode-block" id="LeaseClient.break_lease"><a class="viewcode-back" href="../../../../ref/azure.storage.blob.html#azure.storage.blob.lease.LeaseClient.break_lease">[docs]</a>    <span class="nd">@distributed_trace</span>
+    <span class="k">def</span> <span class="nf">break_lease</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lease_break_period</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="c1"># type: (Optional[int], Optional[int], Any) -&gt; int</span>
         <span class="sd">&quot;&quot;&quot;Break the lease, if the container or blob has an active lease.</span>
 
 <span class="sd">        Once a lease is broken, it cannot be renewed. Any authorized request can break the lease;</span>
@@ -612,8 +608,9 @@
 <span class="sd">        :return: Approximate time remaining in the lease period, in seconds.</span>
 <span class="sd">        :rtype: int</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">mod_conditions</span> <span class="o">=</span> <span class="n">get_modification_conditions</span><span class="p">(</span>
-            <span class="n">if_modified_since</span><span class="p">,</span> <span class="n">if_unmodified_since</span><span class="p">)</span>
+        <span class="n">mod_conditions</span> <span class="o">=</span> <span class="n">ModifiedAccessConditions</span><span class="p">(</span>
+            <span class="n">if_modified_since</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;if_modified_since&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
+            <span class="n">if_unmodified_since</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;if_unmodified_since&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">))</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_client</span><span class="o">.</span><span class="n">break_lease</span><span class="p">(</span>
                 <span class="n">timeout</span><span class="o">=</span><span class="n">timeout</span><span class="p">,</span>

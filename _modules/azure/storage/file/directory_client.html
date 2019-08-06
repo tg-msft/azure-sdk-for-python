@@ -295,23 +295,18 @@
 <span class="kn">import</span> <span class="nn">six</span>
 <span class="kn">from</span> <span class="nn">azure.core.polling</span> <span class="k">import</span> <span class="n">LROPoller</span>
 <span class="kn">from</span> <span class="nn">azure.core.paging</span> <span class="k">import</span> <span class="n">ItemPaged</span>
+<span class="kn">from</span> <span class="nn">azure.core.tracing.decorator</span> <span class="k">import</span> <span class="n">distributed_trace</span>
 
-<span class="kn">from</span> <span class="nn">.file_client</span> <span class="k">import</span> <span class="n">FileClient</span>
-
-<span class="kn">from</span> <span class="nn">.models</span> <span class="k">import</span> <span class="n">DirectoryPropertiesPaged</span><span class="p">,</span> <span class="n">HandlesPaged</span>
 <span class="kn">from</span> <span class="nn">._generated</span> <span class="k">import</span> <span class="n">AzureFileStorage</span>
 <span class="kn">from</span> <span class="nn">._generated.version</span> <span class="k">import</span> <span class="n">VERSION</span>
 <span class="kn">from</span> <span class="nn">._generated.models</span> <span class="k">import</span> <span class="n">StorageErrorException</span>
-<span class="kn">from</span> <span class="nn">._shared.utils</span> <span class="k">import</span> <span class="p">(</span>
-    <span class="n">StorageAccountHostsMixin</span><span class="p">,</span>
-    <span class="n">parse_query</span><span class="p">,</span>
-    <span class="n">return_response_headers</span><span class="p">,</span>
-    <span class="n">add_metadata_headers</span><span class="p">,</span>
-    <span class="n">process_storage_error</span><span class="p">,</span>
-    <span class="n">parse_connection_str</span><span class="p">)</span>
-
-<span class="kn">from</span> <span class="nn">._share_utils</span> <span class="k">import</span> <span class="n">deserialize_directory_properties</span>
-<span class="kn">from</span> <span class="nn">.polling</span> <span class="k">import</span> <span class="n">CloseHandles</span>
+<span class="kn">from</span> <span class="nn">._shared.base_client</span> <span class="k">import</span> <span class="n">StorageAccountHostsMixin</span><span class="p">,</span> <span class="n">parse_connection_str</span><span class="p">,</span> <span class="n">parse_query</span>
+<span class="kn">from</span> <span class="nn">._shared.request_handlers</span> <span class="k">import</span> <span class="n">add_metadata_headers</span>
+<span class="kn">from</span> <span class="nn">._shared.response_handlers</span> <span class="k">import</span> <span class="n">return_response_headers</span><span class="p">,</span> <span class="n">process_storage_error</span>
+<span class="kn">from</span> <span class="nn">._deserialize</span> <span class="k">import</span> <span class="n">deserialize_directory_properties</span>
+<span class="kn">from</span> <span class="nn">._polling</span> <span class="k">import</span> <span class="n">CloseHandles</span>
+<span class="kn">from</span> <span class="nn">.file_client</span> <span class="k">import</span> <span class="n">FileClient</span>
+<span class="kn">from</span> <span class="nn">.models</span> <span class="k">import</span> <span class="n">DirectoryPropertiesPaged</span><span class="p">,</span> <span class="n">HandlesPaged</span>
 
 <span class="k">if</span> <span class="n">TYPE_CHECKING</span><span class="p">:</span>
     <span class="kn">from</span> <span class="nn">.models</span> <span class="k">import</span> <span class="n">SharePermissions</span><span class="p">,</span> <span class="n">ShareProperties</span><span class="p">,</span> <span class="n">DirectoryProperties</span><span class="p">,</span> <span class="n">ContentSettings</span>
@@ -491,7 +486,8 @@
             <span class="n">_hosts</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_hosts</span><span class="p">,</span> <span class="n">_configuration</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_config</span><span class="p">,</span> <span class="n">_pipeline</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_pipeline</span><span class="p">,</span>
             <span class="n">_location_mode</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_location_mode</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="DirectoryClient.create_directory"><a class="viewcode-back" href="../../../../ref/azure.storage.file.html#azure.storage.file.directory_client.DirectoryClient.create_directory">[docs]</a>    <span class="k">def</span> <span class="nf">create_directory</span><span class="p">(</span> <span class="c1"># type: ignore</span>
+<div class="viewcode-block" id="DirectoryClient.create_directory"><a class="viewcode-back" href="../../../../ref/azure.storage.file.html#azure.storage.file.directory_client.DirectoryClient.create_directory">[docs]</a>    <span class="nd">@distributed_trace</span>
+    <span class="k">def</span> <span class="nf">create_directory</span><span class="p">(</span> <span class="c1"># type: ignore</span>
             <span class="bp">self</span><span class="p">,</span> <span class="n">metadata</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>  <span class="c1"># type: Optional[Dict[str, str]]</span>
             <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="c1"># type: Optional[int]</span>
             <span class="o">**</span><span class="n">kwargs</span> <span class="c1"># type: Optional[Any]</span>
@@ -526,7 +522,8 @@
         <span class="k">except</span> <span class="n">StorageErrorException</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
             <span class="n">process_storage_error</span><span class="p">(</span><span class="n">error</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="DirectoryClient.delete_directory"><a class="viewcode-back" href="../../../../ref/azure.storage.file.html#azure.storage.file.directory_client.DirectoryClient.delete_directory">[docs]</a>    <span class="k">def</span> <span class="nf">delete_directory</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<div class="viewcode-block" id="DirectoryClient.delete_directory"><a class="viewcode-back" href="../../../../ref/azure.storage.file.html#azure.storage.file.directory_client.DirectoryClient.delete_directory">[docs]</a>    <span class="nd">@distributed_trace</span>
+    <span class="k">def</span> <span class="nf">delete_directory</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="c1"># type: (Optional[int], **Any) -&gt; None</span>
         <span class="sd">&quot;&quot;&quot;Marks the directory for deletion. The directory is</span>
 <span class="sd">        later deleted during garbage collection.</span>
@@ -548,8 +545,9 @@
         <span class="k">except</span> <span class="n">StorageErrorException</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
             <span class="n">process_storage_error</span><span class="p">(</span><span class="n">error</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="DirectoryClient.list_directories_and_files"><a class="viewcode-back" href="../../../../ref/azure.storage.file.html#azure.storage.file.directory_client.DirectoryClient.list_directories_and_files">[docs]</a>    <span class="k">def</span> <span class="nf">list_directories_and_files</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name_starts_with</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="c1"># type: (Optional[str], Optional[str], Optional[int], **Any) -&gt; ItemPaged</span>
+<div class="viewcode-block" id="DirectoryClient.list_directories_and_files"><a class="viewcode-back" href="../../../../ref/azure.storage.file.html#azure.storage.file.directory_client.DirectoryClient.list_directories_and_files">[docs]</a>    <span class="nd">@distributed_trace</span>
+    <span class="k">def</span> <span class="nf">list_directories_and_files</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name_starts_with</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="c1"># type: (Optional[str], Optional[int], **Any) -&gt; ItemPaged</span>
         <span class="sd">&quot;&quot;&quot;Lists all the directories and files under the directory.</span>
 
 <span class="sd">        :param str name_starts_with:</span>
@@ -578,7 +576,8 @@
             <span class="n">command</span><span class="p">,</span> <span class="n">prefix</span><span class="o">=</span><span class="n">name_starts_with</span><span class="p">,</span> <span class="n">results_per_page</span><span class="o">=</span><span class="n">results_per_page</span><span class="p">,</span>
             <span class="n">page_iterator_class</span><span class="o">=</span><span class="n">DirectoryPropertiesPaged</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="DirectoryClient.list_handles"><a class="viewcode-back" href="../../../../ref/azure.storage.file.html#azure.storage.file.directory_client.DirectoryClient.list_handles">[docs]</a>    <span class="k">def</span> <span class="nf">list_handles</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">recursive</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<div class="viewcode-block" id="DirectoryClient.list_handles"><a class="viewcode-back" href="../../../../ref/azure.storage.file.html#azure.storage.file.directory_client.DirectoryClient.list_handles">[docs]</a>    <span class="nd">@distributed_trace</span>
+    <span class="k">def</span> <span class="nf">list_handles</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">recursive</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Lists opened handles on a directory or a file under the directory.</span>
 
 <span class="sd">        :param bool recursive:</span>
@@ -600,7 +599,8 @@
             <span class="n">command</span><span class="p">,</span> <span class="n">results_per_page</span><span class="o">=</span><span class="n">results_per_page</span><span class="p">,</span>
             <span class="n">page_iterator_class</span><span class="o">=</span><span class="n">HandlesPaged</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="DirectoryClient.close_handles"><a class="viewcode-back" href="../../../../ref/azure.storage.file.html#azure.storage.file.directory_client.DirectoryClient.close_handles">[docs]</a>    <span class="k">def</span> <span class="nf">close_handles</span><span class="p">(</span>
+<div class="viewcode-block" id="DirectoryClient.close_handles"><a class="viewcode-back" href="../../../../ref/azure.storage.file.html#azure.storage.file.directory_client.DirectoryClient.close_handles">[docs]</a>    <span class="nd">@distributed_trace</span>
+    <span class="k">def</span> <span class="nf">close_handles</span><span class="p">(</span>
             <span class="bp">self</span><span class="p">,</span> <span class="n">handle</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="c1"># type: Union[str, HandleItem]</span>
             <span class="n">recursive</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>  <span class="c1"># type: bool</span>
             <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="c1"># type: Optional[int]</span>
@@ -641,14 +641,15 @@
         <span class="k">except</span> <span class="n">StorageErrorException</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
             <span class="n">process_storage_error</span><span class="p">(</span><span class="n">error</span><span class="p">)</span>
 
-        <span class="n">polling_method</span> <span class="o">=</span> <span class="n">CloseHandles</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_config</span><span class="o">.</span><span class="n">data_settings</span><span class="o">.</span><span class="n">copy_polling_interval</span><span class="p">)</span>
+        <span class="n">polling_method</span> <span class="o">=</span> <span class="n">CloseHandles</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_config</span><span class="o">.</span><span class="n">copy_polling_interval</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">LROPoller</span><span class="p">(</span>
             <span class="n">command</span><span class="p">,</span>
             <span class="n">start_close</span><span class="p">,</span>
             <span class="kc">None</span><span class="p">,</span>
             <span class="n">polling_method</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="DirectoryClient.get_directory_properties"><a class="viewcode-back" href="../../../../ref/azure.storage.file.html#azure.storage.file.directory_client.DirectoryClient.get_directory_properties">[docs]</a>    <span class="k">def</span> <span class="nf">get_directory_properties</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<div class="viewcode-block" id="DirectoryClient.get_directory_properties"><a class="viewcode-back" href="../../../../ref/azure.storage.file.html#azure.storage.file.directory_client.DirectoryClient.get_directory_properties">[docs]</a>    <span class="nd">@distributed_trace</span>
+    <span class="k">def</span> <span class="nf">get_directory_properties</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="c1"># type: (Optional[int], Any) -&gt; DirectoryProperties</span>
         <span class="sd">&quot;&quot;&quot;Returns all user-defined metadata and system properties for the</span>
 <span class="sd">        specified directory. The data returned does not include the directory&#39;s</span>
@@ -668,7 +669,8 @@
             <span class="n">process_storage_error</span><span class="p">(</span><span class="n">error</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">response</span> <span class="c1"># type: ignore</span></div>
 
-<div class="viewcode-block" id="DirectoryClient.set_directory_metadata"><a class="viewcode-back" href="../../../../ref/azure.storage.file.html#azure.storage.file.directory_client.DirectoryClient.set_directory_metadata">[docs]</a>    <span class="k">def</span> <span class="nf">set_directory_metadata</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">metadata</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span> <span class="c1"># type: ignore</span>
+<div class="viewcode-block" id="DirectoryClient.set_directory_metadata"><a class="viewcode-back" href="../../../../ref/azure.storage.file.html#azure.storage.file.directory_client.DirectoryClient.set_directory_metadata">[docs]</a>    <span class="nd">@distributed_trace</span>
+    <span class="k">def</span> <span class="nf">set_directory_metadata</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">metadata</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span> <span class="c1"># type: ignore</span>
         <span class="c1"># type: (Dict[str, Any], Optional[int], Any) -&gt;  Dict[str, Any]</span>
         <span class="sd">&quot;&quot;&quot;Sets the metadata for the directory.</span>
 
@@ -695,7 +697,8 @@
         <span class="k">except</span> <span class="n">StorageErrorException</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
             <span class="n">process_storage_error</span><span class="p">(</span><span class="n">error</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="DirectoryClient.create_subdirectory"><a class="viewcode-back" href="../../../../ref/azure.storage.file.html#azure.storage.file.directory_client.DirectoryClient.create_subdirectory">[docs]</a>    <span class="k">def</span> <span class="nf">create_subdirectory</span><span class="p">(</span>
+<div class="viewcode-block" id="DirectoryClient.create_subdirectory"><a class="viewcode-back" href="../../../../ref/azure.storage.file.html#azure.storage.file.directory_client.DirectoryClient.create_subdirectory">[docs]</a>    <span class="nd">@distributed_trace</span>
+    <span class="k">def</span> <span class="nf">create_subdirectory</span><span class="p">(</span>
             <span class="bp">self</span><span class="p">,</span> <span class="n">directory_name</span><span class="p">,</span>  <span class="c1"># type: str</span>
             <span class="n">metadata</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="c1">#type: Optional[Dict[str, Any]]</span>
             <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="c1"># type: Optional[int]</span>
@@ -727,7 +730,8 @@
         <span class="n">subdir</span><span class="o">.</span><span class="n">create_directory</span><span class="p">(</span><span class="n">metadata</span><span class="o">=</span><span class="n">metadata</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="n">timeout</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">subdir</span> <span class="c1"># type: ignore</span></div>
 
-<div class="viewcode-block" id="DirectoryClient.delete_subdirectory"><a class="viewcode-back" href="../../../../ref/azure.storage.file.html#azure.storage.file.directory_client.DirectoryClient.delete_subdirectory">[docs]</a>    <span class="k">def</span> <span class="nf">delete_subdirectory</span><span class="p">(</span>
+<div class="viewcode-block" id="DirectoryClient.delete_subdirectory"><a class="viewcode-back" href="../../../../ref/azure.storage.file.html#azure.storage.file.directory_client.DirectoryClient.delete_subdirectory">[docs]</a>    <span class="nd">@distributed_trace</span>
+    <span class="k">def</span> <span class="nf">delete_subdirectory</span><span class="p">(</span>
             <span class="bp">self</span><span class="p">,</span> <span class="n">directory_name</span><span class="p">,</span>  <span class="c1"># type: str</span>
             <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="c1"># type: Optional[int]</span>
             <span class="o">**</span><span class="n">kwargs</span>
@@ -752,7 +756,8 @@
         <span class="n">subdir</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_subdirectory_client</span><span class="p">(</span><span class="n">directory_name</span><span class="p">)</span>
         <span class="n">subdir</span><span class="o">.</span><span class="n">delete_directory</span><span class="p">(</span><span class="n">timeout</span><span class="o">=</span><span class="n">timeout</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="DirectoryClient.upload_file"><a class="viewcode-back" href="../../../../ref/azure.storage.file.html#azure.storage.file.directory_client.DirectoryClient.upload_file">[docs]</a>    <span class="k">def</span> <span class="nf">upload_file</span><span class="p">(</span>
+<div class="viewcode-block" id="DirectoryClient.upload_file"><a class="viewcode-back" href="../../../../ref/azure.storage.file.html#azure.storage.file.directory_client.DirectoryClient.upload_file">[docs]</a>    <span class="nd">@distributed_trace</span>
+    <span class="k">def</span> <span class="nf">upload_file</span><span class="p">(</span>
             <span class="bp">self</span><span class="p">,</span> <span class="n">file_name</span><span class="p">,</span>  <span class="c1"># type: str</span>
             <span class="n">data</span><span class="p">,</span> <span class="c1"># type: Any</span>
             <span class="n">length</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="c1"># type: Optional[int]</span>
@@ -816,7 +821,8 @@
             <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">file_client</span> <span class="c1"># type: ignore</span></div>
 
-<div class="viewcode-block" id="DirectoryClient.delete_file"><a class="viewcode-back" href="../../../../ref/azure.storage.file.html#azure.storage.file.directory_client.DirectoryClient.delete_file">[docs]</a>    <span class="k">def</span> <span class="nf">delete_file</span><span class="p">(</span>
+<div class="viewcode-block" id="DirectoryClient.delete_file"><a class="viewcode-back" href="../../../../ref/azure.storage.file.html#azure.storage.file.directory_client.DirectoryClient.delete_file">[docs]</a>    <span class="nd">@distributed_trace</span>
+    <span class="k">def</span> <span class="nf">delete_file</span><span class="p">(</span>
             <span class="bp">self</span><span class="p">,</span> <span class="n">file_name</span><span class="p">,</span>  <span class="c1"># type: str</span>
             <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>  <span class="c1"># type: Optional[int]</span>
             <span class="o">**</span><span class="n">kwargs</span>  <span class="c1"># type: Optional[Any]</span>

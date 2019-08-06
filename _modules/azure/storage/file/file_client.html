@@ -297,28 +297,64 @@
 <span class="kn">import</span> <span class="nn">six</span>
 <span class="kn">from</span> <span class="nn">azure.core.polling</span> <span class="k">import</span> <span class="n">LROPoller</span>
 <span class="kn">from</span> <span class="nn">azure.core.paging</span> <span class="k">import</span> <span class="n">ItemPaged</span>
+<span class="kn">from</span> <span class="nn">azure.core.tracing.decorator</span> <span class="k">import</span> <span class="n">distributed_trace</span>
 
-<span class="kn">from</span> <span class="nn">.models</span> <span class="k">import</span> <span class="n">HandlesPaged</span>
 <span class="kn">from</span> <span class="nn">._generated</span> <span class="k">import</span> <span class="n">AzureFileStorage</span>
 <span class="kn">from</span> <span class="nn">._generated.version</span> <span class="k">import</span> <span class="n">VERSION</span>
 <span class="kn">from</span> <span class="nn">._generated.models</span> <span class="k">import</span> <span class="n">StorageErrorException</span><span class="p">,</span> <span class="n">FileHTTPHeaders</span>
-<span class="kn">from</span> <span class="nn">._shared.upload_chunking</span> <span class="k">import</span> <span class="n">IterStreamer</span>
+<span class="kn">from</span> <span class="nn">._shared.uploads</span> <span class="k">import</span> <span class="n">IterStreamer</span><span class="p">,</span> <span class="n">FileChunkUploader</span><span class="p">,</span> <span class="n">upload_data_chunks</span>
+<span class="kn">from</span> <span class="nn">._shared.downloads</span> <span class="k">import</span> <span class="n">StorageStreamDownloader</span>
 <span class="kn">from</span> <span class="nn">._shared.shared_access_signature</span> <span class="k">import</span> <span class="n">FileSharedAccessSignature</span>
-<span class="kn">from</span> <span class="nn">._shared.utils</span> <span class="k">import</span> <span class="p">(</span>
-    <span class="n">StorageAccountHostsMixin</span><span class="p">,</span>
-    <span class="n">parse_query</span><span class="p">,</span>
-    <span class="n">get_length</span><span class="p">,</span>
-    <span class="n">return_response_headers</span><span class="p">,</span>
-    <span class="n">add_metadata_headers</span><span class="p">,</span>
-    <span class="n">process_storage_error</span><span class="p">,</span>
-    <span class="n">parse_connection_str</span><span class="p">)</span>
-<span class="kn">from</span> <span class="nn">._share_utils</span> <span class="k">import</span> <span class="n">upload_file_helper</span><span class="p">,</span> <span class="n">deserialize_file_properties</span><span class="p">,</span> <span class="n">StorageStreamDownloader</span>
-<span class="kn">from</span> <span class="nn">.polling</span> <span class="k">import</span> <span class="n">CopyStatusPoller</span><span class="p">,</span> <span class="n">CloseHandles</span>
+<span class="kn">from</span> <span class="nn">._shared.base_client</span> <span class="k">import</span> <span class="n">StorageAccountHostsMixin</span><span class="p">,</span> <span class="n">parse_connection_str</span><span class="p">,</span> <span class="n">parse_query</span>
+<span class="kn">from</span> <span class="nn">._shared.request_handlers</span> <span class="k">import</span> <span class="n">add_metadata_headers</span><span class="p">,</span> <span class="n">get_length</span>
+<span class="kn">from</span> <span class="nn">._shared.response_handlers</span> <span class="k">import</span> <span class="n">return_response_headers</span><span class="p">,</span> <span class="n">process_storage_error</span>
+<span class="kn">from</span> <span class="nn">._deserialize</span> <span class="k">import</span> <span class="n">deserialize_file_properties</span><span class="p">,</span> <span class="n">deserialize_file_stream</span>
+<span class="kn">from</span> <span class="nn">._polling</span> <span class="k">import</span> <span class="n">CloseHandles</span>
+<span class="kn">from</span> <span class="nn">.models</span> <span class="k">import</span> <span class="n">HandlesPaged</span>
 
 <span class="k">if</span> <span class="n">TYPE_CHECKING</span><span class="p">:</span>
     <span class="kn">from</span> <span class="nn">datetime</span> <span class="k">import</span> <span class="n">datetime</span>
     <span class="kn">from</span> <span class="nn">.models</span> <span class="k">import</span> <span class="n">ShareProperties</span><span class="p">,</span> <span class="n">FilePermissions</span><span class="p">,</span> <span class="n">ContentSettings</span><span class="p">,</span> <span class="n">FileProperties</span>
     <span class="kn">from</span> <span class="nn">._generated.models</span> <span class="k">import</span> <span class="n">HandleItem</span>
+
+
+<span class="k">def</span> <span class="nf">_upload_file_helper</span><span class="p">(</span>
+        <span class="n">client</span><span class="p">,</span>
+        <span class="n">stream</span><span class="p">,</span>
+        <span class="n">size</span><span class="p">,</span>
+        <span class="n">metadata</span><span class="p">,</span>
+        <span class="n">content_settings</span><span class="p">,</span>
+        <span class="n">validate_content</span><span class="p">,</span>
+        <span class="n">timeout</span><span class="p">,</span>
+        <span class="n">max_connections</span><span class="p">,</span>
+        <span class="n">file_settings</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">size</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">size</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;A content size must be specified for a File.&quot;</span><span class="p">)</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">create_file</span><span class="p">(</span>
+            <span class="n">size</span><span class="p">,</span>
+            <span class="n">content_settings</span><span class="o">=</span><span class="n">content_settings</span><span class="p">,</span>
+            <span class="n">metadata</span><span class="o">=</span><span class="n">metadata</span><span class="p">,</span>
+            <span class="n">timeout</span><span class="o">=</span><span class="n">timeout</span><span class="p">,</span>
+            <span class="o">**</span><span class="n">kwargs</span>
+        <span class="p">)</span>
+        <span class="k">if</span> <span class="n">size</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">response</span>
+
+        <span class="k">return</span> <span class="n">upload_data_chunks</span><span class="p">(</span>
+            <span class="n">service</span><span class="o">=</span><span class="n">client</span><span class="p">,</span>
+            <span class="n">uploader_class</span><span class="o">=</span><span class="n">FileChunkUploader</span><span class="p">,</span>
+            <span class="n">total_size</span><span class="o">=</span><span class="n">size</span><span class="p">,</span>
+            <span class="n">chunk_size</span><span class="o">=</span><span class="n">file_settings</span><span class="o">.</span><span class="n">max_range_size</span><span class="p">,</span>
+            <span class="n">stream</span><span class="o">=</span><span class="n">stream</span><span class="p">,</span>
+            <span class="n">max_connections</span><span class="o">=</span><span class="n">max_connections</span><span class="p">,</span>
+            <span class="n">validate_content</span><span class="o">=</span><span class="n">validate_content</span><span class="p">,</span>
+            <span class="n">timeout</span><span class="o">=</span><span class="n">timeout</span><span class="p">,</span>
+            <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    <span class="k">except</span> <span class="n">StorageErrorException</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
+        <span class="n">process_storage_error</span><span class="p">(</span><span class="n">error</span><span class="p">)</span>
+
 
 <div class="viewcode-block" id="FileClient"><a class="viewcode-back" href="../../../../ref/azure.storage.file.html#azure.storage.file.file_client.FileClient">[docs]</a><span class="k">class</span> <span class="nc">FileClient</span><span class="p">(</span><span class="n">StorageAccountHostsMixin</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;A client to interact with a specific file, although that file may not yet exist.</span>
@@ -557,7 +593,8 @@
             <span class="n">content_language</span><span class="o">=</span><span class="n">content_language</span><span class="p">,</span>
             <span class="n">content_type</span><span class="o">=</span><span class="n">content_type</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="FileClient.create_file"><a class="viewcode-back" href="../../../../ref/azure.storage.file.html#azure.storage.file.file_client.FileClient.create_file">[docs]</a>    <span class="k">def</span> <span class="nf">create_file</span><span class="p">(</span> <span class="c1"># type: ignore</span>
+<div class="viewcode-block" id="FileClient.create_file"><a class="viewcode-back" href="../../../../ref/azure.storage.file.html#azure.storage.file.file_client.FileClient.create_file">[docs]</a>    <span class="nd">@distributed_trace</span>
+    <span class="k">def</span> <span class="nf">create_file</span><span class="p">(</span> <span class="c1"># type: ignore</span>
             <span class="bp">self</span><span class="p">,</span> <span class="n">size</span><span class="p">,</span> <span class="c1"># type: int</span>
             <span class="n">content_settings</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="c1"># type: Optional[ContentSettings]</span>
             <span class="n">metadata</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>  <span class="c1"># type: Optional[Dict[str, str]]</span>
@@ -616,7 +653,8 @@
         <span class="k">except</span> <span class="n">StorageErrorException</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
             <span class="n">process_storage_error</span><span class="p">(</span><span class="n">error</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="FileClient.upload_file"><a class="viewcode-back" href="../../../../ref/azure.storage.file.html#azure.storage.file.file_client.FileClient.upload_file">[docs]</a>    <span class="k">def</span> <span class="nf">upload_file</span><span class="p">(</span>
+<div class="viewcode-block" id="FileClient.upload_file"><a class="viewcode-back" href="../../../../ref/azure.storage.file.html#azure.storage.file.file_client.FileClient.upload_file">[docs]</a>    <span class="nd">@distributed_trace</span>
+    <span class="k">def</span> <span class="nf">upload_file</span><span class="p">(</span>
             <span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="c1"># type: Any</span>
             <span class="n">length</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="c1"># type: Optional[int]</span>
             <span class="n">metadata</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>  <span class="c1"># type: Optional[Dict[str, str]]</span>
@@ -681,7 +719,7 @@
             <span class="n">stream</span> <span class="o">=</span> <span class="n">IterStreamer</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="n">encoding</span><span class="p">)</span> <span class="c1"># type: ignore</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Unsupported data type: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">data</span><span class="p">)))</span>
-        <span class="k">return</span> <span class="n">upload_file_helper</span><span class="p">(</span> <span class="c1"># type: ignore</span>
+        <span class="k">return</span> <span class="n">_upload_file_helper</span><span class="p">(</span> <span class="c1"># type: ignore</span>
             <span class="bp">self</span><span class="p">,</span>
             <span class="n">stream</span><span class="p">,</span>
             <span class="n">length</span><span class="p">,</span>
@@ -690,18 +728,22 @@
             <span class="n">validate_content</span><span class="p">,</span>
             <span class="n">timeout</span><span class="p">,</span>
             <span class="n">max_connections</span><span class="p">,</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_config</span><span class="o">.</span><span class="n">data_settings</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_config</span><span class="p">,</span>
             <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="FileClient.copy_file_from_url"><a class="viewcode-back" href="../../../../ref/azure.storage.file.html#azure.storage.file.file_client.FileClient.copy_file_from_url">[docs]</a>    <span class="k">def</span> <span class="nf">copy_file_from_url</span><span class="p">(</span>
+<div class="viewcode-block" id="FileClient.start_copy_from_url"><a class="viewcode-back" href="../../../../ref/azure.storage.file.html#azure.storage.file.file_client.FileClient.start_copy_from_url">[docs]</a>    <span class="nd">@distributed_trace</span>
+    <span class="k">def</span> <span class="nf">start_copy_from_url</span><span class="p">(</span>
             <span class="bp">self</span><span class="p">,</span> <span class="n">source_url</span><span class="p">,</span> <span class="c1"># type: str</span>
             <span class="n">metadata</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>  <span class="c1"># type: Optional[Dict[str, str]]</span>
             <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="c1"># type: Optional[int]</span>
             <span class="o">**</span><span class="n">kwargs</span> <span class="c1"># type: Any</span>
         <span class="p">):</span>
         <span class="c1"># type: (...) -&gt; Any</span>
-        <span class="sd">&quot;&quot;&quot;Copies the file from the provided URL to the file referenced by</span>
-<span class="sd">        the client.</span>
+        <span class="sd">&quot;&quot;&quot;Initiates the copying of data from a source URL into the file</span>
+<span class="sd">        referenced by the client.</span>
+
+<span class="sd">        The status of this copy operation can be found using the `get_properties`</span>
+<span class="sd">        method.</span>
 
 <span class="sd">        :param str source_url:</span>
 <span class="sd">            Specifies the URL of the source file.</span>
@@ -710,8 +752,7 @@
 <span class="sd">        :type metadata: dict(str, str)</span>
 <span class="sd">        :param int timeout:</span>
 <span class="sd">            The timeout parameter is expressed in seconds.</span>
-<span class="sd">        :returns: Polling object in order to wait on or abort the operation</span>
-<span class="sd">        :rtype: ~azure.storage.file.polling.CopyStatusPoller</span>
+<span class="sd">        :rtype: dict(str, Any)</span>
 
 <span class="sd">        Example:</span>
 <span class="sd">            .. literalinclude:: ../tests/test_file_samples_file.py</span>
@@ -725,23 +766,43 @@
         <span class="n">headers</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">add_metadata_headers</span><span class="p">(</span><span class="n">metadata</span><span class="p">))</span>
 
         <span class="k">try</span><span class="p">:</span>
-            <span class="n">start_copy</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_client</span><span class="o">.</span><span class="n">file</span><span class="o">.</span><span class="n">start_copy</span><span class="p">(</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_client</span><span class="o">.</span><span class="n">file</span><span class="o">.</span><span class="n">start_copy</span><span class="p">(</span>
                 <span class="n">source_url</span><span class="p">,</span>
-                <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                <span class="n">timeout</span><span class="o">=</span><span class="n">timeout</span><span class="p">,</span>
                 <span class="n">metadata</span><span class="o">=</span><span class="n">metadata</span><span class="p">,</span>
                 <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span>
                 <span class="bp">cls</span><span class="o">=</span><span class="n">return_response_headers</span><span class="p">,</span>
                 <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="k">except</span> <span class="n">StorageErrorException</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
-            <span class="n">process_storage_error</span><span class="p">(</span><span class="n">error</span><span class="p">)</span>
+            <span class="n">process_storage_error</span><span class="p">(</span><span class="n">error</span><span class="p">)</span></div>
 
-        <span class="n">poller</span> <span class="o">=</span> <span class="n">CopyStatusPoller</span><span class="p">(</span>
-            <span class="bp">self</span><span class="p">,</span> <span class="n">start_copy</span><span class="p">,</span>
-            <span class="n">configuration</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_config</span><span class="p">,</span>
-            <span class="n">timeout</span><span class="o">=</span><span class="n">timeout</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">poller</span></div>
+<div class="viewcode-block" id="FileClient.abort_copy"><a class="viewcode-back" href="../../../../ref/azure.storage.file.html#azure.storage.file.file_client.FileClient.abort_copy">[docs]</a>    <span class="k">def</span> <span class="nf">abort_copy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">copy_id</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="c1"># type: (Union[str, FileProperties], Optional[int], Any) -&gt; Dict[str, Any]</span>
+        <span class="sd">&quot;&quot;&quot;Abort an ongoing copy operation.</span>
 
-<div class="viewcode-block" id="FileClient.download_file"><a class="viewcode-back" href="../../../../ref/azure.storage.file.html#azure.storage.file.file_client.FileClient.download_file">[docs]</a>    <span class="k">def</span> <span class="nf">download_file</span><span class="p">(</span>
+<span class="sd">        This will leave a destination file with zero length and full metadata.</span>
+<span class="sd">        This will raise an error if the copy operation has already ended.</span>
+
+<span class="sd">        :param copy_id:</span>
+<span class="sd">            The copy operation to abort. This can be either an ID, or an</span>
+<span class="sd">            instance of FileProperties.</span>
+<span class="sd">        :type copy_id: str or ~azure.storage.file.models.FileProperties</span>
+<span class="sd">        :rtype: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">copy_id</span> <span class="o">=</span> <span class="n">copy_id</span><span class="o">.</span><span class="n">copy</span><span class="o">.</span><span class="n">id</span>
+        <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">copy_id</span> <span class="o">=</span> <span class="n">copy_id</span><span class="p">[</span><span class="s1">&#39;copy_id&#39;</span><span class="p">]</span>
+            <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
+                <span class="k">pass</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_client</span><span class="o">.</span><span class="n">file</span><span class="o">.</span><span class="n">abort_copy</span><span class="p">(</span><span class="n">copy_id</span><span class="o">=</span><span class="n">copy_id</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="n">timeout</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="k">except</span> <span class="n">StorageErrorException</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
+            <span class="n">process_storage_error</span><span class="p">(</span><span class="n">error</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="FileClient.download_file"><a class="viewcode-back" href="../../../../ref/azure.storage.file.html#azure.storage.file.file_client.FileClient.download_file">[docs]</a>    <span class="nd">@distributed_trace</span>
+    <span class="k">def</span> <span class="nf">download_file</span><span class="p">(</span>
             <span class="bp">self</span><span class="p">,</span> <span class="n">offset</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>  <span class="c1"># type: Optional[int]</span>
             <span class="n">length</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>  <span class="c1"># type: Optional[int]</span>
             <span class="n">validate_content</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>  <span class="c1"># type: bool</span>
@@ -784,18 +845,23 @@
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Offset value must not be None is length is set.&quot;</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="n">StorageStreamDownloader</span><span class="p">(</span>
-            <span class="n">share</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">share_name</span><span class="p">,</span>
-            <span class="n">file_name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">file_name</span><span class="p">,</span>
-            <span class="n">file_path</span><span class="o">=</span><span class="s1">&#39;/&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">file_path</span><span class="p">),</span>
             <span class="n">service</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_client</span><span class="o">.</span><span class="n">file</span><span class="p">,</span>
-            <span class="n">config</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_config</span><span class="o">.</span><span class="n">data_settings</span><span class="p">,</span>
+            <span class="n">config</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_config</span><span class="p">,</span>
             <span class="n">offset</span><span class="o">=</span><span class="n">offset</span><span class="p">,</span>
             <span class="n">length</span><span class="o">=</span><span class="n">length</span><span class="p">,</span>
             <span class="n">validate_content</span><span class="o">=</span><span class="n">validate_content</span><span class="p">,</span>
+            <span class="n">encryption_options</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+            <span class="n">extra_properties</span><span class="o">=</span><span class="p">{</span>
+                <span class="s1">&#39;share&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">share_name</span><span class="p">,</span>
+                <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">file_name</span><span class="p">,</span>
+                <span class="s1">&#39;path&#39;</span><span class="p">:</span> <span class="s1">&#39;/&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">file_path</span><span class="p">),</span>
+            <span class="p">},</span>
+            <span class="bp">cls</span><span class="o">=</span><span class="n">deserialize_file_stream</span><span class="p">,</span>
             <span class="n">timeout</span><span class="o">=</span><span class="n">timeout</span><span class="p">,</span>
             <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="FileClient.delete_file"><a class="viewcode-back" href="../../../../ref/azure.storage.file.html#azure.storage.file.file_client.FileClient.delete_file">[docs]</a>    <span class="k">def</span> <span class="nf">delete_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<div class="viewcode-block" id="FileClient.delete_file"><a class="viewcode-back" href="../../../../ref/azure.storage.file.html#azure.storage.file.file_client.FileClient.delete_file">[docs]</a>    <span class="nd">@distributed_trace</span>
+    <span class="k">def</span> <span class="nf">delete_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="c1"># type: (Optional[int], Optional[Any]) -&gt; None</span>
         <span class="sd">&quot;&quot;&quot;Marks the specified file for deletion. The file is</span>
 <span class="sd">        later deleted during garbage collection.</span>
@@ -817,7 +883,8 @@
         <span class="k">except</span> <span class="n">StorageErrorException</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
             <span class="n">process_storage_error</span><span class="p">(</span><span class="n">error</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="FileClient.get_file_properties"><a class="viewcode-back" href="../../../../ref/azure.storage.file.html#azure.storage.file.file_client.FileClient.get_file_properties">[docs]</a>    <span class="k">def</span> <span class="nf">get_file_properties</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<div class="viewcode-block" id="FileClient.get_file_properties"><a class="viewcode-back" href="../../../../ref/azure.storage.file.html#azure.storage.file.file_client.FileClient.get_file_properties">[docs]</a>    <span class="nd">@distributed_trace</span>
+    <span class="k">def</span> <span class="nf">get_file_properties</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="c1"># type: (Optional[int], Any) -&gt; FileProperties</span>
         <span class="sd">&quot;&quot;&quot;Returns all user-defined metadata, standard HTTP properties, and</span>
 <span class="sd">        system properties for the file.</span>
@@ -836,10 +903,13 @@
         <span class="k">except</span> <span class="n">StorageErrorException</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
             <span class="n">process_storage_error</span><span class="p">(</span><span class="n">error</span><span class="p">)</span>
         <span class="n">file_props</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">file_name</span>
-        <span class="n">file_props</span><span class="o">.</span><span class="n">share_name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">share_name</span>
+        <span class="n">file_props</span><span class="o">.</span><span class="n">share</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">share_name</span>
+        <span class="n">file_props</span><span class="o">.</span><span class="n">snapshot</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">snapshot</span>
+        <span class="n">file_props</span><span class="o">.</span><span class="n">path</span> <span class="o">=</span> <span class="s1">&#39;/&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">file_path</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">file_props</span> <span class="c1"># type: ignore</span></div>
 
-<div class="viewcode-block" id="FileClient.set_http_headers"><a class="viewcode-back" href="../../../../ref/azure.storage.file.html#azure.storage.file.file_client.FileClient.set_http_headers">[docs]</a>    <span class="k">def</span> <span class="nf">set_http_headers</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">content_settings</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span> <span class="c1"># type: ignore</span>
+<div class="viewcode-block" id="FileClient.set_http_headers"><a class="viewcode-back" href="../../../../ref/azure.storage.file.html#azure.storage.file.file_client.FileClient.set_http_headers">[docs]</a>    <span class="nd">@distributed_trace</span>
+    <span class="k">def</span> <span class="nf">set_http_headers</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">content_settings</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span> <span class="c1"># type: ignore</span>
         <span class="c1">#type: (ContentSettings, Optional[int], Optional[Any]) -&gt; Dict[str, Any]</span>
         <span class="sd">&quot;&quot;&quot;Sets HTTP headers on the file.</span>
 
@@ -869,7 +939,8 @@
         <span class="k">except</span> <span class="n">StorageErrorException</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
             <span class="n">process_storage_error</span><span class="p">(</span><span class="n">error</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="FileClient.set_file_metadata"><a class="viewcode-back" href="../../../../ref/azure.storage.file.html#azure.storage.file.file_client.FileClient.set_file_metadata">[docs]</a>    <span class="k">def</span> <span class="nf">set_file_metadata</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">metadata</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span> <span class="c1"># type: ignore</span>
+<div class="viewcode-block" id="FileClient.set_file_metadata"><a class="viewcode-back" href="../../../../ref/azure.storage.file.html#azure.storage.file.file_client.FileClient.set_file_metadata">[docs]</a>    <span class="nd">@distributed_trace</span>
+    <span class="k">def</span> <span class="nf">set_file_metadata</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">metadata</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span> <span class="c1"># type: ignore</span>
         <span class="c1">#type: (Optional[Dict[str, Any]], Optional[int], Optional[Any]) -&gt; Dict[str, Any]</span>
         <span class="sd">&quot;&quot;&quot;Sets user-defined metadata for the specified file as one or more</span>
 <span class="sd">        name-value pairs.</span>
@@ -898,7 +969,8 @@
         <span class="k">except</span> <span class="n">StorageErrorException</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
             <span class="n">process_storage_error</span><span class="p">(</span><span class="n">error</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="FileClient.upload_range"><a class="viewcode-back" href="../../../../ref/azure.storage.file.html#azure.storage.file.file_client.FileClient.upload_range">[docs]</a>    <span class="k">def</span> <span class="nf">upload_range</span><span class="p">(</span> <span class="c1"># type: ignore</span>
+<div class="viewcode-block" id="FileClient.upload_range"><a class="viewcode-back" href="../../../../ref/azure.storage.file.html#azure.storage.file.file_client.FileClient.upload_range">[docs]</a>    <span class="nd">@distributed_trace</span>
+    <span class="k">def</span> <span class="nf">upload_range</span><span class="p">(</span> <span class="c1"># type: ignore</span>
             <span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span>  <span class="c1"># type: bytes</span>
             <span class="n">start_range</span><span class="p">,</span> <span class="c1"># type: int</span>
             <span class="n">end_range</span><span class="p">,</span> <span class="c1"># type: int</span>
@@ -955,7 +1027,8 @@
         <span class="k">except</span> <span class="n">StorageErrorException</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
             <span class="n">process_storage_error</span><span class="p">(</span><span class="n">error</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="FileClient.get_ranges"><a class="viewcode-back" href="../../../../ref/azure.storage.file.html#azure.storage.file.file_client.FileClient.get_ranges">[docs]</a>    <span class="k">def</span> <span class="nf">get_ranges</span><span class="p">(</span> <span class="c1"># type: ignore</span>
+<div class="viewcode-block" id="FileClient.get_ranges"><a class="viewcode-back" href="../../../../ref/azure.storage.file.html#azure.storage.file.file_client.FileClient.get_ranges">[docs]</a>    <span class="nd">@distributed_trace</span>
+    <span class="k">def</span> <span class="nf">get_ranges</span><span class="p">(</span> <span class="c1"># type: ignore</span>
             <span class="bp">self</span><span class="p">,</span> <span class="n">start_range</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="c1"># type: Optional[int]</span>
             <span class="n">end_range</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="c1"># type: Optional[int]</span>
             <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="c1"># type: Optional[int]</span>
@@ -996,7 +1069,8 @@
             <span class="n">process_storage_error</span><span class="p">(</span><span class="n">error</span><span class="p">)</span>
         <span class="k">return</span> <span class="p">[{</span><span class="s1">&#39;start&#39;</span><span class="p">:</span> <span class="n">b</span><span class="o">.</span><span class="n">start</span><span class="p">,</span> <span class="s1">&#39;end&#39;</span><span class="p">:</span> <span class="n">b</span><span class="o">.</span><span class="n">end</span><span class="p">}</span> <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">ranges</span><span class="p">]</span></div>
 
-<div class="viewcode-block" id="FileClient.clear_range"><a class="viewcode-back" href="../../../../ref/azure.storage.file.html#azure.storage.file.file_client.FileClient.clear_range">[docs]</a>    <span class="k">def</span> <span class="nf">clear_range</span><span class="p">(</span> <span class="c1"># type: ignore</span>
+<div class="viewcode-block" id="FileClient.clear_range"><a class="viewcode-back" href="../../../../ref/azure.storage.file.html#azure.storage.file.file_client.FileClient.clear_range">[docs]</a>    <span class="nd">@distributed_trace</span>
+    <span class="k">def</span> <span class="nf">clear_range</span><span class="p">(</span> <span class="c1"># type: ignore</span>
             <span class="bp">self</span><span class="p">,</span> <span class="n">start_range</span><span class="p">,</span>  <span class="c1"># type: int</span>
             <span class="n">end_range</span><span class="p">,</span>  <span class="c1"># type: int</span>
             <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>  <span class="c1"># type: Optional[int]</span>
@@ -1040,7 +1114,8 @@
         <span class="k">except</span> <span class="n">StorageErrorException</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
             <span class="n">process_storage_error</span><span class="p">(</span><span class="n">error</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="FileClient.resize_file"><a class="viewcode-back" href="../../../../ref/azure.storage.file.html#azure.storage.file.file_client.FileClient.resize_file">[docs]</a>    <span class="k">def</span> <span class="nf">resize_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">size</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span> <span class="c1"># type: ignore</span>
+<div class="viewcode-block" id="FileClient.resize_file"><a class="viewcode-back" href="../../../../ref/azure.storage.file.html#azure.storage.file.file_client.FileClient.resize_file">[docs]</a>    <span class="nd">@distributed_trace</span>
+    <span class="k">def</span> <span class="nf">resize_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">size</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span> <span class="c1"># type: ignore</span>
         <span class="c1"># type: (int, Optional[int], Optional[Any]) -&gt; Dict[str, Any]</span>
         <span class="sd">&quot;&quot;&quot;Resizes a file to the specified size.</span>
 
@@ -1060,7 +1135,8 @@
         <span class="k">except</span> <span class="n">StorageErrorException</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
             <span class="n">process_storage_error</span><span class="p">(</span><span class="n">error</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="FileClient.list_handles"><a class="viewcode-back" href="../../../../ref/azure.storage.file.html#azure.storage.file.file_client.FileClient.list_handles">[docs]</a>    <span class="k">def</span> <span class="nf">list_handles</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<div class="viewcode-block" id="FileClient.list_handles"><a class="viewcode-back" href="../../../../ref/azure.storage.file.html#azure.storage.file.file_client.FileClient.list_handles">[docs]</a>    <span class="nd">@distributed_trace</span>
+    <span class="k">def</span> <span class="nf">list_handles</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="c1"># type: (int, Any) -&gt; ItemPaged[Handle]</span>
         <span class="sd">&quot;&quot;&quot;Lists handles for file.</span>
 
@@ -1079,7 +1155,8 @@
             <span class="n">command</span><span class="p">,</span> <span class="n">results_per_page</span><span class="o">=</span><span class="n">results_per_page</span><span class="p">,</span>
             <span class="n">page_iterator_class</span><span class="o">=</span><span class="n">HandlesPaged</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="FileClient.close_handles"><a class="viewcode-back" href="../../../../ref/azure.storage.file.html#azure.storage.file.file_client.FileClient.close_handles">[docs]</a>    <span class="k">def</span> <span class="nf">close_handles</span><span class="p">(</span>
+<div class="viewcode-block" id="FileClient.close_handles"><a class="viewcode-back" href="../../../../ref/azure.storage.file.html#azure.storage.file.file_client.FileClient.close_handles">[docs]</a>    <span class="nd">@distributed_trace</span>
+    <span class="k">def</span> <span class="nf">close_handles</span><span class="p">(</span>
             <span class="bp">self</span><span class="p">,</span> <span class="n">handle</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="c1"># type: Union[str, HandleItem]</span>
             <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="c1"># type: Optional[int]</span>
             <span class="o">**</span><span class="n">kwargs</span> <span class="c1"># type: Any</span>
@@ -1115,7 +1192,7 @@
         <span class="k">except</span> <span class="n">StorageErrorException</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
             <span class="n">process_storage_error</span><span class="p">(</span><span class="n">error</span><span class="p">)</span>
 
-        <span class="n">polling_method</span> <span class="o">=</span> <span class="n">CloseHandles</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_config</span><span class="o">.</span><span class="n">data_settings</span><span class="o">.</span><span class="n">copy_polling_interval</span><span class="p">)</span>
+        <span class="n">polling_method</span> <span class="o">=</span> <span class="n">CloseHandles</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_config</span><span class="o">.</span><span class="n">copy_polling_interval</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">LROPoller</span><span class="p">(</span>
             <span class="n">command</span><span class="p">,</span>
             <span class="n">start_close</span><span class="p">,</span>

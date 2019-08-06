@@ -293,20 +293,18 @@
     <span class="kn">from</span> <span class="nn">urlparse</span> <span class="k">import</span> <span class="n">urlparse</span> <span class="c1"># type: ignore</span>
 
 <span class="kn">from</span> <span class="nn">azure.core.paging</span> <span class="k">import</span> <span class="n">ItemPaged</span>
+<span class="kn">from</span> <span class="nn">azure.core.tracing.decorator</span> <span class="k">import</span> <span class="n">distributed_trace</span>
 
-<span class="kn">from</span> <span class="nn">.share_client</span> <span class="k">import</span> <span class="n">ShareClient</span>
 <span class="kn">from</span> <span class="nn">._shared.shared_access_signature</span> <span class="k">import</span> <span class="n">SharedAccessSignature</span>
 <span class="kn">from</span> <span class="nn">._shared.models</span> <span class="k">import</span> <span class="n">Services</span>
-<span class="kn">from</span> <span class="nn">._shared.utils</span> <span class="k">import</span> <span class="p">(</span>
-    <span class="n">StorageAccountHostsMixin</span><span class="p">,</span>
-    <span class="n">parse_connection_str</span><span class="p">,</span>
-    <span class="n">process_storage_error</span><span class="p">,</span>
-    <span class="n">parse_query</span><span class="p">)</span>
-
-<span class="kn">from</span> <span class="nn">.models</span> <span class="k">import</span> <span class="n">SharePropertiesPaged</span>
+<span class="kn">from</span> <span class="nn">._shared.base_client</span> <span class="k">import</span> <span class="n">StorageAccountHostsMixin</span><span class="p">,</span> <span class="n">parse_connection_str</span><span class="p">,</span> <span class="n">parse_query</span>
+<span class="kn">from</span> <span class="nn">._shared.response_handlers</span> <span class="k">import</span> <span class="n">process_storage_error</span>
 <span class="kn">from</span> <span class="nn">._generated</span> <span class="k">import</span> <span class="n">AzureFileStorage</span>
 <span class="kn">from</span> <span class="nn">._generated.models</span> <span class="k">import</span> <span class="n">StorageErrorException</span><span class="p">,</span> <span class="n">StorageServiceProperties</span>
 <span class="kn">from</span> <span class="nn">._generated.version</span> <span class="k">import</span> <span class="n">VERSION</span>
+<span class="kn">from</span> <span class="nn">.share_client</span> <span class="k">import</span> <span class="n">ShareClient</span>
+<span class="kn">from</span> <span class="nn">.models</span> <span class="k">import</span> <span class="n">SharePropertiesPaged</span>
+
 <span class="k">if</span> <span class="n">TYPE_CHECKING</span><span class="p">:</span>
     <span class="kn">from</span> <span class="nn">datetime</span> <span class="k">import</span> <span class="n">datetime</span>
     <span class="kn">from</span> <span class="nn">._shared.models</span> <span class="k">import</span> <span class="n">ResourceTypes</span><span class="p">,</span> <span class="n">AccountPermissions</span>
@@ -477,7 +475,8 @@
         <span class="k">return</span> <span class="n">sas</span><span class="o">.</span><span class="n">generate_account</span><span class="p">(</span>
             <span class="n">Services</span><span class="o">.</span><span class="n">FILE</span><span class="p">,</span> <span class="n">resource_types</span><span class="p">,</span> <span class="n">permission</span><span class="p">,</span> <span class="n">expiry</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="n">start</span><span class="p">,</span> <span class="n">ip</span><span class="o">=</span><span class="n">ip</span><span class="p">,</span> <span class="n">protocol</span><span class="o">=</span><span class="n">protocol</span><span class="p">)</span> <span class="c1"># type: ignore</span></div>
 
-<div class="viewcode-block" id="FileServiceClient.get_service_properties"><a class="viewcode-back" href="../../../../ref/azure.storage.file.html#azure.storage.file.file_service_client.FileServiceClient.get_service_properties">[docs]</a>    <span class="k">def</span> <span class="nf">get_service_properties</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<div class="viewcode-block" id="FileServiceClient.get_service_properties"><a class="viewcode-back" href="../../../../ref/azure.storage.file.html#azure.storage.file.file_service_client.FileServiceClient.get_service_properties">[docs]</a>    <span class="nd">@distributed_trace</span>
+    <span class="k">def</span> <span class="nf">get_service_properties</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="c1"># type(Optional[int]) -&gt; Dict[str, Any]</span>
         <span class="sd">&quot;&quot;&quot;Gets the properties of a storage account&#39;s File service, including</span>
 <span class="sd">        Azure Storage Analytics.</span>
@@ -499,7 +498,8 @@
         <span class="k">except</span> <span class="n">StorageErrorException</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
             <span class="n">process_storage_error</span><span class="p">(</span><span class="n">error</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="FileServiceClient.set_service_properties"><a class="viewcode-back" href="../../../../ref/azure.storage.file.html#azure.storage.file.file_service_client.FileServiceClient.set_service_properties">[docs]</a>    <span class="k">def</span> <span class="nf">set_service_properties</span><span class="p">(</span>
+<div class="viewcode-block" id="FileServiceClient.set_service_properties"><a class="viewcode-back" href="../../../../ref/azure.storage.file.html#azure.storage.file.file_service_client.FileServiceClient.set_service_properties">[docs]</a>    <span class="nd">@distributed_trace</span>
+    <span class="k">def</span> <span class="nf">set_service_properties</span><span class="p">(</span>
             <span class="bp">self</span><span class="p">,</span> <span class="n">hour_metrics</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>  <span class="c1"># type: Optional[Metrics]</span>
             <span class="n">minute_metrics</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>  <span class="c1"># type: Optional[Metrics]</span>
             <span class="n">cors</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>  <span class="c1"># type: Optional[List[CorsRule]]</span>
@@ -546,7 +546,8 @@
         <span class="k">except</span> <span class="n">StorageErrorException</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
             <span class="n">process_storage_error</span><span class="p">(</span><span class="n">error</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="FileServiceClient.list_shares"><a class="viewcode-back" href="../../../../ref/azure.storage.file.html#azure.storage.file.file_service_client.FileServiceClient.list_shares">[docs]</a>    <span class="k">def</span> <span class="nf">list_shares</span><span class="p">(</span>
+<div class="viewcode-block" id="FileServiceClient.list_shares"><a class="viewcode-back" href="../../../../ref/azure.storage.file.html#azure.storage.file.file_service_client.FileServiceClient.list_shares">[docs]</a>    <span class="nd">@distributed_trace</span>
+    <span class="k">def</span> <span class="nf">list_shares</span><span class="p">(</span>
             <span class="bp">self</span><span class="p">,</span> <span class="n">name_starts_with</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>  <span class="c1"># type: Optional[str]</span>
             <span class="n">include_metadata</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>  <span class="c1"># type: Optional[bool]</span>
             <span class="n">include_snapshots</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="c1"># type: Optional[bool]</span>
@@ -593,7 +594,8 @@
             <span class="n">command</span><span class="p">,</span> <span class="n">prefix</span><span class="o">=</span><span class="n">name_starts_with</span><span class="p">,</span> <span class="n">results_per_page</span><span class="o">=</span><span class="n">results_per_page</span><span class="p">,</span>
             <span class="n">page_iterator_class</span><span class="o">=</span><span class="n">SharePropertiesPaged</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="FileServiceClient.create_share"><a class="viewcode-back" href="../../../../ref/azure.storage.file.html#azure.storage.file.file_service_client.FileServiceClient.create_share">[docs]</a>    <span class="k">def</span> <span class="nf">create_share</span><span class="p">(</span>
+<div class="viewcode-block" id="FileServiceClient.create_share"><a class="viewcode-back" href="../../../../ref/azure.storage.file.html#azure.storage.file.file_service_client.FileServiceClient.create_share">[docs]</a>    <span class="nd">@distributed_trace</span>
+    <span class="k">def</span> <span class="nf">create_share</span><span class="p">(</span>
             <span class="bp">self</span><span class="p">,</span> <span class="n">share_name</span><span class="p">,</span>  <span class="c1"># type: str</span>
             <span class="n">metadata</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>  <span class="c1"># type: Optional[Dict[str, str]]</span>
             <span class="n">quota</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>  <span class="c1"># type: Optional[int]</span>
@@ -628,7 +630,8 @@
         <span class="n">share</span><span class="o">.</span><span class="n">create_share</span><span class="p">(</span><span class="n">metadata</span><span class="p">,</span> <span class="n">quota</span><span class="p">,</span> <span class="n">timeout</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">share</span></div>
 
-<div class="viewcode-block" id="FileServiceClient.delete_share"><a class="viewcode-back" href="../../../../ref/azure.storage.file.html#azure.storage.file.file_service_client.FileServiceClient.delete_share">[docs]</a>    <span class="k">def</span> <span class="nf">delete_share</span><span class="p">(</span>
+<div class="viewcode-block" id="FileServiceClient.delete_share"><a class="viewcode-back" href="../../../../ref/azure.storage.file.html#azure.storage.file.file_service_client.FileServiceClient.delete_share">[docs]</a>    <span class="nd">@distributed_trace</span>
+    <span class="k">def</span> <span class="nf">delete_share</span><span class="p">(</span>
             <span class="bp">self</span><span class="p">,</span> <span class="n">share_name</span><span class="p">,</span>  <span class="c1"># type: Union[ShareProperties, str]</span>
             <span class="n">delete_snapshots</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="c1"># type: Optional[bool]</span>
             <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>  <span class="c1"># type: Optional[int]</span>

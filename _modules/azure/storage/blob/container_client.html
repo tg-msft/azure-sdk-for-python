@@ -295,39 +295,35 @@
     <span class="kn">from</span> <span class="nn">urllib2</span> <span class="k">import</span> <span class="n">quote</span><span class="p">,</span> <span class="n">unquote</span> <span class="c1"># type: ignore</span>
 
 <span class="kn">from</span> <span class="nn">azure.core.paging</span> <span class="k">import</span> <span class="n">ItemPaged</span>
+<span class="kn">from</span> <span class="nn">azure.core.tracing.decorator</span> <span class="k">import</span> <span class="n">distributed_trace</span>
 
 <span class="kn">import</span> <span class="nn">six</span>
 
 <span class="kn">from</span> <span class="nn">._shared.shared_access_signature</span> <span class="k">import</span> <span class="n">BlobSharedAccessSignature</span>
-<span class="kn">from</span> <span class="nn">._shared.utils</span> <span class="k">import</span> <span class="p">(</span>
-    <span class="n">StorageAccountHostsMixin</span><span class="p">,</span>
+<span class="kn">from</span> <span class="nn">._shared.base_client</span> <span class="k">import</span> <span class="n">StorageAccountHostsMixin</span><span class="p">,</span> <span class="n">parse_connection_str</span><span class="p">,</span> <span class="n">parse_query</span>
+<span class="kn">from</span> <span class="nn">._shared.request_handlers</span> <span class="k">import</span> <span class="n">add_metadata_headers</span><span class="p">,</span> <span class="n">serialize_iso</span>
+<span class="kn">from</span> <span class="nn">._shared.response_handlers</span> <span class="k">import</span> <span class="p">(</span>
     <span class="n">process_storage_error</span><span class="p">,</span>
     <span class="n">return_response_headers</span><span class="p">,</span>
-    <span class="n">add_metadata_headers</span><span class="p">,</span>
-    <span class="n">parse_connection_str</span><span class="p">,</span>
-    <span class="n">serialize_iso</span><span class="p">,</span>
-    <span class="n">parse_query</span><span class="p">,</span>
     <span class="n">return_headers_and_deserialized</span><span class="p">)</span>
 <span class="kn">from</span> <span class="nn">._generated</span> <span class="k">import</span> <span class="n">AzureBlobStorage</span>
 <span class="kn">from</span> <span class="nn">._generated.models</span> <span class="k">import</span> <span class="p">(</span>
+    <span class="n">ModifiedAccessConditions</span><span class="p">,</span>
     <span class="n">StorageErrorException</span><span class="p">,</span>
     <span class="n">SignedIdentifier</span><span class="p">)</span>
-<span class="kn">from</span> <span class="nn">._blob_utils</span> <span class="k">import</span> <span class="p">(</span>
-    <span class="n">get_access_conditions</span><span class="p">,</span>
-    <span class="n">get_modification_conditions</span><span class="p">,</span>
-    <span class="n">deserialize_container_properties</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">._deserialize</span> <span class="k">import</span> <span class="n">deserialize_container_properties</span>
 <span class="kn">from</span> <span class="nn">.models</span> <span class="k">import</span> <span class="p">(</span> <span class="c1"># pylint: disable=unused-import</span>
     <span class="n">ContainerProperties</span><span class="p">,</span>
     <span class="n">BlobProperties</span><span class="p">,</span>
     <span class="n">BlobPropertiesPaged</span><span class="p">,</span>
     <span class="n">BlobType</span><span class="p">,</span>
     <span class="n">BlobPrefix</span><span class="p">)</span>
-<span class="kn">from</span> <span class="nn">.lease</span> <span class="k">import</span> <span class="n">LeaseClient</span>
+<span class="kn">from</span> <span class="nn">.lease</span> <span class="k">import</span> <span class="n">LeaseClient</span><span class="p">,</span> <span class="n">get_access_conditions</span>
 <span class="kn">from</span> <span class="nn">.blob_client</span> <span class="k">import</span> <span class="n">BlobClient</span>
 
 <span class="k">if</span> <span class="n">TYPE_CHECKING</span><span class="p">:</span>
-    <span class="kn">from</span> <span class="nn">azure.core.pipeline.transport</span> <span class="k">import</span> <span class="n">HttpTransport</span>
-    <span class="kn">from</span> <span class="nn">azure.core.pipeline.policies</span> <span class="k">import</span> <span class="n">HTTPPolicy</span>
+    <span class="kn">from</span> <span class="nn">azure.core.pipeline.transport</span> <span class="k">import</span> <span class="n">HttpTransport</span>  <span class="c1"># pylint: disable=ungrouped-imports</span>
+    <span class="kn">from</span> <span class="nn">azure.core.pipeline.policies</span> <span class="k">import</span> <span class="n">HTTPPolicy</span> <span class="c1"># pylint: disable=ungrouped-imports</span>
     <span class="kn">from</span> <span class="nn">.models</span> <span class="k">import</span> <span class="n">ContainerPermissions</span><span class="p">,</span> <span class="n">PublicAccess</span>
     <span class="kn">from</span> <span class="nn">datetime</span> <span class="k">import</span> <span class="n">datetime</span>
     <span class="kn">from</span> <span class="nn">.models</span> <span class="k">import</span> <span class="p">(</span> <span class="c1"># pylint: disable=unused-import</span>
@@ -559,7 +555,8 @@
             <span class="n">content_type</span><span class="o">=</span><span class="n">content_type</span><span class="p">,</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="ContainerClient.create_container"><a class="viewcode-back" href="../../../../ref/azure.storage.blob.html#azure.storage.blob.container_client.ContainerClient.create_container">[docs]</a>    <span class="k">def</span> <span class="nf">create_container</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">metadata</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">public_access</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<div class="viewcode-block" id="ContainerClient.create_container"><a class="viewcode-back" href="../../../../ref/azure.storage.blob.html#azure.storage.blob.container_client.ContainerClient.create_container">[docs]</a>    <span class="nd">@distributed_trace</span>
+    <span class="k">def</span> <span class="nf">create_container</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">metadata</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">public_access</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="c1"># type: (Optional[Dict[str, str]], Optional[Union[PublicAccess, str]], Optional[int], **Any) -&gt; None</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Creates a new container under the specified account. If the container</span>
@@ -595,12 +592,9 @@
         <span class="k">except</span> <span class="n">StorageErrorException</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
             <span class="n">process_storage_error</span><span class="p">(</span><span class="n">error</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="ContainerClient.delete_container"><a class="viewcode-back" href="../../../../ref/azure.storage.blob.html#azure.storage.blob.container_client.ContainerClient.delete_container">[docs]</a>    <span class="k">def</span> <span class="nf">delete_container</span><span class="p">(</span>
+<div class="viewcode-block" id="ContainerClient.delete_container"><a class="viewcode-back" href="../../../../ref/azure.storage.blob.html#azure.storage.blob.container_client.ContainerClient.delete_container">[docs]</a>    <span class="nd">@distributed_trace</span>
+    <span class="k">def</span> <span class="nf">delete_container</span><span class="p">(</span>
             <span class="bp">self</span><span class="p">,</span> <span class="n">lease</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>  <span class="c1"># type: Optional[Union[LeaseClient, str]]</span>
-            <span class="n">if_modified_since</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>  <span class="c1"># type: Optional[datetime]</span>
-            <span class="n">if_unmodified_since</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>  <span class="c1"># type: Optional[datetime]</span>
-            <span class="n">if_match</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>  <span class="c1"># type: Optional[str]</span>
-            <span class="n">if_none_match</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>  <span class="c1"># type: Optional[str]</span>
             <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>  <span class="c1"># type: Optional[int]</span>
             <span class="o">**</span><span class="n">kwargs</span>
         <span class="p">):</span>
@@ -647,8 +641,11 @@
 <span class="sd">                :caption: Delete a container.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">access_conditions</span> <span class="o">=</span> <span class="n">get_access_conditions</span><span class="p">(</span><span class="n">lease</span><span class="p">)</span>
-        <span class="n">mod_conditions</span> <span class="o">=</span> <span class="n">get_modification_conditions</span><span class="p">(</span>
-            <span class="n">if_modified_since</span><span class="p">,</span> <span class="n">if_unmodified_since</span><span class="p">,</span> <span class="n">if_match</span><span class="p">,</span> <span class="n">if_none_match</span><span class="p">)</span>
+        <span class="n">mod_conditions</span> <span class="o">=</span> <span class="n">ModifiedAccessConditions</span><span class="p">(</span>
+            <span class="n">if_modified_since</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;if_modified_since&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
+            <span class="n">if_unmodified_since</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;if_unmodified_since&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
+            <span class="n">if_match</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;if_match&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
+            <span class="n">if_none_match</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;if_none_match&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">))</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_client</span><span class="o">.</span><span class="n">container</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span>
                 <span class="n">timeout</span><span class="o">=</span><span class="n">timeout</span><span class="p">,</span>
@@ -658,13 +655,10 @@
         <span class="k">except</span> <span class="n">StorageErrorException</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
             <span class="n">process_storage_error</span><span class="p">(</span><span class="n">error</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="ContainerClient.acquire_lease"><a class="viewcode-back" href="../../../../ref/azure.storage.blob.html#azure.storage.blob.container_client.ContainerClient.acquire_lease">[docs]</a>    <span class="k">def</span> <span class="nf">acquire_lease</span><span class="p">(</span>
+<div class="viewcode-block" id="ContainerClient.acquire_lease"><a class="viewcode-back" href="../../../../ref/azure.storage.blob.html#azure.storage.blob.container_client.ContainerClient.acquire_lease">[docs]</a>    <span class="nd">@distributed_trace</span>
+    <span class="k">def</span> <span class="nf">acquire_lease</span><span class="p">(</span>
             <span class="bp">self</span><span class="p">,</span> <span class="n">lease_duration</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span>  <span class="c1"># type: int</span>
             <span class="n">lease_id</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>  <span class="c1"># type: Optional[str]</span>
-            <span class="n">if_modified_since</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>  <span class="c1"># type: Optional[datetime]</span>
-            <span class="n">if_unmodified_since</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>  <span class="c1"># type: Optional[datetime]</span>
-            <span class="n">if_match</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>  <span class="c1"># type: Optional[str]</span>
-            <span class="n">if_none_match</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>  <span class="c1"># type: Optional[str]</span>
             <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>  <span class="c1"># type: Optional[int]</span>
             <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="c1"># type: (...) -&gt; LeaseClient</span>
@@ -716,17 +710,11 @@
 <span class="sd">                :caption: Acquiring a lease on the container.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">lease</span> <span class="o">=</span> <span class="n">LeaseClient</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lease_id</span><span class="o">=</span><span class="n">lease_id</span><span class="p">)</span> <span class="c1"># type: ignore</span>
-        <span class="n">lease</span><span class="o">.</span><span class="n">acquire</span><span class="p">(</span>
-            <span class="n">lease_duration</span><span class="o">=</span><span class="n">lease_duration</span><span class="p">,</span>
-            <span class="n">if_modified_since</span><span class="o">=</span><span class="n">if_modified_since</span><span class="p">,</span>
-            <span class="n">if_unmodified_since</span><span class="o">=</span><span class="n">if_unmodified_since</span><span class="p">,</span>
-            <span class="n">if_match</span><span class="o">=</span><span class="n">if_match</span><span class="p">,</span>
-            <span class="n">if_none_match</span><span class="o">=</span><span class="n">if_none_match</span><span class="p">,</span>
-            <span class="n">timeout</span><span class="o">=</span><span class="n">timeout</span><span class="p">,</span>
-            <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="n">lease</span><span class="o">.</span><span class="n">acquire</span><span class="p">(</span><span class="n">lease_duration</span><span class="o">=</span><span class="n">lease_duration</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="n">timeout</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">lease</span></div>
 
-<div class="viewcode-block" id="ContainerClient.get_account_information"><a class="viewcode-back" href="../../../../ref/azure.storage.blob.html#azure.storage.blob.container_client.ContainerClient.get_account_information">[docs]</a>    <span class="k">def</span> <span class="nf">get_account_information</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span> <span class="c1"># type: ignore</span>
+<div class="viewcode-block" id="ContainerClient.get_account_information"><a class="viewcode-back" href="../../../../ref/azure.storage.blob.html#azure.storage.blob.container_client.ContainerClient.get_account_information">[docs]</a>    <span class="nd">@distributed_trace</span>
+    <span class="k">def</span> <span class="nf">get_account_information</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span> <span class="c1"># type: ignore</span>
         <span class="c1"># type: (**Any) -&gt; Dict[str, str]</span>
         <span class="sd">&quot;&quot;&quot;Gets information related to the storage account.</span>
 
@@ -741,7 +729,8 @@
         <span class="k">except</span> <span class="n">StorageErrorException</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
             <span class="n">process_storage_error</span><span class="p">(</span><span class="n">error</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="ContainerClient.get_container_properties"><a class="viewcode-back" href="../../../../ref/azure.storage.blob.html#azure.storage.blob.container_client.ContainerClient.get_container_properties">[docs]</a>    <span class="k">def</span> <span class="nf">get_container_properties</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lease</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<div class="viewcode-block" id="ContainerClient.get_container_properties"><a class="viewcode-back" href="../../../../ref/azure.storage.blob.html#azure.storage.blob.container_client.ContainerClient.get_container_properties">[docs]</a>    <span class="nd">@distributed_trace</span>
+    <span class="k">def</span> <span class="nf">get_container_properties</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lease</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="c1"># type: (Optional[Union[LeaseClient, str]], Optional[int], **Any) -&gt; ContainerProperties</span>
         <span class="sd">&quot;&quot;&quot;Returns all user-defined metadata and system properties for the specified</span>
 <span class="sd">        container. The data returned does not include the container&#39;s list of blobs.</span>
@@ -774,10 +763,10 @@
         <span class="n">response</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">container_name</span>
         <span class="k">return</span> <span class="n">response</span> <span class="c1"># type: ignore</span></div>
 
-<div class="viewcode-block" id="ContainerClient.set_container_metadata"><a class="viewcode-back" href="../../../../ref/azure.storage.blob.html#azure.storage.blob.container_client.ContainerClient.set_container_metadata">[docs]</a>    <span class="k">def</span> <span class="nf">set_container_metadata</span><span class="p">(</span> <span class="c1"># type: ignore</span>
+<div class="viewcode-block" id="ContainerClient.set_container_metadata"><a class="viewcode-back" href="../../../../ref/azure.storage.blob.html#azure.storage.blob.container_client.ContainerClient.set_container_metadata">[docs]</a>    <span class="nd">@distributed_trace</span>
+    <span class="k">def</span> <span class="nf">set_container_metadata</span><span class="p">(</span> <span class="c1"># type: ignore</span>
             <span class="bp">self</span><span class="p">,</span> <span class="n">metadata</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>  <span class="c1"># type: Optional[Dict[str, str]]</span>
             <span class="n">lease</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>  <span class="c1"># type: Optional[Union[str, LeaseClient]]</span>
-            <span class="n">if_modified_since</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>  <span class="c1"># type: Optional[datetime]</span>
             <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>  <span class="c1"># type: Optional[int]</span>
             <span class="o">**</span><span class="n">kwargs</span>
         <span class="p">):</span>
@@ -815,7 +804,7 @@
         <span class="n">headers</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;headers&#39;</span><span class="p">,</span> <span class="p">{})</span>
         <span class="n">headers</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">add_metadata_headers</span><span class="p">(</span><span class="n">metadata</span><span class="p">))</span>
         <span class="n">access_conditions</span> <span class="o">=</span> <span class="n">get_access_conditions</span><span class="p">(</span><span class="n">lease</span><span class="p">)</span>
-        <span class="n">mod_conditions</span> <span class="o">=</span> <span class="n">get_modification_conditions</span><span class="p">(</span><span class="n">if_modified_since</span><span class="o">=</span><span class="n">if_modified_since</span><span class="p">)</span>
+        <span class="n">mod_conditions</span> <span class="o">=</span> <span class="n">ModifiedAccessConditions</span><span class="p">(</span><span class="n">if_modified_since</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;if_modified_since&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">))</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_client</span><span class="o">.</span><span class="n">container</span><span class="o">.</span><span class="n">set_metadata</span><span class="p">(</span> <span class="c1"># type: ignore</span>
                 <span class="n">timeout</span><span class="o">=</span><span class="n">timeout</span><span class="p">,</span>
@@ -827,7 +816,8 @@
         <span class="k">except</span> <span class="n">StorageErrorException</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
             <span class="n">process_storage_error</span><span class="p">(</span><span class="n">error</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="ContainerClient.get_container_access_policy"><a class="viewcode-back" href="../../../../ref/azure.storage.blob.html#azure.storage.blob.container_client.ContainerClient.get_container_access_policy">[docs]</a>    <span class="k">def</span> <span class="nf">get_container_access_policy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lease</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<div class="viewcode-block" id="ContainerClient.get_container_access_policy"><a class="viewcode-back" href="../../../../ref/azure.storage.blob.html#azure.storage.blob.container_client.ContainerClient.get_container_access_policy">[docs]</a>    <span class="nd">@distributed_trace</span>
+    <span class="k">def</span> <span class="nf">get_container_access_policy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lease</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="c1"># type: (Optional[Union[LeaseClient, str]], Optional[int], **Any) -&gt; Dict[str, Any]</span>
         <span class="sd">&quot;&quot;&quot;Gets the permissions for the specified container.</span>
 <span class="sd">        The permissions indicate whether container data may be accessed publicly.</span>
@@ -862,12 +852,11 @@
             <span class="s1">&#39;signed_identifiers&#39;</span><span class="p">:</span> <span class="n">identifiers</span> <span class="ow">or</span> <span class="p">[]</span>
         <span class="p">}</span></div>
 
-<div class="viewcode-block" id="ContainerClient.set_container_access_policy"><a class="viewcode-back" href="../../../../ref/azure.storage.blob.html#azure.storage.blob.container_client.ContainerClient.set_container_access_policy">[docs]</a>    <span class="k">def</span> <span class="nf">set_container_access_policy</span><span class="p">(</span>
+<div class="viewcode-block" id="ContainerClient.set_container_access_policy"><a class="viewcode-back" href="../../../../ref/azure.storage.blob.html#azure.storage.blob.container_client.ContainerClient.set_container_access_policy">[docs]</a>    <span class="nd">@distributed_trace</span>
+    <span class="k">def</span> <span class="nf">set_container_access_policy</span><span class="p">(</span>
             <span class="bp">self</span><span class="p">,</span> <span class="n">signed_identifiers</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>  <span class="c1"># type: Optional[Dict[str, Optional[AccessPolicy]]]</span>
             <span class="n">public_access</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>  <span class="c1"># type: Optional[Union[str, PublicAccess]]</span>
             <span class="n">lease</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>  <span class="c1"># type: Optional[Union[str, LeaseClient]]</span>
-            <span class="n">if_modified_since</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>  <span class="c1"># type: Optional[datetime]</span>
-            <span class="n">if_unmodified_since</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>  <span class="c1"># type: Optional[datetime]</span>
             <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>  <span class="c1"># type: Optional[int]</span>
             <span class="o">**</span><span class="n">kwargs</span>
         <span class="p">):</span>
@@ -923,8 +912,9 @@
                 <span class="n">identifiers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">SignedIdentifier</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="n">key</span><span class="p">,</span> <span class="n">access_policy</span><span class="o">=</span><span class="n">value</span><span class="p">))</span> <span class="c1"># type: ignore</span>
             <span class="n">signed_identifiers</span> <span class="o">=</span> <span class="n">identifiers</span> <span class="c1"># type: ignore</span>
 
-        <span class="n">mod_conditions</span> <span class="o">=</span> <span class="n">get_modification_conditions</span><span class="p">(</span>
-            <span class="n">if_modified_since</span><span class="p">,</span> <span class="n">if_unmodified_since</span><span class="p">)</span>
+        <span class="n">mod_conditions</span> <span class="o">=</span> <span class="n">ModifiedAccessConditions</span><span class="p">(</span>
+            <span class="n">if_modified_since</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;if_modified_since&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
+            <span class="n">if_unmodified_since</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;if_unmodified_since&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">))</span>
         <span class="n">access_conditions</span> <span class="o">=</span> <span class="n">get_access_conditions</span><span class="p">(</span><span class="n">lease</span><span class="p">)</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_client</span><span class="o">.</span><span class="n">container</span><span class="o">.</span><span class="n">set_access_policy</span><span class="p">(</span>
@@ -938,7 +928,8 @@
         <span class="k">except</span> <span class="n">StorageErrorException</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
             <span class="n">process_storage_error</span><span class="p">(</span><span class="n">error</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="ContainerClient.list_blobs"><a class="viewcode-back" href="../../../../ref/azure.storage.blob.html#azure.storage.blob.container_client.ContainerClient.list_blobs">[docs]</a>    <span class="k">def</span> <span class="nf">list_blobs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name_starts_with</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">include</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<div class="viewcode-block" id="ContainerClient.list_blobs"><a class="viewcode-back" href="../../../../ref/azure.storage.blob.html#azure.storage.blob.container_client.ContainerClient.list_blobs">[docs]</a>    <span class="nd">@distributed_trace</span>
+    <span class="k">def</span> <span class="nf">list_blobs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name_starts_with</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">include</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="c1"># type: (Optional[str], Optional[Any], Optional[int], **Any) -&gt; ItemPaged[BlobProperties]</span>
         <span class="sd">&quot;&quot;&quot;Returns a generator to list the blobs under the specified container.</span>
 <span class="sd">        The generator will lazily follow the continuation tokens returned by</span>
@@ -977,7 +968,8 @@
             <span class="n">page_iterator_class</span><span class="o">=</span><span class="n">BlobPropertiesPaged</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="ContainerClient.walk_blobs"><a class="viewcode-back" href="../../../../ref/azure.storage.blob.html#azure.storage.blob.container_client.ContainerClient.walk_blobs">[docs]</a>    <span class="k">def</span> <span class="nf">walk_blobs</span><span class="p">(</span>
+<div class="viewcode-block" id="ContainerClient.walk_blobs"><a class="viewcode-back" href="../../../../ref/azure.storage.blob.html#azure.storage.blob.container_client.ContainerClient.walk_blobs">[docs]</a>    <span class="nd">@distributed_trace</span>
+    <span class="k">def</span> <span class="nf">walk_blobs</span><span class="p">(</span>
             <span class="bp">self</span><span class="p">,</span> <span class="n">name_starts_with</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="c1"># type: Optional[str]</span>
             <span class="n">include</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="c1"># type: Optional[Any]</span>
             <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;/&quot;</span><span class="p">,</span> <span class="c1"># type: str</span>
@@ -1022,7 +1014,8 @@
             <span class="n">results_per_page</span><span class="o">=</span><span class="n">results_per_page</span><span class="p">,</span>
             <span class="n">delimiter</span><span class="o">=</span><span class="n">delimiter</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="ContainerClient.upload_blob"><a class="viewcode-back" href="../../../../ref/azure.storage.blob.html#azure.storage.blob.container_client.ContainerClient.upload_blob">[docs]</a>    <span class="k">def</span> <span class="nf">upload_blob</span><span class="p">(</span>
+<div class="viewcode-block" id="ContainerClient.upload_blob"><a class="viewcode-back" href="../../../../ref/azure.storage.blob.html#azure.storage.blob.container_client.ContainerClient.upload_blob">[docs]</a>    <span class="nd">@distributed_trace</span>
+    <span class="k">def</span> <span class="nf">upload_blob</span><span class="p">(</span>
             <span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span>  <span class="c1"># type: Union[str, BlobProperties]</span>
             <span class="n">data</span><span class="p">,</span>  <span class="c1"># type: Union[Iterable[AnyStr], IO[AnyStr]]</span>
             <span class="n">blob_type</span><span class="o">=</span><span class="n">BlobType</span><span class="o">.</span><span class="n">BlockBlob</span><span class="p">,</span>  <span class="c1"># type: Union[str, BlobType]</span>
@@ -1032,13 +1025,7 @@
             <span class="n">content_settings</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>  <span class="c1"># type: Optional[ContentSettings]</span>
             <span class="n">validate_content</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>  <span class="c1"># type: Optional[bool]</span>
             <span class="n">lease</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>  <span class="c1"># type: Optional[Union[LeaseClient, str]]</span>
-            <span class="n">if_modified_since</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>  <span class="c1"># type: Optional[datetime]</span>
-            <span class="n">if_unmodified_since</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>  <span class="c1"># type: Optional[datetime]</span>
-            <span class="n">if_match</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>  <span class="c1"># type: Optional[str]</span>
-            <span class="n">if_none_match</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>  <span class="c1"># type: Optional[str]</span>
             <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>  <span class="c1"># type: Optional[int]</span>
-            <span class="n">premium_page_blob_tier</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>  <span class="c1"># type: Optional[Union[str, PremiumPageBlobTier]]</span>
-            <span class="n">maxsize_condition</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>  <span class="c1"># type: Optional[int]</span>
             <span class="n">max_connections</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>  <span class="c1"># type: int</span>
             <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;UTF-8&#39;</span><span class="p">,</span> <span class="c1"># type: str</span>
             <span class="o">**</span><span class="n">kwargs</span>
@@ -1139,27 +1126,18 @@
             <span class="n">content_settings</span><span class="o">=</span><span class="n">content_settings</span><span class="p">,</span>
             <span class="n">validate_content</span><span class="o">=</span><span class="n">validate_content</span><span class="p">,</span>
             <span class="n">lease</span><span class="o">=</span><span class="n">lease</span><span class="p">,</span>
-            <span class="n">if_modified_since</span><span class="o">=</span><span class="n">if_modified_since</span><span class="p">,</span>
-            <span class="n">if_unmodified_since</span><span class="o">=</span><span class="n">if_unmodified_since</span><span class="p">,</span>
-            <span class="n">if_match</span><span class="o">=</span><span class="n">if_match</span><span class="p">,</span>
-            <span class="n">if_none_match</span><span class="o">=</span><span class="n">if_none_match</span><span class="p">,</span>
             <span class="n">timeout</span><span class="o">=</span><span class="n">timeout</span><span class="p">,</span>
-            <span class="n">premium_page_blob_tier</span><span class="o">=</span><span class="n">premium_page_blob_tier</span><span class="p">,</span>
-            <span class="n">maxsize_condition</span><span class="o">=</span><span class="n">maxsize_condition</span><span class="p">,</span>
             <span class="n">max_connections</span><span class="o">=</span><span class="n">max_connections</span><span class="p">,</span>
             <span class="n">encoding</span><span class="o">=</span><span class="n">encoding</span><span class="p">,</span>
             <span class="o">**</span><span class="n">kwargs</span>
         <span class="p">)</span>
         <span class="k">return</span> <span class="n">blob</span></div>
 
-<div class="viewcode-block" id="ContainerClient.delete_blob"><a class="viewcode-back" href="../../../../ref/azure.storage.blob.html#azure.storage.blob.container_client.ContainerClient.delete_blob">[docs]</a>    <span class="k">def</span> <span class="nf">delete_blob</span><span class="p">(</span>
+<div class="viewcode-block" id="ContainerClient.delete_blob"><a class="viewcode-back" href="../../../../ref/azure.storage.blob.html#azure.storage.blob.container_client.ContainerClient.delete_blob">[docs]</a>    <span class="nd">@distributed_trace</span>
+    <span class="k">def</span> <span class="nf">delete_blob</span><span class="p">(</span>
             <span class="bp">self</span><span class="p">,</span> <span class="n">blob</span><span class="p">,</span>  <span class="c1"># type: Union[str, BlobProperties]</span>
             <span class="n">delete_snapshots</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>  <span class="c1"># type: Optional[str]</span>
             <span class="n">lease</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>  <span class="c1"># type: Optional[Union[str, LeaseClient]]</span>
-            <span class="n">if_modified_since</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>  <span class="c1"># type: Optional[datetime]</span>
-            <span class="n">if_unmodified_since</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>  <span class="c1"># type: Optional[datetime]</span>
-            <span class="n">if_match</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>  <span class="c1"># type: Optional[str]</span>
-            <span class="n">if_none_match</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>  <span class="c1"># type: Optional[str]</span>
             <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>  <span class="c1"># type: Optional[int]</span>
             <span class="o">**</span><span class="n">kwargs</span>
         <span class="p">):</span>
@@ -1221,10 +1199,6 @@
         <span class="n">blob</span><span class="o">.</span><span class="n">delete_blob</span><span class="p">(</span> <span class="c1"># type: ignore</span>
             <span class="n">delete_snapshots</span><span class="o">=</span><span class="n">delete_snapshots</span><span class="p">,</span>
             <span class="n">lease</span><span class="o">=</span><span class="n">lease</span><span class="p">,</span>
-            <span class="n">if_modified_since</span><span class="o">=</span><span class="n">if_modified_since</span><span class="p">,</span>
-            <span class="n">if_unmodified_since</span><span class="o">=</span><span class="n">if_unmodified_since</span><span class="p">,</span>
-            <span class="n">if_match</span><span class="o">=</span><span class="n">if_match</span><span class="p">,</span>
-            <span class="n">if_none_match</span><span class="o">=</span><span class="n">if_none_match</span><span class="p">,</span>
             <span class="n">timeout</span><span class="o">=</span><span class="n">timeout</span><span class="p">,</span>
             <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
 
