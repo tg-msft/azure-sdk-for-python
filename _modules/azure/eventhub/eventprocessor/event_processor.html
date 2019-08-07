@@ -1,0 +1,545 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>azure.eventhub.eventprocessor.event_processor &mdash; Azure SDK for Python 2.0.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../../" src="../../../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../../index.html" class="icon icon-home"> Azure SDK for Python
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                2.0.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">User Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../quickstart_authentication.html">Resource Management Authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../multicloud.html">Multi-cloud - use Azure on all regions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../exceptions.html">Exception handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../servicemanagement.html">Service Management (Legacy)</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Developer Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../ref/azure.common.html">azure.common package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../ref/azure.applicationinsights.html">azure.applicationinsights package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../ref/azure.batch.html">azure.batch package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../ref/azure.cognitiveservices.anomalydetector.html">azure.cognitiveservices.anomalydetector package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../ref/azure.cognitiveservices.knowledge.qnamaker.html">azure.cognitiveservices.knowledge.qnamaker package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../ref/azure.cognitiveservices.language.luis.authoring.html">azure.cognitiveservices.language.luis.authoring package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../ref/azure.cognitiveservices.language.luis.runtime.html">azure.cognitiveservices.language.luis.runtime package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../ref/azure.cognitiveservices.language.spellcheck.html">azure.cognitiveservices.language.spellcheck package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../ref/azure.cognitiveservices.language.textanalytics.html">azure.cognitiveservices.language.textanalytics package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../ref/azure.cognitiveservices.search.autosuggest.html">azure.cognitiveservices.search.autosuggest package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../ref/azure.cognitiveservices.search.customimagesearch.html">azure.cognitiveservices.search.customimagesearch package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../ref/azure.cognitiveservices.search.customsearch.html">azure.cognitiveservices.search.customsearch package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../ref/azure.cognitiveservices.search.entitysearch.html">azure.cognitiveservices.search.entitysearch package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../ref/azure.cognitiveservices.search.imagesearch.html">azure.cognitiveservices.search.imagesearch package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../ref/azure.cognitiveservices.search.newssearch.html">azure.cognitiveservices.search.newssearch package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../ref/azure.cognitiveservices.search.videosearch.html">azure.cognitiveservices.search.videosearch package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../ref/azure.cognitiveservices.search.visualsearch.html">azure.cognitiveservices.search.visualsearch package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../ref/azure.cognitiveservices.search.websearch.html">azure.cognitiveservices.search.websearch package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../ref/azure.cognitiveservices.vision.computervision.html">azure.cognitiveservices.vision.computervision package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../ref/azure.cognitiveservices.vision.contentmoderator.html">azure.cognitiveservices.vision.contentmoderator package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../ref/azure.cognitiveservices.vision.customvision.prediction.html">azure.cognitiveservices.vision.customvision.prediction package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../ref/azure.cognitiveservices.vision.customvision.training.html">azure.cognitiveservices.vision.customvision.training package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../ref/azure.cognitiveservices.vision.face.html">azure.cognitiveservices.vision.face package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../ref/azure.core.html">azure.core package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../ref/azure.cosmos.html">azure.cosmos package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../ref/azure.eventgrid.html">azure.eventgrid package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../ref/azure.eventhub.html">azure.eventhub package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../ref/azure.graphrbac.html">azure.graphrbac package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../ref/azure.identity.html">azure.identity package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../ref/azure.keyvault.keys.html">azure.keyvault.keys package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../ref/azure.keyvault.secrets.html">azure.keyvault.secrets package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../ref/azure.loganalytics.html">azure.loganalytics package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../ref/azure.mgmt.advisor.html">azure.mgmt.advisor package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../ref/azure.mgmt.alertsmanagement.html">azure.mgmt.alertsmanagement package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../ref/azure.mgmt.apimanagement.html">azure.mgmt.apimanagement package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../ref/azure.mgmt.applicationinsights.html">azure.mgmt.applicationinsights package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../ref/azure.mgmt.authorization.html">azure.mgmt.authorization package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../ref/azure.mgmt.automation.html">azure.mgmt.automation package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../ref/azure.mgmt.batch.html">azure.mgmt.batch package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../ref/azure.mgmt.batchai.html">azure.mgmt.batchai package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../ref/azure.mgmt.billing.html">azure.mgmt.billing package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../ref/azure.mgmt.cdn.html">azure.mgmt.cdn package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../ref/azure.mgmt.cognitiveservices.html">azure.mgmt.cognitiveservices package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../ref/azure.mgmt.commerce.html">azure.mgmt.commerce package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../ref/azure.mgmt.compute.html">azure.mgmt.compute package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../ref/azure.mgmt.consumption.html">azure.mgmt.consumption package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../ref/azure.mgmt.containerinstance.html">azure.mgmt.containerinstance package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../ref/azure.mgmt.containerregistry.html">azure.mgmt.containerregistry package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../ref/azure.mgmt.containerservice.html">azure.mgmt.containerservice package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../ref/azure.mgmt.cosmosdb.html">azure.mgmt.cosmosdb package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../ref/azure.mgmt.databricks.html">azure.mgmt.databricks package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../ref/azure.mgmt.datafactory.html">azure.mgmt.datafactory package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../ref/azure.mgmt.datalake.analytics.account.html">azure.mgmt.datalake.analytics.account package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../ref/azure.mgmt.datalake.analytics.catalog.html">azure.mgmt.datalake.analytics.catalog package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../ref/azure.mgmt.datalake.analytics.job.html">azure.mgmt.datalake.analytics.job package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../ref/azure.mgmt.datalake.store.html">azure.mgmt.datalake.store package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../ref/azure.mgmt.datamigration.html">azure.mgmt.datamigration package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../ref/azure.mgmt.devspaces.html">azure.mgmt.devspaces package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../ref/azure.mgmt.devtestlabs.html">azure.mgmt.devtestlabs package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../ref/azure.mgmt.dns.html">azure.mgmt.dns package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../ref/azure.mgmt.eventgrid.html">azure.mgmt.eventgrid package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../ref/azure.mgmt.eventhub.html">azure.mgmt.eventhub package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../ref/azure.mgmt.hanaonazure.html">azure.mgmt.hanaonazure package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../ref/azure.mgmt.hdinsight.html">azure.mgmt.hdinsight package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../ref/azure.mgmt.imagebuilder.html">azure.mgmt.imagebuilder package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../ref/azure.mgmt.iotcentral.html">azure.mgmt.iotcentral package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../ref/azure.mgmt.iothub.html">azure.mgmt.iothub package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../ref/azure.mgmt.iothubprovisioningservices.html">azure.mgmt.iothubprovisioningservices package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../ref/azure.mgmt.keyvault.html">azure.mgmt.keyvault package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../ref/azure.mgmt.kusto.html">azure.mgmt.kusto package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../ref/azure.mgmt.labservices.html">azure.mgmt.labservices package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../ref/azure.mgmt.loganalytics.html">azure.mgmt.loganalytics package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../ref/azure.mgmt.logic.html">azure.mgmt.logic package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../ref/azure.mgmt.machinelearningcompute.html">azure.mgmt.machinelearningcompute package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../ref/azure.mgmt.managementgroups.html">azure.mgmt.managementgroups package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../ref/azure.mgmt.managementpartner.html">azure.mgmt.managementpartner package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../ref/azure.mgmt.maps.html">azure.mgmt.maps package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../ref/azure.mgmt.marketplaceordering.html">azure.mgmt.marketplaceordering package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../ref/azure.mgmt.media.html">azure.mgmt.media package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../ref/azure.mgmt.mixedreality.html">azure.mgmt.mixedreality package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../ref/azure.mgmt.monitor.html">azure.mgmt.monitor package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../ref/azure.mgmt.msi.html">azure.mgmt.msi package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../ref/azure.mgmt.netapp.html">azure.mgmt.netapp package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../ref/azure.mgmt.network.html">azure.mgmt.network package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../ref/azure.mgmt.notificationhubs.html">azure.mgmt.notificationhubs package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../ref/azure.mgmt.policyinsights.html">azure.mgmt.policyinsights package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../ref/azure.mgmt.powerbiembedded.html">azure.mgmt.powerbiembedded package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../ref/azure.mgmt.rdbms.mariadb.html">azure.mgmt.rdbms.mariadb package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../ref/azure.mgmt.rdbms.mysql.html">azure.mgmt.rdbms.mysql package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../ref/azure.mgmt.rdbms.postgresql.html">azure.mgmt.rdbms.postgresql package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../ref/azure.mgmt.recoveryservices.html">azure.mgmt.recoveryservices package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../ref/azure.mgmt.recoveryservicesbackup.html">azure.mgmt.recoveryservicesbackup package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../ref/azure.mgmt.redis.html">azure.mgmt.redis package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../ref/azure.mgmt.relay.html">azure.mgmt.relay package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../ref/azure.mgmt.resource.features.html">azure.mgmt.resource.features package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../ref/azure.mgmt.resource.links.html">azure.mgmt.resource.links package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../ref/azure.mgmt.resource.locks.html">azure.mgmt.resource.locks package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../ref/azure.mgmt.resource.managedapplications.html">azure.mgmt.resource.managedapplications package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../ref/azure.mgmt.resource.policy.html">azure.mgmt.resource.policy package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../ref/azure.mgmt.resource.resources.html">azure.mgmt.resource.resources package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../ref/azure.mgmt.resource.subscriptions.html">azure.mgmt.resource.subscriptions package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../ref/azure.mgmt.resourcegraph.html">azure.mgmt.resourcegraph package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../ref/azure.mgmt.scheduler.html">azure.mgmt.scheduler package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../ref/azure.mgmt.search.html">azure.mgmt.search package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../ref/azure.mgmt.security.html">azure.mgmt.security package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../ref/azure.mgmt.servermanager.html">azure.mgmt.servermanager package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../ref/azure.mgmt.servicebus.html">azure.mgmt.servicebus package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../ref/azure.mgmt.servicefabric.html">azure.mgmt.servicefabric package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../ref/azure.mgmt.signalr.html">azure.mgmt.signalr package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../ref/azure.mgmt.sql.html">azure.mgmt.sql package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../ref/azure.mgmt.sqlvirtualmachine.html">azure.mgmt.sqlvirtualmachine package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../ref/azure.mgmt.storage.html">azure.mgmt.storage package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../ref/azure.mgmt.subscription.html">azure.mgmt.subscription package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../ref/azure.mgmt.trafficmanager.html">azure.mgmt.trafficmanager package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../ref/azure.mgmt.web.html">azure.mgmt.web package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../ref/azure.servicebus.html">azure.servicebus package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../ref/azure.servicefabric.html">azure.servicefabric package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../ref/azure.storage.blob.html">azure.storage.blob package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../ref/azure.storage.file.html">azure.storage.file package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../ref/azure.storage.queue.html">azure.storage.queue package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../ref/azure.servicemanagement.html">azure.servicemanagement package</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">Azure SDK for Python</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../../index.html">Module code</a> &raquo;</li>
+        
+      <li>azure.eventhub.eventprocessor.event_processor</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for azure.eventhub.eventprocessor.event_processor</h1><div class="highlight"><pre>
+<span></span><span class="c1"># --------------------------------------------------------------------------------------------</span>
+<span class="c1"># Copyright (c) Microsoft Corporation. All rights reserved.</span>
+<span class="c1"># Licensed under the MIT License. See License.txt in the project root for license information.</span>
+<span class="c1"># -----------------------------------------------------------------------------------</span>
+
+<span class="kn">from</span> <span class="nn">typing</span> <span class="k">import</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">List</span>
+<span class="kn">import</span> <span class="nn">uuid</span>
+<span class="kn">import</span> <span class="nn">asyncio</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+
+<span class="kn">from</span> <span class="nn">azure.eventhub</span> <span class="k">import</span> <span class="n">EventPosition</span><span class="p">,</span> <span class="n">EventHubError</span>
+<span class="kn">from</span> <span class="nn">azure.eventhub.aio</span> <span class="k">import</span> <span class="n">EventHubClient</span>
+<span class="kn">from</span> <span class="nn">.checkpoint_manager</span> <span class="k">import</span> <span class="n">CheckpointManager</span>
+<span class="kn">from</span> <span class="nn">.partition_manager</span> <span class="k">import</span> <span class="n">PartitionManager</span>
+<span class="kn">from</span> <span class="nn">.partition_processor</span> <span class="k">import</span> <span class="n">PartitionProcessor</span><span class="p">,</span> <span class="n">CloseReason</span>
+<span class="kn">from</span> <span class="nn">.utils</span> <span class="k">import</span> <span class="n">get_running_loop</span>
+
+<span class="n">log</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+<span class="n">OWNER_LEVEL</span> <span class="o">=</span> <span class="mi">0</span>
+
+
+<div class="viewcode-block" id="EventProcessor"><a class="viewcode-back" href="../../../../ref/azure.eventhub.eventprocessor.html#azure.eventhub.eventprocessor.event_processor.EventProcessor">[docs]</a><span class="k">class</span> <span class="nc">EventProcessor</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">eventhub_client</span><span class="p">:</span> <span class="n">EventHubClient</span><span class="p">,</span> <span class="n">consumer_group_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+                 <span class="n">partition_processor_factory</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">CheckpointManager</span><span class="p">],</span> <span class="n">PartitionProcessor</span><span class="p">],</span>
+                 <span class="n">partition_manager</span><span class="p">:</span> <span class="n">PartitionManager</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        An EventProcessor constantly receives events from all partitions of the Event Hub in the context of a given</span>
+<span class="sd">        consumer group. The received data will be sent to PartitionProcessor to be processed.</span>
+
+<span class="sd">        It provides the user a convenient way to receive events from multiple partitions and save checkpoints.</span>
+<span class="sd">        If multiple EventProcessors are running for an event hub, they will automatically balance load.</span>
+<span class="sd">        This load balancing won&#39;t be available until preview 3.</span>
+
+<span class="sd">        :param eventhub_client: An instance of ~azure.eventhub.aio.EventClient object</span>
+<span class="sd">        :type eventhub_client: ~azure.eventhub.aio.EventClient</span>
+<span class="sd">        :param consumer_group_name: The name of the consumer group this event processor is associated with. Events will</span>
+<span class="sd">         be read only in the context of this group.</span>
+<span class="sd">        :type consumer_group_name: str</span>
+<span class="sd">        :param partition_processor_factory: A callable(type or function) object that creates an instance of a class</span>
+<span class="sd">         implementing the ~azure.eventhub.eventprocessor.PartitionProcessor.</span>
+<span class="sd">        :type partition_processor_factory: callable object</span>
+<span class="sd">        :param partition_manager: Interacts with the storage system, dealing with ownership and checkpoints.</span>
+<span class="sd">         For preview 2, sample Sqlite3PartitionManager is provided.</span>
+<span class="sd">        :type partition_manager: Class implementing the ~azure.eventhub.eventprocessor.PartitionManager.</span>
+<span class="sd">        :param initial_event_position: The offset to start a partition consumer if the partition has no checkpoint yet.</span>
+<span class="sd">        :type initial_event_position: int or str</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">            ```python</span>
+<span class="sd">                    class MyPartitionProcessor(PartitionProcessor):</span>
+<span class="sd">                        async def process_events(self, events):</span>
+<span class="sd">                            if events:</span>
+<span class="sd">                                # do something sync or async to process the events</span>
+<span class="sd">                                await self._checkpoint_manager.update_checkpoint(events[-1].offset, events[-1].sequence_number)</span>
+
+
+<span class="sd">                    import asyncio</span>
+<span class="sd">                    from azure.eventhub.aio import EventHubClient</span>
+<span class="sd">                    from azure.eventhub.eventprocessor import EventProcessor, PartitionProcessor, Sqlite3PartitionManager</span>
+<span class="sd">                    client = EventHubClient.from_connection_string(&quot;&lt;your connection string&gt;&quot;, receive_timeout=5, retry_total=3)</span>
+<span class="sd">                    partition_manager = Sqlite3PartitionManager()</span>
+<span class="sd">                    try:</span>
+<span class="sd">                        event_processor = EventProcessor(client, &quot;$default&quot;, MyPartitionProcessor, partition_manager)</span>
+<span class="sd">                        asyncio.ensure_future(event_processor.start())</span>
+<span class="sd">                        await asyncio.sleep(100)  # allow it to run 100 seconds</span>
+<span class="sd">                        await event_processor.stop()</span>
+<span class="sd">                    finally:</span>
+<span class="sd">                        await partition_manager.close()</span>
+<span class="sd">            ```</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_consumer_group_name</span> <span class="o">=</span> <span class="n">consumer_group_name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_eventhub_client</span> <span class="o">=</span> <span class="n">eventhub_client</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_eventhub_name</span> <span class="o">=</span> <span class="n">eventhub_client</span><span class="o">.</span><span class="n">eh_name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_partition_processor_factory</span> <span class="o">=</span> <span class="n">partition_processor_factory</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_partition_manager</span> <span class="o">=</span> <span class="n">partition_manager</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_initial_event_position</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;initial_event_position&quot;</span><span class="p">,</span> <span class="s2">&quot;-1&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_max_batch_size</span> <span class="o">=</span> <span class="n">eventhub_client</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">max_batch_size</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_receive_timeout</span> <span class="o">=</span> <span class="n">eventhub_client</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">receive_timeout</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_tasks</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c1"># type: List[asyncio.Task]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_id</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">uuid</span><span class="o">.</span><span class="n">uuid4</span><span class="p">())</span>
+
+    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s1">&#39;EventProcessor: id </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_id</span><span class="p">)</span>
+
+<div class="viewcode-block" id="EventProcessor.start"><a class="viewcode-back" href="../../../../ref/azure.eventhub.eventprocessor.html#azure.eventhub.eventprocessor.event_processor.EventProcessor.start">[docs]</a>    <span class="k">async</span> <span class="k">def</span> <span class="nf">start</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Start the EventProcessor.</span>
+
+<span class="sd">            1. retrieve the partition ids from eventhubs</span>
+<span class="sd">            2. claim partition ownership of these partitions.</span>
+<span class="sd">            3. repeatedly call EvenHubConsumer.receive() to retrieve events and</span>
+<span class="sd">            call user defined PartitionProcessor.process_events()</span>
+
+<span class="sd">            :return None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;EventProcessor </span><span class="si">%r</span><span class="s2"> is being started&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_id</span><span class="p">)</span>
+        <span class="n">partition_ids</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_eventhub_client</span><span class="o">.</span><span class="n">get_partition_ids</span><span class="p">()</span>
+        <span class="n">claimed_list</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_claim_partitions</span><span class="p">(</span><span class="n">partition_ids</span><span class="p">)</span>
+        <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_start_claimed_partitions</span><span class="p">(</span><span class="n">claimed_list</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="EventProcessor.stop"><a class="viewcode-back" href="../../../../ref/azure.eventhub.eventprocessor.html#azure.eventhub.eventprocessor.event_processor.EventProcessor.stop">[docs]</a>    <span class="k">async</span> <span class="k">def</span> <span class="nf">stop</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Stop all the partition consumer</span>
+
+<span class="sd">        This method cancels tasks that are running EventHubConsumer.receive() for the partitions owned by this EventProcessor.</span>
+
+<span class="sd">        :return None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_tasks</span><span class="p">)):</span>
+            <span class="n">task</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tasks</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+            <span class="n">task</span><span class="o">.</span><span class="n">cancel</span><span class="p">()</span>
+        <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;EventProcessor </span><span class="si">%r</span><span class="s2"> has been cancelled&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_id</span><span class="p">)</span>
+        <span class="k">await</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>  <span class="c1"># give some time to finish after cancelled</span></div>
+
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">_claim_partitions</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">partition_ids</span><span class="p">):</span>
+        <span class="n">partitions_ownership</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_partition_manager</span><span class="o">.</span><span class="n">list_ownership</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_eventhub_name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_consumer_group_name</span><span class="p">)</span>
+        <span class="n">partitions_ownership_dict</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">ownership</span> <span class="ow">in</span> <span class="n">partitions_ownership</span><span class="p">:</span>
+            <span class="n">partitions_ownership_dict</span><span class="p">[</span><span class="n">ownership</span><span class="p">[</span><span class="s2">&quot;partition_id&quot;</span><span class="p">]]</span> <span class="o">=</span> <span class="n">ownership</span>
+
+        <span class="n">to_claim_list</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">pid</span> <span class="ow">in</span> <span class="n">partition_ids</span><span class="p">:</span>
+            <span class="n">p_ownership</span> <span class="o">=</span> <span class="n">partitions_ownership_dict</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pid</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">p_ownership</span><span class="p">:</span>
+                <span class="n">to_claim_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">p_ownership</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">new_ownership</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;eventhub_name&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_eventhub_name</span><span class="p">,</span> <span class="s2">&quot;consumer_group_name&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_consumer_group_name</span><span class="p">,</span>
+                                 <span class="s2">&quot;owner_id&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_id</span><span class="p">,</span> <span class="s2">&quot;partition_id&quot;</span><span class="p">:</span> <span class="n">pid</span><span class="p">,</span> <span class="s2">&quot;owner_level&quot;</span><span class="p">:</span> <span class="n">OWNER_LEVEL</span><span class="p">}</span>
+                <span class="n">to_claim_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">new_ownership</span><span class="p">)</span>
+        <span class="n">claimed_list</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_partition_manager</span><span class="o">.</span><span class="n">claim_ownership</span><span class="p">(</span><span class="n">to_claim_list</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">claimed_list</span>
+
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">_start_claimed_partitions</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">claimed_partitions</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">partition</span> <span class="ow">in</span> <span class="n">claimed_partitions</span><span class="p">:</span>
+            <span class="n">partition_id</span> <span class="o">=</span> <span class="n">partition</span><span class="p">[</span><span class="s2">&quot;partition_id&quot;</span><span class="p">]</span>
+            <span class="n">offset</span> <span class="o">=</span> <span class="n">partition</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;offset&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_initial_event_position</span><span class="p">)</span>
+            <span class="n">consumer</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_eventhub_client</span><span class="o">.</span><span class="n">create_consumer</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_consumer_group_name</span><span class="p">,</span> <span class="n">partition_id</span><span class="p">,</span>
+                                                            <span class="n">EventPosition</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">offset</span><span class="p">)))</span>
+            <span class="n">partition_processor</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_partition_processor_factory</span><span class="p">(</span>
+                <span class="n">checkpoint_manager</span><span class="o">=</span><span class="n">CheckpointManager</span><span class="p">(</span><span class="n">partition_id</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_eventhub_name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_consumer_group_name</span><span class="p">,</span>
+                                                     <span class="bp">self</span><span class="o">.</span><span class="n">_id</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_partition_manager</span><span class="p">)</span>
+            <span class="p">)</span>
+            <span class="n">loop</span> <span class="o">=</span> <span class="n">get_running_loop</span><span class="p">()</span>
+            <span class="n">task</span> <span class="o">=</span> <span class="n">loop</span><span class="o">.</span><span class="n">create_task</span><span class="p">(</span>
+                <span class="n">_receive</span><span class="p">(</span><span class="n">consumer</span><span class="p">,</span> <span class="n">partition_processor</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_receive_timeout</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_tasks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">task</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">await</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">gather</span><span class="p">(</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">_tasks</span><span class="p">)</span>
+        <span class="k">finally</span><span class="p">:</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;EventProcessor </span><span class="si">%r</span><span class="s2"> has stopped&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_id</span><span class="p">)</span></div>
+
+
+<span class="k">async</span> <span class="k">def</span> <span class="nf">_receive</span><span class="p">(</span><span class="n">partition_consumer</span><span class="p">,</span> <span class="n">partition_processor</span><span class="p">,</span> <span class="n">receive_timeout</span><span class="p">):</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">events</span> <span class="o">=</span> <span class="k">await</span> <span class="n">partition_consumer</span><span class="o">.</span><span class="n">receive</span><span class="p">(</span><span class="n">timeout</span><span class="o">=</span><span class="n">receive_timeout</span><span class="p">)</span>
+            <span class="k">except</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">CancelledError</span> <span class="k">as</span> <span class="n">cancelled_error</span><span class="p">:</span>
+                <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+                    <span class="s2">&quot;PartitionProcessor of EventProcessor instance </span><span class="si">%r</span><span class="s2"> of eventhub </span><span class="si">%r</span><span class="s2"> partition </span><span class="si">%r</span><span class="s2"> consumer group </span><span class="si">%r</span><span class="s2"> &quot;</span>
+                    <span class="s2">&quot;is cancelled&quot;</span><span class="p">,</span>
+                    <span class="n">partition_processor</span><span class="o">.</span><span class="n">_checkpoint_manager</span><span class="o">.</span><span class="n">owner_id</span><span class="p">,</span>
+                    <span class="n">partition_processor</span><span class="o">.</span><span class="n">_checkpoint_manager</span><span class="o">.</span><span class="n">eventhub_name</span><span class="p">,</span>
+                    <span class="n">partition_processor</span><span class="o">.</span><span class="n">_checkpoint_manager</span><span class="o">.</span><span class="n">partition_id</span><span class="p">,</span>
+                    <span class="n">partition_processor</span><span class="o">.</span><span class="n">_checkpoint_manager</span><span class="o">.</span><span class="n">consumer_group_name</span>
+                <span class="p">)</span>
+                <span class="k">await</span> <span class="n">partition_processor</span><span class="o">.</span><span class="n">process_error</span><span class="p">(</span><span class="n">cancelled_error</span><span class="p">)</span>
+                <span class="k">await</span> <span class="n">partition_processor</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="n">reason</span><span class="o">=</span><span class="n">CloseReason</span><span class="o">.</span><span class="n">SHUTDOWN</span><span class="p">)</span>
+                <span class="k">break</span>
+            <span class="k">except</span> <span class="n">EventHubError</span> <span class="k">as</span> <span class="n">eh_err</span><span class="p">:</span>
+                <span class="n">reason</span> <span class="o">=</span> <span class="n">CloseReason</span><span class="o">.</span><span class="n">LEASE_LOST</span> <span class="k">if</span> <span class="n">eh_err</span><span class="o">.</span><span class="n">error</span> <span class="o">==</span> <span class="s2">&quot;link:stolen&quot;</span> <span class="k">else</span> <span class="n">CloseReason</span><span class="o">.</span><span class="n">EVENTHUB_EXCEPTION</span>
+                <span class="n">log</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
+                    <span class="s2">&quot;PartitionProcessor of EventProcessor instance </span><span class="si">%r</span><span class="s2"> of eventhub </span><span class="si">%r</span><span class="s2"> partition </span><span class="si">%r</span><span class="s2"> consumer group </span><span class="si">%r</span><span class="s2"> &quot;</span>
+                    <span class="s2">&quot;has met an exception receiving events. It&#39;s being closed. The exception is </span><span class="si">%r</span><span class="s2">.&quot;</span><span class="p">,</span>
+                    <span class="n">partition_processor</span><span class="o">.</span><span class="n">_checkpoint_manager</span><span class="o">.</span><span class="n">owner_id</span><span class="p">,</span>
+                    <span class="n">partition_processor</span><span class="o">.</span><span class="n">_checkpoint_manager</span><span class="o">.</span><span class="n">eventhub_name</span><span class="p">,</span>
+                    <span class="n">partition_processor</span><span class="o">.</span><span class="n">_checkpoint_manager</span><span class="o">.</span><span class="n">partition_id</span><span class="p">,</span>
+                    <span class="n">partition_processor</span><span class="o">.</span><span class="n">_checkpoint_manager</span><span class="o">.</span><span class="n">consumer_group_name</span><span class="p">,</span>
+                    <span class="n">eh_err</span>
+                <span class="p">)</span>
+                <span class="k">await</span> <span class="n">partition_processor</span><span class="o">.</span><span class="n">process_error</span><span class="p">(</span><span class="n">eh_err</span><span class="p">)</span>
+                <span class="k">await</span> <span class="n">partition_processor</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="n">reason</span><span class="o">=</span><span class="n">reason</span><span class="p">)</span>
+                <span class="k">break</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="k">await</span> <span class="n">partition_processor</span><span class="o">.</span><span class="n">process_events</span><span class="p">(</span><span class="n">events</span><span class="p">)</span>
+            <span class="k">except</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">CancelledError</span> <span class="k">as</span> <span class="n">cancelled_error</span><span class="p">:</span>
+                <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+                    <span class="s2">&quot;PartitionProcessor of EventProcessor instance </span><span class="si">%r</span><span class="s2"> of eventhub </span><span class="si">%r</span><span class="s2"> partition </span><span class="si">%r</span><span class="s2"> consumer group </span><span class="si">%r</span><span class="s2"> &quot;</span>
+                    <span class="s2">&quot;is cancelled.&quot;</span><span class="p">,</span>
+                    <span class="n">partition_processor</span><span class="o">.</span><span class="n">_checkpoint_manager</span><span class="o">.</span><span class="n">owner_id</span><span class="p">,</span>
+                    <span class="n">partition_processor</span><span class="o">.</span><span class="n">_checkpoint_manager</span><span class="o">.</span><span class="n">eventhub_name</span><span class="p">,</span>
+                    <span class="n">partition_processor</span><span class="o">.</span><span class="n">_checkpoint_manager</span><span class="o">.</span><span class="n">partition_id</span><span class="p">,</span>
+                    <span class="n">partition_processor</span><span class="o">.</span><span class="n">_checkpoint_manager</span><span class="o">.</span><span class="n">consumer_group_name</span>
+                <span class="p">)</span>
+                <span class="k">await</span> <span class="n">partition_processor</span><span class="o">.</span><span class="n">process_error</span><span class="p">(</span><span class="n">cancelled_error</span><span class="p">)</span>
+                <span class="k">await</span> <span class="n">partition_processor</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="n">reason</span><span class="o">=</span><span class="n">CloseReason</span><span class="o">.</span><span class="n">SHUTDOWN</span><span class="p">)</span>
+                <span class="k">break</span>
+            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">exp</span><span class="p">:</span>  <span class="c1"># user code has caused an error</span>
+                <span class="n">log</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
+                    <span class="s2">&quot;PartitionProcessor of EventProcessor instance </span><span class="si">%r</span><span class="s2"> of eventhub </span><span class="si">%r</span><span class="s2"> partition </span><span class="si">%r</span><span class="s2"> consumer group </span><span class="si">%r</span><span class="s2"> &quot;</span>
+                    <span class="s2">&quot;has met an exception from user code process_events. It&#39;s being closed. The exception is </span><span class="si">%r</span><span class="s2">.&quot;</span><span class="p">,</span>
+                    <span class="n">partition_processor</span><span class="o">.</span><span class="n">_checkpoint_manager</span><span class="o">.</span><span class="n">owner_id</span><span class="p">,</span>
+                    <span class="n">partition_processor</span><span class="o">.</span><span class="n">_checkpoint_manager</span><span class="o">.</span><span class="n">eventhub_name</span><span class="p">,</span>
+                    <span class="n">partition_processor</span><span class="o">.</span><span class="n">_checkpoint_manager</span><span class="o">.</span><span class="n">partition_id</span><span class="p">,</span>
+                    <span class="n">partition_processor</span><span class="o">.</span><span class="n">_checkpoint_manager</span><span class="o">.</span><span class="n">consumer_group_name</span><span class="p">,</span>
+                    <span class="n">exp</span>
+                <span class="p">)</span>
+                <span class="k">await</span> <span class="n">partition_processor</span><span class="o">.</span><span class="n">process_error</span><span class="p">(</span><span class="n">exp</span><span class="p">)</span>
+                <span class="k">await</span> <span class="n">partition_processor</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="n">reason</span><span class="o">=</span><span class="n">CloseReason</span><span class="o">.</span><span class="n">EVENTHUB_EXCEPTION</span><span class="p">)</span>
+                <span class="k">break</span>
+                <span class="c1"># TODO: will review whether to break and close partition processor after user&#39;s code has an exception</span>
+        <span class="c1"># TODO: try to inform other EventProcessors to take the partition when this partition is closed in preview 3?</span>
+    <span class="k">finally</span><span class="p">:</span>
+        <span class="k">await</span> <span class="n">partition_consumer</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016, Microsoft
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+  
+ 
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-62780441-36"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-62780441-36');
+</script>
+
+
+</body>
+</html>
