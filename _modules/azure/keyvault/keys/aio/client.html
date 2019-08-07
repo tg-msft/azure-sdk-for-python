@@ -281,7 +281,7 @@
 <span class="c1"># Licensed under the MIT License.</span>
 <span class="c1"># ------------------------------------</span>
 <span class="kn">from</span> <span class="nn">datetime</span> <span class="k">import</span> <span class="n">datetime</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="k">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">AsyncIterable</span><span class="p">,</span> <span class="n">Mapping</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="k">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">AsyncIterable</span><span class="p">,</span> <span class="n">Mapping</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Union</span>
 
 <span class="kn">from</span> <span class="nn">azure.core.exceptions</span> <span class="k">import</span> <span class="n">ResourceExistsError</span><span class="p">,</span> <span class="n">ResourceNotFoundError</span>
 <span class="kn">from</span> <span class="nn">azure.core.tracing.decorator</span> <span class="k">import</span> <span class="n">distributed_trace</span>
@@ -289,8 +289,10 @@
 <span class="kn">from</span> <span class="nn">azure.keyvault.keys.models</span> <span class="k">import</span> <span class="n">DeletedKey</span><span class="p">,</span> <span class="n">JsonWebKey</span><span class="p">,</span> <span class="n">Key</span><span class="p">,</span> <span class="n">KeyBase</span><span class="p">,</span> <span class="n">KeyOperationResult</span>
 <span class="kn">from</span> <span class="nn">azure.keyvault.keys._shared</span> <span class="k">import</span> <span class="n">AsyncKeyVaultClientBase</span>
 
+<span class="kn">from</span> <span class="nn">..crypto.aio</span> <span class="k">import</span> <span class="n">CryptographyClient</span>
 
-<div class="viewcode-block" id="KeyClient"><a class="viewcode-back" href="../../../../../ref/azure.keyvault.keys.aio.html#azure.keyvault.keys.aio.KeyClient">[docs]</a><span class="k">class</span> <span class="nc">KeyClient</span><span class="p">(</span><span class="n">AsyncKeyVaultClientBase</span><span class="p">):</span>
+
+<div class="viewcode-block" id="KeyClient"><a class="viewcode-back" href="../../../../../ref/azure.keyvault.keys.aio.html#azure.keyvault.keys.aio.client.KeyClient">[docs]</a><span class="k">class</span> <span class="nc">KeyClient</span><span class="p">(</span><span class="n">AsyncKeyVaultClientBase</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;A high-level asynchronous interface for managing a vault&#39;s keys.</span>
 
 <span class="sd">    :param credential: An object which can provide an access token for the vault, such as a credential from</span>
@@ -308,7 +310,13 @@
 
     <span class="c1"># pylint:disable=protected-access</span>
 
-<div class="viewcode-block" id="KeyClient.create_key"><a class="viewcode-back" href="../../../../../ref/azure.keyvault.keys.aio.html#azure.keyvault.keys.aio.KeyClient.create_key">[docs]</a>    <span class="nd">@distributed_trace_async</span>
+<div class="viewcode-block" id="KeyClient.get_cryptography_client"><a class="viewcode-back" href="../../../../../ref/azure.keyvault.keys.aio.html#azure.keyvault.keys.aio.client.KeyClient.get_cryptography_client">[docs]</a>    <span class="k">def</span> <span class="nf">get_cryptography_client</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Key</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CryptographyClient</span><span class="p">:</span>
+        <span class="c1"># the initializer requires a credential but won&#39;t actually use it in this case because we pass in this</span>
+        <span class="c1"># KeyClient&#39;s generated client, whose pipeline (and auth policy) is fully configured</span>
+        <span class="n">credential</span> <span class="o">=</span> <span class="nb">object</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">CryptographyClient</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">credential</span><span class="p">,</span> <span class="n">generated_client</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_client</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="KeyClient.create_key"><a class="viewcode-back" href="../../../../../ref/azure.keyvault.keys.aio.html#azure.keyvault.keys.aio.client.KeyClient.create_key">[docs]</a>    <span class="nd">@distributed_trace_async</span>
     <span class="k">async</span> <span class="k">def</span> <span class="nf">create_key</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
@@ -366,7 +374,7 @@
         <span class="p">)</span>
         <span class="k">return</span> <span class="n">Key</span><span class="o">.</span><span class="n">_from_key_bundle</span><span class="p">(</span><span class="n">bundle</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="KeyClient.create_rsa_key"><a class="viewcode-back" href="../../../../../ref/azure.keyvault.keys.aio.html#azure.keyvault.keys.aio.KeyClient.create_rsa_key">[docs]</a>    <span class="nd">@distributed_trace_async</span>
+<div class="viewcode-block" id="KeyClient.create_rsa_key"><a class="viewcode-back" href="../../../../../ref/azure.keyvault.keys.aio.html#azure.keyvault.keys.aio.client.KeyClient.create_rsa_key">[docs]</a>    <span class="nd">@distributed_trace_async</span>
     <span class="k">async</span> <span class="k">def</span> <span class="nf">create_rsa_key</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
@@ -416,7 +424,7 @@
             <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="KeyClient.create_ec_key"><a class="viewcode-back" href="../../../../../ref/azure.keyvault.keys.aio.html#azure.keyvault.keys.aio.KeyClient.create_ec_key">[docs]</a>    <span class="nd">@distributed_trace_async</span>
+<div class="viewcode-block" id="KeyClient.create_ec_key"><a class="viewcode-back" href="../../../../../ref/azure.keyvault.keys.aio.html#azure.keyvault.keys.aio.client.KeyClient.create_ec_key">[docs]</a>    <span class="nd">@distributed_trace_async</span>
     <span class="k">async</span> <span class="k">def</span> <span class="nf">create_ec_key</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
@@ -467,7 +475,7 @@
             <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="KeyClient.delete_key"><a class="viewcode-back" href="../../../../../ref/azure.keyvault.keys.aio.html#azure.keyvault.keys.aio.KeyClient.delete_key">[docs]</a>    <span class="nd">@distributed_trace_async</span>
+<div class="viewcode-block" id="KeyClient.delete_key"><a class="viewcode-back" href="../../../../../ref/azure.keyvault.keys.aio.html#azure.keyvault.keys.aio.client.KeyClient.delete_key">[docs]</a>    <span class="nd">@distributed_trace_async</span>
     <span class="k">async</span> <span class="k">def</span> <span class="nf">delete_key</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">DeletedKey</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Delete all versions of a key and its cryptographic material. Requires the keys/delete permission.</span>
 
@@ -487,7 +495,7 @@
         <span class="n">bundle</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_client</span><span class="o">.</span><span class="n">delete_key</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">vault_url</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">error_map</span><span class="o">=</span><span class="p">{</span><span class="mi">404</span><span class="p">:</span> <span class="n">ResourceNotFoundError</span><span class="p">},</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">DeletedKey</span><span class="o">.</span><span class="n">_from_deleted_key_bundle</span><span class="p">(</span><span class="n">bundle</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="KeyClient.get_key"><a class="viewcode-back" href="../../../../../ref/azure.keyvault.keys.aio.html#azure.keyvault.keys.aio.KeyClient.get_key">[docs]</a>    <span class="nd">@distributed_trace_async</span>
+<div class="viewcode-block" id="KeyClient.get_key"><a class="viewcode-back" href="../../../../../ref/azure.keyvault.keys.aio.html#azure.keyvault.keys.aio.client.KeyClient.get_key">[docs]</a>    <span class="nd">@distributed_trace_async</span>
     <span class="k">async</span> <span class="k">def</span> <span class="nf">get_key</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">version</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Key</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Get a key&#39;s attributes and, if it&#39;s an asymmetric key, its public material. Requires the keys/get permission.</span>
 
@@ -513,7 +521,7 @@
         <span class="p">)</span>
         <span class="k">return</span> <span class="n">Key</span><span class="o">.</span><span class="n">_from_key_bundle</span><span class="p">(</span><span class="n">bundle</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="KeyClient.get_deleted_key"><a class="viewcode-back" href="../../../../../ref/azure.keyvault.keys.aio.html#azure.keyvault.keys.aio.KeyClient.get_deleted_key">[docs]</a>    <span class="nd">@distributed_trace_async</span>
+<div class="viewcode-block" id="KeyClient.get_deleted_key"><a class="viewcode-back" href="../../../../../ref/azure.keyvault.keys.aio.html#azure.keyvault.keys.aio.client.KeyClient.get_deleted_key">[docs]</a>    <span class="nd">@distributed_trace_async</span>
     <span class="k">async</span> <span class="k">def</span> <span class="nf">get_deleted_key</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">DeletedKey</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Get a deleted key. This is only possible in a vault with soft-delete enabled. Requires the keys/get</span>
 <span class="sd">        permission.</span>
@@ -535,7 +543,7 @@
         <span class="p">)</span>
         <span class="k">return</span> <span class="n">DeletedKey</span><span class="o">.</span><span class="n">_from_deleted_key_bundle</span><span class="p">(</span><span class="n">bundle</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="KeyClient.list_deleted_keys"><a class="viewcode-back" href="../../../../../ref/azure.keyvault.keys.aio.html#azure.keyvault.keys.aio.KeyClient.list_deleted_keys">[docs]</a>    <span class="nd">@distributed_trace</span>
+<div class="viewcode-block" id="KeyClient.list_deleted_keys"><a class="viewcode-back" href="../../../../../ref/azure.keyvault.keys.aio.html#azure.keyvault.keys.aio.client.KeyClient.list_deleted_keys">[docs]</a>    <span class="nd">@distributed_trace</span>
     <span class="k">def</span> <span class="nf">list_deleted_keys</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">AsyncIterable</span><span class="p">[</span><span class="n">DeletedKey</span><span class="p">]:</span>
         <span class="sd">&quot;&quot;&quot;List all deleted keys, including the public part of each. This is only possible in a vault with soft-delete</span>
 <span class="sd">        enabled. Requires the keys/list permission.</span>
@@ -559,7 +567,7 @@
             <span class="o">**</span><span class="n">kwargs</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="KeyClient.list_keys"><a class="viewcode-back" href="../../../../../ref/azure.keyvault.keys.aio.html#azure.keyvault.keys.aio.KeyClient.list_keys">[docs]</a>    <span class="nd">@distributed_trace</span>
+<div class="viewcode-block" id="KeyClient.list_keys"><a class="viewcode-back" href="../../../../../ref/azure.keyvault.keys.aio.html#azure.keyvault.keys.aio.client.KeyClient.list_keys">[docs]</a>    <span class="nd">@distributed_trace</span>
     <span class="k">def</span> <span class="nf">list_keys</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">AsyncIterable</span><span class="p">[</span><span class="n">KeyBase</span><span class="p">]:</span>
         <span class="sd">&quot;&quot;&quot;List identifiers, attributes, and tags of all keys in the vault. Requires the keys/list permission.</span>
 
@@ -582,7 +590,7 @@
             <span class="o">**</span><span class="n">kwargs</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="KeyClient.list_key_versions"><a class="viewcode-back" href="../../../../../ref/azure.keyvault.keys.aio.html#azure.keyvault.keys.aio.KeyClient.list_key_versions">[docs]</a>    <span class="nd">@distributed_trace</span>
+<div class="viewcode-block" id="KeyClient.list_key_versions"><a class="viewcode-back" href="../../../../../ref/azure.keyvault.keys.aio.html#azure.keyvault.keys.aio.client.KeyClient.list_key_versions">[docs]</a>    <span class="nd">@distributed_trace</span>
     <span class="k">def</span> <span class="nf">list_key_versions</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">AsyncIterable</span><span class="p">[</span><span class="n">KeyBase</span><span class="p">]:</span>
         <span class="sd">&quot;&quot;&quot;List the identifiers, attributes, and tags of a key&#39;s versions. Requires the keys/list permission.</span>
 
@@ -607,7 +615,7 @@
             <span class="o">**</span><span class="n">kwargs</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="KeyClient.purge_deleted_key"><a class="viewcode-back" href="../../../../../ref/azure.keyvault.keys.aio.html#azure.keyvault.keys.aio.KeyClient.purge_deleted_key">[docs]</a>    <span class="nd">@distributed_trace_async</span>
+<div class="viewcode-block" id="KeyClient.purge_deleted_key"><a class="viewcode-back" href="../../../../../ref/azure.keyvault.keys.aio.html#azure.keyvault.keys.aio.client.KeyClient.purge_deleted_key">[docs]</a>    <span class="nd">@distributed_trace_async</span>
     <span class="k">async</span> <span class="k">def</span> <span class="nf">purge_deleted_key</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Permanently delete the specified key. This is only possible in vaults with soft-delete enabled. If a vault</span>
 <span class="sd">        does not have soft-delete enabled, :func:`delete_key` is permanent, and this method will return an error.</span>
@@ -627,7 +635,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_client</span><span class="o">.</span><span class="n">purge_deleted_key</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">vault_url</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="KeyClient.recover_deleted_key"><a class="viewcode-back" href="../../../../../ref/azure.keyvault.keys.aio.html#azure.keyvault.keys.aio.KeyClient.recover_deleted_key">[docs]</a>    <span class="nd">@distributed_trace_async</span>
+<div class="viewcode-block" id="KeyClient.recover_deleted_key"><a class="viewcode-back" href="../../../../../ref/azure.keyvault.keys.aio.html#azure.keyvault.keys.aio.client.KeyClient.recover_deleted_key">[docs]</a>    <span class="nd">@distributed_trace_async</span>
     <span class="k">async</span> <span class="k">def</span> <span class="nf">recover_deleted_key</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Key</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Recover a deleted key to its latest version. This is only possible in vaults with soft-delete enabled. If a</span>
 <span class="sd">        vault does not have soft-delete enabled, :func:`delete_key` is permanent, and this method will return an error.</span>
@@ -650,7 +658,7 @@
         <span class="n">bundle</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_client</span><span class="o">.</span><span class="n">recover_deleted_key</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">vault_url</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">Key</span><span class="o">.</span><span class="n">_from_key_bundle</span><span class="p">(</span><span class="n">bundle</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="KeyClient.update_key"><a class="viewcode-back" href="../../../../../ref/azure.keyvault.keys.aio.html#azure.keyvault.keys.aio.KeyClient.update_key">[docs]</a>    <span class="nd">@distributed_trace_async</span>
+<div class="viewcode-block" id="KeyClient.update_key"><a class="viewcode-back" href="../../../../../ref/azure.keyvault.keys.aio.html#azure.keyvault.keys.aio.client.KeyClient.update_key">[docs]</a>    <span class="nd">@distributed_trace_async</span>
     <span class="k">async</span> <span class="k">def</span> <span class="nf">update_key</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
@@ -702,7 +710,7 @@
         <span class="p">)</span>
         <span class="k">return</span> <span class="n">Key</span><span class="o">.</span><span class="n">_from_key_bundle</span><span class="p">(</span><span class="n">bundle</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="KeyClient.backup_key"><a class="viewcode-back" href="../../../../../ref/azure.keyvault.keys.aio.html#azure.keyvault.keys.aio.KeyClient.backup_key">[docs]</a>    <span class="nd">@distributed_trace_async</span>
+<div class="viewcode-block" id="KeyClient.backup_key"><a class="viewcode-back" href="../../../../../ref/azure.keyvault.keys.aio.html#azure.keyvault.keys.aio.client.KeyClient.backup_key">[docs]</a>    <span class="nd">@distributed_trace_async</span>
     <span class="k">async</span> <span class="k">def</span> <span class="nf">backup_key</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Back up a key in a protected form that can&#39;t be used outside Azure Key Vault. This is intended to allow</span>
 <span class="sd">        copying a key from one vault to another. Requires the key/backup permission.</span>
@@ -728,7 +736,7 @@
         <span class="p">)</span>
         <span class="k">return</span> <span class="n">backup_result</span><span class="o">.</span><span class="n">value</span></div>
 
-<div class="viewcode-block" id="KeyClient.restore_key"><a class="viewcode-back" href="../../../../../ref/azure.keyvault.keys.aio.html#azure.keyvault.keys.aio.KeyClient.restore_key">[docs]</a>    <span class="nd">@distributed_trace_async</span>
+<div class="viewcode-block" id="KeyClient.restore_key"><a class="viewcode-back" href="../../../../../ref/azure.keyvault.keys.aio.html#azure.keyvault.keys.aio.client.KeyClient.restore_key">[docs]</a>    <span class="nd">@distributed_trace_async</span>
     <span class="k">async</span> <span class="k">def</span> <span class="nf">restore_key</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">backup</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Key</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Restore a key backup to the vault. This imports all versions of the key, with its name, attributes, and</span>
 <span class="sd">        access control policies. Requires the keys/restore permission.</span>
@@ -752,7 +760,7 @@
         <span class="n">bundle</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_client</span><span class="o">.</span><span class="n">restore_key</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">vault_url</span><span class="p">,</span> <span class="n">backup</span><span class="p">,</span> <span class="n">error_map</span><span class="o">=</span><span class="p">{</span><span class="mi">409</span><span class="p">:</span> <span class="n">ResourceExistsError</span><span class="p">},</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">Key</span><span class="o">.</span><span class="n">_from_key_bundle</span><span class="p">(</span><span class="n">bundle</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="KeyClient.import_key"><a class="viewcode-back" href="../../../../../ref/azure.keyvault.keys.aio.html#azure.keyvault.keys.aio.KeyClient.import_key">[docs]</a>    <span class="nd">@distributed_trace_async</span>
+<div class="viewcode-block" id="KeyClient.import_key"><a class="viewcode-back" href="../../../../../ref/azure.keyvault.keys.aio.html#azure.keyvault.keys.aio.client.KeyClient.import_key">[docs]</a>    <span class="nd">@distributed_trace_async</span>
     <span class="k">async</span> <span class="k">def</span> <span class="nf">import_key</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
@@ -788,7 +796,7 @@
         <span class="p">)</span>
         <span class="k">return</span> <span class="n">Key</span><span class="o">.</span><span class="n">_from_key_bundle</span><span class="p">(</span><span class="n">bundle</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="KeyClient.wrap_key"><a class="viewcode-back" href="../../../../../ref/azure.keyvault.keys.aio.html#azure.keyvault.keys.aio.KeyClient.wrap_key">[docs]</a>    <span class="nd">@distributed_trace_async</span>
+<div class="viewcode-block" id="KeyClient.wrap_key"><a class="viewcode-back" href="../../../../../ref/azure.keyvault.keys.aio.html#azure.keyvault.keys.aio.client.KeyClient.wrap_key">[docs]</a>    <span class="nd">@distributed_trace_async</span>
     <span class="k">async</span> <span class="k">def</span> <span class="nf">wrap_key</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">algorithm</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">,</span> <span class="n">version</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">KeyOperationResult</span><span class="p">:</span>
@@ -825,7 +833,7 @@
         <span class="p">)</span>
         <span class="k">return</span> <span class="n">KeyOperationResult</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="n">bundle</span><span class="o">.</span><span class="n">kid</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="n">bundle</span><span class="o">.</span><span class="n">result</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="KeyClient.unwrap_key"><a class="viewcode-back" href="../../../../../ref/azure.keyvault.keys.aio.html#azure.keyvault.keys.aio.KeyClient.unwrap_key">[docs]</a>    <span class="nd">@distributed_trace_async</span>
+<div class="viewcode-block" id="KeyClient.unwrap_key"><a class="viewcode-back" href="../../../../../ref/azure.keyvault.keys.aio.html#azure.keyvault.keys.aio.client.KeyClient.unwrap_key">[docs]</a>    <span class="nd">@distributed_trace_async</span>
     <span class="k">async</span> <span class="k">def</span> <span class="nf">unwrap_key</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">algorithm</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">,</span> <span class="n">version</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">KeyOperationResult</span><span class="p">:</span>

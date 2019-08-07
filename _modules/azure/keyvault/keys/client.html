@@ -297,10 +297,11 @@
 <span class="kn">from</span> <span class="nn">azure.core.tracing.decorator</span> <span class="k">import</span> <span class="n">distributed_trace</span>
 
 <span class="kn">from</span> <span class="nn">._shared</span> <span class="k">import</span> <span class="n">KeyVaultClientBase</span>
+<span class="kn">from</span> <span class="nn">.crypto</span> <span class="k">import</span> <span class="n">CryptographyClient</span>
 <span class="kn">from</span> <span class="nn">.models</span> <span class="k">import</span> <span class="n">Key</span><span class="p">,</span> <span class="n">KeyBase</span><span class="p">,</span> <span class="n">DeletedKey</span><span class="p">,</span> <span class="n">KeyOperationResult</span>
 
 
-<div class="viewcode-block" id="KeyClient"><a class="viewcode-back" href="../../../../ref/azure.keyvault.keys.html#azure.keyvault.keys.KeyClient">[docs]</a><span class="k">class</span> <span class="nc">KeyClient</span><span class="p">(</span><span class="n">KeyVaultClientBase</span><span class="p">):</span>
+<div class="viewcode-block" id="KeyClient"><a class="viewcode-back" href="../../../../ref/azure.keyvault.keys.html#azure.keyvault.keys.client.KeyClient">[docs]</a><span class="k">class</span> <span class="nc">KeyClient</span><span class="p">(</span><span class="n">KeyVaultClientBase</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;A high-level interface for managing a vault&#39;s keys.</span>
 
 <span class="sd">    :param credential: An object which can provide an access token for the vault, such as a credential from</span>
@@ -318,7 +319,15 @@
 
     <span class="c1"># pylint:disable=protected-access</span>
 
-<div class="viewcode-block" id="KeyClient.create_key"><a class="viewcode-back" href="../../../../ref/azure.keyvault.keys.html#azure.keyvault.keys.KeyClient.create_key">[docs]</a>    <span class="nd">@distributed_trace</span>
+<div class="viewcode-block" id="KeyClient.get_cryptography_client"><a class="viewcode-back" href="../../../../ref/azure.keyvault.keys.html#azure.keyvault.keys.client.KeyClient.get_cryptography_client">[docs]</a>    <span class="k">def</span> <span class="nf">get_cryptography_client</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="c1"># type: (Union[Key, str], Any) -&gt; CryptographyClient</span>
+
+        <span class="c1"># the initializer requires a credential but won&#39;t actually use it in this case because we pass in this</span>
+        <span class="c1"># KeyClient&#39;s generated client, whose pipeline (and auth policy) is fully configured</span>
+        <span class="n">credential</span> <span class="o">=</span> <span class="nb">object</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">CryptographyClient</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">credential</span><span class="p">,</span> <span class="n">generated_client</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_client</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="KeyClient.create_key"><a class="viewcode-back" href="../../../../ref/azure.keyvault.keys.html#azure.keyvault.keys.client.KeyClient.create_key">[docs]</a>    <span class="nd">@distributed_trace</span>
     <span class="k">def</span> <span class="nf">create_key</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">name</span><span class="p">,</span>
@@ -377,7 +386,7 @@
         <span class="p">)</span>
         <span class="k">return</span> <span class="n">Key</span><span class="o">.</span><span class="n">_from_key_bundle</span><span class="p">(</span><span class="n">bundle</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="KeyClient.create_rsa_key"><a class="viewcode-back" href="../../../../ref/azure.keyvault.keys.html#azure.keyvault.keys.KeyClient.create_rsa_key">[docs]</a>    <span class="nd">@distributed_trace</span>
+<div class="viewcode-block" id="KeyClient.create_rsa_key"><a class="viewcode-back" href="../../../../ref/azure.keyvault.keys.html#azure.keyvault.keys.client.KeyClient.create_rsa_key">[docs]</a>    <span class="nd">@distributed_trace</span>
     <span class="k">def</span> <span class="nf">create_rsa_key</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">name</span><span class="p">,</span>
@@ -428,7 +437,7 @@
             <span class="o">**</span><span class="n">kwargs</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="KeyClient.create_ec_key"><a class="viewcode-back" href="../../../../ref/azure.keyvault.keys.html#azure.keyvault.keys.KeyClient.create_ec_key">[docs]</a>    <span class="nd">@distributed_trace</span>
+<div class="viewcode-block" id="KeyClient.create_ec_key"><a class="viewcode-back" href="../../../../ref/azure.keyvault.keys.html#azure.keyvault.keys.client.KeyClient.create_ec_key">[docs]</a>    <span class="nd">@distributed_trace</span>
     <span class="k">def</span> <span class="nf">create_ec_key</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">name</span><span class="p">,</span>
@@ -481,7 +490,7 @@
             <span class="o">**</span><span class="n">kwargs</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="KeyClient.delete_key"><a class="viewcode-back" href="../../../../ref/azure.keyvault.keys.html#azure.keyvault.keys.KeyClient.delete_key">[docs]</a>    <span class="nd">@distributed_trace</span>
+<div class="viewcode-block" id="KeyClient.delete_key"><a class="viewcode-back" href="../../../../ref/azure.keyvault.keys.html#azure.keyvault.keys.client.KeyClient.delete_key">[docs]</a>    <span class="nd">@distributed_trace</span>
     <span class="k">def</span> <span class="nf">delete_key</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="c1"># type: (str, Mapping[str, Any]) -&gt; DeletedKey</span>
         <span class="sd">&quot;&quot;&quot;Delete all versions of a key and its cryptographic material. Requires the keys/delete permission.</span>
@@ -502,7 +511,7 @@
         <span class="n">bundle</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_client</span><span class="o">.</span><span class="n">delete_key</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">vault_url</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">error_map</span><span class="o">=</span><span class="p">{</span><span class="mi">404</span><span class="p">:</span> <span class="n">ResourceNotFoundError</span><span class="p">},</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">DeletedKey</span><span class="o">.</span><span class="n">_from_deleted_key_bundle</span><span class="p">(</span><span class="n">bundle</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="KeyClient.get_key"><a class="viewcode-back" href="../../../../ref/azure.keyvault.keys.html#azure.keyvault.keys.KeyClient.get_key">[docs]</a>    <span class="nd">@distributed_trace</span>
+<div class="viewcode-block" id="KeyClient.get_key"><a class="viewcode-back" href="../../../../ref/azure.keyvault.keys.html#azure.keyvault.keys.client.KeyClient.get_key">[docs]</a>    <span class="nd">@distributed_trace</span>
     <span class="k">def</span> <span class="nf">get_key</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">version</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="c1"># type: (str, Optional[str], Mapping[str, Any]) -&gt; Key</span>
         <span class="sd">&quot;&quot;&quot;Get a key&#39;s attributes and, if it&#39;s an asymmetric key, its public material. Requires the keys/get permission.</span>
@@ -526,7 +535,7 @@
         <span class="p">)</span>
         <span class="k">return</span> <span class="n">Key</span><span class="o">.</span><span class="n">_from_key_bundle</span><span class="p">(</span><span class="n">bundle</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="KeyClient.get_deleted_key"><a class="viewcode-back" href="../../../../ref/azure.keyvault.keys.html#azure.keyvault.keys.KeyClient.get_deleted_key">[docs]</a>    <span class="nd">@distributed_trace</span>
+<div class="viewcode-block" id="KeyClient.get_deleted_key"><a class="viewcode-back" href="../../../../ref/azure.keyvault.keys.html#azure.keyvault.keys.client.KeyClient.get_deleted_key">[docs]</a>    <span class="nd">@distributed_trace</span>
     <span class="k">def</span> <span class="nf">get_deleted_key</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="c1"># type: (str, Mapping[str, Any]) -&gt; DeletedKey</span>
         <span class="sd">&quot;&quot;&quot;Get a deleted key. This is only possible in a vault with soft-delete enabled. Requires the keys/get</span>
@@ -548,7 +557,7 @@
         <span class="n">bundle</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_client</span><span class="o">.</span><span class="n">get_deleted_key</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">vault_url</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">error_map</span><span class="o">=</span><span class="p">{</span><span class="mi">404</span><span class="p">:</span> <span class="n">ResourceNotFoundError</span><span class="p">},</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">DeletedKey</span><span class="o">.</span><span class="n">_from_deleted_key_bundle</span><span class="p">(</span><span class="n">bundle</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="KeyClient.list_deleted_keys"><a class="viewcode-back" href="../../../../ref/azure.keyvault.keys.html#azure.keyvault.keys.KeyClient.list_deleted_keys">[docs]</a>    <span class="nd">@distributed_trace</span>
+<div class="viewcode-block" id="KeyClient.list_deleted_keys"><a class="viewcode-back" href="../../../../ref/azure.keyvault.keys.html#azure.keyvault.keys.client.KeyClient.list_deleted_keys">[docs]</a>    <span class="nd">@distributed_trace</span>
     <span class="k">def</span> <span class="nf">list_deleted_keys</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="c1"># type: (Mapping[str, Any]) -&gt; ItemPaged[DeletedKey]</span>
         <span class="sd">&quot;&quot;&quot;List all deleted keys, including the public part of each. This is only possible in a vault with soft-delete</span>
@@ -573,7 +582,7 @@
             <span class="o">**</span><span class="n">kwargs</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="KeyClient.list_keys"><a class="viewcode-back" href="../../../../ref/azure.keyvault.keys.html#azure.keyvault.keys.KeyClient.list_keys">[docs]</a>    <span class="nd">@distributed_trace</span>
+<div class="viewcode-block" id="KeyClient.list_keys"><a class="viewcode-back" href="../../../../ref/azure.keyvault.keys.html#azure.keyvault.keys.client.KeyClient.list_keys">[docs]</a>    <span class="nd">@distributed_trace</span>
     <span class="k">def</span> <span class="nf">list_keys</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="c1"># type: (Mapping[str, Any]) -&gt; ItemPaged[KeyBase]</span>
         <span class="sd">&quot;&quot;&quot;List identifiers, attributes, and tags of all keys in the vault. Requires the keys/list permission.</span>
@@ -597,7 +606,7 @@
             <span class="o">**</span><span class="n">kwargs</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="KeyClient.list_key_versions"><a class="viewcode-back" href="../../../../ref/azure.keyvault.keys.html#azure.keyvault.keys.KeyClient.list_key_versions">[docs]</a>    <span class="nd">@distributed_trace</span>
+<div class="viewcode-block" id="KeyClient.list_key_versions"><a class="viewcode-back" href="../../../../ref/azure.keyvault.keys.html#azure.keyvault.keys.client.KeyClient.list_key_versions">[docs]</a>    <span class="nd">@distributed_trace</span>
     <span class="k">def</span> <span class="nf">list_key_versions</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="c1"># type: (str, Mapping[str, Any]) -&gt; ItemPaged[KeyBase]</span>
         <span class="sd">&quot;&quot;&quot;List the identifiers, attributes, and tags of a key&#39;s versions. Requires the keys/list permission.</span>
@@ -623,7 +632,7 @@
             <span class="o">**</span><span class="n">kwargs</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="KeyClient.purge_deleted_key"><a class="viewcode-back" href="../../../../ref/azure.keyvault.keys.html#azure.keyvault.keys.KeyClient.purge_deleted_key">[docs]</a>    <span class="nd">@distributed_trace</span>
+<div class="viewcode-block" id="KeyClient.purge_deleted_key"><a class="viewcode-back" href="../../../../ref/azure.keyvault.keys.html#azure.keyvault.keys.client.KeyClient.purge_deleted_key">[docs]</a>    <span class="nd">@distributed_trace</span>
     <span class="k">def</span> <span class="nf">purge_deleted_key</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="c1"># type: (str, Mapping[str, Any]) -&gt; None</span>
         <span class="sd">&quot;&quot;&quot;Permanently delete the specified key. This is only possible in vaults with soft-delete enabled. If a vault</span>
@@ -644,7 +653,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_client</span><span class="o">.</span><span class="n">purge_deleted_key</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">vault_url</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="KeyClient.recover_deleted_key"><a class="viewcode-back" href="../../../../ref/azure.keyvault.keys.html#azure.keyvault.keys.KeyClient.recover_deleted_key">[docs]</a>    <span class="nd">@distributed_trace</span>
+<div class="viewcode-block" id="KeyClient.recover_deleted_key"><a class="viewcode-back" href="../../../../ref/azure.keyvault.keys.html#azure.keyvault.keys.client.KeyClient.recover_deleted_key">[docs]</a>    <span class="nd">@distributed_trace</span>
     <span class="k">def</span> <span class="nf">recover_deleted_key</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="c1"># type: (str, Mapping[str, Any]) -&gt; Key</span>
         <span class="sd">&quot;&quot;&quot;Recover a deleted key to its latest version. This is only possible in vaults with soft-delete enabled. If a</span>
@@ -668,7 +677,7 @@
         <span class="n">bundle</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_client</span><span class="o">.</span><span class="n">recover_deleted_key</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">vault_url</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">Key</span><span class="o">.</span><span class="n">_from_key_bundle</span><span class="p">(</span><span class="n">bundle</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="KeyClient.update_key"><a class="viewcode-back" href="../../../../ref/azure.keyvault.keys.html#azure.keyvault.keys.KeyClient.update_key">[docs]</a>    <span class="nd">@distributed_trace</span>
+<div class="viewcode-block" id="KeyClient.update_key"><a class="viewcode-back" href="../../../../ref/azure.keyvault.keys.html#azure.keyvault.keys.client.KeyClient.update_key">[docs]</a>    <span class="nd">@distributed_trace</span>
     <span class="k">def</span> <span class="nf">update_key</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">version</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">key_operations</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">enabled</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">expires</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">not_before</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">tags</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span>
     <span class="p">):</span>
@@ -712,7 +721,7 @@
         <span class="p">)</span>
         <span class="k">return</span> <span class="n">Key</span><span class="o">.</span><span class="n">_from_key_bundle</span><span class="p">(</span><span class="n">bundle</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="KeyClient.backup_key"><a class="viewcode-back" href="../../../../ref/azure.keyvault.keys.html#azure.keyvault.keys.KeyClient.backup_key">[docs]</a>    <span class="nd">@distributed_trace</span>
+<div class="viewcode-block" id="KeyClient.backup_key"><a class="viewcode-back" href="../../../../ref/azure.keyvault.keys.html#azure.keyvault.keys.client.KeyClient.backup_key">[docs]</a>    <span class="nd">@distributed_trace</span>
     <span class="k">def</span> <span class="nf">backup_key</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="c1"># type: (str, Mapping[str, Any]) -&gt; bytes</span>
         <span class="sd">&quot;&quot;&quot;Back up a key in a protected form that can&#39;t be used outside Azure Key Vault. This is intended to allow</span>
@@ -737,7 +746,7 @@
         <span class="n">backup_result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_client</span><span class="o">.</span><span class="n">backup_key</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">vault_url</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">error_map</span><span class="o">=</span><span class="p">{</span><span class="mi">404</span><span class="p">:</span> <span class="n">ResourceNotFoundError</span><span class="p">},</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">backup_result</span><span class="o">.</span><span class="n">value</span></div>
 
-<div class="viewcode-block" id="KeyClient.restore_key"><a class="viewcode-back" href="../../../../ref/azure.keyvault.keys.html#azure.keyvault.keys.KeyClient.restore_key">[docs]</a>    <span class="nd">@distributed_trace</span>
+<div class="viewcode-block" id="KeyClient.restore_key"><a class="viewcode-back" href="../../../../ref/azure.keyvault.keys.html#azure.keyvault.keys.client.KeyClient.restore_key">[docs]</a>    <span class="nd">@distributed_trace</span>
     <span class="k">def</span> <span class="nf">restore_key</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">backup</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="c1"># type: (bytes, Mapping[str, Any]) -&gt; Key</span>
         <span class="sd">&quot;&quot;&quot;Restore a key backup to the vault. This imports all versions of the key, with its name, attributes, and</span>
@@ -762,7 +771,7 @@
         <span class="n">bundle</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_client</span><span class="o">.</span><span class="n">restore_key</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">vault_url</span><span class="p">,</span> <span class="n">backup</span><span class="p">,</span> <span class="n">error_map</span><span class="o">=</span><span class="p">{</span><span class="mi">409</span><span class="p">:</span> <span class="n">ResourceExistsError</span><span class="p">},</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">Key</span><span class="o">.</span><span class="n">_from_key_bundle</span><span class="p">(</span><span class="n">bundle</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="KeyClient.import_key"><a class="viewcode-back" href="../../../../ref/azure.keyvault.keys.html#azure.keyvault.keys.KeyClient.import_key">[docs]</a>    <span class="nd">@distributed_trace</span>
+<div class="viewcode-block" id="KeyClient.import_key"><a class="viewcode-back" href="../../../../ref/azure.keyvault.keys.html#azure.keyvault.keys.client.KeyClient.import_key">[docs]</a>    <span class="nd">@distributed_trace</span>
     <span class="k">def</span> <span class="nf">import_key</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">hsm</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">enabled</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">not_before</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">expires</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">tags</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="c1"># type: (str, List[str], Optional[bool], Optional[bool], Optional[datetime], Optional[datetime], Optional[Dict[str, str]], Mapping[str, Any]) -&gt; Key</span>
         <span class="sd">&quot;&quot;&quot;Import an externally created key. If ``name`` is already in use, import the key as a new version. Requires</span>
@@ -787,73 +796,7 @@
         <span class="n">bundle</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_client</span><span class="o">.</span><span class="n">import_key</span><span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">vault_url</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="n">key</span><span class="p">,</span> <span class="n">hsm</span><span class="o">=</span><span class="n">hsm</span><span class="p">,</span> <span class="n">key_attributes</span><span class="o">=</span><span class="n">attributes</span><span class="p">,</span> <span class="n">tags</span><span class="o">=</span><span class="n">tags</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span>
         <span class="p">)</span>
-        <span class="k">return</span> <span class="n">Key</span><span class="o">.</span><span class="n">_from_key_bundle</span><span class="p">(</span><span class="n">bundle</span><span class="p">)</span></div>
-
-<div class="viewcode-block" id="KeyClient.wrap_key"><a class="viewcode-back" href="../../../../ref/azure.keyvault.keys.html#azure.keyvault.keys.KeyClient.wrap_key">[docs]</a>    <span class="nd">@distributed_trace</span>
-    <span class="k">def</span> <span class="nf">wrap_key</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">algorithm</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">version</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="c1"># type: (str, str, Optional[str], bytes, Mapping[str, Any]) -&gt; KeyOperationResult</span>
-        <span class="sd">&quot;&quot;&quot;Wraps a symmetric key using a specified key.</span>
-
-<span class="sd">        The WRAP operation supports encryption of a symmetric key using a key</span>
-<span class="sd">        encryption key that has previously been stored in an Azure Key Vault.</span>
-<span class="sd">        The WRAP operation is only strictly necessary for symmetric keys stored</span>
-<span class="sd">        in Azure Key Vault since protection with an asymmetric key can be</span>
-<span class="sd">        performed using the public portion of the key. This operation is</span>
-<span class="sd">        supported for asymmetric keys as a convenience for callers that have a</span>
-<span class="sd">        key-reference but do not have access to the public key material. This</span>
-<span class="sd">        operation requires the keys/wrapKey permission.</span>
-
-<span class="sd">        :param str name: The name of the key</span>
-<span class="sd">        :param str version: The version of the key.</span>
-<span class="sd">        :param algorithm: algorithm identifier. Possible values include:</span>
-<span class="sd">         &#39;RSA-OAEP&#39;, &#39;RSA-OAEP-256&#39;, &#39;RSA1_5&#39;</span>
-<span class="sd">        :type algorithm: str or</span>
-<span class="sd">         ~azure.security.keyvault.v7_0.models.JsonWebKeyEncryptionAlgorithm</span>
-<span class="sd">        :param value:</span>
-<span class="sd">        :type value: bytes</span>
-<span class="sd">        :returns: The wrapped symmetric key.</span>
-<span class="sd">        :rtype: ~azure.keyvault.keys.models.Key</span>
-
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="n">version</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">version</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
-
-        <span class="n">bundle</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_client</span><span class="o">.</span><span class="n">wrap_key</span><span class="p">(</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">vault_url</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">key_version</span><span class="o">=</span><span class="n">version</span><span class="p">,</span> <span class="n">algorithm</span><span class="o">=</span><span class="n">algorithm</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="n">value</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span>
-        <span class="p">)</span>
-        <span class="k">return</span> <span class="n">KeyOperationResult</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="n">bundle</span><span class="o">.</span><span class="n">kid</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="n">bundle</span><span class="o">.</span><span class="n">result</span><span class="p">)</span></div>
-
-<div class="viewcode-block" id="KeyClient.unwrap_key"><a class="viewcode-back" href="../../../../ref/azure.keyvault.keys.html#azure.keyvault.keys.KeyClient.unwrap_key">[docs]</a>    <span class="nd">@distributed_trace</span>
-    <span class="k">def</span> <span class="nf">unwrap_key</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">algorithm</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">version</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="c1"># type: (str, str, Optional[str], bytes, Mapping[str, Any]) -&gt; KeyOperationResult</span>
-        <span class="sd">&quot;&quot;&quot;Unwraps a symmetric key using the specified key that was initially used</span>
-<span class="sd">        for wrapping that key.</span>
-
-<span class="sd">        The UNWRAP operation supports decryption of a symmetric key using the</span>
-<span class="sd">        target key encryption key. This operation is the reverse of the WRAP</span>
-<span class="sd">        operation. The UNWRAP operation applies to asymmetric and symmetric</span>
-<span class="sd">        keys stored in Azure Key Vault since it uses the private portion of the</span>
-<span class="sd">        key. This operation requires the keys/unwrapKey permission.</span>
-
-<span class="sd">        :param str name: The name of the key</span>
-<span class="sd">        :param str version: The version of the key.</span>
-<span class="sd">        :param algorithm: algorithm identifier. Possible values include:</span>
-<span class="sd">         &#39;RSA-OAEP&#39;, &#39;RSA-OAEP-256&#39;, &#39;RSA1_5&#39;</span>
-<span class="sd">        :type algorithm: str or</span>
-<span class="sd">         ~azure.security.keyvault.v7_0.models.JsonWebKeyEncryptionAlgorithm</span>
-<span class="sd">        :param value:</span>
-<span class="sd">        :type value: bytes</span>
-<span class="sd">        :returns: The unwrapped symmetric key.</span>
-<span class="sd">        :rtype: ~azure.keyvault.keys.models.Key</span>
-
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="n">version</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">version</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
-
-        <span class="n">bundle</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_client</span><span class="o">.</span><span class="n">unwrap_key</span><span class="p">(</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">vault_url</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">key_version</span><span class="o">=</span><span class="n">version</span><span class="p">,</span> <span class="n">algorithm</span><span class="o">=</span><span class="n">algorithm</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="n">value</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span>
-        <span class="p">)</span>
-        <span class="k">return</span> <span class="n">KeyOperationResult</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="n">bundle</span><span class="o">.</span><span class="n">kid</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="n">bundle</span><span class="o">.</span><span class="n">result</span><span class="p">)</span></div></div>
+        <span class="k">return</span> <span class="n">Key</span><span class="o">.</span><span class="n">_from_key_bundle</span><span class="p">(</span><span class="n">bundle</span><span class="p">)</span></div></div>
 </pre></div>
 
            </div>

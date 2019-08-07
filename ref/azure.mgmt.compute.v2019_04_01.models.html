@@ -318,7 +318,7 @@ sending a request.</p>
 <dt class="field-odd">Variables</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>resource_type</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The type of resource the SKU applies to.</p></li>
-<li><p><a class="reference internal" href="azure.keyvault.secrets.html#azure.keyvault.secrets.models.SecretAttributes.name" title="azure.keyvault.secrets.models.SecretAttributes.name"><strong>name</strong></a> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The name of SKU.</p></li>
+<li><p><a class="reference internal" href="azure.keyvault.keys.html#azure.keyvault.keys.models.KeyBase.name" title="azure.keyvault.keys.models.KeyBase.name"><strong>name</strong></a> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The name of SKU.</p></li>
 <li><p><a class="reference internal" href="azure.mgmt.kusto.models.html#azure.mgmt.kusto.models.AzureSku.tier" title="azure.mgmt.kusto.models.AzureSku.tier"><strong>tier</strong></a> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Specifies the tier of virtual machines in a scale set.&lt;br
 /&gt;&lt;br /&gt; Possible Values:&lt;br /&gt;&lt;br /&gt; <strong>Standard**&lt;br /&gt;&lt;br /&gt; **Basic</strong></p></li>
 <li><p><a class="reference internal" href="azure.eventhub.html#azure.eventhub.common.EventDataBatch.size" title="azure.eventhub.common.EventDataBatch.size"><strong>size</strong></a> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The Size of the SKU.</p></li>
@@ -348,8 +348,8 @@ sending a request.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Variables</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><a class="reference internal" href="azure.keyvault.secrets.html#azure.keyvault.secrets.models.SecretAttributes.name" title="azure.keyvault.secrets.models.SecretAttributes.name"><strong>name</strong></a> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – An invariant to describe the feature.</p></li>
-<li><p><a class="reference internal" href="azure.keyvault.secrets.html#azure.keyvault.secrets.models.Secret.value" title="azure.keyvault.secrets.models.Secret.value"><strong>value</strong></a> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – An invariant if the feature is measured by quantity.</p></li>
+<li><p><a class="reference internal" href="azure.keyvault.keys.html#azure.keyvault.keys.models.KeyBase.name" title="azure.keyvault.keys.models.KeyBase.name"><strong>name</strong></a> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – An invariant to describe the feature.</p></li>
+<li><p><a class="reference internal" href="azure.keyvault.keys.html#azure.keyvault.keys.models.KeyOperationResult.value" title="azure.keyvault.keys.models.KeyOperationResult.value"><strong>value</strong></a> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – An invariant if the feature is measured by quantity.</p></li>
 </ul>
 </dd>
 </dl>
@@ -465,7 +465,7 @@ sending a request.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Variables</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><a class="reference internal" href="azure.keyvault.secrets.html#azure.keyvault.secrets.models.SecretAttributes.name" title="azure.keyvault.secrets.models.SecretAttributes.name"><strong>name</strong></a> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a><em>]</em>) – The set of zones that the SKU is available in with the
+<li><p><a class="reference internal" href="azure.keyvault.keys.html#azure.keyvault.keys.models.KeyBase.name" title="azure.keyvault.keys.models.KeyBase.name"><strong>name</strong></a> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a><em>]</em>) – The set of zones that the SKU is available in with the
 specified capabilities.</p></li>
 <li><p><strong>capabilities</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><em>list</em></a><em>[</em><a class="reference internal" href="#azure.mgmt.compute.v2019_04_01.models.ResourceSkuCapabilities" title="azure.mgmt.compute.v2019_04_01.models.ResourceSkuCapabilities"><em>ResourceSkuCapabilities</em></a><em>]</em>) – A list of capabilities that are available for the SKU
 in the specified list of zones.</p></li>

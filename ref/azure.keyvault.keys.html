@@ -126,10 +126,13 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">azure.keyvault.keys package</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#subpackages">Subpackages</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="azure.keyvault.keys.aio.html">azure.keyvault.keys.aio package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="azure.keyvault.keys.crypto.html">azure.keyvault.keys.crypto package</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#submodules">Submodules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#azure-keyvault-keys-version-module">azure.keyvault.keys.version module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-azure.keyvault.keys.client">azure.keyvault.keys.client module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-azure.keyvault.keys.enums">azure.keyvault.keys.enums module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-azure.keyvault.keys.models">azure.keyvault.keys.models module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#module-azure.keyvault.keys">Module contents</a></li>
 </ul>
 </li>
@@ -295,7 +298,25 @@
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="azure.keyvault.keys.aio.html">azure.keyvault.keys.aio package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="azure.keyvault.keys.aio.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="azure.keyvault.keys.aio.html#module-azure.keyvault.keys.aio.client">azure.keyvault.keys.aio.client module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="azure.keyvault.keys.aio.html#module-azure.keyvault.keys.aio">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="azure.keyvault.keys.crypto.html">azure.keyvault.keys.crypto package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="azure.keyvault.keys.crypto.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="azure.keyvault.keys.crypto.aio.html">azure.keyvault.keys.crypto.aio package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="azure.keyvault.keys.crypto.aio.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="azure.keyvault.keys.crypto.aio.html#module-azure.keyvault.keys.crypto.aio.client">azure.keyvault.keys.crypto.aio.client module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="azure.keyvault.keys.crypto.aio.html#module-azure.keyvault.keys.crypto.aio">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="azure.keyvault.keys.crypto.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="azure.keyvault.keys.crypto.html#module-azure.keyvault.keys.crypto.client">azure.keyvault.keys.crypto.client module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="azure.keyvault.keys.crypto.html#module-azure.keyvault.keys.crypto.enums">azure.keyvault.keys.crypto.enums module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="azure.keyvault.keys.crypto.html#module-azure.keyvault.keys.crypto">Module contents</a></li>
 </ul>
 </li>
 </ul>
@@ -304,8 +325,948 @@
 <div class="section" id="submodules">
 <h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
 </div>
-<div class="section" id="azure-keyvault-keys-version-module">
-<h2>azure.keyvault.keys.version module<a class="headerlink" href="#azure-keyvault-keys-version-module" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-azure.keyvault.keys.client">
+<span id="azure-keyvault-keys-client-module"></span><h2>azure.keyvault.keys.client module<a class="headerlink" href="#module-azure.keyvault.keys.client" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="azure.keyvault.keys.client.KeyClient">
+<em class="property">class </em><code class="sig-prename descclassname">azure.keyvault.keys.client.</code><code class="sig-name descname">KeyClient</code><span class="sig-paren">(</span><em class="sig-param">vault_url</em>, <em class="sig-param">credential</em>, <em class="sig-param">transport=None</em>, <em class="sig-param">api_version=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/keyvault/keys/client.html#KeyClient"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.keyvault.keys.client.KeyClient" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">azure.keyvault.keys._shared.client_base.KeyVaultClientBase</span></code></p>
+<p>A high-level interface for managing a vault’s keys.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>credential</strong> – An object which can provide an access token for the vault, such as a credential from
+<a class="reference internal" href="azure.identity.html#module-azure.identity" title="azure.identity"><code class="xref py py-mod docutils literal notranslate"><span class="pre">azure.identity</span></code></a></p></li>
+<li><p><strong>vault_url</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – URL of the vault the client will access</p></li>
+</ul>
+</dd>
+</dl>
+<dl>
+<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id1">
+<div class="code-block-caption"><span class="caption-text">Create a new <code class="docutils literal notranslate"><span class="pre">KeyClient</span></code></span><a class="headerlink" href="#id1" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
+<span class="kn">from</span> <span class="nn">azure.identity</span> <span class="kn">import</span> <span class="n">DefaultAzureCredential</span>
+<span class="kn">from</span> <span class="nn">azure.keyvault.keys</span> <span class="kn">import</span> <span class="n">KeyClient</span>
+
+<span class="c1"># Create a KeyClient using default Azure credentials</span>
+<span class="n">credential</span> <span class="o">=</span> <span class="n">DefaultAzureCredential</span><span class="p">()</span>
+<span class="n">key_client</span> <span class="o">=</span> <span class="n">KeyClient</span><span class="p">(</span><span class="n">vault_url</span><span class="p">,</span> <span class="n">credential</span><span class="p">)</span>
+
+</pre></div>
+</div>
+</div>
+</dd>
+</dl>
+<dl class="method">
+<dt id="azure.keyvault.keys.client.KeyClient.backup_key">
+<code class="sig-name descname">backup_key</code><span class="sig-paren">(</span><em class="sig-param">name</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/keyvault/keys/client.html#KeyClient.backup_key"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.keyvault.keys.client.KeyClient.backup_key" title="Permalink to this definition">¶</a></dt>
+<dd><p>Back up a key in a protected form that can’t be used outside Azure Key Vault. This is intended to allow
+copying a key from one vault to another. Requires the key/backup permission.</p>
+<p>Backup / restore cannot be performed across geopolitical boundaries. For example, a backup from a vault in a
+USA region cannot be restored to a vault in an EU region.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The name of the key</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The raw bytes of the key backup</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3.5/library/functions.html#bytes" title="(in Python v3.5)">bytes</a></p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p>~azure.core.exceptions.ResourceNotFoundError if the key doesn’t exist</p>
+</dd>
+</dl>
+<dl>
+<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id2">
+<div class="code-block-caption"><span class="caption-text">Get a key backup</span><a class="headerlink" href="#id2" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
+<span class="c1"># backup key</span>
+<span class="n">key_backup</span> <span class="o">=</span> <span class="n">key_client</span><span class="o">.</span><span class="n">backup_key</span><span class="p">(</span><span class="n">key_name</span><span class="p">)</span>
+
+<span class="c1"># returns the raw bytes of the backed up key</span>
+<span class="k">print</span><span class="p">(</span><span class="n">key_backup</span><span class="p">)</span>
+
+</pre></div>
+</div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="azure.keyvault.keys.client.KeyClient.create_ec_key">
+<code class="sig-name descname">create_ec_key</code><span class="sig-paren">(</span><em class="sig-param">name</em>, <em class="sig-param">hsm</em>, <em class="sig-param">curve=None</em>, <em class="sig-param">key_operations=None</em>, <em class="sig-param">enabled=None</em>, <em class="sig-param">expires=None</em>, <em class="sig-param">not_before=None</em>, <em class="sig-param">tags=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/keyvault/keys/client.html#KeyClient.create_ec_key"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.keyvault.keys.client.KeyClient.create_ec_key" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a new elliptic curve key. If <code class="docutils literal notranslate"><span class="pre">name</span></code> is already in use, create a new version of the key. Requires
+the keys/create permission.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The name for the new key. Key Vault will generate the key’s version.</p></li>
+<li><p><strong>hsm</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#bool" title="(in Python v3.5)"><em>bool</em></a>) – Whether to create as a hardware key (HSM) or software key.</p></li>
+<li><p><strong>curve</strong> (<a class="reference internal" href="#azure.keyvault.keys.enums.JsonWebKeyCurveName" title="azure.keyvault.keys.enums.JsonWebKeyCurveName"><em>JsonWebKeyCurveName</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – (optional) Elliptic curve name. Defaults to the NIST P-256 elliptic curve.</p></li>
+<li><p><strong>key_operations</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><em>list</em></a><em>(</em><a class="reference internal" href="#azure.keyvault.keys.enums.JsonWebKeyOperation" title="azure.keyvault.keys.enums.JsonWebKeyOperation"><em>JsonWebKeyOperation</em></a><em>)</em>) – (optional) Allowed key operations</p></li>
+<li><p><strong>enabled</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#bool" title="(in Python v3.5)"><em>bool</em></a>) – (optional) Whether the key is enabled for use</p></li>
+<li><p><strong>expires</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/datetime.html#datetime.datetime" title="(in Python v3.5)"><em>datetime.datetime</em></a>) – (optional) Expiry date of the key in UTC</p></li>
+<li><p><strong>not_before</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/datetime.html#datetime.datetime" title="(in Python v3.5)"><em>datetime.datetime</em></a>) – (optional) Not before date of the key in UTC</p></li>
+<li><p><strong>tags</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#dict" title="(in Python v3.5)"><em>dict</em></a>) – (optional) Application specific metadata in the form of key-value pairs</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The created key</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#azure.keyvault.keys.models.Key" title="azure.keyvault.keys.models.Key">Key</a></p>
+</dd>
+</dl>
+<dl>
+<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id3">
+<div class="code-block-caption"><span class="caption-text">Create an elliptic curve key</span><a class="headerlink" href="#id3" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">key_curve</span> <span class="o">=</span> <span class="s2">&quot;P-256&quot;</span>
+
+<span class="c1"># create an EC (Elliptic curve) key with curve specification</span>
+<span class="c1"># EC key can be created with default curve of &#39;P-256&#39;</span>
+<span class="n">ec_key</span> <span class="o">=</span> <span class="n">key_client</span><span class="o">.</span><span class="n">create_ec_key</span><span class="p">(</span><span class="s2">&quot;key-name&quot;</span><span class="p">,</span> <span class="n">hsm</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">curve</span><span class="o">=</span><span class="n">key_curve</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">ec_key</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">ec_key</span><span class="o">.</span><span class="n">version</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">ec_key</span><span class="o">.</span><span class="n">key_material</span><span class="o">.</span><span class="n">kty</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">ec_key</span><span class="o">.</span><span class="n">key_material</span><span class="o">.</span><span class="n">crv</span><span class="p">)</span>
+
+</pre></div>
+</div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="azure.keyvault.keys.client.KeyClient.create_key">
+<code class="sig-name descname">create_key</code><span class="sig-paren">(</span><em class="sig-param">name</em>, <em class="sig-param">key_type</em>, <em class="sig-param">size=None</em>, <em class="sig-param">key_operations=None</em>, <em class="sig-param">enabled=None</em>, <em class="sig-param">expires=None</em>, <em class="sig-param">not_before=None</em>, <em class="sig-param">tags=None</em>, <em class="sig-param">curve=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/keyvault/keys/client.html#KeyClient.create_key"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.keyvault.keys.client.KeyClient.create_key" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a key. If <code class="docutils literal notranslate"><span class="pre">name</span></code> is already in use, create a new version of the key. Requires the keys/create
+permission.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The name of the new key. Key Vault will generate the key’s version.</p></li>
+<li><p><strong>key_type</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a><em> or </em><a class="reference internal" href="#azure.keyvault.keys.enums.JsonWebKeyType" title="azure.keyvault.keys.enums.JsonWebKeyType"><em>JsonWebKeyType</em></a>) – The type of key to create</p></li>
+<li><p><strong>size</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a>) – (optional) RSA key size in bits, for example 2048, 3072, or 4096.</p></li>
+<li><p><strong>key_operations</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><em>list</em></a><em>(</em><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a><em> or </em><a class="reference internal" href="#azure.keyvault.keys.enums.JsonWebKeyOperation" title="azure.keyvault.keys.enums.JsonWebKeyOperation"><em>JsonWebKeyOperation</em></a><em>)</em>) – (optional) Allowed key operations</p></li>
+<li><p><strong>enabled</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#bool" title="(in Python v3.5)"><em>bool</em></a>) – (optional) Whether the key is enabled for use</p></li>
+<li><p><strong>expires</strong> – (optional) Expiry date of the key in UTC</p></li>
+<li><p><strong>not_before</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/datetime.html#datetime.datetime" title="(in Python v3.5)"><em>datetime.datetime</em></a>) – (optional) Not before date of the key in UTC</p></li>
+<li><p><strong>tags</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#dict" title="(in Python v3.5)"><em>dict</em></a>) – (optional) Application specific metadata in the form of key-value pairs</p></li>
+<li><p><strong>curve</strong> (<a class="reference internal" href="#azure.keyvault.keys.enums.JsonWebKeyCurveName" title="azure.keyvault.keys.enums.JsonWebKeyCurveName"><em>JsonWebKeyCurveName</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – (optional) Elliptic curve name. Defaults to the NIST P-256 elliptic curve.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The created key</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#azure.keyvault.keys.models.Key" title="azure.keyvault.keys.models.Key">Key</a></p>
+</dd>
+</dl>
+<dl>
+<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id4">
+<div class="code-block-caption"><span class="caption-text">Create a key</span><a class="headerlink" href="#id4" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">dateutil</span> <span class="kn">import</span> <span class="n">parser</span> <span class="k">as</span> <span class="n">date_parse</span>
+
+<span class="n">expires</span> <span class="o">=</span> <span class="n">date_parse</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s2">&quot;2050-02-02T08:00:00.000Z&quot;</span><span class="p">)</span>
+
+<span class="c1"># create a key with optional arguments</span>
+<span class="n">key</span> <span class="o">=</span> <span class="n">key_client</span><span class="o">.</span><span class="n">create_key</span><span class="p">(</span><span class="s2">&quot;key-name&quot;</span><span class="p">,</span> <span class="s2">&quot;RSA-HSM&quot;</span><span class="p">,</span> <span class="n">expires</span><span class="o">=</span><span class="n">expires</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">key</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">key</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">key</span><span class="o">.</span><span class="n">key_material</span><span class="o">.</span><span class="n">kty</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">key</span><span class="o">.</span><span class="n">expires</span><span class="p">)</span>
+
+</pre></div>
+</div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="azure.keyvault.keys.client.KeyClient.create_rsa_key">
+<code class="sig-name descname">create_rsa_key</code><span class="sig-paren">(</span><em class="sig-param">name</em>, <em class="sig-param">hsm</em>, <em class="sig-param">size=None</em>, <em class="sig-param">key_operations=None</em>, <em class="sig-param">enabled=None</em>, <em class="sig-param">expires=None</em>, <em class="sig-param">not_before=None</em>, <em class="sig-param">tags=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/keyvault/keys/client.html#KeyClient.create_rsa_key"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.keyvault.keys.client.KeyClient.create_rsa_key" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a new RSA key. If <code class="docutils literal notranslate"><span class="pre">name</span></code> is already in use, create a new version of the key. Requires the
+keys/create permission.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The name for the new key. Key Vault will generate the key’s version.</p></li>
+<li><p><strong>hsm</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#bool" title="(in Python v3.5)"><em>bool</em></a>) – Whether to create a hardware key (HSM) or software key</p></li>
+<li><p><strong>size</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a>) – (optional) Key size in bits, for example 2048, 3072, or 4096</p></li>
+<li><p><strong>key_operations</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><em>list</em></a><em>(</em><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a><em> or </em><a class="reference internal" href="#azure.keyvault.keys.enums.JsonWebKeyOperation" title="azure.keyvault.keys.enums.JsonWebKeyOperation"><em>JsonWebKeyOperation</em></a><em>)</em>) – (optional) Allowed key operations</p></li>
+<li><p><strong>enabled</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#bool" title="(in Python v3.5)"><em>bool</em></a>) – (optional) Whether the key is enabled for use</p></li>
+<li><p><strong>expires</strong> – (optional) Expiry date of the key in UTC</p></li>
+<li><p><strong>not_before</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/datetime.html#datetime.datetime" title="(in Python v3.5)"><em>datetime.datetime</em></a>) – (optional) Not before date of the key in UTC</p></li>
+<li><p><strong>tags</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#dict" title="(in Python v3.5)"><em>dict</em></a>) – (optional) Application specific metadata in the form of key-value pairs</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The created key</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#azure.keyvault.keys.models.Key" title="azure.keyvault.keys.models.Key">Key</a></p>
+</dd>
+</dl>
+<dl>
+<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id5">
+<div class="code-block-caption"><span class="caption-text">Create RSA key</span><a class="headerlink" href="#id5" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
+<span class="n">key_size</span> <span class="o">=</span> <span class="mi">2048</span>
+<span class="n">key_ops</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;encrypt&quot;</span><span class="p">,</span> <span class="s2">&quot;decrypt&quot;</span><span class="p">,</span> <span class="s2">&quot;sign&quot;</span><span class="p">,</span> <span class="s2">&quot;verify&quot;</span><span class="p">,</span> <span class="s2">&quot;wrapKey&quot;</span><span class="p">,</span> <span class="s2">&quot;unwrapKey&quot;</span><span class="p">]</span>
+
+<span class="c1"># create an rsa key with size specification</span>
+<span class="c1"># RSA key can be created with default size of &#39;2048&#39;</span>
+<span class="n">key</span> <span class="o">=</span> <span class="n">key_client</span><span class="o">.</span><span class="n">create_rsa_key</span><span class="p">(</span><span class="s2">&quot;key-name&quot;</span><span class="p">,</span> <span class="n">hsm</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">key_size</span><span class="p">,</span> <span class="n">key_operations</span><span class="o">=</span><span class="n">key_ops</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">key</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">key</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">key</span><span class="o">.</span><span class="n">key_material</span><span class="o">.</span><span class="n">kty</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">key</span><span class="o">.</span><span class="n">key_material</span><span class="o">.</span><span class="n">key_ops</span><span class="p">)</span>
+
+</pre></div>
+</div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="azure.keyvault.keys.client.KeyClient.delete_key">
+<code class="sig-name descname">delete_key</code><span class="sig-paren">(</span><em class="sig-param">name</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/keyvault/keys/client.html#KeyClient.delete_key"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.keyvault.keys.client.KeyClient.delete_key" title="Permalink to this definition">¶</a></dt>
+<dd><p>Delete all versions of a key and its cryptographic material. Requires the keys/delete permission.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The name of the key to delete.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The deleted key</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#azure.keyvault.keys.models.DeletedKey" title="azure.keyvault.keys.models.DeletedKey">DeletedKey</a></p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p>~azure.core.exceptions.ResourceNotFoundError if the key doesn’t exist</p>
+</dd>
+</dl>
+<dl>
+<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id6">
+<div class="code-block-caption"><span class="caption-text">Delete a key</span><a class="headerlink" href="#id6" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
+<span class="c1"># delete a key</span>
+<span class="n">deleted_key</span> <span class="o">=</span> <span class="n">key_client</span><span class="o">.</span><span class="n">delete_key</span><span class="p">(</span><span class="s2">&quot;key-name&quot;</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">deleted_key</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+
+<span class="c1"># if the vault has soft-delete enabled, the key&#39;s deleted_date,</span>
+<span class="c1"># scheduled purge date and recovery id are set</span>
+<span class="k">print</span><span class="p">(</span><span class="n">deleted_key</span><span class="o">.</span><span class="n">deleted_date</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">deleted_key</span><span class="o">.</span><span class="n">scheduled_purge_date</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">deleted_key</span><span class="o">.</span><span class="n">recovery_id</span><span class="p">)</span>
+
+</pre></div>
+</div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="azure.keyvault.keys.client.KeyClient.get_cryptography_client">
+<code class="sig-name descname">get_cryptography_client</code><span class="sig-paren">(</span><em class="sig-param">key</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/keyvault/keys/client.html#KeyClient.get_cryptography_client"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.keyvault.keys.client.KeyClient.get_cryptography_client" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="azure.keyvault.keys.client.KeyClient.get_deleted_key">
+<code class="sig-name descname">get_deleted_key</code><span class="sig-paren">(</span><em class="sig-param">name</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/keyvault/keys/client.html#KeyClient.get_deleted_key"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.keyvault.keys.client.KeyClient.get_deleted_key" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get a deleted key. This is only possible in a vault with soft-delete enabled. Requires the keys/get
+permission.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The name of the key</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The deleted key</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#azure.keyvault.keys.models.DeletedKey" title="azure.keyvault.keys.models.DeletedKey">DeletedKey</a></p>
+</dd>
+</dl>
+<dl>
+<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id7">
+<div class="code-block-caption"><span class="caption-text">Get a deleted key</span><a class="headerlink" href="#id7" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
+<span class="c1"># get a deleted key (requires soft-delete enabled for the vault)</span>
+<span class="n">deleted_key</span> <span class="o">=</span> <span class="n">key_client</span><span class="o">.</span><span class="n">get_deleted_key</span><span class="p">(</span><span class="s2">&quot;key-name&quot;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">deleted_key</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+
+<span class="c1"># if the vault has soft-delete enabled, the key&#39;s deleted_date</span>
+<span class="c1"># scheduled purge date and recovery id are set</span>
+<span class="k">print</span><span class="p">(</span><span class="n">deleted_key</span><span class="o">.</span><span class="n">deleted_date</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">deleted_key</span><span class="o">.</span><span class="n">scheduled_purge_date</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">deleted_key</span><span class="o">.</span><span class="n">recovery_id</span><span class="p">)</span>
+
+</pre></div>
+</div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="azure.keyvault.keys.client.KeyClient.get_key">
+<code class="sig-name descname">get_key</code><span class="sig-paren">(</span><em class="sig-param">name</em>, <em class="sig-param">version=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/keyvault/keys/client.html#KeyClient.get_key"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.keyvault.keys.client.KeyClient.get_key" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get a key’s attributes and, if it’s an asymmetric key, its public material. Requires the keys/get permission.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The name of the key to get.</p></li>
+<li><p><strong>version</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – (optional) A specific version of the key to get. If not specified, gets the latest version
+of the key.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference internal" href="#azure.keyvault.keys.models.Key" title="azure.keyvault.keys.models.Key">Key</a></p>
+</dd>
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><p>~azure.core.exceptions.ResourceNotFoundError if the key doesn’t exist</p>
+</dd>
+</dl>
+<dl>
+<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id8">
+<div class="code-block-caption"><span class="caption-text">Get a key</span><a class="headerlink" href="#id8" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
+<span class="c1"># get the latest version of a key</span>
+<span class="n">key</span> <span class="o">=</span> <span class="n">key_client</span><span class="o">.</span><span class="n">get_key</span><span class="p">(</span><span class="s2">&quot;key-name&quot;</span><span class="p">)</span>
+
+<span class="c1"># alternatively, specify a version</span>
+<span class="n">key_version</span> <span class="o">=</span> <span class="n">key</span><span class="o">.</span><span class="n">version</span>
+<span class="n">key</span> <span class="o">=</span> <span class="n">key_client</span><span class="o">.</span><span class="n">get_key</span><span class="p">(</span><span class="s2">&quot;key-name&quot;</span><span class="p">,</span> <span class="n">key_version</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">key</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">key</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">key</span><span class="o">.</span><span class="n">version</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">key</span><span class="o">.</span><span class="n">key_material</span><span class="o">.</span><span class="n">kty</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">key</span><span class="o">.</span><span class="n">vault_url</span><span class="p">)</span>
+
+</pre></div>
+</div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="azure.keyvault.keys.client.KeyClient.import_key">
+<code class="sig-name descname">import_key</code><span class="sig-paren">(</span><em class="sig-param">name</em>, <em class="sig-param">key</em>, <em class="sig-param">hsm=None</em>, <em class="sig-param">enabled=None</em>, <em class="sig-param">not_before=None</em>, <em class="sig-param">expires=None</em>, <em class="sig-param">tags=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/keyvault/keys/client.html#KeyClient.import_key"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.keyvault.keys.client.KeyClient.import_key" title="Permalink to this definition">¶</a></dt>
+<dd><p>Import an externally created key. If <code class="docutils literal notranslate"><span class="pre">name</span></code> is already in use, import the key as a new version. Requires
+the keys/import permission.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Name for the imported key</p></li>
+<li><p><strong>key</strong> (<a class="reference internal" href="#azure.keyvault.keys.models.JsonWebKey" title="azure.keyvault.keys.models.JsonWebKey"><em>JsonWebKey</em></a>) – The JSON web key to import</p></li>
+<li><p><strong>hsm</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#bool" title="(in Python v3.5)"><em>bool</em></a>) – (optional) Whether to import as a hardware key (HSM) or software key</p></li>
+<li><p><strong>enabled</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#bool" title="(in Python v3.5)"><em>bool</em></a>) – (optional) Whether the key is enabled for use</p></li>
+<li><p><strong>expires</strong> – (optional) Expiry date of the key in UTC</p></li>
+<li><p><strong>not_before</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/datetime.html#datetime.datetime" title="(in Python v3.5)"><em>datetime.datetime</em></a>) – (optional) Not before date of the key in UTC</p></li>
+<li><p><strong>tags</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#dict" title="(in Python v3.5)"><em>dict</em></a>) – (optional) Application specific metadata in the form of key-value pairs</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The imported key</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#azure.keyvault.keys.models.Key" title="azure.keyvault.keys.models.Key">Key</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="azure.keyvault.keys.client.KeyClient.list_deleted_keys">
+<code class="sig-name descname">list_deleted_keys</code><span class="sig-paren">(</span><em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/keyvault/keys/client.html#KeyClient.list_deleted_keys"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.keyvault.keys.client.KeyClient.list_deleted_keys" title="Permalink to this definition">¶</a></dt>
+<dd><p>List all deleted keys, including the public part of each. This is only possible in a vault with soft-delete
+enabled. Requires the keys/list permission.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>An iterator of deleted keys</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference internal" href="azure.core.html#azure.core.paging.ItemPaged" title="azure.core.paging.ItemPaged">ItemPaged</a>[<a class="reference internal" href="#azure.keyvault.keys.models.DeletedKey" title="azure.keyvault.keys.models.DeletedKey">DeletedKey</a>]</p>
+</dd>
+</dl>
+<dl>
+<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id9">
+<div class="code-block-caption"><span class="caption-text">List all the deleted keys</span><a class="headerlink" href="#id9" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
+<span class="c1"># get an iterator of deleted keys (requires soft-delete enabled for the vault)</span>
+<span class="n">deleted_keys</span> <span class="o">=</span> <span class="n">key_client</span><span class="o">.</span><span class="n">list_deleted_keys</span><span class="p">()</span>
+
+<span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">deleted_keys</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">key</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">key</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">key</span><span class="o">.</span><span class="n">scheduled_purge_date</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">key</span><span class="o">.</span><span class="n">recovery_id</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">key</span><span class="o">.</span><span class="n">deleted_date</span><span class="p">)</span>
+
+</pre></div>
+</div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="azure.keyvault.keys.client.KeyClient.list_key_versions">
+<code class="sig-name descname">list_key_versions</code><span class="sig-paren">(</span><em class="sig-param">name</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/keyvault/keys/client.html#KeyClient.list_key_versions"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.keyvault.keys.client.KeyClient.list_key_versions" title="Permalink to this definition">¶</a></dt>
+<dd><p>List the identifiers, attributes, and tags of a key’s versions. Requires the keys/list permission.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The name of the key</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>An iterator of keys without their cryptographic material</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="azure.core.html#azure.core.paging.ItemPaged" title="azure.core.paging.ItemPaged">ItemPaged</a>[<a class="reference internal" href="#azure.keyvault.keys.models.KeyBase" title="azure.keyvault.keys.models.KeyBase">KeyBase</a>]</p>
+</dd>
+</dl>
+<dl>
+<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id10">
+<div class="code-block-caption"><span class="caption-text">List all versions of a key</span><a class="headerlink" href="#id10" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
+<span class="c1"># get an iterator of a key&#39;s versions</span>
+<span class="n">key_versions</span> <span class="o">=</span> <span class="n">key_client</span><span class="o">.</span><span class="n">list_key_versions</span><span class="p">(</span><span class="s2">&quot;key-name&quot;</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">key_versions</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">key</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">key</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+
+</pre></div>
+</div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="azure.keyvault.keys.client.KeyClient.list_keys">
+<code class="sig-name descname">list_keys</code><span class="sig-paren">(</span><em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/keyvault/keys/client.html#KeyClient.list_keys"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.keyvault.keys.client.KeyClient.list_keys" title="Permalink to this definition">¶</a></dt>
+<dd><p>List identifiers, attributes, and tags of all keys in the vault. Requires the keys/list permission.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>An iterator of keys without their cryptographic material or version information</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference internal" href="azure.core.html#azure.core.paging.ItemPaged" title="azure.core.paging.ItemPaged">ItemPaged</a>[<a class="reference internal" href="#azure.keyvault.keys.models.KeyBase" title="azure.keyvault.keys.models.KeyBase">KeyBase</a>]</p>
+</dd>
+</dl>
+<dl>
+<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id11">
+<div class="code-block-caption"><span class="caption-text">List all keys</span><a class="headerlink" href="#id11" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
+<span class="c1"># get an iterator of keys</span>
+<span class="n">keys</span> <span class="o">=</span> <span class="n">key_client</span><span class="o">.</span><span class="n">list_keys</span><span class="p">()</span>
+
+<span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">keys</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">key</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">key</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+
+</pre></div>
+</div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="azure.keyvault.keys.client.KeyClient.purge_deleted_key">
+<code class="sig-name descname">purge_deleted_key</code><span class="sig-paren">(</span><em class="sig-param">name</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/keyvault/keys/client.html#KeyClient.purge_deleted_key"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.keyvault.keys.client.KeyClient.purge_deleted_key" title="Permalink to this definition">¶</a></dt>
+<dd><p>Permanently delete the specified key. This is only possible in vaults with soft-delete enabled. If a vault
+does not have soft-delete enabled, <a class="reference internal" href="#azure.keyvault.keys.client.KeyClient.delete_key" title="azure.keyvault.keys.client.KeyClient.delete_key"><code class="xref py py-func docutils literal notranslate"><span class="pre">delete_key()</span></code></a> is permanent, and this method will return an error.</p>
+<p>Requires the keys/purge permission.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The name of the key</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<dl>
+<dt>Example:</dt><dd><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># if the vault has soft-delete enabled, purge permanently deletes a deleted key</span>
+<span class="c1"># (with soft-delete disabled, delete_key is permanent)</span>
+<span class="n">key_client</span><span class="o">.</span><span class="n">purge_deleted_key</span><span class="p">(</span><span class="s2">&quot;key-name&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="azure.keyvault.keys.client.KeyClient.recover_deleted_key">
+<code class="sig-name descname">recover_deleted_key</code><span class="sig-paren">(</span><em class="sig-param">name</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/keyvault/keys/client.html#KeyClient.recover_deleted_key"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.keyvault.keys.client.KeyClient.recover_deleted_key" title="Permalink to this definition">¶</a></dt>
+<dd><p>Recover a deleted key to its latest version. This is only possible in vaults with soft-delete enabled. If a
+vault does not have soft-delete enabled, <a class="reference internal" href="#azure.keyvault.keys.client.KeyClient.delete_key" title="azure.keyvault.keys.client.KeyClient.delete_key"><code class="xref py py-func docutils literal notranslate"><span class="pre">delete_key()</span></code></a> is permanent, and this method will return an error.
+Attempting to recover an non-deleted key will also return an error.</p>
+<p>Requires the keys/recover permission.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The name of the deleted key</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The recovered key</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#azure.keyvault.keys.models.Key" title="azure.keyvault.keys.models.Key">Key</a></p>
+</dd>
+</dl>
+<dl>
+<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id12">
+<div class="code-block-caption"><span class="caption-text">Recover a deleted key</span><a class="headerlink" href="#id12" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
+<span class="c1"># recover a deleted key to its latest version (requires soft-delete enabled for the vault)</span>
+<span class="n">recovered_key</span> <span class="o">=</span> <span class="n">key_client</span><span class="o">.</span><span class="n">recover_deleted_key</span><span class="p">(</span><span class="s2">&quot;key-name&quot;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">recovered_key</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">recovered_key</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+
+</pre></div>
+</div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="azure.keyvault.keys.client.KeyClient.restore_key">
+<code class="sig-name descname">restore_key</code><span class="sig-paren">(</span><em class="sig-param">backup</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/keyvault/keys/client.html#KeyClient.restore_key"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.keyvault.keys.client.KeyClient.restore_key" title="Permalink to this definition">¶</a></dt>
+<dd><p>Restore a key backup to the vault. This imports all versions of the key, with its name, attributes, and
+access control policies. Requires the keys/restore permission.</p>
+<p>If the backed up key’s name is already in use in the target vault, restoring it will fail. Also, the target
+vault must be owned by the same Microsoft Azure subscription as the source vault.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>backup</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#bytes" title="(in Python v3.5)"><em>bytes</em></a>) – The raw bytes of the key backup</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The restored key</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#azure.keyvault.keys.models.Key" title="azure.keyvault.keys.models.Key">Key</a></p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p>~azure.core.exceptions.ResourceExistsError if the backed up key’s name is already in use</p>
+</dd>
+</dl>
+<dl>
+<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id13">
+<div class="code-block-caption"><span class="caption-text">Restore a key backup</span><a class="headerlink" href="#id13" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
+<span class="c1"># restore a key backup</span>
+<span class="n">restored_key</span> <span class="o">=</span> <span class="n">key_client</span><span class="o">.</span><span class="n">restore_key</span><span class="p">(</span><span class="n">key_backup</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">restored_key</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">restored_key</span><span class="o">.</span><span class="n">version</span><span class="p">)</span>
+
+</pre></div>
+</div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="azure.keyvault.keys.client.KeyClient.update_key">
+<code class="sig-name descname">update_key</code><span class="sig-paren">(</span><em class="sig-param">name</em>, <em class="sig-param">version=None</em>, <em class="sig-param">key_operations=None</em>, <em class="sig-param">enabled=None</em>, <em class="sig-param">expires=None</em>, <em class="sig-param">not_before=None</em>, <em class="sig-param">tags=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/keyvault/keys/client.html#KeyClient.update_key"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.keyvault.keys.client.KeyClient.update_key" title="Permalink to this definition">¶</a></dt>
+<dd><p>Change attributes of a key. Cannot change a key’s cryptographic material. Requires the keys/update
+permission.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The name of key to update</p></li>
+<li><p><strong>version</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – (optional) The version of the key to update</p></li>
+<li><p><strong>key_operations</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><em>list</em></a><em>(</em><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a><em> or </em><a class="reference internal" href="#azure.keyvault.keys.enums.JsonWebKeyOperation" title="azure.keyvault.keys.enums.JsonWebKeyOperation"><em>JsonWebKeyOperation</em></a><em>)</em>) – (optional) Allowed key operations</p></li>
+<li><p><strong>enabled</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#bool" title="(in Python v3.5)"><em>bool</em></a>) – (optional) Whether the key is enabled for use</p></li>
+<li><p><strong>expires</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/datetime.html#datetime.datetime" title="(in Python v3.5)"><em>datetime.datetime</em></a>) – (optional) Expiry date of the key in UTC</p></li>
+<li><p><strong>not_before</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/datetime.html#datetime.datetime" title="(in Python v3.5)"><em>datetime.datetime</em></a>) – (optional) Not before date of the key in UTC</p></li>
+<li><p><strong>tags</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#dict" title="(in Python v3.5)"><em>dict</em></a>) – (optional) Application specific metadata in the form of key-value pairs</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The updated key</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#azure.keyvault.keys.models.Key" title="azure.keyvault.keys.models.Key">Key</a></p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p>~azure.core.exceptions.ResourceNotFoundError if the key doesn’t exist</p>
+</dd>
+</dl>
+<dl>
+<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id14">
+<div class="code-block-caption"><span class="caption-text">Update a key’s attributes</span><a class="headerlink" href="#id14" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
+<span class="c1"># update attributes of an existing key</span>
+<span class="n">expires</span> <span class="o">=</span> <span class="n">date_parse</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s2">&quot;2050-01-02T08:00:00.000Z&quot;</span><span class="p">)</span>
+<span class="n">tags</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;foo&quot;</span><span class="p">:</span> <span class="s2">&quot;updated tag&quot;</span><span class="p">}</span>
+<span class="n">updated_key</span> <span class="o">=</span> <span class="n">key_client</span><span class="o">.</span><span class="n">update_key</span><span class="p">(</span><span class="n">key</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">expires</span><span class="o">=</span><span class="n">expires</span><span class="p">,</span> <span class="n">tags</span><span class="o">=</span><span class="n">tags</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">updated_key</span><span class="o">.</span><span class="n">version</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">updated_key</span><span class="o">.</span><span class="n">updated</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">updated_key</span><span class="o">.</span><span class="n">expires</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">updated_key</span><span class="o">.</span><span class="n">tags</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">key</span><span class="o">.</span><span class="n">key_material</span><span class="o">.</span><span class="n">kty</span><span class="p">)</span>
+
+</pre></div>
+</div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-azure.keyvault.keys.enums">
+<span id="azure-keyvault-keys-enums-module"></span><h2>azure.keyvault.keys.enums module<a class="headerlink" href="#module-azure.keyvault.keys.enums" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="azure.keyvault.keys.enums.JsonWebKeyCurveName">
+<em class="property">class </em><code class="sig-prename descclassname">azure.keyvault.keys.enums.</code><code class="sig-name descname">JsonWebKeyCurveName</code><a class="reference internal" href="../_modules/azure/keyvault/keys/enums.html#JsonWebKeyCurveName"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.keyvault.keys.enums.JsonWebKeyCurveName" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3.5/library/enum.html#enum.Enum" title="(in Python v3.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></a></p>
+<p>Supported elliptic curves</p>
+<dl class="attribute">
+<dt id="azure.keyvault.keys.enums.JsonWebKeyCurveName.p_256">
+<code class="sig-name descname">p_256</code><em class="property"> = 'P-256'</em><a class="headerlink" href="#azure.keyvault.keys.enums.JsonWebKeyCurveName.p_256" title="Permalink to this definition">¶</a></dt>
+<dd><p>The NIST P-256 elliptic curve, AKA SECG curve SECP256R1.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="azure.keyvault.keys.enums.JsonWebKeyCurveName.p_256_k">
+<code class="sig-name descname">p_256_k</code><em class="property"> = 'P-256K'</em><a class="headerlink" href="#azure.keyvault.keys.enums.JsonWebKeyCurveName.p_256_k" title="Permalink to this definition">¶</a></dt>
+<dd><p>The SECG SECP256K1 elliptic curve.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="azure.keyvault.keys.enums.JsonWebKeyCurveName.p_384">
+<code class="sig-name descname">p_384</code><em class="property"> = 'P-384'</em><a class="headerlink" href="#azure.keyvault.keys.enums.JsonWebKeyCurveName.p_384" title="Permalink to this definition">¶</a></dt>
+<dd><p>The NIST P-384 elliptic curve, AKA SECG curve SECP384R1.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="azure.keyvault.keys.enums.JsonWebKeyCurveName.p_521">
+<code class="sig-name descname">p_521</code><em class="property"> = 'P-521'</em><a class="headerlink" href="#azure.keyvault.keys.enums.JsonWebKeyCurveName.p_521" title="Permalink to this definition">¶</a></dt>
+<dd><p>The NIST P-521 elliptic curve, AKA SECG curve SECP521R1.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="azure.keyvault.keys.enums.JsonWebKeyOperation">
+<em class="property">class </em><code class="sig-prename descclassname">azure.keyvault.keys.enums.</code><code class="sig-name descname">JsonWebKeyOperation</code><a class="reference internal" href="../_modules/azure/keyvault/keys/enums.html#JsonWebKeyOperation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.keyvault.keys.enums.JsonWebKeyOperation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3.5/library/enum.html#enum.Enum" title="(in Python v3.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></a></p>
+<p>Supported key operations</p>
+<dl class="attribute">
+<dt id="azure.keyvault.keys.enums.JsonWebKeyOperation.decrypt">
+<code class="sig-name descname">decrypt</code><em class="property"> = 'decrypt'</em><a class="headerlink" href="#azure.keyvault.keys.enums.JsonWebKeyOperation.decrypt" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="azure.keyvault.keys.enums.JsonWebKeyOperation.encrypt">
+<code class="sig-name descname">encrypt</code><em class="property"> = 'encrypt'</em><a class="headerlink" href="#azure.keyvault.keys.enums.JsonWebKeyOperation.encrypt" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="azure.keyvault.keys.enums.JsonWebKeyOperation.sign">
+<code class="sig-name descname">sign</code><em class="property"> = 'sign'</em><a class="headerlink" href="#azure.keyvault.keys.enums.JsonWebKeyOperation.sign" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="azure.keyvault.keys.enums.JsonWebKeyOperation.unwrap_key">
+<code class="sig-name descname">unwrap_key</code><em class="property"> = 'unwrapKey'</em><a class="headerlink" href="#azure.keyvault.keys.enums.JsonWebKeyOperation.unwrap_key" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="azure.keyvault.keys.enums.JsonWebKeyOperation.verify">
+<code class="sig-name descname">verify</code><em class="property"> = 'verify'</em><a class="headerlink" href="#azure.keyvault.keys.enums.JsonWebKeyOperation.verify" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="azure.keyvault.keys.enums.JsonWebKeyOperation.wrap_key">
+<code class="sig-name descname">wrap_key</code><em class="property"> = 'wrapKey'</em><a class="headerlink" href="#azure.keyvault.keys.enums.JsonWebKeyOperation.wrap_key" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="azure.keyvault.keys.enums.JsonWebKeyType">
+<em class="property">class </em><code class="sig-prename descclassname">azure.keyvault.keys.enums.</code><code class="sig-name descname">JsonWebKeyType</code><a class="reference internal" href="../_modules/azure/keyvault/keys/enums.html#JsonWebKeyType"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.keyvault.keys.enums.JsonWebKeyType" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3.5/library/enum.html#enum.Enum" title="(in Python v3.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></a></p>
+<p>Supported key types</p>
+<dl class="attribute">
+<dt id="azure.keyvault.keys.enums.JsonWebKeyType.ec">
+<code class="sig-name descname">ec</code><em class="property"> = 'EC'</em><a class="headerlink" href="#azure.keyvault.keys.enums.JsonWebKeyType.ec" title="Permalink to this definition">¶</a></dt>
+<dd><p>Elliptic Curve</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="azure.keyvault.keys.enums.JsonWebKeyType.ec_hsm">
+<code class="sig-name descname">ec_hsm</code><em class="property"> = 'EC-HSM'</em><a class="headerlink" href="#azure.keyvault.keys.enums.JsonWebKeyType.ec_hsm" title="Permalink to this definition">¶</a></dt>
+<dd><p>Elliptic Curve with a private key which is not exportable from the HSM</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="azure.keyvault.keys.enums.JsonWebKeyType.oct">
+<code class="sig-name descname">oct</code><em class="property"> = 'oct'</em><a class="headerlink" href="#azure.keyvault.keys.enums.JsonWebKeyType.oct" title="Permalink to this definition">¶</a></dt>
+<dd><p>Octet sequence (used to represent symmetric keys)</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="azure.keyvault.keys.enums.JsonWebKeyType.rsa">
+<code class="sig-name descname">rsa</code><em class="property"> = 'RSA'</em><a class="headerlink" href="#azure.keyvault.keys.enums.JsonWebKeyType.rsa" title="Permalink to this definition">¶</a></dt>
+<dd><p>RSA (<a class="reference external" href="https://tools.ietf.org/html/rfc3447">https://tools.ietf.org/html/rfc3447</a>)</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="azure.keyvault.keys.enums.JsonWebKeyType.rsa_hsm">
+<code class="sig-name descname">rsa_hsm</code><em class="property"> = 'RSA-HSM'</em><a class="headerlink" href="#azure.keyvault.keys.enums.JsonWebKeyType.rsa_hsm" title="Permalink to this definition">¶</a></dt>
+<dd><p>RSA with a private key which is not exportable from the HSM</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-azure.keyvault.keys.models">
+<span id="azure-keyvault-keys-models-module"></span><h2>azure.keyvault.keys.models module<a class="headerlink" href="#module-azure.keyvault.keys.models" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="azure.keyvault.keys.models.DeletedKey">
+<em class="property">class </em><code class="sig-prename descclassname">azure.keyvault.keys.models.</code><code class="sig-name descname">DeletedKey</code><span class="sig-paren">(</span><em class="sig-param">attributes</em>, <em class="sig-param">vault_id</em>, <em class="sig-param">key_material=None</em>, <em class="sig-param">deleted_date=None</em>, <em class="sig-param">recovery_id=None</em>, <em class="sig-param">scheduled_purge_date=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/keyvault/keys/models.html#DeletedKey"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.keyvault.keys.models.DeletedKey" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#azure.keyvault.keys.models.Key" title="azure.keyvault.keys.models.Key"><code class="xref py py-class docutils literal notranslate"><span class="pre">azure.keyvault.keys.models.Key</span></code></a></p>
+<p>A deleted key’s id, attributes, and cryptographic material, as well as when it will be purged</p>
+<dl class="method">
+<dt id="azure.keyvault.keys.models.DeletedKey.deleted_date">
+<em class="property">property </em><code class="sig-name descname">deleted_date</code><a class="headerlink" href="#azure.keyvault.keys.models.DeletedKey.deleted_date" title="Permalink to this definition">¶</a></dt>
+<dd><p>When the key was deleted, in UTC</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3.5/library/datetime.html#datetime.datetime" title="(in Python v3.5)">datetime.datetime</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="azure.keyvault.keys.models.DeletedKey.recovery_id">
+<em class="property">property </em><code class="sig-name descname">recovery_id</code><a class="headerlink" href="#azure.keyvault.keys.models.DeletedKey.recovery_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>An identifier used to recover the deleted key</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="azure.keyvault.keys.models.DeletedKey.scheduled_purge_date">
+<em class="property">property </em><code class="sig-name descname">scheduled_purge_date</code><a class="headerlink" href="#azure.keyvault.keys.models.DeletedKey.scheduled_purge_date" title="Permalink to this definition">¶</a></dt>
+<dd><p>When the key is scheduled to be purged, in UTC</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3.5/library/datetime.html#datetime.datetime" title="(in Python v3.5)">datetime.datetime</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="azure.keyvault.keys.models.JsonWebKey">
+<em class="property">class </em><code class="sig-prename descclassname">azure.keyvault.keys.models.</code><code class="sig-name descname">JsonWebKey</code><span class="sig-paren">(</span><em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/keyvault/keys/models.html#JsonWebKey"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.keyvault.keys.models.JsonWebKey" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3.5/library/functions.html#object" title="(in Python v3.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>As of <a class="reference external" href="http://tools.ietf.org/html/draft-ietf-jose-json-web-key-18">http://tools.ietf.org/html/draft-ietf-jose-json-web-key-18</a>. All parameters are optional.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>kid</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Key identifier.</p></li>
+<li><p><strong>kty</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a><em> or </em><a class="reference internal" href="#azure.keyvault.keys.enums.JsonWebKeyType" title="azure.keyvault.keys.enums.JsonWebKeyType"><em>JsonWebKeyType</em></a>) – Key Type (kty), as defined in <a class="reference external" href="https://tools.ietf.org/html/draft-ietf-jose-json-web-algorithms-40">https://tools.ietf.org/html/draft-ietf-jose-json-web-algorithms-40</a></p></li>
+<li><p><strong>key_ops</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><em>list</em></a><em>(</em><a class="reference internal" href="#azure.keyvault.keys.enums.JsonWebKeyOperation" title="azure.keyvault.keys.enums.JsonWebKeyOperation"><em>JsonWebKeyOperation</em></a><em>)</em>) – Allowed operations for the key</p></li>
+<li><p><strong>n</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#bytes" title="(in Python v3.5)"><em>bytes</em></a>) – RSA modulus.</p></li>
+<li><p><strong>e</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#bytes" title="(in Python v3.5)"><em>bytes</em></a>) – RSA public exponent.</p></li>
+<li><p><strong>d</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#bytes" title="(in Python v3.5)"><em>bytes</em></a>) – RSA private exponent, or the D component of an EC private key.</p></li>
+<li><p><strong>dp</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#bytes" title="(in Python v3.5)"><em>bytes</em></a>) – RSA private key parameter.</p></li>
+<li><p><strong>dq</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#bytes" title="(in Python v3.5)"><em>bytes</em></a>) – RSA private key parameter.</p></li>
+<li><p><strong>qi</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#bytes" title="(in Python v3.5)"><em>bytes</em></a>) – RSA private key parameter.</p></li>
+<li><p><strong>p</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#bytes" title="(in Python v3.5)"><em>bytes</em></a>) – RSA secret prime.</p></li>
+<li><p><strong>q</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#bytes" title="(in Python v3.5)"><em>bytes</em></a>) – RSA secret prime, with p &lt; q.</p></li>
+<li><p><strong>k</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#bytes" title="(in Python v3.5)"><em>bytes</em></a>) – Symmetric key.</p></li>
+<li><p><strong>t</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#bytes" title="(in Python v3.5)"><em>bytes</em></a>) – HSM Token, used with ‘Bring Your Own Key’.</p></li>
+<li><p><strong>crv</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a><em> or </em><a class="reference internal" href="#azure.keyvault.keys.enums.JsonWebKeyCurveName" title="azure.keyvault.keys.enums.JsonWebKeyCurveName"><em>JsonWebKeyCurveName</em></a>) – Elliptic curve name.</p></li>
+<li><p><strong>x</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#bytes" title="(in Python v3.5)"><em>bytes</em></a>) – X component of an EC public key.</p></li>
+<li><p><strong>y</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#bytes" title="(in Python v3.5)"><em>bytes</em></a>) – Y component of an EC public key.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="class">
+<dt id="azure.keyvault.keys.models.Key">
+<em class="property">class </em><code class="sig-prename descclassname">azure.keyvault.keys.models.</code><code class="sig-name descname">Key</code><span class="sig-paren">(</span><em class="sig-param">attributes</em>, <em class="sig-param">vault_id</em>, <em class="sig-param">key_material</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/keyvault/keys/models.html#Key"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.keyvault.keys.models.Key" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#azure.keyvault.keys.models.KeyBase" title="azure.keyvault.keys.models.KeyBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">azure.keyvault.keys.models.KeyBase</span></code></a></p>
+<p>A key’s attributes and cryptographic material</p>
+<dl class="method">
+<dt id="azure.keyvault.keys.models.Key.key_material">
+<em class="property">property </em><code class="sig-name descname">key_material</code><a class="headerlink" href="#azure.keyvault.keys.models.Key.key_material" title="Permalink to this definition">¶</a></dt>
+<dd><p>The JSON web key</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="azure.keyvault.keys.models.KeyBase">
+<em class="property">class </em><code class="sig-prename descclassname">azure.keyvault.keys.models.</code><code class="sig-name descname">KeyBase</code><span class="sig-paren">(</span><em class="sig-param">attributes</em>, <em class="sig-param">vault_id</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/keyvault/keys/models.html#KeyBase"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.keyvault.keys.models.KeyBase" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3.5/library/functions.html#object" title="(in Python v3.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>A key’s id and attributes.</p>
+<dl class="method">
+<dt id="azure.keyvault.keys.models.KeyBase.created">
+<em class="property">property </em><code class="sig-name descname">created</code><a class="headerlink" href="#azure.keyvault.keys.models.KeyBase.created" title="Permalink to this definition">¶</a></dt>
+<dd><p>When the key was created, in UTC</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3.5/library/datetime.html#datetime.datetime" title="(in Python v3.5)">datetime.datetime</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="azure.keyvault.keys.models.KeyBase.enabled">
+<em class="property">property </em><code class="sig-name descname">enabled</code><a class="headerlink" href="#azure.keyvault.keys.models.KeyBase.enabled" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3.5/library/functions.html#bool" title="(in Python v3.5)">bool</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="azure.keyvault.keys.models.KeyBase.expires">
+<em class="property">property </em><code class="sig-name descname">expires</code><a class="headerlink" href="#azure.keyvault.keys.models.KeyBase.expires" title="Permalink to this definition">¶</a></dt>
+<dd><p>When the key will expire, in UTC</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3.5/library/datetime.html#datetime.datetime" title="(in Python v3.5)">datetime.datetime</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="azure.keyvault.keys.models.KeyBase.id">
+<em class="property">property </em><code class="sig-name descname">id</code><a class="headerlink" href="#azure.keyvault.keys.models.KeyBase.id" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="azure.keyvault.keys.models.KeyBase.name">
+<em class="property">property </em><code class="sig-name descname">name</code><a class="headerlink" href="#azure.keyvault.keys.models.KeyBase.name" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="azure.keyvault.keys.models.KeyBase.not_before">
+<em class="property">property </em><code class="sig-name descname">not_before</code><a class="headerlink" href="#azure.keyvault.keys.models.KeyBase.not_before" title="Permalink to this definition">¶</a></dt>
+<dd><p>The key’s not-before time, in UTC</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3.5/library/datetime.html#datetime.datetime" title="(in Python v3.5)">datetime.datetime</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="azure.keyvault.keys.models.KeyBase.recovery_level">
+<em class="property">property </em><code class="sig-name descname">recovery_level</code><a class="headerlink" href="#azure.keyvault.keys.models.KeyBase.recovery_level" title="Permalink to this definition">¶</a></dt>
+<dd><p>The vault’s deletion recovery level for keys</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="azure.keyvault.keys.models.KeyBase.tags">
+<em class="property">property </em><code class="sig-name descname">tags</code><a class="headerlink" href="#azure.keyvault.keys.models.KeyBase.tags" title="Permalink to this definition">¶</a></dt>
+<dd><p>Application specific metadata in the form of key-value pairs</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#dict" title="(in Python v3.5)">dict</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="azure.keyvault.keys.models.KeyBase.updated">
+<em class="property">property </em><code class="sig-name descname">updated</code><a class="headerlink" href="#azure.keyvault.keys.models.KeyBase.updated" title="Permalink to this definition">¶</a></dt>
+<dd><p>When the key was last updated, in UTC</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3.5/library/datetime.html#datetime.datetime" title="(in Python v3.5)">datetime.datetime</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="azure.keyvault.keys.models.KeyBase.vault_url">
+<em class="property">property </em><code class="sig-name descname">vault_url</code><a class="headerlink" href="#azure.keyvault.keys.models.KeyBase.vault_url" title="Permalink to this definition">¶</a></dt>
+<dd><p>URL of the vault containing the key</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="azure.keyvault.keys.models.KeyBase.version">
+<em class="property">property </em><code class="sig-name descname">version</code><a class="headerlink" href="#azure.keyvault.keys.models.KeyBase.version" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="azure.keyvault.keys.models.KeyOperationResult">
+<em class="property">class </em><code class="sig-prename descclassname">azure.keyvault.keys.models.</code><code class="sig-name descname">KeyOperationResult</code><span class="sig-paren">(</span><em class="sig-param">id</em>, <em class="sig-param">value</em><span class="sig-paren">)</span><a class="headerlink" href="#azure.keyvault.keys.models.KeyOperationResult" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#tuple" title="(in Python v3.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></a></p>
+<p>Create new instance of KeyOperationResult(id, value)</p>
+<dl class="method">
+<dt id="azure.keyvault.keys.models.KeyOperationResult.id">
+<em class="property">property </em><code class="sig-name descname">id</code><a class="headerlink" href="#azure.keyvault.keys.models.KeyOperationResult.id" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 0</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="azure.keyvault.keys.models.KeyOperationResult.value">
+<em class="property">property </em><code class="sig-name descname">value</code><a class="headerlink" href="#azure.keyvault.keys.models.KeyOperationResult.value" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 1</p>
+</dd></dl>
+
+</dd></dl>
+
 </div>
 <div class="section" id="module-azure.keyvault.keys">
 <span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-azure.keyvault.keys" title="Permalink to this headline">¶</a></h2>
@@ -429,8 +1390,8 @@
 </dd>
 </dl>
 <dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id1">
-<div class="code-block-caption"><span class="caption-text">Create a new <code class="docutils literal notranslate"><span class="pre">KeyClient</span></code></span><a class="headerlink" href="#id1" title="Permalink to this code">¶</a></div>
+<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id15">
+<div class="code-block-caption"><span class="caption-text">Create a new <code class="docutils literal notranslate"><span class="pre">KeyClient</span></code></span><a class="headerlink" href="#id15" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
 <span class="kn">from</span> <span class="nn">azure.identity</span> <span class="kn">import</span> <span class="n">DefaultAzureCredential</span>
 <span class="kn">from</span> <span class="nn">azure.keyvault.keys</span> <span class="kn">import</span> <span class="n">KeyClient</span>
@@ -466,8 +1427,8 @@ USA region cannot be restored to a vault in an EU region.</p>
 </dd>
 </dl>
 <dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id2">
-<div class="code-block-caption"><span class="caption-text">Get a key backup</span><a class="headerlink" href="#id2" title="Permalink to this code">¶</a></div>
+<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id16">
+<div class="code-block-caption"><span class="caption-text">Get a key backup</span><a class="headerlink" href="#id16" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
 <span class="c1"># backup key</span>
 <span class="n">key_backup</span> <span class="o">=</span> <span class="n">key_client</span><span class="o">.</span><span class="n">backup_key</span><span class="p">(</span><span class="n">key_name</span><span class="p">)</span>
@@ -492,8 +1453,8 @@ the keys/create permission.</p>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The name for the new key. Key Vault will generate the key’s version.</p></li>
 <li><p><strong>hsm</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#bool" title="(in Python v3.5)"><em>bool</em></a>) – Whether to create as a hardware key (HSM) or software key.</p></li>
-<li><p><strong>curve</strong> (<em>JsonWebKeyCurveName</em><em> or </em><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – (optional) Elliptic curve name. Defaults to the NIST P-256 elliptic curve.</p></li>
-<li><p><strong>key_operations</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><em>list</em></a><em>(</em><em>JsonWebKeyOperation</em><em>)</em>) – (optional) Allowed key operations</p></li>
+<li><p><strong>curve</strong> (<a class="reference internal" href="#azure.keyvault.keys.enums.JsonWebKeyCurveName" title="azure.keyvault.keys.enums.JsonWebKeyCurveName"><em>JsonWebKeyCurveName</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – (optional) Elliptic curve name. Defaults to the NIST P-256 elliptic curve.</p></li>
+<li><p><strong>key_operations</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><em>list</em></a><em>(</em><a class="reference internal" href="#azure.keyvault.keys.enums.JsonWebKeyOperation" title="azure.keyvault.keys.enums.JsonWebKeyOperation"><em>JsonWebKeyOperation</em></a><em>)</em>) – (optional) Allowed key operations</p></li>
 <li><p><strong>enabled</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#bool" title="(in Python v3.5)"><em>bool</em></a>) – (optional) Whether the key is enabled for use</p></li>
 <li><p><strong>expires</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/datetime.html#datetime.datetime" title="(in Python v3.5)"><em>datetime.datetime</em></a>) – (optional) Expiry date of the key in UTC</p></li>
 <li><p><strong>not_before</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/datetime.html#datetime.datetime" title="(in Python v3.5)"><em>datetime.datetime</em></a>) – (optional) Not before date of the key in UTC</p></li>
@@ -504,12 +1465,12 @@ the keys/create permission.</p>
 <dd class="field-even"><p>The created key</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>Key</p>
+<dd class="field-odd"><p><a class="reference internal" href="#azure.keyvault.keys.models.Key" title="azure.keyvault.keys.models.Key">Key</a></p>
 </dd>
 </dl>
 <dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id3">
-<div class="code-block-caption"><span class="caption-text">Create an elliptic curve key</span><a class="headerlink" href="#id3" title="Permalink to this code">¶</a></div>
+<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id17">
+<div class="code-block-caption"><span class="caption-text">Create an elliptic curve key</span><a class="headerlink" href="#id17" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">key_curve</span> <span class="o">=</span> <span class="s2">&quot;P-256&quot;</span>
 
 <span class="c1"># create an EC (Elliptic curve) key with curve specification</span>
@@ -537,26 +1498,26 @@ permission.</p>
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The name of the new key. Key Vault will generate the key’s version.</p></li>
-<li><p><strong>key_type</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a><em> or </em><em>JsonWebKeyType</em>) – The type of key to create</p></li>
+<li><p><strong>key_type</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a><em> or </em><a class="reference internal" href="#azure.keyvault.keys.enums.JsonWebKeyType" title="azure.keyvault.keys.enums.JsonWebKeyType"><em>JsonWebKeyType</em></a>) – The type of key to create</p></li>
 <li><p><strong>size</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a>) – (optional) RSA key size in bits, for example 2048, 3072, or 4096.</p></li>
-<li><p><strong>key_operations</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><em>list</em></a><em>(</em><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a><em> or </em><em>JsonWebKeyOperation</em><em>)</em>) – (optional) Allowed key operations</p></li>
+<li><p><strong>key_operations</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><em>list</em></a><em>(</em><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a><em> or </em><a class="reference internal" href="#azure.keyvault.keys.enums.JsonWebKeyOperation" title="azure.keyvault.keys.enums.JsonWebKeyOperation"><em>JsonWebKeyOperation</em></a><em>)</em>) – (optional) Allowed key operations</p></li>
 <li><p><strong>enabled</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#bool" title="(in Python v3.5)"><em>bool</em></a>) – (optional) Whether the key is enabled for use</p></li>
 <li><p><strong>expires</strong> – (optional) Expiry date of the key in UTC</p></li>
 <li><p><strong>not_before</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/datetime.html#datetime.datetime" title="(in Python v3.5)"><em>datetime.datetime</em></a>) – (optional) Not before date of the key in UTC</p></li>
 <li><p><strong>tags</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#dict" title="(in Python v3.5)"><em>dict</em></a>) – (optional) Application specific metadata in the form of key-value pairs</p></li>
-<li><p><strong>curve</strong> (<em>JsonWebKeyCurveName</em><em> or </em><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – (optional) Elliptic curve name. Defaults to the NIST P-256 elliptic curve.</p></li>
+<li><p><strong>curve</strong> (<a class="reference internal" href="#azure.keyvault.keys.enums.JsonWebKeyCurveName" title="azure.keyvault.keys.enums.JsonWebKeyCurveName"><em>JsonWebKeyCurveName</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – (optional) Elliptic curve name. Defaults to the NIST P-256 elliptic curve.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>The created key</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>Key</p>
+<dd class="field-odd"><p><a class="reference internal" href="#azure.keyvault.keys.models.Key" title="azure.keyvault.keys.models.Key">Key</a></p>
 </dd>
 </dl>
 <dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id4">
-<div class="code-block-caption"><span class="caption-text">Create a key</span><a class="headerlink" href="#id4" title="Permalink to this code">¶</a></div>
+<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id18">
+<div class="code-block-caption"><span class="caption-text">Create a key</span><a class="headerlink" href="#id18" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">dateutil</span> <span class="kn">import</span> <span class="n">parser</span> <span class="k">as</span> <span class="n">date_parse</span>
 
 <span class="n">expires</span> <span class="o">=</span> <span class="n">date_parse</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s2">&quot;2050-02-02T08:00:00.000Z&quot;</span><span class="p">)</span>
@@ -587,7 +1548,7 @@ keys/create permission.</p>
 <li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The name for the new key. Key Vault will generate the key’s version.</p></li>
 <li><p><strong>hsm</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#bool" title="(in Python v3.5)"><em>bool</em></a>) – Whether to create a hardware key (HSM) or software key</p></li>
 <li><p><strong>size</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a>) – (optional) Key size in bits, for example 2048, 3072, or 4096</p></li>
-<li><p><strong>key_operations</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><em>list</em></a><em>(</em><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a><em> or </em><em>JsonWebKeyOperation</em><em>)</em>) – (optional) Allowed key operations</p></li>
+<li><p><strong>key_operations</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><em>list</em></a><em>(</em><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a><em> or </em><a class="reference internal" href="#azure.keyvault.keys.enums.JsonWebKeyOperation" title="azure.keyvault.keys.enums.JsonWebKeyOperation"><em>JsonWebKeyOperation</em></a><em>)</em>) – (optional) Allowed key operations</p></li>
 <li><p><strong>enabled</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#bool" title="(in Python v3.5)"><em>bool</em></a>) – (optional) Whether the key is enabled for use</p></li>
 <li><p><strong>expires</strong> – (optional) Expiry date of the key in UTC</p></li>
 <li><p><strong>not_before</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/datetime.html#datetime.datetime" title="(in Python v3.5)"><em>datetime.datetime</em></a>) – (optional) Not before date of the key in UTC</p></li>
@@ -598,12 +1559,12 @@ keys/create permission.</p>
 <dd class="field-even"><p>The created key</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>Key</p>
+<dd class="field-odd"><p><a class="reference internal" href="#azure.keyvault.keys.models.Key" title="azure.keyvault.keys.models.Key">Key</a></p>
 </dd>
 </dl>
 <dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id5">
-<div class="code-block-caption"><span class="caption-text">Create RSA key</span><a class="headerlink" href="#id5" title="Permalink to this code">¶</a></div>
+<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id19">
+<div class="code-block-caption"><span class="caption-text">Create RSA key</span><a class="headerlink" href="#id19" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
 <span class="n">key_size</span> <span class="o">=</span> <span class="mi">2048</span>
 <span class="n">key_ops</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;encrypt&quot;</span><span class="p">,</span> <span class="s2">&quot;decrypt&quot;</span><span class="p">,</span> <span class="s2">&quot;sign&quot;</span><span class="p">,</span> <span class="s2">&quot;verify&quot;</span><span class="p">,</span> <span class="s2">&quot;wrapKey&quot;</span><span class="p">,</span> <span class="s2">&quot;unwrapKey&quot;</span><span class="p">]</span>
@@ -636,15 +1597,15 @@ keys/create permission.</p>
 <dd class="field-even"><p>The deleted key</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>DeletedKey</p>
+<dd class="field-odd"><p><a class="reference internal" href="#azure.keyvault.keys.models.DeletedKey" title="azure.keyvault.keys.models.DeletedKey">DeletedKey</a></p>
 </dd>
 <dt class="field-even">Raises</dt>
 <dd class="field-even"><p>~azure.core.exceptions.ResourceNotFoundError if the key doesn’t exist</p>
 </dd>
 </dl>
 <dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id6">
-<div class="code-block-caption"><span class="caption-text">Delete a key</span><a class="headerlink" href="#id6" title="Permalink to this code">¶</a></div>
+<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id20">
+<div class="code-block-caption"><span class="caption-text">Delete a key</span><a class="headerlink" href="#id20" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
 <span class="c1"># delete a key</span>
 <span class="n">deleted_key</span> <span class="o">=</span> <span class="n">key_client</span><span class="o">.</span><span class="n">delete_key</span><span class="p">(</span><span class="s2">&quot;key-name&quot;</span><span class="p">)</span>
@@ -665,6 +1626,11 @@ keys/create permission.</p>
 </dd></dl>
 
 <dl class="method">
+<dt id="azure.keyvault.keys.KeyClient.get_cryptography_client">
+<code class="sig-name descname">get_cryptography_client</code><span class="sig-paren">(</span><em class="sig-param">key</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/keyvault/keys/client.html#KeyClient.get_cryptography_client"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.keyvault.keys.KeyClient.get_cryptography_client" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
 <dt id="azure.keyvault.keys.KeyClient.get_deleted_key">
 <code class="sig-name descname">get_deleted_key</code><span class="sig-paren">(</span><em class="sig-param">name</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/keyvault/keys/client.html#KeyClient.get_deleted_key"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.keyvault.keys.KeyClient.get_deleted_key" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get a deleted key. This is only possible in a vault with soft-delete enabled. Requires the keys/get
@@ -677,12 +1643,12 @@ permission.</p>
 <dd class="field-even"><p>The deleted key</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>DeletedKey</p>
+<dd class="field-odd"><p><a class="reference internal" href="#azure.keyvault.keys.models.DeletedKey" title="azure.keyvault.keys.models.DeletedKey">DeletedKey</a></p>
 </dd>
 </dl>
 <dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id7">
-<div class="code-block-caption"><span class="caption-text">Get a deleted key</span><a class="headerlink" href="#id7" title="Permalink to this code">¶</a></div>
+<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id21">
+<div class="code-block-caption"><span class="caption-text">Get a deleted key</span><a class="headerlink" href="#id21" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
 <span class="c1"># get a deleted key (requires soft-delete enabled for the vault)</span>
 <span class="n">deleted_key</span> <span class="o">=</span> <span class="n">key_client</span><span class="o">.</span><span class="n">get_deleted_key</span><span class="p">(</span><span class="s2">&quot;key-name&quot;</span><span class="p">)</span>
@@ -714,15 +1680,15 @@ of the key.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p>Key</p>
+<dd class="field-even"><p><a class="reference internal" href="#azure.keyvault.keys.models.Key" title="azure.keyvault.keys.models.Key">Key</a></p>
 </dd>
 <dt class="field-odd">Raises</dt>
 <dd class="field-odd"><p>~azure.core.exceptions.ResourceNotFoundError if the key doesn’t exist</p>
 </dd>
 </dl>
 <dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id8">
-<div class="code-block-caption"><span class="caption-text">Get a key</span><a class="headerlink" href="#id8" title="Permalink to this code">¶</a></div>
+<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id22">
+<div class="code-block-caption"><span class="caption-text">Get a key</span><a class="headerlink" href="#id22" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
 <span class="c1"># get the latest version of a key</span>
 <span class="n">key</span> <span class="o">=</span> <span class="n">key_client</span><span class="o">.</span><span class="n">get_key</span><span class="p">(</span><span class="s2">&quot;key-name&quot;</span><span class="p">)</span>
@@ -753,7 +1719,7 @@ the keys/import permission.</p>
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Name for the imported key</p></li>
-<li><p><strong>key</strong> (<em>JsonWebKey</em>) – The JSON web key to import</p></li>
+<li><p><strong>key</strong> (<a class="reference internal" href="#azure.keyvault.keys.models.JsonWebKey" title="azure.keyvault.keys.models.JsonWebKey"><em>JsonWebKey</em></a>) – The JSON web key to import</p></li>
 <li><p><strong>hsm</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#bool" title="(in Python v3.5)"><em>bool</em></a>) – (optional) Whether to import as a hardware key (HSM) or software key</p></li>
 <li><p><strong>enabled</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#bool" title="(in Python v3.5)"><em>bool</em></a>) – (optional) Whether the key is enabled for use</p></li>
 <li><p><strong>expires</strong> – (optional) Expiry date of the key in UTC</p></li>
@@ -765,7 +1731,7 @@ the keys/import permission.</p>
 <dd class="field-even"><p>The imported key</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>Key</p>
+<dd class="field-odd"><p><a class="reference internal" href="#azure.keyvault.keys.models.Key" title="azure.keyvault.keys.models.Key">Key</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -780,12 +1746,12 @@ enabled. Requires the keys/list permission.</p>
 <dd class="field-odd"><p>An iterator of deleted keys</p>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference internal" href="azure.core.html#azure.core.paging.ItemPaged" title="azure.core.paging.ItemPaged">ItemPaged</a>[DeletedKey]</p>
+<dd class="field-even"><p><a class="reference internal" href="azure.core.html#azure.core.paging.ItemPaged" title="azure.core.paging.ItemPaged">ItemPaged</a>[<a class="reference internal" href="#azure.keyvault.keys.models.DeletedKey" title="azure.keyvault.keys.models.DeletedKey">DeletedKey</a>]</p>
 </dd>
 </dl>
 <dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id9">
-<div class="code-block-caption"><span class="caption-text">List all the deleted keys</span><a class="headerlink" href="#id9" title="Permalink to this code">¶</a></div>
+<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id23">
+<div class="code-block-caption"><span class="caption-text">List all the deleted keys</span><a class="headerlink" href="#id23" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
 <span class="c1"># get an iterator of deleted keys (requires soft-delete enabled for the vault)</span>
 <span class="n">deleted_keys</span> <span class="o">=</span> <span class="n">key_client</span><span class="o">.</span><span class="n">list_deleted_keys</span><span class="p">()</span>
@@ -816,12 +1782,12 @@ enabled. Requires the keys/list permission.</p>
 <dd class="field-even"><p>An iterator of keys without their cryptographic material</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference internal" href="azure.core.html#azure.core.paging.ItemPaged" title="azure.core.paging.ItemPaged">ItemPaged</a>[KeyBase]</p>
+<dd class="field-odd"><p><a class="reference internal" href="azure.core.html#azure.core.paging.ItemPaged" title="azure.core.paging.ItemPaged">ItemPaged</a>[<a class="reference internal" href="#azure.keyvault.keys.models.KeyBase" title="azure.keyvault.keys.models.KeyBase">KeyBase</a>]</p>
 </dd>
 </dl>
 <dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id10">
-<div class="code-block-caption"><span class="caption-text">List all versions of a key</span><a class="headerlink" href="#id10" title="Permalink to this code">¶</a></div>
+<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id24">
+<div class="code-block-caption"><span class="caption-text">List all versions of a key</span><a class="headerlink" href="#id24" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
 <span class="c1"># get an iterator of a key&#39;s versions</span>
 <span class="n">key_versions</span> <span class="o">=</span> <span class="n">key_client</span><span class="o">.</span><span class="n">list_key_versions</span><span class="p">(</span><span class="s2">&quot;key-name&quot;</span><span class="p">)</span>
@@ -846,12 +1812,12 @@ enabled. Requires the keys/list permission.</p>
 <dd class="field-odd"><p>An iterator of keys without their cryptographic material or version information</p>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference internal" href="azure.core.html#azure.core.paging.ItemPaged" title="azure.core.paging.ItemPaged">ItemPaged</a>[KeyBase]</p>
+<dd class="field-even"><p><a class="reference internal" href="azure.core.html#azure.core.paging.ItemPaged" title="azure.core.paging.ItemPaged">ItemPaged</a>[<a class="reference internal" href="#azure.keyvault.keys.models.KeyBase" title="azure.keyvault.keys.models.KeyBase">KeyBase</a>]</p>
 </dd>
 </dl>
 <dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id11">
-<div class="code-block-caption"><span class="caption-text">List all keys</span><a class="headerlink" href="#id11" title="Permalink to this code">¶</a></div>
+<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id25">
+<div class="code-block-caption"><span class="caption-text">List all keys</span><a class="headerlink" href="#id25" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
 <span class="c1"># get an iterator of keys</span>
 <span class="n">keys</span> <span class="o">=</span> <span class="n">key_client</span><span class="o">.</span><span class="n">list_keys</span><span class="p">()</span>
@@ -906,12 +1872,12 @@ Attempting to recover an non-deleted key will also return an error.</p>
 <dd class="field-even"><p>The recovered key</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>Key</p>
+<dd class="field-odd"><p><a class="reference internal" href="#azure.keyvault.keys.models.Key" title="azure.keyvault.keys.models.Key">Key</a></p>
 </dd>
 </dl>
 <dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id12">
-<div class="code-block-caption"><span class="caption-text">Recover a deleted key</span><a class="headerlink" href="#id12" title="Permalink to this code">¶</a></div>
+<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id26">
+<div class="code-block-caption"><span class="caption-text">Recover a deleted key</span><a class="headerlink" href="#id26" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
 <span class="c1"># recover a deleted key to its latest version (requires soft-delete enabled for the vault)</span>
 <span class="n">recovered_key</span> <span class="o">=</span> <span class="n">key_client</span><span class="o">.</span><span class="n">recover_deleted_key</span><span class="p">(</span><span class="s2">&quot;key-name&quot;</span><span class="p">)</span>
@@ -940,15 +1906,15 @@ vault must be owned by the same Microsoft Azure subscription as the source vault
 <dd class="field-even"><p>The restored key</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>Key</p>
+<dd class="field-odd"><p><a class="reference internal" href="#azure.keyvault.keys.models.Key" title="azure.keyvault.keys.models.Key">Key</a></p>
 </dd>
 <dt class="field-even">Raises</dt>
 <dd class="field-even"><p>~azure.core.exceptions.ResourceExistsError if the backed up key’s name is already in use</p>
 </dd>
 </dl>
 <dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id13">
-<div class="code-block-caption"><span class="caption-text">Restore a key backup</span><a class="headerlink" href="#id13" title="Permalink to this code">¶</a></div>
+<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id27">
+<div class="code-block-caption"><span class="caption-text">Restore a key backup</span><a class="headerlink" href="#id27" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
 <span class="c1"># restore a key backup</span>
 <span class="n">restored_key</span> <span class="o">=</span> <span class="n">key_client</span><span class="o">.</span><span class="n">restore_key</span><span class="p">(</span><span class="n">key_backup</span><span class="p">)</span>
@@ -963,36 +1929,6 @@ vault must be owned by the same Microsoft Azure subscription as the source vault
 </dd></dl>
 
 <dl class="method">
-<dt id="azure.keyvault.keys.KeyClient.unwrap_key">
-<code class="sig-name descname">unwrap_key</code><span class="sig-paren">(</span><em class="sig-param">name</em>, <em class="sig-param">algorithm</em>, <em class="sig-param">value</em>, <em class="sig-param">version=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/keyvault/keys/client.html#KeyClient.unwrap_key"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.keyvault.keys.KeyClient.unwrap_key" title="Permalink to this definition">¶</a></dt>
-<dd><p>Unwraps a symmetric key using the specified key that was initially used
-for wrapping that key.</p>
-<p>The UNWRAP operation supports decryption of a symmetric key using the
-target key encryption key. This operation is the reverse of the WRAP
-operation. The UNWRAP operation applies to asymmetric and symmetric
-keys stored in Azure Key Vault since it uses the private portion of the
-key. This operation requires the keys/unwrapKey permission.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The name of the key</p></li>
-<li><p><strong>version</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The version of the key.</p></li>
-<li><p><strong>algorithm</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a><em> or
-</em><em>JsonWebKeyEncryptionAlgorithm</em>) – algorithm identifier. Possible values include:
-‘RSA-OAEP’, ‘RSA-OAEP-256’, ‘RSA1_5’</p></li>
-<li><p><strong>value</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#bytes" title="(in Python v3.5)"><em>bytes</em></a>) – </p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>The unwrapped symmetric key.</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>Key</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="method">
 <dt id="azure.keyvault.keys.KeyClient.update_key">
 <code class="sig-name descname">update_key</code><span class="sig-paren">(</span><em class="sig-param">name</em>, <em class="sig-param">version=None</em>, <em class="sig-param">key_operations=None</em>, <em class="sig-param">enabled=None</em>, <em class="sig-param">expires=None</em>, <em class="sig-param">not_before=None</em>, <em class="sig-param">tags=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/keyvault/keys/client.html#KeyClient.update_key"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.keyvault.keys.KeyClient.update_key" title="Permalink to this definition">¶</a></dt>
 <dd><p>Change attributes of a key. Cannot change a key’s cryptographic material. Requires the keys/update
@@ -1002,7 +1938,7 @@ permission.</p>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The name of key to update</p></li>
 <li><p><strong>version</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – (optional) The version of the key to update</p></li>
-<li><p><strong>key_operations</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><em>list</em></a><em>(</em><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a><em> or </em><em>JsonWebKeyOperation</em><em>)</em>) – (optional) Allowed key operations</p></li>
+<li><p><strong>key_operations</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><em>list</em></a><em>(</em><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a><em> or </em><a class="reference internal" href="#azure.keyvault.keys.enums.JsonWebKeyOperation" title="azure.keyvault.keys.enums.JsonWebKeyOperation"><em>JsonWebKeyOperation</em></a><em>)</em>) – (optional) Allowed key operations</p></li>
 <li><p><strong>enabled</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#bool" title="(in Python v3.5)"><em>bool</em></a>) – (optional) Whether the key is enabled for use</p></li>
 <li><p><strong>expires</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/datetime.html#datetime.datetime" title="(in Python v3.5)"><em>datetime.datetime</em></a>) – (optional) Expiry date of the key in UTC</p></li>
 <li><p><strong>not_before</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/datetime.html#datetime.datetime" title="(in Python v3.5)"><em>datetime.datetime</em></a>) – (optional) Not before date of the key in UTC</p></li>
@@ -1013,15 +1949,15 @@ permission.</p>
 <dd class="field-even"><p>The updated key</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>Key</p>
+<dd class="field-odd"><p><a class="reference internal" href="#azure.keyvault.keys.models.Key" title="azure.keyvault.keys.models.Key">Key</a></p>
 </dd>
 <dt class="field-even">Raises</dt>
 <dd class="field-even"><p>~azure.core.exceptions.ResourceNotFoundError if the key doesn’t exist</p>
 </dd>
 </dl>
 <dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id14">
-<div class="code-block-caption"><span class="caption-text">Update a key’s attributes</span><a class="headerlink" href="#id14" title="Permalink to this code">¶</a></div>
+<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id28">
+<div class="code-block-caption"><span class="caption-text">Update a key’s attributes</span><a class="headerlink" href="#id28" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
 <span class="c1"># update attributes of an existing key</span>
 <span class="n">expires</span> <span class="o">=</span> <span class="n">date_parse</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s2">&quot;2050-01-02T08:00:00.000Z&quot;</span><span class="p">)</span>
@@ -1037,38 +1973,6 @@ permission.</p>
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="method">
-<dt id="azure.keyvault.keys.KeyClient.wrap_key">
-<code class="sig-name descname">wrap_key</code><span class="sig-paren">(</span><em class="sig-param">name</em>, <em class="sig-param">algorithm</em>, <em class="sig-param">value</em>, <em class="sig-param">version=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/keyvault/keys/client.html#KeyClient.wrap_key"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.keyvault.keys.KeyClient.wrap_key" title="Permalink to this definition">¶</a></dt>
-<dd><p>Wraps a symmetric key using a specified key.</p>
-<p>The WRAP operation supports encryption of a symmetric key using a key
-encryption key that has previously been stored in an Azure Key Vault.
-The WRAP operation is only strictly necessary for symmetric keys stored
-in Azure Key Vault since protection with an asymmetric key can be
-performed using the public portion of the key. This operation is
-supported for asymmetric keys as a convenience for callers that have a
-key-reference but do not have access to the public key material. This
-operation requires the keys/wrapKey permission.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The name of the key</p></li>
-<li><p><strong>version</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The version of the key.</p></li>
-<li><p><strong>algorithm</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a><em> or
-</em><em>JsonWebKeyEncryptionAlgorithm</em>) – algorithm identifier. Possible values include:
-‘RSA-OAEP’, ‘RSA-OAEP-256’, ‘RSA1_5’</p></li>
-<li><p><strong>value</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#bytes" title="(in Python v3.5)"><em>bytes</em></a>) – </p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>The wrapped symmetric key.</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>Key</p>
 </dd>
 </dl>
 </dd></dl>

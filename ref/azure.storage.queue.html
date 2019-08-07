@@ -440,7 +440,7 @@ The retention policy for the metrics.</p></li>
 <dl class="field-list simple">
 <dt class="field-odd">Variables</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><a class="reference internal" href="azure.keyvault.secrets.html#azure.keyvault.secrets.models.SecretAttributes.id" title="azure.keyvault.secrets.models.SecretAttributes.id"><strong>id</strong></a> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – A GUID value assigned to the message by the Queue service that
+<li><p><a class="reference internal" href="azure.keyvault.keys.html#azure.keyvault.keys.models.KeyBase.id" title="azure.keyvault.keys.models.KeyBase.id"><strong>id</strong></a> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – A GUID value assigned to the message by the Queue service that
 identifies the message in the queue. This value may be used together
 with the value of pop_receipt to delete a message from the queue after
 it has been retrieved with the receive messages operation.</p></li>
@@ -523,7 +523,7 @@ Update so you can first get the message you want to update.</p></li>
 <dl class="field-list simple">
 <dt class="field-odd">Variables</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><a class="reference internal" href="azure.keyvault.secrets.html#azure.keyvault.secrets.models.SecretAttributes.name" title="azure.keyvault.secrets.models.SecretAttributes.name"><strong>name</strong></a> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The name of the queue.</p></li>
+<li><p><a class="reference internal" href="azure.keyvault.keys.html#azure.keyvault.keys.models.KeyBase.name" title="azure.keyvault.keys.models.KeyBase.name"><strong>name</strong></a> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The name of the queue.</p></li>
 <li><p><strong>metadata</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#dict" title="(in Python v3.5)"><em>dict</em></a><em>(</em><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a><em>)</em>) – A dict containing name-value pairs associated with the queue as metadata.
 This var is set to None unless the include=metadata param was included
 for the list queues operation. If this parameter was specified but the
@@ -3441,7 +3441,7 @@ blobs or files.</p></li>
 <dl class="field-list simple">
 <dt class="field-odd">Variables</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><a class="reference internal" href="azure.keyvault.secrets.html#azure.keyvault.secrets.models.SecretAttributes.id" title="azure.keyvault.secrets.models.SecretAttributes.id"><strong>id</strong></a> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – A GUID value assigned to the message by the Queue service that
+<li><p><a class="reference internal" href="azure.keyvault.keys.html#azure.keyvault.keys.models.KeyBase.id" title="azure.keyvault.keys.models.KeyBase.id"><strong>id</strong></a> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – A GUID value assigned to the message by the Queue service that
 identifies the message in the queue. This value may be used together
 with the value of pop_receipt to delete a message from the queue after
 it has been retrieved with the receive messages operation.</p></li>
@@ -3472,7 +3472,7 @@ the service. Default is str.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Variables</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><a class="reference internal" href="azure.keyvault.secrets.html#azure.keyvault.secrets.models.SecretAttributes.name" title="azure.keyvault.secrets.models.SecretAttributes.name"><strong>name</strong></a> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The name of the queue.</p></li>
+<li><p><a class="reference internal" href="azure.keyvault.keys.html#azure.keyvault.keys.models.KeyBase.name" title="azure.keyvault.keys.models.KeyBase.name"><strong>name</strong></a> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – The name of the queue.</p></li>
 <li><p><strong>metadata</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#dict" title="(in Python v3.5)"><em>dict</em></a><em>(</em><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a><em>)</em>) – A dict containing name-value pairs associated with the queue as metadata.
 This var is set to None unless the include=metadata param was included
 for the list queues operation. If this parameter was specified but the
