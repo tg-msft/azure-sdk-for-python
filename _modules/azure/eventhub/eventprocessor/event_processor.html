@@ -299,16 +299,42 @@
 
 
 <div class="viewcode-block" id="EventProcessor"><a class="viewcode-back" href="../../../../ref/azure.eventhub.eventprocessor.html#azure.eventhub.eventprocessor.event_processor.EventProcessor">[docs]</a><span class="k">class</span> <span class="nc">EventProcessor</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    An EventProcessor constantly receives events from all partitions of the Event Hub in the context of a given</span>
+<span class="sd">    consumer group. The received data will be sent to PartitionProcessor to be processed.</span>
+
+<span class="sd">    It provides the user a convenient way to receive events from multiple partitions and save checkpoints.</span>
+<span class="sd">    If multiple EventProcessors are running for an event hub, they will automatically balance load.</span>
+<span class="sd">    This load balancing won&#39;t be available until preview 3.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        .. code-block:: python</span>
+
+<span class="sd">            class MyPartitionProcessor(PartitionProcessor):</span>
+<span class="sd">                async def process_events(self, events):</span>
+<span class="sd">                    if events:</span>
+<span class="sd">                        # do something sync or async to process the events</span>
+<span class="sd">                        await self._checkpoint_manager.update_checkpoint(events[-1].offset, events[-1].sequence_number)</span>
+
+<span class="sd">            import asyncio</span>
+<span class="sd">            from azure.eventhub.aio import EventHubClient</span>
+<span class="sd">            from azure.eventhub.eventprocessor import EventProcessor, PartitionProcessor, Sqlite3PartitionManager</span>
+<span class="sd">            client = EventHubClient.from_connection_string(&quot;&lt;your connection string&gt;&quot;, receive_timeout=5, retry_total=3)</span>
+<span class="sd">            partition_manager = Sqlite3PartitionManager()</span>
+<span class="sd">            try:</span>
+<span class="sd">                event_processor = EventProcessor(client, &quot;$default&quot;, MyPartitionProcessor, partition_manager)</span>
+<span class="sd">                asyncio.ensure_future(event_processor.start())</span>
+<span class="sd">                await asyncio.sleep(100)  # allow it to run 100 seconds</span>
+<span class="sd">                await event_processor.stop()</span>
+<span class="sd">            finally:</span>
+<span class="sd">                await partition_manager.close()</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">eventhub_client</span><span class="p">:</span> <span class="n">EventHubClient</span><span class="p">,</span> <span class="n">consumer_group_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
                  <span class="n">partition_processor_factory</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">CheckpointManager</span><span class="p">],</span> <span class="n">PartitionProcessor</span><span class="p">],</span>
                  <span class="n">partition_manager</span><span class="p">:</span> <span class="n">PartitionManager</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        An EventProcessor constantly receives events from all partitions of the Event Hub in the context of a given</span>
-<span class="sd">        consumer group. The received data will be sent to PartitionProcessor to be processed.</span>
-
-<span class="sd">        It provides the user a convenient way to receive events from multiple partitions and save checkpoints.</span>
-<span class="sd">        If multiple EventProcessors are running for an event hub, they will automatically balance load.</span>
-<span class="sd">        This load balancing won&#39;t be available until preview 3.</span>
+<span class="sd">        Instantiate an EventProcessor.</span>
 
 <span class="sd">        :param eventhub_client: An instance of ~azure.eventhub.aio.EventClient object</span>
 <span class="sd">        :type eventhub_client: ~azure.eventhub.aio.EventClient</span>
@@ -323,29 +349,6 @@
 <span class="sd">        :type partition_manager: Class implementing the ~azure.eventhub.eventprocessor.PartitionManager.</span>
 <span class="sd">        :param initial_event_position: The offset to start a partition consumer if the partition has no checkpoint yet.</span>
 <span class="sd">        :type initial_event_position: int or str</span>
-
-<span class="sd">        Example:</span>
-<span class="sd">            ```python</span>
-<span class="sd">                    class MyPartitionProcessor(PartitionProcessor):</span>
-<span class="sd">                        async def process_events(self, events):</span>
-<span class="sd">                            if events:</span>
-<span class="sd">                                # do something sync or async to process the events</span>
-<span class="sd">                                await self._checkpoint_manager.update_checkpoint(events[-1].offset, events[-1].sequence_number)</span>
-
-
-<span class="sd">                    import asyncio</span>
-<span class="sd">                    from azure.eventhub.aio import EventHubClient</span>
-<span class="sd">                    from azure.eventhub.eventprocessor import EventProcessor, PartitionProcessor, Sqlite3PartitionManager</span>
-<span class="sd">                    client = EventHubClient.from_connection_string(&quot;&lt;your connection string&gt;&quot;, receive_timeout=5, retry_total=3)</span>
-<span class="sd">                    partition_manager = Sqlite3PartitionManager()</span>
-<span class="sd">                    try:</span>
-<span class="sd">                        event_processor = EventProcessor(client, &quot;$default&quot;, MyPartitionProcessor, partition_manager)</span>
-<span class="sd">                        asyncio.ensure_future(event_processor.start())</span>
-<span class="sd">                        await asyncio.sleep(100)  # allow it to run 100 seconds</span>
-<span class="sd">                        await event_processor.stop()</span>
-<span class="sd">                    finally:</span>
-<span class="sd">                        await partition_manager.close()</span>
-<span class="sd">            ```</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_consumer_group_name</span> <span class="o">=</span> <span class="n">consumer_group_name</span>
@@ -365,12 +368,12 @@
 <div class="viewcode-block" id="EventProcessor.start"><a class="viewcode-back" href="../../../../ref/azure.eventhub.eventprocessor.html#azure.eventhub.eventprocessor.event_processor.EventProcessor.start">[docs]</a>    <span class="k">async</span> <span class="k">def</span> <span class="nf">start</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Start the EventProcessor.</span>
 
-<span class="sd">            1. retrieve the partition ids from eventhubs</span>
-<span class="sd">            2. claim partition ownership of these partitions.</span>
-<span class="sd">            3. repeatedly call EvenHubConsumer.receive() to retrieve events and</span>
-<span class="sd">            call user defined PartitionProcessor.process_events()</span>
+<span class="sd">        1. retrieve the partition ids from eventhubs.</span>
+<span class="sd">        2. claim partition ownership of these partitions.</span>
+<span class="sd">        3. repeatedly call EvenHubConsumer.receive() to retrieve events and call user defined PartitionProcessor.process_events().</span>
 
-<span class="sd">            :return None</span>
+<span class="sd">        :return: None</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;EventProcessor </span><span class="si">%r</span><span class="s2"> is being started&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_id</span><span class="p">)</span>
         <span class="n">partition_ids</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_eventhub_client</span><span class="o">.</span><span class="n">get_partition_ids</span><span class="p">()</span>
@@ -382,7 +385,8 @@
 
 <span class="sd">        This method cancels tasks that are running EventHubConsumer.receive() for the partitions owned by this EventProcessor.</span>
 
-<span class="sd">        :return None</span>
+<span class="sd">        :return: None</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_tasks</span><span class="p">)):</span>
             <span class="n">task</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tasks</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>

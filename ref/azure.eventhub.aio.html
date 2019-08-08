@@ -393,8 +393,10 @@ queued. Default value is 60 seconds. If set to 0, there will be no timeout.</p><
 <li><p><strong>loop</strong> – An event loop. If not specified the default event loop will be used.</p></li>
 </ul>
 </dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference internal" href="#azure.eventhub.aio.producer_async.EventHubProducer" title="azure.eventhub.aio.producer_async.EventHubProducer">EventHubProducer</a></p>
+</dd>
 </dl>
-<p>:rtype ~azure.eventhub.aio.producer_async.EventHubProducer</p>
 <dl>
 <dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id3">
 <div class="code-block-caption"><span class="caption-text">Add an async producer to the client to send EventData.</span><a class="headerlink" href="#id3" title="Permalink to this code">¶</a></div>
@@ -654,19 +656,20 @@ due to an error.</p>
 <dt id="azure.eventhub.aio.producer_async.EventHubProducer.create_batch">
 <em class="property">async </em><code class="sig-name descname">create_batch</code><span class="sig-paren">(</span><em class="sig-param">max_size=None</em>, <em class="sig-param">partition_key=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/eventhub/aio/producer_async.html#EventHubProducer.create_batch"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.eventhub.aio.producer_async.EventHubProducer.create_batch" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create an EventDataBatch object with max size being max_size.
-The max_size should be no greater than the max allowed message size defined by the service side.
-:param max_size: The maximum size of bytes data that an EventDataBatch object can hold.
-:type max_size: int
-:param partition_key: With the given partition_key, event data will land to</p>
-<blockquote>
-<div><p>a particular partition of the Event Hub decided by the service.</p>
-</div></blockquote>
+The max_size should be no greater than the max allowed message size defined by the service side.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>an EventDataBatch instance</p>
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>max_size</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a>) – The maximum size of bytes data that an EventDataBatch object can hold.</p></li>
+<li><p><strong>partition_key</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – With the given partition_key, event data will land to
+a particular partition of the Event Hub decided by the service.</p></li>
+</ul>
 </dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference internal" href="azure.eventhub.html#azure.eventhub.EventDataBatch" title="azure.eventhub.EventDataBatch">EventDataBatch</a></p>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>an EventDataBatch instance</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="azure.eventhub.html#azure.eventhub.EventDataBatch" title="azure.eventhub.EventDataBatch">EventDataBatch</a></p>
 </dd>
 </dl>
 <dl>
@@ -699,17 +702,14 @@ received or operation times out.</p>
 <li><p><strong>partition_key</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – With the given partition_key, event data will land to
 a particular partition of the Event Hub decided by the service. partition_key
 could be omitted if event_data is of type ~azure.eventhub.EventDataBatch.</p></li>
-<li><p><strong>timeout</strong> – The maximum wait time to send the event data.
+<li><p><strong>timeout</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#float" title="(in Python v3.5)"><em>float</em></a>) – The maximum wait time to send the event data.
 If not specified, the default wait time specified when the producer was created will be used.</p></li>
 </ul>
 </dd>
-</dl>
-<p>:type timeout:float
-:raises: ~azure.eventhub.AuthenticationError, ~azure.eventhub.ConnectError, ~azure.eventhub.ConnectionLostError,</p>
-<blockquote>
-<div><p>~azure.eventhub.EventDataError, ~azure.eventhub.EventDataSendError, ~azure.eventhub.EventHubError</p>
-</div></blockquote>
-<dl class="field-list simple">
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p>~azure.eventhub.AuthenticationError, ~azure.eventhub.ConnectError, ~azure.eventhub.ConnectionLostError,
+~azure.eventhub.EventDataError, ~azure.eventhub.EventDataSendError, ~azure.eventhub.EventHubError</p>
+</dd>
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>None</p>
 </dd>
@@ -817,8 +817,10 @@ queued. Default value is 60 seconds. If set to 0, there will be no timeout.</p><
 <li><p><strong>loop</strong> – An event loop. If not specified the default event loop will be used.</p></li>
 </ul>
 </dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference internal" href="#azure.eventhub.aio.producer_async.EventHubProducer" title="azure.eventhub.aio.producer_async.EventHubProducer">EventHubProducer</a></p>
+</dd>
 </dl>
-<p>:rtype ~azure.eventhub.aio.producer_async.EventHubProducer</p>
 <dl>
 <dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id11">
 <div class="code-block-caption"><span class="caption-text">Add an async producer to the client to send EventData.</span><a class="headerlink" href="#id11" title="Permalink to this code">¶</a></div>
@@ -1072,19 +1074,20 @@ due to an error.</p>
 <dt id="azure.eventhub.aio.EventHubProducer.create_batch">
 <em class="property">async </em><code class="sig-name descname">create_batch</code><span class="sig-paren">(</span><em class="sig-param">max_size=None</em>, <em class="sig-param">partition_key=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/eventhub/aio/producer_async.html#EventHubProducer.create_batch"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.eventhub.aio.EventHubProducer.create_batch" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create an EventDataBatch object with max size being max_size.
-The max_size should be no greater than the max allowed message size defined by the service side.
-:param max_size: The maximum size of bytes data that an EventDataBatch object can hold.
-:type max_size: int
-:param partition_key: With the given partition_key, event data will land to</p>
-<blockquote>
-<div><p>a particular partition of the Event Hub decided by the service.</p>
-</div></blockquote>
+The max_size should be no greater than the max allowed message size defined by the service side.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>an EventDataBatch instance</p>
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>max_size</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a>) – The maximum size of bytes data that an EventDataBatch object can hold.</p></li>
+<li><p><strong>partition_key</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – With the given partition_key, event data will land to
+a particular partition of the Event Hub decided by the service.</p></li>
+</ul>
 </dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference internal" href="azure.eventhub.html#azure.eventhub.EventDataBatch" title="azure.eventhub.EventDataBatch">EventDataBatch</a></p>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>an EventDataBatch instance</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="azure.eventhub.html#azure.eventhub.EventDataBatch" title="azure.eventhub.EventDataBatch">EventDataBatch</a></p>
 </dd>
 </dl>
 <dl>
@@ -1117,17 +1120,14 @@ received or operation times out.</p>
 <li><p><strong>partition_key</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – With the given partition_key, event data will land to
 a particular partition of the Event Hub decided by the service. partition_key
 could be omitted if event_data is of type ~azure.eventhub.EventDataBatch.</p></li>
-<li><p><strong>timeout</strong> – The maximum wait time to send the event data.
+<li><p><strong>timeout</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#float" title="(in Python v3.5)"><em>float</em></a>) – The maximum wait time to send the event data.
 If not specified, the default wait time specified when the producer was created will be used.</p></li>
 </ul>
 </dd>
-</dl>
-<p>:type timeout:float
-:raises: ~azure.eventhub.AuthenticationError, ~azure.eventhub.ConnectError, ~azure.eventhub.ConnectionLostError,</p>
-<blockquote>
-<div><p>~azure.eventhub.EventDataError, ~azure.eventhub.EventDataSendError, ~azure.eventhub.EventHubError</p>
-</div></blockquote>
-<dl class="field-list simple">
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p>~azure.eventhub.AuthenticationError, ~azure.eventhub.ConnectError, ~azure.eventhub.ConnectionLostError,
+~azure.eventhub.EventDataError, ~azure.eventhub.EventDataSendError, ~azure.eventhub.EventHubError</p>
+</dd>
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>None</p>
 </dd>

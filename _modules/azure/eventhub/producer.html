@@ -441,6 +441,7 @@
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Create an EventDataBatch object with max size being max_size.</span>
 <span class="sd">        The max_size should be no greater than the max allowed message size defined by the service side.</span>
+
 <span class="sd">        :param max_size: The maximum size of bytes data that an EventDataBatch object can hold.</span>
 <span class="sd">        :type max_size: int</span>
 <span class="sd">        :param partition_key: With the given partition_key, event data will land to</span>
@@ -482,7 +483,8 @@
 <span class="sd">        :type partition_key: str</span>
 <span class="sd">        :param timeout: The maximum wait time to send the event data.</span>
 <span class="sd">         If not specified, the default wait time specified when the producer was created will be used.</span>
-<span class="sd">        :type timeout:float</span>
+<span class="sd">        :type timeout: float</span>
+
 <span class="sd">        :raises: ~azure.eventhub.AuthenticationError, ~azure.eventhub.ConnectError, ~azure.eventhub.ConnectionLostError,</span>
 <span class="sd">                ~azure.eventhub.EventDataError, ~azure.eventhub.EventDataSendError, ~azure.eventhub.EventHubError</span>
 <span class="sd">        :return: None</span>
