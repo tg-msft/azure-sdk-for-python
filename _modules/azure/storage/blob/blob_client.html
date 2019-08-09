@@ -349,13 +349,13 @@
 
 <span class="sd">    :ivar str url:</span>
 <span class="sd">        The full endpoint URL to the Blob, including snapshot and SAS token if used. This could be</span>
-<span class="sd">        either the primary endpoint, or the secondard endpoint depending on the current `location_mode`.</span>
+<span class="sd">        either the primary endpoint, or the secondary endpoint depending on the current `location_mode`.</span>
 <span class="sd">    :ivar str primary_endpoint:</span>
 <span class="sd">        The full primary endpoint URL.</span>
 <span class="sd">    :ivar str primary_hostname:</span>
 <span class="sd">        The hostname of the primary endpoint.</span>
 <span class="sd">    :ivar str secondary_endpoint:</span>
-<span class="sd">        The full secondard endpoint URL if configured. If not available</span>
+<span class="sd">        The full secondary endpoint URL if configured. If not available</span>
 <span class="sd">        a ValueError will be raised. To explicitly specify a secondary hostname, use the optional</span>
 <span class="sd">        `secondary_hostname` keyword argument on instantiation.</span>
 <span class="sd">    :ivar str secondary_hostname:</span>
@@ -1570,7 +1570,9 @@
 <span class="sd">            is public, no authentication is required.</span>
 <span class="sd">            Examples:</span>
 <span class="sd">            https://myaccount.blob.core.windows.net/mycontainer/myblob</span>
+
 <span class="sd">            https://myaccount.blob.core.windows.net/mycontainer/myblob?snapshot=&lt;DateTime&gt;</span>
+
 <span class="sd">            https://otheraccount.blob.core.windows.net/mycontainer/myblob?sastoken</span>
 <span class="sd">        :param metadata:</span>
 <span class="sd">            Name-value pairs associated with the blob as metadata. If no name-value</span>
@@ -1655,9 +1657,16 @@
 <span class="sd">            premium storage accounts.</span>
 <span class="sd">        :param bool requires_sync:</span>
 <span class="sd">            Enforces that the service will not return a response until the copy is complete.</span>
-<span class="sd">        :param bool polling: A poller will be used for this operation. Defaults to True.</span>
-<span class="sd">        :returns: A pollable object to check copy operation status (and abort).</span>
-<span class="sd">        :rtype: :class:`~azure.storage.blob.polling.CopyStatusPoller`</span>
+<span class="sd">        :returns: A dictionary of copy properties (etag, last_modified, copy_id, copy_status).</span>
+<span class="sd">        :rtype: Dict[str, Union[str, datetime]]</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">            .. literalinclude:: ../tests/test_blob_samples_common.py</span>
+<span class="sd">                :start-after: [START copy_blob_from_url]</span>
+<span class="sd">                :end-before: [END copy_blob_from_url]</span>
+<span class="sd">                :language: python</span>
+<span class="sd">                :dedent: 12</span>
+<span class="sd">                :caption: Copy a blob from a URL.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">options</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_start_copy_from_url_options</span><span class="p">(</span>
             <span class="n">source_url</span><span class="p">,</span>
@@ -1690,7 +1699,7 @@
 
 <div class="viewcode-block" id="BlobClient.abort_copy"><a class="viewcode-back" href="../../../../ref/azure.storage.blob.html#azure.storage.blob.blob_client.BlobClient.abort_copy">[docs]</a>    <span class="nd">@distributed_trace</span>
     <span class="k">def</span> <span class="nf">abort_copy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">copy_id</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="c1"># type: (Union[str, FileProperties], **Any) -&gt; None</span>
+        <span class="c1"># type: (Union[str, BlobProperties], **Any) -&gt; None</span>
         <span class="sd">&quot;&quot;&quot;Abort an ongoing copy operation.</span>
 
 <span class="sd">        This will leave a destination blob with zero length and full metadata.</span>
@@ -1698,9 +1707,17 @@
 
 <span class="sd">        :param copy_id:</span>
 <span class="sd">            The copy operation to abort. This can be either an ID, or an</span>
-<span class="sd">            instance of FileProperties.</span>
-<span class="sd">        :type copy_id: str or ~azure.storage.file.models.FileProperties</span>
+<span class="sd">            instance of BlobProperties.</span>
+<span class="sd">        :type copy_id: str or ~azure.storage.blob.models.BlobProperties</span>
 <span class="sd">        :rtype: None</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">            .. literalinclude:: ../tests/test_blob_samples_common.py</span>
+<span class="sd">                :start-after: [START abort_copy_blob_from_url]</span>
+<span class="sd">                :end-before: [END abort_copy_blob_from_url]</span>
+<span class="sd">                :language: python</span>
+<span class="sd">                :dedent: 12</span>
+<span class="sd">                :caption: Abort copying a blob from URL.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">options</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_abort_copy_options</span><span class="p">(</span><span class="n">copy_id</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="k">try</span><span class="p">:</span>

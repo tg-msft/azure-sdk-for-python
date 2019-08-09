@@ -341,13 +341,13 @@
 
 <span class="sd">    :ivar str url:</span>
 <span class="sd">        The full endpoint URL to the Container, including SAS token if used. This could be</span>
-<span class="sd">        either the primary endpoint, or the secondard endpoint depending on the current `location_mode`.</span>
+<span class="sd">        either the primary endpoint, or the secondary endpoint depending on the current `location_mode`.</span>
 <span class="sd">    :ivar str primary_endpoint:</span>
 <span class="sd">        The full primary endpoint URL.</span>
 <span class="sd">    :ivar str primary_hostname:</span>
 <span class="sd">        The hostname of the primary endpoint.</span>
 <span class="sd">    :ivar str secondary_endpoint:</span>
-<span class="sd">        The full secondard endpoint URL if configured. If not available</span>
+<span class="sd">        The full secondary endpoint URL if configured. If not available</span>
 <span class="sd">        a ValueError will be raised. To explicitly specify a secondary hostname, use the optional</span>
 <span class="sd">        `secondary_hostname` keyword argument on instantiation.</span>
 <span class="sd">    :ivar str secondary_hostname:</span>
@@ -375,7 +375,7 @@
 <span class="sd">            :end-before: [END create_container_client_from_service]</span>
 <span class="sd">            :language: python</span>
 <span class="sd">            :dedent: 8</span>
-<span class="sd">            :caption: Get a ContainerClient from an existing BlobSericeClient.</span>
+<span class="sd">            :caption: Get a ContainerClient from an existing BlobServiceClient.</span>
 
 <span class="sd">        .. literalinclude:: ../tests/test_blob_samples_containers.py</span>
 <span class="sd">            :start-after: [START create_container_client_sasurl]</span>
@@ -1106,7 +1106,7 @@
 <span class="sd">        :param str encoding:</span>
 <span class="sd">            Defaults to UTF-8.</span>
 <span class="sd">        :returns: A BlobClient to interact with the newly uploaded blob.</span>
-<span class="sd">        :rtype: ~azure.storage.blob.blob_cient.BlobClient</span>
+<span class="sd">        :rtype: ~azure.storage.blob.blob_client.BlobClient</span>
 
 <span class="sd">        Example:</span>
 <span class="sd">            .. literalinclude:: ../tests/test_blob_samples_containers.py</span>
