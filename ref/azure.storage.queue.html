@@ -1026,15 +1026,17 @@ should be set to a value smaller than the time-to-live value.</p></li>
 <dl>
 <dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id11">
 <div class="code-block-caption"><span class="caption-text">Receive messages from the queue.</span><a class="headerlink" href="#id11" title="Permalink to this code">¶</a></div>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># receive one message from the front of the queue</span>
-<span class="n">one_msg</span> <span class="o">=</span> <span class="n">queue</span><span class="o">.</span><span class="n">receive_messages</span><span class="p">()</span>
-
-<span class="c1"># Receive the last 5 messages</span>
-<span class="n">messages</span> <span class="o">=</span> <span class="n">queue</span><span class="o">.</span><span class="n">receive_messages</span><span class="p">(</span><span class="n">messages_per_page</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
-
-<span class="c1"># Print the messages</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Receive messages one-by-one</span>
+<span class="n">messages</span> <span class="o">=</span> <span class="n">queue</span><span class="o">.</span><span class="n">receive_messages</span><span class="p">()</span>
 <span class="k">for</span> <span class="n">msg</span> <span class="ow">in</span> <span class="n">messages</span><span class="p">:</span>
     <span class="k">print</span><span class="p">(</span><span class="n">msg</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+
+<span class="c1"># Receive messages by batch</span>
+<span class="n">messages</span> <span class="o">=</span> <span class="n">queue</span><span class="o">.</span><span class="n">receive_messages</span><span class="p">(</span><span class="n">messages_per_page</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">msg_batch</span> <span class="ow">in</span> <span class="n">messages</span><span class="o">.</span><span class="n">by_page</span><span class="p">():</span>
+    <span class="k">for</span> <span class="n">msg</span> <span class="ow">in</span> <span class="n">msg_batch</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">msg</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+        <span class="n">queue</span><span class="o">.</span><span class="n">delete_message</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1224,6 +1226,22 @@ shared access key, or an instance of a TokenCredentials class from azure.identit
 </pre></div>
 </div>
 </div>
+<div class="literal-block-wrapper docutils container" id="id16">
+<div class="code-block-caption"><span class="caption-text">Creating the QueueServiceClient with Azure Identity credentials.</span><a class="headerlink" href="#id16" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get a token credential for authentication</span>
+<span class="kn">from</span> <span class="nn">azure.identity</span> <span class="kn">import</span> <span class="n">ClientSecretCredential</span>
+<span class="n">token_credential</span> <span class="o">=</span> <span class="n">ClientSecretCredential</span><span class="p">(</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">active_directory_application_id</span><span class="p">,</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">active_directory_application_secret</span><span class="p">,</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">active_directory_tenant_id</span>
+<span class="p">)</span>
+
+<span class="c1"># Instantiate a QueueServiceClient using a token credential</span>
+<span class="kn">from</span> <span class="nn">azure.storage.queue</span> <span class="kn">import</span> <span class="n">QueueServiceClient</span>
+<span class="n">queue_service</span> <span class="o">=</span> <span class="n">QueueServiceClient</span><span class="p">(</span><span class="n">account_url</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">url</span><span class="p">,</span> <span class="n">credential</span><span class="o">=</span><span class="n">token_credential</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
 </dd>
 </dl>
 <dl class="method">
@@ -1246,8 +1264,8 @@ queue as metadata. Example: {‘Category’: ‘test’}</p></li>
 </dd>
 </dl>
 <dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id16">
-<div class="code-block-caption"><span class="caption-text">Create a queue in the service.</span><a class="headerlink" href="#id16" title="Permalink to this code">¶</a></div>
+<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id17">
+<div class="code-block-caption"><span class="caption-text">Create a queue in the service.</span><a class="headerlink" href="#id17" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">queue_service</span><span class="o">.</span><span class="n">create_queue</span><span class="p">(</span><span class="s2">&quot;testqueue&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -1279,8 +1297,8 @@ or an instance of QueueProperties.</p></li>
 </dd>
 </dl>
 <dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id17">
-<div class="code-block-caption"><span class="caption-text">Delete a queue in the service.</span><a class="headerlink" href="#id17" title="Permalink to this code">¶</a></div>
+<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id18">
+<div class="code-block-caption"><span class="caption-text">Delete a queue in the service.</span><a class="headerlink" href="#id18" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">queue_service</span><span class="o">.</span><span class="n">delete_queue</span><span class="p">(</span><span class="s2">&quot;testqueue&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -1305,8 +1323,8 @@ key, or an instance of a TokenCredentials class from azure.identity.</p></li>
 </dd>
 </dl>
 <dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id18">
-<div class="code-block-caption"><span class="caption-text">Creating the QueueServiceClient with a connection string.</span><a class="headerlink" href="#id18" title="Permalink to this code">¶</a></div>
+<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id19">
+<div class="code-block-caption"><span class="caption-text">Creating the QueueServiceClient with a connection string.</span><a class="headerlink" href="#id19" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">azure.storage.queue</span> <span class="kn">import</span> <span class="n">QueueServiceClient</span>
 <span class="n">queue_service</span> <span class="o">=</span> <span class="n">QueueServiceClient</span><span class="o">.</span><span class="n">from_connection_string</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">connection_string</span><span class="p">)</span>
 </pre></div>
@@ -1374,8 +1392,8 @@ or an instance of QueueProperties.</p>
 </dd>
 </dl>
 <dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id19">
-<div class="code-block-caption"><span class="caption-text">Get the queue client.</span><a class="headerlink" href="#id19" title="Permalink to this code">¶</a></div>
+<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id20">
+<div class="code-block-caption"><span class="caption-text">Get the queue client.</span><a class="headerlink" href="#id20" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get the queue client to interact with a specific queue</span>
 <span class="n">queue</span> <span class="o">=</span> <span class="n">queue_service</span><span class="o">.</span><span class="n">get_queue_client</span><span class="p">(</span><span class="s2">&quot;myqueue&quot;</span><span class="p">)</span>
 </pre></div>
@@ -1399,8 +1417,8 @@ Azure Storage Analytics.</p>
 </dd>
 </dl>
 <dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id20">
-<div class="code-block-caption"><span class="caption-text">Getting queue service properties.</span><a class="headerlink" href="#id20" title="Permalink to this code">¶</a></div>
+<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id21">
+<div class="code-block-caption"><span class="caption-text">Getting queue service properties.</span><a class="headerlink" href="#id21" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">properties</span> <span class="o">=</span> <span class="n">queue_service</span><span class="o">.</span><span class="n">get_service_properties</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -1467,13 +1485,17 @@ applied to each individual call.</p></li>
 </dd>
 </dl>
 <dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id21">
-<div class="code-block-caption"><span class="caption-text">List queues in the service.</span><a class="headerlink" href="#id21" title="Permalink to this code">¶</a></div>
+<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id22">
+<div class="code-block-caption"><span class="caption-text">List queues in the service.</span><a class="headerlink" href="#id22" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># List all the queues in the service</span>
-<span class="n">list_queues</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">queue_service</span><span class="o">.</span><span class="n">list_queues</span><span class="p">())</span>
+<span class="n">list_queues</span> <span class="o">=</span> <span class="n">queue_service</span><span class="o">.</span><span class="n">list_queues</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">queue</span> <span class="ow">in</span> <span class="n">list_queues</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">queue</span><span class="p">)</span>
 
 <span class="c1"># List the queues in the service that start with the name &quot;test&quot;</span>
-<span class="n">list_test_queues</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">queue_service</span><span class="o">.</span><span class="n">list_queues</span><span class="p">(</span><span class="n">name_starts_with</span><span class="o">=</span><span class="s2">&quot;test&quot;</span><span class="p">))</span>
+<span class="n">list_test_queues</span> <span class="o">=</span> <span class="n">queue_service</span><span class="o">.</span><span class="n">list_queues</span><span class="p">(</span><span class="n">name_starts_with</span><span class="o">=</span><span class="s2">&quot;test&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">queue</span> <span class="ow">in</span> <span class="n">list_test_queues</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">queue</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1507,8 +1529,8 @@ and CORS will be disabled for the service.</p></li>
 </dd>
 </dl>
 <dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id22">
-<div class="code-block-caption"><span class="caption-text">Setting queue service properties.</span><a class="headerlink" href="#id22" title="Permalink to this code">¶</a></div>
+<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id23">
+<div class="code-block-caption"><span class="caption-text">Setting queue service properties.</span><a class="headerlink" href="#id23" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create service properties</span>
 <span class="kn">from</span> <span class="nn">azure.storage.queue</span> <span class="kn">import</span> <span class="n">Logging</span><span class="p">,</span> <span class="n">Metrics</span><span class="p">,</span> <span class="n">CorsRule</span><span class="p">,</span> <span class="n">RetentionPolicy</span>
 
@@ -1588,8 +1610,8 @@ shared access key, or an instance of a TokenCredentials class from azure.identit
 </dd>
 </dl>
 <dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id23">
-<div class="code-block-caption"><span class="caption-text">Create the queue client with url and credential.</span><a class="headerlink" href="#id23" title="Permalink to this code">¶</a></div>
+<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id24">
+<div class="code-block-caption"><span class="caption-text">Create the queue client with url and credential.</span><a class="headerlink" href="#id24" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">q</span> <span class="o">=</span> <span class="n">QueueClient</span><span class="p">(</span>
     <span class="n">queue_url</span><span class="o">=</span><span class="n">queue_client</span><span class="o">.</span><span class="n">url</span><span class="p">,</span>
     <span class="n">credential</span><span class="o">=</span><span class="n">sas_token</span>
@@ -1609,8 +1631,8 @@ shared access key, or an instance of a TokenCredentials class from azure.identit
 </dd>
 </dl>
 <dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id24">
-<div class="code-block-caption"><span class="caption-text">Clears all messages.</span><a class="headerlink" href="#id24" title="Permalink to this code">¶</a></div>
+<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id25">
+<div class="code-block-caption"><span class="caption-text">Clears all messages.</span><a class="headerlink" href="#id25" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">queue</span><span class="o">.</span><span class="n">clear_messages</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -1644,8 +1666,8 @@ were created, but are case-insensitive when set or read.</p></li>
 </dd>
 </dl>
 <dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id25">
-<div class="code-block-caption"><span class="caption-text">Create a queue.</span><a class="headerlink" href="#id25" title="Permalink to this code">¶</a></div>
+<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id26">
+<div class="code-block-caption"><span class="caption-text">Create a queue.</span><a class="headerlink" href="#id26" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">queue</span><span class="o">.</span><span class="n">create_queue</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -1678,8 +1700,8 @@ to the <a class="reference internal" href="#azure.storage.queue.QueueClient.rece
 </dd>
 </dl>
 <dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id26">
-<div class="code-block-caption"><span class="caption-text">Delete a message.</span><a class="headerlink" href="#id26" title="Permalink to this code">¶</a></div>
+<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id27">
+<div class="code-block-caption"><span class="caption-text">Delete a message.</span><a class="headerlink" href="#id27" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get the message at the front of the queue</span>
 <span class="n">msg</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">queue</span><span class="o">.</span><span class="n">receive_messages</span><span class="p">())</span>
 
@@ -1711,8 +1733,8 @@ an <code class="xref py py-class docutils literal notranslate"><span class="pre"
 </dd>
 </dl>
 <dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id27">
-<div class="code-block-caption"><span class="caption-text">Delete a queue.</span><a class="headerlink" href="#id27" title="Permalink to this code">¶</a></div>
+<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id28">
+<div class="code-block-caption"><span class="caption-text">Delete a queue.</span><a class="headerlink" href="#id28" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">queue</span><span class="o">.</span><span class="n">delete_queue</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -1761,8 +1783,8 @@ returned from the service.</p>
 </dd>
 </dl>
 <dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id28">
-<div class="code-block-caption"><span class="caption-text">Enqueue messages.</span><a class="headerlink" href="#id28" title="Permalink to this code">¶</a></div>
+<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id29">
+<div class="code-block-caption"><span class="caption-text">Enqueue messages.</span><a class="headerlink" href="#id29" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">queue</span><span class="o">.</span><span class="n">enqueue_message</span><span class="p">(</span><span class="sa">u</span><span class="s2">&quot;message1&quot;</span><span class="p">)</span>
 <span class="n">queue</span><span class="o">.</span><span class="n">enqueue_message</span><span class="p">(</span><span class="sa">u</span><span class="s2">&quot;message2&quot;</span><span class="p">,</span> <span class="n">visibility_timeout</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>  <span class="c1"># wait 30s before becoming visible</span>
 <span class="n">queue</span><span class="o">.</span><span class="n">enqueue_message</span><span class="p">(</span><span class="sa">u</span><span class="s2">&quot;message3&quot;</span><span class="p">)</span>
@@ -1793,8 +1815,8 @@ key, or an instance of a TokenCredentials class from azure.identity.</p></li>
 </dd>
 </dl>
 <dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id29">
-<div class="code-block-caption"><span class="caption-text">Create the queue client from connection string.</span><a class="headerlink" href="#id29" title="Permalink to this code">¶</a></div>
+<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id30">
+<div class="code-block-caption"><span class="caption-text">Create the queue client from connection string.</span><a class="headerlink" href="#id30" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">azure.storage.queue</span> <span class="kn">import</span> <span class="n">QueueClient</span>
 <span class="n">queue_client</span> <span class="o">=</span> <span class="n">QueueClient</span><span class="o">.</span><span class="n">from_connection_string</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">connection_string</span><span class="p">,</span> <span class="s2">&quot;queuetest&quot;</span><span class="p">)</span>
 </pre></div>
@@ -1847,8 +1869,8 @@ is https,http.</p></li>
 </dd>
 </dl>
 <dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id30">
-<div class="code-block-caption"><span class="caption-text">Generate a sas token.</span><a class="headerlink" href="#id30" title="Permalink to this code">¶</a></div>
+<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id31">
+<div class="code-block-caption"><span class="caption-text">Generate a sas token.</span><a class="headerlink" href="#id31" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">sas_token</span> <span class="o">=</span> <span class="n">queue_client</span><span class="o">.</span><span class="n">generate_shared_access_signature</span><span class="p">(</span>
     <span class="n">policy_id</span><span class="o">=</span><span class="s1">&#39;my-access-policy-id&#39;</span>
 <span class="p">)</span>
@@ -1894,8 +1916,8 @@ queue that may be used with Shared Access Signatures.</p>
 </dd>
 </dl>
 <dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id31">
-<div class="code-block-caption"><span class="caption-text">Get the properties on the queue.</span><a class="headerlink" href="#id31" title="Permalink to this code">¶</a></div>
+<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id32">
+<div class="code-block-caption"><span class="caption-text">Get the properties on the queue.</span><a class="headerlink" href="#id32" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">queue</span><span class="o">.</span><span class="n">get_queue_properties</span><span class="p">()</span><span class="o">.</span><span class="n">metadata</span>
 </pre></div>
 </div>
@@ -1937,8 +1959,8 @@ not pop the message and can only retrieve already visible messages.</p>
 </dd>
 </dl>
 <dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id32">
-<div class="code-block-caption"><span class="caption-text">Peek messages.</span><a class="headerlink" href="#id32" title="Permalink to this code">¶</a></div>
+<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id33">
+<div class="code-block-caption"><span class="caption-text">Peek messages.</span><a class="headerlink" href="#id33" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Peek at one message at the front of the queue</span>
 <span class="n">msg</span> <span class="o">=</span> <span class="n">queue</span><span class="o">.</span><span class="n">peek_messages</span><span class="p">()</span>
 
@@ -1990,17 +2012,19 @@ should be set to a value smaller than the time-to-live value.</p></li>
 </dd>
 </dl>
 <dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id33">
-<div class="code-block-caption"><span class="caption-text">Receive messages from the queue.</span><a class="headerlink" href="#id33" title="Permalink to this code">¶</a></div>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># receive one message from the front of the queue</span>
-<span class="n">one_msg</span> <span class="o">=</span> <span class="n">queue</span><span class="o">.</span><span class="n">receive_messages</span><span class="p">()</span>
-
-<span class="c1"># Receive the last 5 messages</span>
-<span class="n">messages</span> <span class="o">=</span> <span class="n">queue</span><span class="o">.</span><span class="n">receive_messages</span><span class="p">(</span><span class="n">messages_per_page</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
-
-<span class="c1"># Print the messages</span>
+<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id34">
+<div class="code-block-caption"><span class="caption-text">Receive messages from the queue.</span><a class="headerlink" href="#id34" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Receive messages one-by-one</span>
+<span class="n">messages</span> <span class="o">=</span> <span class="n">queue</span><span class="o">.</span><span class="n">receive_messages</span><span class="p">()</span>
 <span class="k">for</span> <span class="n">msg</span> <span class="ow">in</span> <span class="n">messages</span><span class="p">:</span>
     <span class="k">print</span><span class="p">(</span><span class="n">msg</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+
+<span class="c1"># Receive messages by batch</span>
+<span class="n">messages</span> <span class="o">=</span> <span class="n">queue</span><span class="o">.</span><span class="n">receive_messages</span><span class="p">(</span><span class="n">messages_per_page</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">msg_batch</span> <span class="ow">in</span> <span class="n">messages</span><span class="o">.</span><span class="n">by_page</span><span class="p">():</span>
+    <span class="k">for</span> <span class="n">msg</span> <span class="ow">in</span> <span class="n">msg_batch</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">msg</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+        <span class="n">queue</span><span class="o">.</span><span class="n">delete_message</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -2033,8 +2057,8 @@ will clear the access policies set on the service.</p></li>
 </dd>
 </dl>
 <dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id34">
-<div class="code-block-caption"><span class="caption-text">Set an access policy on the queue.</span><a class="headerlink" href="#id34" title="Permalink to this code">¶</a></div>
+<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id35">
+<div class="code-block-caption"><span class="caption-text">Set an access policy on the queue.</span><a class="headerlink" href="#id35" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create an access policy</span>
 <span class="kn">from</span> <span class="nn">azure.storage.queue</span> <span class="kn">import</span> <span class="n">AccessPolicy</span><span class="p">,</span> <span class="n">QueuePermissions</span>
 <span class="n">access_policy</span> <span class="o">=</span> <span class="n">AccessPolicy</span><span class="p">()</span>
@@ -2067,8 +2091,8 @@ queue as metadata.</p></li>
 </dd>
 </dl>
 <dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id35">
-<div class="code-block-caption"><span class="caption-text">Set metadata on the queue.</span><a class="headerlink" href="#id35" title="Permalink to this code">¶</a></div>
+<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id36">
+<div class="code-block-caption"><span class="caption-text">Set metadata on the queue.</span><a class="headerlink" href="#id36" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">metadata</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;foo&#39;</span><span class="p">:</span> <span class="s1">&#39;val1&#39;</span><span class="p">,</span> <span class="s1">&#39;bar&#39;</span><span class="p">:</span> <span class="s1">&#39;val2&#39;</span><span class="p">,</span> <span class="s1">&#39;baz&#39;</span><span class="p">:</span> <span class="s1">&#39;val3&#39;</span><span class="p">}</span>
 <span class="n">queue</span><span class="o">.</span><span class="n">set_queue_metadata</span><span class="p">(</span><span class="n">metadata</span><span class="o">=</span><span class="n">metadata</span><span class="p">)</span>
 </pre></div>
@@ -2118,8 +2142,8 @@ this object is also populated with the content, although it is not returned by t
 </dd>
 </dl>
 <dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id36">
-<div class="code-block-caption"><span class="caption-text">Update a message.</span><a class="headerlink" href="#id36" title="Permalink to this code">¶</a></div>
+<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id37">
+<div class="code-block-caption"><span class="caption-text">Update a message.</span><a class="headerlink" href="#id37" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Enqueue a message</span>
 <span class="n">queue</span><span class="o">.</span><span class="n">enqueue_message</span><span class="p">(</span><span class="sa">u</span><span class="s2">&quot;update me&quot;</span><span class="p">)</span>
 
@@ -2180,10 +2204,26 @@ shared access key, or an instance of a TokenCredentials class from azure.identit
 </dd>
 </dl>
 <dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id37">
-<div class="code-block-caption"><span class="caption-text">Creating the QueueServiceClient with an account url and credential.</span><a class="headerlink" href="#id37" title="Permalink to this code">¶</a></div>
+<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id38">
+<div class="code-block-caption"><span class="caption-text">Creating the QueueServiceClient with an account url and credential.</span><a class="headerlink" href="#id38" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">azure.storage.queue</span> <span class="kn">import</span> <span class="n">QueueServiceClient</span>
 <span class="n">queue_service</span> <span class="o">=</span> <span class="n">QueueServiceClient</span><span class="p">(</span><span class="n">account_url</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">url</span><span class="p">,</span> <span class="n">credential</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">shared_access_key</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="literal-block-wrapper docutils container" id="id39">
+<div class="code-block-caption"><span class="caption-text">Creating the QueueServiceClient with Azure Identity credentials.</span><a class="headerlink" href="#id39" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get a token credential for authentication</span>
+<span class="kn">from</span> <span class="nn">azure.identity</span> <span class="kn">import</span> <span class="n">ClientSecretCredential</span>
+<span class="n">token_credential</span> <span class="o">=</span> <span class="n">ClientSecretCredential</span><span class="p">(</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">active_directory_application_id</span><span class="p">,</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">active_directory_application_secret</span><span class="p">,</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">active_directory_tenant_id</span>
+<span class="p">)</span>
+
+<span class="c1"># Instantiate a QueueServiceClient using a token credential</span>
+<span class="kn">from</span> <span class="nn">azure.storage.queue</span> <span class="kn">import</span> <span class="n">QueueServiceClient</span>
+<span class="n">queue_service</span> <span class="o">=</span> <span class="n">QueueServiceClient</span><span class="p">(</span><span class="n">account_url</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">url</span><span class="p">,</span> <span class="n">credential</span><span class="o">=</span><span class="n">token_credential</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -2209,8 +2249,8 @@ queue as metadata. Example: {‘Category’: ‘test’}</p></li>
 </dd>
 </dl>
 <dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id38">
-<div class="code-block-caption"><span class="caption-text">Create a queue in the service.</span><a class="headerlink" href="#id38" title="Permalink to this code">¶</a></div>
+<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id40">
+<div class="code-block-caption"><span class="caption-text">Create a queue in the service.</span><a class="headerlink" href="#id40" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">queue_service</span><span class="o">.</span><span class="n">create_queue</span><span class="p">(</span><span class="s2">&quot;testqueue&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -2242,8 +2282,8 @@ or an instance of QueueProperties.</p></li>
 </dd>
 </dl>
 <dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id39">
-<div class="code-block-caption"><span class="caption-text">Delete a queue in the service.</span><a class="headerlink" href="#id39" title="Permalink to this code">¶</a></div>
+<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id41">
+<div class="code-block-caption"><span class="caption-text">Delete a queue in the service.</span><a class="headerlink" href="#id41" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">queue_service</span><span class="o">.</span><span class="n">delete_queue</span><span class="p">(</span><span class="s2">&quot;testqueue&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -2268,8 +2308,8 @@ key, or an instance of a TokenCredentials class from azure.identity.</p></li>
 </dd>
 </dl>
 <dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id40">
-<div class="code-block-caption"><span class="caption-text">Creating the QueueServiceClient with a connection string.</span><a class="headerlink" href="#id40" title="Permalink to this code">¶</a></div>
+<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id42">
+<div class="code-block-caption"><span class="caption-text">Creating the QueueServiceClient with a connection string.</span><a class="headerlink" href="#id42" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">azure.storage.queue</span> <span class="kn">import</span> <span class="n">QueueServiceClient</span>
 <span class="n">queue_service</span> <span class="o">=</span> <span class="n">QueueServiceClient</span><span class="o">.</span><span class="n">from_connection_string</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">connection_string</span><span class="p">)</span>
 </pre></div>
@@ -2337,8 +2377,8 @@ or an instance of QueueProperties.</p>
 </dd>
 </dl>
 <dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id41">
-<div class="code-block-caption"><span class="caption-text">Get the queue client.</span><a class="headerlink" href="#id41" title="Permalink to this code">¶</a></div>
+<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id43">
+<div class="code-block-caption"><span class="caption-text">Get the queue client.</span><a class="headerlink" href="#id43" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get the queue client to interact with a specific queue</span>
 <span class="n">queue</span> <span class="o">=</span> <span class="n">queue_service</span><span class="o">.</span><span class="n">get_queue_client</span><span class="p">(</span><span class="s2">&quot;myqueue&quot;</span><span class="p">)</span>
 </pre></div>
@@ -2362,8 +2402,8 @@ Azure Storage Analytics.</p>
 </dd>
 </dl>
 <dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id42">
-<div class="code-block-caption"><span class="caption-text">Getting queue service properties.</span><a class="headerlink" href="#id42" title="Permalink to this code">¶</a></div>
+<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id44">
+<div class="code-block-caption"><span class="caption-text">Getting queue service properties.</span><a class="headerlink" href="#id44" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">properties</span> <span class="o">=</span> <span class="n">queue_service</span><span class="o">.</span><span class="n">get_service_properties</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -2430,13 +2470,17 @@ applied to each individual call.</p></li>
 </dd>
 </dl>
 <dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id43">
-<div class="code-block-caption"><span class="caption-text">List queues in the service.</span><a class="headerlink" href="#id43" title="Permalink to this code">¶</a></div>
+<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id45">
+<div class="code-block-caption"><span class="caption-text">List queues in the service.</span><a class="headerlink" href="#id45" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># List all the queues in the service</span>
-<span class="n">list_queues</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">queue_service</span><span class="o">.</span><span class="n">list_queues</span><span class="p">())</span>
+<span class="n">list_queues</span> <span class="o">=</span> <span class="n">queue_service</span><span class="o">.</span><span class="n">list_queues</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">queue</span> <span class="ow">in</span> <span class="n">list_queues</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">queue</span><span class="p">)</span>
 
 <span class="c1"># List the queues in the service that start with the name &quot;test&quot;</span>
-<span class="n">list_test_queues</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">queue_service</span><span class="o">.</span><span class="n">list_queues</span><span class="p">(</span><span class="n">name_starts_with</span><span class="o">=</span><span class="s2">&quot;test&quot;</span><span class="p">))</span>
+<span class="n">list_test_queues</span> <span class="o">=</span> <span class="n">queue_service</span><span class="o">.</span><span class="n">list_queues</span><span class="p">(</span><span class="n">name_starts_with</span><span class="o">=</span><span class="s2">&quot;test&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">queue</span> <span class="ow">in</span> <span class="n">list_test_queues</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">queue</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -2470,8 +2514,8 @@ and CORS will be disabled for the service.</p></li>
 </dd>
 </dl>
 <dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id44">
-<div class="code-block-caption"><span class="caption-text">Setting queue service properties.</span><a class="headerlink" href="#id44" title="Permalink to this code">¶</a></div>
+<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id46">
+<div class="code-block-caption"><span class="caption-text">Setting queue service properties.</span><a class="headerlink" href="#id46" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create service properties</span>
 <span class="kn">from</span> <span class="nn">azure.storage.queue</span> <span class="kn">import</span> <span class="n">Logging</span><span class="p">,</span> <span class="n">Metrics</span><span class="p">,</span> <span class="n">CorsRule</span><span class="p">,</span> <span class="n">RetentionPolicy</span>
 
