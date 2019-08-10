@@ -301,7 +301,7 @@
     <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="n">item</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="s1">&#39;size&#39;</span><span class="p">:</span> <span class="n">item</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">content_length</span><span class="p">,</span> <span class="s1">&#39;is_directory&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">}</span>
 
 
-<div class="viewcode-block" id="Metrics"><a class="viewcode-back" href="../../../../ref/azure.storage.file.html#azure.storage.file.models.Metrics">[docs]</a><span class="k">class</span> <span class="nc">Metrics</span><span class="p">(</span><span class="n">GeneratedMetrics</span><span class="p">):</span>
+<div class="viewcode-block" id="Metrics"><a class="viewcode-back" href="../../../../ref/azure.storage.file.aio.html#azure.storage.file.models.Metrics">[docs]</a><span class="k">class</span> <span class="nc">Metrics</span><span class="p">(</span><span class="n">GeneratedMetrics</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;A summary of request statistics grouped by API in hour or minute aggregates</span>
 <span class="sd">    for files.</span>
 
@@ -324,7 +324,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">retention_policy</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;retention_policy&#39;</span><span class="p">)</span> <span class="ow">or</span> <span class="n">RetentionPolicy</span><span class="p">()</span></div>
 
 
-<div class="viewcode-block" id="RetentionPolicy"><a class="viewcode-back" href="../../../../ref/azure.storage.file.html#azure.storage.file.models.RetentionPolicy">[docs]</a><span class="k">class</span> <span class="nc">RetentionPolicy</span><span class="p">(</span><span class="n">GeneratedRetentionPolicy</span><span class="p">):</span>
+<div class="viewcode-block" id="RetentionPolicy"><a class="viewcode-back" href="../../../../ref/azure.storage.file.aio.html#azure.storage.file.models.RetentionPolicy">[docs]</a><span class="k">class</span> <span class="nc">RetentionPolicy</span><span class="p">(</span><span class="n">GeneratedRetentionPolicy</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;The retention policy which determines how long the associated data should</span>
 <span class="sd">    persist.</span>
 
@@ -344,7 +344,7 @@
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;If policy is enabled, &#39;days&#39; must be specified.&quot;</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="CorsRule"><a class="viewcode-back" href="../../../../ref/azure.storage.file.html#azure.storage.file.models.CorsRule">[docs]</a><span class="k">class</span> <span class="nc">CorsRule</span><span class="p">(</span><span class="n">GeneratedCorsRule</span><span class="p">):</span>
+<div class="viewcode-block" id="CorsRule"><a class="viewcode-back" href="../../../../ref/azure.storage.file.aio.html#azure.storage.file.models.CorsRule">[docs]</a><span class="k">class</span> <span class="nc">CorsRule</span><span class="p">(</span><span class="n">GeneratedCorsRule</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;CORS is an HTTP feature that enables a web application running under one</span>
 <span class="sd">    domain to access resources in another domain. Web browsers implement a</span>
 <span class="sd">    security restriction known as same-origin policy that prevents a web page</span>
@@ -382,7 +382,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">max_age_in_seconds</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;max_age_in_seconds&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="AccessPolicy"><a class="viewcode-back" href="../../../../ref/azure.storage.file.html#azure.storage.file.models.AccessPolicy">[docs]</a><span class="k">class</span> <span class="nc">AccessPolicy</span><span class="p">(</span><span class="n">GenAccessPolicy</span><span class="p">):</span>
+<div class="viewcode-block" id="AccessPolicy"><a class="viewcode-back" href="../../../../ref/azure.storage.file.aio.html#azure.storage.file.models.AccessPolicy">[docs]</a><span class="k">class</span> <span class="nc">AccessPolicy</span><span class="p">(</span><span class="n">GenAccessPolicy</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Access Policy class used by the set and get acl methods in each service.</span>
 
 <span class="sd">    A stored access policy can specify the start time, expiry time, and</span>
@@ -430,7 +430,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">permission</span> <span class="o">=</span> <span class="n">permission</span></div>
 
 
-<div class="viewcode-block" id="ContentSettings"><a class="viewcode-back" href="../../../../ref/azure.storage.file.html#azure.storage.file.models.ContentSettings">[docs]</a><span class="k">class</span> <span class="nc">ContentSettings</span><span class="p">(</span><span class="n">DictMixin</span><span class="p">):</span>
+<div class="viewcode-block" id="ContentSettings"><a class="viewcode-back" href="../../../../ref/azure.storage.file.aio.html#azure.storage.file.models.ContentSettings">[docs]</a><span class="k">class</span> <span class="nc">ContentSettings</span><span class="p">(</span><span class="n">DictMixin</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Used to store the content settings of a file.</span>
 
 <span class="sd">    :param str content_type:</span>
@@ -480,7 +480,7 @@
         <span class="k">return</span> <span class="n">settings</span></div>
 
 
-<div class="viewcode-block" id="ShareProperties"><a class="viewcode-back" href="../../../../ref/azure.storage.file.html#azure.storage.file.models.ShareProperties">[docs]</a><span class="k">class</span> <span class="nc">ShareProperties</span><span class="p">(</span><span class="n">DictMixin</span><span class="p">):</span>
+<div class="viewcode-block" id="ShareProperties"><a class="viewcode-back" href="../../../../ref/azure.storage.file.aio.html#azure.storage.file.models.ShareProperties">[docs]</a><span class="k">class</span> <span class="nc">ShareProperties</span><span class="p">(</span><span class="n">DictMixin</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Share&#39;s properties class.</span>
 
 <span class="sd">    :ivar str name:</span>
@@ -573,7 +573,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_response</span><span class="o">.</span><span class="n">next_marker</span> <span class="ow">or</span> <span class="kc">None</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_page</span></div>
 
 
-<div class="viewcode-block" id="Handle"><a class="viewcode-back" href="../../../../ref/azure.storage.file.html#azure.storage.file.models.Handle">[docs]</a><span class="k">class</span> <span class="nc">Handle</span><span class="p">(</span><span class="n">DictMixin</span><span class="p">):</span>
+<div class="viewcode-block" id="Handle"><a class="viewcode-back" href="../../../../ref/azure.storage.file.aio.html#azure.storage.file.models.Handle">[docs]</a><span class="k">class</span> <span class="nc">Handle</span><span class="p">(</span><span class="n">DictMixin</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;A listed Azure Storage handle item.</span>
 
 <span class="sd">    All required parameters must be populated in order to send to Azure.</span>
@@ -669,7 +669,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_response</span><span class="o">.</span><span class="n">next_marker</span> <span class="ow">or</span> <span class="kc">None</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_page</span></div>
 
 
-<div class="viewcode-block" id="DirectoryProperties"><a class="viewcode-back" href="../../../../ref/azure.storage.file.html#azure.storage.file.models.DirectoryProperties">[docs]</a><span class="k">class</span> <span class="nc">DirectoryProperties</span><span class="p">(</span><span class="n">DictMixin</span><span class="p">):</span>
+<div class="viewcode-block" id="DirectoryProperties"><a class="viewcode-back" href="../../../../ref/azure.storage.file.aio.html#azure.storage.file.models.DirectoryProperties">[docs]</a><span class="k">class</span> <span class="nc">DirectoryProperties</span><span class="p">(</span><span class="n">DictMixin</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Directory&#39;s properties class.</span>
 
 <span class="sd">    :ivar str name:</span>
@@ -763,7 +763,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_response</span><span class="o">.</span><span class="n">next_marker</span> <span class="ow">or</span> <span class="kc">None</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_page</span></div>
 
 
-<div class="viewcode-block" id="FileProperties"><a class="viewcode-back" href="../../../../ref/azure.storage.file.html#azure.storage.file.models.FileProperties">[docs]</a><span class="k">class</span> <span class="nc">FileProperties</span><span class="p">(</span><span class="n">DictMixin</span><span class="p">):</span>
+<div class="viewcode-block" id="FileProperties"><a class="viewcode-back" href="../../../../ref/azure.storage.file.aio.html#azure.storage.file.models.FileProperties">[docs]</a><span class="k">class</span> <span class="nc">FileProperties</span><span class="p">(</span><span class="n">DictMixin</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;File&#39;s properties class.</span>
 
 <span class="sd">    :ivar str name:</span>
@@ -893,7 +893,7 @@
         <span class="k">return</span> <span class="n">copy</span></div>
 
 
-<div class="viewcode-block" id="FilePermissions"><a class="viewcode-back" href="../../../../ref/azure.storage.file.html#azure.storage.file.models.FilePermissions">[docs]</a><span class="k">class</span> <span class="nc">FilePermissions</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<div class="viewcode-block" id="FilePermissions"><a class="viewcode-back" href="../../../../ref/azure.storage.file.aio.html#azure.storage.file.models.FilePermissions">[docs]</a><span class="k">class</span> <span class="nc">FilePermissions</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;FilePermissions class to be used with</span>
 <span class="sd">    generating shared access signature operations.</span>
 
@@ -954,7 +954,7 @@
 <span class="n">FilePermissions</span><span class="o">.</span><span class="n">WRITE</span> <span class="o">=</span> <span class="n">FilePermissions</span><span class="p">(</span><span class="n">write</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="c1"># type: ignore</span>
 
 
-<div class="viewcode-block" id="SharePermissions"><a class="viewcode-back" href="../../../../ref/azure.storage.file.html#azure.storage.file.models.SharePermissions">[docs]</a><span class="k">class</span> <span class="nc">SharePermissions</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<div class="viewcode-block" id="SharePermissions"><a class="viewcode-back" href="../../../../ref/azure.storage.file.aio.html#azure.storage.file.models.SharePermissions">[docs]</a><span class="k">class</span> <span class="nc">SharePermissions</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;SharePermissions class to be used to be used with</span>
 <span class="sd">    generating shared access signature and access policy operations.</span>
 

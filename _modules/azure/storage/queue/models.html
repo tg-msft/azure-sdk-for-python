@@ -296,7 +296,7 @@
 <span class="kn">from</span> <span class="nn">._generated.models</span> <span class="k">import</span> <span class="n">CorsRule</span> <span class="k">as</span> <span class="n">GeneratedCorsRule</span>
 
 
-<div class="viewcode-block" id="Logging"><a class="viewcode-back" href="../../../../ref/azure.storage.queue.html#azure.storage.queue.models.Logging">[docs]</a><span class="k">class</span> <span class="nc">Logging</span><span class="p">(</span><span class="n">GeneratedLogging</span><span class="p">):</span>
+<div class="viewcode-block" id="Logging"><a class="viewcode-back" href="../../../../ref/azure.storage.queue.aio.html#azure.storage.queue.models.Logging">[docs]</a><span class="k">class</span> <span class="nc">Logging</span><span class="p">(</span><span class="n">GeneratedLogging</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Azure Analytics Logging settings.</span>
 
 <span class="sd">    All required parameters must be populated in order to send to Azure.</span>
@@ -318,7 +318,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">retention_policy</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;retention_policy&#39;</span><span class="p">)</span> <span class="ow">or</span> <span class="n">RetentionPolicy</span><span class="p">()</span></div>
 
 
-<div class="viewcode-block" id="Metrics"><a class="viewcode-back" href="../../../../ref/azure.storage.queue.html#azure.storage.queue.models.Metrics">[docs]</a><span class="k">class</span> <span class="nc">Metrics</span><span class="p">(</span><span class="n">GeneratedMetrics</span><span class="p">):</span>
+<div class="viewcode-block" id="Metrics"><a class="viewcode-back" href="../../../../ref/azure.storage.queue.aio.html#azure.storage.queue.models.Metrics">[docs]</a><span class="k">class</span> <span class="nc">Metrics</span><span class="p">(</span><span class="n">GeneratedMetrics</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;A summary of request statistics grouped by API in hour or minute aggregates.</span>
 
 <span class="sd">    All required parameters must be populated in order to send to Azure.</span>
@@ -339,7 +339,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">retention_policy</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;retention_policy&#39;</span><span class="p">)</span> <span class="ow">or</span> <span class="n">RetentionPolicy</span><span class="p">()</span></div>
 
 
-<div class="viewcode-block" id="RetentionPolicy"><a class="viewcode-back" href="../../../../ref/azure.storage.queue.html#azure.storage.queue.models.RetentionPolicy">[docs]</a><span class="k">class</span> <span class="nc">RetentionPolicy</span><span class="p">(</span><span class="n">GeneratedRetentionPolicy</span><span class="p">):</span>
+<div class="viewcode-block" id="RetentionPolicy"><a class="viewcode-back" href="../../../../ref/azure.storage.queue.aio.html#azure.storage.queue.models.RetentionPolicy">[docs]</a><span class="k">class</span> <span class="nc">RetentionPolicy</span><span class="p">(</span><span class="n">GeneratedRetentionPolicy</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;The retention policy which determines how long the associated data should</span>
 <span class="sd">    persist.</span>
 
@@ -359,7 +359,7 @@
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;If policy is enabled, &#39;days&#39; must be specified.&quot;</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="CorsRule"><a class="viewcode-back" href="../../../../ref/azure.storage.queue.html#azure.storage.queue.models.CorsRule">[docs]</a><span class="k">class</span> <span class="nc">CorsRule</span><span class="p">(</span><span class="n">GeneratedCorsRule</span><span class="p">):</span>
+<div class="viewcode-block" id="CorsRule"><a class="viewcode-back" href="../../../../ref/azure.storage.queue.aio.html#azure.storage.queue.models.CorsRule">[docs]</a><span class="k">class</span> <span class="nc">CorsRule</span><span class="p">(</span><span class="n">GeneratedCorsRule</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;CORS is an HTTP feature that enables a web application running under one</span>
 <span class="sd">    domain to access resources in another domain. Web browsers implement a</span>
 <span class="sd">    security restriction known as same-origin policy that prevents a web page</span>
@@ -397,7 +397,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">max_age_in_seconds</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;max_age_in_seconds&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="AccessPolicy"><a class="viewcode-back" href="../../../../ref/azure.storage.queue.html#azure.storage.queue.models.AccessPolicy">[docs]</a><span class="k">class</span> <span class="nc">AccessPolicy</span><span class="p">(</span><span class="n">GenAccessPolicy</span><span class="p">):</span>
+<div class="viewcode-block" id="AccessPolicy"><a class="viewcode-back" href="../../../../ref/azure.storage.queue.aio.html#azure.storage.queue.models.AccessPolicy">[docs]</a><span class="k">class</span> <span class="nc">AccessPolicy</span><span class="p">(</span><span class="n">GenAccessPolicy</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Access Policy class used by the set and get access policy methods.</span>
 
 <span class="sd">    A stored access policy can specify the start time, expiry time, and</span>
@@ -446,7 +446,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">permission</span> <span class="o">=</span> <span class="n">permission</span></div>
 
 
-<div class="viewcode-block" id="QueueMessage"><a class="viewcode-back" href="../../../../ref/azure.storage.queue.html#azure.storage.queue.models.QueueMessage">[docs]</a><span class="k">class</span> <span class="nc">QueueMessage</span><span class="p">(</span><span class="n">DictMixin</span><span class="p">):</span>
+<div class="viewcode-block" id="QueueMessage"><a class="viewcode-back" href="../../../../ref/azure.storage.queue.aio.html#azure.storage.queue.models.QueueMessage">[docs]</a><span class="k">class</span> <span class="nc">QueueMessage</span><span class="p">(</span><span class="n">DictMixin</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Queue message class.</span>
 
 <span class="sd">    :ivar str id:</span>
@@ -531,7 +531,7 @@
         <span class="k">return</span> <span class="s2">&quot;TOKEN_IGNORED&quot;</span><span class="p">,</span> <span class="p">[</span><span class="n">QueueMessage</span><span class="o">.</span><span class="n">_from_generated</span><span class="p">(</span><span class="n">q</span><span class="p">)</span> <span class="k">for</span> <span class="n">q</span> <span class="ow">in</span> <span class="n">messages</span><span class="p">]</span>  <span class="c1"># pylint: disable=protected-access</span></div>
 
 
-<div class="viewcode-block" id="QueueProperties"><a class="viewcode-back" href="../../../../ref/azure.storage.queue.html#azure.storage.queue.models.QueueProperties">[docs]</a><span class="k">class</span> <span class="nc">QueueProperties</span><span class="p">(</span><span class="n">DictMixin</span><span class="p">):</span>
+<div class="viewcode-block" id="QueueProperties"><a class="viewcode-back" href="../../../../ref/azure.storage.queue.aio.html#azure.storage.queue.models.QueueProperties">[docs]</a><span class="k">class</span> <span class="nc">QueueProperties</span><span class="p">(</span><span class="n">DictMixin</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Queue Properties.</span>
 
 <span class="sd">    :ivar str name: The name of the queue.</span>
@@ -609,7 +609,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_response</span><span class="o">.</span><span class="n">next_marker</span> <span class="ow">or</span> <span class="kc">None</span><span class="p">,</span> <span class="n">props_list</span></div>
 
 
-<div class="viewcode-block" id="QueuePermissions"><a class="viewcode-back" href="../../../../ref/azure.storage.queue.html#azure.storage.queue.models.QueuePermissions">[docs]</a><span class="k">class</span> <span class="nc">QueuePermissions</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<div class="viewcode-block" id="QueuePermissions"><a class="viewcode-back" href="../../../../ref/azure.storage.queue.aio.html#azure.storage.queue.models.QueuePermissions">[docs]</a><span class="k">class</span> <span class="nc">QueuePermissions</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;QueuePermissions class to be used with</span>
 <span class="sd">    :func:`~azure.storage.queue.queue_client.QueueClient.generate_shared_access_signature`</span>
 <span class="sd">    method and for the AccessPolicies used with</span>

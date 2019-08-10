@@ -294,7 +294,7 @@
         <span class="k">return</span> <span class="n">value</span>
 
 
-<div class="viewcode-block" id="StorageErrorCode"><a class="viewcode-back" href="../../../../../ref/azure.storage.file.html#azure.storage.file.StorageErrorCode">[docs]</a><span class="k">class</span> <span class="nc">StorageErrorCode</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">Enum</span><span class="p">):</span>
+<div class="viewcode-block" id="StorageErrorCode"><a class="viewcode-back" href="../../../../../ref/azure.storage.file.aio.html#azure.storage.file.StorageErrorCode">[docs]</a><span class="k">class</span> <span class="nc">StorageErrorCode</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">Enum</span><span class="p">):</span>
 
     <span class="c1"># Generic storage values</span>
     <span class="n">account_already_exists</span> <span class="o">=</span> <span class="s2">&quot;AccountAlreadyExists&quot;</span>
@@ -488,7 +488,7 @@
         <span class="k">return</span> <span class="n">default</span>
 
 
-<div class="viewcode-block" id="LocationMode"><a class="viewcode-back" href="../../../../../ref/azure.storage.file.html#azure.storage.file.LocationMode">[docs]</a><span class="k">class</span> <span class="nc">LocationMode</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<div class="viewcode-block" id="LocationMode"><a class="viewcode-back" href="../../../../../ref/azure.storage.file.aio.html#azure.storage.file.LocationMode">[docs]</a><span class="k">class</span> <span class="nc">LocationMode</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Specifies the location the request should be sent to. This mode only applies</span>
 <span class="sd">    for RA-GRS accounts which allow secondary read access. All other account types</span>
@@ -499,7 +499,7 @@
     <span class="n">SECONDARY</span> <span class="o">=</span> <span class="s1">&#39;secondary&#39;</span>  <span class="c1">#: Requests should be sent to the secondary location, if possible.</span></div>
 
 
-<div class="viewcode-block" id="ResourceTypes"><a class="viewcode-back" href="../../../../../ref/azure.storage.file.html#azure.storage.file.ResourceTypes">[docs]</a><span class="k">class</span> <span class="nc">ResourceTypes</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<div class="viewcode-block" id="ResourceTypes"><a class="viewcode-back" href="../../../../../ref/azure.storage.file.aio.html#azure.storage.file.ResourceTypes">[docs]</a><span class="k">class</span> <span class="nc">ResourceTypes</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Specifies the resource types that are accessible with the account SAS.</span>
 
@@ -555,7 +555,7 @@
 <span class="n">ResourceTypes</span><span class="o">.</span><span class="n">OBJECT</span> <span class="o">=</span> <span class="n">ResourceTypes</span><span class="p">(</span><span class="nb">object</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
 
-<div class="viewcode-block" id="AccountPermissions"><a class="viewcode-back" href="../../../../../ref/azure.storage.file.html#azure.storage.file.AccountPermissions">[docs]</a><span class="k">class</span> <span class="nc">AccountPermissions</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<div class="viewcode-block" id="AccountPermissions"><a class="viewcode-back" href="../../../../../ref/azure.storage.file.aio.html#azure.storage.file.AccountPermissions">[docs]</a><span class="k">class</span> <span class="nc">AccountPermissions</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    :class:`~ResourceTypes` class to be used with generate_shared_access_signature</span>
 <span class="sd">    method and for the AccessPolicies used with set_*_acl. There are two types of</span>
