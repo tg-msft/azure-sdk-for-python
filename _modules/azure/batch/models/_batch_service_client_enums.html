@@ -335,8 +335,8 @@
 
 <div class="viewcode-block" id="DependencyAction"><a class="viewcode-back" href="../../../../ref/azure.batch.models.html#azure.batch.models.DependencyAction">[docs]</a><span class="k">class</span> <span class="nc">DependencyAction</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">Enum</span><span class="p">):</span>
 
-    <span class="n">satisfy</span> <span class="o">=</span> <span class="s2">&quot;satisfy&quot;</span>  <span class="c1">#: Satisfy the Task&#39;s dependencies.</span>
-    <span class="n">block</span> <span class="o">=</span> <span class="s2">&quot;block&quot;</span>  <span class="c1">#: Block the Task&#39;s dependencies.</span></div>
+    <span class="n">satisfy</span> <span class="o">=</span> <span class="s2">&quot;satisfy&quot;</span>  <span class="c1">#: Satisfy tasks waiting on this task; once all dependencies are satisfied, the task will be scheduled to run.</span>
+    <span class="n">block</span> <span class="o">=</span> <span class="s2">&quot;block&quot;</span>  <span class="c1">#: Blocks tasks waiting on this task, preventing them from being scheduled.</span></div>
 
 
 <div class="viewcode-block" id="AutoUserScope"><a class="viewcode-back" href="../../../../ref/azure.batch.models.html#azure.batch.models.AutoUserScope">[docs]</a><span class="k">class</span> <span class="nc">AutoUserScope</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">Enum</span><span class="p">):</span>
@@ -378,9 +378,9 @@
 
 <div class="viewcode-block" id="CertificateVisibility"><a class="viewcode-back" href="../../../../ref/azure.batch.models.html#azure.batch.models.CertificateVisibility">[docs]</a><span class="k">class</span> <span class="nc">CertificateVisibility</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">Enum</span><span class="p">):</span>
 
-    <span class="n">start_task</span> <span class="o">=</span> <span class="s2">&quot;starttask&quot;</span>  <span class="c1">#: The Certificate should be visible to the user Account under which the start Task is run.</span>
-    <span class="n">task</span> <span class="o">=</span> <span class="s2">&quot;task&quot;</span>  <span class="c1">#: The Certificate should be visible to the user Accounts under which Job Tasks are run.</span>
-    <span class="n">remote_user</span> <span class="o">=</span> <span class="s2">&quot;remoteuser&quot;</span>  <span class="c1">#: The Certificate should be visible to the user Accounts under which users remotely access the Compute Node.</span></div>
+    <span class="n">start_task</span> <span class="o">=</span> <span class="s2">&quot;starttask&quot;</span>  <span class="c1">#: The Certificate should be visible to the user account under which the StartTask is run. Note that if AutoUser Scope is Pool for both the StartTask and a Task, this certificate will be visible to the Task as well.</span>
+    <span class="n">task</span> <span class="o">=</span> <span class="s2">&quot;task&quot;</span>  <span class="c1">#: The Certificate should be visible to the user accounts under which Job Tasks are run.</span>
+    <span class="n">remote_user</span> <span class="o">=</span> <span class="s2">&quot;remoteuser&quot;</span>  <span class="c1">#: The Certificate should be visible to the user accounts under which users remotely access the Compute Node.</span></div>
 
 
 <div class="viewcode-block" id="CachingType"><a class="viewcode-back" href="../../../../ref/azure.batch.models.html#azure.batch.models.CachingType">[docs]</a><span class="k">class</span> <span class="nc">CachingType</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">Enum</span><span class="p">):</span>
@@ -513,8 +513,8 @@
 
 <div class="viewcode-block" id="StartTaskState"><a class="viewcode-back" href="../../../../ref/azure.batch.models.html#azure.batch.models.StartTaskState">[docs]</a><span class="k">class</span> <span class="nc">StartTaskState</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">Enum</span><span class="p">):</span>
 
-    <span class="n">running</span> <span class="o">=</span> <span class="s2">&quot;running&quot;</span>  <span class="c1">#: The start Task is currently running.</span>
-    <span class="n">completed</span> <span class="o">=</span> <span class="s2">&quot;completed&quot;</span>  <span class="c1">#: The start Task has exited with exit code 0, or the start Task has failed and the retry limit has reached, or the start Task process did not run due to Task preparation errors (such as resource file download failures).</span></div>
+    <span class="n">running</span> <span class="o">=</span> <span class="s2">&quot;running&quot;</span>  <span class="c1">#: The StartTask is currently running.</span>
+    <span class="n">completed</span> <span class="o">=</span> <span class="s2">&quot;completed&quot;</span>  <span class="c1">#: The StartTask has exited with exit code 0, or the StartTask has failed and the retry limit has reached, or the StartTask process did not run due to Task preparation errors (such as resource file download failures).</span></div>
 
 
 <div class="viewcode-block" id="ComputeNodeState"><a class="viewcode-back" href="../../../../ref/azure.batch.models.html#azure.batch.models.ComputeNodeState">[docs]</a><span class="k">class</span> <span class="nc">ComputeNodeState</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">Enum</span><span class="p">):</span>
@@ -522,12 +522,12 @@
     <span class="n">idle</span> <span class="o">=</span> <span class="s2">&quot;idle&quot;</span>  <span class="c1">#: The Compute Node is not currently running a Task.</span>
     <span class="n">rebooting</span> <span class="o">=</span> <span class="s2">&quot;rebooting&quot;</span>  <span class="c1">#: The Compute Node is rebooting.</span>
     <span class="n">reimaging</span> <span class="o">=</span> <span class="s2">&quot;reimaging&quot;</span>  <span class="c1">#: The Compute Node is reimaging.</span>
-    <span class="n">running</span> <span class="o">=</span> <span class="s2">&quot;running&quot;</span>  <span class="c1">#: The Compute Node is running one or more Tasks (other than a start task).</span>
+    <span class="n">running</span> <span class="o">=</span> <span class="s2">&quot;running&quot;</span>  <span class="c1">#: The Compute Node is running one or more Tasks (other than a StartTask).</span>
     <span class="n">unusable</span> <span class="o">=</span> <span class="s2">&quot;unusable&quot;</span>  <span class="c1">#: The Compute Node cannot be used for Task execution due to errors.</span>
     <span class="n">creating</span> <span class="o">=</span> <span class="s2">&quot;creating&quot;</span>  <span class="c1">#: The Batch service has obtained the underlying virtual machine from Azure Compute, but it has not yet started to join the Pool.</span>
     <span class="n">starting</span> <span class="o">=</span> <span class="s2">&quot;starting&quot;</span>  <span class="c1">#: The Batch service is starting on the underlying virtual machine.</span>
-    <span class="n">waiting_for_start_task</span> <span class="o">=</span> <span class="s2">&quot;waitingforstarttask&quot;</span>  <span class="c1">#: The start Task has started running on the Compute Node, but waitForSuccess is set and the start Task has not yet completed.</span>
-    <span class="n">start_task_failed</span> <span class="o">=</span> <span class="s2">&quot;starttaskfailed&quot;</span>  <span class="c1">#: The start Task has failed on the Compute Node (and exhausted all retries), and waitForSuccess is set. The Compute Node is not usable for running Tasks.</span>
+    <span class="n">waiting_for_start_task</span> <span class="o">=</span> <span class="s2">&quot;waitingforstarttask&quot;</span>  <span class="c1">#: The StartTask has started running on the Compute Node, but waitForSuccess is set and the StartTask has not yet completed.</span>
+    <span class="n">start_task_failed</span> <span class="o">=</span> <span class="s2">&quot;starttaskfailed&quot;</span>  <span class="c1">#: The StartTask has failed on the Compute Node (and exhausted all retries), and waitForSuccess is set. The Compute Node is not usable for running Tasks.</span>
     <span class="n">unknown</span> <span class="o">=</span> <span class="s2">&quot;unknown&quot;</span>  <span class="c1">#: The Batch service has lost contact with the Compute Node, and does not know its true state.</span>
     <span class="n">leaving_pool</span> <span class="o">=</span> <span class="s2">&quot;leavingpool&quot;</span>  <span class="c1">#: The Compute Node is leaving the Pool, either because the user explicitly removed it or because the Pool is resizing or autoscaling down.</span>
     <span class="n">offline</span> <span class="o">=</span> <span class="s2">&quot;offline&quot;</span>  <span class="c1">#: The Compute Node is not currently running a Task, and scheduling of new Tasks to the Compute Node is disabled.</span>

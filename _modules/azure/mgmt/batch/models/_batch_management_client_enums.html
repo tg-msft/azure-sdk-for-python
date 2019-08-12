@@ -290,140 +290,146 @@
 <span class="kn">from</span> <span class="nn">enum</span> <span class="k">import</span> <span class="n">Enum</span>
 
 
-<div class="viewcode-block" id="PoolAllocationMode"><a class="viewcode-back" href="../../../../../ref/azure.mgmt.batch.models.html#azure.mgmt.batch.models.PoolAllocationMode">[docs]</a><span class="k">class</span> <span class="nc">PoolAllocationMode</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+<div class="viewcode-block" id="PoolAllocationMode"><a class="viewcode-back" href="../../../../../ref/azure.mgmt.batch.models.html#azure.mgmt.batch.models.PoolAllocationMode">[docs]</a><span class="k">class</span> <span class="nc">PoolAllocationMode</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">Enum</span><span class="p">):</span>
 
-    <span class="n">batch_service</span> <span class="o">=</span> <span class="s2">&quot;BatchService&quot;</span>
-    <span class="n">user_subscription</span> <span class="o">=</span> <span class="s2">&quot;UserSubscription&quot;</span></div>
-
-
-<div class="viewcode-block" id="ProvisioningState"><a class="viewcode-back" href="../../../../../ref/azure.mgmt.batch.models.html#azure.mgmt.batch.models.ProvisioningState">[docs]</a><span class="k">class</span> <span class="nc">ProvisioningState</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
-
-    <span class="n">invalid</span> <span class="o">=</span> <span class="s2">&quot;Invalid&quot;</span>
-    <span class="n">creating</span> <span class="o">=</span> <span class="s2">&quot;Creating&quot;</span>
-    <span class="n">deleting</span> <span class="o">=</span> <span class="s2">&quot;Deleting&quot;</span>
-    <span class="n">succeeded</span> <span class="o">=</span> <span class="s2">&quot;Succeeded&quot;</span>
-    <span class="n">failed</span> <span class="o">=</span> <span class="s2">&quot;Failed&quot;</span>
-    <span class="n">cancelled</span> <span class="o">=</span> <span class="s2">&quot;Cancelled&quot;</span></div>
+    <span class="n">batch_service</span> <span class="o">=</span> <span class="s2">&quot;BatchService&quot;</span>  <span class="c1">#: Pools will be allocated in subscriptions owned by the Batch service.</span>
+    <span class="n">user_subscription</span> <span class="o">=</span> <span class="s2">&quot;UserSubscription&quot;</span>  <span class="c1">#: Pools will be allocated in a subscription owned by the user.</span></div>
 
 
-<div class="viewcode-block" id="AccountKeyType"><a class="viewcode-back" href="../../../../../ref/azure.mgmt.batch.models.html#azure.mgmt.batch.models.AccountKeyType">[docs]</a><span class="k">class</span> <span class="nc">AccountKeyType</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+<div class="viewcode-block" id="ProvisioningState"><a class="viewcode-back" href="../../../../../ref/azure.mgmt.batch.models.html#azure.mgmt.batch.models.ProvisioningState">[docs]</a><span class="k">class</span> <span class="nc">ProvisioningState</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">Enum</span><span class="p">):</span>
 
-    <span class="n">primary</span> <span class="o">=</span> <span class="s2">&quot;Primary&quot;</span>
-    <span class="n">secondary</span> <span class="o">=</span> <span class="s2">&quot;Secondary&quot;</span></div>
-
-
-<div class="viewcode-block" id="PackageState"><a class="viewcode-back" href="../../../../../ref/azure.mgmt.batch.models.html#azure.mgmt.batch.models.PackageState">[docs]</a><span class="k">class</span> <span class="nc">PackageState</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
-
-    <span class="n">pending</span> <span class="o">=</span> <span class="s2">&quot;Pending&quot;</span>
-    <span class="n">active</span> <span class="o">=</span> <span class="s2">&quot;Active&quot;</span></div>
+    <span class="n">invalid</span> <span class="o">=</span> <span class="s2">&quot;Invalid&quot;</span>  <span class="c1">#: The account is in an invalid state.</span>
+    <span class="n">creating</span> <span class="o">=</span> <span class="s2">&quot;Creating&quot;</span>  <span class="c1">#: The account is being created.</span>
+    <span class="n">deleting</span> <span class="o">=</span> <span class="s2">&quot;Deleting&quot;</span>  <span class="c1">#: The account is being deleted.</span>
+    <span class="n">succeeded</span> <span class="o">=</span> <span class="s2">&quot;Succeeded&quot;</span>  <span class="c1">#: The account has been created and is ready for use.</span>
+    <span class="n">failed</span> <span class="o">=</span> <span class="s2">&quot;Failed&quot;</span>  <span class="c1">#: The last operation for the account is failed.</span>
+    <span class="n">cancelled</span> <span class="o">=</span> <span class="s2">&quot;Cancelled&quot;</span>  <span class="c1">#: The last operation for the account is cancelled.</span></div>
 
 
-<div class="viewcode-block" id="CertificateFormat"><a class="viewcode-back" href="../../../../../ref/azure.mgmt.batch.models.html#azure.mgmt.batch.models.CertificateFormat">[docs]</a><span class="k">class</span> <span class="nc">CertificateFormat</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+<div class="viewcode-block" id="AccountKeyType"><a class="viewcode-back" href="../../../../../ref/azure.mgmt.batch.models.html#azure.mgmt.batch.models.AccountKeyType">[docs]</a><span class="k">class</span> <span class="nc">AccountKeyType</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">Enum</span><span class="p">):</span>
 
-    <span class="n">pfx</span> <span class="o">=</span> <span class="s2">&quot;Pfx&quot;</span>
-    <span class="n">cer</span> <span class="o">=</span> <span class="s2">&quot;Cer&quot;</span></div>
-
-
-<div class="viewcode-block" id="CertificateProvisioningState"><a class="viewcode-back" href="../../../../../ref/azure.mgmt.batch.models.html#azure.mgmt.batch.models.CertificateProvisioningState">[docs]</a><span class="k">class</span> <span class="nc">CertificateProvisioningState</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
-
-    <span class="n">succeeded</span> <span class="o">=</span> <span class="s2">&quot;Succeeded&quot;</span>
-    <span class="n">deleting</span> <span class="o">=</span> <span class="s2">&quot;Deleting&quot;</span>
-    <span class="n">failed</span> <span class="o">=</span> <span class="s2">&quot;Failed&quot;</span></div>
+    <span class="n">primary</span> <span class="o">=</span> <span class="s2">&quot;Primary&quot;</span>  <span class="c1">#: The primary account key.</span>
+    <span class="n">secondary</span> <span class="o">=</span> <span class="s2">&quot;Secondary&quot;</span>  <span class="c1">#: The secondary account key.</span></div>
 
 
-<div class="viewcode-block" id="PoolProvisioningState"><a class="viewcode-back" href="../../../../../ref/azure.mgmt.batch.models.html#azure.mgmt.batch.models.PoolProvisioningState">[docs]</a><span class="k">class</span> <span class="nc">PoolProvisioningState</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+<div class="viewcode-block" id="PackageState"><a class="viewcode-back" href="../../../../../ref/azure.mgmt.batch.models.html#azure.mgmt.batch.models.PackageState">[docs]</a><span class="k">class</span> <span class="nc">PackageState</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">Enum</span><span class="p">):</span>
 
-    <span class="n">succeeded</span> <span class="o">=</span> <span class="s2">&quot;Succeeded&quot;</span>
-    <span class="n">deleting</span> <span class="o">=</span> <span class="s2">&quot;Deleting&quot;</span></div>
-
-
-<div class="viewcode-block" id="AllocationState"><a class="viewcode-back" href="../../../../../ref/azure.mgmt.batch.models.html#azure.mgmt.batch.models.AllocationState">[docs]</a><span class="k">class</span> <span class="nc">AllocationState</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
-
-    <span class="n">steady</span> <span class="o">=</span> <span class="s2">&quot;Steady&quot;</span>
-    <span class="n">resizing</span> <span class="o">=</span> <span class="s2">&quot;Resizing&quot;</span>
-    <span class="n">stopping</span> <span class="o">=</span> <span class="s2">&quot;Stopping&quot;</span></div>
+    <span class="n">pending</span> <span class="o">=</span> <span class="s2">&quot;Pending&quot;</span>  <span class="c1">#: The application package has been created but has not yet been activated.</span>
+    <span class="n">active</span> <span class="o">=</span> <span class="s2">&quot;Active&quot;</span>  <span class="c1">#: The application package is ready for use.</span></div>
 
 
-<div class="viewcode-block" id="CachingType"><a class="viewcode-back" href="../../../../../ref/azure.mgmt.batch.models.html#azure.mgmt.batch.models.CachingType">[docs]</a><span class="k">class</span> <span class="nc">CachingType</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+<div class="viewcode-block" id="CertificateFormat"><a class="viewcode-back" href="../../../../../ref/azure.mgmt.batch.models.html#azure.mgmt.batch.models.CertificateFormat">[docs]</a><span class="k">class</span> <span class="nc">CertificateFormat</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">Enum</span><span class="p">):</span>
 
-    <span class="n">none</span> <span class="o">=</span> <span class="s2">&quot;None&quot;</span>
-    <span class="n">read_only</span> <span class="o">=</span> <span class="s2">&quot;ReadOnly&quot;</span>
-    <span class="n">read_write</span> <span class="o">=</span> <span class="s2">&quot;ReadWrite&quot;</span></div>
-
-
-<div class="viewcode-block" id="StorageAccountType"><a class="viewcode-back" href="../../../../../ref/azure.mgmt.batch.models.html#azure.mgmt.batch.models.StorageAccountType">[docs]</a><span class="k">class</span> <span class="nc">StorageAccountType</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
-
-    <span class="n">standard_lrs</span> <span class="o">=</span> <span class="s2">&quot;Standard_LRS&quot;</span>
-    <span class="n">premium_lrs</span> <span class="o">=</span> <span class="s2">&quot;Premium_LRS&quot;</span></div>
+    <span class="n">pfx</span> <span class="o">=</span> <span class="s2">&quot;Pfx&quot;</span>  <span class="c1">#: The certificate is a PFX (PKCS#12) formatted certificate or certificate chain.</span>
+    <span class="n">cer</span> <span class="o">=</span> <span class="s2">&quot;Cer&quot;</span>  <span class="c1">#: The certificate is a base64-encoded X.509 certificate.</span></div>
 
 
-<div class="viewcode-block" id="ComputeNodeDeallocationOption"><a class="viewcode-back" href="../../../../../ref/azure.mgmt.batch.models.html#azure.mgmt.batch.models.ComputeNodeDeallocationOption">[docs]</a><span class="k">class</span> <span class="nc">ComputeNodeDeallocationOption</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+<div class="viewcode-block" id="CertificateProvisioningState"><a class="viewcode-back" href="../../../../../ref/azure.mgmt.batch.models.html#azure.mgmt.batch.models.CertificateProvisioningState">[docs]</a><span class="k">class</span> <span class="nc">CertificateProvisioningState</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">Enum</span><span class="p">):</span>
 
-    <span class="n">requeue</span> <span class="o">=</span> <span class="s2">&quot;Requeue&quot;</span>
-    <span class="n">terminate</span> <span class="o">=</span> <span class="s2">&quot;Terminate&quot;</span>
-    <span class="n">task_completion</span> <span class="o">=</span> <span class="s2">&quot;TaskCompletion&quot;</span>
-    <span class="n">retained_data</span> <span class="o">=</span> <span class="s2">&quot;RetainedData&quot;</span></div>
-
-
-<div class="viewcode-block" id="InterNodeCommunicationState"><a class="viewcode-back" href="../../../../../ref/azure.mgmt.batch.models.html#azure.mgmt.batch.models.InterNodeCommunicationState">[docs]</a><span class="k">class</span> <span class="nc">InterNodeCommunicationState</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
-
-    <span class="n">enabled</span> <span class="o">=</span> <span class="s2">&quot;Enabled&quot;</span>
-    <span class="n">disabled</span> <span class="o">=</span> <span class="s2">&quot;Disabled&quot;</span></div>
+    <span class="n">succeeded</span> <span class="o">=</span> <span class="s2">&quot;Succeeded&quot;</span>  <span class="c1">#: The certificate is available for use in pools.</span>
+    <span class="n">deleting</span> <span class="o">=</span> <span class="s2">&quot;Deleting&quot;</span>  <span class="c1">#: The user has requested that the certificate be deleted, but the delete operation has not yet completed. You may not reference the certificate when creating or updating pools.</span>
+    <span class="n">failed</span> <span class="o">=</span> <span class="s2">&quot;Failed&quot;</span>  <span class="c1">#: The user requested that the certificate be deleted, but there are pools that still have references to the certificate, or it is still installed on one or more compute nodes. (The latter can occur if the certificate has been removed from the pool, but the node has not yet restarted. Nodes refresh their certificates only when they restart.) You may use the cancel certificate delete operation to cancel the delete, or the delete certificate operation to retry the delete.</span></div>
 
 
-<div class="viewcode-block" id="InboundEndpointProtocol"><a class="viewcode-back" href="../../../../../ref/azure.mgmt.batch.models.html#azure.mgmt.batch.models.InboundEndpointProtocol">[docs]</a><span class="k">class</span> <span class="nc">InboundEndpointProtocol</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+<div class="viewcode-block" id="PoolProvisioningState"><a class="viewcode-back" href="../../../../../ref/azure.mgmt.batch.models.html#azure.mgmt.batch.models.PoolProvisioningState">[docs]</a><span class="k">class</span> <span class="nc">PoolProvisioningState</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">Enum</span><span class="p">):</span>
 
-    <span class="n">tcp</span> <span class="o">=</span> <span class="s2">&quot;TCP&quot;</span>
-    <span class="n">udp</span> <span class="o">=</span> <span class="s2">&quot;UDP&quot;</span></div>
-
-
-<div class="viewcode-block" id="NetworkSecurityGroupRuleAccess"><a class="viewcode-back" href="../../../../../ref/azure.mgmt.batch.models.html#azure.mgmt.batch.models.NetworkSecurityGroupRuleAccess">[docs]</a><span class="k">class</span> <span class="nc">NetworkSecurityGroupRuleAccess</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
-
-    <span class="n">allow</span> <span class="o">=</span> <span class="s2">&quot;Allow&quot;</span>
-    <span class="n">deny</span> <span class="o">=</span> <span class="s2">&quot;Deny&quot;</span></div>
+    <span class="n">succeeded</span> <span class="o">=</span> <span class="s2">&quot;Succeeded&quot;</span>  <span class="c1">#: The pool is available to run tasks subject to the availability of compute nodes.</span>
+    <span class="n">deleting</span> <span class="o">=</span> <span class="s2">&quot;Deleting&quot;</span>  <span class="c1">#: The user has requested that the pool be deleted, but the delete operation has not yet completed.</span></div>
 
 
-<div class="viewcode-block" id="ComputeNodeFillType"><a class="viewcode-back" href="../../../../../ref/azure.mgmt.batch.models.html#azure.mgmt.batch.models.ComputeNodeFillType">[docs]</a><span class="k">class</span> <span class="nc">ComputeNodeFillType</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+<div class="viewcode-block" id="AllocationState"><a class="viewcode-back" href="../../../../../ref/azure.mgmt.batch.models.html#azure.mgmt.batch.models.AllocationState">[docs]</a><span class="k">class</span> <span class="nc">AllocationState</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">Enum</span><span class="p">):</span>
 
-    <span class="n">spread</span> <span class="o">=</span> <span class="s2">&quot;Spread&quot;</span>
-    <span class="n">pack</span> <span class="o">=</span> <span class="s2">&quot;Pack&quot;</span></div>
-
-
-<div class="viewcode-block" id="ElevationLevel"><a class="viewcode-back" href="../../../../../ref/azure.mgmt.batch.models.html#azure.mgmt.batch.models.ElevationLevel">[docs]</a><span class="k">class</span> <span class="nc">ElevationLevel</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
-
-    <span class="n">non_admin</span> <span class="o">=</span> <span class="s2">&quot;NonAdmin&quot;</span>
-    <span class="n">admin</span> <span class="o">=</span> <span class="s2">&quot;Admin&quot;</span></div>
+    <span class="n">steady</span> <span class="o">=</span> <span class="s2">&quot;Steady&quot;</span>  <span class="c1">#: The pool is not resizing. There are no changes to the number of nodes in the pool in progress. A pool enters this state when it is created and when no operations are being performed on the pool to change the number of nodes.</span>
+    <span class="n">resizing</span> <span class="o">=</span> <span class="s2">&quot;Resizing&quot;</span>  <span class="c1">#: The pool is resizing; that is, compute nodes are being added to or removed from the pool.</span>
+    <span class="n">stopping</span> <span class="o">=</span> <span class="s2">&quot;Stopping&quot;</span>  <span class="c1">#: The pool was resizing, but the user has requested that the resize be stopped, but the stop request has not yet been completed.</span></div>
 
 
-<div class="viewcode-block" id="LoginMode"><a class="viewcode-back" href="../../../../../ref/azure.mgmt.batch.models.html#azure.mgmt.batch.models.LoginMode">[docs]</a><span class="k">class</span> <span class="nc">LoginMode</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+<div class="viewcode-block" id="CachingType"><a class="viewcode-back" href="../../../../../ref/azure.mgmt.batch.models.html#azure.mgmt.batch.models.CachingType">[docs]</a><span class="k">class</span> <span class="nc">CachingType</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">Enum</span><span class="p">):</span>
 
-    <span class="n">batch</span> <span class="o">=</span> <span class="s2">&quot;Batch&quot;</span>
-    <span class="n">interactive</span> <span class="o">=</span> <span class="s2">&quot;Interactive&quot;</span></div>
-
-
-<div class="viewcode-block" id="AutoUserScope"><a class="viewcode-back" href="../../../../../ref/azure.mgmt.batch.models.html#azure.mgmt.batch.models.AutoUserScope">[docs]</a><span class="k">class</span> <span class="nc">AutoUserScope</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
-
-    <span class="n">task</span> <span class="o">=</span> <span class="s2">&quot;Task&quot;</span>
-    <span class="n">pool</span> <span class="o">=</span> <span class="s2">&quot;Pool&quot;</span></div>
+    <span class="n">none</span> <span class="o">=</span> <span class="s2">&quot;None&quot;</span>  <span class="c1">#: The caching mode for the disk is not enabled.</span>
+    <span class="n">read_only</span> <span class="o">=</span> <span class="s2">&quot;ReadOnly&quot;</span>  <span class="c1">#: The caching mode for the disk is read only.</span>
+    <span class="n">read_write</span> <span class="o">=</span> <span class="s2">&quot;ReadWrite&quot;</span>  <span class="c1">#: The caching mode for the disk is read and write.</span></div>
 
 
-<div class="viewcode-block" id="CertificateStoreLocation"><a class="viewcode-back" href="../../../../../ref/azure.mgmt.batch.models.html#azure.mgmt.batch.models.CertificateStoreLocation">[docs]</a><span class="k">class</span> <span class="nc">CertificateStoreLocation</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+<div class="viewcode-block" id="StorageAccountType"><a class="viewcode-back" href="../../../../../ref/azure.mgmt.batch.models.html#azure.mgmt.batch.models.StorageAccountType">[docs]</a><span class="k">class</span> <span class="nc">StorageAccountType</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">Enum</span><span class="p">):</span>
 
-    <span class="n">current_user</span> <span class="o">=</span> <span class="s2">&quot;CurrentUser&quot;</span>
-    <span class="n">local_machine</span> <span class="o">=</span> <span class="s2">&quot;LocalMachine&quot;</span></div>
-
-
-<div class="viewcode-block" id="CertificateVisibility"><a class="viewcode-back" href="../../../../../ref/azure.mgmt.batch.models.html#azure.mgmt.batch.models.CertificateVisibility">[docs]</a><span class="k">class</span> <span class="nc">CertificateVisibility</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
-
-    <span class="n">start_task</span> <span class="o">=</span> <span class="s2">&quot;StartTask&quot;</span>
-    <span class="n">task</span> <span class="o">=</span> <span class="s2">&quot;Task&quot;</span>
-    <span class="n">remote_user</span> <span class="o">=</span> <span class="s2">&quot;RemoteUser&quot;</span></div>
+    <span class="n">standard_lrs</span> <span class="o">=</span> <span class="s2">&quot;Standard_LRS&quot;</span>  <span class="c1">#: The data disk should use standard locally redundant storage.</span>
+    <span class="n">premium_lrs</span> <span class="o">=</span> <span class="s2">&quot;Premium_LRS&quot;</span>  <span class="c1">#: The data disk should use premium locally redundant storage.</span></div>
 
 
-<div class="viewcode-block" id="NameAvailabilityReason"><a class="viewcode-back" href="../../../../../ref/azure.mgmt.batch.models.html#azure.mgmt.batch.models.NameAvailabilityReason">[docs]</a><span class="k">class</span> <span class="nc">NameAvailabilityReason</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+<div class="viewcode-block" id="ComputeNodeDeallocationOption"><a class="viewcode-back" href="../../../../../ref/azure.mgmt.batch.models.html#azure.mgmt.batch.models.ComputeNodeDeallocationOption">[docs]</a><span class="k">class</span> <span class="nc">ComputeNodeDeallocationOption</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">Enum</span><span class="p">):</span>
 
-    <span class="n">invalid</span> <span class="o">=</span> <span class="s2">&quot;Invalid&quot;</span>
-    <span class="n">already_exists</span> <span class="o">=</span> <span class="s2">&quot;AlreadyExists&quot;</span></div>
+    <span class="n">requeue</span> <span class="o">=</span> <span class="s2">&quot;Requeue&quot;</span>  <span class="c1">#: Terminate running task processes and requeue the tasks. The tasks will run again when a node is available. Remove nodes as soon as tasks have been terminated.</span>
+    <span class="n">terminate</span> <span class="o">=</span> <span class="s2">&quot;Terminate&quot;</span>  <span class="c1">#: Terminate running tasks. The tasks will be completed with failureInfo indicating that they were terminated, and will not run again. Remove nodes as soon as tasks have been terminated.</span>
+    <span class="n">task_completion</span> <span class="o">=</span> <span class="s2">&quot;TaskCompletion&quot;</span>  <span class="c1">#: Allow currently running tasks to complete. Schedule no new tasks while waiting. Remove nodes when all tasks have completed.</span>
+    <span class="n">retained_data</span> <span class="o">=</span> <span class="s2">&quot;RetainedData&quot;</span>  <span class="c1">#: Allow currently running tasks to complete, then wait for all task data retention periods to expire. Schedule no new tasks while waiting. Remove nodes when all task retention periods have expired.</span></div>
+
+
+<div class="viewcode-block" id="InterNodeCommunicationState"><a class="viewcode-back" href="../../../../../ref/azure.mgmt.batch.models.html#azure.mgmt.batch.models.InterNodeCommunicationState">[docs]</a><span class="k">class</span> <span class="nc">InterNodeCommunicationState</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">Enum</span><span class="p">):</span>
+
+    <span class="n">enabled</span> <span class="o">=</span> <span class="s2">&quot;Enabled&quot;</span>  <span class="c1">#: Enable network communication between virtual machines.</span>
+    <span class="n">disabled</span> <span class="o">=</span> <span class="s2">&quot;Disabled&quot;</span>  <span class="c1">#: Disable network communication between virtual machines.</span></div>
+
+
+<div class="viewcode-block" id="InboundEndpointProtocol"><a class="viewcode-back" href="../../../../../ref/azure.mgmt.batch.models.html#azure.mgmt.batch.models.InboundEndpointProtocol">[docs]</a><span class="k">class</span> <span class="nc">InboundEndpointProtocol</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">Enum</span><span class="p">):</span>
+
+    <span class="n">tcp</span> <span class="o">=</span> <span class="s2">&quot;TCP&quot;</span>  <span class="c1">#: Use TCP for the endpoint.</span>
+    <span class="n">udp</span> <span class="o">=</span> <span class="s2">&quot;UDP&quot;</span>  <span class="c1">#: Use UDP for the endpoint.</span></div>
+
+
+<div class="viewcode-block" id="NetworkSecurityGroupRuleAccess"><a class="viewcode-back" href="../../../../../ref/azure.mgmt.batch.models.html#azure.mgmt.batch.models.NetworkSecurityGroupRuleAccess">[docs]</a><span class="k">class</span> <span class="nc">NetworkSecurityGroupRuleAccess</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">Enum</span><span class="p">):</span>
+
+    <span class="n">allow</span> <span class="o">=</span> <span class="s2">&quot;Allow&quot;</span>  <span class="c1">#: Allow access.</span>
+    <span class="n">deny</span> <span class="o">=</span> <span class="s2">&quot;Deny&quot;</span>  <span class="c1">#: Deny access.</span></div>
+
+
+<div class="viewcode-block" id="ComputeNodeFillType"><a class="viewcode-back" href="../../../../../ref/azure.mgmt.batch.models.html#azure.mgmt.batch.models.ComputeNodeFillType">[docs]</a><span class="k">class</span> <span class="nc">ComputeNodeFillType</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">Enum</span><span class="p">):</span>
+
+    <span class="n">spread</span> <span class="o">=</span> <span class="s2">&quot;Spread&quot;</span>  <span class="c1">#: Tasks should be assigned evenly across all nodes in the pool.</span>
+    <span class="n">pack</span> <span class="o">=</span> <span class="s2">&quot;Pack&quot;</span>  <span class="c1">#: As many tasks as possible (maxTasksPerNode) should be assigned to each node in the pool before any tasks are assigned to the next node in the pool.</span></div>
+
+
+<div class="viewcode-block" id="ElevationLevel"><a class="viewcode-back" href="../../../../../ref/azure.mgmt.batch.models.html#azure.mgmt.batch.models.ElevationLevel">[docs]</a><span class="k">class</span> <span class="nc">ElevationLevel</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">Enum</span><span class="p">):</span>
+
+    <span class="n">non_admin</span> <span class="o">=</span> <span class="s2">&quot;NonAdmin&quot;</span>  <span class="c1">#: The user is a standard user without elevated access.</span>
+    <span class="n">admin</span> <span class="o">=</span> <span class="s2">&quot;Admin&quot;</span>  <span class="c1">#: The user is a user with elevated access and operates with full Administrator permissions.</span></div>
+
+
+<div class="viewcode-block" id="LoginMode"><a class="viewcode-back" href="../../../../../ref/azure.mgmt.batch.models.html#azure.mgmt.batch.models.LoginMode">[docs]</a><span class="k">class</span> <span class="nc">LoginMode</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">Enum</span><span class="p">):</span>
+
+    <span class="n">batch</span> <span class="o">=</span> <span class="s2">&quot;Batch&quot;</span>  <span class="c1">#: The LOGON32_LOGON_BATCH Win32 login mode. The batch login mode is recommended for long running parallel processes.</span>
+    <span class="n">interactive</span> <span class="o">=</span> <span class="s2">&quot;Interactive&quot;</span>  <span class="c1">#: The LOGON32_LOGON_INTERACTIVE Win32 login mode. Some applications require having permissions associated with the interactive login mode. If this is the case for an application used in your task, then this option is recommended.</span></div>
+
+
+<div class="viewcode-block" id="AutoUserScope"><a class="viewcode-back" href="../../../../../ref/azure.mgmt.batch.models.html#azure.mgmt.batch.models.AutoUserScope">[docs]</a><span class="k">class</span> <span class="nc">AutoUserScope</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">Enum</span><span class="p">):</span>
+
+    <span class="n">task</span> <span class="o">=</span> <span class="s2">&quot;Task&quot;</span>  <span class="c1">#: Specifies that the service should create a new user for the task.</span>
+    <span class="n">pool</span> <span class="o">=</span> <span class="s2">&quot;Pool&quot;</span>  <span class="c1">#: Specifies that the task runs as the common auto user account which is created on every node in a pool.</span></div>
+
+
+<div class="viewcode-block" id="ContainerWorkingDirectory"><a class="viewcode-back" href="../../../../../ref/azure.mgmt.batch.models.html#azure.mgmt.batch.models.ContainerWorkingDirectory">[docs]</a><span class="k">class</span> <span class="nc">ContainerWorkingDirectory</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">Enum</span><span class="p">):</span>
+
+    <span class="n">task_working_directory</span> <span class="o">=</span> <span class="s2">&quot;TaskWorkingDirectory&quot;</span>  <span class="c1">#: Use the standard Batch service task working directory, which will contain the Task resource files populated by Batch.</span>
+    <span class="n">container_image_default</span> <span class="o">=</span> <span class="s2">&quot;ContainerImageDefault&quot;</span>  <span class="c1">#: Using container image defined working directory. Beware that this directory will not contain the resource files downloaded by Batch.</span></div>
+
+
+<div class="viewcode-block" id="CertificateStoreLocation"><a class="viewcode-back" href="../../../../../ref/azure.mgmt.batch.models.html#azure.mgmt.batch.models.CertificateStoreLocation">[docs]</a><span class="k">class</span> <span class="nc">CertificateStoreLocation</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">Enum</span><span class="p">):</span>
+
+    <span class="n">current_user</span> <span class="o">=</span> <span class="s2">&quot;CurrentUser&quot;</span>  <span class="c1">#: Certificates should be installed to the CurrentUser certificate store.</span>
+    <span class="n">local_machine</span> <span class="o">=</span> <span class="s2">&quot;LocalMachine&quot;</span>  <span class="c1">#: Certificates should be installed to the LocalMachine certificate store.</span></div>
+
+
+<div class="viewcode-block" id="CertificateVisibility"><a class="viewcode-back" href="../../../../../ref/azure.mgmt.batch.models.html#azure.mgmt.batch.models.CertificateVisibility">[docs]</a><span class="k">class</span> <span class="nc">CertificateVisibility</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">Enum</span><span class="p">):</span>
+
+    <span class="n">start_task</span> <span class="o">=</span> <span class="s2">&quot;StartTask&quot;</span>  <span class="c1">#: The certificate should be visible to the user account under which the start task is run. Note that if AutoUser Scope is Pool for both the StartTask and a Task, this certificate will be visible to the Task as well.</span>
+    <span class="n">task</span> <span class="o">=</span> <span class="s2">&quot;Task&quot;</span>  <span class="c1">#: The certificate should be visible to the user accounts under which job tasks are run.</span>
+    <span class="n">remote_user</span> <span class="o">=</span> <span class="s2">&quot;RemoteUser&quot;</span>  <span class="c1">#: The certificate should be visible to the user accounts under which users remotely access the node.</span></div>
+
+
+<div class="viewcode-block" id="NameAvailabilityReason"><a class="viewcode-back" href="../../../../../ref/azure.mgmt.batch.models.html#azure.mgmt.batch.models.NameAvailabilityReason">[docs]</a><span class="k">class</span> <span class="nc">NameAvailabilityReason</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">Enum</span><span class="p">):</span>
+
+    <span class="n">invalid</span> <span class="o">=</span> <span class="s2">&quot;Invalid&quot;</span>  <span class="c1">#: The requested name is invalid.</span>
+    <span class="n">already_exists</span> <span class="o">=</span> <span class="s2">&quot;AlreadyExists&quot;</span>  <span class="c1">#: The requested name is already in use.</span></div>
 </pre></div>
 
            </div>

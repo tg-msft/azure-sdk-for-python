@@ -302,7 +302,7 @@
 <span class="sd">    :param config: Configuration of service client.</span>
 <span class="sd">    :param serializer: An object model serializer.</span>
 <span class="sd">    :param deserializer: An object model deserializer.</span>
-<span class="sd">    :ivar api_version: Client API Version. Constant value: &quot;2019-06-01.9.0&quot;.</span>
+<span class="sd">    :ivar api_version: Client API Version. Constant value: &quot;2019-08-01.10.0&quot;.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">models</span> <span class="o">=</span> <span class="n">models</span>
@@ -312,7 +312,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_client</span> <span class="o">=</span> <span class="n">client</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_serialize</span> <span class="o">=</span> <span class="n">serializer</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_deserialize</span> <span class="o">=</span> <span class="n">deserializer</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">api_version</span> <span class="o">=</span> <span class="s2">&quot;2019-06-01.9.0&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">api_version</span> <span class="o">=</span> <span class="s2">&quot;2019-08-01.10.0&quot;</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">config</span> <span class="o">=</span> <span class="n">config</span>
 
@@ -1055,9 +1055,9 @@
         <span class="sd">&quot;&quot;&quot;Updates the properties of the specified Pool.</span>
 
 <span class="sd">        This only replaces the Pool properties specified in the request. For</span>
-<span class="sd">        example, if the Pool has a start Task associated with it, and a request</span>
-<span class="sd">        does not specify a start Task element, then the Pool keeps the existing</span>
-<span class="sd">        start Task.</span>
+<span class="sd">        example, if the Pool has a StartTask associated with it, and a request</span>
+<span class="sd">        does not specify a StartTask element, then the Pool keeps the existing</span>
+<span class="sd">        StartTask.</span>
 
 <span class="sd">        :param pool_id: The ID of the Pool to update.</span>
 <span class="sd">        :type pool_id: str</span>
@@ -1714,9 +1714,9 @@
         <span class="sd">&quot;&quot;&quot;Updates the properties of the specified Pool.</span>
 
 <span class="sd">        This fully replaces all the updatable properties of the Pool. For</span>
-<span class="sd">        example, if the Pool has a start Task associated with it and if start</span>
-<span class="sd">        Task is not specified with this request, then the Batch service will</span>
-<span class="sd">        remove the existing start Task.</span>
+<span class="sd">        example, if the Pool has a StartTask associated with it and if</span>
+<span class="sd">        StartTask is not specified with this request, then the Batch service</span>
+<span class="sd">        will remove the existing StartTask.</span>
 
 <span class="sd">        :param pool_id: The ID of the Pool to update.</span>
 <span class="sd">        :type pool_id: str</span>

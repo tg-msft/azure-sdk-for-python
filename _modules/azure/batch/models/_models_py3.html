@@ -680,7 +680,12 @@
     <span class="sd">&quot;&quot;&quot;Specifies the parameters for the auto user that runs a Task on the Batch</span>
 <span class="sd">    service.</span>
 
-<span class="sd">    :param scope: The scope for the auto user. The default value is Task.</span>
+<span class="sd">    :param scope: The scope for the auto user. The default value is pool. If</span>
+<span class="sd">     the pool is running Windows a value of Task should be specified if</span>
+<span class="sd">     stricter isolation between tasks is required. For example, if the task</span>
+<span class="sd">     mutates the registry in a way which could impact other tasks, or if</span>
+<span class="sd">     certificates have been specified on the pool which should not be</span>
+<span class="sd">     accessible by normal tasks but should be accessible by StartTasks.</span>
 <span class="sd">     Possible values include: &#39;task&#39;, &#39;pool&#39;</span>
 <span class="sd">    :type scope: str or ~azure.batch.models.AutoUserScope</span>
 <span class="sd">    :param elevation_level: The elevation level of the auto user. The default</span>
@@ -697,6 +702,104 @@
         <span class="nb">super</span><span class="p">(</span><span class="n">AutoUserSpecification</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">scope</span> <span class="o">=</span> <span class="n">scope</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">elevation_level</span> <span class="o">=</span> <span class="n">elevation_level</span></div>
+
+
+<div class="viewcode-block" id="AzureBlobFileSystemConfiguration"><a class="viewcode-back" href="../../../../ref/azure.batch.models.html#azure.batch.models.AzureBlobFileSystemConfiguration">[docs]</a><span class="k">class</span> <span class="nc">AzureBlobFileSystemConfiguration</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Information used to connect to an Azure Storage Container using Blobfuse.</span>
+
+<span class="sd">    All required parameters must be populated in order to send to Azure.</span>
+
+<span class="sd">    :param account_name: Required. The Azure Storage Account name.</span>
+<span class="sd">    :type account_name: str</span>
+<span class="sd">    :param container_name: Required. The Azure Blob Storage Container name.</span>
+<span class="sd">    :type container_name: str</span>
+<span class="sd">    :param account_key: The Azure Storage Account key. This property is</span>
+<span class="sd">     mutually exclusive with sasKey and one must be specified.</span>
+<span class="sd">    :type account_key: str</span>
+<span class="sd">    :param sas_key: The Azure Storage SAS token. This property is mutually</span>
+<span class="sd">     exclusive with accountKey and one must be specified.</span>
+<span class="sd">    :type sas_key: str</span>
+<span class="sd">    :param blobfuse_options: Additional command line options to pass to the</span>
+<span class="sd">     mount command. These are &#39;net use&#39; options in Windows and &#39;mount&#39; options</span>
+<span class="sd">     in Linux.</span>
+<span class="sd">    :type blobfuse_options: str</span>
+<span class="sd">    :param relative_mount_path: Required. The relative path on the compute</span>
+<span class="sd">     node where the file system will be mounted. All file systems are mounted</span>
+<span class="sd">     relative to the Batch mounts directory, accessible via the</span>
+<span class="sd">     AZ_BATCH_NODE_MOUNTS_DIR environment variable.</span>
+<span class="sd">    :type relative_mount_path: str</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">_validation</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;account_name&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;required&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">},</span>
+        <span class="s1">&#39;container_name&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;required&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">},</span>
+        <span class="s1">&#39;relative_mount_path&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;required&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">},</span>
+    <span class="p">}</span>
+
+    <span class="n">_attribute_map</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;account_name&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;key&#39;</span><span class="p">:</span> <span class="s1">&#39;accountName&#39;</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;str&#39;</span><span class="p">},</span>
+        <span class="s1">&#39;container_name&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;key&#39;</span><span class="p">:</span> <span class="s1">&#39;containerName&#39;</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;str&#39;</span><span class="p">},</span>
+        <span class="s1">&#39;account_key&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;key&#39;</span><span class="p">:</span> <span class="s1">&#39;accountKey&#39;</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;str&#39;</span><span class="p">},</span>
+        <span class="s1">&#39;sas_key&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;key&#39;</span><span class="p">:</span> <span class="s1">&#39;sasKey&#39;</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;str&#39;</span><span class="p">},</span>
+        <span class="s1">&#39;blobfuse_options&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;key&#39;</span><span class="p">:</span> <span class="s1">&#39;blobfuseOptions&#39;</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;str&#39;</span><span class="p">},</span>
+        <span class="s1">&#39;relative_mount_path&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;key&#39;</span><span class="p">:</span> <span class="s1">&#39;relativeMountPath&#39;</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;str&#39;</span><span class="p">},</span>
+    <span class="p">}</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">account_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">container_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">relative_mount_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">account_key</span><span class="p">:</span> <span class="nb">str</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">sas_key</span><span class="p">:</span> <span class="nb">str</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">blobfuse_options</span><span class="p">:</span> <span class="nb">str</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">AzureBlobFileSystemConfiguration</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">account_name</span> <span class="o">=</span> <span class="n">account_name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">container_name</span> <span class="o">=</span> <span class="n">container_name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">account_key</span> <span class="o">=</span> <span class="n">account_key</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sas_key</span> <span class="o">=</span> <span class="n">sas_key</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">blobfuse_options</span> <span class="o">=</span> <span class="n">blobfuse_options</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">relative_mount_path</span> <span class="o">=</span> <span class="n">relative_mount_path</span></div>
+
+
+<div class="viewcode-block" id="AzureFileShareConfiguration"><a class="viewcode-back" href="../../../../ref/azure.batch.models.html#azure.batch.models.AzureFileShareConfiguration">[docs]</a><span class="k">class</span> <span class="nc">AzureFileShareConfiguration</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Information used to connect to an Azure Fileshare.</span>
+
+<span class="sd">    All required parameters must be populated in order to send to Azure.</span>
+
+<span class="sd">    :param account_name: Required. The Azure Storage account name.</span>
+<span class="sd">    :type account_name: str</span>
+<span class="sd">    :param azure_file_url: Required. The Azure Files URL. This is of the form</span>
+<span class="sd">     &#39;https://{account}.file.core.windows.net/&#39;.</span>
+<span class="sd">    :type azure_file_url: str</span>
+<span class="sd">    :param account_key: Required. The Azure Storage account key.</span>
+<span class="sd">    :type account_key: str</span>
+<span class="sd">    :param relative_mount_path: Required. The relative path on the compute</span>
+<span class="sd">     node where the file system will be mounted. All file systems are mounted</span>
+<span class="sd">     relative to the Batch mounts directory, accessible via the</span>
+<span class="sd">     AZ_BATCH_NODE_MOUNTS_DIR environment variable.</span>
+<span class="sd">    :type relative_mount_path: str</span>
+<span class="sd">    :param mount_options: Additional command line options to pass to the mount</span>
+<span class="sd">     command. These are &#39;net use&#39; options in Windows and &#39;mount&#39; options in</span>
+<span class="sd">     Linux.</span>
+<span class="sd">    :type mount_options: str</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">_validation</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;account_name&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;required&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">},</span>
+        <span class="s1">&#39;azure_file_url&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;required&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">},</span>
+        <span class="s1">&#39;account_key&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;required&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">},</span>
+        <span class="s1">&#39;relative_mount_path&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;required&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">},</span>
+    <span class="p">}</span>
+
+    <span class="n">_attribute_map</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;account_name&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;key&#39;</span><span class="p">:</span> <span class="s1">&#39;accountName&#39;</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;str&#39;</span><span class="p">},</span>
+        <span class="s1">&#39;azure_file_url&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;key&#39;</span><span class="p">:</span> <span class="s1">&#39;azureFileUrl&#39;</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;str&#39;</span><span class="p">},</span>
+        <span class="s1">&#39;account_key&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;key&#39;</span><span class="p">:</span> <span class="s1">&#39;accountKey&#39;</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;str&#39;</span><span class="p">},</span>
+        <span class="s1">&#39;relative_mount_path&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;key&#39;</span><span class="p">:</span> <span class="s1">&#39;relativeMountPath&#39;</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;str&#39;</span><span class="p">},</span>
+        <span class="s1">&#39;mount_options&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;key&#39;</span><span class="p">:</span> <span class="s1">&#39;mountOptions&#39;</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;str&#39;</span><span class="p">},</span>
+    <span class="p">}</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">account_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">azure_file_url</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">account_key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">relative_mount_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">mount_options</span><span class="p">:</span> <span class="nb">str</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">AzureFileShareConfiguration</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">account_name</span> <span class="o">=</span> <span class="n">account_name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">azure_file_url</span> <span class="o">=</span> <span class="n">azure_file_url</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">account_key</span> <span class="o">=</span> <span class="n">account_key</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">relative_mount_path</span> <span class="o">=</span> <span class="n">relative_mount_path</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mount_options</span> <span class="o">=</span> <span class="n">mount_options</span></div>
 
 
 <div class="viewcode-block" id="BatchError"><a class="viewcode-back" href="../../../../ref/azure.batch.models.html#azure.batch.models.BatchError">[docs]</a><span class="k">class</span> <span class="nc">BatchError</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
@@ -1114,6 +1217,54 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">visibility</span> <span class="o">=</span> <span class="n">visibility</span></div>
 
 
+<div class="viewcode-block" id="CIFSMountConfiguration"><a class="viewcode-back" href="../../../../ref/azure.batch.models.html#azure.batch.models.CIFSMountConfiguration">[docs]</a><span class="k">class</span> <span class="nc">CIFSMountConfiguration</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Information used to connect to a CIFS file system.</span>
+
+<span class="sd">    All required parameters must be populated in order to send to Azure.</span>
+
+<span class="sd">    :param username: Required. The user to use for authentication against the</span>
+<span class="sd">     CIFS file system.</span>
+<span class="sd">    :type username: str</span>
+<span class="sd">    :param source: Required. The URI of the file system to mount.</span>
+<span class="sd">    :type source: str</span>
+<span class="sd">    :param relative_mount_path: Required. The relative path on the compute</span>
+<span class="sd">     node where the file system will be mounted. All file systems are mounted</span>
+<span class="sd">     relative to the Batch mounts directory, accessible via the</span>
+<span class="sd">     AZ_BATCH_NODE_MOUNTS_DIR environment variable.</span>
+<span class="sd">    :type relative_mount_path: str</span>
+<span class="sd">    :param mount_options: Additional command line options to pass to the mount</span>
+<span class="sd">     command. These are &#39;net use&#39; options in Windows and &#39;mount&#39; options in</span>
+<span class="sd">     Linux.</span>
+<span class="sd">    :type mount_options: str</span>
+<span class="sd">    :param password: Required. The password to use for authentication against</span>
+<span class="sd">     the CIFS file system.</span>
+<span class="sd">    :type password: str</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">_validation</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;username&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;required&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">},</span>
+        <span class="s1">&#39;source&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;required&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">},</span>
+        <span class="s1">&#39;relative_mount_path&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;required&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">},</span>
+        <span class="s1">&#39;password&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;required&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">},</span>
+    <span class="p">}</span>
+
+    <span class="n">_attribute_map</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;username&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;key&#39;</span><span class="p">:</span> <span class="s1">&#39;username&#39;</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;str&#39;</span><span class="p">},</span>
+        <span class="s1">&#39;source&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;key&#39;</span><span class="p">:</span> <span class="s1">&#39;source&#39;</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;str&#39;</span><span class="p">},</span>
+        <span class="s1">&#39;relative_mount_path&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;key&#39;</span><span class="p">:</span> <span class="s1">&#39;relativeMountPath&#39;</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;str&#39;</span><span class="p">},</span>
+        <span class="s1">&#39;mount_options&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;key&#39;</span><span class="p">:</span> <span class="s1">&#39;mountOptions&#39;</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;str&#39;</span><span class="p">},</span>
+        <span class="s1">&#39;password&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;key&#39;</span><span class="p">:</span> <span class="s1">&#39;password&#39;</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;str&#39;</span><span class="p">},</span>
+    <span class="p">}</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">username</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">source</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">relative_mount_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">password</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">mount_options</span><span class="p">:</span> <span class="nb">str</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">CIFSMountConfiguration</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">username</span> <span class="o">=</span> <span class="n">username</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">source</span> <span class="o">=</span> <span class="n">source</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">relative_mount_path</span> <span class="o">=</span> <span class="n">relative_mount_path</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mount_options</span> <span class="o">=</span> <span class="n">mount_options</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">password</span> <span class="o">=</span> <span class="n">password</span></div>
+
+
 <span class="k">class</span> <span class="nc">CloudError</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;CloudError.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -1525,6 +1676,9 @@
 <span class="sd">     service performs periodic roll-up of statistics. The typical delay is</span>
 <span class="sd">     about 30 minutes.</span>
 <span class="sd">    :type stats: ~azure.batch.models.PoolStatistics</span>
+<span class="sd">    :param mount_configuration: A list of file systems to mount on each node</span>
+<span class="sd">     in the pool. This supports Azure Files, NFS, CIFS/SMB, and Blobfuse.</span>
+<span class="sd">    :type mount_configuration: list[~azure.batch.models.MountConfiguration]</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">_attribute_map</span> <span class="o">=</span> <span class="p">{</span>
@@ -1562,9 +1716,10 @@
         <span class="s1">&#39;user_accounts&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;key&#39;</span><span class="p">:</span> <span class="s1">&#39;userAccounts&#39;</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;[UserAccount]&#39;</span><span class="p">},</span>
         <span class="s1">&#39;metadata&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;key&#39;</span><span class="p">:</span> <span class="s1">&#39;metadata&#39;</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;[MetadataItem]&#39;</span><span class="p">},</span>
         <span class="s1">&#39;stats&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;key&#39;</span><span class="p">:</span> <span class="s1">&#39;stats&#39;</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;PoolStatistics&#39;</span><span class="p">},</span>
+        <span class="s1">&#39;mount_configuration&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;key&#39;</span><span class="p">:</span> <span class="s1">&#39;mountConfiguration&#39;</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;[MountConfiguration]&#39;</span><span class="p">},</span>
     <span class="p">}</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="nb">id</span><span class="p">:</span> <span class="nb">str</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">display_name</span><span class="p">:</span> <span class="nb">str</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">url</span><span class="p">:</span> <span class="nb">str</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">e_tag</span><span class="p">:</span> <span class="nb">str</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">last_modified</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">creation_time</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">state_transition_time</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">allocation_state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">allocation_state_transition_time</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">vm_size</span><span class="p">:</span> <span class="nb">str</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">cloud_service_configuration</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">virtual_machine_configuration</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">resize_timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">resize_errors</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">current_dedicated_nodes</span><span class="p">:</span> <span class="nb">int</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">current_low_priority_nodes</span><span class="p">:</span> <span class="nb">int</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">target_dedicated_nodes</span><span class="p">:</span> <span class="nb">int</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">target_low_priority_nodes</span><span class="p">:</span> <span class="nb">int</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">enable_auto_scale</span><span class="p">:</span> <span class="nb">bool</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">auto_scale_formula</span><span class="p">:</span> <span class="nb">str</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">auto_scale_evaluation_interval</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">auto_scale_run</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">enable_inter_node_communication</span><span class="p">:</span> <span class="nb">bool</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">network_configuration</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">start_task</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">certificate_references</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">application_package_references</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">application_licenses</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">max_tasks_per_node</span><span class="p">:</span> <span class="nb">int</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">task_scheduling_policy</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">user_accounts</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">metadata</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">stats</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="nb">id</span><span class="p">:</span> <span class="nb">str</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">display_name</span><span class="p">:</span> <span class="nb">str</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">url</span><span class="p">:</span> <span class="nb">str</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">e_tag</span><span class="p">:</span> <span class="nb">str</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">last_modified</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">creation_time</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">state_transition_time</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">allocation_state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">allocation_state_transition_time</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">vm_size</span><span class="p">:</span> <span class="nb">str</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">cloud_service_configuration</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">virtual_machine_configuration</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">resize_timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">resize_errors</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">current_dedicated_nodes</span><span class="p">:</span> <span class="nb">int</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">current_low_priority_nodes</span><span class="p">:</span> <span class="nb">int</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">target_dedicated_nodes</span><span class="p">:</span> <span class="nb">int</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">target_low_priority_nodes</span><span class="p">:</span> <span class="nb">int</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">enable_auto_scale</span><span class="p">:</span> <span class="nb">bool</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">auto_scale_formula</span><span class="p">:</span> <span class="nb">str</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">auto_scale_evaluation_interval</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">auto_scale_run</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">enable_inter_node_communication</span><span class="p">:</span> <span class="nb">bool</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">network_configuration</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">start_task</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">certificate_references</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">application_package_references</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">application_licenses</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">max_tasks_per_node</span><span class="p">:</span> <span class="nb">int</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">task_scheduling_policy</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">user_accounts</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">metadata</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">stats</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">mount_configuration</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">CloudPool</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="nb">id</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">display_name</span> <span class="o">=</span> <span class="n">display_name</span>
@@ -1599,7 +1754,8 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">task_scheduling_policy</span> <span class="o">=</span> <span class="n">task_scheduling_policy</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">user_accounts</span> <span class="o">=</span> <span class="n">user_accounts</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">metadata</span> <span class="o">=</span> <span class="n">metadata</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">stats</span> <span class="o">=</span> <span class="n">stats</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">stats</span> <span class="o">=</span> <span class="n">stats</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mount_configuration</span> <span class="o">=</span> <span class="n">mount_configuration</span></div>
 
 
 <div class="viewcode-block" id="CloudServiceConfiguration"><a class="viewcode-back" href="../../../../ref/azure.batch.models.html#azure.batch.models.CloudServiceConfiguration">[docs]</a><span class="k">class</span> <span class="nc">CloudServiceConfiguration</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
@@ -1925,7 +2081,7 @@
 <span class="sd">     joins the Pool.</span>
 <span class="sd">    :type start_task: ~azure.batch.models.StartTask</span>
 <span class="sd">    :param start_task_info: Runtime information about the execution of the</span>
-<span class="sd">     start Task on the Compute Node.</span>
+<span class="sd">     StartTask on the Compute Node.</span>
 <span class="sd">    :type start_task_info: ~azure.batch.models.StartTaskInformation</span>
 <span class="sd">    :param certificate_references: The list of Certificates installed on the</span>
 <span class="sd">     Compute Node. For Windows Nodes, the Batch service installs the</span>
@@ -2673,7 +2829,8 @@
 
 <div class="viewcode-block" id="DataDisk"><a class="viewcode-back" href="../../../../ref/azure.batch.models.html#azure.batch.models.DataDisk">[docs]</a><span class="k">class</span> <span class="nc">DataDisk</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Settings which will be used by the data disks associated to Compute Nodes</span>
-<span class="sd">    in the Pool.</span>
+<span class="sd">    in the Pool. When using attached data disks, you need to mount and format</span>
+<span class="sd">    the disks from within a VM to use them.</span>
 
 <span class="sd">    All required parameters must be populated in order to send to Azure.</span>
 
@@ -2913,13 +3070,10 @@
 <span class="sd">     &#39;terminate&#39;</span>
 <span class="sd">    :type job_action: str or ~azure.batch.models.JobAction</span>
 <span class="sd">    :param dependency_action: An action that the Batch service performs on</span>
-<span class="sd">     Tasks that depend on this Task. The default is &#39;satisfy&#39; for exit code 0,</span>
-<span class="sd">     and &#39;block&#39; for all other exit conditions. If the Job&#39;s</span>
-<span class="sd">     usesTaskDependencies property is set to false, then specifying the</span>
-<span class="sd">     dependencyAction property returns an error and the add Task request fails</span>
-<span class="sd">     with an invalid property value error; if you are calling the REST API</span>
-<span class="sd">     directly, the HTTP status code is 400  (Bad Request). Possible values</span>
-<span class="sd">     include: &#39;satisfy&#39;, &#39;block&#39;</span>
+<span class="sd">     Tasks that depend on this Task. Possible values are &#39;satisfy&#39; (allowing</span>
+<span class="sd">     dependent tasks to progress) and &#39;block&#39; (dependent tasks continue to</span>
+<span class="sd">     wait). Batch does not yet support cancellation of dependent tasks.</span>
+<span class="sd">     Possible values include: &#39;satisfy&#39;, &#39;block&#39;</span>
 <span class="sd">    :type dependency_action: str or ~azure.batch.models.DependencyAction</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
@@ -3400,20 +3554,25 @@
 <span class="sd">     Image. For example, UbuntuServer or WindowsServer.</span>
 <span class="sd">    :type offer: str</span>
 <span class="sd">    :param sku: The SKU of the Azure Virtual Machines Marketplace Image. For</span>
-<span class="sd">     example, 14.04.0-LTS or 2012-R2-Datacenter.</span>
+<span class="sd">     example, 18.04-LTS or 2019-Datacenter.</span>
 <span class="sd">    :type sku: str</span>
 <span class="sd">    :param version: The version of the Azure Virtual Machines Marketplace</span>
 <span class="sd">     Image. A value of &#39;latest&#39; can be specified to select the latest version</span>
 <span class="sd">     of an Image. If omitted, the default is &#39;latest&#39;.</span>
 <span class="sd">    :type version: str</span>
 <span class="sd">    :param virtual_machine_image_id: The ARM resource identifier of the</span>
-<span class="sd">     Virtual Machine Image. Computes Compute Nodes of the Pool will be created</span>
-<span class="sd">     using this custom Image. This is of the form</span>
-<span class="sd">     /subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/images/{imageName}.</span>
-<span class="sd">     This property is mutually exclusive with other ImageReference properties.</span>
-<span class="sd">     The Virtual Machine Image must be in the same region and subscription as</span>
-<span class="sd">     the Azure Batch Account. For information about the firewall settings for</span>
-<span class="sd">     the Batch Compute Node agent to communicate with the Batch service see</span>
+<span class="sd">     Virtual Machine Image or Shared Image Gallery Image. Computes Compute</span>
+<span class="sd">     Nodes of the Pool will be created using this Image Id. This is of either</span>
+<span class="sd">     the form</span>
+<span class="sd">     /subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/images/{imageName}</span>
+<span class="sd">     for Virtual Machine Image or</span>
+<span class="sd">     /subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/galleries/{galleryName}/images/{imageDefinitionName}/versions/{versionId}</span>
+<span class="sd">     for SIG image. This property is mutually exclusive with other</span>
+<span class="sd">     ImageReference properties. For Virtual Machine Image it must be in the</span>
+<span class="sd">     same region and subscription as the Azure Batch account. For SIG image it</span>
+<span class="sd">     must have replicas in the same region as the Azure Batch account. For</span>
+<span class="sd">     information about the firewall settings for the Batch Compute Node agent</span>
+<span class="sd">     to communicate with the Batch service see</span>
 <span class="sd">     https://docs.microsoft.com/en-us/azure/batch/batch-api-basics#virtual-network-vnet-and-firewall-configuration.</span>
 <span class="sd">    :type virtual_machine_image_id: str</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -4419,14 +4578,14 @@
 <span class="sd">     concurrent Tasks. The default value is true.</span>
 <span class="sd">    :type run_exclusive: bool</span>
 <span class="sd">    :param application_package_references: A list of Application Packages that</span>
-<span class="sd">     the Batch service will deploy to the Compute Compute Node before running</span>
-<span class="sd">     the command line. Application Packages are downloaded and deployed to a</span>
-<span class="sd">     shared directory, not the Task working directory. Therefore, if a</span>
-<span class="sd">     referenced Application Package is already on the Compute Node, and is up</span>
-<span class="sd">     to date, then it is not re-downloaded; the existing copy on the Compute</span>
-<span class="sd">     Compute Node is used. If a referenced Application Package cannot be</span>
-<span class="sd">     installed, for example because the package has been deleted or because</span>
-<span class="sd">     download failed, the Task fails.</span>
+<span class="sd">     the Batch service will deploy to the Compute Node before running the</span>
+<span class="sd">     command line. Application Packages are downloaded and deployed to a shared</span>
+<span class="sd">     directory, not the Task working directory. Therefore, if a referenced</span>
+<span class="sd">     Application Package is already on the Compute Node, and is up to date,</span>
+<span class="sd">     then it is not re-downloaded; the existing copy on the Compute Node is</span>
+<span class="sd">     used. If a referenced Application Package cannot be installed, for example</span>
+<span class="sd">     because the package has been deleted or because download failed, the Task</span>
+<span class="sd">     fails.</span>
 <span class="sd">    :type application_package_references:</span>
 <span class="sd">     list[~azure.batch.models.ApplicationPackageReference]</span>
 <span class="sd">    :param authentication_token_settings: The settings for an authentication</span>
@@ -4613,10 +4772,11 @@
 <span class="sd">    :param pool_info: The Pool on which the Batch service runs the Job&#39;s</span>
 <span class="sd">     Tasks. You may change the Pool for a Job only when the Job is disabled.</span>
 <span class="sd">     The Patch Job call will fail if you include the poolInfo element and the</span>
-<span class="sd">     Job is not disabled. If you specify an autoPoolSpecification specification</span>
-<span class="sd">     in the poolInfo, only the keepAlive property can be updated, and then only</span>
-<span class="sd">     if the auto Pool has a poolLifetimeOption of Job. If omitted, the Job</span>
-<span class="sd">     continues to run on its current Pool.</span>
+<span class="sd">     Job is not disabled. If you specify an autoPoolSpecification in the</span>
+<span class="sd">     poolInfo, only the keepAlive property of the autoPoolSpecification can be</span>
+<span class="sd">     updated, and then only if the autoPoolSpecification has a</span>
+<span class="sd">     poolLifetimeOption of Job (other job properties can be updated as normal).</span>
+<span class="sd">     If omitted, the Job continues to run on its current Pool.</span>
 <span class="sd">    :type pool_info: ~azure.batch.models.PoolInformation</span>
 <span class="sd">    :param metadata: A list of name-value pairs associated with the Job as</span>
 <span class="sd">     metadata. If omitted, the existing Job metadata is left unchanged.</span>
@@ -6370,9 +6530,10 @@
 <span class="sd">     Job&#39;s Tasks. You may change the Pool for a Job only when the Job is</span>
 <span class="sd">     disabled. The Update Job call will fail if you include the poolInfo</span>
 <span class="sd">     element and the Job is not disabled. If you specify an</span>
-<span class="sd">     autoPoolSpecification specification in the poolInfo, only the keepAlive</span>
-<span class="sd">     property can be updated, and then only if the auto Pool has a</span>
-<span class="sd">     poolLifetimeOption of Job.</span>
+<span class="sd">     autoPoolSpecification in the poolInfo, only the keepAlive property of the</span>
+<span class="sd">     autoPoolSpecification can be updated, and then only if the</span>
+<span class="sd">     autoPoolSpecification has a poolLifetimeOption of Job (other job</span>
+<span class="sd">     properties can be updated as normal).</span>
 <span class="sd">    :type pool_info: ~azure.batch.models.PoolInformation</span>
 <span class="sd">    :param metadata: A list of name-value pairs associated with the Job as</span>
 <span class="sd">     metadata. If omitted, it takes the default value of an empty list; in</span>
@@ -6478,6 +6639,41 @@
         <span class="nb">super</span><span class="p">(</span><span class="n">MetadataItem</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">value</span></div>
+
+
+<div class="viewcode-block" id="MountConfiguration"><a class="viewcode-back" href="../../../../ref/azure.batch.models.html#azure.batch.models.MountConfiguration">[docs]</a><span class="k">class</span> <span class="nc">MountConfiguration</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;The file system to mount on each node.</span>
+
+<span class="sd">    :param azure_blob_file_system_configuration: The Azure Storage Container</span>
+<span class="sd">     to mount using blob FUSE on each node. This property is mutually exclusive</span>
+<span class="sd">     with all other properties.</span>
+<span class="sd">    :type azure_blob_file_system_configuration:</span>
+<span class="sd">     ~azure.batch.models.AzureBlobFileSystemConfiguration</span>
+<span class="sd">    :param nfs_mount_configuration: The NFS file system to mount on each node.</span>
+<span class="sd">     This property is mutually exclusive with all other properties.</span>
+<span class="sd">    :type nfs_mount_configuration: ~azure.batch.models.NFSMountConfiguration</span>
+<span class="sd">    :param cifs_mount_configuration: The CIFS/SMB file system to mount on each</span>
+<span class="sd">     node. This property is mutually exclusive with all other properties.</span>
+<span class="sd">    :type cifs_mount_configuration: ~azure.batch.models.CIFSMountConfiguration</span>
+<span class="sd">    :param azure_file_share_configuration: The Azure File Share to mount on</span>
+<span class="sd">     each node. This property is mutually exclusive with all other properties.</span>
+<span class="sd">    :type azure_file_share_configuration:</span>
+<span class="sd">     ~azure.batch.models.AzureFileShareConfiguration</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">_attribute_map</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;azure_blob_file_system_configuration&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;key&#39;</span><span class="p">:</span> <span class="s1">&#39;azureBlobFileSystemConfiguration&#39;</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;AzureBlobFileSystemConfiguration&#39;</span><span class="p">},</span>
+        <span class="s1">&#39;nfs_mount_configuration&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;key&#39;</span><span class="p">:</span> <span class="s1">&#39;nfsMountConfiguration&#39;</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;NFSMountConfiguration&#39;</span><span class="p">},</span>
+        <span class="s1">&#39;cifs_mount_configuration&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;key&#39;</span><span class="p">:</span> <span class="s1">&#39;cifsMountConfiguration&#39;</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;CIFSMountConfiguration&#39;</span><span class="p">},</span>
+        <span class="s1">&#39;azure_file_share_configuration&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;key&#39;</span><span class="p">:</span> <span class="s1">&#39;azureFileShareConfiguration&#39;</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;AzureFileShareConfiguration&#39;</span><span class="p">},</span>
+    <span class="p">}</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">azure_blob_file_system_configuration</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">nfs_mount_configuration</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">cifs_mount_configuration</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">azure_file_share_configuration</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">MountConfiguration</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">azure_blob_file_system_configuration</span> <span class="o">=</span> <span class="n">azure_blob_file_system_configuration</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">nfs_mount_configuration</span> <span class="o">=</span> <span class="n">nfs_mount_configuration</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cifs_mount_configuration</span> <span class="o">=</span> <span class="n">cifs_mount_configuration</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">azure_file_share_configuration</span> <span class="o">=</span> <span class="n">azure_file_share_configuration</span></div>
 
 
 <div class="viewcode-block" id="MultiInstanceSettings"><a class="viewcode-back" href="../../../../ref/azure.batch.models.html#azure.batch.models.MultiInstanceSettings">[docs]</a><span class="k">class</span> <span class="nc">MultiInstanceSettings</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
@@ -6590,19 +6786,29 @@
 <span class="sd">     Pools with the virtualMachineConfiguration property.</span>
 <span class="sd">    :type endpoint_configuration:</span>
 <span class="sd">     ~azure.batch.models.PoolEndpointConfiguration</span>
+<span class="sd">    :param public_ips: The list of public IPs which the Batch service will use</span>
+<span class="sd">     when provisioning Compute Nodes. The number of IPs specified here limits</span>
+<span class="sd">     the maximum size of the Pool - 50 dedicated nodes or 20 low-priority nodes</span>
+<span class="sd">     can be allocated for each public IP. For example, a pool needing 150</span>
+<span class="sd">     dedicated VMs would need at least 3 public IPs specified. Each element of</span>
+<span class="sd">     this collection is of the form:</span>
+<span class="sd">     /subscriptions/{subscription}/resourceGroups/{group}/providers/Microsoft.Network/publicIPAddresses/{ip}.</span>
+<span class="sd">    :type public_ips: list[str]</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">_attribute_map</span> <span class="o">=</span> <span class="p">{</span>
         <span class="s1">&#39;subnet_id&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;key&#39;</span><span class="p">:</span> <span class="s1">&#39;subnetId&#39;</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;str&#39;</span><span class="p">},</span>
         <span class="s1">&#39;dynamic_vnet_assignment_scope&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;key&#39;</span><span class="p">:</span> <span class="s1">&#39;dynamicVNetAssignmentScope&#39;</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;DynamicVNetAssignmentScope&#39;</span><span class="p">},</span>
         <span class="s1">&#39;endpoint_configuration&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;key&#39;</span><span class="p">:</span> <span class="s1">&#39;endpointConfiguration&#39;</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;PoolEndpointConfiguration&#39;</span><span class="p">},</span>
+        <span class="s1">&#39;public_ips&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;key&#39;</span><span class="p">:</span> <span class="s1">&#39;publicIPs&#39;</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;[str]&#39;</span><span class="p">},</span>
     <span class="p">}</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">subnet_id</span><span class="p">:</span> <span class="nb">str</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">dynamic_vnet_assignment_scope</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">endpoint_configuration</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">subnet_id</span><span class="p">:</span> <span class="nb">str</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">dynamic_vnet_assignment_scope</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">endpoint_configuration</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">public_ips</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">NetworkConfiguration</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">subnet_id</span> <span class="o">=</span> <span class="n">subnet_id</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">dynamic_vnet_assignment_scope</span> <span class="o">=</span> <span class="n">dynamic_vnet_assignment_scope</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">endpoint_configuration</span> <span class="o">=</span> <span class="n">endpoint_configuration</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">endpoint_configuration</span> <span class="o">=</span> <span class="n">endpoint_configuration</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">public_ips</span> <span class="o">=</span> <span class="n">public_ips</span></div>
 
 
 <div class="viewcode-block" id="NetworkSecurityGroupRule"><a class="viewcode-back" href="../../../../ref/azure.batch.models.html#azure.batch.models.NetworkSecurityGroupRule">[docs]</a><span class="k">class</span> <span class="nc">NetworkSecurityGroupRule</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
@@ -6655,6 +6861,42 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">access</span> <span class="o">=</span> <span class="n">access</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">source_address_prefix</span> <span class="o">=</span> <span class="n">source_address_prefix</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">source_port_ranges</span> <span class="o">=</span> <span class="n">source_port_ranges</span></div>
+
+
+<div class="viewcode-block" id="NFSMountConfiguration"><a class="viewcode-back" href="../../../../ref/azure.batch.models.html#azure.batch.models.NFSMountConfiguration">[docs]</a><span class="k">class</span> <span class="nc">NFSMountConfiguration</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Information used to connect to an NFS file system.</span>
+
+<span class="sd">    All required parameters must be populated in order to send to Azure.</span>
+
+<span class="sd">    :param source: Required. The URI of the file system to mount.</span>
+<span class="sd">    :type source: str</span>
+<span class="sd">    :param relative_mount_path: Required. The relative path on the compute</span>
+<span class="sd">     node where the file system will be mounted. All file systems are mounted</span>
+<span class="sd">     relative to the Batch mounts directory, accessible via the</span>
+<span class="sd">     AZ_BATCH_NODE_MOUNTS_DIR environment variable.</span>
+<span class="sd">    :type relative_mount_path: str</span>
+<span class="sd">    :param mount_options: Additional command line options to pass to the mount</span>
+<span class="sd">     command. These are &#39;net use&#39; options in Windows and &#39;mount&#39; options in</span>
+<span class="sd">     Linux.</span>
+<span class="sd">    :type mount_options: str</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">_validation</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;source&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;required&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">},</span>
+        <span class="s1">&#39;relative_mount_path&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;required&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">},</span>
+    <span class="p">}</span>
+
+    <span class="n">_attribute_map</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;source&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;key&#39;</span><span class="p">:</span> <span class="s1">&#39;source&#39;</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;str&#39;</span><span class="p">},</span>
+        <span class="s1">&#39;relative_mount_path&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;key&#39;</span><span class="p">:</span> <span class="s1">&#39;relativeMountPath&#39;</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;str&#39;</span><span class="p">},</span>
+        <span class="s1">&#39;mount_options&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;key&#39;</span><span class="p">:</span> <span class="s1">&#39;mountOptions&#39;</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;str&#39;</span><span class="p">},</span>
+    <span class="p">}</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">source</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">relative_mount_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">mount_options</span><span class="p">:</span> <span class="nb">str</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">NFSMountConfiguration</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">source</span> <span class="o">=</span> <span class="n">source</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">relative_mount_path</span> <span class="o">=</span> <span class="n">relative_mount_path</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mount_options</span> <span class="o">=</span> <span class="n">mount_options</span></div>
 
 
 <div class="viewcode-block" id="NodeAgentInformation"><a class="viewcode-back" href="../../../../ref/azure.batch.models.html#azure.batch.models.NodeAgentInformation">[docs]</a><span class="k">class</span> <span class="nc">NodeAgentInformation</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
@@ -7250,6 +7492,10 @@
 <span class="sd">     metadata. The Batch service does not assign any meaning to metadata; it is</span>
 <span class="sd">     solely for the use of user code.</span>
 <span class="sd">    :type metadata: list[~azure.batch.models.MetadataItem]</span>
+<span class="sd">    :param mount_configuration: Mount storage using specified file system for</span>
+<span class="sd">     the entire lifetime of the pool. Mount the storage using Azure fileshare,</span>
+<span class="sd">     NFS, CIFS or Blobfuse based file system.</span>
+<span class="sd">    :type mount_configuration: list[~azure.batch.models.MountConfiguration]</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">_validation</span> <span class="o">=</span> <span class="p">{</span>
@@ -7279,9 +7525,10 @@
         <span class="s1">&#39;task_scheduling_policy&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;key&#39;</span><span class="p">:</span> <span class="s1">&#39;taskSchedulingPolicy&#39;</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;TaskSchedulingPolicy&#39;</span><span class="p">},</span>
         <span class="s1">&#39;user_accounts&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;key&#39;</span><span class="p">:</span> <span class="s1">&#39;userAccounts&#39;</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;[UserAccount]&#39;</span><span class="p">},</span>
         <span class="s1">&#39;metadata&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;key&#39;</span><span class="p">:</span> <span class="s1">&#39;metadata&#39;</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;[MetadataItem]&#39;</span><span class="p">},</span>
+        <span class="s1">&#39;mount_configuration&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;key&#39;</span><span class="p">:</span> <span class="s1">&#39;mountConfiguration&#39;</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;[MountConfiguration]&#39;</span><span class="p">},</span>
     <span class="p">}</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="nb">id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">vm_size</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">display_name</span><span class="p">:</span> <span class="nb">str</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">cloud_service_configuration</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">virtual_machine_configuration</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">resize_timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">target_dedicated_nodes</span><span class="p">:</span> <span class="nb">int</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">target_low_priority_nodes</span><span class="p">:</span> <span class="nb">int</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">enable_auto_scale</span><span class="p">:</span> <span class="nb">bool</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">auto_scale_formula</span><span class="p">:</span> <span class="nb">str</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">auto_scale_evaluation_interval</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">enable_inter_node_communication</span><span class="p">:</span> <span class="nb">bool</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">network_configuration</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">start_task</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">certificate_references</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">application_package_references</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">application_licenses</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">max_tasks_per_node</span><span class="p">:</span> <span class="nb">int</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">task_scheduling_policy</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">user_accounts</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">metadata</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="nb">id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">vm_size</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">display_name</span><span class="p">:</span> <span class="nb">str</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">cloud_service_configuration</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">virtual_machine_configuration</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">resize_timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">target_dedicated_nodes</span><span class="p">:</span> <span class="nb">int</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">target_low_priority_nodes</span><span class="p">:</span> <span class="nb">int</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">enable_auto_scale</span><span class="p">:</span> <span class="nb">bool</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">auto_scale_formula</span><span class="p">:</span> <span class="nb">str</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">auto_scale_evaluation_interval</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">enable_inter_node_communication</span><span class="p">:</span> <span class="nb">bool</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">network_configuration</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">start_task</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">certificate_references</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">application_package_references</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">application_licenses</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">max_tasks_per_node</span><span class="p">:</span> <span class="nb">int</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">task_scheduling_policy</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">user_accounts</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">metadata</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">mount_configuration</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">PoolAddParameter</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="nb">id</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">display_name</span> <span class="o">=</span> <span class="n">display_name</span>
@@ -7303,7 +7550,8 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">max_tasks_per_node</span> <span class="o">=</span> <span class="n">max_tasks_per_node</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">task_scheduling_policy</span> <span class="o">=</span> <span class="n">task_scheduling_policy</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">user_accounts</span> <span class="o">=</span> <span class="n">user_accounts</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">metadata</span> <span class="o">=</span> <span class="n">metadata</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">metadata</span> <span class="o">=</span> <span class="n">metadata</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mount_configuration</span> <span class="o">=</span> <span class="n">mount_configuration</span></div>
 
 
 <div class="viewcode-block" id="PoolDeleteOptions"><a class="viewcode-back" href="../../../../ref/azure.batch.models.html#azure.batch.models.PoolDeleteOptions">[docs]</a><span class="k">class</span> <span class="nc">PoolDeleteOptions</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
@@ -7994,8 +8242,7 @@
 <span class="sd">    :param start_task: A Task to run on each Compute Node as it joins the</span>
 <span class="sd">     Pool. The Task runs when the Compute Node is added to the Pool or when the</span>
 <span class="sd">     Compute Node is restarted. If this element is present, it overwrites any</span>
-<span class="sd">     existing start Task. If omitted, any existing start Task is left</span>
-<span class="sd">     unchanged.</span>
+<span class="sd">     existing StartTask. If omitted, any existing StartTask is left unchanged.</span>
 <span class="sd">    :type start_task: ~azure.batch.models.StartTask</span>
 <span class="sd">    :param certificate_references: A list of Certificates to be installed on</span>
 <span class="sd">     each Compute Node in the Pool. If this element is present, it replaces any</span>
@@ -8241,7 +8488,7 @@
 <span class="sd">     vmSize of the Pool or 256.</span>
 <span class="sd">    :type max_tasks_per_node: int</span>
 <span class="sd">    :param task_scheduling_policy: How Tasks are distributed across Compute</span>
-<span class="sd">     Compute Nodes in a Pool. If not specified, the default is spread.</span>
+<span class="sd">     Nodes in a Pool. If not specified, the default is spread.</span>
 <span class="sd">    :type task_scheduling_policy: ~azure.batch.models.TaskSchedulingPolicy</span>
 <span class="sd">    :param resize_timeout: The timeout for allocation of Compute Nodes to the</span>
 <span class="sd">     Pool. This timeout applies only to manual scaling; it has no effect when</span>
@@ -8326,6 +8573,9 @@
 <span class="sd">     metadata. The Batch service does not assign any meaning to metadata; it is</span>
 <span class="sd">     solely for the use of user code.</span>
 <span class="sd">    :type metadata: list[~azure.batch.models.MetadataItem]</span>
+<span class="sd">    :param mount_configuration: A list of file systems to mount on each node</span>
+<span class="sd">     in the pool. This supports Azure Files, NFS, CIFS/SMB, and Blobfuse.</span>
+<span class="sd">    :type mount_configuration: list[~azure.batch.models.MountConfiguration]</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">_validation</span> <span class="o">=</span> <span class="p">{</span>
@@ -8353,9 +8603,10 @@
         <span class="s1">&#39;application_licenses&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;key&#39;</span><span class="p">:</span> <span class="s1">&#39;applicationLicenses&#39;</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;[str]&#39;</span><span class="p">},</span>
         <span class="s1">&#39;user_accounts&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;key&#39;</span><span class="p">:</span> <span class="s1">&#39;userAccounts&#39;</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;[UserAccount]&#39;</span><span class="p">},</span>
         <span class="s1">&#39;metadata&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;key&#39;</span><span class="p">:</span> <span class="s1">&#39;metadata&#39;</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;[MetadataItem]&#39;</span><span class="p">},</span>
+        <span class="s1">&#39;mount_configuration&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;key&#39;</span><span class="p">:</span> <span class="s1">&#39;mountConfiguration&#39;</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;[MountConfiguration]&#39;</span><span class="p">},</span>
     <span class="p">}</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">vm_size</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">display_name</span><span class="p">:</span> <span class="nb">str</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">cloud_service_configuration</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">virtual_machine_configuration</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">max_tasks_per_node</span><span class="p">:</span> <span class="nb">int</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">task_scheduling_policy</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">resize_timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">target_dedicated_nodes</span><span class="p">:</span> <span class="nb">int</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">target_low_priority_nodes</span><span class="p">:</span> <span class="nb">int</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">enable_auto_scale</span><span class="p">:</span> <span class="nb">bool</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">auto_scale_formula</span><span class="p">:</span> <span class="nb">str</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">auto_scale_evaluation_interval</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">enable_inter_node_communication</span><span class="p">:</span> <span class="nb">bool</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">network_configuration</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">start_task</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">certificate_references</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">application_package_references</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">application_licenses</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">user_accounts</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">metadata</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">vm_size</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">display_name</span><span class="p">:</span> <span class="nb">str</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">cloud_service_configuration</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">virtual_machine_configuration</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">max_tasks_per_node</span><span class="p">:</span> <span class="nb">int</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">task_scheduling_policy</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">resize_timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">target_dedicated_nodes</span><span class="p">:</span> <span class="nb">int</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">target_low_priority_nodes</span><span class="p">:</span> <span class="nb">int</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">enable_auto_scale</span><span class="p">:</span> <span class="nb">bool</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">auto_scale_formula</span><span class="p">:</span> <span class="nb">str</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">auto_scale_evaluation_interval</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">enable_inter_node_communication</span><span class="p">:</span> <span class="nb">bool</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">network_configuration</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">start_task</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">certificate_references</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">application_package_references</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">application_licenses</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">user_accounts</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">metadata</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">mount_configuration</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">PoolSpecification</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">display_name</span> <span class="o">=</span> <span class="n">display_name</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">vm_size</span> <span class="o">=</span> <span class="n">vm_size</span>
@@ -8376,7 +8627,8 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">application_package_references</span> <span class="o">=</span> <span class="n">application_package_references</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">application_licenses</span> <span class="o">=</span> <span class="n">application_licenses</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">user_accounts</span> <span class="o">=</span> <span class="n">user_accounts</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">metadata</span> <span class="o">=</span> <span class="n">metadata</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">metadata</span> <span class="o">=</span> <span class="n">metadata</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mount_configuration</span> <span class="o">=</span> <span class="n">mount_configuration</span></div>
 
 
 <div class="viewcode-block" id="PoolStatistics"><a class="viewcode-back" href="../../../../ref/azure.batch.models.html#azure.batch.models.PoolStatistics">[docs]</a><span class="k">class</span> <span class="nc">PoolStatistics</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
@@ -8528,8 +8780,8 @@
 <span class="sd">    :param start_task: A Task to run on each Compute Node as it joins the</span>
 <span class="sd">     Pool. The Task runs when the Compute Node is added to the Pool or when the</span>
 <span class="sd">     Compute Node is restarted. If this element is present, it overwrites any</span>
-<span class="sd">     existing start Task. If omitted, any existing start Task is removed from</span>
-<span class="sd">     the Pool.</span>
+<span class="sd">     existing StartTask. If omitted, any existing StartTask is removed from the</span>
+<span class="sd">     Pool.</span>
 <span class="sd">    :type start_task: ~azure.batch.models.StartTask</span>
 <span class="sd">    :param certificate_references: Required. A list of Certificates to be</span>
 <span class="sd">     installed on each Compute Node in the Pool. This list replaces any</span>
@@ -8546,15 +8798,15 @@
 <span class="sd">    :type certificate_references:</span>
 <span class="sd">     list[~azure.batch.models.CertificateReference]</span>
 <span class="sd">    :param application_package_references: Required. The list of Application</span>
-<span class="sd">     Packages to be installed on each Compute Compute Node in the Pool. The</span>
-<span class="sd">     list replaces any existing Application Package references on the Pool.</span>
-<span class="sd">     Changes to Application Package references affect all new Compute Nodes</span>
-<span class="sd">     joining the Pool, but do not affect Compute Compute Nodes that are already</span>
-<span class="sd">     in the Pool until they are rebooted or reimaged. There is a maximum of 10</span>
-<span class="sd">     Application Package references on any given Pool. If omitted, or if you</span>
-<span class="sd">     specify an empty collection, any existing Application Packages references</span>
-<span class="sd">     are removed from the Pool. A maximum of 10 references may be specified on</span>
-<span class="sd">     a given Pool.</span>
+<span class="sd">     Packages to be installed on each Compute Node in the Pool. The list</span>
+<span class="sd">     replaces any existing Application Package references on the Pool. Changes</span>
+<span class="sd">     to Application Package references affect all new Compute Nodes joining the</span>
+<span class="sd">     Pool, but do not affect Compute Nodes that are already in the Pool until</span>
+<span class="sd">     they are rebooted or reimaged. There is a maximum of 10 Application</span>
+<span class="sd">     Package references on any given Pool. If omitted, or if you specify an</span>
+<span class="sd">     empty collection, any existing Application Packages references are removed</span>
+<span class="sd">     from the Pool. A maximum of 10 references may be specified on a given</span>
+<span class="sd">     Pool.</span>
 <span class="sd">    :type application_package_references:</span>
 <span class="sd">     list[~azure.batch.models.ApplicationPackageReference]</span>
 <span class="sd">    :param metadata: Required. A list of name-value pairs associated with the</span>
@@ -8927,15 +9179,15 @@
 <span class="sd">    all Tasks should be idempotent. This means Tasks need to tolerate being</span>
 <span class="sd">    interrupted and restarted without causing any corruption or duplicate data.</span>
 <span class="sd">    The best practice for long running Tasks is to use some form of</span>
-<span class="sd">    checkpointing. In some cases the start Task may be re-run even though the</span>
-<span class="sd">    Compute Node was not rebooted. Special care should be taken to avoid start</span>
-<span class="sd">    Tasks which create breakaway process or install/launch services from the</span>
-<span class="sd">    start Task working directory, as this will block Batch from being able to</span>
-<span class="sd">    re-run the start Task.</span>
+<span class="sd">    checkpointing. In some cases the StartTask may be re-run even though the</span>
+<span class="sd">    Compute Node was not rebooted. Special care should be taken to avoid</span>
+<span class="sd">    StartTasks which create breakaway process or install/launch services from</span>
+<span class="sd">    the StartTask working directory, as this will block Batch from being able</span>
+<span class="sd">    to re-run the StartTask.</span>
 
 <span class="sd">    All required parameters must be populated in order to send to Azure.</span>
 
-<span class="sd">    :param command_line: Required. The command line of the start Task. The</span>
+<span class="sd">    :param command_line: Required. The command line of the StartTask. The</span>
 <span class="sd">     command line does not run under a shell, and therefore cannot take</span>
 <span class="sd">     advantage of shell features such as environment variable expansion. If you</span>
 <span class="sd">     want to take advantage of such features, you should invoke the shell in</span>
@@ -8946,7 +9198,7 @@
 <span class="sd">     (https://docs.microsoft.com/en-us/azure/batch/batch-compute-node-environment-variables).</span>
 <span class="sd">    :type command_line: str</span>
 <span class="sd">    :param container_settings: The settings for the container under which the</span>
-<span class="sd">     start Task runs. When this is specified, all directories recursively below</span>
+<span class="sd">     StartTask runs. When this is specified, all directories recursively below</span>
 <span class="sd">     the AZ_BATCH_NODE_ROOT_DIR (the root of Azure Batch directories on the</span>
 <span class="sd">     node) are mapped into the container, all Task environment variables are</span>
 <span class="sd">     mapped into the container, and the Task command line is executed in the</span>
@@ -8964,10 +9216,10 @@
 <span class="sd">     element are located in the Task&#39;s working directory.</span>
 <span class="sd">    :type resource_files: list[~azure.batch.models.ResourceFile]</span>
 <span class="sd">    :param environment_settings: A list of environment variable settings for</span>
-<span class="sd">     the start Task.</span>
+<span class="sd">     the StartTask.</span>
 <span class="sd">    :type environment_settings: list[~azure.batch.models.EnvironmentSetting]</span>
-<span class="sd">    :param user_identity: The user identity under which the start Task runs.</span>
-<span class="sd">     If omitted, the Task runs as a non-administrative user unique to the Task.</span>
+<span class="sd">    :param user_identity: The user identity under which the StartTask runs. If</span>
+<span class="sd">     omitted, the Task runs as a non-administrative user unique to the Task.</span>
 <span class="sd">    :type user_identity: ~azure.batch.models.UserIdentity</span>
 <span class="sd">    :param max_task_retry_count: The maximum number of times the Task may be</span>
 <span class="sd">     retried. The Batch service retries a Task if its exit code is nonzero.</span>
@@ -8979,17 +9231,17 @@
 <span class="sd">     -1, the Batch service retries the Task without limit.</span>
 <span class="sd">    :type max_task_retry_count: int</span>
 <span class="sd">    :param wait_for_success: Whether the Batch service should wait for the</span>
-<span class="sd">     start Task to complete successfully (that is, to exit with exit code 0)</span>
-<span class="sd">     before scheduling any Tasks on the Compute Node. If true and the start</span>
-<span class="sd">     Task fails on a Node, the Batch service retries the start Task up to its</span>
-<span class="sd">     maximum retry count (maxTaskRetryCount). If the Task has still not</span>
-<span class="sd">     completed successfully after all retries, then the Batch service marks the</span>
-<span class="sd">     Node unusable, and will not schedule Tasks to it. This condition can be</span>
+<span class="sd">     StartTask to complete successfully (that is, to exit with exit code 0)</span>
+<span class="sd">     before scheduling any Tasks on the Compute Node. If true and the StartTask</span>
+<span class="sd">     fails on a Node, the Batch service retries the StartTask up to its maximum</span>
+<span class="sd">     retry count (maxTaskRetryCount). If the Task has still not completed</span>
+<span class="sd">     successfully after all retries, then the Batch service marks the Node</span>
+<span class="sd">     unusable, and will not schedule Tasks to it. This condition can be</span>
 <span class="sd">     detected via the Compute Node state and failure info details. If false,</span>
-<span class="sd">     the Batch service will not wait for the start Task to complete. In this</span>
-<span class="sd">     case, other Tasks can start executing on the Compute Node while the start</span>
-<span class="sd">     Task is still running; and even if the start Task fails, new Tasks will</span>
-<span class="sd">     continue to be scheduled on the Compute Node. The default is false.</span>
+<span class="sd">     the Batch service will not wait for the StartTask to complete. In this</span>
+<span class="sd">     case, other Tasks can start executing on the Compute Node while the</span>
+<span class="sd">     StartTask is still running; and even if the StartTask fails, new Tasks</span>
+<span class="sd">     will continue to be scheduled on the Compute Node. The default is true.</span>
 <span class="sd">    :type wait_for_success: bool</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
@@ -9019,30 +9271,30 @@
 
 
 <div class="viewcode-block" id="StartTaskInformation"><a class="viewcode-back" href="../../../../ref/azure.batch.models.html#azure.batch.models.StartTaskInformation">[docs]</a><span class="k">class</span> <span class="nc">StartTaskInformation</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Information about a start Task running on a Compute Node.</span>
+    <span class="sd">&quot;&quot;&quot;Information about a StartTask running on a Compute Node.</span>
 
 <span class="sd">    All required parameters must be populated in order to send to Azure.</span>
 
-<span class="sd">    :param state: Required. The state of the start Task on the Compute Node.</span>
+<span class="sd">    :param state: Required. The state of the StartTask on the Compute Node.</span>
 <span class="sd">     Possible values include: &#39;running&#39;, &#39;completed&#39;</span>
 <span class="sd">    :type state: str or ~azure.batch.models.StartTaskState</span>
-<span class="sd">    :param start_time: Required. The time at which the start Task started</span>
+<span class="sd">    :param start_time: Required. The time at which the StartTask started</span>
 <span class="sd">     running. This value is reset every time the Task is restarted or retried</span>
-<span class="sd">     (that is, this is the most recent time at which the start Task started</span>
+<span class="sd">     (that is, this is the most recent time at which the StartTask started</span>
 <span class="sd">     running).</span>
 <span class="sd">    :type start_time: datetime</span>
-<span class="sd">    :param end_time: The time at which the start Task stopped running. This is</span>
-<span class="sd">     the end time of the most recent run of the start Task, if that run has</span>
+<span class="sd">    :param end_time: The time at which the StartTask stopped running. This is</span>
+<span class="sd">     the end time of the most recent run of the StartTask, if that run has</span>
 <span class="sd">     completed (even if that run failed and a retry is pending). This element</span>
-<span class="sd">     is not present if the start Task is currently running.</span>
+<span class="sd">     is not present if the StartTask is currently running.</span>
 <span class="sd">    :type end_time: datetime</span>
-<span class="sd">    :param exit_code: The exit code of the program specified on the start Task</span>
-<span class="sd">     command line. This property is set only if the start Task is in the</span>
+<span class="sd">    :param exit_code: The exit code of the program specified on the StartTask</span>
+<span class="sd">     command line. This property is set only if the StartTask is in the</span>
 <span class="sd">     completed state. In general, the exit code for a process reflects the</span>
 <span class="sd">     specific convention implemented by the application developer for that</span>
 <span class="sd">     process. If you use the exit code value to make decisions in your code, be</span>
 <span class="sd">     sure that you know the exit code convention used by the application</span>
-<span class="sd">     process. However, if the Batch service terminates the start Task (due to</span>
+<span class="sd">     process. However, if the Batch service terminates the StartTask (due to</span>
 <span class="sd">     timeout, or user termination via the API) you may see an operating</span>
 <span class="sd">     system-defined exit code.</span>
 <span class="sd">    :type exit_code: int</span>
@@ -10189,8 +10441,8 @@
 <span class="sd">    All required parameters must be populated in order to send to Azure.</span>
 
 <span class="sd">    :param node_fill_type: Required. How Tasks are distributed across Compute</span>
-<span class="sd">     Compute Nodes in a Pool. If not specified, the default is spread. Possible</span>
-<span class="sd">     values include: &#39;spread&#39;, &#39;pack&#39;</span>
+<span class="sd">     Nodes in a Pool. If not specified, the default is spread. Possible values</span>
+<span class="sd">     include: &#39;spread&#39;, &#39;pack&#39;</span>
 <span class="sd">    :type node_fill_type: str or ~azure.batch.models.ComputeNodeFillType</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
