@@ -464,8 +464,8 @@ if the exception has been handled and should not be forwarded to the caller.</p>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3.5/library/functions.html#bool" title="(in Python v3.5)">bool</a></p>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span>
+<p class="rubric">Example</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span>
     <span class="n">response</span> <span class="o">=</span> <span class="n">policy</span><span class="o">.</span><span class="n">next</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
 <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">policy</span><span class="o">.</span><span class="n">on_exception</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
@@ -475,8 +475,6 @@ if the exception has been handled and should not be forwarded to the caller.</p>
 <span class="n">exc_type</span><span class="p">,</span> <span class="n">exc_value</span><span class="p">,</span> <span class="n">exc_traceback</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">exc_info</span><span class="p">()</span>
 </pre></div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="method">
@@ -599,8 +597,8 @@ with the response.</p>
 <p><strong>Keyword arguments:</strong></p>
 <p><em>permit_redirects (bool)</em> - Whether the client allows redirects. Defaults to True.</p>
 <p><em>redirect_max (int)</em> - The maximum allowed redirects. Defaults to 30.</p>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id1">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id1">
 <div class="code-block-caption"><span class="caption-text">Configuring a redirect policy.</span><a class="headerlink" href="#id1" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">azure.core.pipeline.policies</span> <span class="kn">import</span> <span class="n">RedirectPolicy</span>
 
@@ -623,8 +621,6 @@ with the response.</p>
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 <dl class="attribute">
 <dt id="azure.core.pipeline.policies.redirect.RedirectPolicy.REDIRECT_HEADERS_BLACKLIST">
 <code class="sig-name descname">REDIRECT_HEADERS_BLACKLIST</code><em class="property"> = frozenset({'Authorization'})</em><a class="headerlink" href="#azure.core.pipeline.policies.redirect.RedirectPolicy.REDIRECT_HEADERS_BLACKLIST" title="Permalink to this definition">¶</a></dt>
@@ -731,8 +727,8 @@ Uses redirect settings to send request to redirect endpoint if necessary.</p>
 <p><strong>Keyword arguments:</strong></p>
 <p><em>permit_redirects (bool)</em> - Whether the client allows redirects. Defaults to True.</p>
 <p><em>redirect_max (int)</em> - The maximum allowed redirects. Defaults to 30.</p>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id2">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id2">
 <div class="code-block-caption"><span class="caption-text">Configuring an async redirect policy.</span><a class="headerlink" href="#id2" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">azure.core.pipeline.policies</span> <span class="kn">import</span> <span class="n">AsyncRedirectPolicy</span>
 
@@ -755,8 +751,6 @@ Uses redirect settings to send request to redirect endpoint if necessary.</p>
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 <dl class="method">
 <dt id="azure.core.pipeline.policies.redirect_async.AsyncRedirectPolicy.send">
 <em class="property">async </em><code class="sig-name descname">send</code><span class="sig-paren">(</span><em class="sig-param">request</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/core/pipeline/policies/redirect_async.html#AsyncRedirectPolicy.send"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.core.pipeline.policies.redirect_async.AsyncRedirectPolicy.send" title="Permalink to this definition">¶</a></dt>
@@ -806,8 +800,8 @@ Retry policy will sleep for: <cite>{backoff factor} * (2 ** ({number of total re
 seconds. If the backoff_factor is 0.1, then the retry will sleep
 for [0.0s, 0.2s, 0.4s, …] between retries. The default value is 0.8.</p>
 <p><em>retry_backoff_max (int)</em> - The maximum back off time. Default value is 120 seconds (2 minutes).</p>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id3">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id3">
 <div class="code-block-caption"><span class="caption-text">Configuring a retry policy.</span><a class="headerlink" href="#id3" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">azure.core.pipeline.policies</span> <span class="kn">import</span> <span class="n">RetryPolicy</span>
 
@@ -861,8 +855,6 @@ for [0.0s, 0.2s, 0.4s, …] between retries. The default value is 0.8.</p>
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 <dl class="attribute">
 <dt id="azure.core.pipeline.policies.retry.RetryPolicy.BACKOFF_MAX">
 <code class="sig-name descname">BACKOFF_MAX</code><em class="property"> = 120</em><a class="headerlink" href="#azure.core.pipeline.policies.retry.RetryPolicy.BACKOFF_MAX" title="Permalink to this definition">¶</a></dt>
@@ -1089,8 +1081,8 @@ Retry policy will sleep for: <cite>{backoff factor} * (2 ** ({number of total re
 seconds. If the backoff_factor is 0.1, then the retry will sleep
 for [0.0s, 0.2s, 0.4s, …] between retries. The default value is 0.8.</p>
 <p><em>retry_backoff_max (int)</em> - The maximum back off time. Default value is 120 seconds (2 minutes).</p>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id4">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id4">
 <div class="code-block-caption"><span class="caption-text">Configuring an async retry policy.</span><a class="headerlink" href="#id4" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">azure.core.pipeline.policies</span> <span class="kn">import</span> <span class="n">AsyncRetryPolicy</span>
 
@@ -1143,8 +1135,6 @@ for [0.0s, 0.2s, 0.4s, …] between retries. The default value is 0.8.</p>
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 <dl class="method">
 <dt id="azure.core.pipeline.policies.retry_async.AsyncRetryPolicy.send">
 <em class="property">async </em><code class="sig-name descname">send</code><span class="sig-paren">(</span><em class="sig-param">request</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/core/pipeline/policies/retry_async.html#AsyncRetryPolicy.send"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.core.pipeline.policies.retry_async.AsyncRetryPolicy.send" title="Permalink to this definition">¶</a></dt>
@@ -1279,8 +1269,8 @@ operations, and additional headers can also be added dynamically per operation.<
 <dd class="field-odd"><p><strong>base_headers</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#dict" title="(in Python v3.5)"><em>dict</em></a>) – Headers to send with the request.</p>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id5">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id5">
 <div class="code-block-caption"><span class="caption-text">Configuring a headers policy.</span><a class="headerlink" href="#id5" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">azure.core.pipeline.policies</span> <span class="kn">import</span> <span class="n">HeadersPolicy</span>
 
@@ -1296,8 +1286,6 @@ operations, and additional headers can also be added dynamically per operation.<
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 <dl class="method">
 <dt id="azure.core.pipeline.policies.universal.HeadersPolicy.add_header">
 <code class="sig-name descname">add_header</code><span class="sig-paren">(</span><em class="sig-param">key</em>, <em class="sig-param">value</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/core/pipeline/policies/universal.html#HeadersPolicy.add_header"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.core.pipeline.policies.universal.HeadersPolicy.add_header" title="Permalink to this definition">¶</a></dt>
@@ -1342,8 +1330,8 @@ operations, and additional headers can also be added dynamically per operation.<
 <dd class="field-odd"><p><strong>logging_enable</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#bool" title="(in Python v3.5)"><em>bool</em></a>) – Use to enable per operation. Defaults to False.</p>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id6">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id6">
 <div class="code-block-caption"><span class="caption-text">Configuring a network trace logging policy.</span><a class="headerlink" href="#id6" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">azure.core.pipeline.policies</span> <span class="kn">import</span> <span class="n">NetworkTraceLoggingPolicy</span>
 <span class="kn">import</span> <span class="nn">sys</span>
@@ -1374,8 +1362,6 @@ operations, and additional headers can also be added dynamically per operation.<
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 <dl class="method">
 <dt id="azure.core.pipeline.policies.universal.NetworkTraceLoggingPolicy.on_request">
 <code class="sig-name descname">on_request</code><span class="sig-paren">(</span><em class="sig-param">request</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/core/pipeline/policies/universal.html#NetworkTraceLoggingPolicy.on_request"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.core.pipeline.policies.universal.NetworkTraceLoggingPolicy.on_request" title="Permalink to this definition">¶</a></dt>
@@ -1416,8 +1402,8 @@ to be used on each Request.</p>
 of the proxy.</p>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id7">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id7">
 <div class="code-block-caption"><span class="caption-text">Configuring a proxy policy.</span><a class="headerlink" href="#id7" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">azure.core.pipeline.policies</span> <span class="kn">import</span> <span class="n">ProxyPolicy</span>
 
@@ -1435,8 +1421,6 @@ of the proxy.</p>
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 <dl class="method">
 <dt id="azure.core.pipeline.policies.universal.ProxyPolicy.on_request">
 <code class="sig-name descname">on_request</code><span class="sig-paren">(</span><em class="sig-param">request</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/core/pipeline/policies/universal.html#ProxyPolicy.on_request"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.core.pipeline.policies.universal.ProxyPolicy.on_request" title="Permalink to this definition">¶</a></dt>
@@ -1463,8 +1447,8 @@ of the proxy.</p>
 <p><strong>Keyword arguments:</strong></p>
 <p><em>user_agent_overwrite (bool)</em> - Overwrites User-Agent when True. Defaults to False.</p>
 <p><em>user_agent_use_env (bool)</em> - Gets user-agent from environment. Defaults to True.</p>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id8">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id8">
 <div class="code-block-caption"><span class="caption-text">Configuring a user agent policy.</span><a class="headerlink" href="#id8" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">azure.core.pipeline.policies</span> <span class="kn">import</span> <span class="n">UserAgentPolicy</span>
 
@@ -1481,8 +1465,6 @@ of the proxy.</p>
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 <dl class="method">
 <dt id="azure.core.pipeline.policies.universal.UserAgentPolicy.add_user_agent">
 <code class="sig-name descname">add_user_agent</code><span class="sig-paren">(</span><em class="sig-param">value</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/core/pipeline/policies/universal.html#UserAgentPolicy.add_user_agent"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.core.pipeline.policies.universal.UserAgentPolicy.add_user_agent" title="Permalink to this definition">¶</a></dt>
@@ -1572,8 +1554,8 @@ if the exception has been handled and should not be forwarded to the caller.</p>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3.5/library/functions.html#bool" title="(in Python v3.5)">bool</a></p>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span>
+<p class="rubric">Example</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span>
     <span class="n">response</span> <span class="o">=</span> <span class="n">policy</span><span class="o">.</span><span class="n">next</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
 <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">policy</span><span class="o">.</span><span class="n">on_exception</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
@@ -1583,8 +1565,6 @@ if the exception has been handled and should not be forwarded to the caller.</p>
 <span class="n">exc_type</span><span class="p">,</span> <span class="n">exc_value</span><span class="p">,</span> <span class="n">exc_traceback</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">exc_info</span><span class="p">()</span>
 </pre></div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="method">
@@ -1659,8 +1639,8 @@ operations, and additional headers can also be added dynamically per operation.<
 <dd class="field-odd"><p><strong>base_headers</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#dict" title="(in Python v3.5)"><em>dict</em></a>) – Headers to send with the request.</p>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id9">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id9">
 <div class="code-block-caption"><span class="caption-text">Configuring a headers policy.</span><a class="headerlink" href="#id9" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">azure.core.pipeline.policies</span> <span class="kn">import</span> <span class="n">HeadersPolicy</span>
 
@@ -1676,8 +1656,6 @@ operations, and additional headers can also be added dynamically per operation.<
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 <dl class="method">
 <dt id="azure.core.pipeline.policies.HeadersPolicy.add_header">
 <code class="sig-name descname">add_header</code><span class="sig-paren">(</span><em class="sig-param">key</em>, <em class="sig-param">value</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/core/pipeline/policies/universal.html#HeadersPolicy.add_header"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.core.pipeline.policies.HeadersPolicy.add_header" title="Permalink to this definition">¶</a></dt>
@@ -1724,8 +1702,8 @@ operations, and additional headers can also be added dynamically per operation.<
 <p><strong>Keyword arguments:</strong></p>
 <p><em>user_agent_overwrite (bool)</em> - Overwrites User-Agent when True. Defaults to False.</p>
 <p><em>user_agent_use_env (bool)</em> - Gets user-agent from environment. Defaults to True.</p>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id10">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id10">
 <div class="code-block-caption"><span class="caption-text">Configuring a user agent policy.</span><a class="headerlink" href="#id10" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">azure.core.pipeline.policies</span> <span class="kn">import</span> <span class="n">UserAgentPolicy</span>
 
@@ -1742,8 +1720,6 @@ operations, and additional headers can also be added dynamically per operation.<
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 <dl class="method">
 <dt id="azure.core.pipeline.policies.UserAgentPolicy.add_user_agent">
 <code class="sig-name descname">add_user_agent</code><span class="sig-paren">(</span><em class="sig-param">value</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/core/pipeline/policies/universal.html#UserAgentPolicy.add_user_agent"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.core.pipeline.policies.UserAgentPolicy.add_user_agent" title="Permalink to this definition">¶</a></dt>
@@ -1781,8 +1757,8 @@ operations, and additional headers can also be added dynamically per operation.<
 <dd class="field-odd"><p><strong>logging_enable</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#bool" title="(in Python v3.5)"><em>bool</em></a>) – Use to enable per operation. Defaults to False.</p>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id11">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id11">
 <div class="code-block-caption"><span class="caption-text">Configuring a network trace logging policy.</span><a class="headerlink" href="#id11" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">azure.core.pipeline.policies</span> <span class="kn">import</span> <span class="n">NetworkTraceLoggingPolicy</span>
 <span class="kn">import</span> <span class="nn">sys</span>
@@ -1813,8 +1789,6 @@ operations, and additional headers can also be added dynamically per operation.<
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 <dl class="method">
 <dt id="azure.core.pipeline.policies.NetworkTraceLoggingPolicy.on_request">
 <code class="sig-name descname">on_request</code><span class="sig-paren">(</span><em class="sig-param">request</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/core/pipeline/policies/universal.html#NetworkTraceLoggingPolicy.on_request"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.core.pipeline.policies.NetworkTraceLoggingPolicy.on_request" title="Permalink to this definition">¶</a></dt>
@@ -1937,8 +1911,8 @@ Retry policy will sleep for: <cite>{backoff factor} * (2 ** ({number of total re
 seconds. If the backoff_factor is 0.1, then the retry will sleep
 for [0.0s, 0.2s, 0.4s, …] between retries. The default value is 0.8.</p>
 <p><em>retry_backoff_max (int)</em> - The maximum back off time. Default value is 120 seconds (2 minutes).</p>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id12">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id12">
 <div class="code-block-caption"><span class="caption-text">Configuring a retry policy.</span><a class="headerlink" href="#id12" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">azure.core.pipeline.policies</span> <span class="kn">import</span> <span class="n">RetryPolicy</span>
 
@@ -1992,8 +1966,6 @@ for [0.0s, 0.2s, 0.4s, …] between retries. The default value is 0.8.</p>
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 <dl class="attribute">
 <dt id="azure.core.pipeline.policies.RetryPolicy.BACKOFF_MAX">
 <code class="sig-name descname">BACKOFF_MAX</code><em class="property"> = 120</em><a class="headerlink" href="#azure.core.pipeline.policies.RetryPolicy.BACKOFF_MAX" title="Permalink to this definition">¶</a></dt>
@@ -2203,8 +2175,8 @@ this method will return immediately.</p>
 <p><strong>Keyword arguments:</strong></p>
 <p><em>permit_redirects (bool)</em> - Whether the client allows redirects. Defaults to True.</p>
 <p><em>redirect_max (int)</em> - The maximum allowed redirects. Defaults to 30.</p>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id13">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id13">
 <div class="code-block-caption"><span class="caption-text">Configuring a redirect policy.</span><a class="headerlink" href="#id13" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">azure.core.pipeline.policies</span> <span class="kn">import</span> <span class="n">RedirectPolicy</span>
 
@@ -2227,8 +2199,6 @@ this method will return immediately.</p>
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 <dl class="attribute">
 <dt id="azure.core.pipeline.policies.RedirectPolicy.REDIRECT_HEADERS_BLACKLIST">
 <code class="sig-name descname">REDIRECT_HEADERS_BLACKLIST</code><em class="property"> = frozenset({'Authorization'})</em><a class="headerlink" href="#azure.core.pipeline.policies.RedirectPolicy.REDIRECT_HEADERS_BLACKLIST" title="Permalink to this definition">¶</a></dt>
@@ -2336,8 +2306,8 @@ to be used on each Request.</p>
 of the proxy.</p>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id14">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id14">
 <div class="code-block-caption"><span class="caption-text">Configuring a proxy policy.</span><a class="headerlink" href="#id14" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">azure.core.pipeline.policies</span> <span class="kn">import</span> <span class="n">ProxyPolicy</span>
 
@@ -2355,8 +2325,6 @@ of the proxy.</p>
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 <dl class="method">
 <dt id="azure.core.pipeline.policies.ProxyPolicy.on_request">
 <code class="sig-name descname">on_request</code><span class="sig-paren">(</span><em class="sig-param">request</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/core/pipeline/policies/universal.html#ProxyPolicy.on_request"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.core.pipeline.policies.ProxyPolicy.on_request" title="Permalink to this definition">¶</a></dt>
@@ -2478,8 +2446,8 @@ is instantiated and all policies chained.</p>
 <p><strong>Keyword arguments:</strong></p>
 <p><em>permit_redirects (bool)</em> - Whether the client allows redirects. Defaults to True.</p>
 <p><em>redirect_max (int)</em> - The maximum allowed redirects. Defaults to 30.</p>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id15">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id15">
 <div class="code-block-caption"><span class="caption-text">Configuring an async redirect policy.</span><a class="headerlink" href="#id15" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">azure.core.pipeline.policies</span> <span class="kn">import</span> <span class="n">AsyncRedirectPolicy</span>
 
@@ -2502,8 +2470,6 @@ is instantiated and all policies chained.</p>
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 <dl class="method">
 <dt id="azure.core.pipeline.policies.AsyncRedirectPolicy.send">
 <em class="property">async </em><code class="sig-name descname">send</code><span class="sig-paren">(</span><em class="sig-param">request</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/core/pipeline/policies/redirect_async.html#AsyncRedirectPolicy.send"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.core.pipeline.policies.AsyncRedirectPolicy.send" title="Permalink to this definition">¶</a></dt>
@@ -2549,8 +2515,8 @@ Retry policy will sleep for: <cite>{backoff factor} * (2 ** ({number of total re
 seconds. If the backoff_factor is 0.1, then the retry will sleep
 for [0.0s, 0.2s, 0.4s, …] between retries. The default value is 0.8.</p>
 <p><em>retry_backoff_max (int)</em> - The maximum back off time. Default value is 120 seconds (2 minutes).</p>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id16">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id16">
 <div class="code-block-caption"><span class="caption-text">Configuring an async retry policy.</span><a class="headerlink" href="#id16" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">azure.core.pipeline.policies</span> <span class="kn">import</span> <span class="n">AsyncRetryPolicy</span>
 
@@ -2603,8 +2569,6 @@ for [0.0s, 0.2s, 0.4s, …] between retries. The default value is 0.8.</p>
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 <dl class="method">
 <dt id="azure.core.pipeline.policies.AsyncRetryPolicy.send">
 <em class="property">async </em><code class="sig-name descname">send</code><span class="sig-paren">(</span><em class="sig-param">request</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/core/pipeline/policies/retry_async.html#AsyncRetryPolicy.send"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.core.pipeline.policies.AsyncRetryPolicy.send" title="Permalink to this definition">¶</a></dt>

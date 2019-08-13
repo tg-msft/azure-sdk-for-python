@@ -317,8 +317,8 @@
 <dd><p>Bases: <a class="reference internal" href="azure.eventhub.html#azure.eventhub.client_abstract.EventHubClientAbstract" title="azure.eventhub.client_abstract.EventHubClientAbstract"><code class="xref py py-class docutils literal notranslate"><span class="pre">azure.eventhub.client_abstract.EventHubClientAbstract</span></code></a></p>
 <p>The EventHubClient class defines a high level interface for asynchronously
 sending events to and receiving events from the Azure Event Hubs service.</p>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id1">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id1">
 <div class="code-block-caption"><span class="caption-text">Create a new instance of the Event Hub client async.</span><a class="headerlink" href="#id1" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">azure.eventhub.aio</span> <span class="kn">import</span> <span class="n">EventHubClient</span>
 <span class="kn">import</span> <span class="nn">os</span>
@@ -331,8 +331,6 @@ sending events to and receiving events from the Azure Event Hubs service.</p>
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 <dl class="method">
 <dt id="azure.eventhub.aio.client_async.EventHubClient.close">
 <em class="property">async </em><code class="sig-name descname">close</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/eventhub/aio/client_async.html#EventHubClient.close"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.eventhub.aio.client_async.EventHubClient.close" title="Permalink to this definition">¶</a></dt>
@@ -361,8 +359,8 @@ The value must start with <cite>/</cite> character.</p></li>
 <dd class="field-even"><p><a class="reference internal" href="#azure.eventhub.aio.consumer_async.EventHubConsumer" title="azure.eventhub.aio.consumer_async.EventHubConsumer">EventHubConsumer</a></p>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id2">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id2">
 <div class="code-block-caption"><span class="caption-text">Add an async consumer to the client for a particular consumer group and partition.</span><a class="headerlink" href="#id2" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">client</span> <span class="o">=</span> <span class="n">EventHubClient</span><span class="o">.</span><span class="n">from_connection_string</span><span class="p">(</span><span class="n">connection_str</span><span class="p">)</span>
 <span class="c1"># Create an async consumer.</span>
@@ -372,8 +370,6 @@ The value must start with <cite>/</cite> character.</p></li>
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="method">
@@ -397,8 +393,8 @@ queued. Default value is 60 seconds. If set to 0, there will be no timeout.</p><
 <dd class="field-even"><p><a class="reference internal" href="#azure.eventhub.aio.producer_async.EventHubProducer" title="azure.eventhub.aio.producer_async.EventHubProducer">EventHubProducer</a></p>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id3">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id3">
 <div class="code-block-caption"><span class="caption-text">Add an async producer to the client to send EventData.</span><a class="headerlink" href="#id3" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">client</span> <span class="o">=</span> <span class="n">EventHubClient</span><span class="o">.</span><span class="n">from_connection_string</span><span class="p">(</span><span class="n">connection_str</span><span class="p">)</span>
 <span class="c1"># Create an async producer.</span>
@@ -406,8 +402,6 @@ queued. Default value is 60 seconds. If set to 0, there will be no timeout.</p><
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="method">
@@ -516,8 +510,8 @@ indicate that the handler was shutdown due to error.</p>
 due to an error.</p>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id4">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id4">
 <div class="code-block-caption"><span class="caption-text">Close down the handler.</span><a class="headerlink" href="#id4" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">client</span> <span class="o">=</span> <span class="n">EventHubClient</span><span class="o">.</span><span class="n">from_connection_string</span><span class="p">(</span><span class="n">connection_str</span><span class="p">)</span>
 <span class="n">consumer</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">create_consumer</span><span class="p">(</span><span class="n">consumer_group</span><span class="o">=</span><span class="s2">&quot;$default&quot;</span><span class="p">,</span> <span class="n">partition_id</span><span class="o">=</span><span class="s2">&quot;0&quot;</span><span class="p">,</span> <span class="n">event_position</span><span class="o">=</span><span class="n">EventPosition</span><span class="p">(</span><span class="s1">&#39;@latest&#39;</span><span class="p">))</span>
@@ -532,8 +526,6 @@ due to an error.</p>
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="method">
@@ -571,8 +563,8 @@ If not specified, the default wait time specified when the consumer was created 
 ~azure.eventhub.EventHubError</p>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id5">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id5">
 <div class="code-block-caption"><span class="caption-text">Receives events asynchronously</span><a class="headerlink" href="#id5" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s2">&quot;azure.eventhub&quot;</span><span class="p">)</span>
 <span class="n">async</span> <span class="k">with</span> <span class="n">consumer</span><span class="p">:</span>
@@ -582,8 +574,6 @@ If not specified, the default wait time specified when the consumer was created 
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="attribute">
@@ -635,8 +625,8 @@ indicate that the handler was shutdown due to error.</p>
 due to an error.</p>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id6">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id6">
 <div class="code-block-caption"><span class="caption-text">Close down the handler.</span><a class="headerlink" href="#id6" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">client</span> <span class="o">=</span> <span class="n">EventHubClient</span><span class="o">.</span><span class="n">from_connection_string</span><span class="p">(</span><span class="n">connection_str</span><span class="p">)</span>
 <span class="n">producer</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">create_producer</span><span class="p">(</span><span class="n">partition_id</span><span class="o">=</span><span class="s2">&quot;0&quot;</span><span class="p">)</span>
@@ -648,8 +638,6 @@ due to an error.</p>
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="method">
@@ -672,8 +660,8 @@ a particular partition of the Event Hub decided by the service.</p></li>
 <dd class="field-odd"><p><a class="reference internal" href="azure.eventhub.html#azure.eventhub.EventDataBatch" title="azure.eventhub.EventDataBatch">EventDataBatch</a></p>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id7">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id7">
 <div class="code-block-caption"><span class="caption-text">Create EventDataBatch object within limited size</span><a class="headerlink" href="#id7" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">event_data_batch</span> <span class="o">=</span> <span class="n">await</span> <span class="n">producer</span><span class="o">.</span><span class="n">create_batch</span><span class="p">(</span><span class="n">max_size</span><span class="o">=</span><span class="mi">10000</span><span class="p">)</span>
 <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
@@ -686,8 +674,6 @@ a particular partition of the Event Hub decided by the service.</p></li>
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="method">
@@ -717,8 +703,8 @@ If not specified, the default wait time specified when the producer was created 
 <dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3.5/library/constants.html#None" title="(in Python v3.5)">None</a></p>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id8">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id8">
 <div class="code-block-caption"><span class="caption-text">Sends an event data and blocks until acknowledgement is received or operation times out.</span><a class="headerlink" href="#id8" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">async</span> <span class="k">with</span> <span class="n">producer</span><span class="p">:</span>
     <span class="n">event_data</span> <span class="o">=</span> <span class="n">EventData</span><span class="p">(</span><span class="sa">b</span><span class="s2">&quot;A single event&quot;</span><span class="p">)</span>
@@ -726,8 +712,6 @@ If not specified, the default wait time specified when the producer was created 
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 </dd></dl>
@@ -741,8 +725,8 @@ If not specified, the default wait time specified when the producer was created 
 <dd><p>Bases: <a class="reference internal" href="azure.eventhub.html#azure.eventhub.client_abstract.EventHubClientAbstract" title="azure.eventhub.client_abstract.EventHubClientAbstract"><code class="xref py py-class docutils literal notranslate"><span class="pre">azure.eventhub.client_abstract.EventHubClientAbstract</span></code></a></p>
 <p>The EventHubClient class defines a high level interface for asynchronously
 sending events to and receiving events from the Azure Event Hubs service.</p>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id9">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id9">
 <div class="code-block-caption"><span class="caption-text">Create a new instance of the Event Hub client async.</span><a class="headerlink" href="#id9" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">azure.eventhub.aio</span> <span class="kn">import</span> <span class="n">EventHubClient</span>
 <span class="kn">import</span> <span class="nn">os</span>
@@ -755,8 +739,6 @@ sending events to and receiving events from the Azure Event Hubs service.</p>
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 <dl class="method">
 <dt id="azure.eventhub.aio.EventHubClient.close">
 <em class="property">async </em><code class="sig-name descname">close</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/eventhub/aio/client_async.html#EventHubClient.close"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.eventhub.aio.EventHubClient.close" title="Permalink to this definition">¶</a></dt>
@@ -785,8 +767,8 @@ The value must start with <cite>/</cite> character.</p></li>
 <dd class="field-even"><p><a class="reference internal" href="#azure.eventhub.aio.consumer_async.EventHubConsumer" title="azure.eventhub.aio.consumer_async.EventHubConsumer">EventHubConsumer</a></p>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id10">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id10">
 <div class="code-block-caption"><span class="caption-text">Add an async consumer to the client for a particular consumer group and partition.</span><a class="headerlink" href="#id10" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">client</span> <span class="o">=</span> <span class="n">EventHubClient</span><span class="o">.</span><span class="n">from_connection_string</span><span class="p">(</span><span class="n">connection_str</span><span class="p">)</span>
 <span class="c1"># Create an async consumer.</span>
@@ -796,8 +778,6 @@ The value must start with <cite>/</cite> character.</p></li>
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="method">
@@ -821,8 +801,8 @@ queued. Default value is 60 seconds. If set to 0, there will be no timeout.</p><
 <dd class="field-even"><p><a class="reference internal" href="#azure.eventhub.aio.producer_async.EventHubProducer" title="azure.eventhub.aio.producer_async.EventHubProducer">EventHubProducer</a></p>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id11">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id11">
 <div class="code-block-caption"><span class="caption-text">Add an async producer to the client to send EventData.</span><a class="headerlink" href="#id11" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">client</span> <span class="o">=</span> <span class="n">EventHubClient</span><span class="o">.</span><span class="n">from_connection_string</span><span class="p">(</span><span class="n">connection_str</span><span class="p">)</span>
 <span class="c1"># Create an async producer.</span>
@@ -830,8 +810,6 @@ queued. Default value is 60 seconds. If set to 0, there will be no timeout.</p><
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="method">
@@ -937,8 +915,8 @@ indicate that the handler was shutdown due to error.</p>
 due to an error.</p>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id12">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id12">
 <div class="code-block-caption"><span class="caption-text">Close down the handler.</span><a class="headerlink" href="#id12" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">client</span> <span class="o">=</span> <span class="n">EventHubClient</span><span class="o">.</span><span class="n">from_connection_string</span><span class="p">(</span><span class="n">connection_str</span><span class="p">)</span>
 <span class="n">consumer</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">create_consumer</span><span class="p">(</span><span class="n">consumer_group</span><span class="o">=</span><span class="s2">&quot;$default&quot;</span><span class="p">,</span> <span class="n">partition_id</span><span class="o">=</span><span class="s2">&quot;0&quot;</span><span class="p">,</span> <span class="n">event_position</span><span class="o">=</span><span class="n">EventPosition</span><span class="p">(</span><span class="s1">&#39;@latest&#39;</span><span class="p">))</span>
@@ -953,8 +931,6 @@ due to an error.</p>
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="method">
@@ -992,8 +968,8 @@ If not specified, the default wait time specified when the consumer was created 
 ~azure.eventhub.EventHubError</p>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id13">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id13">
 <div class="code-block-caption"><span class="caption-text">Receives events asynchronously</span><a class="headerlink" href="#id13" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s2">&quot;azure.eventhub&quot;</span><span class="p">)</span>
 <span class="n">async</span> <span class="k">with</span> <span class="n">consumer</span><span class="p">:</span>
@@ -1003,8 +979,6 @@ If not specified, the default wait time specified when the consumer was created 
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="attribute">
@@ -1053,8 +1027,8 @@ indicate that the handler was shutdown due to error.</p>
 due to an error.</p>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id14">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id14">
 <div class="code-block-caption"><span class="caption-text">Close down the handler.</span><a class="headerlink" href="#id14" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">client</span> <span class="o">=</span> <span class="n">EventHubClient</span><span class="o">.</span><span class="n">from_connection_string</span><span class="p">(</span><span class="n">connection_str</span><span class="p">)</span>
 <span class="n">producer</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">create_producer</span><span class="p">(</span><span class="n">partition_id</span><span class="o">=</span><span class="s2">&quot;0&quot;</span><span class="p">)</span>
@@ -1066,8 +1040,6 @@ due to an error.</p>
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="method">
@@ -1090,8 +1062,8 @@ a particular partition of the Event Hub decided by the service.</p></li>
 <dd class="field-odd"><p><a class="reference internal" href="azure.eventhub.html#azure.eventhub.EventDataBatch" title="azure.eventhub.EventDataBatch">EventDataBatch</a></p>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id15">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id15">
 <div class="code-block-caption"><span class="caption-text">Create EventDataBatch object within limited size</span><a class="headerlink" href="#id15" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">event_data_batch</span> <span class="o">=</span> <span class="n">await</span> <span class="n">producer</span><span class="o">.</span><span class="n">create_batch</span><span class="p">(</span><span class="n">max_size</span><span class="o">=</span><span class="mi">10000</span><span class="p">)</span>
 <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
@@ -1104,8 +1076,6 @@ a particular partition of the Event Hub decided by the service.</p></li>
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="method">
@@ -1135,8 +1105,8 @@ If not specified, the default wait time specified when the producer was created 
 <dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3.5/library/constants.html#None" title="(in Python v3.5)">None</a></p>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id16">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id16">
 <div class="code-block-caption"><span class="caption-text">Sends an event data and blocks until acknowledgement is received or operation times out.</span><a class="headerlink" href="#id16" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">async</span> <span class="k">with</span> <span class="n">producer</span><span class="p">:</span>
     <span class="n">event_data</span> <span class="o">=</span> <span class="n">EventData</span><span class="p">(</span><span class="sa">b</span><span class="s2">&quot;A single event&quot;</span><span class="p">)</span>
@@ -1144,8 +1114,6 @@ If not specified, the default wait time specified when the producer was created 
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 </dd></dl>

@@ -443,8 +443,8 @@ header to requests.</p></li>
 </ul>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id1">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id1">
 <div class="code-block-caption"><span class="caption-text">Creates the service configuration and adds policies.</span><a class="headerlink" href="#id1" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">azure.core</span> <span class="kn">import</span> <span class="n">Configuration</span>
 <span class="kn">from</span> <span class="nn">azure.core.pipeline</span> <span class="kn">import</span> <span class="n">Pipeline</span>
@@ -494,8 +494,6 @@ header to requests.</p></li>
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="class">
@@ -517,8 +515,8 @@ certificate, as a single file (containing the private key and the certificate) o
 </ul>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id2">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id2">
 <div class="code-block-caption"><span class="caption-text">Configuring transport connection settings.</span><a class="headerlink" href="#id2" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">azure.core</span> <span class="kn">import</span> <span class="n">Configuration</span>
 
@@ -537,8 +535,6 @@ certificate, as a single file (containing the private key and the certificate) o
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 </div>
@@ -813,8 +809,8 @@ list of ReturnType</p></li>
 <p><em>pipeline</em> - A Pipeline object. If omitted, a Pipeline object is created and returned.
 <em>policies</em> - A list of policies object. If omitted, the standard policies of the configuration object is used.
 <em>transport</em> - The HTTP Transport instance. If omitted, RequestsTransport is used for synchronous transport.</p>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id3">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id3">
 <div class="code-block-caption"><span class="caption-text">Builds the pipeline client.</span><a class="headerlink" href="#id3" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">azure.core</span> <span class="kn">import</span> <span class="n">Configuration</span><span class="p">,</span> <span class="n">PipelineClient</span>
 <span class="kn">from</span> <span class="nn">azure.core.pipeline.policies</span> <span class="kn">import</span> <span class="n">RedirectPolicy</span><span class="p">,</span> <span class="n">UserAgentPolicy</span>
@@ -831,8 +827,6 @@ list of ReturnType</p></li>
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 <dl class="method">
 <dt id="azure.core.pipeline_client.PipelineClient.close">
 <code class="sig-name descname">close</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/core/pipeline_client.html#PipelineClient.close"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.core.pipeline_client.PipelineClient.close" title="Permalink to this definition">¶</a></dt>
@@ -868,8 +862,8 @@ list of ReturnType</p></li>
 <p><em>pipeline</em> - A Pipeline object. If omitted, an AsyncPipeline is created and returned.
 <em>policies</em> - A list of policies object. If omitted, the standard policies of the configuration object is used.
 <em>transport</em> - The HTTP Transport instance. If omitted, AioHttpTransport is use for asynchronous transport.</p>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id4">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id4">
 <div class="code-block-caption"><span class="caption-text">Builds the async pipeline client.</span><a class="headerlink" href="#id4" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">azure.core</span> <span class="kn">import</span> <span class="n">Configuration</span><span class="p">,</span> <span class="n">AsyncPipelineClient</span>
 <span class="kn">from</span> <span class="nn">azure.core.pipeline.policies</span> <span class="kn">import</span> <span class="n">AsyncRedirectPolicy</span><span class="p">,</span> <span class="n">UserAgentPolicy</span>
@@ -886,8 +880,6 @@ list of ReturnType</p></li>
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 <dl class="method">
 <dt id="azure.core.pipeline_client_async.AsyncPipelineClient.close">
 <em class="property">async </em><code class="sig-name descname">close</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/core/pipeline_client_async.html#AsyncPipelineClient.close"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.core.pipeline_client_async.AsyncPipelineClient.close" title="Permalink to this definition">¶</a></dt>
@@ -932,8 +924,8 @@ header to requests.</p></li>
 </ul>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id5">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id5">
 <div class="code-block-caption"><span class="caption-text">Creates the service configuration and adds policies.</span><a class="headerlink" href="#id5" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">azure.core</span> <span class="kn">import</span> <span class="n">Configuration</span>
 <span class="kn">from</span> <span class="nn">azure.core.pipeline</span> <span class="kn">import</span> <span class="n">Pipeline</span>
@@ -983,8 +975,6 @@ header to requests.</p></li>
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="class">
@@ -1012,8 +1002,8 @@ header to requests.</p></li>
 <p><em>pipeline</em> - A Pipeline object. If omitted, a Pipeline object is created and returned.
 <em>policies</em> - A list of policies object. If omitted, the standard policies of the configuration object is used.
 <em>transport</em> - The HTTP Transport instance. If omitted, RequestsTransport is used for synchronous transport.</p>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id6">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id6">
 <div class="code-block-caption"><span class="caption-text">Builds the pipeline client.</span><a class="headerlink" href="#id6" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">azure.core</span> <span class="kn">import</span> <span class="n">Configuration</span><span class="p">,</span> <span class="n">PipelineClient</span>
 <span class="kn">from</span> <span class="nn">azure.core.pipeline.policies</span> <span class="kn">import</span> <span class="n">RedirectPolicy</span><span class="p">,</span> <span class="n">UserAgentPolicy</span>
@@ -1030,8 +1020,6 @@ header to requests.</p></li>
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 <dl class="method">
 <dt id="azure.core.PipelineClient.close">
 <code class="sig-name descname">close</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/core/pipeline_client.html#PipelineClient.close"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.core.PipelineClient.close" title="Permalink to this definition">¶</a></dt>
@@ -1178,8 +1166,8 @@ valid URL strings.</p>
 <p><em>pipeline</em> - A Pipeline object. If omitted, an AsyncPipeline is created and returned.
 <em>policies</em> - A list of policies object. If omitted, the standard policies of the configuration object is used.
 <em>transport</em> - The HTTP Transport instance. If omitted, AioHttpTransport is use for asynchronous transport.</p>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id7">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id7">
 <div class="code-block-caption"><span class="caption-text">Builds the async pipeline client.</span><a class="headerlink" href="#id7" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">azure.core</span> <span class="kn">import</span> <span class="n">Configuration</span><span class="p">,</span> <span class="n">AsyncPipelineClient</span>
 <span class="kn">from</span> <span class="nn">azure.core.pipeline.policies</span> <span class="kn">import</span> <span class="n">AsyncRedirectPolicy</span><span class="p">,</span> <span class="n">UserAgentPolicy</span>
@@ -1196,8 +1184,6 @@ valid URL strings.</p>
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 <dl class="method">
 <dt id="azure.core.AsyncPipelineClient.close">
 <em class="property">async </em><code class="sig-name descname">close</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/core/pipeline_client_async.html#AsyncPipelineClient.close"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.core.AsyncPipelineClient.close" title="Permalink to this definition">¶</a></dt>

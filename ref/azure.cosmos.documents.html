@@ -358,7 +358,7 @@ gateway proxies requests to the right data partition.</p>
 for response from network peer).</p></li>
 <li><p><strong>MediaRequestTimeout</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a>) – Gets or sets Time to wait for response
 from network peer for attachment content (aka media) operations.</p></li>
-<li><p><a class="reference internal" href="#azure.cosmos.documents.ConnectionMode" title="azure.cosmos.documents.ConnectionMode"><strong>ConnectionMode</strong></a> (<a class="reference internal" href="#azure.cosmos.documents.ConnectionMode" title="azure.cosmos.documents.ConnectionMode"><em>documents.ConnectionMode</em></a>) – Gets or sets the connection mode used in the client. Currently 
+<li><p><a class="reference internal" href="#azure.cosmos.documents.ConnectionMode" title="azure.cosmos.documents.ConnectionMode"><strong>ConnectionMode</strong></a> (<a class="reference internal" href="#azure.cosmos.documents.ConnectionMode" title="azure.cosmos.documents.ConnectionMode"><em>documents.ConnectionMode</em></a>) – Gets or sets the connection mode used in the client. Currently
 only Gateway is supported.</p></li>
 <li><p><a class="reference internal" href="#azure.cosmos.documents.MediaReadMode" title="azure.cosmos.documents.MediaReadMode"><strong>MediaReadMode</strong></a> (<em>MediaReadMode.Buffered</em>) – Gets or sets the attachment content (aka media) download mode.</p></li>
 <li><p><a class="reference internal" href="azure.cosmos.html#azure.cosmos.SSLConfiguration" title="azure.cosmos.SSLConfiguration"><strong>SSLConfiguration</strong></a> (<a class="reference internal" href="#azure.cosmos.documents.SSLConfiguration" title="azure.cosmos.documents.SSLConfiguration"><em>documents.SSLConfiguration</em></a>) – Gets or sets the SSL configuration.</p></li>
@@ -373,7 +373,7 @@ the client will use this list to evaluate the final location, taking into consid
 the order specified in PreferredLocations list. The locations in this list are specified as the names of
 the azure Cosmos locations like, ‘West US’, ‘East US’, ‘Central India’ and so on.</p></li>
 <li><p><strong>RetryOptions</strong> (<em>RetryOptions</em>) – Gets or sets the retry options to be applied to all requests when retrying.</p></li>
-<li><p><strong>DisableSSLVerification</strong> (<em>boolean</em>) – Flag to disable SSL verification for the requests. SSL verification is enabled by default. 
+<li><p><strong>DisableSSLVerification</strong> (<em>boolean</em>) – Flag to disable SSL verification for the requests. SSL verification is enabled by default.
 Don’t set this when targeting production endpoints.
 This is intended to be used only when targeting emulator endpoint to avoid failing your requests with SSL related error.</p></li>
 <li><p><strong>UseMultipleWriteLocations</strong> (<em>boolean</em>) – Flag to enable writes on any locations (regions) for geo-replicated database accounts in the azure Cosmos service.</p></li>
@@ -505,11 +505,11 @@ Value is returned from cached information updated periodically and
 is not guaranteed to be real time.</p></li>
 <li><p><a class="reference internal" href="azure.mgmt.cosmosdb.models.html#azure.mgmt.cosmosdb.models.ConsistencyPolicy" title="azure.mgmt.cosmosdb.models.ConsistencyPolicy"><strong>ConsistencyPolicy</strong></a> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#dict" title="(in Python v3.5)"><em>dict</em></a>) – UserConsistencyPolicy settings.</p></li>
 <li><p><a class="reference internal" href="azure.mgmt.cosmosdb.models.html#azure.mgmt.cosmosdb.models.ConsistencyPolicy" title="azure.mgmt.cosmosdb.models.ConsistencyPolicy"><strong>ConsistencyPolicy</strong></a><strong>[</strong><strong>'defaultConsistencyLevel'</strong><strong>]</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#dict" title="(in Python v3.5)"><em>dict</em></a>) – The default consistency level.</p></li>
-<li><p><a class="reference internal" href="azure.mgmt.cosmosdb.models.html#azure.mgmt.cosmosdb.models.ConsistencyPolicy" title="azure.mgmt.cosmosdb.models.ConsistencyPolicy"><strong>ConsistencyPolicy</strong></a><strong>[</strong><strong>'maxStalenessPrefix'</strong><strong>]</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a>) – In bounded staleness consistency, the maximum allowed staleness in 
+<li><p><a class="reference internal" href="azure.mgmt.cosmosdb.models.html#azure.mgmt.cosmosdb.models.ConsistencyPolicy" title="azure.mgmt.cosmosdb.models.ConsistencyPolicy"><strong>ConsistencyPolicy</strong></a><strong>[</strong><strong>'maxStalenessPrefix'</strong><strong>]</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a>) – In bounded staleness consistency, the maximum allowed staleness in
 terms difference in sequence numbers (aka version).</p></li>
-<li><p><a class="reference internal" href="azure.mgmt.cosmosdb.models.html#azure.mgmt.cosmosdb.models.ConsistencyPolicy" title="azure.mgmt.cosmosdb.models.ConsistencyPolicy"><strong>ConsistencyPolicy</strong></a><strong>[</strong><strong>'maxStalenessIntervalInSeconds'</strong><strong>]</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a>) – In bounded staleness consistency, the maximum allowed staleness in 
+<li><p><a class="reference internal" href="azure.mgmt.cosmosdb.models.html#azure.mgmt.cosmosdb.models.ConsistencyPolicy" title="azure.mgmt.cosmosdb.models.ConsistencyPolicy"><strong>ConsistencyPolicy</strong></a><strong>[</strong><strong>'maxStalenessIntervalInSeconds'</strong><strong>]</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a>) – In bounded staleness consistency, the maximum allowed staleness in
 terms time interval.</p></li>
-<li><p><strong>EnableMultipleWritableLocations</strong> (<em>boolean</em>) – Flag on the azure Cosmos account that indicates if writes can take 
+<li><p><strong>EnableMultipleWritableLocations</strong> (<em>boolean</em>) – Flag on the azure Cosmos account that indicates if writes can take
 place in multiple locations.</p></li>
 </ul>
 </dd>

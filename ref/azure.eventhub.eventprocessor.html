@@ -322,8 +322,8 @@ consumer group. The received data will be sent to PartitionProcessor to be proce
 <p>It provides the user a convenient way to receive events from multiple partitions and save checkpoints.
 If multiple EventProcessors are running for an event hub, they will automatically balance load.
 This load balancing won’t be available until preview 3.</p>
-<dl>
-<dt>Example:</dt><dd><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MyPartitionProcessor</span><span class="p">(</span><span class="n">PartitionProcessor</span><span class="p">):</span>
+<p class="rubric">Example</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MyPartitionProcessor</span><span class="p">(</span><span class="n">PartitionProcessor</span><span class="p">):</span>
     <span class="n">async</span> <span class="k">def</span> <span class="nf">process_events</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">events</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">events</span><span class="p">:</span>
             <span class="c1"># do something sync or async to process the events</span>
@@ -343,8 +343,6 @@ This load balancing won’t be available until preview 3.</p>
     <span class="n">await</span> <span class="n">partition_manager</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 </pre></div>
 </div>
-</dd>
-</dl>
 <p>Instantiate an EventProcessor.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -703,8 +701,8 @@ consumer group. The received data will be sent to PartitionProcessor to be proce
 <p>It provides the user a convenient way to receive events from multiple partitions and save checkpoints.
 If multiple EventProcessors are running for an event hub, they will automatically balance load.
 This load balancing won’t be available until preview 3.</p>
-<dl>
-<dt>Example:</dt><dd><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MyPartitionProcessor</span><span class="p">(</span><span class="n">PartitionProcessor</span><span class="p">):</span>
+<p class="rubric">Example</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MyPartitionProcessor</span><span class="p">(</span><span class="n">PartitionProcessor</span><span class="p">):</span>
     <span class="n">async</span> <span class="k">def</span> <span class="nf">process_events</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">events</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">events</span><span class="p">:</span>
             <span class="c1"># do something sync or async to process the events</span>
@@ -724,8 +722,6 @@ This load balancing won’t be available until preview 3.</p>
     <span class="n">await</span> <span class="n">partition_manager</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 </pre></div>
 </div>
-</dd>
-</dl>
 <p>Instantiate an EventProcessor.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>

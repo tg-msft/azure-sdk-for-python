@@ -464,8 +464,8 @@ If data is supplied in excess of this limit, multiple messages will be sent.</p>
 </ul>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id1">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id1">
 <div class="code-block-caption"><span class="caption-text">Send a batched message.</span><a class="headerlink" href="#id1" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">azure.servicebus</span> <span class="kn">import</span> <span class="n">BatchMessage</span>
 
@@ -478,8 +478,6 @@ If data is supplied in excess of this limit, multiple messages will be sent.</p>
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="class">
@@ -598,8 +596,8 @@ otherwise it will be <cite>False</cite> until the message is completed or otherw
 </ul>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id2">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id2">
 <div class="code-block-caption"><span class="caption-text">Sending a message with additional properties</span><a class="headerlink" href="#id2" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">message</span> <span class="o">=</span> <span class="n">Message</span><span class="p">(</span><span class="s2">&quot;Hello World!&quot;</span><span class="p">)</span>
 <span class="n">message</span><span class="o">.</span><span class="n">session_id</span> <span class="o">=</span> <span class="s2">&quot;MySessionID&quot;</span>
@@ -631,8 +629,6 @@ otherwise it will be <cite>False</cite> until the message is completed or otherw
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 <dl class="method">
 <dt id="azure.servicebus.common.message.Message.abandon">
 <code class="sig-name descname">abandon</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/servicebus/common/message.html#Message.abandon"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.servicebus.common.message.Message.abandon" title="Permalink to this definition">¶</a></dt>
@@ -1031,8 +1027,8 @@ not included in the connection string.</p></li>
 <dd class="field-odd"><p><strong>message</strong> (<a class="reference internal" href="#azure.servicebus.common.message.Message" title="azure.servicebus.common.message.Message"><em>Message</em></a>) – The message to be sent.</p>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="sender-queue">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="sender-queue">
 <div class="code-block-caption"><span class="caption-text">Send the queued messages</span><a class="headerlink" href="#sender-queue" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">queue_client</span><span class="o">.</span><span class="n">get_sender</span><span class="p">()</span> <span class="k">as</span> <span class="n">sender</span><span class="p">:</span>
     <span class="n">message1</span> <span class="o">=</span> <span class="n">Message</span><span class="p">(</span><span class="s2">&quot;Hello World!&quot;</span><span class="p">)</span>
@@ -1047,8 +1043,6 @@ not included in the connection string.</p></li>
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 </dd></dl>
@@ -1271,8 +1265,8 @@ This cannot be combined with <cite>executor</cite>.</p></li>
 </ul>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id4">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id4">
 <div class="code-block-caption"><span class="caption-text">Automatically renew a message lock</span><a class="headerlink" href="#id4" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">azure.servicebus</span> <span class="kn">import</span> <span class="n">AutoLockRenew</span>
 
@@ -1302,8 +1296,6 @@ This cannot be combined with <cite>executor</cite>.</p></li>
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 <dl class="method">
 <dt id="azure.servicebus.common.utils.AutoLockRenew.register">
 <code class="sig-name descname">register</code><span class="sig-paren">(</span><em class="sig-param">renewable</em>, <em class="sig-param">timeout=300</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/servicebus/common/utils.html#AutoLockRenew.register"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.servicebus.common.utils.AutoLockRenew.register" title="Permalink to this definition">¶</a></dt>

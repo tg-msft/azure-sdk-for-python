@@ -341,8 +341,8 @@
 </ul>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id1">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id1">
 <div class="code-block-caption"><span class="caption-text">Create a new <code class="docutils literal notranslate"><span class="pre">KeyClient</span></code></span><a class="headerlink" href="#id1" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
 <span class="kn">from</span> <span class="nn">azure.identity</span> <span class="kn">import</span> <span class="n">DefaultAzureCredential</span>
@@ -355,8 +355,6 @@
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 <dl class="method">
 <dt id="azure.keyvault.keys.client.KeyClient.backup_key">
 <code class="sig-name descname">backup_key</code><span class="sig-paren">(</span><em class="sig-param">name</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/keyvault/keys/client.html#KeyClient.backup_key"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.keyvault.keys.client.KeyClient.backup_key" title="Permalink to this definition">¶</a></dt>
@@ -378,8 +376,8 @@ USA region cannot be restored to a vault in an EU region.</p>
 <dd class="field-even"><p>~azure.core.exceptions.ResourceNotFoundError if the key doesn’t exist</p>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id2">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id2">
 <div class="code-block-caption"><span class="caption-text">Get a key backup</span><a class="headerlink" href="#id2" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
 <span class="c1"># backup key</span>
@@ -391,8 +389,6 @@ USA region cannot be restored to a vault in an EU region.</p>
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="method">
@@ -420,8 +416,8 @@ the keys/create permission.</p>
 <dd class="field-odd"><p><a class="reference internal" href="#azure.keyvault.keys.models.Key" title="azure.keyvault.keys.models.Key">Key</a></p>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id3">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id3">
 <div class="code-block-caption"><span class="caption-text">Create an elliptic curve key</span><a class="headerlink" href="#id3" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">key_curve</span> <span class="o">=</span> <span class="s2">&quot;P-256&quot;</span>
 
@@ -437,8 +433,6 @@ the keys/create permission.</p>
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="method">
@@ -467,8 +461,8 @@ permission.</p>
 <dd class="field-odd"><p><a class="reference internal" href="#azure.keyvault.keys.models.Key" title="azure.keyvault.keys.models.Key">Key</a></p>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id4">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id4">
 <div class="code-block-caption"><span class="caption-text">Create a key</span><a class="headerlink" href="#id4" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">dateutil</span> <span class="kn">import</span> <span class="n">parser</span> <span class="k">as</span> <span class="n">date_parse</span>
 
@@ -485,8 +479,6 @@ permission.</p>
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="method">
@@ -514,8 +506,8 @@ keys/create permission.</p>
 <dd class="field-odd"><p><a class="reference internal" href="#azure.keyvault.keys.models.Key" title="azure.keyvault.keys.models.Key">Key</a></p>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id5">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id5">
 <div class="code-block-caption"><span class="caption-text">Create RSA key</span><a class="headerlink" href="#id5" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
 <span class="n">key_size</span> <span class="o">=</span> <span class="mi">2048</span>
@@ -533,8 +525,6 @@ keys/create permission.</p>
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="method">
@@ -555,8 +545,8 @@ keys/create permission.</p>
 <dd class="field-even"><p>~azure.core.exceptions.ResourceNotFoundError if the key doesn’t exist</p>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id6">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id6">
 <div class="code-block-caption"><span class="caption-text">Delete a key</span><a class="headerlink" href="#id6" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
 <span class="c1"># delete a key</span>
@@ -573,8 +563,6 @@ keys/create permission.</p>
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="method">
@@ -598,8 +586,8 @@ permission.</p>
 <dd class="field-odd"><p><a class="reference internal" href="#azure.keyvault.keys.models.DeletedKey" title="azure.keyvault.keys.models.DeletedKey">DeletedKey</a></p>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id7">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id7">
 <div class="code-block-caption"><span class="caption-text">Get a deleted key</span><a class="headerlink" href="#id7" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
 <span class="c1"># get a deleted key (requires soft-delete enabled for the vault)</span>
@@ -615,8 +603,6 @@ permission.</p>
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="method">
@@ -638,8 +624,8 @@ of the key.</p></li>
 <dd class="field-odd"><p>~azure.core.exceptions.ResourceNotFoundError if the key doesn’t exist</p>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id8">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id8">
 <div class="code-block-caption"><span class="caption-text">Get a key</span><a class="headerlink" href="#id8" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
 <span class="c1"># get the latest version of a key</span>
@@ -658,8 +644,6 @@ of the key.</p></li>
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="method">
@@ -701,8 +685,8 @@ enabled. Requires the keys/list permission.</p>
 <dd class="field-even"><p><a class="reference internal" href="azure.core.html#azure.core.paging.ItemPaged" title="azure.core.paging.ItemPaged">ItemPaged</a>[<a class="reference internal" href="#azure.keyvault.keys.models.DeletedKey" title="azure.keyvault.keys.models.DeletedKey">DeletedKey</a>]</p>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id9">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id9">
 <div class="code-block-caption"><span class="caption-text">List all the deleted keys</span><a class="headerlink" href="#id9" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
 <span class="c1"># get an iterator of deleted keys (requires soft-delete enabled for the vault)</span>
@@ -718,8 +702,6 @@ enabled. Requires the keys/list permission.</p>
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="method">
@@ -737,8 +719,8 @@ enabled. Requires the keys/list permission.</p>
 <dd class="field-odd"><p><a class="reference internal" href="azure.core.html#azure.core.paging.ItemPaged" title="azure.core.paging.ItemPaged">ItemPaged</a>[<a class="reference internal" href="#azure.keyvault.keys.models.KeyBase" title="azure.keyvault.keys.models.KeyBase">KeyBase</a>]</p>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id10">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id10">
 <div class="code-block-caption"><span class="caption-text">List all versions of a key</span><a class="headerlink" href="#id10" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
 <span class="c1"># get an iterator of a key&#39;s versions</span>
@@ -751,8 +733,6 @@ enabled. Requires the keys/list permission.</p>
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="method">
@@ -767,8 +747,8 @@ enabled. Requires the keys/list permission.</p>
 <dd class="field-even"><p><a class="reference internal" href="azure.core.html#azure.core.paging.ItemPaged" title="azure.core.paging.ItemPaged">ItemPaged</a>[<a class="reference internal" href="#azure.keyvault.keys.models.KeyBase" title="azure.keyvault.keys.models.KeyBase">KeyBase</a>]</p>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id11">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id11">
 <div class="code-block-caption"><span class="caption-text">List all keys</span><a class="headerlink" href="#id11" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
 <span class="c1"># get an iterator of keys</span>
@@ -781,8 +761,6 @@ enabled. Requires the keys/list permission.</p>
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="method">
@@ -799,14 +777,12 @@ does not have soft-delete enabled, <a class="reference internal" href="#azure.ke
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># if the vault has soft-delete enabled, purge permanently deletes a deleted key</span>
+<p class="rubric">Example</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># if the vault has soft-delete enabled, purge permanently deletes a deleted key</span>
 <span class="c1"># (with soft-delete disabled, delete_key is permanent)</span>
 <span class="n">key_client</span><span class="o">.</span><span class="n">purge_deleted_key</span><span class="p">(</span><span class="s2">&quot;key-name&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="method">
@@ -827,8 +803,8 @@ Attempting to recover an non-deleted key will also return an error.</p>
 <dd class="field-odd"><p><a class="reference internal" href="#azure.keyvault.keys.models.Key" title="azure.keyvault.keys.models.Key">Key</a></p>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id12">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id12">
 <div class="code-block-caption"><span class="caption-text">Recover a deleted key</span><a class="headerlink" href="#id12" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
 <span class="c1"># recover a deleted key to its latest version (requires soft-delete enabled for the vault)</span>
@@ -839,8 +815,6 @@ Attempting to recover an non-deleted key will also return an error.</p>
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="method">
@@ -864,8 +838,8 @@ vault must be owned by the same Microsoft Azure subscription as the source vault
 <dd class="field-even"><p>~azure.core.exceptions.ResourceExistsError if the backed up key’s name is already in use</p>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id13">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id13">
 <div class="code-block-caption"><span class="caption-text">Restore a key backup</span><a class="headerlink" href="#id13" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
 <span class="c1"># restore a key backup</span>
@@ -876,8 +850,6 @@ vault must be owned by the same Microsoft Azure subscription as the source vault
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="method">
@@ -907,8 +879,8 @@ permission.</p>
 <dd class="field-even"><p>~azure.core.exceptions.ResourceNotFoundError if the key doesn’t exist</p>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id14">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id14">
 <div class="code-block-caption"><span class="caption-text">Update a key’s attributes</span><a class="headerlink" href="#id14" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
 <span class="c1"># update attributes of an existing key</span>
@@ -925,8 +897,6 @@ permission.</p>
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 </dd></dl>
@@ -1028,7 +998,12 @@ permission.</p>
 <dl class="attribute">
 <dt id="azure.keyvault.keys.enums.JsonWebKeyType.rsa">
 <code class="sig-name descname">rsa</code><em class="property"> = 'RSA'</em><a class="headerlink" href="#azure.keyvault.keys.enums.JsonWebKeyType.rsa" title="Permalink to this definition">¶</a></dt>
-<dd><p>RSA (<a class="reference external" href="https://tools.ietf.org/html/rfc3447">https://tools.ietf.org/html/rfc3447</a>)</p>
+<dd><p>//tools.ietf.org/html/rfc3447)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>RSA (https</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="attribute">
@@ -1143,9 +1118,10 @@ permission.</p>
 <dl class="method">
 <dt id="azure.keyvault.keys.models.KeyBase.enabled">
 <em class="property">property </em><code class="sig-name descname">enabled</code><a class="headerlink" href="#azure.keyvault.keys.models.KeyBase.enabled" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="field-list simple">
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3.5/library/functions.html#bool" title="(in Python v3.5)">bool</a></p>
+<dd><p>bool</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>rtype</p>
 </dd>
 </dl>
 </dd></dl>
@@ -1164,9 +1140,10 @@ permission.</p>
 <dl class="method">
 <dt id="azure.keyvault.keys.models.KeyBase.id">
 <em class="property">property </em><code class="sig-name descname">id</code><a class="headerlink" href="#azure.keyvault.keys.models.KeyBase.id" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="field-list simple">
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)">str</a></p>
+<dd><p>str</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>rtype</p>
 </dd>
 </dl>
 </dd></dl>
@@ -1174,9 +1151,10 @@ permission.</p>
 <dl class="method">
 <dt id="azure.keyvault.keys.models.KeyBase.name">
 <em class="property">property </em><code class="sig-name descname">name</code><a class="headerlink" href="#azure.keyvault.keys.models.KeyBase.name" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="field-list simple">
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)">str</a></p>
+<dd><p>str</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>rtype</p>
 </dd>
 </dl>
 </dd></dl>
@@ -1239,9 +1217,10 @@ permission.</p>
 <dl class="method">
 <dt id="azure.keyvault.keys.models.KeyBase.version">
 <em class="property">property </em><code class="sig-name descname">version</code><a class="headerlink" href="#azure.keyvault.keys.models.KeyBase.version" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="field-list simple">
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)">str</a></p>
+<dd><p>str</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>rtype</p>
 </dd>
 </dl>
 </dd></dl>
@@ -1364,7 +1343,12 @@ permission.</p>
 <dl class="attribute">
 <dt id="azure.keyvault.keys.JsonWebKeyType.rsa">
 <code class="sig-name descname">rsa</code><em class="property"> = 'RSA'</em><a class="headerlink" href="#azure.keyvault.keys.JsonWebKeyType.rsa" title="Permalink to this definition">¶</a></dt>
-<dd><p>RSA (<a class="reference external" href="https://tools.ietf.org/html/rfc3447">https://tools.ietf.org/html/rfc3447</a>)</p>
+<dd><p>//tools.ietf.org/html/rfc3447)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>RSA (https</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="attribute">
@@ -1389,8 +1373,8 @@ permission.</p>
 </ul>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id15">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id15">
 <div class="code-block-caption"><span class="caption-text">Create a new <code class="docutils literal notranslate"><span class="pre">KeyClient</span></code></span><a class="headerlink" href="#id15" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
 <span class="kn">from</span> <span class="nn">azure.identity</span> <span class="kn">import</span> <span class="n">DefaultAzureCredential</span>
@@ -1403,8 +1387,6 @@ permission.</p>
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 <dl class="method">
 <dt id="azure.keyvault.keys.KeyClient.backup_key">
 <code class="sig-name descname">backup_key</code><span class="sig-paren">(</span><em class="sig-param">name</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/keyvault/keys/client.html#KeyClient.backup_key"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.keyvault.keys.KeyClient.backup_key" title="Permalink to this definition">¶</a></dt>
@@ -1426,8 +1408,8 @@ USA region cannot be restored to a vault in an EU region.</p>
 <dd class="field-even"><p>~azure.core.exceptions.ResourceNotFoundError if the key doesn’t exist</p>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id16">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id16">
 <div class="code-block-caption"><span class="caption-text">Get a key backup</span><a class="headerlink" href="#id16" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
 <span class="c1"># backup key</span>
@@ -1439,8 +1421,6 @@ USA region cannot be restored to a vault in an EU region.</p>
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="method">
@@ -1468,8 +1448,8 @@ the keys/create permission.</p>
 <dd class="field-odd"><p><a class="reference internal" href="#azure.keyvault.keys.models.Key" title="azure.keyvault.keys.models.Key">Key</a></p>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id17">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id17">
 <div class="code-block-caption"><span class="caption-text">Create an elliptic curve key</span><a class="headerlink" href="#id17" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">key_curve</span> <span class="o">=</span> <span class="s2">&quot;P-256&quot;</span>
 
@@ -1485,8 +1465,6 @@ the keys/create permission.</p>
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="method">
@@ -1515,8 +1493,8 @@ permission.</p>
 <dd class="field-odd"><p><a class="reference internal" href="#azure.keyvault.keys.models.Key" title="azure.keyvault.keys.models.Key">Key</a></p>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id18">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id18">
 <div class="code-block-caption"><span class="caption-text">Create a key</span><a class="headerlink" href="#id18" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">dateutil</span> <span class="kn">import</span> <span class="n">parser</span> <span class="k">as</span> <span class="n">date_parse</span>
 
@@ -1533,8 +1511,6 @@ permission.</p>
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="method">
@@ -1562,8 +1538,8 @@ keys/create permission.</p>
 <dd class="field-odd"><p><a class="reference internal" href="#azure.keyvault.keys.models.Key" title="azure.keyvault.keys.models.Key">Key</a></p>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id19">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id19">
 <div class="code-block-caption"><span class="caption-text">Create RSA key</span><a class="headerlink" href="#id19" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
 <span class="n">key_size</span> <span class="o">=</span> <span class="mi">2048</span>
@@ -1581,8 +1557,6 @@ keys/create permission.</p>
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="method">
@@ -1603,8 +1577,8 @@ keys/create permission.</p>
 <dd class="field-even"><p>~azure.core.exceptions.ResourceNotFoundError if the key doesn’t exist</p>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id20">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id20">
 <div class="code-block-caption"><span class="caption-text">Delete a key</span><a class="headerlink" href="#id20" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
 <span class="c1"># delete a key</span>
@@ -1621,8 +1595,6 @@ keys/create permission.</p>
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="method">
@@ -1646,8 +1618,8 @@ permission.</p>
 <dd class="field-odd"><p><a class="reference internal" href="#azure.keyvault.keys.models.DeletedKey" title="azure.keyvault.keys.models.DeletedKey">DeletedKey</a></p>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id21">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id21">
 <div class="code-block-caption"><span class="caption-text">Get a deleted key</span><a class="headerlink" href="#id21" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
 <span class="c1"># get a deleted key (requires soft-delete enabled for the vault)</span>
@@ -1663,8 +1635,6 @@ permission.</p>
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="method">
@@ -1686,8 +1656,8 @@ of the key.</p></li>
 <dd class="field-odd"><p>~azure.core.exceptions.ResourceNotFoundError if the key doesn’t exist</p>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id22">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id22">
 <div class="code-block-caption"><span class="caption-text">Get a key</span><a class="headerlink" href="#id22" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
 <span class="c1"># get the latest version of a key</span>
@@ -1706,8 +1676,6 @@ of the key.</p></li>
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="method">
@@ -1749,8 +1717,8 @@ enabled. Requires the keys/list permission.</p>
 <dd class="field-even"><p><a class="reference internal" href="azure.core.html#azure.core.paging.ItemPaged" title="azure.core.paging.ItemPaged">ItemPaged</a>[<a class="reference internal" href="#azure.keyvault.keys.models.DeletedKey" title="azure.keyvault.keys.models.DeletedKey">DeletedKey</a>]</p>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id23">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id23">
 <div class="code-block-caption"><span class="caption-text">List all the deleted keys</span><a class="headerlink" href="#id23" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
 <span class="c1"># get an iterator of deleted keys (requires soft-delete enabled for the vault)</span>
@@ -1766,8 +1734,6 @@ enabled. Requires the keys/list permission.</p>
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="method">
@@ -1785,8 +1751,8 @@ enabled. Requires the keys/list permission.</p>
 <dd class="field-odd"><p><a class="reference internal" href="azure.core.html#azure.core.paging.ItemPaged" title="azure.core.paging.ItemPaged">ItemPaged</a>[<a class="reference internal" href="#azure.keyvault.keys.models.KeyBase" title="azure.keyvault.keys.models.KeyBase">KeyBase</a>]</p>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id24">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id24">
 <div class="code-block-caption"><span class="caption-text">List all versions of a key</span><a class="headerlink" href="#id24" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
 <span class="c1"># get an iterator of a key&#39;s versions</span>
@@ -1799,8 +1765,6 @@ enabled. Requires the keys/list permission.</p>
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="method">
@@ -1815,8 +1779,8 @@ enabled. Requires the keys/list permission.</p>
 <dd class="field-even"><p><a class="reference internal" href="azure.core.html#azure.core.paging.ItemPaged" title="azure.core.paging.ItemPaged">ItemPaged</a>[<a class="reference internal" href="#azure.keyvault.keys.models.KeyBase" title="azure.keyvault.keys.models.KeyBase">KeyBase</a>]</p>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id25">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id25">
 <div class="code-block-caption"><span class="caption-text">List all keys</span><a class="headerlink" href="#id25" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
 <span class="c1"># get an iterator of keys</span>
@@ -1829,8 +1793,6 @@ enabled. Requires the keys/list permission.</p>
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="method">
@@ -1847,14 +1809,12 @@ does not have soft-delete enabled, <a class="reference internal" href="#azure.ke
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># if the vault has soft-delete enabled, purge permanently deletes a deleted key</span>
+<p class="rubric">Example</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># if the vault has soft-delete enabled, purge permanently deletes a deleted key</span>
 <span class="c1"># (with soft-delete disabled, delete_key is permanent)</span>
 <span class="n">key_client</span><span class="o">.</span><span class="n">purge_deleted_key</span><span class="p">(</span><span class="s2">&quot;key-name&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="method">
@@ -1875,8 +1835,8 @@ Attempting to recover an non-deleted key will also return an error.</p>
 <dd class="field-odd"><p><a class="reference internal" href="#azure.keyvault.keys.models.Key" title="azure.keyvault.keys.models.Key">Key</a></p>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id26">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id26">
 <div class="code-block-caption"><span class="caption-text">Recover a deleted key</span><a class="headerlink" href="#id26" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
 <span class="c1"># recover a deleted key to its latest version (requires soft-delete enabled for the vault)</span>
@@ -1887,8 +1847,6 @@ Attempting to recover an non-deleted key will also return an error.</p>
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="method">
@@ -1912,8 +1870,8 @@ vault must be owned by the same Microsoft Azure subscription as the source vault
 <dd class="field-even"><p>~azure.core.exceptions.ResourceExistsError if the backed up key’s name is already in use</p>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id27">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id27">
 <div class="code-block-caption"><span class="caption-text">Restore a key backup</span><a class="headerlink" href="#id27" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
 <span class="c1"># restore a key backup</span>
@@ -1924,8 +1882,6 @@ vault must be owned by the same Microsoft Azure subscription as the source vault
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="method">
@@ -1955,8 +1911,8 @@ permission.</p>
 <dd class="field-even"><p>~azure.core.exceptions.ResourceNotFoundError if the key doesn’t exist</p>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id28">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id28">
 <div class="code-block-caption"><span class="caption-text">Update a key’s attributes</span><a class="headerlink" href="#id28" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
 <span class="c1"># update attributes of an existing key</span>
@@ -1973,8 +1929,6 @@ permission.</p>
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 </dd></dl>

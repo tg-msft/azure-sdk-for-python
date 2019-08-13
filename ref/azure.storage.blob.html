@@ -355,8 +355,8 @@ If the URL already has a SAS token, specifying an explicit credential will take 
 </ul>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id1">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id1">
 <div class="code-block-caption"><span class="caption-text">Creating the BlobClient from a URL to a public blob (no auth needed).</span><a class="headerlink" href="#id1" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">azure.storage.blob</span> <span class="kn">import</span> <span class="n">BlobClient</span>
 <span class="n">blob_client</span> <span class="o">=</span> <span class="n">BlobClient</span><span class="p">(</span><span class="n">blob_url</span><span class="o">=</span><span class="s2">&quot;https://account.blob.core.windows.net/container/blob-name&quot;</span><span class="p">)</span>
@@ -372,8 +372,6 @@ If the URL already has a SAS token, specifying an explicit credential will take 
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 <dl class="method">
 <dt id="azure.storage.blob.blob_client.BlobClient.abort_copy">
 <code class="sig-name descname">abort_copy</code><span class="sig-paren">(</span><em class="sig-param">copy_id</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/storage/blob/blob_client.html#BlobClient.abort_copy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.storage.blob.blob_client.BlobClient.abort_copy" title="Permalink to this definition">¶</a></dt>
@@ -389,8 +387,8 @@ instance of BlobProperties.</p>
 <dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3.5/library/constants.html#None" title="(in Python v3.5)">None</a></p>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id3">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id3">
 <div class="code-block-caption"><span class="caption-text">Abort copying a blob from URL.</span><a class="headerlink" href="#id3" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Passing in copy id to abort copy operation</span>
 <span class="n">copied_blob</span><span class="o">.</span><span class="n">abort_copy</span><span class="p">(</span><span class="n">copy_id</span><span class="p">)</span>
@@ -401,8 +399,6 @@ instance of BlobProperties.</p>
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="method">
@@ -448,8 +444,8 @@ operation if it does exist.</p></li>
 <dd class="field-odd"><p><a class="reference internal" href="#azure.storage.blob.lease.LeaseClient" title="azure.storage.blob.lease.LeaseClient">LeaseClient</a></p>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id4">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id4">
 <div class="code-block-caption"><span class="caption-text">Acquiring a lease on a blob.</span><a class="headerlink" href="#id4" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Acquire a lease on the blob</span>
 <span class="n">lease</span> <span class="o">=</span> <span class="n">blob_client</span><span class="o">.</span><span class="n">acquire_lease</span><span class="p">()</span>
@@ -459,8 +455,6 @@ operation if it does exist.</p></li>
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="method">
@@ -752,8 +746,8 @@ or the lease ID as a string.</p></li>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#dict" title="(in Python v3.5)">dict</a>[<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)">str</a>, Any]</p>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id5">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id5">
 <div class="code-block-caption"><span class="caption-text">Create a snapshot of the blob.</span><a class="headerlink" href="#id5" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a read-only snapshot of the blob at this point in time</span>
 <span class="n">snapshot_blob</span> <span class="o">=</span> <span class="n">blob_client</span><span class="o">.</span><span class="n">create_snapshot</span><span class="p">()</span>
@@ -763,8 +757,6 @@ or the lease ID as a string.</p></li>
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="method">
@@ -817,15 +809,13 @@ operation if it does exist.</p></li>
 <dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3.5/library/constants.html#None" title="(in Python v3.5)">None</a></p>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id6">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id6">
 <div class="code-block-caption"><span class="caption-text">Delete a blob.</span><a class="headerlink" href="#id6" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">blob_client</span><span class="o">.</span><span class="n">delete_blob</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="method">
@@ -878,16 +868,14 @@ each call individually.</p></li>
 <dd class="field-odd"><p>StorageStreamDownloader</p>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id7">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id7">
 <div class="code-block-caption"><span class="caption-text">Download a blob.</span><a class="headerlink" href="#id7" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">DEST_FILE</span><span class="p">,</span> <span class="s2">&quot;wb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">my_blob</span><span class="p">:</span>
     <span class="n">my_blob</span><span class="o">.</span><span class="n">writelines</span><span class="p">(</span><span class="n">blob_client</span><span class="o">.</span><span class="n">download_blob</span><span class="p">())</span>
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="method">
@@ -911,8 +899,8 @@ Credentials provided here will take precedence over those in the connection stri
 </ul>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id8">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id8">
 <div class="code-block-caption"><span class="caption-text">Creating the BlobClient from a connection string.</span><a class="headerlink" href="#id8" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">azure.storage.blob</span> <span class="kn">import</span> <span class="n">BlobClient</span>
 <span class="n">blob_client</span> <span class="o">=</span> <span class="n">BlobClient</span><span class="o">.</span><span class="n">from_connection_string</span><span class="p">(</span>
@@ -920,8 +908,6 @@ Credentials provided here will take precedence over those in the connection stri
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="method">
@@ -1033,15 +1019,13 @@ operation if it does exist.</p></li>
 <dd class="field-odd"><p><a class="reference internal" href="#azure.storage.blob.models.BlobProperties" title="azure.storage.blob.models.BlobProperties">BlobProperties</a></p>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id9">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id9">
 <div class="code-block-caption"><span class="caption-text">Getting the properties for a blob.</span><a class="headerlink" href="#id9" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">properties</span> <span class="o">=</span> <span class="n">blob_client</span><span class="o">.</span><span class="n">get_blob_properties</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="method">
@@ -1511,8 +1495,8 @@ premium storage accounts.</p></li>
 <dd class="field-odd"><p>Dict[<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)">str</a>, Union[<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)">str</a>, datetime]]</p>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id10">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id10">
 <div class="code-block-caption"><span class="caption-text">Copy a blob from a URL.</span><a class="headerlink" href="#id10" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get the blob client with the source blob</span>
 <span class="n">source_blob</span> <span class="o">=</span> <span class="s2">&quot;http://www.gutenberg.org/files/59466/59466-0.txt&quot;</span>
@@ -1525,8 +1509,6 @@ premium storage accounts.</p></li>
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="method">
@@ -1543,16 +1525,14 @@ set in the delete retention policy.</p>
 <dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3.5/library/constants.html#None" title="(in Python v3.5)">None</a></p>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id11">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id11">
 <div class="code-block-caption"><span class="caption-text">Undeleting a blob.</span><a class="headerlink" href="#id11" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Undelete the blob before the retention policy expires</span>
 <span class="n">blob_client</span><span class="o">.</span><span class="n">undelete_blob</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="method">
@@ -1626,8 +1606,8 @@ MaxBlobSizeConditionNotMet error (HTTP status code 412 - Precondition Failed).</
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#dict" title="(in Python v3.5)">dict</a>[<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)">str</a>, Any]</p>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id12">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id12">
 <div class="code-block-caption"><span class="caption-text">Upload a blob to the container.</span><a class="headerlink" href="#id12" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Upload content to block blob</span>
 <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">SOURCE_FILE</span><span class="p">,</span> <span class="s2">&quot;rb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">data</span><span class="p">:</span>
@@ -1635,8 +1615,6 @@ MaxBlobSizeConditionNotMet error (HTTP status code 412 - Precondition Failed).</
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="method">
@@ -1743,8 +1721,8 @@ If the URL already has a SAS token, specifying an explicit credential will take 
 </ul>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id13">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id13">
 <div class="code-block-caption"><span class="caption-text">Creating the BlobServiceClient with account url and credential.</span><a class="headerlink" href="#id13" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">azure.storage.blob</span> <span class="kn">import</span> <span class="n">BlobServiceClient</span>
 <span class="n">blob_service_client</span> <span class="o">=</span> <span class="n">BlobServiceClient</span><span class="p">(</span><span class="n">account_url</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">url</span><span class="p">,</span> <span class="n">credential</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">shared_access_key</span><span class="p">)</span>
@@ -1767,8 +1745,6 @@ If the URL already has a SAS token, specifying an explicit credential will take 
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 <dl class="method">
 <dt id="azure.storage.blob.blob_service_client.BlobServiceClient.create_container">
 <code class="sig-name descname">create_container</code><span class="sig-paren">(</span><em class="sig-param">name</em>, <em class="sig-param">metadata=None</em>, <em class="sig-param">public_access=None</em>, <em class="sig-param">timeout=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/storage/blob/blob_service_client.html#BlobServiceClient.create_container"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.storage.blob.blob_service_client.BlobServiceClient.create_container" title="Permalink to this definition">¶</a></dt>
@@ -1790,8 +1766,8 @@ container as metadata. Example: <cite>{‘Category’:’test’}</cite></p></li
 <dd class="field-even"><p><a class="reference internal" href="#azure.storage.blob.container_client.ContainerClient" title="azure.storage.blob.container_client.ContainerClient">ContainerClient</a></p>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id15">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id15">
 <div class="code-block-caption"><span class="caption-text">Creating a container in the blob service.</span><a class="headerlink" href="#id15" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span>
     <span class="n">new_container</span> <span class="o">=</span> <span class="n">blob_service_client</span><span class="o">.</span><span class="n">create_container</span><span class="p">(</span><span class="s2">&quot;containerfromblobservice&quot;</span><span class="p">)</span>
@@ -1801,8 +1777,6 @@ container as metadata. Example: <cite>{‘Category’:’test’}</cite></p></li
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="method">
@@ -1843,8 +1817,8 @@ operation if it does exist.</p></li>
 <dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3.5/library/constants.html#None" title="(in Python v3.5)">None</a></p>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id16">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id16">
 <div class="code-block-caption"><span class="caption-text">Deleting a container in the blob service.</span><a class="headerlink" href="#id16" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Delete container if it exists</span>
 <span class="k">try</span><span class="p">:</span>
@@ -1854,8 +1828,6 @@ operation if it does exist.</p></li>
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="method">
@@ -1874,16 +1846,14 @@ Credentials provided here will take precedence over those in the connection stri
 </ul>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id17">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id17">
 <div class="code-block-caption"><span class="caption-text">Creating the BlobServiceClient from a connection string.</span><a class="headerlink" href="#id17" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">azure.storage.blob</span> <span class="kn">import</span> <span class="n">BlobServiceClient</span>
 <span class="n">blob_service_client</span> <span class="o">=</span> <span class="n">BlobServiceClient</span><span class="o">.</span><span class="n">from_connection_string</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">connection_string</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="method">
@@ -1927,8 +1897,8 @@ restricts the request to those IP addresses.</p></li>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)">str</a></p>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id18">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id18">
 <div class="code-block-caption"><span class="caption-text">Generating a shared access signature.</span><a class="headerlink" href="#id18" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a SAS token to use to authenticate a new client</span>
 <span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">timedelta</span>
@@ -1942,8 +1912,6 @@ restricts the request to those IP addresses.</p></li>
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="method">
@@ -1960,16 +1928,14 @@ The keys in the returned dictionary include ‘sku_name’ and ‘account_kind�
 <dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#dict" title="(in Python v3.5)">dict</a>(<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)">str</a>, <a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)">str</a>)</p>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id19">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id19">
 <div class="code-block-caption"><span class="caption-text">Getting account information for the blob service.</span><a class="headerlink" href="#id19" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">account_info</span> <span class="o">=</span> <span class="n">blob_service_client</span><span class="o">.</span><span class="n">get_account_information</span><span class="p">()</span>
 <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Using Storage SKU: {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">account_info</span><span class="p">[</span><span class="s1">&#39;sku_name&#39;</span><span class="p">]))</span>
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="method">
@@ -1995,8 +1961,8 @@ or a dictionary output returned by <a class="reference internal" href="#azure.st
 <dd class="field-odd"><p><a class="reference internal" href="#azure.storage.blob.blob_client.BlobClient" title="azure.storage.blob.blob_client.BlobClient">BlobClient</a></p>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id20">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id20">
 <div class="code-block-caption"><span class="caption-text">Getting the blob client to interact with a specific blob.</span><a class="headerlink" href="#id20" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">blob_client</span> <span class="o">=</span> <span class="n">blob_service_client</span><span class="o">.</span><span class="n">get_blob_client</span><span class="p">(</span><span class="n">container</span><span class="o">=</span><span class="s2">&quot;containertest&quot;</span><span class="p">,</span> <span class="n">blob</span><span class="o">=</span><span class="s2">&quot;my_blob&quot;</span><span class="p">)</span>
 <span class="k">try</span><span class="p">:</span>
@@ -2006,8 +1972,6 @@ or a dictionary output returned by <a class="reference internal" href="#azure.st
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="method">
@@ -2027,8 +1991,8 @@ or an instance of ContainerProperties.</p>
 <dd class="field-odd"><p>ContainerClient</p>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id21">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id21">
 <div class="code-block-caption"><span class="caption-text">Getting the container client to interact with a specific container.</span><a class="headerlink" href="#id21" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get a client to interact with a specific container - though it may not yet exist</span>
 <span class="n">container_client</span> <span class="o">=</span> <span class="n">blob_service_client</span><span class="o">.</span><span class="n">get_container_client</span><span class="p">(</span><span class="s2">&quot;containertest&quot;</span><span class="p">)</span>
@@ -2040,8 +2004,6 @@ or an instance of ContainerProperties.</p>
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="method">
@@ -2057,15 +2019,13 @@ Azure Storage Analytics.</p>
 <dd class="field-even"><p>StorageServiceProperties</p>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id22">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id22">
 <div class="code-block-caption"><span class="caption-text">Getting service properties for the blob service.</span><a class="headerlink" href="#id22" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">properties</span> <span class="o">=</span> <span class="n">blob_service_client</span><span class="o">.</span><span class="n">get_service_properties</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="method">
@@ -2097,15 +2057,13 @@ replication is enabled for your storage account.</p>
 <dd class="field-odd"><p>StorageServiceStats</p>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id23">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id23">
 <div class="code-block-caption"><span class="caption-text">Getting service stats for the blob service.</span><a class="headerlink" href="#id23" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">stats</span> <span class="o">=</span> <span class="n">blob_service_client</span><span class="o">.</span><span class="n">get_service_stats</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="method">
@@ -2133,8 +2091,8 @@ call. If the request does not specify the server will return up to 5,000 items.<
 <dd class="field-odd"><p><a class="reference internal" href="azure.core.html#azure.core.paging.ItemPaged" title="azure.core.paging.ItemPaged">ItemPaged</a>[ContainerProperties]</p>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id24">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id24">
 <div class="code-block-caption"><span class="caption-text">Listing the containers in the blob service.</span><a class="headerlink" href="#id24" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># List all containers</span>
 <span class="n">all_containers</span> <span class="o">=</span> <span class="n">blob_service_client</span><span class="o">.</span><span class="n">list_containers</span><span class="p">(</span><span class="n">include_metadata</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
@@ -2148,8 +2106,6 @@ call. If the request does not specify the server will return up to 5,000 items.<
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="method">
@@ -2183,8 +2139,8 @@ and if yes, indicates the index document and 404 error document to use.</p></li>
 <dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3.5/library/constants.html#None" title="(in Python v3.5)">None</a></p>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id25">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id25">
 <div class="code-block-caption"><span class="caption-text">Setting service properties for the blob service.</span><a class="headerlink" href="#id25" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create service properties</span>
 <span class="kn">from</span> <span class="nn">azure.storage.blob</span> <span class="kn">import</span> <span class="n">Logging</span><span class="p">,</span> <span class="n">Metrics</span><span class="p">,</span> <span class="n">CorsRule</span><span class="p">,</span> <span class="n">RetentionPolicy</span>
@@ -2206,8 +2162,6 @@ and if yes, indicates the index document and 404 error document to use.</p></li>
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 </dd></dl>
@@ -2252,8 +2206,8 @@ If the URL already has a SAS token, specifying an explicit credential will take 
 </ul>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id26">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id26">
 <div class="code-block-caption"><span class="caption-text">Get a ContainerClient from an existing BlobServiceClient.</span><a class="headerlink" href="#id26" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Instantiate a BlobServiceClient using a connection string</span>
 <span class="kn">from</span> <span class="nn">azure.storage.blob</span> <span class="kn">import</span> <span class="n">BlobServiceClient</span>
@@ -2273,8 +2227,6 @@ If the URL already has a SAS token, specifying an explicit credential will take 
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 <dl class="method">
 <dt id="azure.storage.blob.container_client.ContainerClient.acquire_lease">
 <code class="sig-name descname">acquire_lease</code><span class="sig-paren">(</span><em class="sig-param">lease_duration=-1</em>, <em class="sig-param">lease_id=None</em>, <em class="sig-param">timeout=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/storage/blob/container_client.html#ContainerClient.acquire_lease"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.storage.blob.container_client.ContainerClient.acquire_lease" title="Permalink to this definition">¶</a></dt>
@@ -2317,8 +2269,8 @@ operation if it does exist.</p></li>
 <dd class="field-odd"><p><a class="reference internal" href="#azure.storage.blob.lease.LeaseClient" title="azure.storage.blob.lease.LeaseClient">LeaseClient</a></p>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id28">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id28">
 <div class="code-block-caption"><span class="caption-text">Acquiring a lease on the container.</span><a class="headerlink" href="#id28" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Acquire a lease on the container</span>
 <span class="n">lease</span> <span class="o">=</span> <span class="n">container_client</span><span class="o">.</span><span class="n">acquire_lease</span><span class="p">()</span>
@@ -2328,8 +2280,6 @@ operation if it does exist.</p></li>
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="method">
@@ -2350,15 +2300,13 @@ container as metadata. Example:{‘Category’:’test’}</p></li>
 <dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3.5/library/constants.html#None" title="(in Python v3.5)">None</a></p>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id29">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id29">
 <div class="code-block-caption"><span class="caption-text">Creating a container to store blobs.</span><a class="headerlink" href="#id29" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">container_client</span><span class="o">.</span><span class="n">create_container</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="method">
@@ -2458,15 +2406,13 @@ operation if it does exist.</p></li>
 <dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3.5/library/constants.html#None" title="(in Python v3.5)">None</a></p>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id30">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id30">
 <div class="code-block-caption"><span class="caption-text">Delete a container.</span><a class="headerlink" href="#id30" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">container_client</span><span class="o">.</span><span class="n">delete_container</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="method">
@@ -2486,8 +2432,8 @@ Credentials provided here will take precedence over those in the connection stri
 </ul>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id31">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id31">
 <div class="code-block-caption"><span class="caption-text">Creating the ContainerClient from a connection string.</span><a class="headerlink" href="#id31" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">azure.storage.blob</span> <span class="kn">import</span> <span class="n">ContainerClient</span>
 <span class="n">container_client</span> <span class="o">=</span> <span class="n">ContainerClient</span><span class="o">.</span><span class="n">from_connection_string</span><span class="p">(</span>
@@ -2495,8 +2441,6 @@ Credentials provided here will take precedence over those in the connection stri
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="method">
@@ -2552,8 +2496,8 @@ using this shared access signature.</p></li>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)">str</a></p>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id32">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id32">
 <div class="code-block-caption"><span class="caption-text">Generating a sas token.</span><a class="headerlink" href="#id32" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Use access policy to generate a sas token</span>
 <span class="n">sas_token</span> <span class="o">=</span> <span class="n">container_client</span><span class="o">.</span><span class="n">generate_shared_access_signature</span><span class="p">(</span>
@@ -2562,8 +2506,6 @@ using this shared access signature.</p></li>
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="method">
@@ -2602,16 +2544,14 @@ a blob value specified in the blob URL.</p></li>
 <dd class="field-odd"><p><a class="reference internal" href="#azure.storage.blob.blob_client.BlobClient" title="azure.storage.blob.blob_client.BlobClient">BlobClient</a></p>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id33">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id33">
 <div class="code-block-caption"><span class="caption-text">Get the blob client.</span><a class="headerlink" href="#id33" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get the BlobClient from the ContainerClient to interact with a specific blob</span>
 <span class="n">blob_client</span> <span class="o">=</span> <span class="n">container_client</span><span class="o">.</span><span class="n">get_blob_client</span><span class="p">(</span><span class="s2">&quot;mynewblob&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="method">
@@ -2634,15 +2574,13 @@ container’s lease is active and matches this ID.</p></li>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#dict" title="(in Python v3.5)">dict</a>[<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)">str</a>, <a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)">str</a>]</p>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id34">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id34">
 <div class="code-block-caption"><span class="caption-text">Getting the access policy on the container.</span><a class="headerlink" href="#id34" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">policy</span> <span class="o">=</span> <span class="n">container_client</span><span class="o">.</span><span class="n">get_container_access_policy</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="method">
@@ -2665,15 +2603,13 @@ container’s lease is active and matches this ID.</p></li>
 <dd class="field-odd"><p><a class="reference internal" href="#azure.storage.blob.models.ContainerProperties" title="azure.storage.blob.models.ContainerProperties">ContainerProperties</a></p>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id35">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id35">
 <div class="code-block-caption"><span class="caption-text">Getting properties on the container.</span><a class="headerlink" href="#id35" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">properties</span> <span class="o">=</span> <span class="n">container_client</span><span class="o">.</span><span class="n">get_container_properties</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="method">
@@ -2699,8 +2635,8 @@ Options include: ‘snapshots’, ‘metadata’, ‘uncommittedblobs’, ‘cop
 <dd class="field-odd"><p><a class="reference internal" href="azure.core.html#azure.core.paging.ItemPaged" title="azure.core.paging.ItemPaged">ItemPaged</a>[<a class="reference internal" href="#azure.storage.blob.models.BlobProperties" title="azure.storage.blob.models.BlobProperties">BlobProperties</a>]</p>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id36">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id36">
 <div class="code-block-caption"><span class="caption-text">List the blobs in the container.</span><a class="headerlink" href="#id36" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">blobs_list</span> <span class="o">=</span> <span class="n">container_client</span><span class="o">.</span><span class="n">list_blobs</span><span class="p">()</span>
 <span class="k">for</span> <span class="n">blob</span> <span class="ow">in</span> <span class="n">blobs_list</span><span class="p">:</span>
@@ -2708,8 +2644,6 @@ Options include: ‘snapshots’, ‘metadata’, ‘uncommittedblobs’, ‘cop
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="method">
@@ -2744,8 +2678,8 @@ the resource has not been modified since the specified date/time.</p></li>
 <dd class="field-even"><p>Container-updated property dict (Etag and last modified).</p>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id37">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id37">
 <div class="code-block-caption"><span class="caption-text">Setting access policy on the container.</span><a class="headerlink" href="#id37" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create access policy</span>
 <span class="kn">from</span> <span class="nn">azure.storage.blob</span> <span class="kn">import</span> <span class="n">AccessPolicy</span><span class="p">,</span> <span class="n">ContainerPermissions</span>
@@ -2760,8 +2694,6 @@ the resource has not been modified since the specified date/time.</p></li>
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="method">
@@ -2790,8 +2722,8 @@ if the resource has been modified since the specified time.</p></li>
 <dd class="field-even"><p>Container-updated property dict (Etag and last modified).</p>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id38">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id38">
 <div class="code-block-caption"><span class="caption-text">Setting metadata on the container.</span><a class="headerlink" href="#id38" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create key, value pairs for metadata</span>
 <span class="n">metadata</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;test&#39;</span><span class="p">}</span>
@@ -2801,8 +2733,6 @@ if the resource has been modified since the specified time.</p></li>
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="method">
@@ -2876,8 +2806,8 @@ MaxBlobSizeConditionNotMet error (HTTP status code 412 - Precondition Failed).</
 <dd class="field-odd"><p><a class="reference internal" href="#azure.storage.blob.blob_client.BlobClient" title="azure.storage.blob.blob_client.BlobClient">BlobClient</a></p>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id39">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id39">
 <div class="code-block-caption"><span class="caption-text">Upload blob to the container.</span><a class="headerlink" href="#id39" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">SOURCE_FILE</span><span class="p">,</span> <span class="s2">&quot;rb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">data</span><span class="p">:</span>
     <span class="n">blob_client</span> <span class="o">=</span> <span class="n">container_client</span><span class="o">.</span><span class="n">upload_blob</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;blobby&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
@@ -2886,8 +2816,6 @@ MaxBlobSizeConditionNotMet error (HTTP status code 412 - Precondition Failed).</
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="method">
@@ -3971,8 +3899,8 @@ If the URL already has a SAS token, specifying an explicit credential will take 
 </ul>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id40">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id40">
 <div class="code-block-caption"><span class="caption-text">Creating the BlobServiceClient with account url and credential.</span><a class="headerlink" href="#id40" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">azure.storage.blob</span> <span class="kn">import</span> <span class="n">BlobServiceClient</span>
 <span class="n">blob_service_client</span> <span class="o">=</span> <span class="n">BlobServiceClient</span><span class="p">(</span><span class="n">account_url</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">url</span><span class="p">,</span> <span class="n">credential</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">shared_access_key</span><span class="p">)</span>
@@ -3995,8 +3923,6 @@ If the URL already has a SAS token, specifying an explicit credential will take 
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 <dl class="method">
 <dt id="azure.storage.blob.BlobServiceClient.create_container">
 <code class="sig-name descname">create_container</code><span class="sig-paren">(</span><em class="sig-param">name</em>, <em class="sig-param">metadata=None</em>, <em class="sig-param">public_access=None</em>, <em class="sig-param">timeout=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/storage/blob/blob_service_client.html#BlobServiceClient.create_container"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.storage.blob.BlobServiceClient.create_container" title="Permalink to this definition">¶</a></dt>
@@ -4018,8 +3944,8 @@ container as metadata. Example: <cite>{‘Category’:’test’}</cite></p></li
 <dd class="field-even"><p><a class="reference internal" href="#azure.storage.blob.container_client.ContainerClient" title="azure.storage.blob.container_client.ContainerClient">ContainerClient</a></p>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id42">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id42">
 <div class="code-block-caption"><span class="caption-text">Creating a container in the blob service.</span><a class="headerlink" href="#id42" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span>
     <span class="n">new_container</span> <span class="o">=</span> <span class="n">blob_service_client</span><span class="o">.</span><span class="n">create_container</span><span class="p">(</span><span class="s2">&quot;containerfromblobservice&quot;</span><span class="p">)</span>
@@ -4029,8 +3955,6 @@ container as metadata. Example: <cite>{‘Category’:’test’}</cite></p></li
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="method">
@@ -4071,8 +3995,8 @@ operation if it does exist.</p></li>
 <dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3.5/library/constants.html#None" title="(in Python v3.5)">None</a></p>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id43">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id43">
 <div class="code-block-caption"><span class="caption-text">Deleting a container in the blob service.</span><a class="headerlink" href="#id43" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Delete container if it exists</span>
 <span class="k">try</span><span class="p">:</span>
@@ -4082,8 +4006,6 @@ operation if it does exist.</p></li>
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="method">
@@ -4102,16 +4024,14 @@ Credentials provided here will take precedence over those in the connection stri
 </ul>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id44">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id44">
 <div class="code-block-caption"><span class="caption-text">Creating the BlobServiceClient from a connection string.</span><a class="headerlink" href="#id44" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">azure.storage.blob</span> <span class="kn">import</span> <span class="n">BlobServiceClient</span>
 <span class="n">blob_service_client</span> <span class="o">=</span> <span class="n">BlobServiceClient</span><span class="o">.</span><span class="n">from_connection_string</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">connection_string</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="method">
@@ -4155,8 +4075,8 @@ restricts the request to those IP addresses.</p></li>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)">str</a></p>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id45">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id45">
 <div class="code-block-caption"><span class="caption-text">Generating a shared access signature.</span><a class="headerlink" href="#id45" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a SAS token to use to authenticate a new client</span>
 <span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">timedelta</span>
@@ -4170,8 +4090,6 @@ restricts the request to those IP addresses.</p></li>
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="method">
@@ -4188,16 +4106,14 @@ The keys in the returned dictionary include ‘sku_name’ and ‘account_kind�
 <dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#dict" title="(in Python v3.5)">dict</a>(<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)">str</a>, <a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)">str</a>)</p>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id46">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id46">
 <div class="code-block-caption"><span class="caption-text">Getting account information for the blob service.</span><a class="headerlink" href="#id46" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">account_info</span> <span class="o">=</span> <span class="n">blob_service_client</span><span class="o">.</span><span class="n">get_account_information</span><span class="p">()</span>
 <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Using Storage SKU: {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">account_info</span><span class="p">[</span><span class="s1">&#39;sku_name&#39;</span><span class="p">]))</span>
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="method">
@@ -4223,8 +4139,8 @@ or a dictionary output returned by <a class="reference internal" href="#azure.st
 <dd class="field-odd"><p><a class="reference internal" href="#azure.storage.blob.blob_client.BlobClient" title="azure.storage.blob.blob_client.BlobClient">BlobClient</a></p>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id47">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id47">
 <div class="code-block-caption"><span class="caption-text">Getting the blob client to interact with a specific blob.</span><a class="headerlink" href="#id47" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">blob_client</span> <span class="o">=</span> <span class="n">blob_service_client</span><span class="o">.</span><span class="n">get_blob_client</span><span class="p">(</span><span class="n">container</span><span class="o">=</span><span class="s2">&quot;containertest&quot;</span><span class="p">,</span> <span class="n">blob</span><span class="o">=</span><span class="s2">&quot;my_blob&quot;</span><span class="p">)</span>
 <span class="k">try</span><span class="p">:</span>
@@ -4234,8 +4150,6 @@ or a dictionary output returned by <a class="reference internal" href="#azure.st
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="method">
@@ -4255,8 +4169,8 @@ or an instance of ContainerProperties.</p>
 <dd class="field-odd"><p>ContainerClient</p>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id48">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id48">
 <div class="code-block-caption"><span class="caption-text">Getting the container client to interact with a specific container.</span><a class="headerlink" href="#id48" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get a client to interact with a specific container - though it may not yet exist</span>
 <span class="n">container_client</span> <span class="o">=</span> <span class="n">blob_service_client</span><span class="o">.</span><span class="n">get_container_client</span><span class="p">(</span><span class="s2">&quot;containertest&quot;</span><span class="p">)</span>
@@ -4268,8 +4182,6 @@ or an instance of ContainerProperties.</p>
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="method">
@@ -4285,15 +4197,13 @@ Azure Storage Analytics.</p>
 <dd class="field-even"><p>StorageServiceProperties</p>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id49">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id49">
 <div class="code-block-caption"><span class="caption-text">Getting service properties for the blob service.</span><a class="headerlink" href="#id49" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">properties</span> <span class="o">=</span> <span class="n">blob_service_client</span><span class="o">.</span><span class="n">get_service_properties</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="method">
@@ -4325,15 +4235,13 @@ replication is enabled for your storage account.</p>
 <dd class="field-odd"><p>StorageServiceStats</p>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id50">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id50">
 <div class="code-block-caption"><span class="caption-text">Getting service stats for the blob service.</span><a class="headerlink" href="#id50" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">stats</span> <span class="o">=</span> <span class="n">blob_service_client</span><span class="o">.</span><span class="n">get_service_stats</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="method">
@@ -4361,8 +4269,8 @@ call. If the request does not specify the server will return up to 5,000 items.<
 <dd class="field-odd"><p><a class="reference internal" href="azure.core.html#azure.core.paging.ItemPaged" title="azure.core.paging.ItemPaged">ItemPaged</a>[ContainerProperties]</p>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id51">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id51">
 <div class="code-block-caption"><span class="caption-text">Listing the containers in the blob service.</span><a class="headerlink" href="#id51" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># List all containers</span>
 <span class="n">all_containers</span> <span class="o">=</span> <span class="n">blob_service_client</span><span class="o">.</span><span class="n">list_containers</span><span class="p">(</span><span class="n">include_metadata</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
@@ -4376,8 +4284,6 @@ call. If the request does not specify the server will return up to 5,000 items.<
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="method">
@@ -4411,8 +4317,8 @@ and if yes, indicates the index document and 404 error document to use.</p></li>
 <dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3.5/library/constants.html#None" title="(in Python v3.5)">None</a></p>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id52">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id52">
 <div class="code-block-caption"><span class="caption-text">Setting service properties for the blob service.</span><a class="headerlink" href="#id52" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create service properties</span>
 <span class="kn">from</span> <span class="nn">azure.storage.blob</span> <span class="kn">import</span> <span class="n">Logging</span><span class="p">,</span> <span class="n">Metrics</span><span class="p">,</span> <span class="n">CorsRule</span><span class="p">,</span> <span class="n">RetentionPolicy</span>
@@ -4434,8 +4340,6 @@ and if yes, indicates the index document and 404 error document to use.</p></li>
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 </dd></dl>
@@ -4477,8 +4381,8 @@ If the URL already has a SAS token, specifying an explicit credential will take 
 </ul>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id53">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id53">
 <div class="code-block-caption"><span class="caption-text">Get a ContainerClient from an existing BlobServiceClient.</span><a class="headerlink" href="#id53" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Instantiate a BlobServiceClient using a connection string</span>
 <span class="kn">from</span> <span class="nn">azure.storage.blob</span> <span class="kn">import</span> <span class="n">BlobServiceClient</span>
@@ -4498,8 +4402,6 @@ If the URL already has a SAS token, specifying an explicit credential will take 
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 <dl class="method">
 <dt id="azure.storage.blob.ContainerClient.acquire_lease">
 <code class="sig-name descname">acquire_lease</code><span class="sig-paren">(</span><em class="sig-param">lease_duration=-1</em>, <em class="sig-param">lease_id=None</em>, <em class="sig-param">timeout=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/storage/blob/container_client.html#ContainerClient.acquire_lease"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.storage.blob.ContainerClient.acquire_lease" title="Permalink to this definition">¶</a></dt>
@@ -4542,8 +4444,8 @@ operation if it does exist.</p></li>
 <dd class="field-odd"><p><a class="reference internal" href="#azure.storage.blob.lease.LeaseClient" title="azure.storage.blob.lease.LeaseClient">LeaseClient</a></p>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id55">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id55">
 <div class="code-block-caption"><span class="caption-text">Acquiring a lease on the container.</span><a class="headerlink" href="#id55" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Acquire a lease on the container</span>
 <span class="n">lease</span> <span class="o">=</span> <span class="n">container_client</span><span class="o">.</span><span class="n">acquire_lease</span><span class="p">()</span>
@@ -4553,8 +4455,6 @@ operation if it does exist.</p></li>
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="method">
@@ -4575,15 +4475,13 @@ container as metadata. Example:{‘Category’:’test’}</p></li>
 <dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3.5/library/constants.html#None" title="(in Python v3.5)">None</a></p>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id56">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id56">
 <div class="code-block-caption"><span class="caption-text">Creating a container to store blobs.</span><a class="headerlink" href="#id56" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">container_client</span><span class="o">.</span><span class="n">create_container</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="method">
@@ -4683,15 +4581,13 @@ operation if it does exist.</p></li>
 <dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3.5/library/constants.html#None" title="(in Python v3.5)">None</a></p>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id57">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id57">
 <div class="code-block-caption"><span class="caption-text">Delete a container.</span><a class="headerlink" href="#id57" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">container_client</span><span class="o">.</span><span class="n">delete_container</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="method">
@@ -4711,8 +4607,8 @@ Credentials provided here will take precedence over those in the connection stri
 </ul>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id58">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id58">
 <div class="code-block-caption"><span class="caption-text">Creating the ContainerClient from a connection string.</span><a class="headerlink" href="#id58" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">azure.storage.blob</span> <span class="kn">import</span> <span class="n">ContainerClient</span>
 <span class="n">container_client</span> <span class="o">=</span> <span class="n">ContainerClient</span><span class="o">.</span><span class="n">from_connection_string</span><span class="p">(</span>
@@ -4720,8 +4616,6 @@ Credentials provided here will take precedence over those in the connection stri
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="method">
@@ -4777,8 +4671,8 @@ using this shared access signature.</p></li>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)">str</a></p>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id59">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id59">
 <div class="code-block-caption"><span class="caption-text">Generating a sas token.</span><a class="headerlink" href="#id59" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Use access policy to generate a sas token</span>
 <span class="n">sas_token</span> <span class="o">=</span> <span class="n">container_client</span><span class="o">.</span><span class="n">generate_shared_access_signature</span><span class="p">(</span>
@@ -4787,8 +4681,6 @@ using this shared access signature.</p></li>
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="method">
@@ -4827,16 +4719,14 @@ a blob value specified in the blob URL.</p></li>
 <dd class="field-odd"><p><a class="reference internal" href="#azure.storage.blob.blob_client.BlobClient" title="azure.storage.blob.blob_client.BlobClient">BlobClient</a></p>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id60">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id60">
 <div class="code-block-caption"><span class="caption-text">Get the blob client.</span><a class="headerlink" href="#id60" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get the BlobClient from the ContainerClient to interact with a specific blob</span>
 <span class="n">blob_client</span> <span class="o">=</span> <span class="n">container_client</span><span class="o">.</span><span class="n">get_blob_client</span><span class="p">(</span><span class="s2">&quot;mynewblob&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="method">
@@ -4859,15 +4749,13 @@ container’s lease is active and matches this ID.</p></li>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#dict" title="(in Python v3.5)">dict</a>[<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)">str</a>, <a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)">str</a>]</p>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id61">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id61">
 <div class="code-block-caption"><span class="caption-text">Getting the access policy on the container.</span><a class="headerlink" href="#id61" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">policy</span> <span class="o">=</span> <span class="n">container_client</span><span class="o">.</span><span class="n">get_container_access_policy</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="method">
@@ -4890,15 +4778,13 @@ container’s lease is active and matches this ID.</p></li>
 <dd class="field-odd"><p><a class="reference internal" href="#azure.storage.blob.models.ContainerProperties" title="azure.storage.blob.models.ContainerProperties">ContainerProperties</a></p>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id62">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id62">
 <div class="code-block-caption"><span class="caption-text">Getting properties on the container.</span><a class="headerlink" href="#id62" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">properties</span> <span class="o">=</span> <span class="n">container_client</span><span class="o">.</span><span class="n">get_container_properties</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="method">
@@ -4924,8 +4810,8 @@ Options include: ‘snapshots’, ‘metadata’, ‘uncommittedblobs’, ‘cop
 <dd class="field-odd"><p><a class="reference internal" href="azure.core.html#azure.core.paging.ItemPaged" title="azure.core.paging.ItemPaged">ItemPaged</a>[<a class="reference internal" href="#azure.storage.blob.models.BlobProperties" title="azure.storage.blob.models.BlobProperties">BlobProperties</a>]</p>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id63">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id63">
 <div class="code-block-caption"><span class="caption-text">List the blobs in the container.</span><a class="headerlink" href="#id63" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">blobs_list</span> <span class="o">=</span> <span class="n">container_client</span><span class="o">.</span><span class="n">list_blobs</span><span class="p">()</span>
 <span class="k">for</span> <span class="n">blob</span> <span class="ow">in</span> <span class="n">blobs_list</span><span class="p">:</span>
@@ -4933,8 +4819,6 @@ Options include: ‘snapshots’, ‘metadata’, ‘uncommittedblobs’, ‘cop
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="method">
@@ -4969,8 +4853,8 @@ the resource has not been modified since the specified date/time.</p></li>
 <dd class="field-even"><p>Container-updated property dict (Etag and last modified).</p>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id64">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id64">
 <div class="code-block-caption"><span class="caption-text">Setting access policy on the container.</span><a class="headerlink" href="#id64" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create access policy</span>
 <span class="kn">from</span> <span class="nn">azure.storage.blob</span> <span class="kn">import</span> <span class="n">AccessPolicy</span><span class="p">,</span> <span class="n">ContainerPermissions</span>
@@ -4985,8 +4869,6 @@ the resource has not been modified since the specified date/time.</p></li>
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="method">
@@ -5015,8 +4897,8 @@ if the resource has been modified since the specified time.</p></li>
 <dd class="field-even"><p>Container-updated property dict (Etag and last modified).</p>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id65">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id65">
 <div class="code-block-caption"><span class="caption-text">Setting metadata on the container.</span><a class="headerlink" href="#id65" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create key, value pairs for metadata</span>
 <span class="n">metadata</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;test&#39;</span><span class="p">}</span>
@@ -5026,8 +4908,6 @@ if the resource has been modified since the specified time.</p></li>
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="method">
@@ -5101,8 +4981,8 @@ MaxBlobSizeConditionNotMet error (HTTP status code 412 - Precondition Failed).</
 <dd class="field-odd"><p><a class="reference internal" href="#azure.storage.blob.blob_client.BlobClient" title="azure.storage.blob.blob_client.BlobClient">BlobClient</a></p>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id66">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id66">
 <div class="code-block-caption"><span class="caption-text">Upload blob to the container.</span><a class="headerlink" href="#id66" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">SOURCE_FILE</span><span class="p">,</span> <span class="s2">&quot;rb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">data</span><span class="p">:</span>
     <span class="n">blob_client</span> <span class="o">=</span> <span class="n">container_client</span><span class="o">.</span><span class="n">upload_blob</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;blobby&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
@@ -5111,8 +4991,6 @@ MaxBlobSizeConditionNotMet error (HTTP status code 412 - Precondition Failed).</
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="method">
@@ -5185,8 +5063,8 @@ If the URL already has a SAS token, specifying an explicit credential will take 
 </ul>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id67">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id67">
 <div class="code-block-caption"><span class="caption-text">Creating the BlobClient from a URL to a public blob (no auth needed).</span><a class="headerlink" href="#id67" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">azure.storage.blob</span> <span class="kn">import</span> <span class="n">BlobClient</span>
 <span class="n">blob_client</span> <span class="o">=</span> <span class="n">BlobClient</span><span class="p">(</span><span class="n">blob_url</span><span class="o">=</span><span class="s2">&quot;https://account.blob.core.windows.net/container/blob-name&quot;</span><span class="p">)</span>
@@ -5202,8 +5080,6 @@ If the URL already has a SAS token, specifying an explicit credential will take 
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 <dl class="method">
 <dt id="azure.storage.blob.BlobClient.abort_copy">
 <code class="sig-name descname">abort_copy</code><span class="sig-paren">(</span><em class="sig-param">copy_id</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/storage/blob/blob_client.html#BlobClient.abort_copy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.storage.blob.BlobClient.abort_copy" title="Permalink to this definition">¶</a></dt>
@@ -5219,8 +5095,8 @@ instance of BlobProperties.</p>
 <dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3.5/library/constants.html#None" title="(in Python v3.5)">None</a></p>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id69">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id69">
 <div class="code-block-caption"><span class="caption-text">Abort copying a blob from URL.</span><a class="headerlink" href="#id69" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Passing in copy id to abort copy operation</span>
 <span class="n">copied_blob</span><span class="o">.</span><span class="n">abort_copy</span><span class="p">(</span><span class="n">copy_id</span><span class="p">)</span>
@@ -5231,8 +5107,6 @@ instance of BlobProperties.</p>
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="method">
@@ -5278,8 +5152,8 @@ operation if it does exist.</p></li>
 <dd class="field-odd"><p><a class="reference internal" href="#azure.storage.blob.lease.LeaseClient" title="azure.storage.blob.lease.LeaseClient">LeaseClient</a></p>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id70">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id70">
 <div class="code-block-caption"><span class="caption-text">Acquiring a lease on a blob.</span><a class="headerlink" href="#id70" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Acquire a lease on the blob</span>
 <span class="n">lease</span> <span class="o">=</span> <span class="n">blob_client</span><span class="o">.</span><span class="n">acquire_lease</span><span class="p">()</span>
@@ -5289,8 +5163,6 @@ operation if it does exist.</p></li>
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="method">
@@ -5582,8 +5454,8 @@ or the lease ID as a string.</p></li>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#dict" title="(in Python v3.5)">dict</a>[<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)">str</a>, Any]</p>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id71">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id71">
 <div class="code-block-caption"><span class="caption-text">Create a snapshot of the blob.</span><a class="headerlink" href="#id71" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a read-only snapshot of the blob at this point in time</span>
 <span class="n">snapshot_blob</span> <span class="o">=</span> <span class="n">blob_client</span><span class="o">.</span><span class="n">create_snapshot</span><span class="p">()</span>
@@ -5593,8 +5465,6 @@ or the lease ID as a string.</p></li>
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="method">
@@ -5647,15 +5517,13 @@ operation if it does exist.</p></li>
 <dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3.5/library/constants.html#None" title="(in Python v3.5)">None</a></p>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id72">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id72">
 <div class="code-block-caption"><span class="caption-text">Delete a blob.</span><a class="headerlink" href="#id72" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">blob_client</span><span class="o">.</span><span class="n">delete_blob</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="method">
@@ -5708,16 +5576,14 @@ each call individually.</p></li>
 <dd class="field-odd"><p>StorageStreamDownloader</p>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id73">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id73">
 <div class="code-block-caption"><span class="caption-text">Download a blob.</span><a class="headerlink" href="#id73" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">DEST_FILE</span><span class="p">,</span> <span class="s2">&quot;wb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">my_blob</span><span class="p">:</span>
     <span class="n">my_blob</span><span class="o">.</span><span class="n">writelines</span><span class="p">(</span><span class="n">blob_client</span><span class="o">.</span><span class="n">download_blob</span><span class="p">())</span>
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="method">
@@ -5741,8 +5607,8 @@ Credentials provided here will take precedence over those in the connection stri
 </ul>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id74">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id74">
 <div class="code-block-caption"><span class="caption-text">Creating the BlobClient from a connection string.</span><a class="headerlink" href="#id74" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">azure.storage.blob</span> <span class="kn">import</span> <span class="n">BlobClient</span>
 <span class="n">blob_client</span> <span class="o">=</span> <span class="n">BlobClient</span><span class="o">.</span><span class="n">from_connection_string</span><span class="p">(</span>
@@ -5750,8 +5616,6 @@ Credentials provided here will take precedence over those in the connection stri
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="method">
@@ -5863,15 +5727,13 @@ operation if it does exist.</p></li>
 <dd class="field-odd"><p><a class="reference internal" href="#azure.storage.blob.models.BlobProperties" title="azure.storage.blob.models.BlobProperties">BlobProperties</a></p>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id75">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id75">
 <div class="code-block-caption"><span class="caption-text">Getting the properties for a blob.</span><a class="headerlink" href="#id75" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">properties</span> <span class="o">=</span> <span class="n">blob_client</span><span class="o">.</span><span class="n">get_blob_properties</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="method">
@@ -6341,8 +6203,8 @@ premium storage accounts.</p></li>
 <dd class="field-odd"><p>Dict[<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)">str</a>, Union[<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)">str</a>, datetime]]</p>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id76">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id76">
 <div class="code-block-caption"><span class="caption-text">Copy a blob from a URL.</span><a class="headerlink" href="#id76" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get the blob client with the source blob</span>
 <span class="n">source_blob</span> <span class="o">=</span> <span class="s2">&quot;http://www.gutenberg.org/files/59466/59466-0.txt&quot;</span>
@@ -6355,8 +6217,6 @@ premium storage accounts.</p></li>
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="method">
@@ -6373,16 +6233,14 @@ set in the delete retention policy.</p>
 <dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3.5/library/constants.html#None" title="(in Python v3.5)">None</a></p>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id77">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id77">
 <div class="code-block-caption"><span class="caption-text">Undeleting a blob.</span><a class="headerlink" href="#id77" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Undelete the blob before the retention policy expires</span>
 <span class="n">blob_client</span><span class="o">.</span><span class="n">undelete_blob</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="method">
@@ -6456,8 +6314,8 @@ MaxBlobSizeConditionNotMet error (HTTP status code 412 - Precondition Failed).</
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#dict" title="(in Python v3.5)">dict</a>[<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)">str</a>, Any]</p>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id78">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id78">
 <div class="code-block-caption"><span class="caption-text">Upload a blob to the container.</span><a class="headerlink" href="#id78" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Upload content to block blob</span>
 <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">SOURCE_FILE</span><span class="p">,</span> <span class="s2">&quot;rb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">data</span><span class="p">:</span>
@@ -6465,8 +6323,6 @@ MaxBlobSizeConditionNotMet error (HTTP status code 412 - Precondition Failed).</
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="method">

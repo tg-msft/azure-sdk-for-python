@@ -397,8 +397,8 @@ shared access key, or an instance of a TokenCredentials class from azure.identit
 </ul>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id1">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id1">
 <div class="code-block-caption"><span class="caption-text">Create the queue client with url and credential.</span><a class="headerlink" href="#id1" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">azure.storage.queue.aio</span> <span class="kn">import</span> <span class="n">QueueClient</span>
 <span class="n">q</span> <span class="o">=</span> <span class="n">QueueClient</span><span class="p">(</span>
@@ -415,8 +415,6 @@ shared access key, or an instance of a TokenCredentials class from azure.identit
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 <dl class="method">
 <dt id="azure.storage.queue.aio.queue_client_async.QueueClient.clear_messages">
 <em class="property">async </em><code class="sig-name descname">clear_messages</code><span class="sig-paren">(</span><em class="sig-param">timeout=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/storage/queue/aio/queue_client_async.html#QueueClient.clear_messages"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.storage.queue.aio.queue_client_async.QueueClient.clear_messages" title="Permalink to this definition">¶</a></dt>
@@ -426,15 +424,13 @@ shared access key, or an instance of a TokenCredentials class from azure.identit
 <dd class="field-odd"><p><strong>timeout</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a>) – The server timeout, expressed in seconds.</p>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id3">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id3">
 <div class="code-block-caption"><span class="caption-text">Clears all messages.</span><a class="headerlink" href="#id3" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">await</span> <span class="n">queue</span><span class="o">.</span><span class="n">clear_messages</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="method">
@@ -461,15 +457,13 @@ were created, but are case-insensitive when set or read.</p></li>
 <dd class="field-even"><p>~azure.storage.queue._generated.models._models.StorageErrorException</p>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id4">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id4">
 <div class="code-block-caption"><span class="caption-text">Create a queue.</span><a class="headerlink" href="#id4" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">await</span> <span class="n">queue</span><span class="o">.</span><span class="n">create_queue</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="method">
@@ -495,8 +489,8 @@ to the <a class="reference internal" href="#azure.storage.queue.aio.queue_client
 </ul>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id5">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id5">
 <div class="code-block-caption"><span class="caption-text">Delete a message.</span><a class="headerlink" href="#id5" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get the message at the front of the queue</span>
 <span class="n">messages</span> <span class="o">=</span> <span class="n">queue</span><span class="o">.</span><span class="n">receive_messages</span><span class="p">()</span>
@@ -507,8 +501,6 @@ to the <a class="reference internal" href="#azure.storage.queue.aio.queue_client
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="method">
@@ -529,15 +521,13 @@ an <code class="xref py py-class docutils literal notranslate"><span class="pre"
 <dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3.5/library/constants.html#None" title="(in Python v3.5)">None</a></p>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id6">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id6">
 <div class="code-block-caption"><span class="caption-text">Delete a queue.</span><a class="headerlink" href="#id6" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">await</span> <span class="n">queue</span><span class="o">.</span><span class="n">delete_queue</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="method">
@@ -579,8 +569,8 @@ returned from the service.</p>
 <dd class="field-odd"><p><a class="reference internal" href="azure.storage.queue.html#azure.storage.queue.models.QueueMessage" title="azure.storage.queue.models.QueueMessage">QueueMessage</a></p>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id7">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id7">
 <div class="code-block-caption"><span class="caption-text">Enqueue messages.</span><a class="headerlink" href="#id7" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">await</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">gather</span><span class="p">(</span>
     <span class="n">queue</span><span class="o">.</span><span class="n">enqueue_message</span><span class="p">(</span><span class="sa">u</span><span class="s2">&quot;message1&quot;</span><span class="p">),</span>
@@ -591,8 +581,6 @@ returned from the service.</p>
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="method">
@@ -629,15 +617,13 @@ queue that may be used with Shared Access Signatures.</p>
 <dd class="field-odd"><p><a class="reference internal" href="azure.storage.queue.html#azure.storage.queue.models.QueueProperties" title="azure.storage.queue.models.QueueProperties">QueueProperties</a></p>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id8">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id8">
 <div class="code-block-caption"><span class="caption-text">Get the properties on the queue.</span><a class="headerlink" href="#id8" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">await</span> <span class="n">queue</span><span class="o">.</span><span class="n">get_queue_properties</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="method">
@@ -672,8 +658,8 @@ not pop the message and can only retrieve already visible messages.</p>
 <dd class="field-odd"><p>list(<a class="reference internal" href="azure.storage.queue.html#azure.storage.queue.models.QueueMessage" title="azure.storage.queue.models.QueueMessage"><code class="xref py py-class docutils literal notranslate"><span class="pre">QueueMessage</span></code></a>)</p>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id9">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id9">
 <div class="code-block-caption"><span class="caption-text">Peek messages.</span><a class="headerlink" href="#id9" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Peek at one message at the front of the queue</span>
 <span class="n">msg</span> <span class="o">=</span> <span class="n">await</span> <span class="n">queue</span><span class="o">.</span><span class="n">peek_messages</span><span class="p">()</span>
@@ -687,8 +673,6 @@ not pop the message and can only retrieve already visible messages.</p>
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="method">
@@ -725,8 +709,8 @@ should be set to a value smaller than the time-to-live value.</p></li>
 <dd class="field-odd"><p><a class="reference internal" href="azure.core.html#azure.core.async_paging.AsyncItemPaged" title="azure.core.async_paging.AsyncItemPaged">AsyncItemPaged</a>[Message]</p>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id10">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id10">
 <div class="code-block-caption"><span class="caption-text">Receive messages from the queue.</span><a class="headerlink" href="#id10" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Receive messages one-by-one</span>
 <span class="n">messages</span> <span class="o">=</span> <span class="n">queue</span><span class="o">.</span><span class="n">receive_messages</span><span class="p">()</span>
@@ -742,8 +726,6 @@ should be set to a value smaller than the time-to-live value.</p></li>
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="method">
@@ -770,8 +752,8 @@ will clear the access policies set on the service.</p></li>
 </ul>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id11">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id11">
 <div class="code-block-caption"><span class="caption-text">Set an access policy on the queue.</span><a class="headerlink" href="#id11" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create an access policy</span>
 <span class="kn">from</span> <span class="nn">azure.storage.queue.aio</span> <span class="kn">import</span> <span class="n">AccessPolicy</span><span class="p">,</span> <span class="n">QueuePermissions</span>
@@ -786,8 +768,6 @@ will clear the access policies set on the service.</p></li>
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="method">
@@ -804,16 +784,14 @@ queue as metadata.</p></li>
 </ul>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id12">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id12">
 <div class="code-block-caption"><span class="caption-text">Set metadata on the queue.</span><a class="headerlink" href="#id12" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">metadata</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;foo&#39;</span><span class="p">:</span> <span class="s1">&#39;val1&#39;</span><span class="p">,</span> <span class="s1">&#39;bar&#39;</span><span class="p">:</span> <span class="s1">&#39;val2&#39;</span><span class="p">,</span> <span class="s1">&#39;baz&#39;</span><span class="p">:</span> <span class="s1">&#39;val3&#39;</span><span class="p">}</span>
 <span class="n">await</span> <span class="n">queue</span><span class="o">.</span><span class="n">set_queue_metadata</span><span class="p">(</span><span class="n">metadata</span><span class="o">=</span><span class="n">metadata</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="method">
@@ -855,9 +833,7 @@ this object is also populated with the content, although it is not returned by t
 <dd class="field-odd"><p><a class="reference internal" href="azure.storage.queue.html#azure.storage.queue.models.QueueMessage" title="azure.storage.queue.models.QueueMessage">QueueMessage</a></p>
 </dd>
 </dl>
-<dl class="simple">
-<dt>Example:</dt><dd></dd>
-</dl>
+<p class="rubric">Example</p>
 </dd></dl>
 
 </dd></dl>
@@ -902,8 +878,8 @@ shared access key, or an instance of a TokenCredentials class from azure.identit
 </ul>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id13">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id13">
 <div class="code-block-caption"><span class="caption-text">Creating the QueueServiceClient with an account url and credential.</span><a class="headerlink" href="#id13" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">azure.storage.queue.aio</span> <span class="kn">import</span> <span class="n">QueueServiceClient</span>
 <span class="n">queue_service</span> <span class="o">=</span> <span class="n">QueueServiceClient</span><span class="p">(</span><span class="n">account_url</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">url</span><span class="p">,</span> <span class="n">credential</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">shared_access_key</span><span class="p">)</span>
@@ -926,8 +902,6 @@ shared access key, or an instance of a TokenCredentials class from azure.identit
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 <dl class="method">
 <dt id="azure.storage.queue.aio.queue_service_client_async.QueueServiceClient.create_queue">
 <em class="property">async </em><code class="sig-name descname">create_queue</code><span class="sig-paren">(</span><em class="sig-param">name</em>, <em class="sig-param">metadata=None</em>, <em class="sig-param">timeout=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/storage/queue/aio/queue_service_client_async.html#QueueServiceClient.create_queue"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.storage.queue.aio.queue_service_client_async.QueueServiceClient.create_queue" title="Permalink to this definition">¶</a></dt>
@@ -947,15 +921,13 @@ queue as metadata. Example: {‘Category’: ‘test’}</p></li>
 <dd class="field-even"><p><a class="reference internal" href="#azure.storage.queue.aio.queue_client_async.QueueClient" title="azure.storage.queue.aio.queue_client_async.QueueClient">QueueClient</a></p>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id15">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id15">
 <div class="code-block-caption"><span class="caption-text">Create a queue in the service.</span><a class="headerlink" href="#id15" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">await</span> <span class="n">queue_service</span><span class="o">.</span><span class="n">create_queue</span><span class="p">(</span><span class="s2">&quot;asynctestqueue&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="method">
@@ -980,15 +952,13 @@ or an instance of QueueProperties.</p></li>
 <dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3.5/library/constants.html#None" title="(in Python v3.5)">None</a></p>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id16">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id16">
 <div class="code-block-caption"><span class="caption-text">Delete a queue in the service.</span><a class="headerlink" href="#id16" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">await</span> <span class="n">queue_service</span><span class="o">.</span><span class="n">delete_queue</span><span class="p">(</span><span class="s2">&quot;asynctestqueue&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="method">
@@ -1008,16 +978,14 @@ or an instance of QueueProperties.</p>
 <dd class="field-odd"><p><a class="reference internal" href="#azure.storage.queue.aio.queue_client_async.QueueClient" title="azure.storage.queue.aio.queue_client_async.QueueClient">QueueClient</a></p>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id17">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id17">
 <div class="code-block-caption"><span class="caption-text">Get the queue client.</span><a class="headerlink" href="#id17" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get the queue client to interact with a specific queue</span>
 <span class="n">queue</span> <span class="o">=</span> <span class="n">queue_service</span><span class="o">.</span><span class="n">get_queue_client</span><span class="p">(</span><span class="s2">&quot;myasyncqueue&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="method">
@@ -1033,15 +1001,13 @@ Azure Storage Analytics.</p>
 <dd class="field-even"><p>StorageServiceProperties</p>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id18">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id18">
 <div class="code-block-caption"><span class="caption-text">Getting queue service properties.</span><a class="headerlink" href="#id18" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">properties</span> <span class="o">=</span> <span class="n">await</span> <span class="n">queue_service</span><span class="o">.</span><span class="n">get_service_properties</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="method">
@@ -1101,8 +1067,8 @@ applied to each individual call.</p></li>
 <dd class="field-odd"><p>AsyncItemPaged[QueueProperties]</p>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id19">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id19">
 <div class="code-block-caption"><span class="caption-text">List queues in the service.</span><a class="headerlink" href="#id19" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># List all the queues in the service</span>
 <span class="n">list_queues</span> <span class="o">=</span> <span class="n">queue_service</span><span class="o">.</span><span class="n">list_queues</span><span class="p">()</span>
@@ -1116,8 +1082,6 @@ applied to each individual call.</p></li>
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="method">
@@ -1145,8 +1109,8 @@ and CORS will be disabled for the service.</p></li>
 <dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3.5/library/constants.html#None" title="(in Python v3.5)">None</a></p>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id20">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id20">
 <div class="code-block-caption"><span class="caption-text">Setting queue service properties.</span><a class="headerlink" href="#id20" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create service properties</span>
 <span class="kn">from</span> <span class="nn">azure.storage.queue.aio</span> <span class="kn">import</span> <span class="n">Logging</span><span class="p">,</span> <span class="n">Metrics</span><span class="p">,</span> <span class="n">CorsRule</span><span class="p">,</span> <span class="n">RetentionPolicy</span>
@@ -1180,8 +1144,6 @@ and CORS will be disabled for the service.</p></li>
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 </dd></dl>
@@ -1223,8 +1185,8 @@ shared access key, or an instance of a TokenCredentials class from azure.identit
 </ul>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id21">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id21">
 <div class="code-block-caption"><span class="caption-text">Create the queue client with url and credential.</span><a class="headerlink" href="#id21" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">azure.storage.queue.aio</span> <span class="kn">import</span> <span class="n">QueueClient</span>
 <span class="n">q</span> <span class="o">=</span> <span class="n">QueueClient</span><span class="p">(</span>
@@ -1241,8 +1203,6 @@ shared access key, or an instance of a TokenCredentials class from azure.identit
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 <dl class="method">
 <dt id="azure.storage.queue.aio.QueueClient.clear_messages">
 <em class="property">async </em><code class="sig-name descname">clear_messages</code><span class="sig-paren">(</span><em class="sig-param">timeout=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/storage/queue/aio/queue_client_async.html#QueueClient.clear_messages"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.storage.queue.aio.QueueClient.clear_messages" title="Permalink to this definition">¶</a></dt>
@@ -1252,15 +1212,13 @@ shared access key, or an instance of a TokenCredentials class from azure.identit
 <dd class="field-odd"><p><strong>timeout</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a>) – The server timeout, expressed in seconds.</p>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id23">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id23">
 <div class="code-block-caption"><span class="caption-text">Clears all messages.</span><a class="headerlink" href="#id23" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">await</span> <span class="n">queue</span><span class="o">.</span><span class="n">clear_messages</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="method">
@@ -1287,15 +1245,13 @@ were created, but are case-insensitive when set or read.</p></li>
 <dd class="field-even"><p>~azure.storage.queue._generated.models._models.StorageErrorException</p>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id24">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id24">
 <div class="code-block-caption"><span class="caption-text">Create a queue.</span><a class="headerlink" href="#id24" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">await</span> <span class="n">queue</span><span class="o">.</span><span class="n">create_queue</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="method">
@@ -1321,8 +1277,8 @@ to the <a class="reference internal" href="#azure.storage.queue.aio.QueueClient.
 </ul>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id25">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id25">
 <div class="code-block-caption"><span class="caption-text">Delete a message.</span><a class="headerlink" href="#id25" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get the message at the front of the queue</span>
 <span class="n">messages</span> <span class="o">=</span> <span class="n">queue</span><span class="o">.</span><span class="n">receive_messages</span><span class="p">()</span>
@@ -1333,8 +1289,6 @@ to the <a class="reference internal" href="#azure.storage.queue.aio.QueueClient.
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="method">
@@ -1355,15 +1309,13 @@ an <code class="xref py py-class docutils literal notranslate"><span class="pre"
 <dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3.5/library/constants.html#None" title="(in Python v3.5)">None</a></p>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id26">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id26">
 <div class="code-block-caption"><span class="caption-text">Delete a queue.</span><a class="headerlink" href="#id26" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">await</span> <span class="n">queue</span><span class="o">.</span><span class="n">delete_queue</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="method">
@@ -1405,8 +1357,8 @@ returned from the service.</p>
 <dd class="field-odd"><p><a class="reference internal" href="azure.storage.queue.html#azure.storage.queue.models.QueueMessage" title="azure.storage.queue.models.QueueMessage">QueueMessage</a></p>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id27">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id27">
 <div class="code-block-caption"><span class="caption-text">Enqueue messages.</span><a class="headerlink" href="#id27" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">await</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">gather</span><span class="p">(</span>
     <span class="n">queue</span><span class="o">.</span><span class="n">enqueue_message</span><span class="p">(</span><span class="sa">u</span><span class="s2">&quot;message1&quot;</span><span class="p">),</span>
@@ -1417,8 +1369,6 @@ returned from the service.</p>
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="method">
@@ -1455,15 +1405,13 @@ queue that may be used with Shared Access Signatures.</p>
 <dd class="field-odd"><p><a class="reference internal" href="azure.storage.queue.html#azure.storage.queue.models.QueueProperties" title="azure.storage.queue.models.QueueProperties">QueueProperties</a></p>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id28">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id28">
 <div class="code-block-caption"><span class="caption-text">Get the properties on the queue.</span><a class="headerlink" href="#id28" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">await</span> <span class="n">queue</span><span class="o">.</span><span class="n">get_queue_properties</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="method">
@@ -1498,8 +1446,8 @@ not pop the message and can only retrieve already visible messages.</p>
 <dd class="field-odd"><p>list(<a class="reference internal" href="azure.storage.queue.html#azure.storage.queue.models.QueueMessage" title="azure.storage.queue.models.QueueMessage"><code class="xref py py-class docutils literal notranslate"><span class="pre">QueueMessage</span></code></a>)</p>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id29">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id29">
 <div class="code-block-caption"><span class="caption-text">Peek messages.</span><a class="headerlink" href="#id29" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Peek at one message at the front of the queue</span>
 <span class="n">msg</span> <span class="o">=</span> <span class="n">await</span> <span class="n">queue</span><span class="o">.</span><span class="n">peek_messages</span><span class="p">()</span>
@@ -1513,8 +1461,6 @@ not pop the message and can only retrieve already visible messages.</p>
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="method">
@@ -1551,8 +1497,8 @@ should be set to a value smaller than the time-to-live value.</p></li>
 <dd class="field-odd"><p><a class="reference internal" href="azure.core.html#azure.core.async_paging.AsyncItemPaged" title="azure.core.async_paging.AsyncItemPaged">AsyncItemPaged</a>[Message]</p>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id30">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id30">
 <div class="code-block-caption"><span class="caption-text">Receive messages from the queue.</span><a class="headerlink" href="#id30" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Receive messages one-by-one</span>
 <span class="n">messages</span> <span class="o">=</span> <span class="n">queue</span><span class="o">.</span><span class="n">receive_messages</span><span class="p">()</span>
@@ -1568,8 +1514,6 @@ should be set to a value smaller than the time-to-live value.</p></li>
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="method">
@@ -1596,8 +1540,8 @@ will clear the access policies set on the service.</p></li>
 </ul>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id31">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id31">
 <div class="code-block-caption"><span class="caption-text">Set an access policy on the queue.</span><a class="headerlink" href="#id31" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create an access policy</span>
 <span class="kn">from</span> <span class="nn">azure.storage.queue.aio</span> <span class="kn">import</span> <span class="n">AccessPolicy</span><span class="p">,</span> <span class="n">QueuePermissions</span>
@@ -1612,8 +1556,6 @@ will clear the access policies set on the service.</p></li>
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="method">
@@ -1630,16 +1572,14 @@ queue as metadata.</p></li>
 </ul>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id32">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id32">
 <div class="code-block-caption"><span class="caption-text">Set metadata on the queue.</span><a class="headerlink" href="#id32" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">metadata</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;foo&#39;</span><span class="p">:</span> <span class="s1">&#39;val1&#39;</span><span class="p">,</span> <span class="s1">&#39;bar&#39;</span><span class="p">:</span> <span class="s1">&#39;val2&#39;</span><span class="p">,</span> <span class="s1">&#39;baz&#39;</span><span class="p">:</span> <span class="s1">&#39;val3&#39;</span><span class="p">}</span>
 <span class="n">await</span> <span class="n">queue</span><span class="o">.</span><span class="n">set_queue_metadata</span><span class="p">(</span><span class="n">metadata</span><span class="o">=</span><span class="n">metadata</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="method">
@@ -1681,9 +1621,7 @@ this object is also populated with the content, although it is not returned by t
 <dd class="field-odd"><p><a class="reference internal" href="azure.storage.queue.html#azure.storage.queue.models.QueueMessage" title="azure.storage.queue.models.QueueMessage">QueueMessage</a></p>
 </dd>
 </dl>
-<dl class="simple">
-<dt>Example:</dt><dd></dd>
-</dl>
+<p class="rubric">Example</p>
 </dd></dl>
 
 </dd></dl>
@@ -1725,8 +1663,8 @@ shared access key, or an instance of a TokenCredentials class from azure.identit
 </ul>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id33">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id33">
 <div class="code-block-caption"><span class="caption-text">Creating the QueueServiceClient with an account url and credential.</span><a class="headerlink" href="#id33" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">azure.storage.queue.aio</span> <span class="kn">import</span> <span class="n">QueueServiceClient</span>
 <span class="n">queue_service</span> <span class="o">=</span> <span class="n">QueueServiceClient</span><span class="p">(</span><span class="n">account_url</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">url</span><span class="p">,</span> <span class="n">credential</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">shared_access_key</span><span class="p">)</span>
@@ -1749,8 +1687,6 @@ shared access key, or an instance of a TokenCredentials class from azure.identit
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 <dl class="method">
 <dt id="azure.storage.queue.aio.QueueServiceClient.create_queue">
 <em class="property">async </em><code class="sig-name descname">create_queue</code><span class="sig-paren">(</span><em class="sig-param">name</em>, <em class="sig-param">metadata=None</em>, <em class="sig-param">timeout=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/storage/queue/aio/queue_service_client_async.html#QueueServiceClient.create_queue"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.storage.queue.aio.QueueServiceClient.create_queue" title="Permalink to this definition">¶</a></dt>
@@ -1770,15 +1706,13 @@ queue as metadata. Example: {‘Category’: ‘test’}</p></li>
 <dd class="field-even"><p><a class="reference internal" href="#azure.storage.queue.aio.queue_client_async.QueueClient" title="azure.storage.queue.aio.queue_client_async.QueueClient">QueueClient</a></p>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id35">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id35">
 <div class="code-block-caption"><span class="caption-text">Create a queue in the service.</span><a class="headerlink" href="#id35" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">await</span> <span class="n">queue_service</span><span class="o">.</span><span class="n">create_queue</span><span class="p">(</span><span class="s2">&quot;asynctestqueue&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="method">
@@ -1803,15 +1737,13 @@ or an instance of QueueProperties.</p></li>
 <dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3.5/library/constants.html#None" title="(in Python v3.5)">None</a></p>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id36">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id36">
 <div class="code-block-caption"><span class="caption-text">Delete a queue in the service.</span><a class="headerlink" href="#id36" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">await</span> <span class="n">queue_service</span><span class="o">.</span><span class="n">delete_queue</span><span class="p">(</span><span class="s2">&quot;asynctestqueue&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="method">
@@ -1831,16 +1763,14 @@ or an instance of QueueProperties.</p>
 <dd class="field-odd"><p><a class="reference internal" href="#azure.storage.queue.aio.queue_client_async.QueueClient" title="azure.storage.queue.aio.queue_client_async.QueueClient">QueueClient</a></p>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id37">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id37">
 <div class="code-block-caption"><span class="caption-text">Get the queue client.</span><a class="headerlink" href="#id37" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get the queue client to interact with a specific queue</span>
 <span class="n">queue</span> <span class="o">=</span> <span class="n">queue_service</span><span class="o">.</span><span class="n">get_queue_client</span><span class="p">(</span><span class="s2">&quot;myasyncqueue&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="method">
@@ -1856,15 +1786,13 @@ Azure Storage Analytics.</p>
 <dd class="field-even"><p>StorageServiceProperties</p>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id38">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id38">
 <div class="code-block-caption"><span class="caption-text">Getting queue service properties.</span><a class="headerlink" href="#id38" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">properties</span> <span class="o">=</span> <span class="n">await</span> <span class="n">queue_service</span><span class="o">.</span><span class="n">get_service_properties</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="method">
@@ -1924,8 +1852,8 @@ applied to each individual call.</p></li>
 <dd class="field-odd"><p>AsyncItemPaged[QueueProperties]</p>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id39">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id39">
 <div class="code-block-caption"><span class="caption-text">List queues in the service.</span><a class="headerlink" href="#id39" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># List all the queues in the service</span>
 <span class="n">list_queues</span> <span class="o">=</span> <span class="n">queue_service</span><span class="o">.</span><span class="n">list_queues</span><span class="p">()</span>
@@ -1939,8 +1867,6 @@ applied to each individual call.</p></li>
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="method">
@@ -1968,8 +1894,8 @@ and CORS will be disabled for the service.</p></li>
 <dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3.5/library/constants.html#None" title="(in Python v3.5)">None</a></p>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id40">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id40">
 <div class="code-block-caption"><span class="caption-text">Setting queue service properties.</span><a class="headerlink" href="#id40" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create service properties</span>
 <span class="kn">from</span> <span class="nn">azure.storage.queue.aio</span> <span class="kn">import</span> <span class="n">Logging</span><span class="p">,</span> <span class="n">Metrics</span><span class="p">,</span> <span class="n">CorsRule</span><span class="p">,</span> <span class="n">RetentionPolicy</span>
@@ -2003,8 +1929,6 @@ and CORS will be disabled for the service.</p></li>
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 </dd></dl>

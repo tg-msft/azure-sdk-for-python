@@ -362,8 +362,8 @@ of the HTTP sender. The transport is the last node in the pipeline.</p>
 </ul>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id1">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id1">
 <div class="code-block-caption"><span class="caption-text">Builds the pipeline for synchronous transport.</span><a class="headerlink" href="#id1" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">azure.core.pipeline</span> <span class="kn">import</span> <span class="n">Pipeline</span>
 <span class="kn">from</span> <span class="nn">azure.core.pipeline.policies</span> <span class="kn">import</span> <span class="n">RedirectPolicy</span><span class="p">,</span> <span class="n">UserAgentPolicy</span>
@@ -382,8 +382,6 @@ of the HTTP sender. The transport is the last node in the pipeline.</p>
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 <dl class="method">
 <dt id="azure.core.pipeline.base.Pipeline.run">
 <code class="sig-name descname">run</code><span class="sig-paren">(</span><em class="sig-param">request</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/core/pipeline/base.html#Pipeline.run"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.core.pipeline.base.Pipeline.run" title="Permalink to this definition">¶</a></dt>
@@ -427,8 +425,8 @@ of the HTTP sender.</p>
 </ul>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id2">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id2">
 <div class="code-block-caption"><span class="caption-text">Builds the async pipeline for asynchronous transport.</span><a class="headerlink" href="#id2" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">azure.core.pipeline</span> <span class="kn">import</span> <span class="n">AsyncPipeline</span>
 <span class="kn">from</span> <span class="nn">azure.core.pipeline.policies</span> <span class="kn">import</span> <span class="n">AsyncRedirectPolicy</span><span class="p">,</span> <span class="n">UserAgentPolicy</span>
@@ -447,8 +445,6 @@ of the HTTP sender.</p>
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 <dl class="method">
 <dt id="azure.core.pipeline.base_async.AsyncPipeline.run">
 <em class="property">async </em><code class="sig-name descname">run</code><span class="sig-paren">(</span><em class="sig-param">request: azure.core.pipeline.PipelineRequest</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/core/pipeline/base_async.html#AsyncPipeline.run"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.core.pipeline.base_async.AsyncPipeline.run" title="Permalink to this definition">¶</a></dt>
@@ -486,8 +482,8 @@ of the HTTP sender. The transport is the last node in the pipeline.</p>
 </ul>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id3">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id3">
 <div class="code-block-caption"><span class="caption-text">Builds the pipeline for synchronous transport.</span><a class="headerlink" href="#id3" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">azure.core.pipeline</span> <span class="kn">import</span> <span class="n">Pipeline</span>
 <span class="kn">from</span> <span class="nn">azure.core.pipeline.policies</span> <span class="kn">import</span> <span class="n">RedirectPolicy</span><span class="p">,</span> <span class="n">UserAgentPolicy</span>
@@ -506,8 +502,6 @@ of the HTTP sender. The transport is the last node in the pipeline.</p>
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 <dl class="method">
 <dt id="azure.core.pipeline.Pipeline.run">
 <code class="sig-name descname">run</code><span class="sig-paren">(</span><em class="sig-param">request</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/core/pipeline/base.html#Pipeline.run"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.core.pipeline.Pipeline.run" title="Permalink to this definition">¶</a></dt>
@@ -627,8 +621,8 @@ of the HTTP sender.</p>
 </ul>
 </dd>
 </dl>
-<dl>
-<dt>Example:</dt><dd><div class="literal-block-wrapper docutils container" id="id4">
+<p class="rubric">Example</p>
+<div class="literal-block-wrapper docutils container" id="id4">
 <div class="code-block-caption"><span class="caption-text">Builds the async pipeline for asynchronous transport.</span><a class="headerlink" href="#id4" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">azure.core.pipeline</span> <span class="kn">import</span> <span class="n">AsyncPipeline</span>
 <span class="kn">from</span> <span class="nn">azure.core.pipeline.policies</span> <span class="kn">import</span> <span class="n">AsyncRedirectPolicy</span><span class="p">,</span> <span class="n">UserAgentPolicy</span>
@@ -647,8 +641,6 @@ of the HTTP sender.</p>
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 <dl class="method">
 <dt id="azure.core.pipeline.AsyncPipeline.run">
 <em class="property">async </em><code class="sig-name descname">run</code><span class="sig-paren">(</span><em class="sig-param">request: azure.core.pipeline.PipelineRequest</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/azure/core/pipeline/base_async.html#AsyncPipeline.run"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#azure.core.pipeline.AsyncPipeline.run" title="Permalink to this definition">¶</a></dt>
